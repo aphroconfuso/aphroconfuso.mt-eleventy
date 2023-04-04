@@ -24,7 +24,7 @@ async function getAllBlogposts() {
         },
         body: JSON.stringify({
           query: `{
-						persons {
+						people {
 							data {
 								attributes {
 									forename
@@ -51,13 +51,13 @@ async function getAllBlogposts() {
       }
 
       // update blogpost array with the data from the JSON response
-      blogposts = blogposts.concat(response.data.contributors.data);
+      blogposts = blogposts.concat(response.data.people.data);
 
       // prepare for next query
       recordsToSkip += recordsPerQuery;
 
       // stop querying if we are getting back less than the records we fetch per query
-      if (response.data.contributors.length < recordsPerQuery) {
+      if (response.data.people.length < recordsPerQuery) {
         makeNewQuery = false;
       }
       makeNewQuery = false;
@@ -71,9 +71,9 @@ async function getAllBlogposts() {
 		console.log('2. ', JSON.stringify(item));
     return {
       id: item.attributes.forename.length,
-      title: item.attributes.display,
+      title: item.attributes.forename,
       slug: item.attributes.surname,
-      body: item.attributes.bio,
+      body: item.attributes.bioNote,
       author: item.attributes.forename,
       date: 1234
     };
