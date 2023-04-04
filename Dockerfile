@@ -1,17 +1,9 @@
-FROM node:16-alpine AS builder
+FROM node:16
 
 WORKDIR /usr/src/app
 COPY package*.json ./
-COPY .env ./
 RUN npm install
-COPY ./src ./src
+COPY . .
 
-FROM node:16-alpine
-
-WORKDIR /usr/src/app
-COPY package*.json ./
-COPY .env ./
-RUN npm install
-COPY --from=builder /usr/src/app/dist ./dist
-EXPOSE 4001
-CMD ["npm", "run", "start"]
+EXPOSE 8080
+CMD [ "npm", "run", "build" ]
