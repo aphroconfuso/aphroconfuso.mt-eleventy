@@ -1,4 +1,6 @@
-aphroconfuso.mt/
 _site/
 node_modules/
 package-lock.json
+
+aphroconfuso.mt/*
+!aphroconfuso.mt/.gitkeep
