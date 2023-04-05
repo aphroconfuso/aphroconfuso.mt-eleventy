@@ -1,0 +1,75 @@
+---
+layout: layouts/home.njk
+templateClass: tmpl-post
+pagination:
+  data: contributors
+  size: 1
+  alias: contributor
+permalink: /{{ contributor.slug | slugify }}/index.html
+---
+{% include "postslist.njk" %}
+{% set htmlTitle = contributor.slug %}
+
+{% block content %}
+<article class="generic">
+	<header>
+		<h5>Kontributuri</h5>
+		<h1>{{ contributor.name }}</h1>
+	</header>
+	<div class="container">
+		<section class="grid-max-panel-left-top">
+			<section class="kittieba-menu">
+				{% for item in contributors %}
+					{% if loop.first %}<ul>{% endif %}
+						<li>
+							<a href="/{{ item.slug  | slugify }}">{{ item.slug }}</a>
+						</li>
+					{% if loop.last %}</ul>{% endif %}
+				{% endfor %}
+			</section>
+		</section>
+		<section class="grid-max-panel-right-top">
+			{# X #}
+		</section>
+	<section>
+		<div class="generic-body-text">{{ contributor.bioNote | prettifyMaltese | safe }}</div>
+		<ul class="promo-list">
+			{% for story in contributor.storiesAuthored %}
+				<li>
+					<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.title | slugify }}">
+						<header>
+							<h5>{{ story.monthYear }}</h5>
+							<h1>{{ story.title }}</h1>
+						</header>
+						<div class="body-text">
+								<p>{{ story.description | prettifyMaltese | safe }}</p>
+						</div>
+					</a>
+				</li>
+			{% endfor %}
+			{% for story in contributor.storiesTranslated %}
+				<li>
+					<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.title | slugify }}">
+						<header>
+							<h5>{{ story.monthYear }}</h5>
+							<h1 class="translated">{{ story.title }}</h1>
+						</header>
+						<div class="body-text">
+								<p>{{ story.description | prettifyMaltese | safe }}</p>
+						</div>
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</section>
+	<section class="grid-max-panel-left-bottom">
+		<!-- X -->
+	</section>
+	<section class="grid-max-panel-right-bottom">
+		<!-- X -->
+	</section>
+</div>
+
+</article>
+
+{% endblock %}

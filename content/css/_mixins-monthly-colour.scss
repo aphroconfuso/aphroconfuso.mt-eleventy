@@ -1,0 +1,69 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+@use "mixins-backgrounds" as *;
+
+@mixin monthly-colour($colour) {
+	border-bottom-color: $colour;
+	h1 {
+		color: $colour;
+	}
+	.dropcap {
+		&::before,
+		&::after {
+			color: lighten($colour, $lightest);
+		}
+	}
+	.end-dot {
+		color: $colour;
+		background-color: $colour;
+	}
+	.letters {
+		border-color: lighten($colour, $lighter);
+		&:before {
+			@include diagonal-stripes($colour);
+		}
+		h5 {
+			color: $colour;
+		}
+	}
+	@media screen and (min-width: $mobile-breakpoint-plusone) {
+		a:hover {
+			text-decoration-color: $colour;
+			@include ease-out($fade-in-short);
+		}
+		&.promo {
+			h1 {
+				clear: both;
+				display: inline-block;
+				position: relative;
+				&::after {
+					@include animated-underline-pre($colour, $interval: $fade-in-short);
+				}
+			}
+			h5 {
+				display: block;
+			}
+		}
+		&.promo:hover,
+		&.promo:focus {
+			h1::after {
+				@include animated-underline-post();
+			}
+			h5 {
+				color: $colour;
+				@include ease-out($fade-in-long);
+			}
+			// h2,
+			// p {
+			//   color: $colour;
+			//   @include ease-out(10s);
+			// }
+		}
+		& ~ .bookmark:hover {
+			border: 12px solid $colour !important;
+			border-bottom: 12px solid transparent;
+		}
+	}
+}

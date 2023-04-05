@@ -1,0 +1,12 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+
+.editorial {
+	border-radius: $body-margin-eighth;
+	display: block;
+	font-size: $font-size-editorial;
+	font-weight: 500;
+	padding: $body-margin;
+	position: relative;
+}

@@ -1,0 +1,164 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+footer {
+	background-color: $light-brown;
+	border-top: 1px solid $dark-brown;
+	font-family: $sans-alt;
+	font-size: $body-font-size;
+	margin-top: $body-margin;
+	padding: $body-margin;
+	.footer-content {
+		max-width: $max-width;
+		margin: 0 auto;
+		color: $paper;
+		position: relative;
+	}
+	li {
+		white-space: nowrap;
+	}
+	nav {
+		a {
+			display: inline-block;
+			height: ($body-margin * 1.5);
+			&:hover {
+				text-decoration: underline;
+				text-decoration-thickness: 1px;
+			}
+		}
+	}
+
+	.logotype {
+		width: 50%;
+	}
+
+	.copyright,
+	.email {
+		color: $dark-brown;
+		white-space: nowrap;
+	}
+
+	.footer-content {
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto auto auto auto auto auto;
+		gap: $body-margin $body-margin;
+		grid-template-areas:
+			"housekeeping"
+			"media"
+			"socials"
+			"logotype-container"
+			"copyright"
+			"email";
+	}
+
+	#housekeeping {
+		grid-area: housekeeping;
+		columns: 3;
+	}
+
+	#socials {
+		grid-area: socials;
+		columns: 3;
+	}
+
+	#media {
+		grid-area: media;
+		columns: 3;
+	}
+
+	#logotype-container {
+		grid-area: logotype-container;
+	}
+
+	#email {
+		grid-area: email;
+	}
+
+	#copyright {
+		grid-area: copyright;
+		position: relative;
+		a {
+			position: absolute;
+		}
+	}
+
+	nav a {
+		height: unset;
+	}
+
+	nav li:first-of-type {
+		column-span: all;
+		a {
+			font-style: italic;
+			text-transform: lowercase;
+		}
+	}
+
+	#logotype-container a {
+		height: auto;
+	}
+
+	#logotype-container a,
+	#email,
+	#copyright {
+		display: flex;
+		justify-content: center;
+	}
+
+	@media screen and (min-width: $mobile-breakpoint-plusone) {
+		.footer-content {
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+			grid-template-rows: auto auto;
+			gap: $body-margin $body-margin;
+			grid-template-areas:
+				"housekeeping housekeeping media media socials logotype-container"
+				"email email email email copyright logotype-container";
+		}
+
+		#socials {
+			columns: 2;
+		}
+
+		.logotype {
+			margin-top: -10px;
+			width: 80%;
+		}
+
+		#email,
+		#copyright {
+			display: block;
+		}
+
+		#logotype-container a {
+			justify-content: flex-end;
+		}
+
+		footer nav a {
+			height: auto;
+		}
+	}
+
+	body:not(.story) #scroll-tools {
+		display: none;
+	}
+	#scroll-tools {
+		@include ease-in();
+		bottom: 1rem;
+		font-weight: 500;
+		opacity: 0;
+		position: fixed;
+		right: 0;
+	}
+	#progress {
+		vertical-align: -0.5rem;
+	}
+	#arrow-top {
+		padding: 1rem;
+	}
+	.scrolling #scroll-tools {
+		opacity: 1;
+	}
+}

@@ -1,0 +1,60 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+
+::selection {
+	background: $highlight;
+	text-shadow: none;
+}
+
+html {
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+	overflow-y: scroll;
+	text-size-adjust: none;
+}
+
+body {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	-webkit-print-color-adjust: exact;
+	background-color: $paper;
+	color: hsl(0, 0%, 39%);
+	font-family: $sans, sans;
+	font-size: $font-size-furniture;
+	font-weight: 400;
+	line-height: 1.4;
+	print-color-adjust: exact;
+	min-height: 101%;
+	display: grid;
+	grid-template-rows: max-content 1fr;
+}
+
+.container {
+	max-width: $max-content-width;
+	margin: 0 auto;
+}
+
+main {
+	padding: 0 $font-size-furniture;
+}
+
+header {
+	max-width: $max-content-width;
+	margin: $body-margin auto;
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+	.hide-mobile {
+		display: none !important;
+	}
+}
+@media screen and (min-width: $mobile-breakpoint-plusone) {
+	header {
+		max-width: $max-content-width;
+		margin: ($body-margin * 4) auto ($body-margin * 3);
+	}
+	.hide-laptop {
+		display: none !important;
+	}
+}

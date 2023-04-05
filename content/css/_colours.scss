@@ -1,0 +1,53 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-monthly-colour" as *;
+
+h1 {
+	color: $h1-color;
+}
+h2 {
+	color: $h2-color;
+}
+h5 {
+	color: $h5-color;
+}
+
+// Make it this month
+// .editorial,
+// .promo-2 {
+//   // @include zigzag($mejju-2023);
+//   @include vertical-stripes($ġunju-2023);
+//   // background-color: lighten($mejju-2023, $lightest);
+// }
+
+// FIXME
+* {
+	-webkit-tap-highlight-color: rgba($color: $mejju-2023, $alpha: 0.2);
+}
+
+.mejju-2023 {
+	@include monthly-colour($mejju-2023);
+}
+
+.gunju-2023 {
+	@include monthly-colour($ġunju-2023);
+}
+
+.lulju-2023 {
+	@include monthly-colour($lulju-2023);
+}
+
+.awwissu-2023 {
+	@include monthly-colour($awwissu-2023);
+}
+
+// html {
+//   scrollbar-face-color: #eec800;
+//   scrollbar-shadow-color: #006cb4;
+//   scrollbar-highlight-color: #006cb4;
+//   scrollbar-3dlight-color: #006cb4;
+//   scrollbar-darkshadow-color: #006cb4;
+//   scrollbar-track-color: #006cb4;
+//   scrollbar-arrow-color: #c1c1d1;
+// }

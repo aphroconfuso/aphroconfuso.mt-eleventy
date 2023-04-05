@@ -1,0 +1,52 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+
+.bookmark {
+	align-items: center;
+	border: 12px solid $light-brown;
+	border-bottom: 12px solid transparent;
+	box-sizing: border-box;
+	color: $lightest-brown;
+	cursor: pointer;
+	display: flex;
+	font-size: 1rem;
+	height: 45px;
+	justify-content: center;
+	width: 0;
+}
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+.bookmark-destination {
+	position: fixed;
+	top: 50%;
+	right: 10rem;
+	animation: fadeOut 3s;
+	animation-timing-function: ease-in;
+	opacity: 0;
+}
+
+.ga1,
+.ga2,
+.ga3,
+.ga4,
+.ga5,
+.ga6,
+.ga7,
+.ga8,
+.ga9,
+.ga10,
+.ga11,
+.ga12 {
+	.bookmark {
+		position: absolute;
+		right: 1rem;
+		top: -5px;
+	}
+}

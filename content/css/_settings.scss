@@ -1,0 +1,22 @@
+@use "constants" as *;
+@use "calculations" as *;
+
+$font-size-editorial: $body-font-size;
+$font-size-aside: $font-size-compact;
+$font-size-nav: $font-size-compact;
+$font-size-furniture: $font-size-compact;
+$font-size-blockquote: $font-size-compact;
+$font-size-story-header: $font-size-largest;
+$font-size-story-header-mobile: $font-size-largest-mobile;
+
+$grid-lines: $faint-brown;
+$h1-color: $lighter-brown;
+$h2-color: $lighter-brown;
+$h3-color: $lighter-brown;
+$h4-color: $lighter-brown;
+$h5-color: $lighter-brown;
+
+$mejju-2023: $green;
+$ġunju-2023: $purple;
+$lulju-2023: $blue;
+$awwissu-2023: $pink;

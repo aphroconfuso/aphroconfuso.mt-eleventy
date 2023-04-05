@@ -1,0 +1,12 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+
+#form {
+	border: none;
+	display: block;
+	height: 400px;
+	margin-top: 4rem;
+	overflow: hidden;
+	width: 100%;
+}

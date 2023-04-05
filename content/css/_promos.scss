@@ -1,0 +1,46 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+@use "sass:math";
+
+.promo {
+	@include clamp(10);
+	header {
+		margin: 0 0 $body-margin-half;
+		h1,
+		h2 {
+			font-size: 2rem;
+		}
+	}
+	p {
+		color: $lighter-ink;
+	}
+}
+
+.home .promo {
+	h1,
+	h2 {
+		font-size: 2rem;
+	}
+}
+
+@mixin image-fit($width-ratio: 16, $height-ratio: 9) {
+	margin: 0;
+	overflow: hidden;
+	padding-top: (math.div($height-ratio, $width-ratio) * 100%);
+	position: relative;
+	width: 100%;
+	img {
+		left: 50%;
+		object-fit: cover;
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 100%;
+	}
+}
+
+.image-16-by-9 {
+	@include image-fit();
+}

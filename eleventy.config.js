@@ -5,13 +5,16 @@ const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginBundle = require("@11ty/eleventy-plugin-bundle");
 const pluginNavigation = require("@11ty/eleventy-navigation");
-const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
+const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
+const eleventySass = require("eleventy-sass");
+const pluginRev = require("eleventy-plugin-rev");
 
 module.exports = function(eleventyConfig) {
 	// Copy the contents of the `public` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig.addPassthroughCopy({
 		"./public/": "/",
+		"./scss/style.css": "/css",
 		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css"
 	});
 
@@ -33,6 +36,21 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPlugin(pluginNavigation);
 	eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 	eleventyConfig.addPlugin(pluginBundle);
+
+	// Others
+	eleventyConfig.addPlugin(pluginRev);
+	eleventyConfig.addPlugin(eleventySass, {
+    compileOptions: {
+      permalink: function(contents, inputPath) {
+        return (data) => data.page.filePathStem.replace(/^\/scss\//, "/css/") + ".css";
+      }
+    },
+    sass: {
+      style: "compressed",
+      sourceMap: false
+    },
+    rev: true
+  });
 
 	// Filters
 	eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
@@ -76,7 +94,29 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("prettifyMaltese", function prettifyMaltese(text) {
-		return (text || []).replace(/\b(\w{0,3}[lrstċdnxzż]-[a-zċżġħ]+)/, '<u>$1</u>').replace(/ - | -- /, '&hairsp;—&hairsp;');
+		return (text || []).replace(/’/g, "’")
+			.replace(/  /g, " ")
+			.replace(/ ?— ?| - | -- /g, "&thinsp;—&thinsp;")
+			.replace(/ċ/g,"MXc").replace(/ġ/g,"MXg").replace(/ħ/g,"MXh").replace(/ż/g,"MXz")
+			.replace(/Ċ/g,"MXC").replace(/Ġ/g,"MXG").replace(/Ħ/g,"MXH").replace(/Ż/g,"MXZ")
+			.replace(/\b([\w]{0,5}[lrstċdnxzż]-[a-zċżġħ]+)\b/gmi, "<u>$1</u>")
+			.replace(/MXc/g,"ċ").replace(/MXg/g,"ġ").replace(/MXh/g,"ħ").replace(/MXz/g,"ż")
+			.replace(/MXC/g,"Ċ").replace(/MXG/g,"Ġ").replace(/MXH/g,"Ħ").replace(/MXZ/g,"Ż")
+	});
+
+	eleventyConfig.addFilter("paragraphise", function paragraphise(text) {
+		return (text || []).split('\n')
+			.map(p => p && p.length && `<p>${ p }</p>`)
+			.join('\n');
+	});
+
+	eleventyConfig.addFilter("dropCapsify", function dropCapsify(text) {
+		return (text || []).replace(/<p>(.)(\w+)/, '<p><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>')
+											 .replace(/<p>\#<\/p>\s*<p>(.)([\w\-]+)/g, '<p class="section-break"><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>');
+	});
+
+	eleventyConfig.addFilter("endNotify", function endNotify(text) {
+		return (text || []).replace(/\.?\s*<\/p>\s*$/, '<span class="end-dot">.</span>');
 	});
 
 	// Customize Markdown library settings:
@@ -119,10 +159,10 @@ module.exports = function(eleventyConfig) {
 
 		// These are all optional:
 		dir: {
-			input: "content",         // default: "."
+			input: "content",          // default: "."
 			includes: "../_includes",  // default: "_includes"
 			data: "../_data",          // default: "_data"
-			output: "aphroconfuso.mt"
+			output: "aphroconfuso.mt"  // default: "_site"
 		},
 
 		// -----------------------------------------------------------------

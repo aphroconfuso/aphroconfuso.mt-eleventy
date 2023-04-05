@@ -1,0 +1,100 @@
+---
+layout: layouts/home.njk
+templateClass: tmpl-post
+pagination:
+  data: stories
+  size: 1
+  alias: story
+permalink: /{{ story.title | slugify }}/index.html
+---
+{% include "postslist.njk" %}
+{% set htmlTitle = story.title %}
+
+{% block content %}
+<article class="{{ story.monthYear | slugify }}">
+	<header>
+		<h5>{{ story.monthYear }}</h5>
+		<h1>{{ story.title }}</h1>
+		<h2>
+			{% if story.translator %}
+				{{ story.author }} <span class="translator"><a href="/{{story.translator | slugify }}">{{ story.translator }}</a></span>
+			{% else %}
+				<a href="/{{story.author | slugify }}">{{ story.author }}</a>
+			{% endif %}
+		</h2>
+	</header>
+	<div class="container">
+		<section class="grid-max-panel-left-top">
+			<section class="reviewed">
+				<p>
+					<span class="title">Marta Marta</span>
+					<span class="author">ta’ Loranne Vella</span>
+					<span class="publisher">(EDE Books 2022)</span>
+				</p>
+				<p>
+					<span class="title">Marta Marta</span>
+					<span class="author">ta’ Loranne Vella</span>
+					<span class="publisher">(EDE Books 2022)</span>
+				</p>
+				<p>
+					<span class="title">Marta Marta</span>
+					<span class="author">ta’ Loranne Vella</span>
+					<span class="publisher">(EDE Books 2022)</span>
+				</p>
+			</section>
+		</section>
+		<section class="grid-max-panel-right-top">
+			<!-- X -->
+		</section>
+		<div class="grid-body">
+			<section id="body-text" class="body-text">
+				{{ story.body | dropCapsify | prettifyMaltese | endNotify | safe }}
+			</section>
+			{% if story.endnote %}
+				<aside class="endnote body-text">
+					{{ story.endnote | prettifyMaltese | safe }}
+				</aside>
+			{% endif %}
+		</div>
+		<section class="grid-max-panel-left-bottom">
+			<aside class="notes">
+				<p>§ Tessie kitbitilha dwar milsa infettata u minfuħa, għarrfitha dwar <span class="h">in-nifs</span> maqtugħ, <span class="h">id-deni,</span> <span class="h">l-indiġestjoni</span> u <span class="h">l-vomtu</span> wara <span class="h">l-ikel.</span> Pinġitilha b’tixbihat <span class="h">l-għeja</span> u <span class="h">d-dgħufija</span> minkejja <span class="h">l-mistrieħ,</span> <span class="h">l-uġigħ</span> f’ġenbha minkejja <span class="h">t-trattament,</span> <span class="h">l-għaraq</span> ma’ ġisimha minkejja <span class="h">l-bard</span> u <span class="h">l-bjuda</span> ta’ wiċċha minkejja <span class="h">x-xemx.</span></p>
+			</aside>
+		</section>
+		<section class="grid-max-panel-right-bottom">
+			{# <aside class="letters-solicit">
+				<p>Iktbulna dwar din l-istorja fuq l-indirizz <a href="mailto:ittri@aphroconfuso.mt?subject=Marta Marta ta' Loranne Vella" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludu ismek, ir-raħal jew belt, u l-pajjiż fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
+			</aside> #}
+		</section>
+	</div>
+	{% if story.letters %}
+			<section class="letters">
+				<!-- X -->
+			</section>
+			{{ story.endnote | prettifyMaltese | safe }}
+		</aside>
+	{% endif %}
+</article>
+<aside class="promos-container">
+	{% for promo in story.endPromos %}
+		<div class="promo-{{ loop.index }}">
+			<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug | slugify }}">
+				<header>
+					<h5>{{ promo.monthYear }}</h5>
+					<h1>{{ promo.title }}</h1>
+					<h2>
+						{% if promo.translator %}
+							{{ promo.author }} <span class="translator">{{ promo.translator }}</span>
+						{% else %}
+							{{ promo.author }}
+						{% endif %}
+					</h2>
+				</header>
+				<div class="body-text">
+					<p>{{ promo.description }}</p>
+				</div>
+			</a>
+		</div>
+	{% endfor %}
+</aside>
+{% endblock %}

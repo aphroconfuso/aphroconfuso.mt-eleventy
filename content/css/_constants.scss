@@ -1,0 +1,75 @@
+@use "sass:math";
+
+// contradiction here
+// hover doesn't come in but full nav already has
+$mobile-breakpoint: 749px;
+$mobile-breakpoint-plusone: ($mobile-breakpoint + 1px);
+$tablet-mini-breakpoint: 620px;
+
+$tablet-breakpoint: 1080px;
+$laptop-breakpoint: 1200px;
+
+$max-content-width: 39rem;
+$max-logo-width: 820px;
+$max-width: 1300px;
+
+// Use this for underlined links:
+// @media (hover: none) {
+//   a {
+//     background: yellow;
+//   }
+// }
+
+$fade-in-short: 200ms;
+$fade-in-medium: 400ms;
+$fade-in-long: 800ms;
+
+$sans: "Fira Sans";
+$sans-alt: "Alegreya Sans";
+$sans-sc: "Alegreya Sans SC";
+$serif: "Alegreya";
+$serif-sc: "Alegreya SC";
+$decorative: "Cinzel Decorative";
+
+$dark-brown: hsl(26, 5%, 12%);
+$light-brown: hsl(26, 5%, 28%);
+$lighter-brown: hsl(26, 5%, 48%);
+$lightest-brown: hsl(26, 5%, 68%);
+$faint-brown: hsl(26, 5%, 88%);
+$greyer-brown: hsl(30, 1%, 66%);
+$paper: hsl(60, 33%, 96%);
+$ink: hsl(0, 0%, 13%);
+$lighter-ink: hsl(0, 0%, 12%);
+$highlight: hsl(60, 57%, 74%);
+
+$saturation: 50%;
+$lightness: 47.5%;
+$lighter: 5;
+$lightest: 20;
+
+$faint-line: $faint-brown;
+$light-text: $lighter-ink;
+
+$body-font-size: 1.2rem;
+$font-size-compact: math.div($body-font-size * 4, 5);
+$body-line-height: 1.5;
+$body-margin: $body-font-size * $body-line-height;
+$body-margin-half: math.div($body-margin, 2);
+$body-margin-quarter: math.div($body-margin, 4);
+$body-margin-eighth: math.div($body-margin, 8);
+$header-line-height: 1.1;
+$font-size-largest-mobile: 2.5rem;
+$font-size-largest: 3rem;
+
+$EXAMPLE: hsl(0, 65%, 37.5%);
+
+$blue-hue: 177;
+$green-hue: 98;
+$magenta-hue: 320;
+$orange-hue: 27;
+$pink-hue: 310;
+$purple-hue: 250;
+$red-hue: 0;
+$reddish-pink-hue: 340;
+$blue2-hue: 196;
+$yellow-hue: 51;

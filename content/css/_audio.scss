@@ -1,0 +1,36 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+
+figure {
+	margin-bottom: $body-margin;
+}
+
+figcaption {
+	color: $lighter-brown;
+	font-size: 0.9rem;
+	line-height: ($body-line-height * 0.66);
+}
+
+audio {
+	&::-webkit-media-controls-timeline-container {
+		color: red;
+		// background-color: #f00;
+	}
+}
+
+//   &::-webkit-media-controls-panel:
+// &::-webkit-media-controls-mute-button:
+// &::-webkit-media-controls-play-button:
+// &::-webkit-media-controls-timeline:
+// &::-webkit-media-controls-timeline-container:
+// &::-webkit-media-controls-current-time-display:
+// &::-webkit-media-controls-time-remaining-display:
+// &::-webkit-media-controls-volume-slider-container:
+// &::-webkit-media-controls-volume-slider:
+// &::-webkit-media-controls-seek-back-button:
+// &::-webkit-media-controls-seek-forward-button:
+// &::-webkit-media-controls-fullscreen-button:
+// &::-webkit-media-controls-rewind-button:
+// &::-webkit-media-controls-return-to-realtime-button:
+// &::-webkit-media-controls-toggle-closed-captions-button:

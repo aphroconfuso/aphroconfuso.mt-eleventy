@@ -1,0 +1,81 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+.promo-picture-1 {
+	.body-text {
+		grid-area: promo-body;
+		p {
+			@include clamp(7);
+		}
+	}
+	header {
+		grid-area: promo-header;
+	}
+	figure {
+		grid-area: promo-image;
+		padding: $body-margin-half 0;
+		img {
+			aspect-ratio: 16 / 9;
+		}
+		figcaption {
+			display: none;
+		}
+	}
+	@media screen and (min-width: $mobile-breakpoint-plusone) {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: min-content min-content;
+		gap: $body-margin-half $body-margin;
+		grid-template-areas:
+			"promo-header promo-header"
+			"promo-body promo-image";
+		.body-text {
+			p {
+				@include clamp(13);
+			}
+		}
+		figure {
+			padding: 0;
+		}
+	}
+}
+
+.promo-picture-2 {
+	.body-text {
+		grid-area: promo-body;
+		// p {
+		//   @include clamp(3);
+		// }
+	}
+	header {
+		grid-area: promo-header;
+	}
+	figure {
+		grid-area: promo-image;
+		margin: 0;
+		img {
+			aspect-ratio: 32 / 9;
+		}
+		figcaption {
+			display: none;
+		}
+	}
+	@media screen and (min-width: $mobile-breakpoint-plusone) {
+		display: grid;
+		grid-template-columns: auto;
+		grid-template-rows: auto auto auto;
+		gap: $body-margin;
+		grid-template-areas:
+			"promo-header"
+			"promo-image"
+			"promo-body";
+		.body-text {
+			columns: 3;
+			column-gap: $body-margin;
+			column-rule: 1px dotted $faint-line;
+			column-fill: balance;
+		}
+	}
+}

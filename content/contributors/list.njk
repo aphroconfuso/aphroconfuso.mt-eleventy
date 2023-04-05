@@ -2,28 +2,24 @@
 layout: layouts/home.njk
 templateClass: tmpl-post
 eleventyNavigation:
-  key: Blog
-  order: 4
+  key: Contributors
+  order: 3
 pagination:
-  data: blogposts
+  data: contributors
   size: 12
-permalink: blogd{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber + 1}}{% endif %}/index.html
+permalink: kontributuri{% if pagination.pageNumber > 0 %}/p{{ pagination.pageNumber + 1}}{% endif %}/index.html
 ---
-
-{% include "postslist.njk" %}
 {% set htmlTitle = 'LIST' %}
 
 {% block content %}
-  <h2>Unfiltered, raw and probably full of typos</h2>
+  <h2>Kontributuri</h2>
 
   {# loop through paginated item #}
   {% for item in pagination.items %}
     {% if loop.first %}<ul>{% endif %}
       <li>
-        <h2><a href="/blogd/{{ item.slug  | slugify }}">{{ item.title }} </a></h2>
-        <p>by {{ item.author }}  </p>
-        <br>
-      </li>
+				<a href="/{{ item.slug  | slugify }}">{{ item.slug }}</a>
+			</li>
     {% if loop.last %}</ul>{% endif %}
   {% endfor %}
 

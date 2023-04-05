@@ -1,0 +1,55 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+.promo-quote {
+	border-radius: $body-margin-eighth;
+	display: block;
+	padding: 1rem 3rem;
+	position: relative;
+	&:before,
+	&:after {
+		color: $paper;
+		font-family: $decorative;
+		font-size: 9rem;
+		font-style: normal;
+		font-weight: 500;
+		position: absolute;
+	}
+	&:before {
+		content: "\275D";
+		left: 0;
+		top: 0;
+	}
+	&:after {
+		content: "\275E";
+		line-height: 0;
+		right: 0;
+		bottom: 0;
+	}
+}
+
+@media screen and (min-width: $mobile-breakpoint-plusone) {
+	.promo-quote {
+		p {
+			@include clamp(3);
+		}
+		&:before,
+		&:after {
+			color: $paper;
+			bottom: unset;
+			font-size: 5rem;
+			top: 50%;
+			transform: translate(0, -50%);
+		}
+		&:before {
+			content: "«";
+			left: 0;
+		}
+		&:after {
+			content: "»";
+			right: 0;
+		}
+	}
+}

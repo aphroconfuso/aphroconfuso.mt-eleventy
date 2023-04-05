@@ -1,0 +1,57 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+
+@mixin clamp($lines: 9) {
+	display: -webkit-box;
+	-webkit-line-clamp: $lines;
+	-webkit-box-orient: vertical;
+	line-clamp: $lines;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+@mixin ease-in($interval: 1s) {
+	-moz-transition: all $interval ease-in;
+	-o-transition: all $interval ease-in;
+	-webkit-transition: all $interval ease-in;
+	transition: all $interval ease-in;
+}
+
+@mixin ease-out($interval: 1s) {
+	-moz-transition: all $interval ease-out;
+	-o-transition: all $interval ease-out;
+	-webkit-transition: all $interval ease-out;
+	transition: all $interval ease-out;
+}
+
+@mixin animated-underline-pre($colour, $interval: $fade-in-short) {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background-color: $colour;
+	opacity: 0;
+	transition: opacity $interval, transform $interval;
+	opacity: 1;
+	transform: scale(0);
+	transform-origin: center;
+}
+
+@mixin animated-underline-post() {
+	transform: scale(1);
+}
+
+@mixin animated-underline($colour: red, $interval: $fade-in-short) {
+	display: inline-block;
+	position: relative;
+	&::after {
+		@include animated-underline-pre($colour, $interval: $fade-in-short);
+	}
+	&:hover::after,
+	&:focus::after {
+		@include animated-underline-post();
+	}
+}

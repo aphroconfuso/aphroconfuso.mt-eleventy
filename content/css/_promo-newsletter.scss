@@ -1,0 +1,51 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+
+.newsletter-subscribe {
+	p {
+		color: $light-brown;
+		font-family: $sans-sc;
+		margin-right: 0.5rem;
+		text-transform: lowercase;
+		white-space: nowrap;
+	}
+	display: flex;
+	align-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-weight: 500;
+	justify-content: center;
+	letter-spacing: 1px;
+	padding: 0 3rem 0 2rem;
+	position: relative;
+	form {
+		white-space: nowrap;
+	}
+	input {
+		border: 1px solid $light-brown;
+		border-radius: 0.25rem;
+		padding: 0.5rem;
+	}
+	input[type="email"] {
+		color: $green;
+		font-family: $sans;
+		width: 12rem;
+		&::placeholder {
+			color: lighten(complement($green), $lighter);
+		}
+	}
+	input[type="submit"] {
+		background-color: $light-brown;
+		color: $paper;
+		font-family: $sans-sc;
+		padding: 0.5rem 1rem;
+		text-transform: lowercase;
+	}
+}
+
+@media screen and (min-width: $mobile-breakpoint-plusone) {
+	.newsletter-subscribe {
+		flex-direction: column;
+	}
+}

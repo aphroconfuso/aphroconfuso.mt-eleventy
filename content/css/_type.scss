@@ -1,0 +1,129 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+body {
+	font-size: $font-size-compact;
+}
+
+h1 {
+	font-family: $serif, serif;
+	font-size: $font-size-story-header-mobile;
+	font-weight: 600;
+	line-height: 1.1;
+}
+
+h2 {
+	font-family: $serif, serif;
+	font-size: $font-size-story-header-mobile;
+	font-weight: 500;
+	line-height: 1.1;
+	.translator {
+		display: inline-block;
+		white-space: nowrap;
+		&:before {
+			color: $lightest-brown;
+			content: "(\2009tr\2009";
+		}
+		&:after {
+			color: $lightest-brown;
+			content: "\2009)";
+		}
+	}
+}
+
+h5 {
+	display: inline-block;
+	font-family: $sans-sc, sans-serif;
+	line-height: 1.1;
+	text-transform: lowercase;
+}
+
+u {
+	white-space: nowrap;
+}
+
+.work-title {
+	font-style: italic;
+}
+
+.details {
+	color: #757575;
+	font-family: $sans, sans-serif;
+}
+
+.generic-body-text,
+.body-text {
+	color: $ink;
+	font-family: $serif, serif;
+	p.section-break {
+		margin-top: $body-margin * 2;
+	}
+	p {
+		font-size: $body-font-size;
+		margin-bottom: $body-margin-half;
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+	blockquote {
+		font-size: $font-size-blockquote;
+		padding: 0 $body-margin $body-margin-half;
+	}
+}
+
+.generic-body-text {
+	font-family: $sans-alt, sans-serif;
+}
+
+.end-dot {
+	border-radius: 50%;
+	display: inline-block;
+	font-family: $decorative;
+	font-size: 0.8rem;
+	font-weight: 700;
+	height: 0.8rem;
+	margin-left: 0.25rem;
+	text-align: center;
+	width: 0.8rem;
+}
+
+.section {
+	margin-top: $body-margin;
+}
+
+.initial {
+	text-transform: uppercase;
+}
+
+.endnote {
+	font-style: italic;
+	margin-bottom: $body-margin;
+}
+
+.outlined {
+	text-shadow: -1px -1px 0 $paper, 0 -1px 0 $paper, 1px -1px 0 $paper,
+		1px 0 0 $paper, 1px 1px 0 $paper, 0 1px 0 $paper, -1px 1px 0 $paper,
+		-1px 0 0 $paper;
+}
+
+// article a {
+//   text-decoration-color: $ink;
+//   text-decoration-thickness: 0.125rem;
+//   text-underline-offset: 1.5px;
+// }
+
+@media screen and (min-width: $laptop-breakpoint) {
+	h1,
+	h2 {
+		font-size: 3rem;
+	}
+	h2 a {
+		@include animated-underline($lighter-brown);
+	}
+}
+
+.arabic {
+	font-family: "Noto Naskh Arabic", sans-serif;
+}

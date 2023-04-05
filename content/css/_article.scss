@@ -1,0 +1,52 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+
+article {
+	border-bottom: $body-margin-quarter solid $paper;
+	margin: 0 auto $body-margin;
+	max-width: $max-width;
+}
+
+#body-text {
+	margin: 0 auto $body-margin auto;
+	max-width: $max-content-width;
+}
+
+// Why is this here alone???
+.details,
+.notes,
+.reviewed {
+	margin-bottom: $body-margin;
+}
+
+.reviewed {
+	border: 1px solid $faint-line;
+	font-size: 1rem;
+	padding: $body-margin-half;
+	.title {
+		letter-spacing: 1px;
+		text-transform: uppercase;
+	}
+	.author {
+		white-space: nowrap;
+	}
+	.publisher {
+		white-space: nowrap;
+	}
+	p {
+		// margin-bottom: $body-margin-half;
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+}
+
+@media screen and (min-width: $mobile-breakpoint-plusone) {
+	article {
+		aside {
+			color: $greyer-brown;
+			font-size: $font-size-aside;
+		}
+	}
+}

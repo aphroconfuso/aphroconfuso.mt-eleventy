@@ -1,0 +1,33 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+
+.promo-braces {
+	&:before,
+	&:after {
+		color: $light-brown;
+		font-family: $decorative;
+		font-size: 5rem;
+		font-style: normal;
+		font-weight: 500;
+		position: absolute;
+		top: 50%;
+		transform: translate(0, -50%);
+	}
+	&:before {
+		content: "{";
+		left: 0;
+	}
+	&:after {
+		content: "}";
+		right: 0;
+	}
+	p {
+		font-family: $sans, sans;
+		font-size: 1.4rem;
+		font-weight: 400;
+	}
+	display: block;
+	padding: 0 3rem;
+	position: relative;
+}

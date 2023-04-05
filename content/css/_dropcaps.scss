@@ -1,0 +1,302 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+
+.dropcap {
+	color: $lighter-ink;
+	float: left;
+	font-size: 7rem;
+	font-weight: 400;
+	line-height: 0.6;
+	margin-left: -0.25rem;
+	padding-right: 0.1rem;
+	padding-top: 0.1rem;
+	position: relative;
+	z-index: -1;
+	&::before {
+		bottom: -0.9rem;
+		font-family: $decorative;
+		font-size: 8rem;
+		font-weight: 700;
+		left: -0.33rem;
+		position: absolute;
+		z-index: -1;
+	}
+	&::after {
+		position: absolute;
+		z-index: -1;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	// better placing
+	.dropcap::before {
+		left: -1rem;
+	}
+}
+
+.drop-A {
+	margin-left: 0.1rem;
+	padding-right: 0.6rem;
+	&::before {
+		content: "A";
+		left: -0.9rem;
+	}
+}
+.drop-B {
+	margin-left: -0.3rem;
+	padding-right: 0;
+	&::before {
+		content: "B";
+		left: -0.7rem;
+	}
+}
+.drop-C::before {
+	content: "C";
+	left: -0.9rem;
+}
+.drop-Ċ {
+	&::before {
+		content: "C";
+		left: -0.9rem;
+	}
+	&::after {
+		content: ".";
+		left: 1.3rem;
+		top: -5.6rem;
+	}
+}
+.drop-D {
+	margin-left: -0.3rem;
+	&::before {
+		content: "D";
+		left: -0.7rem;
+	}
+}
+.drop-E {
+	margin-left: -0.3rem;
+	&::before {
+		content: "E";
+		left: -0.7rem;
+	}
+}
+.drop-F {
+	margin-left: -0.3rem;
+	&::before {
+		content: "F";
+		left: -0.7rem;
+	}
+}
+.drop-G::before {
+	content: "G";
+	left: -0.7rem;
+}
+.drop-Ġ {
+	&::before {
+		content: "G";
+		left: -0.7rem;
+	}
+	&::after {
+		content: ".";
+		left: 1.35rem;
+		top: -5.5rem;
+	}
+}
+.drop-Għ {
+	letter-spacing: -0.7rem;
+	padding-right: 1rem;
+	&::before {
+		content: "GH";
+		left: -1.6rem;
+		letter-spacing: -0.9rem;
+	}
+	&::after {
+		content: "―";
+		left: 4rem;
+		top: -1.2rem;
+	}
+}
+.drop-H {
+	margin-left: -0.3rem;
+	&::before {
+		content: "H";
+		left: -0.8rem;
+	}
+}
+.drop-Ħ {
+	margin-left: -0.3rem;
+	&::before {
+		content: "H";
+		left: -0.8rem;
+	}
+	&::after {
+		content: "―";
+		left: -0.8rem;
+		top: -1.2rem;
+	}
+}
+.drop-I {
+	margin-left: -0.3rem;
+	&::before {
+		content: "I";
+		left: -0.7rem;
+	}
+}
+.drop-Ie {
+	margin-left: -0.3rem;
+	letter-spacing: -0.3rem;
+	padding-right: 0.3rem;
+	&::before {
+		content: "IE";
+		left: -1.6rem;
+		letter-spacing: -0.3rem;
+	}
+}
+.drop-J::before {
+	content: "J";
+}
+.drop-K {
+	&::before {
+		content: "K";
+		left: -0.9rem;
+	}
+	left: -0.18rem;
+	padding-right: 0.3rem;
+}
+.drop-L {
+	&::before {
+		content: "L";
+		left: -0.9rem;
+	}
+	left: -0.18rem;
+	padding-right: 0.3rem;
+}
+.drop-M {
+	&::before {
+		content: "M";
+		left: -0.75rem;
+	}
+	left: -0.18rem;
+	padding-right: 0;
+}
+.drop-N {
+	&::before {
+		content: "N";
+		left: -0.9rem;
+	}
+	left: -0.18rem;
+	padding-right: 0;
+}
+.drop-O::before {
+	content: "O";
+	left: -1rem;
+}
+.drop-P {
+	&::before {
+		content: "P";
+		left: -0.9rem;
+	}
+	left: -0.18rem;
+	padding-right: 0;
+}
+.drop-Q::before {
+	content: "Q";
+	left: -1.4rem;
+}
+.drop-R {
+	&::before {
+		content: "R";
+		left: -0.9rem;
+	}
+	left: -0.18rem;
+	padding-right: 0;
+}
+.drop-S {
+	&::before {
+		content: "s";
+		left: -0.9rem;
+	}
+	margin-left: -0.3rem;
+	padding-right: 0;
+}
+.drop-T::before {
+	content: "T";
+}
+.drop-U::before {
+	content: "U";
+	left: -1rem;
+}
+.drop-V::before {
+	content: "V";
+	left: -1rem;
+}
+.drop-W::before {
+	content: "W";
+	left: -1rem;
+}
+.drop-X::before {
+	content: "X";
+	left: -1rem;
+}
+.drop-Y::before {
+	content: "Y";
+	left: -1rem;
+}
+.drop-Z::before {
+	content: "Z";
+	left: -1rem;
+}
+.drop-Ż {
+	&::before {
+		content: "Z";
+		left: -1rem;
+	}
+	&::after {
+		content: ".";
+		left: 0.9rem;
+		top: -5.6rem;
+	}
+}
+.drop-q::before {
+	content: "Q";
+	left: -1.4rem;
+}
+.drop-0::before {
+	content: "0";
+	left: -1rem;
+}
+.drop-1::before {
+	content: "1";
+}
+.drop-2::before {
+	content: "2";
+	left: -1rem;
+}
+.drop-3::before {
+	content: "3";
+	left: -1rem;
+}
+.drop-4::before {
+	content: "4";
+	left: -1rem;
+}
+.drop-5::before {
+	content: "5";
+	left: -1rem;
+}
+.drop-6::before {
+	content: "6";
+	left: -1rem;
+}
+.drop-7::before {
+	content: "7";
+	left: -1rem;
+}
+.drop-8::before {
+	content: "8";
+	left: -1rem;
+}
+.drop-9::before {
+	content: "9";
+	left: -1rem;
+}
