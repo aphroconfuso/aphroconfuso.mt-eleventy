@@ -49,6 +49,38 @@ async function getAllStories() {
 											}
 										}
 									}
+									booksMentioned {
+										data {
+											attributes {
+												title
+												publicationDate
+													authors {
+														data {
+															attributes {
+																forename
+																surname
+															}
+														}
+													}
+												translators {
+														data {
+															attributes {
+																forename
+																surname
+															}
+														}
+													}
+												publishers {
+													data {
+														attributes {
+															name
+															city
+														}
+													}
+												}
+											}
+										}
+									}
 									endPromos {
 										text
 										story {
@@ -112,15 +144,10 @@ async function getAllStories() {
     }
   }
 
-	console.log('2. ', stories.length, stories);
-
-
   // format stories objects
   const storiesFormatted = stories.map((item) => {
 		const author = item.attributes.authors.data.length && item.attributes.authors.data[0].attributes;
 		const translator = item.attributes.translators.data.length && item.attributes.translators.data[0].attributes;
-
-		console.log('2. ', stories.length, item.attributes.endPromos.length && JSON.stringify(item.attributes.endPromos[0]));
 
 		const endPromosFormatted = item.attributes.endPromos.length && item.attributes.endPromos.map((promo) => {
 			const promoAtts = promo.story.data.attributes;
@@ -137,6 +164,24 @@ async function getAllStories() {
 			};
 		});
 
+		const booksMentioned = item.attributes.booksMentioned.data.length && item.attributes.booksMentioned.data.map((book) => {
+			const bookAtts = book.attributes;
+			const author = bookAtts.authors.data.length && bookAtts.authors.data[0].attributes;
+			const translator = bookAtts.translators.data.length && bookAtts.translators.data[0].attributes;
+			const publisher = bookAtts.publishers.data.length && bookAtts.publishers.data[0].attributes;
+
+			return {
+				title: bookAtts.title,
+				author: author && `${ author.forename } ${ author.surname }`,
+				translator: translator && `${ translator.forename } ${ translator.surname }`,
+				publicationYear: new Date(bookAtts.publicationDate).getFullYear(),
+				publisherName: publisher.name,
+				publisherCity: publisher.city
+			};
+		});
+
+		console.log(5, booksMentioned);
+
     return {
       title: item.attributes.title,
 			body: item.attributes.body,
@@ -146,11 +191,10 @@ async function getAllStories() {
 			description: item.attributes.description,
 			author: author && `${author.forename} ${author.surname}`,
 			translator: translator && `${ translator.forename } ${ translator.surname }`,
-			endPromos: endPromosFormatted
+			endPromos: endPromosFormatted,
+			booksMentioned: booksMentioned
     };
   });
-
-	console.log('3. ', stories.length, storiesFormatted);
 
   // return formatted stories
   return storiesFormatted;

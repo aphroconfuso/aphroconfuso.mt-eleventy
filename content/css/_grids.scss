@@ -42,6 +42,9 @@
 
 	.grid-body {
 		grid-area: grid-max-body;
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 
 	.grid-max-panel-left-bottom {
@@ -63,8 +66,18 @@
 		flex-direction: column;
 		justify-content: flex-end;
 	}
+
 	.grid-bottom-full {
 		grid-area: grid-bottom-full;
+	}
+
+	aside,
+	div,
+	section,
+	p {
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 
 	.promos-container {

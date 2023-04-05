@@ -26,21 +26,13 @@ permalink: /{{ story.title | slugify }}/index.html
 	<div class="container">
 		<section class="grid-max-panel-left-top">
 			<section class="reviewed">
-				<p>
-					<span class="title">Marta Marta</span>
-					<span class="author">ta’ Loranne Vella</span>
-					<span class="publisher">(EDE Books 2022)</span>
-				</p>
-				<p>
-					<span class="title">Marta Marta</span>
-					<span class="author">ta’ Loranne Vella</span>
-					<span class="publisher">(EDE Books 2022)</span>
-				</p>
-				<p>
-					<span class="title">Marta Marta</span>
-					<span class="author">ta’ Loranne Vella</span>
-					<span class="publisher">(EDE Books 2022)</span>
-				</p>
+				{% for book in story.booksMentioned %}
+					<p>
+						<span class="title">{{ book.title }}</span>
+						<span class="author"> ta’ {{ book.author }}</span>
+						<span class="publisher">({{ book.publisherName }}, {{ book.publisherCity }} {{ book.publicationYear }})</span>
+					</p>
+				{% endfor %}
 			</section>
 		</section>
 		<section class="grid-max-panel-right-top">
