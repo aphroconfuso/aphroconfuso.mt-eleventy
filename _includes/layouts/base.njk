@@ -2,9 +2,9 @@
 <html lang="mt" translate="no">
 
 	<head>
-		<title>Aphroconfuso | {{ htmlTitle }}</title>
+		<title>{{ contributor.metaTitle or story.metaTitle or metadata.title }}</title>
 		<meta content="black" name="apple-mobile-web-app-status-bar-style">
-		<meta content="dalwaqt..." name="description">
+		<meta content="{{ contributor.metaDescription or story.metaDescription or metadata.description }}" name="description">
 		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 		<meta content="width=device-width, initial-scale=1" name="viewport">
 		<meta content="width=device-width" initial-scale="1.0" maximum-scale="1.0" name="viewport">
@@ -41,7 +41,7 @@
 	</head>
 	<body class="show-nav story">
 		<nav id="top-nav">
-			<a id="logo-container" href="index.html?r=1680465513008"><img src="/img/logo-4C4845.svg" id="logo" alt="logo: Aphroconfuso" /></a>
+			<a id="logo-container" href="/"><img src="/img/logo-4C4845.svg" id="logo" alt="logo: Aphroconfuso" /></a>
 			<input id="menu-toggle" type="checkbox" />
 			<label class='menu-button-container' for="menu-toggle">
 				<div class='menu-button'></div>

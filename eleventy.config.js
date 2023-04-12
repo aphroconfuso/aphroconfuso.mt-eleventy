@@ -8,6 +8,9 @@ const pluginNavigation = require("@11ty/eleventy-navigation");
 const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
 const eleventySass = require("eleventy-sass");
 const pluginRev = require("eleventy-plugin-rev");
+const stripTags = require("striptags");
+
+const slugifyStringMaltese = require("./src/slugifyMaltese.js");
 
 module.exports = function(eleventyConfig) {
 	// Copy the contents of the `public` folder to the output folder
@@ -94,14 +97,25 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("prettifyMaltese", function prettifyMaltese(text) {
-		return (text || []).replace(/’/g, "’")
-			.replace(/  /g, " ")
-			.replace(/ ?— ?| - | -- /g, "&thinsp;—&thinsp;")
-			.replace(/ċ/g,"MXc").replace(/ġ/g,"MXg").replace(/ħ/g,"MXh").replace(/ż/g,"MXz")
-			.replace(/Ċ/g,"MXC").replace(/Ġ/g,"MXG").replace(/Ħ/g,"MXH").replace(/Ż/g,"MXZ")
+		return (text || []).replace(/<p>\s*<\/p>/gm, "")
+			.replace(/'/gm, "’")
+			.replace(/  +/gm, " ")
+			.replace(/> */gm, ">")
+			.replace(/ *</gm, "<")
+			.replace(/ ?— ?| - | -- /gm, "&hairsp;—&hairsp;")
+			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz")
+			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ")
 			.replace(/\b([\w]{0,5}[lrstċdnxzż]-[a-zċżġħ]+)\b/gmi, "<u>$1</u>")
-			.replace(/MXc/g,"ċ").replace(/MXg/g,"ġ").replace(/MXh/g,"ħ").replace(/MXz/g,"ż")
-			.replace(/MXC/g,"Ċ").replace(/MXG/g,"Ġ").replace(/MXH/g,"Ħ").replace(/MXZ/g,"Ż")
+			.replace(/MXc/gm,"ċ").replace(/MXg/gm,"ġ").replace(/MXh/gm,"ħ").replace(/MXz/gm,"ż")
+			.replace(/MXC/gm,"Ċ").replace(/MXG/gm,"Ġ").replace(/MXH/gm,"Ħ").replace(/MXZ/gm,"Ż")
+	});
+
+	eleventyConfig.addFilter("slugifyMaltese", function slugifyMaltese(text) {
+		return slugifyStringMaltese(text);
+	});
+
+	eleventyConfig.addFilter("fixMonthMaltese", function fixMonthMaltese(text) {
+		return (text || []).replace(/Gunju/gi, "Ġunju").replace(/Dicembru/gi, "Diċembru");
 	});
 
 	eleventyConfig.addFilter("paragraphise", function paragraphise(text) {
@@ -110,9 +124,19 @@ module.exports = function(eleventyConfig) {
 			.join('\n');
 	});
 
-	eleventyConfig.addFilter("dropCapsify", function dropCapsify(text) {
-		return (text || []).replace(/<p>(.)(\w+)/, '<p><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>')
-											 .replace(/<p>\#<\/p>\s*<p>(.)([\w\-]+)/g, '<p class="section-break"><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>');
+	eleventyConfig.addFilter("versify", function versify(text1) {
+		const text = text1.replace(/<p>\s*<\/p>\s*/gm, '#');
+		return stripTags(text, ['i', 'em']).split('#').map(p => p && p.length && `<p>${ p.replace('\n', '<br/>') }</p>`)
+			.join('');
+	});
+
+	eleventyConfig.addFilter("dropCapsifyAndSectionise", function dropCapsifyAndSectionise(text) {
+		return (text || []).replace(/<p>(.)([\w\-]+)/, '<p><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;')
+			.replace(/<p>\#<\/p>\s*<p>(.)([\w\-]+)/gm, '<p class="section-break"><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;');
+	});
+
+	eleventyConfig.addFilter("sectioniseOnly", function sectioniseOnly(text) {
+		return (text || []).replace(/<p>\#<\/p>\s*<p>/gm, '<p class="section-break">');
 	});
 
 	eleventyConfig.addFilter("endNotify", function endNotify(text) {
@@ -162,7 +186,7 @@ module.exports = function(eleventyConfig) {
 			input: "content",          // default: "."
 			includes: "../_includes",  // default: "_includes"
 			data: "../_data",          // default: "_data"
-			output: "aphroconfuso.mt"  // default: "_site"
+			output: "aphroconfuso.mt/site"  // default: "_site"
 		},
 
 		// -----------------------------------------------------------------

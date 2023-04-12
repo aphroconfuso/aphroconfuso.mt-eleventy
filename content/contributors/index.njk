@@ -1,0 +1,46 @@
+---
+layout: layouts/home.njk
+templateClass: tmpl-post
+eleventyNavigation:
+  key: Contributors
+  order: 3
+pagination:
+  data: contributors
+  size: 12
+permalink: kontributuri{% if pagination.pageNumber > 0 %}/p{{ pagination.pageNumber + 1}}{% endif %}/index.html
+---
+{% block content %}
+<article class="generic">
+	<header>
+		<h5>&nbsp;</h5>
+		<h1>Kontributuri</h1>
+		<h2>&nbsp;</h2>
+	</header>
+	<div class="container">
+		<section class="grid-max-panel-left-top">
+			<section class="kittieba-menu">
+				{% for item in contributors %}
+					{% if loop.first %}<ul>{% endif %}
+						<li>
+							<a href="/{{ item.slug }}">{{ item.name }}</a>
+						</li>
+					{% if loop.last %}</ul>{% endif %}
+				{% endfor %}
+			</section>
+		</section>
+		<section class="grid-max-panel-right-top">
+			{# X #}
+		</section>
+	<section>
+		<!-- X -->
+	</section>
+	<section class="grid-max-panel-left-bottom">
+		<!-- X -->
+	</section>
+	<section class="grid-max-panel-right-bottom">
+		<!-- X -->
+	</section>
+</div>
+<img src="/img/deco-1.svg" />
+</article>
+{% endblock %}

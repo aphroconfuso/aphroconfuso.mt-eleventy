@@ -1,4 +1,8 @@
 const fetch = require("node-fetch");
+const smartTruncate = require("smart-truncate");
+const stripTags = require("striptags");
+const slugifyMaltese = require("../src/slugifyMaltese.js");
+const makeTitleSlug = require("../src/makeTitleSlug.js");
 
 // function to get contributors
 async function getAllContributors() {
@@ -39,6 +43,22 @@ async function getAllContributors() {
 												pageUrl
 												issueMonth
 												issueYear
+												authors {
+													data {
+														attributes {
+															forename
+															surname
+														}
+													}
+												}
+												translators {
+													data {
+														attributes {
+															forename
+															surname
+														}
+													}
+												}
 											}
 										}
 									}
@@ -51,6 +71,22 @@ async function getAllContributors() {
 												pageUrl
 												issueMonth
 												issueYear
+												authors {
+													data {
+														attributes {
+															forename
+															surname
+														}
+													}
+												}
+												translators {
+													data {
+														attributes {
+															forename
+															surname
+														}
+													}
+												}
 											}
 										}
 									}
@@ -92,20 +128,30 @@ async function getAllContributors() {
   const contributorsFormatted = contributors.map((item) => {
 
 		const storiesAuthored = item.attributes.storiesAuthored.data.length && item.attributes.storiesAuthored.data.map((storyAuthored) => {
-			console.log('>>>>>', storyAuthored);
+
+			const author = storyAuthored.attributes.authors.data.length && storyAuthored.attributes.authors.data[0].attributes;
+			const translator = storyAuthored.attributes.translators.data.length && storyAuthored.attributes.translators.data[0].attributes;
+			const authorFullName = author && `${author.forename} ${author.surname}`
+			const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`
+
 			return {
 				title: storyAuthored.attributes.title,
-				slug: storyAuthored.attributes.title,
+				slug: makeTitleSlug(storyAuthored.attributes.title, authorFullName, translatorFullName),
 				monthYear: `${storyAuthored.attributes.issueMonth} ${storyAuthored.attributes.issueYear.replace("s_", "")}`,
 				description: storyAuthored.attributes.description,
 			};
 		});
 
 		const storiesTranslated = item.attributes.storiesTranslated.data.length && item.attributes.storiesTranslated.data.map((storyTranslated) => {
-			console.log('>>>>>', storyTranslated);
+
+			const author = storyTranslated.attributes.authors.data.length && storyTranslated.attributes.authors.data[0].attributes;
+			const translator = storyTranslated.attributes.translators.data.length && storyTranslated.attributes.translators.data[0].attributes;
+			const authorFullName = author && `${author.forename} ${author.surname}`
+			const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`
+
 			return {
 				title: storyTranslated.attributes.title,
-				slug: storyTranslated.attributes.title,
+				slug: makeTitleSlug(storyTranslated.attributes.title, authorFullName, translatorFullName),
 				monthYear: `${storyTranslated.attributes.issueMonth} ${storyTranslated.attributes.issueYear.replace("s_", "")}`,
 				description: storyTranslated.attributes.description,
 			};
@@ -114,9 +160,11 @@ async function getAllContributors() {
 		return {
       name: `${ item.attributes.forename } ${ item.attributes.surname }`,
 			bioNote: item.attributes.bioNote,
-			slug: `${ item.attributes.forename } ${ item.attributes.surname }`,
+			slug: slugifyMaltese(`${ item.attributes.forename } ${ item.attributes.surname }`),
 			storiesAuthored: storiesAuthored,
-			storiesTranslated: storiesTranslated
+			storiesTranslated: storiesTranslated,
+			metaTitle: `${ item.attributes.forename } ${ item.attributes.surname } · Aphroconfuso`,
+			metaDescription: smartTruncate(stripTags(item.attributes.bioNote), 155)
     };
   });
 
