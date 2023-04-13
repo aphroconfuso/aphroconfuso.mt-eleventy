@@ -6,6 +6,9 @@ article {
 	border-bottom: $body-margin-quarter solid $paper;
 	margin: 0 auto $body-margin;
 	max-width: $max-width;
+	aside {
+		margin-bottom: $body-margin;
+	}
 }
 
 #body-text {
@@ -13,16 +16,10 @@ article {
 	max-width: $max-content-width;
 }
 
-// Why is this here alone???
-.details,
-.notes,
-.reviewed {
-	margin-bottom: $body-margin;
-}
-
 .reviewed {
 	border: 1px solid $faint-line;
 	font-size: 1rem;
+	margin-bottom: $body-margin;
 	padding: $body-margin-half;
 	.title {
 		letter-spacing: 1px;
@@ -47,6 +44,7 @@ article {
 		aside {
 			color: $greyer-brown;
 			font-size: $font-size-aside;
+			margin-bottom: 0;
 		}
 	}
 }

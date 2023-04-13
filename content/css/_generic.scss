@@ -9,22 +9,20 @@
 		.promo {
 			header {
 				margin: 0 0 $body-margin-quarter;
+				.as-translator {
+					h1 {
+						display: inline;
+					}
+					span {
+						color: $lightest-brown;
+						font-family: $serif, serif;
+						font-size: 2rem;
+						font-weight: bold;
+					}
+				}
 			}
 			display: block;
 			margin-bottom: $body-margin;
-			// &:last-of-type {
-			// 	margin-bottom: 0;
-			// }
-			h1.translated {
-				display: inline-block;
-				position: relative;
-				// white-space: nowrap;
-				&:after {
-					color: $lightest-brown;
-					content: "\2009tr";
-					position: absolute;
-				}
-			}
 		}
 	}
 }

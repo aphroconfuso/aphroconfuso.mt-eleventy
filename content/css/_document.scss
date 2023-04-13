@@ -27,13 +27,21 @@ body {
 	print-color-adjust: exact;
 	min-height: 101%;
 	display: grid;
-	grid-template-rows: max-content 1fr;
+	grid-template-rows: auto 1fr auto;
+	// grid-template-areas:
+	// 	"grid-document-main"
+	// 	"grid-document-footer";
 }
 
-.container {
-	max-width: $max-content-width;
-	margin: 0 auto;
-}
+// main {
+// 	max-width: $max-content-width;
+// 	margin: 0 auto;
+// 	grid-area: grid-document-main;
+// }
+
+// footer {
+// 	grid-area: grid-document-footer;
+// }
 
 main {
 	padding: 0 $font-size-furniture;
@@ -42,6 +50,10 @@ main {
 header {
 	max-width: $max-content-width;
 	margin: $body-margin auto;
+}
+
+#skip {
+	visibility: hidden;
 }
 
 @media screen and (max-width: $mobile-breakpoint) {

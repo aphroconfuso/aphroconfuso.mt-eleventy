@@ -33,14 +33,28 @@ eleventyComputed:
 				</p>
 				{% if loop.last %}</section>{% endif %}
 			{% endfor %}
-			<section id="introduction">
-				{{ story.introduction | prettifyMaltese | safe }}
-			</section>
+			{% if story.introduction %}
+				<aside id="introduction">
+					{{ story.introduction | restrictHtml | prettifyMaltese | safe }}
+				</aside>
+			{% endif %}
 		</section>
 		<section class="grid-max-panel-right-top">
-			<!-- X -->
+			{% if story.podcastNote %}
+				<aside id="podcastNote">
+					{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
+				</aside>
+			{% endif %}
 		</section>
 		<div class="grid-body">
+			{% for epigraph in story.epigraphs %}
+				{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
+					<figure class="epigraph">
+						{{ epigraph.quotation | restrictHtml | prettifyMaltese | safe }}
+						<figcaption>{{ epigraph.attribution | restrictHtml | prettifyMaltese | safe }}</figcaption>
+					</figure>
+				{% if loop.last %}</section>{% endif %}
+			{% endfor %}
 			{% if story.type == 'Poezija' %}
 				<section id="body-text" class="body-text poetry">
 					{{ story.body | versify | safe }}
@@ -52,19 +66,26 @@ eleventyComputed:
 			{% endif %}
 			{% if story.endnote %}
 				<aside class="endnote body-text">
-					{{ story.endnote | prettifyMaltese | safe }}
+					{{ story.endnote | restrictHtml | prettifyMaltese | safe }}
 				</aside>
 			{% endif %}
 		</div>
 		<section class="grid-max-panel-left-bottom">
-			<aside class="notes">
-				<p>§ Tessie kitbitilha dwar milsa infettata u minfuħa, għarrfitha dwar <span class="h">in-nifs</span> maqtugħ, <span class="h">id-deni,</span> <span class="h">l-indiġestjoni</span> u <span class="h">l-vomtu</span> wara <span class="h">l-ikel.</span> Pinġitilha b’tixbihat <span class="h">l-għeja</span> u <span class="h">d-dgħufija</span> minkejja <span class="h">l-mistrieħ,</span> <span class="h">l-uġigħ</span> f’ġenbha minkejja <span class="h">t-trattament,</span> <span class="h">l-għaraq</span> ma’ ġisimha minkejja <span class="h">l-bard</span> u <span class="h">l-bjuda</span> ta’ wiċċha minkejja <span class="h">x-xemx.</span></p>
-			</aside>
+			{% if story.coda %}
+				<aside id="coda">
+					{{ story.coda | restrictHtml | prettifyMaltese | safe }}
+				</aside>
+			{% endif %}
 		</section>
 		<section class="grid-max-panel-right-bottom">
+			{% if story.postscript %}
+				<aside id="postscript">
+					{{ story.postscript | restrictHtml | prettifyMaltese | safe }}
+				</aside>
+			{% endif %}
 			{% if story.type == 'Esej' %}
-				<aside class="letters-solicit">
-					<p>Iktbulna dwar din l-istorja fuq l-indirizz <a href="mailto:ittri@aphroconfuso.mt?subject={{ story.title }} ta' {{ story.author }}" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludu ismek, ir-raħal jew belt, u l-pajjiż fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
+				<aside id="letters-solicit">
+					<p>Iktbulna dwar din <u>l-istorja</u> fuq <u>l-indirizz</u> <a href="mailto:ittri@aphroconfuso.mt?subject={{ story.displayTitle }}" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludu ismek, <u>ir-raħal</u> jew belt, u <u>l-pajjiż</u> fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
 				</aside>
 			{% endif %}
 		</section>
@@ -73,8 +94,6 @@ eleventyComputed:
 			<section class="letters">
 				<!-- X -->
 			</section>
-			{{ story.endnote | prettifyMaltese | safe }}
-		</aside>
 	{% endif %}
 </article>
 <aside class="promos-container">

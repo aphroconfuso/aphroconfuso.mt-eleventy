@@ -44,6 +44,10 @@ u {
 	white-space: nowrap;
 }
 
+em {
+	font-style: italic;
+}
+
 .work-title {
 	font-style: italic;
 }
@@ -51,6 +55,10 @@ u {
 .details {
 	color: #757575;
 	font-family: $sans, sans-serif;
+}
+
+#epigraphs {
+	padding-bottom: $body-margin;
 }
 
 .generic-body-text,
@@ -63,8 +71,24 @@ u {
 	p {
 		font-size: $body-font-size;
 		margin-bottom: $body-margin-half;
-		&:last-of-type {
+		&:last-of-type,
+		.enjambed {
 			margin-bottom: 0;
+		}
+	}
+	figure {
+		padding-right: $body-margin;
+		margin-bottom: $body-margin;
+		p,
+		figcaption {
+			font-size: $font-size-compact;
+		}
+		figcaption {
+			margin-top: $body-margin-half;
+			&:before {
+				content: "\2014";
+				padding-right: 3px;
+			}
 		}
 	}
 	blockquote {
@@ -74,6 +98,7 @@ u {
 }
 
 .generic-body-text {
+	color: $text-brown;
 	font-family: $sans-alt, sans-serif;
 }
 

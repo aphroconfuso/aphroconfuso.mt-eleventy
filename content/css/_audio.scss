@@ -2,14 +2,16 @@
 @use "calculations" as *;
 @use "settings" as *;
 
-figure {
-	margin-bottom: $body-margin;
-}
+.audio {
+	figure {
+		margin-bottom: $body-margin;
+	}
 
-figcaption {
-	color: $lighter-brown;
-	font-size: 0.9rem;
-	line-height: ($body-line-height * 0.66);
+	figcaption {
+		color: $lighter-brown;
+		font-size: 0.9rem;
+		line-height: ($body-line-height * 0.66);
+	}
 }
 
 audio {

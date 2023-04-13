@@ -29,6 +29,12 @@
 		}
 	}
 	@media screen and (min-width: $mobile-breakpoint-plusone) {
+		h5 {
+			a:hover {
+				color: $colour;
+				@include ease-out($fade-in-short);
+			}
+		}
 		a:hover {
 			text-decoration-color: $colour;
 			@include ease-out($fade-in-short);

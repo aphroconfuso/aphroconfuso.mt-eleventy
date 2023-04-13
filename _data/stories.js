@@ -38,7 +38,14 @@ async function getAllStories() {
 									issueYear
 									type
 									appointment
+									epigraphs {
+										quotation
+										attribution
+									}
 									introduction
+									podcastNote
+									coda
+									postscript
 									authors {
 										data {
 											attributes {
@@ -151,18 +158,19 @@ async function getAllStories() {
   }
 
   // format stories objects
-  const storiesFormatted = stories.map((item) => {
-		const author = !!item.attributes.authors.data.length && item.attributes.authors.data[0].attributes;
-		const translator = !!item.attributes.translators.data.length && item.attributes.translators.data[0].attributes;
+	const storiesFormatted = stories.map((item) => {
+		const atts = item.attributes;
+		const author = !!atts.authors.data.length && atts.authors.data[0].attributes;
+		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 
-		const endPromosFormatted = item.attributes.endPromos.length && item.attributes.endPromos.map((promo) => {
+		const endPromosFormatted = atts.endPromos.length && atts.endPromos.map((promo) => {
 			const promoAtts = promo.story.data.attributes;
 			const author = promoAtts.authors.data.length && promoAtts.authors.data[0].attributes;
 			const translator = promoAtts.translators.data.length && promoAtts.translators.data[0].attributes;
 
 			const authorFullName = author && `${author.forename} ${author.surname}`
 			const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`
-			const slug = `${author && authorFullName + ' '}${translator && translatorFullName + ' '}${item.attributes.title}`
+			const slug = `${author && authorFullName + ' '}${translator && translatorFullName + ' '}${atts.title}`
 
 			return {
 				title: promoAtts.title,
@@ -175,7 +183,7 @@ async function getAllStories() {
 			};
 		});
 
-		const booksMentioned = !!item.attributes.booksMentioned.data.length && item.attributes.booksMentioned.data.map((book) => {
+		const booksMentioned = !!atts.booksMentioned.data.length && atts.booksMentioned.data.map((book) => {
 			const bookAtts = book.attributes;
 			const author = !!bookAtts.authors.data.length && bookAtts.authors.data[0].attributes;
 			const translator = !!bookAtts.translators.data.length && bookAtts.translators.data[0].attributes;
@@ -194,26 +202,33 @@ async function getAllStories() {
 			};
 		});
 
-		const authorFullName = author && `${ author.forename } ${ author.surname }`;
-		const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`;
+		const authorFullName = !!author && `${ author.forename } ${ author.surname }`;
+		const translatorFullName = !!translator && `${ translator.forename } ${ translator.surname }`;
+		const displayTitle = `${ author && authorFullName }: ${ atts.title }${ translatorFullName ? ' (tr ' + translatorFullName + ')' : '' }`;
 
 		console.log(5, booksMentioned);
+		console.log(6, atts.epigraphs);
 
     return {
-      title: item.attributes.title,
-			body: item.attributes.body,
-			slug: makeTitleSlug(item.attributes.title, authorFullName, translatorFullName),
-			endnote: item.attributes.endnote,
-			monthYear: `${item.attributes.issueMonth} ${item.attributes.issueYear.replace("s_", "")}`,
-			description: item.attributes.description,
-			type: item.attributes.type,
-			appointment: item.attributes.appointment,
-			introduction: item.attributes.introduction,
+      title: atts.title,
+			body: atts.body,
+			slug: makeTitleSlug(atts.title, authorFullName, translatorFullName),
+			endnote: atts.endnote,
+			monthYear: `${atts.issueMonth} ${atts.issueYear.replace("s_", "")}`,
+			description: atts.description,
+			type: atts.type,
+			appointment: atts.appointment,
+			epigraphs: !!atts.epigraphs && atts.epigraphs,
+			introduction: atts.introduction,
+			podcastNote: atts.podcastNote,
+			coda: atts.coda,
+			postscript: atts.postscript,
 			author: authorFullName,
 			translator: translatorFullName,
 			endPromos: endPromosFormatted,
 			booksMentioned: booksMentioned,
-			metaTitle: `${author && authorFullName}: ${item.attributes.title} Aphroconfuso`
+			displayTitle: displayTitle,
+			metaTitle: `${displayTitle} · Aphroconfuso`
     };
   });
 

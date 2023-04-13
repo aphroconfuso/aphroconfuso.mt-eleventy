@@ -14,7 +14,7 @@
 @media screen and (min-width: $mobile-breakpoint-plusone) {
 	.container,
 	.promos-container {
-		gap: $body-margin $body-margin;
+		gap: $body-margin ($body-margin * 2);
 		margin: 0 auto;
 	}
 }
@@ -104,6 +104,6 @@
 	.promo-2 {
 		border-right: 1px solid $grid-lines;
 		margin-right: $body-margin-half;
-		padding-right: calc(#{$body-margin} - 1px);
+		padding-right: calc(#{$body-margin * 1.25} - 1px);
 	}
 }

@@ -143,6 +143,10 @@ module.exports = function(eleventyConfig) {
 		return (text || []).replace(/\.?\s*<\/p>\s*$/, '<span class="end-dot">.</span>');
 	});
 
+	eleventyConfig.addFilter("restrictHtml", function restrictHtml(text) {
+		return stripTags(text || [], ['p', 'i', 'em']);
+	});
+
 	// Customize Markdown library settings:
 	eleventyConfig.amendLibrary("md", mdLib => {
 		mdLib.use(markdownItAnchor, {

@@ -50,7 +50,7 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 					<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.slug }}">
 						<header>
 							<h5>{{ story.monthYear | fixMonthMaltese }}</h5>
-							<h1 class="translated">{{ story.title }}</h1>
+							<div class="as-translator"><h1>{{ story.title }}</h1><span> (tr)</span></div>
 						</header>
 						<div class="body-text">
 								<p>{{ story.description | prettifyMaltese | safe }}</p>
@@ -67,6 +67,5 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 		<!-- X -->
 	</section>
 </div>
-<img src="/img/deco-1.svg" />
 </article>
 {% endblock %}
