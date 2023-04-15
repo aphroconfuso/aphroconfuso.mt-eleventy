@@ -100,14 +100,14 @@ module.exports = function(eleventyConfig) {
 		return (text || []).replace(/<p>\s*<\/p>/gm, "")
 			.replace(/'/gm, "’")
 			.replace(/  +/gm, " ")
-			.replace(/> */gm, ">")
-			.replace(/ *</gm, "<")
+			.replace(/<p> */gm, "<p>")
+			.replace(/ *<\\p>/gm, "<\p>")
 			.replace(/ ?— ?| - | -- /gm, "&hairsp;—&hairsp;")
-			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz")
-			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ")
-			.replace(/\b([\w]{0,5}[lrstċdnxzż]-[a-zċżġħ]+)\b/gmi, "<u>$1</u>")
-			.replace(/MXc/gm,"ċ").replace(/MXg/gm,"ġ").replace(/MXh/gm,"ħ").replace(/MXz/gm,"ż")
-			.replace(/MXC/gm,"Ċ").replace(/MXG/gm,"Ġ").replace(/MXH/gm,"Ħ").replace(/MXZ/gm,"Ż")
+			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
+			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
+			.replace(/\b([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)’?\b/gmi, "<u>$1$2$3$4</u>")
+			.replace(/MXc/gm,"ċ").replace(/MXg/gm,"ġ").replace(/MXh/gm,"ħ").replace(/MXz/gm,"ż").replace(/MXa/gm,"à")
+			.replace(/MXC/gm,"Ċ").replace(/MXG/gm,"Ġ").replace(/MXH/gm,"Ħ").replace(/MXZ/gm,"Ż").replace(/MXA/gm,"À")
 	});
 
 	eleventyConfig.addFilter("slugifyMaltese", function slugifyMaltese(text) {

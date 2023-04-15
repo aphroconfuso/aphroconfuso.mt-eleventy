@@ -11,7 +11,7 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 <article class="generic">
 	<header>
 		<h5><a href="/kontributuri">Kontributuri</a></h5>
-		<h1>{{ contributor.name }}</h1>
+		<h1>{{ contributor.name | prettifyMaltese | safe }}</h1>
 		<h2></h2>
 	</header>
 	<div class="container">

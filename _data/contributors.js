@@ -28,7 +28,7 @@ async function getAllContributors() {
         },
         body: JSON.stringify({
           query: `{
-						people {
+						people(sort: ["surname:asc", "name:asc"], filters: {contributor: { eq: true}}) {
 							data {
 								attributes {
 									forename
