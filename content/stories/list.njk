@@ -9,9 +9,6 @@ pagination:
   size: 12
 permalink: stejjer{% if pagination.pageNumber > 0 %}/p{{ pagination.pageNumber + 1}}{% endif %}/index.html
 ---
-{% include "postslist.njk" %}
-{% set htmlTitle = 'LIST' %}
-
 {% block content %}
 
   {# loop through paginated item #}

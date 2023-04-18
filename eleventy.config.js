@@ -106,6 +106,9 @@ module.exports = function(eleventyConfig) {
 			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
 			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
 			.replace(/\b([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)’?\b/gmi, "<u>$1$2$3$4</u>")
+			.replace(/(”)([,\.;:])/gm, "$1<span class=\"pull\">$2</span>")
+			.replace(/([,\.])(”)/gm, "$1<span class=\"pullsemi\">$2</span>")
+			.replace(/(’)([,\.;:])/gm, "$1<span class=\"pullsemi\">$2</span>")
 			.replace(/MXc/gm,"ċ").replace(/MXg/gm,"ġ").replace(/MXh/gm,"ħ").replace(/MXz/gm,"ż").replace(/MXa/gm,"à")
 			.replace(/MXC/gm,"Ċ").replace(/MXG/gm,"Ġ").replace(/MXH/gm,"Ħ").replace(/MXZ/gm,"Ż").replace(/MXA/gm,"À")
 	});
@@ -126,17 +129,22 @@ module.exports = function(eleventyConfig) {
 
 	eleventyConfig.addFilter("versify", function versify(text1) {
 		const text = text1.replace(/<p>\s*<\/p>\s*/gm, '#');
-		return stripTags(text, ['i', 'em']).split('#').map(p => p && p.length && `<p>${ p.replace('\n', '<br/>') }</p>`)
+		return stripTags(text, ['i', 'em']).split('#').map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
 			.join('');
 	});
 
 	eleventyConfig.addFilter("dropCapsifyAndSectionise", function dropCapsifyAndSectionise(text) {
-		return (text || []).replace(/<p>(.)([\w\-]+)/, '<p><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;')
-			.replace(/<p>\#<\/p>\s*<p>(.)([\w\-]+)/gm, '<p class="section-break"><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;');
+		return (text || []).replace(/<p>\#\#\#<\/p>$/, '')
+			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
+			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
+			.replace(/<p>(.)([\w\-]+)/, '<p><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;')
+			.replace(/<p>\#<\/p>\s*<p>(.)([\w\-]+)/gm, '<p class="break"><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;')
+			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
+			.replace(/MXC/gm,"Ċ").replace(/MXG/gm,"Ġ").replace(/MXH/gm,"Ħ").replace(/MXZ/gm,"Ż").replace(/MXA/gm,"À")
 	});
 
 	eleventyConfig.addFilter("sectioniseOnly", function sectioniseOnly(text) {
-		return (text || []).replace(/<p>\#<\/p>\s*<p>/gm, '<p class="section-break">');
+		return (text || []).replace(/<p>\#\#\#<\/p>$/, '').replace(/<p>\#<\/p>\s*<p>/gm, '<p class="break">');
 	});
 
 	eleventyConfig.addFilter("endNotify", function endNotify(text) {

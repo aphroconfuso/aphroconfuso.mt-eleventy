@@ -57,7 +57,7 @@ eleventyComputed:
 			{% endfor %}
 			{% if story.type == 'Poezija' %}
 				<section id="body-text" class="body-text poetry">
-					{{ story.body | versify | safe }}
+					{{ story.body | prettifyMaltese | versify | safe }}
 				</section>
 			{% else %}
 				<section id="body-text" class="body-text">

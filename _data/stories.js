@@ -206,9 +206,6 @@ async function getAllStories() {
 		const translatorFullName = !!translator && `${ translator.forename } ${ translator.surname }`;
 		const displayTitle = `${ author && authorFullName }: ${ atts.title }${ translatorFullName ? ' (tr ' + translatorFullName + ')' : '' }`;
 
-		console.log(5, booksMentioned);
-		console.log(6, atts.epigraphs);
-
     return {
       title: atts.title,
 			body: atts.body,

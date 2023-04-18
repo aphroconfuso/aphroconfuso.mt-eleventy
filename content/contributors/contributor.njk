@@ -15,20 +15,6 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 		<h2></h2>
 	</header>
 	<div class="container">
-		<section class="grid-max-panel-left-top">
-			<section class="kittieba-menu">
-				{% for item in contributors %}
-					{% if loop.first %}<ul>{% endif %}
-						<li>
-							<a href="/{{ item.slug }}">{{ item.name }}</a>
-						</li>
-					{% if loop.last %}</ul>{% endif %}
-				{% endfor %}
-			</section>
-		</section>
-		<section class="grid-max-panel-right-top">
-			{# X #}
-		</section>
 	<section>
 		<div class="generic-body-text">{{ contributor.bioNote | prettifyMaltese | safe }}</div>
 		<ul class="promo-list">
@@ -60,11 +46,16 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 			{% endfor %}
 		</ul>
 	</section>
-	<section class="grid-max-panel-left-bottom">
-		<!-- X -->
-	</section>
-	<section class="grid-max-panel-right-bottom">
-		<!-- X -->
+	<section class="grid-max-panel-left-top">
+		<section class="kittieba-menu">
+			{% for item in contributors %}
+				{% if loop.first %}<ul>{% endif %}
+					<li>
+						<a href="/{{ item.slug }}">{{ item.name }}</a>
+					</li>
+				{% if loop.last %}</ul>{% endif %}
+			{% endfor %}
+		</section>
 	</section>
 </div>
 </article>

@@ -48,6 +48,15 @@ em {
 	font-style: italic;
 }
 
+.pull {
+	margin-left: -7px;
+	margin-right: 4px;
+}
+
+.pullsemi {
+	margin-left: -3px;
+}
+
 .work-title {
 	font-style: italic;
 }
@@ -65,14 +74,14 @@ em {
 .body-text {
 	color: $ink;
 	font-family: $serif, serif;
-	p.section-break {
+	p.break {
 		margin-top: $body-margin * 2;
 	}
 	p {
 		font-size: $body-font-size;
 		margin-bottom: $body-margin-half;
 		&:last-of-type,
-		.enjambed {
+		&.enjambed {
 			margin-bottom: 0;
 		}
 	}
