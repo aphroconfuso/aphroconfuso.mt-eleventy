@@ -1,12 +1,14 @@
 @use "constants" as *;
 @use "calculations" as *;
 @use "settings" as *;
+@use "mixins-etc" as *;
 
 .generic {
 	// font-size: $font-size-furniture;
 	.promo-list {
 		margin-top: $body-margin;
 		.promo {
+			@include clamp(7);
 			header {
 				margin: 0 0 $body-margin-quarter;
 				.as-translator {
@@ -21,8 +23,16 @@
 					}
 				}
 			}
-			display: block;
 			margin-bottom: $body-margin;
+		}
+	}
+	.definitions-list {
+		margin-top: $body-margin;
+		li {
+			margin-bottom: $body-margin;
+			&:last-of-type {
+				margin-bottom: 0;
+			}
 		}
 	}
 }

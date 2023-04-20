@@ -18,8 +18,8 @@ permalink: /index.html
 						<a class="promo promo-{{ loop.index }} {{ promo.monthYear | slugify }}" href="/{{ promo.slug | slugifyMaltese }}/">
 					{% endif %}
 							<header>
-								<h5>{{ promo.monthYear }}</h5>
-								<h1>{{ promo.title }}</h1>
+								<h3>{{ promo.monthYear }}</h3>
+								<h1>{{ promo.title | prettifyMaltese | safe }}</h1>
 								<h2>
 									{% if promo.translator %}
 										{{ promo.author }} <span class="translator">{{ promo.translator }}</span>

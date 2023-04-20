@@ -12,7 +12,7 @@ eleventyComputed:
 {% block content %}
 <article class="{{ story.monthYear | slugify }}">
 	<header>
-		<h5><a href="/appuntamenti/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
+		<h3><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
 		<h1>{{ story.title }}</h1>
 		<h2>
 			{% if story.translator %}
@@ -101,8 +101,8 @@ eleventyComputed:
 		<div class="promo-{{ loop.index }}">
 			<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug | slugifyMaltese }}/">
 				<header>
-					<h5>{{ promo.monthYear }}</h5>
-					<h1>{{ promo.title }}</h1>
+					<h3>{{ promo.monthYear }}</h5>
+					<h1>{{ promo.title | prettifyMaltese | safe }}</h1>
 					<h2>
 						{% if promo.translator %}
 							{{ promo.author }} <span class="translator">{{ promo.translator }}</span>

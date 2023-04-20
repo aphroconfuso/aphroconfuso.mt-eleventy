@@ -24,12 +24,12 @@
 		&:before {
 			@include diagonal-stripes($colour);
 		}
-		h5 {
+		h3 {
 			color: $colour;
 		}
 	}
 	@media screen and (min-width: $mobile-breakpoint-plusone) {
-		h5 {
+		h3 {
 			a:hover {
 				color: $colour;
 				@include ease-out($fade-in-short);
@@ -48,7 +48,7 @@
 					@include animated-underline-pre($colour, $interval: $fade-in-short);
 				}
 			}
-			h5 {
+			h3 {
 				display: block;
 			}
 		}
@@ -57,7 +57,7 @@
 			h1::after {
 				@include animated-underline-post();
 			}
-			h5 {
+			h3 {
 				color: $colour;
 				@include ease-out($fade-in-long);
 			}

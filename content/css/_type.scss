@@ -33,11 +33,16 @@ h2 {
 	}
 }
 
-h5 {
+h3 {
 	display: inline-block;
 	font-family: $sans-sc, sans-serif;
 	line-height: 1.1;
 	text-transform: lowercase;
+}
+
+h4 {
+	font-size: $body-font-size;
+	font-weight: 500;
 }
 
 u {

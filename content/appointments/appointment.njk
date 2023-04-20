@@ -1,0 +1,51 @@
+---
+layout: layouts/home.njk
+templateClass: tmpl-post
+pagination:
+  data: appointments
+  size: 1
+  alias: appointment
+permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
+eleventyComputed:
+	title: “{{ appointment.monthYear | slugifyMaltese }}” · Aphroconfuso
+---
+{% block content %}
+<article class="generic">
+	<header>
+		<h3><a href="/appuntamenti">Appuntamenti</a></h5>
+		<h1>{{ appointment.monthYear | prettifyMaltese | safe }}</h1>
+		<h2></h2>
+	</header>
+	<div class="container">
+	<section>
+		<div class="generic-body-text">{{ appointment.editorial | prettifyMaltese | safe }}</div>
+		<ul class="promo-list">
+			{% for story in appointment.stories %}
+				<li>
+					<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.slug }}">
+						<header>
+							<h3>{{ story.monthYear | fixMonthMaltese }}</h5>
+							<h1>{{ story.title }}</h1>
+						</header>
+						<div class="body-text">
+								<p>{{ story.description | prettifyMaltese | safe }}</p>
+						</div>
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</section>
+	<section class="grid-max-panel-left-top">
+		{# <section class="kittieba-menu">
+			{% for item in appointments %}
+				{% if loop.first %}<ul>{% endif %}
+					<li>
+						<a href="/{{ item.slug }}">{{ item.name }}</a>
+					</li>
+				{% if loop.last %}</ul>{% endif %}
+			{% endfor %}
+		</section> #}
+	</section>
+</div>
+</article>
+{% endblock %}

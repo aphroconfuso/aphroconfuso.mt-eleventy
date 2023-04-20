@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
-async function getGeneric(page) {
-	let generic;
+async function getStyleGuide() {
+	let styleguideData;
 	try {
 		const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
 			method: "POST",
@@ -11,11 +11,19 @@ async function getGeneric(page) {
 			},
 			body: JSON.stringify({
 				query: `{
-					${page} {
+					styleGuide {
 						data {
 							attributes {
 								title
 								body
+							}
+						}
+					}
+					styleGuideEntries(sort: "term:asc") {
+						data {
+							attributes {
+								term
+								definition
 							}
 						}
 					}
@@ -31,11 +39,19 @@ async function getGeneric(page) {
 			});
 			throw new Error("Houston... We have a CMS problem");
 		}
-		generic = response.data[page];
+		styleguideData = response.data;
 	} catch (error) {
 		throw new Error(error);
 	}
-  return generic.data.attributes;
+
+	const styleGuide = styleguideData.styleGuide.data.attributes;
+	const styleGuideEntries = styleguideData.styleGuideEntries.data;
+
+	return {
+		title: styleGuide.title,
+		body: styleGuide.body,
+		entries: styleGuideEntries,
+	};
 }
 
-module.exports = getGeneric;
+module.exports = getStyleGuide;

@@ -5,17 +5,10 @@ const makeTitleSlug = require("../src/makeTitleSlug.js");
 
 // function to get stories
 async function getAllStories() {
-  // max number of records to fetch per query
   const recordsPerQuery = 100;
-
-  // number of records to skip (start at 0)
   let recordsToSkip = 0;
-
   let makeNewQuery = true;
-
   let stories = [];
-
-  // make queries until makeNewQuery is set to false
   while (makeNewQuery) {
     try {
       // initiate fetch
