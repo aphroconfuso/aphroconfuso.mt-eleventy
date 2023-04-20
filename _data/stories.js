@@ -3,6 +3,8 @@ const smartTruncate = require("smart-truncate");
 const stripTags = require("striptags");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
 
+const getMonthYear = require("../src/getMonthYear.js");
+
 // function to get stories
 async function getAllStories() {
   const recordsPerQuery = 100;
@@ -27,8 +29,7 @@ async function getAllStories() {
 									body
 									description
 									endnote
-									issueMonth
-									issueYear
+									dateTimePublication
 									type
 									appointment
 									epigraphs {
@@ -92,8 +93,7 @@ async function getAllStories() {
 										story {
 											data {
 												attributes {
-													issueMonth
-													issueYear
+													dateTimePublication
 													title
 													description
 													type
@@ -168,7 +168,7 @@ async function getAllStories() {
 			return {
 				title: promoAtts.title,
 				slug: promoAtts.title,
-				monthYear: `${promoAtts.issueMonth} ${promoAtts.issueYear.replace("s_", "")}`,
+				monthYear: getMonthYear(promoAtts.dateTimePublication),
 				description: promo.text || promoAtts.description,
 				author: authorFullName,
 				translator: translatorFullName,
@@ -204,7 +204,7 @@ async function getAllStories() {
 			body: atts.body,
 			slug: makeTitleSlug(atts.title, authorFullName, translatorFullName),
 			endnote: atts.endnote,
-			monthYear: `${atts.issueMonth} ${atts.issueYear.replace("s_", "")}`,
+			monthYear: getMonthYear(atts.dateTimePublication),
 			description: atts.description,
 			type: atts.type,
 			appointment: atts.appointment,

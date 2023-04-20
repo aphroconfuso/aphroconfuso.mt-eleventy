@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 const smartTruncate = require("smart-truncate");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
+const getMonthYear = require("../src/getMonthYear.js");
 
 async function getHomepage() {
 	let homepage;
@@ -22,11 +23,10 @@ async function getHomepage() {
 									story {
 										data {
 											attributes {
-												issueMonth
-												issueYear
 												title
 												description
 												type
+												dateTimePublication
 												promoImage {
 													data{
 														attributes {
@@ -86,7 +86,7 @@ async function getHomepage() {
 
 		return {
 			title: promoAtts.title,
-			monthYear: `${ promoAtts.issueMonth } ${ promoAtts.issueYear.replace("s_", "") }`,
+			monthYear: getMonthYear(promoAtts.dateTimePublication),
 			description: promo.text || promoAtts.description,
 			author: authorFullName,
 			translator: translatorFullName,

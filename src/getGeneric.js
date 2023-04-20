@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 
 async function getGeneric(page) {
+	console.log('>>> ', page);
 	let generic;
 	try {
 		const data = await fetch("https://cms.aphroconfuso.mt/graphql", {

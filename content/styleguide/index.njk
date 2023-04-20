@@ -20,24 +20,23 @@ permalink: /gwida-tal-istil/index.html
 			<section class="grid-max-panel-right-top">
 				<!-- X -->
 			</section>
-		<section>
-			<div class="generic-body-text">{{ styleguide.body | prettifyMaltese | safe }}</div>
-			<ol class="definitions-list generic-body-text">
-			{% for entry in styleguide.entries %}
-				<li>
-					<h4>{{ entry.attributes.term | prettifyMaltese | safe }}</h4>
-					{{ entry.attributes.definition | prettifyMaltese | safe }}
-				</li>
-			{% endfor %}
-			</ol>
-		</section>
-		<section class="grid-max-panel-left-bottom">
-			<!-- X -->
-		</section>
-		<section class="grid-max-panel-right-bottom">
-			<!-- X -->
-		</section>
-	</div>
-	<img src="/img/deco-1.svg" />
+			<section>
+				<div class="generic-body-text">{{ styleguide.body | prettifyMaltese | safe }}</div>
+				<ol class="definitions-list generic-body-text">
+				{% for entry in styleguide.entries %}
+					<li>
+						<h4>{{ entry.attributes.term | prettifyMaltese | safe }}</h4>
+						{{ entry.attributes.definition | prettifyMaltese | safe }}
+					</li>
+				{% endfor %}
+				</ol>
+			</section>
+			<section class="grid-max-panel-left-bottom">
+				<!-- X -->
+			</section>
+			<section class="grid-max-panel-right-bottom">
+				<!-- X -->
+			</section>
+		</div>
 	</article>
 {% endblock %}

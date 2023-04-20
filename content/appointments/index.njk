@@ -21,7 +21,7 @@ permalink: /appuntamenti/index.html
 		<!-- X -->
 		</section>
 	<section>
-			<div class="generic-body-text">xxx</div>
+			<div class="generic-body-text">{{ appointmentIndex.body | prettifyMaltese | safe }}</div>
 			<ul class="promo-list">
 				{% for appointment in appointments %}
 					<li>
@@ -44,6 +44,5 @@ permalink: /appuntamenti/index.html
 		<!-- X -->
 	</section>
 </div>
-<img src="/img/deco-1.svg" />
 </article>
 {% endblock %}

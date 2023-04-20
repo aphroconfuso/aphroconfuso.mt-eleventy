@@ -1,18 +1,8 @@
 const fetch = require("node-fetch");
 const smartTruncate = require("smart-truncate");
 const stripTags = require("striptags");
-const slugifyMaltese = require("../src/slugifyMaltese.js");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
-
-const getMonthYear = (date) => {
-	const newDate = new Date(date);
-	const year = newDate.getFullYear();
-	const monthNumber = newDate.getMonth();
-	const monthsMaltese = ['Jannar', 'Frar', 'Marzu', 'April', 'Mejju', 'Ġunju', 'Lulju', 'Awwissu', 'Settembru', 'Ottubru', 'Novembru', 'Diċembru'];
-	const month = monthsMaltese[monthNumber];
-	return `${month} ${year}`
-}
-
+const getMonthYear = require("../src/getMonthYear.js");
 
 async function getAllAppointments() {
   let appointmentsData;
@@ -37,8 +27,6 @@ async function getAllAppointments() {
 						data {
 							attributes {
 								dateTimePublication
-								issueMonth
-								issueYear
 								editorial
 								stories {
 									data {
@@ -47,8 +35,7 @@ async function getAllAppointments() {
 											title
 											description
 											pageUrl
-											issueMonth
-											issueYear
+											dateTimePublication
 											authors {
 												data {
 													attributes {
@@ -89,7 +76,7 @@ async function getAllAppointments() {
 
 	// console.log(JSON.stringify(appointmentsData));
 
-	const appointmentIndex = appointmentsData.appointmentIndex.data.attributes;
+	// const appointmentIndex = appointmentsData.appointmentIndex.data.attributes;
 	const appointments = appointmentsData.appointments.data.map((appointment) => {
 		const storiesFormatted = !!appointment.attributes.stories.data.length && appointment.attributes.stories.data.map((storyAuthored) => {
 
@@ -103,6 +90,8 @@ async function getAllAppointments() {
 				slug: makeTitleSlug(storyAuthored.attributes.title, authorFullName, translatorFullName),
 				monthYear: getMonthYear(appointment.attributes.dateTimePublication),
 				description: storyAuthored.attributes.description,
+				author: authorFullName,
+				translator: translatorFullName,
 			};
 		});
 

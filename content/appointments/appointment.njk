@@ -26,6 +26,13 @@ eleventyComputed:
 						<header>
 							<h3>{{ story.monthYear | fixMonthMaltese }}</h5>
 							<h1>{{ story.title }}</h1>
+							<h2>
+								{% if story.translator %}
+									{{ story.author }} <span class="translator">{{ story.translator }}</span>
+								{% else %}
+									{{ story.author }}
+								{% endif %}
+							</h2>
 						</header>
 						<div class="body-text">
 								<p>{{ story.description | prettifyMaltese | safe }}</p>
