@@ -18,7 +18,13 @@ permalink: kontributuri{% if pagination.pageNumber > 0 %}/p{{ pagination.pageNum
 	</header>
 	<div class="container">
 		<section class="grid-max-panel-left-top">
-			<section class="kittieba-menu">
+			<!-- -->
+		</section>
+		<section class="grid-max-panel-right-top">
+			{# X #}
+		</section>
+		<section>
+			<section class="contributors-menu">
 				{% for item in contributors %}
 					{% if loop.first %}<ul>{% endif %}
 						<li>
@@ -27,12 +33,6 @@ permalink: kontributuri{% if pagination.pageNumber > 0 %}/p{{ pagination.pageNum
 					{% if loop.last %}</ul>{% endif %}
 				{% endfor %}
 			</section>
-		</section>
-		<section class="grid-max-panel-right-top">
-			{# X #}
-		</section>
-		<section>
-			<!-- X -->
 		</section>
 		<section class="grid-max-panel-left-bottom">
 			<!-- X -->

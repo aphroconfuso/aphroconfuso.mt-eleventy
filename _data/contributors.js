@@ -118,7 +118,7 @@ async function getAllContributors() {
 			return {
 				title: storyAuthored.attributes.title,
 				slug: makeTitleSlug(storyAuthored.attributes.title, authorFullName, translatorFullName),
-				monthYear: getMonthYear(storyAuthored.dateTimePublication),
+				monthYear: getMonthYear(storyAuthored.attributes.dateTimePublication),
 				description: storyAuthored.attributes.description,
 			};
 		});
@@ -132,7 +132,7 @@ async function getAllContributors() {
 			return {
 				title: storyTranslated.attributes.title,
 				slug: makeTitleSlug(storyTranslated.attributes.title, authorFullName, translatorFullName),
-				monthYear: getMonthYear(storyTranslated.dateTimePublication),
+				monthYear: getMonthYear(storyTranslated.attributes.dateTimePublication),
 				description: storyTranslated.attributes.description,
 			};
 		});

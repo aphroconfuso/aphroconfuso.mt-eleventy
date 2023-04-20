@@ -15,48 +15,49 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 		<h2></h2>
 	</header>
 	<div class="container">
-	<section>
-		<div class="generic-body-text">{{ contributor.bioNote | prettifyMaltese | safe }}</div>
-		<ul class="promo-list">
-			{% for story in contributor.storiesAuthored %}
-				<li>
-					<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.slug }}">
-						<header>
-							<h3>{{ story.monthYear | fixMonthMaltese }}</h5>
-							<h1>{{ story.title }}</h1>
-						</header>
-						<div class="body-text">
-								<p>{{ story.description | prettifyMaltese | safe }}</p>
-						</div>
-					</a>
-				</li>
-			{% endfor %}
-			{% for story in contributor.storiesTranslated %}
-				<li>
-					<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.slug }}">
-						<header>
-							<h3>{{ story.monthYear | fixMonthMaltese }}</h5>
-							<div class="as-translator"><h1>{{ story.title }}</h1><span> (tr)</span></div>
-						</header>
-						<div class="body-text">
-								<p>{{ story.description | prettifyMaltese | safe }}</p>
-						</div>
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
-	</section>
-	<section class="grid-max-panel-left-top">
-		<section class="kittieba-menu">
-			{% for item in contributors %}
-				{% if loop.first %}<ul>{% endif %}
+		<section>
+			<div class="generic-body-text">{{ contributor.bioNote | prettifyMaltese | safe }}</div>
+			<ul class="promo-list">
+				{% for story in contributor.storiesAuthored %}
 					<li>
-						<a href="/{{ item.slug }}">{{ item.name }}</a>
+						<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.slug }}">
+							<header>
+								<h3>{{ story.monthYear }}</h5>
+								<h1>{{ story.title }}</h1>
+							</header>
+							<div class="body-text">
+									<p>{{ story.description | prettifyMaltese | safe }}</p>
+							</div>
+						</a>
 					</li>
-				{% if loop.last %}</ul>{% endif %}
-			{% endfor %}
+				{% endfor %}
+				{% for story in contributor.storiesTranslated %}
+					<li>
+						<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.slug }}">
+							<header>
+								<h3>{{ story.monthYear }}</h5>
+								<div class="as-translator"><h1>{{ story.title }}</h1><span> (tr)</span></div>
+							</header>
+							<div class="body-text">
+									<p>{{ story.description | prettifyMaltese | safe }}</p>
+							</div>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+			<section class="contributors-menu">
+				{% for item in contributors %}
+					{% if loop.first %}<ul>{% endif %}
+						<li>
+							<a href="/{{ item.slug }}">{{ item.name }}</a>
+						</li>
+					{% if loop.last %}</ul>{% endif %}
+				{% endfor %}
+			</section>
 		</section>
-	</section>
-</div>
+		<section class="grid-max-panel-left-top">
+			<!-- -->
+		</section>
+	</div>
 </article>
 {% endblock %}
