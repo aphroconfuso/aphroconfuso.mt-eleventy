@@ -103,6 +103,7 @@ async function getAllStories() {
 													issueYear
 													title
 													description
+													type
 													authors {
 														data {
 															attributes {
@@ -170,7 +171,6 @@ async function getAllStories() {
 
 			const authorFullName = author && `${author.forename} ${author.surname}`
 			const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`
-			const slug = `${author && authorFullName + ' '}${translator && translatorFullName + ' '}${atts.title}`
 
 			return {
 				title: promoAtts.title,

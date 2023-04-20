@@ -1,0 +1,103 @@
+const fetch = require("node-fetch");
+const smartTruncate = require("smart-truncate");
+const makeTitleSlug = require("../src/makeTitleSlug.js");
+
+async function getHomepage() {
+  // let appointmentsData;
+	try {
+  let appointmentsData;
+		const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: JSON.stringify({
+				query: `{
+					appointments {
+						data {
+							attributes {
+								layout
+								promos {
+									text
+									story {
+										data {
+											attributes {
+												issueMonth
+												issueYear
+												title
+												description
+												authors {
+													data {
+														attributes {
+															forename
+															surname
+														}
+													}
+												}
+												translators {
+													data {
+														attributes {
+															forename
+															surname
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}`,
+			}),
+		});
+		const response = await data.json();
+		console.log('~1~~~', response.data);
+		if (response.errors) {
+			let errors = response.errors;
+			errors.map((error) => {
+				console.log(error.message);
+			});
+			throw new Error("Problem fetching data at appointments.js");
+		}
+		console.log('~~~~', response.data);
+		appointmentsData = response.data.appointments;
+		console.log('***', appointmentsData);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+	const appointmentsFormatted = appointmentsData.map((item) => {
+		const atts = item.attributes;
+
+		const promosFormatted = atts.endPromos.length && atts.endPromos.map((promo) => {
+			const promoAtts = promo.story.data.attributes;
+			const author = promoAtts.authors.data.length && promoAtts.authors.data[0].attributes;
+			const translator = promoAtts.translators.data.length && promoAtts.translators.data[0].attributes;
+
+			const authorFullName = author && `${author.forename} ${author.surname}`
+			const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`
+
+			return {
+				title: promoAtts.title,
+				slug: promoAtts.title,
+				monthYear: `${promoAtts.issueMonth} ${promoAtts.issueYear.replace("s_", "")}`,
+				description: promo.text || promoAtts.description,
+				author: authorFullName,
+				translator: translatorFullName,
+				slug: makeTitleSlug(promoAtts.title, authorFullName, translatorFullName)
+			};
+		});
+
+
+
+    return {
+      layout: atts.layout,
+			promos: promosFormatted,
+    };
+  });
+  return appointmentsFormatted;
+
+module.exports = getHomepage;

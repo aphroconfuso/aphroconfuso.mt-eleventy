@@ -1,28 +1,49 @@
 ---
 layout: layouts/home.njk
+templateClass: tmpl-post
 eleventyNavigation:
-  key: Home
+  key: Homepage
   order: 1
-numberOfLatestPostsToShow: 3
+permalink: /index.html
 ---
-{% set postsCount = collections.posts | length %}
-{% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
-<h1>Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}</h1>
-
-{% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
-{% set postslistCounter = postsCount %}
-{% include "postslist.njk" %}
-
-{% set morePosts = postsCount - numberOfLatestPostsToShow %}
-{% if morePosts > 0 %}
-<p>{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found in <a href="/blog/">the archive</a>.</p>
-{% endif %}
-
-{# List every content page in the project #}
-{#
-<ul>
-	{%- for entry in collections.all %}
-	<li><a href="{{ entry.url }}"><code>{{ entry.url }}</code></a></li>
-	{%- endfor %}
-</ul>
-#}
+{% block content %}
+	<main>
+		<article class="home">
+			<div class="home-grid-2">
+				{% for promo in homepage.promos %}
+						<div class="ga{{ loop.index }}">
+					{% if promo.images %}
+						<a class="promo promo-picture-{{ loop.index }} {{ promo.monthYear | slugify }}" href="/{{ promo.slug | slugifyMaltese }}/">
+					{% else %}
+						<a class="promo promo-{{ loop.index }} {{ promo.monthYear | slugify }}" href="/{{ promo.slug | slugifyMaltese }}/">
+					{% endif %}
+							<header>
+								<h5>{{ promo.monthYear }}</h5>
+								<h1>{{ promo.title }}</h1>
+								<h2>
+									{% if promo.translator %}
+										{{ promo.author }} <span class="translator">{{ promo.translator }}</span>
+									{% else %}
+										{{ promo.author }}
+									{% endif %}
+								</h2>
+							</header>
+							{% if promo.images %}
+								<figure>
+									<img src="https://stampi.aphroconfuso.mt/{{ promo.images.large.hash }}{{ promo.images.large.ext }}">
+								</figure>
+							{% endif %}
+							<div class="{{ promo.cssClass }}">
+								{% if promo.type === 'Poezija' %}
+									{{ promo.description | prettifyMaltese | versifyDescriptionn | safe }}
+								{% else %}
+									<p>{{ promo.description | prettifyMaltese | safe }}</p>
+								{% endif %}
+						</div>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</article>
+	</main>
+{% endblock %}

@@ -133,6 +133,12 @@ module.exports = function(eleventyConfig) {
 			.join('');
 	});
 
+	eleventyConfig.addFilter("versifyDescriptionn", function versifyDescriptionn(text1) {
+		const text = text1.replace(/\n\n/gm, '#');
+		return stripTags(text, ['i', 'em']).split('#').map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
+			.join('');
+	});
+
 	eleventyConfig.addFilter("dropCapsifyAndSectionise", function dropCapsifyAndSectionise(text) {
 		return (text || []).replace(/<p>\#\#\#<\/p>$/, '')
 			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")

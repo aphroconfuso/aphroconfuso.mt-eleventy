@@ -4,7 +4,7 @@ templateClass: tmpl-post
 eleventyNavigation:
   key: Newsletter
   order: 2
-permalink: /dwarna/index.html
+permalink: /newsletter/index.html
 ---
 {% block content %}
 	<article class="generic">
@@ -22,6 +22,18 @@ permalink: /dwarna/index.html
 			</section>
 		<section>
 			<div class="generic-body-text">{{ newsletter.body | prettifyMaltese | safe }}</div>
+
+			<section id="form" data-track-content data-content-name="Homepage" data-content-piece="formola">
+				<iframe src="https://newsletter.aphroconfuso.mt/subscription/form"></iframe>
+			</section>
+			<section id="pending" data-track-content data-content-name="Homepage" data-content-piece="pendenti">
+				<p>Bgħatnielek email biex tikkonferma <u>l-abbonament</u> tiegħek <u>fin-newsletter</u>. F’każ li ma ssibhiex, jekk jogħġbok fittixha <u>fl-ispam</u>.</p>
+			</section>
+			<section id="subscribed" data-track-content data-content-name="Homepage" data-content-piece="dalwaqt">
+				<p>Inti ġa abbonat fin-newsletter!</u></p>
+			</section>
+			<section id="message" data-track-content data-content-name="Homepage" data-content-piece="Messaġġ">&nbsp;</section>
+			<section id="placeholder">&nbsp;</section>
 		</section>
 		<section class="grid-max-panel-left-bottom">
 			<!-- X -->

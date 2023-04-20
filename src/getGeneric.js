@@ -24,6 +24,7 @@ async function getGeneric(page) {
 			}),
 		});
 		const response = await data.json();
+
 		if (response.errors) {
 			let errors = response.errors;
 			errors.map((error) => {
