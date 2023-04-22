@@ -28,7 +28,8 @@ eleventyComputed:
 				{% if loop.first %}<section class="reviewed">{% endif %}
 				<p>
 					<span class="title">{{ book.title }}</span>
-					<span class="author"> ta’ {{ book.author }}</span>
+					{% if book.author %}<span class="author"> ta’ {{ book.author }}</span>{% endif %}
+					{% if book.translator %}<span class="translator"> ta' {{ book.translator }} (tr)</span>{% endif %}
 					<span class="publisher">({{ book.publisherName }}, {{ book.publisherCity }} {{ book.publicationYear }})</span>
 				</p>
 				{% if loop.last %}</section>{% endif %}
@@ -76,6 +77,9 @@ eleventyComputed:
 					{{ story.coda | restrictHtml | prettifyMaltese | safe }}
 				</aside>
 			{% endif %}
+				<aside id="publication-history">
+					Dan ix-xogħol ġie ppubblikat għall-ewwel darba fl-1 ta' Mejju 2023, f'dan il-ġurnal.
+				</aside>
 		</section>
 		<section class="grid-max-panel-right-bottom">
 			{% if story.postscript %}
@@ -85,7 +89,7 @@ eleventyComputed:
 			{% endif %}
 			{% if story.type == 'Esej' %}
 				<aside id="letters-solicit">
-					<p>Iktbulna dwar din <u>l-istorja</u> fuq <u>l-indirizz</u> <a href="mailto:ittri@aphroconfuso.mt?subject={{ story.displayTitle }}" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludu ismek, <u>ir-raħal</u> jew belt, u <u>l-pajjiż</u> fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
+					<p>Iktbilna dwar dan ix-xogħol fuq <u>l-indirizz</u> <a href="mailto:ittri@aphroconfuso.mt?subject={{ story.displayTitle }}" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludi ismek u fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
 				</aside>
 			{% endif %}
 		</section>

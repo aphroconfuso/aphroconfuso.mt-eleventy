@@ -28,6 +28,9 @@
 			color: $colour;
 		}
 	}
+	.editorial {
+		border: 5px solid $colour;
+	}
 	@media screen and (min-width: $mobile-breakpoint-plusone) {
 		h3 {
 			a:hover {

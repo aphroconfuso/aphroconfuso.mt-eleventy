@@ -1,0 +1,16 @@
+<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.slug }}">
+	<header>
+		<h3>{{ story.monthYear | fixMonthMaltese }}</h5>
+		<h1>{{ story.title }}</h1>
+		<h2>
+			{% if story.translator | prettifyMaltese | safe %}
+				{{ story.author }} <span class="translator">{{ story.translator }}</span>
+			{% else %}
+				{{ story.author | prettifyMaltese | safe }}
+			{% endif %}
+		</h2>
+	</header>
+	<div class="body-text">
+			<p>{{ story.description | prettifyMaltese | safe }}</p>
+	</div>
+</a>

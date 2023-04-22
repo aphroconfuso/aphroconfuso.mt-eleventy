@@ -10,7 +10,7 @@ eleventyComputed:
 	title: “{{ appointment.monthYear | slugifyMaltese }}” · Aphroconfuso
 ---
 {% block content %}
-<article class="generic">
+<article class="generic {{ appointment.monthYear | slugify }}">
 	<header>
 		<h3><a href="/appuntamenti">Appuntamenti</a></h5>
 		<h1>{{ appointment.monthYear | prettifyMaltese | safe }}</h1>
@@ -18,7 +18,7 @@ eleventyComputed:
 	</header>
 	<div class="container">
 	<section>
-		<div class="generic-body-text">{{ appointment.editorial | prettifyMaltese | safe }}</div>
+		<div class="generic-body-text editorial">{{ appointment.editorial | prettifyMaltese | safe }}</div>
 		<ul class="promo-list">
 			{% for story in appointment.stories %}
 				<li>
