@@ -22,11 +22,11 @@ footer {
 	nav {
 		a {
 			display: inline-block;
+			text-decoration: underline;
+			text-decoration-color: $light-brown;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 2px;
 			height: ($body-margin * 1.5);
-			&:hover {
-				text-decoration: underline;
-				text-decoration-thickness: 1px;
-			}
 		}
 	}
 
@@ -136,14 +136,19 @@ footer {
 			justify-content: flex-end;
 		}
 
-		footer nav a {
+		nav a {
 			height: auto;
+			&:hover {
+				@include ease-in(0.25s);
+				text-decoration-color: $paper;
+			}
 		}
 	}
 
 	body:not(.story) #scroll-tools {
 		display: none;
 	}
+
 	#scroll-tools {
 		@include ease-in();
 		bottom: 1rem;

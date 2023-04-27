@@ -1,7 +1,13 @@
 const fetch = require("node-fetch");
 
-async function getGeneric(page) {
-	let generic;
+const codes = {
+	"Deutsch": "de",
+	"English": "en",
+	"Francais": "fr",
+}
+
+async function getInternationals() {
+	let internationals;
 	try {
 		const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
 			method: "POST",
@@ -11,9 +17,10 @@ async function getGeneric(page) {
 			},
 			body: JSON.stringify({
 				query: `{
-					${page} {
+					internationalMedias {
 						data {
 							attributes {
+								language
 								title
 								body
 							}
@@ -31,11 +38,21 @@ async function getGeneric(page) {
 			});
 			throw new Error("Houston... We have a CMS problem");
 		}
-		generic = response.data[page];
+		internationals = response.data.internationalMedias;
 	} catch (error) {
 		throw new Error(error);
 	}
-  return generic.data.attributes;
+
+	const internationalsFormatted = internationals.data.map((international) => {
+		const atts = international.attributes;
+		return {
+			code: codes[atts.language],
+			direction: (atts.language === 'العربية' ? 'rtl' : 'ltr'),
+			title: atts.title,
+			body: atts.body,
+		};
+	});
+	return internationalsFormatted;
 }
 
-module.exports = getGeneric;
+module.exports = getInternationals;

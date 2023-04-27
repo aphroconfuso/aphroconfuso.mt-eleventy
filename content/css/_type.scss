@@ -151,11 +151,26 @@ strong {
 		-1px 0 0 $paper;
 }
 
-// article a {
-//   text-decoration-color: $ink;
-//   text-decoration-thickness: 0.125rem;
-//   text-underline-offset: 1.5px;
-// }
+main {
+	li {
+		a {
+			text-decoration: underline;
+			text-decoration-color: $paper;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 2px;
+		}
+	}
+}
+
+.generic-body-text,
+aside {
+	a {
+		text-decoration: underline;
+		text-decoration-color: $lightester-brown;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 2px;
+	}
+}
 
 @media screen and (min-width: $laptop-breakpoint) {
 	h1,
@@ -164,6 +179,15 @@ strong {
 	}
 	h2 a {
 		@include animated-underline($lighter-brown);
+	}
+	a:hover {
+		@include ease-in(0.25s);
+		text-decoration-color: $text-brown;
+	}
+	a[href^="http"]:hover {
+		@include ease-in(0.25s);
+		color: blue;
+		text-decoration-color: blue;
 	}
 }
 

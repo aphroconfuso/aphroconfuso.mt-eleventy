@@ -2,9 +2,8 @@
 <html lang="mt" translate="no">
 
 	<head>
-		<title>{{ contributor.metaTitle or story.metaTitle or metadata.title }}</title>
+		{{ head | safe }}
 		<meta content="black" name="apple-mobile-web-app-status-bar-style">
-		<meta content="{{ contributor.metaDescription or story.metaDescription or metadata.description }}" name="description">
 		<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 		<meta content="width=device-width, initial-scale=1" name="viewport">
 		<meta content="width=device-width" initial-scale="1.0" maximum-scale="1.0" name="viewport">
@@ -12,12 +11,16 @@
 		<meta content="yes" name="mobile-web-app-capable">
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="theme-color" content="#f9f9f6">
+		<meta name="theme-color" content="#f9f9f3">
 		<link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
 		<link rel="manifest" href="/manifest.json">
 		<link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#5bbad5">
+		<meta property="og:image:type" content="image/jpeg">
+		<meta property="og:image:width" content="1200">
+		<meta property="og:image:height" content="630">
+
 		<!-- DOWNLOAD FONTS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

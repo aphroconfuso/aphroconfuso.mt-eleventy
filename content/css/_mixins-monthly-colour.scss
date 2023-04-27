@@ -5,7 +5,9 @@
 @use "mixins-backgrounds" as *;
 
 @mixin monthly-colour($colour) {
-	border-bottom-color: $colour;
+	&.content {
+		border-bottom-color: $colour;
+	}
 	h1 {
 		color: $colour;
 	}

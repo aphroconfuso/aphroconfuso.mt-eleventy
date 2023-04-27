@@ -6,9 +6,13 @@ pagination:
   size: 1
   alias: story
 permalink: /{{ story.slug | slugifyMaltese }}/index.html
-eleventyComputed:
-	title: “{{ story.title }}” · Aphroconfuso
 ---
+{% block head %}
+	<title>{{ story.metaTitle or metadata.title }}</title>
+	<meta content="{{ contributor.metaDescription or story.metaDescription or metadata.description }}" name="description">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}/{{ story.socialImage }}">
+{% endblock %}
+
 {% block content %}
 <article class="{{ story.monthYear | slugify }}">
 	<header>

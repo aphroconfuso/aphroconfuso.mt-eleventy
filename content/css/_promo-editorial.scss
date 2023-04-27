@@ -1,12 +1,19 @@
 @use "constants" as *;
 @use "calculations" as *;
 @use "settings" as *;
+@use "mixins-etc" as *;
 
 .editorial {
+	border: 5px solid red;
 	border-radius: $body-margin-eighth;
-	display: block;
 	font-size: $font-size-editorial;
-	font-weight: 500;
 	padding: $body-margin;
-	position: relative;
+}
+
+.home {
+	.editorial {
+		.body-text-generic {
+			@include clamp(14);
+		}
+	}
 }

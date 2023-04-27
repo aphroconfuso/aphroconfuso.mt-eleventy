@@ -8,8 +8,19 @@ permalink: /index.html
 ---
 {% block content %}
 	<main>
-		<article class="home">
-			<div class="home-grid-2">
+		<article class="home {{ homepage.monthYear | slugify }}">
+			<div class="{{ homepage.layout | slugify }}">
+				<a class="ga-editorial editorial" href="/{{ homepage.monthYear | slugify }}/">
+					<section class="body-text-generic">{{ homepage.editorial | prettifyMaltese | safe }}</section>
+				</a>
+				<div class="ga-newsletter">
+					<section id="form" data-track-content data-content-name="Homepage" data-content-piece="formola">
+						<iframe src="https://newsletter.aphroconfuso.mt/subscription/form"></iframe>
+					</section>
+					<section id="pending" data-track-content data-content-name="Homepage" data-content-piece="pendenti">
+						<p>Bgħatnielek email biex tikkonferma <u>l-abbonament</u> tiegħek <u>fin-newsletter</u>. F’każ li ma ssibhiex, jekk jogħġbok fittixha <u>fl-ispam</u>.</p>
+					</section>
+				</div>
 				{% for promo in homepage.promos %}
 						<div class="ga{{ loop.index }}">
 					{% if promo.images %}
@@ -30,6 +41,12 @@ permalink: /index.html
 							</header>
 							{% if promo.images %}
 								<figure>
+										{# <img
+											srcset="elva-fairy-480w.jpg 480w, elva-fairy-800w.jpg 800w"
+											sizes="(max-width: 600px) 480px, 800px"
+											src="elva-fairy-800w.jpg"
+											alt="Elva dressed as a fairy"
+										/> #}
 									<img src="https://stampi.aphroconfuso.mt/{{ promo.images.large.hash }}{{ promo.images.large.ext }}">
 								</figure>
 							{% endif %}

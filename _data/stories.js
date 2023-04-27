@@ -32,6 +32,21 @@ async function getAllStories() {
 									dateTimePublication
 									type
 									appointment
+									showImagePromo
+									promoImage {
+										data{
+											attributes {
+												formats
+											}
+										}
+									}
+									promoImageMobile {
+										data{
+											attributes {
+												formats
+											}
+										}
+									}
 									epigraphs {
 										quotation
 										attribution
@@ -199,6 +214,9 @@ async function getAllStories() {
 		const translatorFullName = !!translator && `${ translator.forename } ${ translator.surname }`;
 		const displayTitle = `${ author && authorFullName }: ${ atts.title }${ translatorFullName ? ' (tr ' + translatorFullName + ')' : '' }`;
 
+		// console.log('~~~~ ', JSON.stringify(atts.promoImage.data.attributes.formats.social));
+		const promoImageFormats = atts.promoImage.data.attributes.formats;
+
     return {
       title: atts.title,
 			body: atts.body,
@@ -218,7 +236,9 @@ async function getAllStories() {
 			endPromos: endPromosFormatted,
 			booksMentioned: booksMentioned,
 			displayTitle: displayTitle,
-			metaTitle: `${displayTitle} · Aphroconfuso`
+			metaTitle: `${ displayTitle } · Aphroconfuso`,
+			showImagePromo: atts.showImagePromo,
+			socialImage: promoImageFormats.social && `${promoImageFormats.social.hash}${promoImageFormats.social.ext}`,
     };
   });
 

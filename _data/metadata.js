@@ -7,5 +7,8 @@ module.exports = {
 		"name": "Aphroconfuso",
 		"email": "l-edituri@aphroconfuso.mt",
 		"url": "https://aphroconfuso.mt/"
+	},
+	"settings": {
+		"imagesUrl": "https://stampi.aphroconfuso.mt"
 	}
 }

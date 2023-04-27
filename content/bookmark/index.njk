@@ -6,6 +6,12 @@ eleventyNavigation:
   order: 2
 permalink: /bookmarks/index.html
 ---
+{% block head %}
+	<title>{{ bookmark.title }} · Aphroconfuso</title>
+	<meta content="{{ contributor.metaDescription or metadata.description }}" name="description">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}/{{ metadata.settings.promoImage }}">
+{% endblock %}
+
 {% block content %}
 	<article class="generic">
 		<header>

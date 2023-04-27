@@ -18,8 +18,30 @@ async function getHomepage() {
 						data {
 							attributes {
 								layout
+                appointment {
+                  data {
+                    attributes {
+											dateTimePublication
+											editorial
+                    }
+                  }
+                }
 								promos {
 									text
+									image {
+										data{
+											attributes {
+												formats
+											}
+										}
+									}
+									mobileImage {
+										data{
+											attributes {
+												formats
+											}
+										}
+									}
 									story {
 										data {
 											attributes {
@@ -27,7 +49,15 @@ async function getHomepage() {
 												description
 												type
 												dateTimePublication
+												showImagePromo
 												promoImage {
+													data{
+														attributes {
+															formats
+														}
+													}
+												}
+												promoImageMobile {
 													data{
 														attributes {
 															formats
@@ -57,7 +87,7 @@ async function getHomepage() {
 							}
 						}
 					}
-				}`,
+				}`
 			}),
 		});
 		const response = await data.json();
@@ -91,14 +121,16 @@ async function getHomepage() {
 			author: authorFullName,
 			translator: translatorFullName,
 			slug: makeTitleSlug(promoAtts.title, authorFullName, translatorFullName),
-			images: promoAtts.promoImage.data && promoAtts.promoImage.data.attributes.formats,
+			images: promoAtts.showImagePromo && promoAtts.promoImage.data && promoAtts.promoImage.data.attributes.formats,
 			type: promoAtts.type,
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text'
 		};
 	});
 
-	return {
+	const homepageFormatted = {
 		layout: atts.layout,
+		editorial: atts.appointment.data.attributes.editorial,
+		monthYear: getMonthYear(atts.appointment.data.attributes.dateTimePublication),
 		promos: promosFormatted,
 	};
 

@@ -30,12 +30,11 @@ async function getAllAppointments() {
 								editorial
 								stories {
 									data {
-										id
 										attributes {
 											title
+											dateTimePublication
 											description
 											pageUrl
-											dateTimePublication
 											authors {
 												data {
 													attributes {
@@ -74,9 +73,6 @@ async function getAllAppointments() {
 		throw new Error(error);
 	}
 
-	// console.log(JSON.stringify(appointmentsData));
-
-	// const appointmentIndex = appointmentsData.appointmentIndex.data.attributes;
 	const appointments = appointmentsData.appointments.data.map((appointment) => {
 		const storiesFormatted = !!appointment.attributes.stories.data.length && appointment.attributes.stories.data.map((storyAuthored) => {
 
@@ -88,7 +84,7 @@ async function getAllAppointments() {
 			return {
 				title: storyAuthored.attributes.title,
 				slug: makeTitleSlug(storyAuthored.attributes.title, authorFullName, translatorFullName),
-				monthYear: getMonthYear(appointment.attributes.dateTimePublication),
+				monthYear: getMonthYear(storyAuthored.attributes.dateTimePublication),
 				description: storyAuthored.attributes.description,
 				author: authorFullName,
 				translator: translatorFullName,
@@ -102,14 +98,6 @@ async function getAllAppointments() {
 			stories: storiesFormatted
 		}
 	});
-
-	console.log(appointments);
-
-	// const appointmentsFormatted = {
-	// 	title: appointmentIndex.title,
-	// 	body: appointmentIndex.body,
-	// 	appointments: appointments
-	// };
 
   return appointments;
 }

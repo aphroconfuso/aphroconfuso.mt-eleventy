@@ -7,6 +7,12 @@ pagination:
   alias: contributor
 permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 ---
+{% block head %}
+	<title>{{ contributor.metaTitle or metadata.title }}</title>
+	<meta content="{{ contributor.metaDescription or metadata.description }}" name="description">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}/{{ story.socialImage }}">
+{% endblock %}
+
 {% block content %}
 <article class="generic">
 	<header>
