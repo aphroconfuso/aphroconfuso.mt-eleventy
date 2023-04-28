@@ -7,26 +7,26 @@ eleventyNavigation:
 permalink: /appuntamenti/index.html
 ---
 {% block head %}
-	<title>Appuntamenti · Aphroconfuso</title>
-	<meta content="{{ contributor.metaDescription or metadata.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}/{{ metadata.settings.promoImage }}">
+	<title>{{ appointmentIndex.title }} · Aphroconfuso</title>
+	<meta content="{{ metadata.description }}" name="description">
+	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
 {% endblock %}
 
 {% block content %}
 <article class="generic">
 	<header>
 		<h5>&nbsp;</h5>
-		<h1>Appuntamenti</h1>
+		<h1>{{ appointmentIndex.title }}</h1>
 		<h2>&nbsp;</h2>
 	</header>
 	<div class="container">
-		<section class="grid-max-panel-left-top">
+		<section id="grid-max-panel-left-top">
 		<!-- X -->
 		</section>
-		<section class="grid-max-panel-right-top">
+		<section id="grid-max-panel-right-top">
 		<!-- X -->
 		</section>
-	<section>
+	<section id="grid-body">
 			<div class="generic-body-text">{{ appointmentIndex.body | prettifyMaltese | safe }}</div>
 			<ul class="promo-list">
 				{% for appointment in appointments %}
@@ -43,10 +43,10 @@ permalink: /appuntamenti/index.html
 				{% endfor %}
 			</ul>
 	</section>
-	<section class="grid-max-panel-left-bottom">
+	<section id="grid-max-panel-left-bottom">
 		<!-- X -->
 	</section>
-	<section class="grid-max-panel-right-bottom">
+	<section id="grid-max-panel-right-bottom">
 		<!-- X -->
 	</section>
 </div>

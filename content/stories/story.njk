@@ -9,12 +9,12 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 ---
 {% block head %}
 	<title>{{ story.metaTitle or metadata.title }}</title>
-	<meta content="{{ contributor.metaDescription or story.metaDescription or metadata.description }}" name="description">
+	<meta content="{{ story.metaDescription or metadata.description }}" name="description">
 	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}/{{ story.socialImage }}">
 {% endblock %}
 
 {% block content %}
-<article class="{{ story.monthYear | slugify }}">
+<article class="content {{ story.monthYear | slugify }}">
 	<header>
 		<h3><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
 		<h1>{{ story.title }}</h1>
@@ -27,7 +27,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 		</h2>
 	</header>
 	<div class="container">
-		<section class="grid-max-panel-left-top">
+		<section id="grid-max-panel-left-top">
 			{% for book in story.booksMentioned %}
 				{% if loop.first %}<section class="reviewed">{% endif %}
 				<p>
@@ -44,14 +44,14 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 				</aside>
 			{% endif %}
 		</section>
-		<section class="grid-max-panel-right-top">
+		<section id="grid-max-panel-right-top">
 			{% if story.podcastNote %}
 				<aside id="podcastNote">
 					{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
 				</aside>
 			{% endif %}
 		</section>
-		<div class="grid-body">
+		<section id="grid-body">
 			{% for epigraph in story.epigraphs %}
 				{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
 					<figure class="epigraph">
@@ -66,7 +66,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 				</section>
 			{% else %}
 				<section id="body-text" class="body-text">
-					{{ story.body | dropCapsifyAndSectionise | prettifyMaltese | endNotify | safe }}
+					{{ story.body | dropCapsifyAndSectionise | prettifyMaltese | endDotify | safe }}
 				</section>
 			{% endif %}
 			{% if story.endnote %}
@@ -74,8 +74,8 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 					{{ story.endnote | restrictHtml | prettifyMaltese | safe }}
 				</aside>
 			{% endif %}
-		</div>
-		<section class="grid-max-panel-left-bottom">
+		</section>
+		<section id="grid-max-panel-left-bottom">
 			{% if story.coda %}
 				<aside id="coda">
 					{{ story.coda | restrictHtml | prettifyMaltese | safe }}
@@ -85,7 +85,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 					Dan ix-xogħol ġie ppubblikat għall-ewwel darba fl-1 ta' Mejju 2023, f'dan il-ġurnal.
 				</aside>
 		</section>
-		<section class="grid-max-panel-right-bottom">
+		<section id="grid-max-panel-right-bottom">
 			{% if story.postscript %}
 				<aside id="postscript">
 					{{ story.postscript | restrictHtml | prettifyMaltese | safe }}

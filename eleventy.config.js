@@ -9,6 +9,7 @@ const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
 const eleventySass = require("eleventy-sass");
 const pluginRev = require("eleventy-plugin-rev");
 const stripTags = require("striptags");
+const smartTruncate = require('smart-truncate');
 
 const slugifyStringMaltese = require("./src/slugifyMaltese.js");
 
@@ -98,6 +99,7 @@ module.exports = function(eleventyConfig) {
 
 	eleventyConfig.addFilter("prettifyMaltese", function prettifyMaltese(text) {
 		return (text || []).replace(/<p>\s*<\/p>/gm, "")
+			.replace(/-</gm, "- <")
 			.replace(/'/gm, "’")
 			.replace(/  +/gm, " ")
 			.replace(/<p> */gm, "<p>")
@@ -105,12 +107,13 @@ module.exports = function(eleventyConfig) {
 			.replace(/ ?— ?| - | -- /gm, "&hairsp;—&hairsp;")
 			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
 			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
-			.replace(/\b([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)’?\b/gmi, "<u>$1$2$3$4</u>")
+			.replace(/([ \,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)’?([ \,\.\?\!\’\“\”\—\<])/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
 			.replace(/(”)([,\.;:])/gm, "$1<span class=\"pull\">$2</span>")
 			.replace(/([,\.])(”)/gm, "$1<span class=\"pullsemi\">$2</span>")
 			.replace(/(’)([,\.;:])/gm, "$1<span class=\"pullsemi\">$2</span>")
-			.replace(/MXc/gm,"ċ").replace(/MXg/gm,"ġ").replace(/MXh/gm,"ħ").replace(/MXz/gm,"ż").replace(/MXa/gm,"à")
+			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
 			.replace(/MXC/gm,"Ċ").replace(/MXG/gm,"Ġ").replace(/MXH/gm,"Ħ").replace(/MXZ/gm,"Ż").replace(/MXA/gm,"À")
+			.replace(/- </gm, "-<")
 	});
 
 	eleventyConfig.addFilter("slugifyMaltese", function slugifyMaltese(text) {
@@ -153,12 +156,16 @@ module.exports = function(eleventyConfig) {
 		return (text || []).replace(/<p>\#\#\#<\/p>$/, '').replace(/<p>\#<\/p>\s*<p>/gm, '<p class="break">');
 	});
 
-	eleventyConfig.addFilter("endNotify", function endNotify(text) {
+	eleventyConfig.addFilter("endDotify", function endDotify(text) {
 		return (text || []).replace(/\.?\s*<\/p>\s*$/, '<span class="end-dot">.</span>');
 	});
 
 	eleventyConfig.addFilter("restrictHtml", function restrictHtml(text) {
-		return stripTags(text || [], ['p', 'i', 'em']);
+		return stripTags(text || [], ['a', 'span', 'p', 'i', 'em']);
+	});
+
+	eleventyConfig.addFilter("getDescription", function getDescription(text) {
+		return smartTruncate(stripTags(text || []), 300);
 	});
 
 	// Customize Markdown library settings:

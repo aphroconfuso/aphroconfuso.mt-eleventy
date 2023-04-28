@@ -4,10 +4,11 @@
 @use "mixins-etc" as *;
 
 #top-nav menu li {
-	font-family: $sans-sc, sans-serif;
-	letter-spacing: 1px;
-	text-transform: lowercase;
 	color: $lighter-brown;
+	font-family: $sans-alt, sans-serif;
+	font-size: $font-size-nav;
+	letter-spacing: 1px;
+	text-transform: uppercase;
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
@@ -48,24 +49,26 @@
 			width: 100%;
 			li {
 				display: flex;
-				font-size: $font-size-nav;
 				margin: 0 1rem;
 				margin: 0;
 				overflow: hidden;
-				text-transform: lowercase;
 				width: 100%;
 				// &:nth-child(4) {
 				// 	display: none;
 				// }
 				a {
 					display: inline-block;
-					padding: 1.5rem 0;
+					padding: 1.5rem 0 0;
 					width: 100%;
 				}
 				&#text-size-adjust {
-					align-items: center;
+					align-items: baseline;
 					justify-content: center;
 					font-family: $sans;
+					text-transform: lowercase;
+					a {
+						padding: 0.65rem 0 0;
+					}
 					a:nth-child(1) {
 						font-size: 1.1rem;
 					}
@@ -199,7 +202,7 @@
 			margin: 0 auto;
 			& > li {
 				display: inline;
-				font-size: 1.1rem;
+				font-size: $font-size-compact;
 				position: relative;
 				a {
 					@include animated-underline($lighter-brown);

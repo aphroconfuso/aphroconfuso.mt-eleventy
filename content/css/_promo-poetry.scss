@@ -1,0 +1,14 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+.home {
+	.promo-poetry {
+		background-color: #e3e3e0;
+		border: 1px solid #d3d3d0;
+		border-radius: $body-margin-eighth;
+		display: block;
+		padding: $body-margin;
+	}
+}

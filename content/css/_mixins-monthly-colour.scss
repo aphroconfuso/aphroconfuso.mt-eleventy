@@ -40,10 +40,10 @@
 				@include ease-out($fade-in-short);
 			}
 		}
-		a:hover {
-			text-decoration-color: $colour;
-			@include ease-out($fade-in-short);
-		}
+		// a:hover {
+		// 	text-decoration-color: $colour;
+		// 	@include ease-out($fade-in-short);
+		// }
 		&.promo {
 			h1 {
 				clear: both;

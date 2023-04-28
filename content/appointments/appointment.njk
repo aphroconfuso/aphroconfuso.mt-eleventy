@@ -6,15 +6,8 @@ pagination:
   size: 1
   alias: appointment
 permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
-eleventyComputed:
-	title: “{{ appointment.monthYear | slugifyMaltese }}” · Aphroconfuso
+metaTitle: "ABC {{ appointment.monthYear }}"
 ---
-{% block head %}
-	<title>{{ appointment.monthYear | prettifyMaltese }} · Aphroconfuso</title>
-	<meta content="{{ contributor.metaDescription or metadata.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}/{{ metadata.settings.promoImage }}">
-{% endblock %}
-
 {% block content %}
 <article class="generic {{ appointment.monthYear | slugify }}">
 	<header>
@@ -24,7 +17,7 @@ eleventyComputed:
 	</header>
 	<div class="container">
 	<section>
-		<div class="generic-body-text editorial">{{ appointment.editorial | prettifyMaltese | safe }}</div>
+		<div class="generic-body-text editorial">{{ appointment.editorial | prettifyMaltese | endDotify | safe }}</div>
 		<ul class="promo-list">
 			{% for story in appointment.stories %}
 				<li>
@@ -34,9 +27,9 @@ eleventyComputed:
 							<h1>{{ story.title }}</h1>
 							<h2>
 								{% if story.translator %}
-									{{ story.author }} <span class="translator">{{ story.translator }}</span>
+									{{ story.author | prettifyMaltese }} <span class="translator">{{ story.translator | prettifyMaltese }}</span>
 								{% else %}
-									{{ story.author }}
+									{{ story.author | prettifyMaltese }}
 								{% endif %}
 							</h2>
 						</header>
@@ -48,7 +41,7 @@ eleventyComputed:
 			{% endfor %}
 		</ul>
 	</section>
-	<section class="grid-max-panel-left-top">
+	<section id="grid-max-panel-left-top">
 		{# <section class="kittieba-menu">
 			{% for item in appointments %}
 				{% if loop.first %}<ul>{% endif %}

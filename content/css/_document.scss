@@ -19,7 +19,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-webkit-print-color-adjust: exact;
 	background-color: $paper;
-	color: hsl(0, 0%, 39%);
+	color: $lighter-brown;
 	font-family: $sans, sans;
 	font-size: $font-size-furniture;
 	font-weight: 400;
@@ -33,7 +33,7 @@ body {
 }
 
 main {
-	padding: 0 $font-size-furniture;
+	padding: 0 $main-side-padding;
 }
 
 header {

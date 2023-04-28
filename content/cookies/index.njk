@@ -8,8 +8,8 @@ permalink: /cookies/index.html
 ---
 {% block head %}
 	<title>{{ cookies.title }} · Aphroconfuso</title>
-	<meta content="{{ contributor.metaDescription or metadata.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}/{{ metadata.settings.promoImage }}">
+	<meta content="{{ metadata.description }}" name="description">
+	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
 {% endblock %}
 
 {% block content %}
@@ -20,19 +20,59 @@ permalink: /cookies/index.html
 			<h2>&nbsp;</h2>
 		</header>
 		<div class="container">
-			<section class="grid-max-panel-left-top">
+			<section id="grid-max-panel-left-top">
 				<!-- -->
 			</section>
-			<section class="grid-max-panel-right-top">
+			<section id="grid-max-panel-right-top">
 				<!-- X -->
 			</section>
-			<section>
-				<div class="generic-body-text">{{ cookies.body | prettifyMaltese | safe }}</div>
+			<section id="grid-body">
+				<div class="generic-body-text">
+					{{ cookies.body | safe }}
+					<div id="optInOutWrapper">
+						<input type="checkbox" id="optInOut" />
+						<label for="optInOut">&nbsp;</label>
+					</div>
+					<script>
+						document.addEventListener("DOMContentLoaded", function (event) {
+							function setOptOutText(element) {
+								window._paq.push([function () {
+									element.checked = !this.isUserOptedOut();
+								}]);
+								if (element.checked) {
+									document.body.classList.remove('track-opted-out');
+								} else {
+									document.body.classList.add('track-opted-out');
+								}
+							}
+							function setOptOutText(element) {
+								window._paq.push([function () {
+									element.checked = !this.isUserOptedOut();
+									document.querySelector('label[for=optInOut]').innerHTML = this.isUserOptedOut()
+										? "<p>Bħalissa qed twaqqafna milli niġbru statistika dwar <u>iż-żjarat</u> tiegħek. Agħfas iċ-checkbox jekk trid tħallina niġbru din <u>l-informazzjoni</u>.</p>"
+										: "<p>Bħalissa qed niġbru informazzjoni dwar <u>iż-żjarat</u> tiegħek mingħajr ma nżommu ebda informazzjoni li tista’ tidentifikak personalment. Agħfas iċ-checkbox jekk trid twaqqafna milli niġbru din <u>l-informazzjoni</u>.</p>";
+								}]);
+							}
+							var optOut = document.getElementById("optInOut");
+							optOut.addEventListener("click", function () {
+								if (this.checked) {
+									_paq.push(['trackEvent', 'Tracking', 'Buttuna', 'Mitfi']);
+									window._paq.push(['forgetUserOptOut']);
+								} else {
+									_paq.push(['trackEvent', 'Tracking', 'Buttuna', 'Mixgħul']);
+									window._paq.push(['optUserOut']);
+								}
+								setOptOutText(optOut);
+							});
+							setOptOutText(optOut);
+						});
+					</script>
+				</div>
 			</section>
-			<section class="grid-max-panel-left-bottom">
+			<section id="grid-max-panel-left-bottom">
 				<!-- X -->
 			</section>
-			<section class="grid-max-panel-right-bottom">
+			<section id="grid-max-panel-right-bottom">
 				<!-- X -->
 			</section>
 		</div>

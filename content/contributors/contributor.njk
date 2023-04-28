@@ -8,9 +8,9 @@ pagination:
 permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 ---
 {% block head %}
-	<title>{{ contributor.metaTitle or metadata.title }}</title>
-	<meta content="{{ contributor.metaDescription or metadata.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}/{{ story.socialImage }}">
+	<title>{{ contributor.name | prettifyMaltese }} · Aphroconfuso</title>
+	<meta content="{{ contributor.bioNote | getDescription }}" name="description">
+	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
 {% endblock %}
 
 {% block content %}
@@ -52,7 +52,7 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 				{% endfor %}
 			</ul>
 		</section>
-		<section class="grid-max-panel-left-top">
+		<section id="grid-max-panel-left-top">
 			<section class="contributors-menu">
 				{% for item in contributors %}
 					{% if loop.first %}<ul>{% endif %}

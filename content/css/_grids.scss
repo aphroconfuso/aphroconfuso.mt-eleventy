@@ -17,69 +17,6 @@
 		gap: $body-margin ($body-margin * 2);
 		margin: 0 auto;
 	}
-}
-
-@media screen and (min-width: $laptop-breakpoint) {
-	.grid-mid-panel-top {
-		grid-area: unset;
-	}
-	.grid-mid-panel-bottom {
-		grid-area: unset;
-		display: block;
-	}
-
-	.container {
-		max-width: $max-width;
-		display: grid;
-		grid-template-columns: 1fr $max-content-width 1fr;
-		grid-template-rows: auto auto auto;
-		grid-auto-flow: row;
-		grid-template-areas:
-			"grid-max-panel-left-top grid-max-body grid-max-panel-right-top"
-			"grid-max-panel-left-bottom grid-max-body grid-max-panel-right-bottom"
-			"grid-bottom-full grid-bottom-full grid-bottom-full";
-	}
-
-	.grid-body {
-		grid-area: grid-max-body;
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
-
-	.grid-max-panel-left-bottom {
-		grid-area: grid-max-panel-left-bottom;
-	}
-	.grid-max-panel-right-bottom {
-		grid-area: grid-max-panel-right-bottom;
-	}
-	.grid-max-panel-left-top {
-		grid-area: grid-max-panel-left-top;
-	}
-	.grid-max-panel-right-top {
-		grid-area: grid-max-panel-right-top;
-	}
-
-	.grid-max-panel-left-bottom,
-	.grid-max-panel-right-bottom {
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-end;
-	}
-
-	.grid-bottom-full {
-		grid-area: grid-bottom-full;
-	}
-
-	aside,
-	div,
-	section,
-	p {
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
-
 	.promos-container {
 		max-width: $max-width;
 		display: grid;
@@ -105,5 +42,59 @@
 		border-right: 1px solid $grid-lines;
 		margin-right: $body-margin-half;
 		padding-right: calc(#{$body-margin * 1.25} - 1px);
+	}
+}
+
+@media screen and (min-width: $laptop-breakpoint) {
+	.container {
+		max-width: $max-width;
+		display: grid;
+		grid-template-columns: 1fr $max-content-width 1fr;
+		grid-template-rows: auto auto auto;
+		grid-auto-flow: row;
+		grid-template-areas:
+			"grid-max-panel-left-top grid-max-body grid-max-panel-right-top"
+			"grid-max-panel-left-bottom grid-max-body grid-max-panel-right-bottom"
+			"grid-bottom-full grid-bottom-full grid-bottom-full";
+	}
+
+	#grid-body {
+		grid-area: grid-max-body;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	#grid-max-panel-left-bottom {
+		grid-area: grid-max-panel-left-bottom;
+	}
+	#grid-max-panel-right-bottom {
+		grid-area: grid-max-panel-right-bottom;
+	}
+	#grid-max-panel-left-top {
+		grid-area: grid-max-panel-left-top;
+	}
+	#grid-max-panel-right-top {
+		grid-area: grid-max-panel-right-top;
+	}
+
+	#grid-max-panel-left-bottom,
+	#grid-max-panel-right-bottom {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+
+	#grid-bottom-full {
+		grid-area: grid-bottom-full;
+	}
+
+	aside,
+	div,
+	section,
+	p {
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 }

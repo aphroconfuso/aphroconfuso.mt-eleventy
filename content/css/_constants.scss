@@ -13,6 +13,8 @@ $max-content-width: 39rem;
 $max-logo-width: 820px;
 $max-width: 1300px;
 
+$main-side-padding: 1.5rem;
+
 // Use this for underlined links:
 // @media (hover: none) {
 //   a {
@@ -26,7 +28,6 @@ $fade-in-long: 800ms;
 
 $sans: "Fira Sans";
 $sans-alt: "Alegreya Sans";
-$sans-sc: "Alegreya Sans SC";
 $serif: "Alegreya";
 $serif-sc: "Alegreya SC";
 $decorative: "Cinzel Decorative";
@@ -55,7 +56,8 @@ $faint-line: $faint-brown;
 $light-text: $lighter-ink;
 
 $body-font-size: 1.2rem;
-$font-size-compact: math.div($body-font-size * 4, 5);
+$font-size-furniture: 1rem;
+$font-size-compact: 0.85rem;
 $body-line-height: 1.5;
 $body-margin: $body-font-size * $body-line-height;
 $body-margin-half: math.div($body-margin, 2);

@@ -7,12 +7,20 @@ article {
 	margin: 0 auto $body-margin;
 	max-width: $max-width;
 	aside {
+		color: $lighter-brown;
+		font-family: $sans-alt;
+		font-size: $font-size-aside;
 		margin-bottom: $body-margin;
 	}
 }
 
+#grid-max-panel-left-top,
+#grid-max-panel-right-top,
+#grid-max-panel-left-bottom,
+#grid-max-panel-right-bottom,
+#grid-body,
 #body-text {
-	margin: 0 auto $body-margin auto;
+	// margin: 0 auto $body-margin auto;
 	max-width: $max-content-width;
 }
 
@@ -42,8 +50,6 @@ article {
 @media screen and (min-width: $mobile-breakpoint-plusone) {
 	article {
 		aside {
-			color: $greyer-brown;
-			font-size: $font-size-aside;
 			margin-bottom: 0;
 		}
 	}

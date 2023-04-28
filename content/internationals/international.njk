@@ -12,8 +12,8 @@ permalink: /{{ international.code }}/index.html
 ---
 {% block head %}
 	<title>{{ international.title }} · Aphroconfuso</title>
-	<meta content="{{ international.metaDescription or metadata.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}/{{ metadata.promoImage }}">
+	<meta content="{{ metadata.description }}" name="description">
+	<meta property="og:image" content="{{ metadata.socialImage }}">
 {% endblock %}
 
 {% block content %}
@@ -24,19 +24,19 @@ permalink: /{{ international.code }}/index.html
 			<h2>&nbsp;</h2>
 		</header>
 		<div class="container">
-			<section class="grid-max-panel-left-top">
+			<section id="grid-max-panel-left-top">
 				<!-- -->
 			</section>
-			<section class="grid-max-panel-right-top">
+			<section id="grid-max-panel-right-top">
 				<!-- X -->
 			</section>
-			<section>
+			<section id="grid-body">
 				<div class="generic-body-text">{{ international.body | safe }}</div>
 			</section>
-			<section class="grid-max-panel-left-bottom">
+			<section id="grid-max-panel-left-bottom">
 				<!-- X -->
 			</section>
-			<section class="grid-max-panel-right-bottom">
+			<section id="grid-max-panel-right-bottom">
 				<!-- X -->
 			</section>
 		</div>

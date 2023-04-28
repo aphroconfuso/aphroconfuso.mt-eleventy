@@ -5,9 +5,9 @@
 .newsletter-subscribe {
 	p {
 		color: $light-brown;
-		font-family: $sans-sc;
+		font-family: $sans-alt;
 		margin-right: 0.5rem;
-		text-transform: lowercase;
+		text-transform: uppercase;
 		white-space: nowrap;
 	}
 	display: flex;
@@ -38,9 +38,9 @@
 	input[type="submit"] {
 		background-color: $light-brown;
 		color: $paper;
-		font-family: $sans-sc;
+		font-family: $sans;
 		padding: 0.5rem 1rem;
-		text-transform: lowercase;
+		text-transform: uppercase;
 	}
 }
 

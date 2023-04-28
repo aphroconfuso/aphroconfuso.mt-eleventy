@@ -35,17 +35,22 @@ h2 {
 
 h3 {
 	display: inline-block;
-	font-family: $sans-sc, sans-serif;
+	font-family: $sans-alt, sans-serif;
 	line-height: 1.1;
-	text-transform: lowercase;
+	text-transform: uppercase;
+	font-size: $font-size-compact;
 }
 
 h4 {
+	color: red;
+}
+
+h6 {
 	font-size: $body-font-size;
 	font-weight: 600;
 }
 
-u {
+l-m {
 	white-space: nowrap;
 }
 
@@ -58,12 +63,12 @@ strong {
 }
 
 .pull {
-	margin-left: -7px;
-	margin-right: 4px;
+	margin-left: -0.35rem;
+	margin-right: 0.15rem;
 }
 
 .pullsemi {
-	margin-left: -3px;
+	margin-left: -0.25rem;
 }
 
 .work-title {
@@ -99,7 +104,7 @@ strong {
 		margin-bottom: $body-margin;
 		p,
 		figcaption {
-			font-size: $font-size-compact;
+			font-size: $font-size-blockquote;
 		}
 		figcaption {
 			margin-top: $body-margin-half;
@@ -112,6 +117,9 @@ strong {
 	blockquote {
 		font-size: $font-size-blockquote;
 		padding: 0 $body-margin $body-margin-half;
+	}
+	.epigraph p {
+		font-size: $font-size-blockquote;
 	}
 }
 
@@ -151,24 +159,26 @@ strong {
 		-1px 0 0 $paper;
 }
 
-main {
-	li {
-		a {
-			text-decoration: underline;
-			text-decoration-color: $paper;
-			text-decoration-thickness: 1px;
-			text-underline-offset: 2px;
-		}
-	}
-}
+// main {
+// 	li {
+// 		a {
+// 			text-decoration: underline;
+// 			text-decoration-color: $paper;
+// 			text-decoration-thickness: 1px;
+// 			text-underline-offset: 2px;
+// 		}
+// 	}
+// }
 
 .generic-body-text,
 aside {
-	a {
-		text-decoration: underline;
-		text-decoration-color: $lightester-brown;
-		text-decoration-thickness: 1px;
-		text-underline-offset: 2px;
+	p {
+		a {
+			text-decoration: underline;
+			text-decoration-color: $lightester-brown;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 2px;
+		}
 	}
 }
 
@@ -180,14 +190,11 @@ aside {
 	h2 a {
 		@include animated-underline($lighter-brown);
 	}
-	a:hover {
-		@include ease-in(0.25s);
-		text-decoration-color: $text-brown;
-	}
-	a[href^="http"]:hover {
-		@include ease-in(0.25s);
-		color: blue;
-		text-decoration-color: blue;
+	#grid-body {
+		a:hover {
+			@include ease-in(0.25s);
+			text-decoration-color: $dark-brown;
+		}
 	}
 }
 

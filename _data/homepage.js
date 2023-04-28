@@ -123,7 +123,8 @@ async function getHomepage() {
 			slug: makeTitleSlug(promoAtts.title, authorFullName, translatorFullName),
 			images: promoAtts.showImagePromo && promoAtts.promoImage.data && promoAtts.promoImage.data.attributes.formats,
 			type: promoAtts.type,
-			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text'
+			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
+			promoType: promoAtts.type === 'Poezija' ? 'promo-poetry' : (promoAtts.showImagePromo && promoAtts.promoImage.data ? 'promo-picture' : 'promo'),
 		};
 	});
 

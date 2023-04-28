@@ -33,7 +33,7 @@
 		font-size: 2rem;
 		font-weight: 700;
 	}
-	h6 {
+	h4 {
 		font-size: 1.5rem;
 		font-weight: 500;
 	}
@@ -52,21 +52,21 @@
 	}
 }
 @media screen and (min-width: $tablet-mini-breakpoint) {
-	.grid-bottom-full {
+	#grid-bottom-full {
 		.letter-content {
 			columns: 2;
 		}
 	}
 }
 @media screen and (min-width: $tablet-breakpoint) {
-	.grid-bottom-full {
+	#grid-bottom-full {
 		.letter-content {
 			columns: 3;
 		}
 	}
 }
 @media screen and (min-width: $laptop-breakpoint) {
-	.grid-bottom-full {
+	#grid-bottom-full {
 		.letter-content {
 			columns: 4;
 		}

@@ -1,5 +1,7 @@
 @use "reset";
 @use "document" as *;
+@use "functional" as *;
+@use "fonts" as *;
 @use "type" as *;
 @use "top-nav" as *;
 @use "article" as *;
@@ -10,14 +12,15 @@
 @use "promos" as *;
 @use "promo-braces" as *;
 @use "promo-editorial" as *;
-// @use "promo-plain" as *;
+@use "promo-plain" as *;
 @use "promo-picture" as *;
+@use "promo-poetry" as *;
 @use "promo-newsletter" as *;
 @use "promo-letter" as *;
 @use "promo-quote" as *;
 @use "bookmarks" as *;
 @use "audio" as *;
-@use "newsletter-iframe" as *;
+@use "newsletter" as *;
 @use "grids" as *;
 @use "home-grids" as *;
 @use "colours" as *;

@@ -9,6 +9,7 @@ module.exports = {
 		"url": "https://aphroconfuso.mt/"
 	},
 	"settings": {
-		"imagesUrl": "https://stampi.aphroconfuso.mt"
+		"imagesUrl": "https://stampi.aphroconfuso.mt",
+		"socialImage": "https://stampi.aphroconfuso.mt/social_aphroconfuso_logo_wallpaper_40f6589ea4.jpg"
 	}
 }
