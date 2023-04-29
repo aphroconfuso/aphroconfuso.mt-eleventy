@@ -19,7 +19,7 @@ async function getStyleGuide() {
 							}
 						}
 					}
-					styleGuideEntries(sort: "term:asc") {
+					styleGuideEntries(sort: "term:asc", pagination: { page: 1, pageSize: 250 }) {
 						data {
 							attributes {
 								term

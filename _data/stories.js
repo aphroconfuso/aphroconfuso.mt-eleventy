@@ -213,11 +213,9 @@ async function getAllStories() {
 		const authorFullName = !!author && `${ author.forename } ${ author.surname }`;
 		const translatorFullName = !!translator && `${ translator.forename } ${ translator.surname }`;
 		const displayTitle = `${ author && authorFullName }: ${ atts.title }${ translatorFullName ? ' (tr ' + translatorFullName + ')' : '' }`;
-
-		// console.log('~~~~ ', JSON.stringify(atts.promoImage.data.attributes.formats.social));
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
 
-    return {
+		return {
       title: atts.title,
 			body: atts.body,
 			slug: makeTitleSlug(atts.title, authorFullName, translatorFullName),

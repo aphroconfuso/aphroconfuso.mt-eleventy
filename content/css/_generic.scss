@@ -52,6 +52,11 @@
 		}
 	}
 }
+#podcast-url {
+	width: 100%;
+	border: 1px solid $faint-line;
+	padding: 5px;
+}
 #grid-body {
 	.contributors-menu {
 		columns: 2;

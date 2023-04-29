@@ -17,12 +17,12 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 <article class="content {{ story.monthYear | slugify }}">
 	<header>
 		<h3><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
-		<h1>{{ story.title }}</h1>
+		<h1>{{ story.title | prettifyMaltese | safe }}</h1>
 		<h2>
 			{% if story.translator %}
-				{{ story.author }} <span class="translator"><a href="/{{story.translator | slugify }}">{{ story.translator }}</a></span>
+				{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugify }}">{{ story.translator | prettifyMaltese | safe }}</a></span>
 			{% else %}
-				<a href="/{{story.author | slugify }}">{{ story.author }}</a>
+				<a href="/{{story.author | slugify }}">{{ story.author | prettifyMaltese | safe }}</a>
 			{% endif %}
 		</h2>
 	</header>

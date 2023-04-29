@@ -18,9 +18,9 @@
 .ga-newsletter {
 	display: flex;
 	position: relative;
-	*:last-of-type {
-		margin-bottom: 0;
-	}
+	// *:last-of-type {
+	// 	margin-bottom: 0;
+	// }
 }
 .ga1 {
 	grid-area: ga1;

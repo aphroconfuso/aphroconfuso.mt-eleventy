@@ -5,22 +5,17 @@
 #newsletter-container {
 	#pending,
 	#subscribed,
-	#form,
 	#message,
 	#placeholder {
 		border: none;
 		display: block;
-		margin-top: 2rem;
-		max-width: 700px;
+		margin-top: $body-margin;
 		overflow: hidden;
-		width: 90%;
 	}
 
 	#form {
 		border: none;
 		display: block;
-		height: 400px;
-		margin-top: 4rem;
 		overflow: hidden;
 		width: 100%;
 		iframe {

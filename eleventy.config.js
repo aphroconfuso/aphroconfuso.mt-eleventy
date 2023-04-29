@@ -103,16 +103,17 @@ module.exports = function(eleventyConfig) {
 			.replace(/'/gm, "’")
 			.replace(/  +/gm, " ")
 			.replace(/<p> */gm, "<p>")
-			.replace(/ *<\\p>/gm, "<\p>")
+			.replace(/ *<\/p>/gm, "</p>")
 			.replace(/ ?— ?| - | -- /gm, "&hairsp;—&hairsp;")
 			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
 			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
-			.replace(/([ \,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)’?([ \,\.\?\!\’\“\”\—\<])/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
+			.replace(/([ \,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<])/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
 			.replace(/(”)([,\.;:])/gm, "$1<span class=\"pull\">$2</span>")
 			.replace(/([,\.])(”)/gm, "$1<span class=\"pullsemi\">$2</span>")
 			.replace(/(’)([,\.;:])/gm, "$1<span class=\"pullsemi\">$2</span>")
 			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
-			.replace(/MXC/gm,"Ċ").replace(/MXG/gm,"Ġ").replace(/MXH/gm,"Ħ").replace(/MXZ/gm,"Ż").replace(/MXA/gm,"À")
+			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+			.replace(/<\/blockquote>\s*<blockquote>/gm, "<br>")
 			.replace(/- </gm, "-<")
 	});
 
@@ -125,7 +126,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("paragraphise", function paragraphise(text) {
-		return (text || []).split('\n')
+		return (text || []).replace(/\\n\\n/gm, '\n').split('\n')
 			.map(p => p && p.length && `<p>${ p }</p>`)
 			.join('\n');
 	});
