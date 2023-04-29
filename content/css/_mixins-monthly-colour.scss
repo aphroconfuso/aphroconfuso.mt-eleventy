@@ -32,6 +32,17 @@
 	}
 	.editorial {
 		border: 5px solid $colour;
+		.editorial-month-year {
+			display: inline;
+			font-size: 1.6rem;
+			font-weight: 600;
+			margin-right: $body-margin-quarter;
+			text-transform: uppercase;
+			color: $colour;
+		}
+		p {
+			display: inline;
+		}
 	}
 	@media screen and (min-width: $mobile-breakpoint-plusone) {
 		h3 {

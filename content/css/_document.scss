@@ -36,7 +36,7 @@ main {
 	padding: 0 $main-side-padding;
 }
 
-header {
+article > header {
 	max-width: $max-content-width;
 	margin: $body-margin auto;
 }
@@ -64,7 +64,7 @@ header {
 	}
 }
 @media screen and (min-width: $mobile-breakpoint-plusone) {
-	header {
+	article > header {
 		max-width: $max-content-width;
 		margin: ($body-margin * 4) auto ($body-margin * 3);
 	}

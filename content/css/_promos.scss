@@ -18,10 +18,36 @@
 	}
 }
 
-.home .promo {
-	h1,
-	h2 {
-		font-size: 2rem;
+.home {
+	.promo {
+		h1,
+		h2 {
+			font-size: 2rem;
+		}
+	}
+	&.mejju-2023 .mejju-2023,
+	&.gunju-2023 .gunju-2023,
+	&.lulju-2023 .lulju-2023,
+	&.awwissu-2023 .awwissu-2023,
+	&.settembru-2023 .settembru-2023,
+	&.ottubru-2023 .ottubru-2023,
+	&.novembru-2023 .novembru-2023,
+	&.dicembru-2023 .dicembru-2023,
+	&.jannar-2024 .jannar-2024,
+	&.frar-2024 .frar-2024,
+	&.marzu-2024 .marzu-2024,
+	&.april-2024 .april-2024,
+	&.mejju-2024 .mejju-2024,
+	&.gunju-2024 .gunju-2024,
+	&.lulju-2024 .lulju-2024,
+	&.awwissu-2024 .awwissu-2024,
+	&.settembru-2024 .settembru-2024,
+	&.ottubru-2024 .ottubru-2024,
+	&.novembru-2024 .novembru-2024,
+	&.dicembru-2024 .dicembru-2024 {
+		h3 {
+			display: none;
+		}
 	}
 }
 

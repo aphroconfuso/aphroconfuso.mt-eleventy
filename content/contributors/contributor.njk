@@ -31,8 +31,12 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 								<h3>{{ story.monthYear }}</h5>
 								<h1>{{ story.title }}</h1>
 							</header>
-							<div class="body-text">
+							<div class="{{ story.cssClass }}">
+								{% if story.type === 'Poezija' %}
+									{{ story.description | prettifyMaltese | versifyDescription | safe }}
+								{% else %}
 									<p>{{ story.description | prettifyMaltese | safe }}</p>
+								{% endif %}
 							</div>
 						</a>
 					</li>

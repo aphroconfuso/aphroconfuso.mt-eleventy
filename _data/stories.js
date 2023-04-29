@@ -187,7 +187,9 @@ async function getAllStories() {
 				description: promo.text || promoAtts.description,
 				author: authorFullName,
 				translator: translatorFullName,
-				slug: makeTitleSlug(promoAtts.title, authorFullName, translatorFullName)
+				slug: makeTitleSlug(promoAtts.title, authorFullName, translatorFullName),
+				type: promoAtts.type,
+				cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			};
 		});
 

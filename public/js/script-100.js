@@ -1,6 +1,6 @@
 var _paq = window._paq || [];
 
-const setCookie = (cname, cvalue, exdays = 3650) => {
+const setCookie = (cname, cvalue, exdays = 36500) => {
   const d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
   let expires = "expires="+ d.toUTCString();
@@ -23,9 +23,12 @@ const getCookie = (cname) => {
   return "";
 }
 
-const checkMode = () => {
+const initiateNewsletter = () => {
+	if (!document.getElementById("newsletter-container")) {
+		return;
+	}
   const cookies = getCookie('cookies');
-  const newsletter = getCookie('newsletter');
+	const newsletter = getCookie('newsletter');
   document.getElementById("newsletter-container").classList.add('hide-placeholder');
   if (!!location.hash && document.referrer.indexOf('//newsletter.aphroconfuso.mt')) {
     // REVIEW escape is deprecated
@@ -59,4 +62,32 @@ const checkMode = () => {
 	return;
 }
 
-checkMode();
+const addRemoveFontSizeClass = (size) => {
+	document.body.classList.remove('font-size-1','font-size-2','font-size-3','font-size-4');
+	document.body.classList.add(`font-size-${ size }`);
+	setCookie('font', size);
+}
+
+const initiateFontSize = () => {
+	const fontSize = getCookie('font') || 1;
+	addRemoveFontSizeClass(fontSize);
+}
+
+const initiateFontSizeListeners = () => {
+	document.getElementById("font-size-1").addEventListener('click', () => addRemoveFontSizeClass(1));
+	document.getElementById("font-size-2").addEventListener('click', () => addRemoveFontSizeClass(2));
+	document.getElementById("font-size-3").addEventListener('click', () => addRemoveFontSizeClass(3));
+	document.getElementById("font-size-4").addEventListener('click', () => addRemoveFontSizeClass(4));
+};
+
+const initiateAfterNewsletter = () => {
+	initiateNewsletter();
+}
+
+const initiateAfterBody = () => {
+	initiateFontSize();
+}
+
+const initiateAfterNav = () => {
+	initiateFontSizeListeners();
+}

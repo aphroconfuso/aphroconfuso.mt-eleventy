@@ -62,9 +62,18 @@
 }
 
 @font-face {
-	font-family: "Noto Naskh";
-	src: url("/fonts/NotoNaskhArabic-Regular.ttf") format("truetype");
+	font-family: "Noto Sans Arabic";
+	src: url("/fonts/NotoSansArabic-VariableFont.ttf") format("truetype");
 	font-style: normal;
+	font-weight: 350;
+	font-stretch: narrower;
+}
+
+@font-face {
+	font-family: "Alegreya Sans Arabic Fallback";
+	src: url("/fonts/AlegreyaSans-Regular.ttf") format("truetype");
+	size-adjust: 87%;
+	font-style: italic;
 	font-weight: 400;
 }
 

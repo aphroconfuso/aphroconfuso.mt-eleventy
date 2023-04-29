@@ -33,8 +33,12 @@ metaTitle: "ABC {{ appointment.monthYear }}"
 								{% endif %}
 							</h2>
 						</header>
-						<div class="body-text">
+						<div class="{{ story.cssClass }}">
+							{% if story.type === 'Poezija' %}
+								{{ story.description | prettifyMaltese | versifyDescription | safe }}
+							{% else %}
 								<p>{{ story.description | prettifyMaltese | safe }}</p>
+							{% endif %}
 						</div>
 					</a>
 				</li>

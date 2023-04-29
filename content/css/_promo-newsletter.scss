@@ -49,3 +49,10 @@
 		flex-direction: column;
 	}
 }
+
+.home {
+	#newsletter-container {
+		border: 5px solid #513db6;
+		border-radius: $body-margin-eighth;
+	}
+}

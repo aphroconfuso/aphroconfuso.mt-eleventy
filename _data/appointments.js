@@ -35,6 +35,7 @@ async function getAllAppointments() {
 											dateTimePublication
 											description
 											pageUrl
+											type
 											authors {
 												data {
 													attributes {
@@ -88,6 +89,8 @@ async function getAllAppointments() {
 				description: storyAuthored.attributes.description,
 				author: authorFullName,
 				translator: translatorFullName,
+				type: storyAuthored.attributes.type,
+				cssClass: storyAuthored.attributes.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			};
 		});
 

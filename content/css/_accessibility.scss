@@ -1,0 +1,70 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+@media screen and (max-width: $mobile-breakpoint) {
+	#top-nav menu li#text-size-adjust {
+		align-items: baseline;
+		justify-content: center;
+		a {
+			font-family: $serif, serif;
+			text-transform: lowercase;
+			text-decoration-thickness: 4px !important;
+			text-underline-offset: 6px;
+			text-align: center;
+			padding: 0;
+			&#font-size-1 {
+				font-size: 1.2rem;
+			}
+			&#font-size-2 {
+				font-size: 1.5rem;
+			}
+			&#font-size-3 {
+				font-size: 1.8rem;
+			}
+			&#font-size-4 {
+				font-size: 2.1rem;
+			}
+		}
+	}
+
+	body {
+		&.font-size-1 {
+			.body-text p,
+			.generic-body-text p {
+				font-size: 1.2rem;
+			}
+			#text-size-adjust a#font-size-1 {
+				text-decoration: underline;
+			}
+		}
+		&.font-size-2 {
+			.body-text p,
+			.generic-body-text p {
+				font-size: 1.5rem;
+			}
+			#text-size-adjust a#font-size-2 {
+				text-decoration: underline;
+			}
+		}
+		&.font-size-3 {
+			.body-text p,
+			.generic-body-text p {
+				font-size: 1.8rem;
+			}
+			#text-size-adjust a#font-size-3 {
+				text-decoration: underline;
+			}
+		}
+		&.font-size-4 {
+			.body-text p,
+			.generic-body-text p {
+				font-size: 2.1rem;
+			}
+			#text-size-adjust a#font-size-4 {
+				text-decoration: underline;
+			}
+		}
+	}
+}

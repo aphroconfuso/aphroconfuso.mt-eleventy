@@ -1,12 +1,12 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
 pagination:
   data: stories
   size: 1
   alias: story
 permalink: /{{ story.slug | slugifyMaltese }}/index.html
 ---
+{% extends 'layouts/home.njk' %}
+
 {% block head %}
 	<title>{{ story.metaTitle or metadata.title }}</title>
 	<meta content="{{ story.metaDescription or metadata.description }}" name="description">
@@ -20,9 +20,9 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 		<h1>{{ story.title | prettifyMaltese | safe }}</h1>
 		<h2>
 			{% if story.translator %}
-				{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugify }}">{{ story.translator | prettifyMaltese | safe }}</a></span>
+				{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}">{{ story.translator | prettifyMaltese | safe }}</a></span>
 			{% else %}
-				<a href="/{{story.author | slugify }}">{{ story.author | prettifyMaltese | safe }}</a>
+				<a href="/{{story.author | slugifyMaltese }}">{{ story.author | prettifyMaltese | safe }}</a>
 			{% endif %}
 		</h2>
 	</header>
@@ -93,7 +93,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 			{% endif %}
 			{% if story.type == 'Esej' %}
 				<aside id="letters-solicit">
-					<p>Iktbilna dwar dan ix-xogħol fuq <u>l-indirizz</u> <a href="mailto:ittri@aphroconfuso.mt?subject={{ story.displayTitle }}" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludi ismek u fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
+					<p>Iktbilna dwar dan ix-xogħol fuq <l-m>l-indirizz</l-m> <a href="mailto:ittri@aphroconfuso.mt?subject={{ story.displayTitle }}" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludi ismek u fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
 				</aside>
 			{% endif %}
 		</section>
@@ -119,8 +119,12 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 						{% endif %}
 					</h2>
 				</header>
-				<div class="body-text">
-					<p>{{ promo.description | prettifyMaltese | safe }}</p>
+				<div class="{{ promo.cssClass }}">
+					{% if promo.type === 'Poezija' %}
+						{{ promo.description | prettifyMaltese | versifyDescription | safe }}
+					{% else %}
+						<p>{{ promo.description | prettifyMaltese | safe }}</p>
+					{% endif %}
 				</div>
 			</a>
 		</div>

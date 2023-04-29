@@ -132,12 +132,12 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("versify", function versify(text1) {
-		const text = text1.replace(/<p>\s*<\/p>\s*/gm, '#');
+		const text = text1.replace(/<p>\s*<\/p>\s*/gm, '#').replace(/#\s*#/gm, '#');
 		return stripTags(text, ['i', 'em']).split('#').map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
 			.join('');
 	});
 
-	eleventyConfig.addFilter("versifyDescriptionn", function versifyDescriptionn(text1) {
+	eleventyConfig.addFilter("versifyDescription", function versifyDescription(text1) {
 		const text = text1.replace(/\n\n/gm, '#');
 		return stripTags(text, ['i', 'em']).split('#').map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
 			.join('');

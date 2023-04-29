@@ -89,12 +89,10 @@ footer {
 		height: unset;
 	}
 
-	nav li:first-of-type {
+	nav li.header {
 		column-span: all;
-		a {
-			font-style: italic;
-			text-transform: lowercase;
-		}
+		font-style: italic;
+		text-transform: lowercase;
 	}
 
 	#logotype-container a {

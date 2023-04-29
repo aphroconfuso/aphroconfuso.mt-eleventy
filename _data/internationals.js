@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 
 const codes = {
+	"alerbyt": 'ar',
 	"Deutsch": "de",
 	"English": "en",
 	"Francais": "fr",
@@ -47,7 +48,7 @@ async function getInternationals() {
 		const atts = international.attributes;
 		return {
 			code: codes[atts.language],
-			direction: (atts.language === 'العربية' ? 'rtl' : 'ltr'),
+			direction: (atts.language === 'alerbyt' ? 'rtl' : 'ltr'),
 			title: atts.title,
 			body: atts.body,
 		};

@@ -31,6 +31,7 @@ async function getHomepage() {
 									image {
 										data{
 											attributes {
+												alternativeText
 												formats
 											}
 										}
@@ -53,6 +54,7 @@ async function getHomepage() {
 												promoImage {
 													data{
 														attributes {
+															alternativeText
 															formats
 														}
 													}
@@ -122,9 +124,10 @@ async function getHomepage() {
 			translator: translatorFullName,
 			slug: makeTitleSlug(promoAtts.title, authorFullName, translatorFullName),
 			images: promoAtts.showImagePromo && promoAtts.promoImage.data && promoAtts.promoImage.data.attributes.formats,
+			alternativeText: promoAtts.promoImage.data.attributes.alternativeText,
 			type: promoAtts.type,
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
-			promoType: promoAtts.type === 'Poezija' ? 'promo-poetry' : (promoAtts.showImagePromo && promoAtts.promoImage.data ? 'promo-picture' : 'promo'),
+			promoType: promoAtts.type === 'Poezija' ? 'promo-poetry promo' : (promoAtts.showImagePromo && promoAtts.promoImage.data ? 'promo-picture-1 promo' : 'promo'),
 		};
 	});
 

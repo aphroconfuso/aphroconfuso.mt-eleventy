@@ -198,6 +198,10 @@ aside {
 	}
 }
 
-.arabic {
-	font-family: "Noto Naskh Arabic", sans-serif;
+article.generic[lang="ar"] {
+	p,
+	h1 {
+		font-family: "Noto Sans Arabic", "Alegreya Sans Arabic Fallback", $sans,
+			sans-serif;
+	}
 }

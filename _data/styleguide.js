@@ -45,7 +45,8 @@ async function getStyleGuide() {
 	}
 
 	const styleGuide = styleguideData.styleGuide.data.attributes;
-	const styleGuideEntries = styleguideData.styleGuideEntries.data;
+	const styleGuideEntries = styleguideData.styleGuideEntries.data.sort((a, b) => (a.attributes.term.toLowerCase() > b.attributes.term.toLowerCase()) ? 1 : ((b.attributes.term.toLowerCase() > a.attributes.term.toLowerCase()) ? -1 : 0));
+
 
 	return {
 		title: styleGuide.title,

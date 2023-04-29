@@ -35,6 +35,7 @@ async function getAllContributors() {
 												description
 												pageUrl
 												dateTimePublication
+												type
 												authors {
 													data {
 														attributes {
@@ -62,6 +63,7 @@ async function getAllContributors() {
 												description
 												pageUrl
 												dateTimePublication
+												type
 												authors {
 													data {
 														attributes {
@@ -120,6 +122,8 @@ async function getAllContributors() {
 				slug: makeTitleSlug(storyAuthored.attributes.title, authorFullName, translatorFullName),
 				monthYear: getMonthYear(storyAuthored.attributes.dateTimePublication),
 				description: storyAuthored.attributes.description,
+				type: storyAuthored.attributes.type,
+				cssClass: storyAuthored.attributes.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			};
 		});
 
