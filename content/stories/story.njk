@@ -5,7 +5,7 @@ pagination:
   alias: story
 permalink: /{{ story.slug | slugifyMaltese }}/index.html
 ---
-{% extends 'layouts/home.njk' %}
+{% extends 'layouts/base.njk' %}
 
 {% block head %}
 	<title>{{ story.metaTitle or metadata.title }}</title>
@@ -113,9 +113,9 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 					<h1>{{ promo.title | prettifyMaltese | safe }}</h1>
 					<h2>
 						{% if promo.translator %}
-							{{ promo.author }} <span class="translator">{{ promo.translator }}</span>
+							{{ promo.author | prettifyMaltese | safe }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
 						{% else %}
-							{{ promo.author }}
+							{{ promo.author | prettifyMaltese | safe }}
 						{% endif %}
 					</h2>
 				</header>
@@ -130,4 +130,5 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 		</div>
 	{% endfor %}
 </aside>
+<!-- WORDCOUNT {{ story.body | wordcount }} -->
 {% endblock %}

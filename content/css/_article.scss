@@ -20,8 +20,13 @@ article {
 #grid-max-panel-right-bottom,
 #grid-body,
 #body-text {
-	// margin: 0 auto $body-margin auto;
+	margin: 0 auto;
 	max-width: $max-content-width;
+}
+
+#grid-max-panel-left-bottom,
+#grid-max-panel-right-bottom {
+	margin: $body-margin auto 0 auto;
 }
 
 .reviewed {
@@ -52,5 +57,12 @@ article {
 		aside {
 			margin-bottom: 0;
 		}
+		padding-bottom: $body-margin;
+	}
+}
+
+@media screen and (min-width: $laptop-breakpoint) {
+	article {
+		padding-bottom: 0;
 	}
 }

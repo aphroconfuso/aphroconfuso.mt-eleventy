@@ -1,11 +1,8 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
-eleventyNavigation:
-  key: Accessibility
-  order: 3
 permalink: /{{ accessibility.title | slugifyMaltese }}/index.html
 ---
+{% extends 'layouts/base.njk' %}
+
 {% block head %}
 	<title>{{ accessibility.title }} · Aphroconfuso</title>
 	<meta content="{{ contributor.metaDescription or metadata.description }}" name="description">

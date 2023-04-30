@@ -1,15 +1,12 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
-eleventyNavigation:
-  key: Internationals
-  order: 2
 pagination:
   data: internationals
   size: 1
   alias: international
 permalink: /{{ international.code }}/index.html
 ---
+{% extends 'layouts/base.njk' %}
+
 {% block head %}
 	<title>{{ international.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">

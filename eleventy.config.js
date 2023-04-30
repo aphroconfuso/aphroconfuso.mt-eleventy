@@ -169,6 +169,10 @@ module.exports = function(eleventyConfig) {
 		return smartTruncate(stripTags(text || []), 300);
 	});
 
+	eleventyConfig.addFilter("wordcount", function wordcount(text) {
+		return stripTags(text || []).trim().split(/\s+/).length;
+	});
+
 	// Customize Markdown library settings:
 	eleventyConfig.amendLibrary("md", mdLib => {
 		mdLib.use(markdownItAnchor, {

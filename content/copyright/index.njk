@@ -1,11 +1,8 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
-eleventyNavigation:
-  key: Copyright
-  order: 2
 permalink: /drittijiet/index.html
 ---
+{% extends 'layouts/base.njk' %}
+
 {% block head %}
 	<title>{{ copyright.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">

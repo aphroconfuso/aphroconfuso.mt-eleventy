@@ -53,7 +53,7 @@ article > header {
 }
 
 #deco {
-	margin: 0 auto;
+	margin: $body-margin auto 0;
 	max-width: 1000px;
 	width: 90%;
 }

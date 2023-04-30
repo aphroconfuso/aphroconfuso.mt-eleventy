@@ -1,11 +1,8 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
-eleventyNavigation:
-  key: About
-  order: 2
 permalink: /dwarna/index.html
 ---
+{% extends 'layouts/base.njk' %}
+
 {% block head %}
 	<title>{{ about.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">

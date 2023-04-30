@@ -1,12 +1,12 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
 pagination:
   data: contributors
   size: 1
   alias: contributor
 permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 ---
+{% extends 'layouts/base.njk' %}
+
 {% block head %}
 	<title>{{ contributor.name | prettifyMaltese }} · Aphroconfuso</title>
 	<meta content="{{ contributor.bioNote | getDescription }}" name="description">

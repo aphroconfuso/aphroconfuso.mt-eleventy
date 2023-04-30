@@ -1,11 +1,8 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
-eleventyNavigation:
-  key: Privacy
-  order: 2
 permalink: /privatezza/index.html
 ---
+{% extends 'layouts/base.njk' %}
+
 {% block head %}
 	<title>{{ privacy.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">

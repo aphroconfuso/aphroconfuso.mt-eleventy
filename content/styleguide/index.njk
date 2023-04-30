@@ -1,11 +1,8 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
-eleventyNavigation:
-  key: Gwida
-  order: 2
 permalink: /gwida-tal-istil/index.html
 ---
+{% extends 'layouts/base.njk' %}
+
 {% block head %}
 	<title>{{ styleguide.title }} · Aphroconfuso</title>
 	<meta content="{{ styleguide.body | getDescription }}" name="description">

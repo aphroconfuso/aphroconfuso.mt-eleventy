@@ -1,11 +1,11 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
 eleventyNavigation:
   key: Cookies
   order: 2
 permalink: /cookies/index.html
 ---
+{% extends 'layouts/base.njk' %}
+
 {% block head %}
 	<title>{{ cookies.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">

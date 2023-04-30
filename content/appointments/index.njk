@@ -1,11 +1,8 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
-eleventyNavigation:
-  key: Appointments
-  order: 3
 permalink: /appuntamenti/index.html
 ---
+{% extends 'layouts/base.njk' %}
+
 {% block head %}
 	<title>{{ appointmentIndex.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">

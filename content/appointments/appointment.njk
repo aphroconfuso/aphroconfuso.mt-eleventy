@@ -1,13 +1,18 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
 pagination:
   data: appointments
   size: 1
   alias: appointment
 permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
-metaTitle: "ABC {{ appointment.monthYear }}"
 ---
+{% extends 'layouts/base.njk' %}
+
+{% block head %}
+	<title>{{ appointment.monthYear | prettifyMaltese | safe }} · Aphroconfuso</title>
+	<meta content="{{ appointment.editorial | getDescription }}" name="description">
+	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
+{% endblock %}
+
 {% block content %}
 <article class="generic {{ appointment.monthYear | slugify }}">
 	<header>

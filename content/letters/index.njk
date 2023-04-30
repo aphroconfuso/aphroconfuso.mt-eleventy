@@ -1,11 +1,8 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
-eleventyNavigation:
-  key: Letters
-  order: 2
 permalink: /ittri/index.html
 ---
+{% extends 'layouts/base.njk' %}
+
 {% block head %}
 	<title>{{ letters.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">

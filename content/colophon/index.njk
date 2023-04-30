@@ -1,11 +1,8 @@
 ---
-layout: layouts/home.njk
-templateClass: tmpl-post
-eleventyNavigation:
-  key: Colophon
-  order: 2
 permalink: /kolofon/index.html
 ---
+{% extends 'layouts/base.njk' %}
+
 {% block head %}
 	<title>{{ colophon.title }} · Aphroconfuso</title>
 	<meta content="{{ contributor.metaDescription or metadata.description }}" name="description">
