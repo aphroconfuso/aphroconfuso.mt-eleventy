@@ -115,6 +115,7 @@ module.exports = function(eleventyConfig) {
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
 			.replace(/<\/blockquote>\s*<blockquote>/gm, "<br>")
 			.replace(/- </gm, "-<")
+			.replace(/&amp;shy;/gm, '<wbr>');
 	});
 
 	eleventyConfig.addFilter("slugifyMaltese", function slugifyMaltese(text) {
@@ -131,16 +132,16 @@ module.exports = function(eleventyConfig) {
 			.join('\n');
 	});
 
+	//  REMOVE NBSP;
+	// REDO THIS ALGORITHM
 	eleventyConfig.addFilter("versify", function versify(text1) {
-		const text = text1.replace(/<p>\s*<\/p>\s*/gm, '#').replace(/#\s*#/gm, '#');
+		const text = text1.replace("&nbsp;", "").replace(/<p>\s*<\/p>\s*/gm, '#').replace(/#\s*#/gm, '#');
 		return stripTags(text, ['i', 'em']).split('#').map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
-			.join('');
+			.join('<p class="poetry-separator">*</p>');
 	});
 
-	eleventyConfig.addFilter("versifyDescription", function versifyDescription(text1) {
-		const text = text1.replace(/\n\n/gm, '#');
-		return stripTags(text, ['i', 'em']).split('#').map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
-			.join('');
+	eleventyConfig.addFilter("versifyDescription", function versifyDescription(text) {
+		return stripTags(text || [], ['i', 'em']).replace(/\n/gm, '<br/>');
 	});
 
 	eleventyConfig.addFilter("dropCapsifyAndSectionise", function dropCapsifyAndSectionise(text) {
@@ -150,7 +151,8 @@ module.exports = function(eleventyConfig) {
 			.replace(/<p>(.)([\w\-]+)/, '<p><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;')
 			.replace(/<p>\#<\/p>\s*<p>(.)([\w\-]+)/gm, '<p class="break"><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;')
 			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
-			.replace(/MXC/gm,"Ċ").replace(/MXG/gm,"Ġ").replace(/MXH/gm,"Ħ").replace(/MXZ/gm,"Ż").replace(/MXA/gm,"À")
+			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+			.replace(/\[\+\]/gm, '<p>&nbsp;</p>');
 	});
 
 	eleventyConfig.addFilter("sectioniseOnly", function sectioniseOnly(text) {

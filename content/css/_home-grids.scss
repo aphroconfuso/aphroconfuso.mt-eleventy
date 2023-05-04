@@ -111,8 +111,8 @@
 	}
 }
 
-.ga3 .body-text {
-	@include clamp(6);
+.ga3 .body-text p {
+	@include clamp(7);
 }
 
 @media screen and (min-width: $mobile-breakpoint-plusone) {
@@ -138,18 +138,18 @@
 			"ga-newsletter ga-newsletter ga-newsletter ga-editorial ga-editorial ga-editorial"
 			"ga3 ga3 ga4 ga4 ga5 ga5"
 			"ga3 ga3 ga6 ga6 ga7 ga7";
-		.ga2 .body-text {
+		.ga2 .body-text p {
 			@include clamp(7);
 		}
-		.ga3 .body-text {
-			@include clamp(14);
+		.ga3 .body-text p {
+			@include clamp(15);
 		}
 		.ga4,
 		.ga5,
 		.ga6,
 		.ga7 {
-			.promo {
-				@include clamp(9);
+			.promo p {
+				@include clamp(7);
 			}
 		}
 	}

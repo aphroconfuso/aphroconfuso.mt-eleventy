@@ -12,7 +12,7 @@ async function getAllContributors() {
   let contributors = [];
   while (makeNewQuery) {
     try {
-      // initiate fetch
+      // initialise fetch
       const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
         method: "POST",
         headers: {

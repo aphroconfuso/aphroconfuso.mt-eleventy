@@ -45,8 +45,11 @@ async function getStyleGuide() {
 	}
 
 	const styleGuide = styleguideData.styleGuide.data.attributes;
-	const styleGuideEntries = styleguideData.styleGuideEntries.data.sort((a, b) => (a.attributes.term.toLowerCase() > b.attributes.term.toLowerCase()) ? 1 : ((b.attributes.term.toLowerCase() > a.attributes.term.toLowerCase()) ? -1 : 0));
-
+	const styleGuideEntries = styleguideData.styleGuideEntries.data.sort((a, b) => {
+		const preparedA = a.attributes.term.toLowerCase().replace(/^il-/g, '').replace(/ċ/, 'c').replace(/ġ/g, 'g').replace(/ħ/g, 'h');
+		const preparedB = b.attributes.term.toLowerCase().replace(/^il-/g, '').replace(/ċ/, 'c').replace(/ġ/g, 'g').replace(/ħ/g, 'h');
+		return preparedA > preparedB ? 1 : ((preparedB > preparedA) ? -1 : 0);
+	});
 
 	return {
 		title: styleGuide.title,

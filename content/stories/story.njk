@@ -9,12 +9,17 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 
 {% block head %}
 	<title>{{ story.metaTitle or metadata.title }}</title>
-	<meta content="{{ story.metaDescription or metadata.description }}" name="description">
+	<meta content="{{ story.description }}" name="description">
+	{% if story.translator %}
+		<meta name="author" content="{{ story.author }} (tr {{ story.translator }})">
+	{% else %}
+		<meta name="author" content="{{ story.author }}">
+	{% endif %}
 	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}/{{ story.socialImage }}">
 {% endblock %}
 
 {% block content %}
-<article class="content {{ story.monthYear | slugify }}">
+<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }}">
 	<header>
 		<h3><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
 		<h1>{{ story.title | prettifyMaltese | safe }}</h1>
@@ -121,7 +126,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 				</header>
 				<div class="{{ promo.cssClass }}">
 					{% if promo.type === 'Poezija' %}
-						{{ promo.description | prettifyMaltese | versifyDescription | safe }}
+						<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
 					{% else %}
 						<p>{{ promo.description | prettifyMaltese | safe }}</p>
 					{% endif %}
@@ -130,5 +135,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 		</div>
 	{% endfor %}
 </aside>
-<!-- WORDCOUNT {{ story.body | wordcount }} -->
+<script>
+	wordcount = {{ story.body | wordcount }};
+</script>
 {% endblock %}

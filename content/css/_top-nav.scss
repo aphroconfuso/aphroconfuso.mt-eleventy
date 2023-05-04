@@ -34,6 +34,13 @@
 		#top-nav:hover {
 			bottom: 0;
 		}
+		#brownline {
+			border-bottom: 1px solid $lighter-brown;
+			position: absolute;
+			top: 20vw;
+			width: 100%;
+			left: 0;
+		}
 		menu {
 			align-items: flex-start;
 			background-color: $paper;
@@ -45,8 +52,9 @@
 			margin: 20vw 0 0;
 			padding: 0 1.5rem;
 			position: absolute;
-			top: 0;
+			top: -320px;
 			width: 100%;
+			z-index: -1;
 			li {
 				display: flex;
 				margin: 0 1rem;
@@ -71,7 +79,9 @@
 	}
 
 	#logo-container {
+		background-color: $paper;
 		padding: 0.33rem;
+		z-index: 1;
 	}
 
 	#logo {
@@ -138,7 +148,9 @@
 		margin-top: 0px;
 		transform: rotate(-405deg);
 	}
-
+	#menu-toggle:checked ~ #brownline {
+		display: none;
+	}
 	.menu-button-container {
 		display: flex;
 	}
@@ -156,6 +168,11 @@
 		&:last-child {
 			border: none;
 		}
+	}
+
+	#menu-toggle:checked ~ menu {
+		top: 0;
+		transition: top $fade-in-medium cubic-bezier(0.23, 1, 0.32, 1);
 	}
 }
 

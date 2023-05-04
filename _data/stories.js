@@ -13,7 +13,7 @@ async function getAllStories() {
   let stories = [];
   while (makeNewQuery) {
     try {
-      // initiate fetch
+      // initialise fetch
       const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
         method: "POST",
         headers: {

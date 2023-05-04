@@ -33,7 +33,7 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 							</header>
 							<div class="{{ story.cssClass }}">
 								{% if story.type === 'Poezija' %}
-									{{ story.description | prettifyMaltese | versifyDescription | safe }}
+									<p>{{ story.description | prettifyMaltese | versifyDescription | safe }}</p>
 								{% else %}
 									<p>{{ story.description | prettifyMaltese | safe }}</p>
 								{% endif %}
