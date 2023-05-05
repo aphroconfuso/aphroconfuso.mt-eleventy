@@ -23,10 +23,9 @@ const getCookie = (cname) => {
 
 const getScrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
 
+var percentageMax;
+
 const scrolling = () => {
-  // if (!document.body.classList.contains('story')) {
-  //   return;
-  // }
   const newScrollPosition = getScrollPosition();
   // console.log(newScrollPosition);
   if (newScrollPosition < 120 || newScrollPosition < lastScrollPosition) {
@@ -42,11 +41,40 @@ const scrolling = () => {
       document.body.classList.remove('scrolling')
     }, 5000);
 
-    progress = parseInt((newScrollPosition * 100) / pageHeight);
-    document.querySelector('#progress').innerHTML = `${ progress }%`;
+		percentageMax = parseInt(((newScrollPosition - bodyStart) * 100) / pageHeight);
+		// percentageProgress = parseInt(((newScrollPosition - lastScrollPosition) * 100) / pageHeight);
+    // document.querySelector('#progress').innerHTML = `${ percentageMax }%`;
 
     lastScrollPosition = newScrollPosition;
-  }
+	}
+
+	const threshold = bodyStart;
+	const maxScroll = bodyEnd;
+	const scrollReportingIncrement = screenHeight / 3;
+	if ((newScrollPosition >= threshold) && (newScrollPosition < maxScroll) && (newScrollPosition - lastReportedScrolledPosition) > (scrollReportingIncrement)) {
+		const pixelProgress = newScrollPosition - lastReportedScrolledPosition;
+		const wordsRead = parseInt(wordsPerPixel * pixelProgress);
+		const timeNow = new Date() / 1000;
+		const secondsElapsed =  timeNow - newReportsSentAT;
+		const wordsPerSecond = wordsRead / secondsElapsed;
+		const minutesMax = parseInt(((new Date() / 1000) - startReadingTime) / 60);
+
+		// Is it a plausible speed?
+		if (wordsRead > 100 && wordsPerSecond > 1 && wordsPerSecond < 3) {
+			// console.log('Reporting:', wordsRead, 'words read');
+			console.log(`Reporting: ${wordsRead}wr ${wordsPerSecond}wps ${percentageMax}% kliem: ${wordsRead} minuti: ${minutesMax}`);
+			window._paq.push(['trackEvent', 'Qari', 'Fil-mija', pageTitle, parseInt(percentageMax)]);
+			window._paq.push(['trackEvent', 'Qari', 'Kliem', pageTitle, parseInt(wordsRead)]);
+			window._paq.push(['trackEvent', 'Qari', 'Minuti', pageTitle, parseInt(minutesMax)]);
+			lastReportedScrolledPosition = newScrollPosition;
+			newReportsSentAT = new Date() / 1000;
+			return;
+		} else {
+			console.log(`NOT Reporting: ${wordsRead}wr ${wordsPerSecond}wps ${percentageMax}% kliem: ${wordsRead} minuti: ${minutesMax}`);
+		}
+	} else {
+		console.log('NOT', newScrollPosition, threshold, newScrollPosition, maxScroll);
+}
   return;
 }
 
@@ -113,18 +141,20 @@ const initialiseFontSizeListeners = () => {
 
 // ANALITIKA u BOOKMARKS
 
-var lastReportedReadingTime;
+var lastReportedReadingTime, startReadingTime, newReportsSentAT;
 
 const initialiseReadingHeartbeat = () => {
-	lastReportedReadingTime = new Date() / 1000;
-	const body = document.getElementById('body-text');
-	const bodyHeight = body.offsetHeight;
-	const bodyStart = body.offsetTop;
-	const bodyEnd = bodyStart + bodyHeight;
-	const screenHeight = window.innerHeight;
-	const wordsPerScreen = wordcount * screenHeight / bodyHeight;
-	const wordsPerPixel = wordcount / bodyHeight;
-	const heartbeatId = setInterval(heartbeat, 3000, wordsPerPixel, screenHeight);
+	startReadingTime = new Date() / 1000
+	newReportsSentAT = startReadingTime;
+	lastReportedReadingTime = startReadingTime;
+	body = document.getElementById('body-text');
+	bodyHeight = body.offsetHeight;
+	bodyStart = body.offsetTop;
+	bodyEnd = bodyStart + bodyHeight;
+	screenHeight = window.innerHeight;
+	wordsPerScreen = wordcount * screenHeight / bodyHeight;
+	wordsPerPixel = wordcount / bodyHeight;
+	heartbeatId = setInterval(heartbeat, 3000, wordsPerPixel, screenHeight);
 }
 
 const heartbeat = (wordsPerPixel, screenHeight, bodyStart, bodyEnd) => {
@@ -152,9 +182,7 @@ const heartbeat = (wordsPerPixel, screenHeight, bodyStart, bodyEnd) => {
 		// Is it a plausible speed?
 		if (wordsRead > 100 && wordsPerSecond > 1 && wordsPerSecond < 3) {
 			// console.log('Reporting:', wordsRead, 'words read');
-			const title = document.querySelector("h1").innerText;
-			const author = document.querySelector("h2").innerText;
-			window._paq.push(['trackEvent', 'Qari', title, 'kliem', parseInt(wordsRead)]);
+			window._paq.push(['trackEvent', 'Qari', pageTitle, 'kliem', parseInt(wordsRead)]);
 			lastReportedScrollPosition = newScrollPosition;
 			lastReportedReadingTime = timeNow;
 			return;
@@ -170,7 +198,9 @@ const heartbeat = (wordsPerPixel, screenHeight, bodyStart, bodyEnd) => {
 	}
 }
 
-var lastScrollPosition, lastReportedScrollPosition, progress, hideScrollTools, pageHeight;
+var lastScrollPosition, progress, hideScrollTools, pageHeight, pageTitle, bodyStart, body, bodyHeight, bodyStart, bodyEnd, screenHeight, wordsPerScreen, wordsPerPixel, heartbeatId;
+var lastReportedScrollPosition = getScrollPosition();
+var lastReportedScrolledPosition = lastReportedScrollPosition;
 
 var wordcount;
 const initialiseAfterWindow = () => {
@@ -182,6 +212,7 @@ const initialiseAfterWindow = () => {
 	lastScrollPosition = getScrollPosition();
 	lastReportedScrollPosition = lastScrollPosition;
 	pageHeight = document.body.scrollHeight;
+	pageTitle = document.querySelector("h1").innerText;
 }
 
 const initialiseAfterBody = () => {
