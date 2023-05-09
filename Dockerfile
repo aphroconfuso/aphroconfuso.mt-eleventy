@@ -16,7 +16,7 @@ RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev l
 WORKDIR /opt/
 COPY ./package.json ./package-lock.json ./
 ENV PATH /opt/node_modules/.bin:$PATH
-RUN npm ci --omit=dev
+RUN npm ci
 WORKDIR /opt/app
 COPY ./ .
 RUN npm run build
@@ -31,4 +31,4 @@ ENV PATH /opt/node_modules/.bin:$PATH
 WORKDIR /opt/app
 COPY --from=build /opt/app ./
 EXPOSE 8080
-CMD ["npm", "run","start"]
+CMD ["npm", "run","build"]
