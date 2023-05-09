@@ -76,7 +76,7 @@
 	.layout-4 {
 		display: grid;
 		grid-template-columns: auto;
-		grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+		grid-template-rows: auto auto auto auto auto auto auto auto auto;
 		gap: $body-margin $body-margin;
 		grid-template-areas:
 			"ga1"
@@ -87,32 +87,16 @@
 			"ga5"
 			"ga3"
 			"ga6"
-			"ga7"
-			"ga8"
-			"ga9"
-			"ga10"
-			"ga11"
-			"ga12";
+			"ga7";
 	}
-	.ga1,
 	.ga2,
-	.ga3,
-	.ga4,
-	.ga5,
-	.ga6,
-	.ga7,
-	.ga8,
-	.ga9,
-	.ga10,
-	.ga11,
-	.ga12 {
-		border-bottom: 1px solid $grid-lines;
+	.ga6 {
 		padding-bottom: calc(#{$body-margin} - 1px);
+		border-bottom: 1px solid $grid-lines;
 	}
-}
-
-.ga3 .body-text p {
-	@include clamp(7);
+	.ga3 .body-text p {
+		@include clamp(7);
+	}
 }
 
 @media screen and (min-width: $mobile-breakpoint-plusone) {

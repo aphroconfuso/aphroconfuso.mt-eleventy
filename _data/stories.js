@@ -1,9 +1,20 @@
 const fetch = require("node-fetch");
 const smartTruncate = require("smart-truncate");
-const stripTags = require("striptags");
+// const stripTags = require("striptags");
+// const unique = require('unique-words');
 const makeTitleSlug = require("../src/makeTitleSlug.js");
 
 const getMonthYear = require("../src/getMonthYear.js");
+
+// const fs = require('fs');
+// var Spellchecker = require("hunspell-spellchecker");
+// var spellchecker = new Spellchecker();
+// // Parse an hunspell dictionary that can be serialized as JSON
+// var DICT = spellchecker.parse({
+// 	dic: fs.readFileSync("./mt_MT.dic"),
+// 	aff: fs.readFileSync("./mt_MT.aff")
+// });
+// spellchecker.use(DICT);
 
 // function to get stories
 async function getAllStories() {
@@ -33,6 +44,7 @@ async function getAllStories() {
 									type
 									appointment
 									showImagePromo
+									publicationHistory
 									promoImage {
 										data{
 											attributes {
@@ -167,8 +179,8 @@ async function getAllStories() {
   }
 
   // format stories objects
-	const storiesFormatted = stories.map((item) => {
-		const atts = item.attributes;
+	const storiesFormatted = stories.map((story) => {
+		const atts = story.attributes;
 		const author = !!atts.authors.data.length && atts.authors.data[0].attributes;
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 
@@ -217,6 +229,26 @@ async function getAllStories() {
 		const displayTitle = `${ author && authorFullName }: ${ atts.title }${ translatorFullName ? ' (tr ' + translatorFullName + ')' : '' }`;
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
 
+		// find total times a story is endPromoted
+		// const timesStoryPromoted = stories.map((story) => story.attributes.endPromos
+		// promo.story.data.attributes.title)
+
+		// const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa"));
+		// const vocabulary = unique(body).filter((word) => {
+		// 	const fixedWord = word.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à");
+		// 	const check = spellchecker.check(fixedWord);
+		// 	if (check) {
+		// 		return true;
+		// 	} else {
+		// 		console.log(fixedWord);
+		// 		return false;
+		// 	}
+		// });
+		// console.log('tul', vocabulary.length);
+
+		const vocabulary = [];
+		// console.log(vocabulary);
+
 		return {
       title: atts.title,
 			body: atts.body,
@@ -238,7 +270,9 @@ async function getAllStories() {
 			displayTitle: displayTitle,
 			metaTitle: `${ displayTitle } · Aphroconfuso`,
 			showImagePromo: atts.showImagePromo,
-			socialImage: promoImageFormats.social && `${promoImageFormats.social.hash}${promoImageFormats.social.ext}`,
+			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
+			vocabulary: vocabulary,
+			publicationHistory: atts.publicationHistory,
     };
   });
 

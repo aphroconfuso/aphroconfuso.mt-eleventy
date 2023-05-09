@@ -14,7 +14,9 @@
 	}
 	figure {
 		grid-area: promo-image;
+		margin-left: $body-margin-half * -1;
 		padding: $body-margin-half 0;
+		width: calc(100% + $body-margin);
 		img {
 			aspect-ratio: 16 / 9;
 		}
