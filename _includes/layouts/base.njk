@@ -21,13 +21,15 @@
 		<meta property="og:image:width" content="1200">
 		<meta property="og:image:height" content="630">
 		<link rel="stylesheet" href="{{ '/css/style.css' | rev }}">
-		<script src="{{ '/js/script-105.js' }}"></script>
+		<script src="{{ '/js/script-108.js' }}"></script>
 		<script>
 			var _paq = window._paq = window._paq || [];
-			_paq.push(['enableJSErrorTracking']);
 			_paq.push(['disableCookies']);
-			_paq.push(['trackPageView']);
+			_paq.push(['enableJSErrorTracking']);
+			_paq.push(['enableHeartBeatTimer']);
 			_paq.push(['enableLinkTracking']);
+			_paq.push(['trackPageView']);
+			_paq.push(['trackVisibleContentImpressions']);
 			(function () {
 				var u = "//analitika.aphroconfuso.mt/";
 				_paq.push(['setTrackerUrl', u + 'matomo.php']);
@@ -45,16 +47,17 @@
 				<a id="logo-container" href="/"><img src="/img/logo-4C4845.svg" id="logo" alt="logo: Aphroconfuso" /></a>
 				<input id="menu-toggle" type="checkbox" />
 				<label class='menu-button-container' for="menu-toggle">
+					<span style="display: none">Mobile biss: iftaħ il-menu</span>
 					<div class='menu-button'></div>
 				</label>
 				<menu>
-					<li><a href="/appuntamenti">Appuntamenti</a></li>
-					<li><a href="/kontributuri">Kontributuri</a></li>
-					<li><a href="/dwarna">Dwarna</a></li>
-					<li class="hide-laptop">&nbsp;</li>
-					<li><a href="/kolofon">Kolofon</a></li>
-					<li><a href="/newsletter">Newsletter</a></li>
-					<li><a href="/podcast">Podcast</a></li>
+					<li><a href="/appuntamenti/">Appuntamenti</a></li>
+					<li><a href="/kontributuri/">Kontributuri</a></li>
+					<li><a href="/dwarna/">Dwarna</a></li>
+					<li class="hide-laptop/">&nbsp;</li>
+					<li><a href="/kolofon/">Kolofon</a></li>
+					<li><a href="/newsletter/">Newsletter</a></li>
+					<li><a href="/podcast/">Podcast</a></li>
 					<li id="text-size-adjust" class="hide-laptop">
 						<a id="font-size-1" href="#">a</a>
 						<a id="font-size-2" href="#">a</a>
@@ -70,32 +73,32 @@
 			</main>
 		</div>
 		<div id="bottom-wrapper">
-			<img id="deco" src="/img/deco-100.svg" />
-			<footer>
+			<img id="deco" src="/img/deco-100.svg" alt="Dekorazzjoni art-nouveau" />
+			<footer data-track-content data-content-name="Footer" data-content-piece="{{ page.fileSlug }}">
 				<nav class="footer-content">
 					<menu id="housekeeping">
 						<li class="header">Dwarna</li>
-						<li><a href="/kolofon">Kolofon</a></li>
-						<li><a href="/drittijiet">Drittijiet</a></li>
-						<li><a href="/gwida-tal-istil">Gwida tal-Istil</a></li>
-						<li><a href="/cookies">Cookies</a></li>
-						<li><a href="/privatezza">Privatezza</a></li>
-						<li><a href="/aċċessibbiltà">Aċċessibbiltà</a></li>
-						<li><a href="/podcast">Podcast</a></li>
-						<li><a href="/newsletter">Newsletter</a></li>
-						<li><a href="/ittri">Ittri</a></li>
+						<li><a href="/kolofon/">Kolofon</a></li>
+						<li><a href="/drittijiet/">Drittijiet</a></li>
+						<li><a href="/gwida-tal-istil/">Gwida tal-Istil</a></li>
+						<li><a href="/cookies/">Cookies</a></li>
+						<li><a href="/privatezza/">Privatezza</a></li>
+						<li><a href="/aċċessibbiltà/">Aċċessibbiltà</a></li>
+						<li><a href="/podcast/">Podcast</a></li>
+						<li><a href="/newsletter/">Newsletter</a></li>
+						<li><a href="/ittri/">Ittri</a></li>
 					</menu>
 					<menu id="media">
 						<li class="header">Midja</li>
-						<li><a href="/ar" class="arabic">العربية</a></li>
-						<li><a href="/ca">Català</a></li>
-						<li><a href="/de">Deutsch</a></li>
-						<li><a href="/en">English</a></li>
-						<li><a href="/es">Español</a></li>
-						<li><a href="/ro">Română</a></li>
-						<li><a href="/fr">Français</a></li>
-						<li><a href="/pl">Polski</a></li>
-						<li><a href="/it">Italiano</a></li>
+						<li><a href="/ar" class="arabic/">العربية</a></li>
+						<li><a href="/ca/">Català</a></li>
+						<li><a href="/de/">Deutsch</a></li>
+						<li><a href="/en/">English</a></li>
+						<li><a href="/es/">Español</a></li>
+						<li><a href="/fr/">Français</a></li>
+						<li><a href="/it/">Italiano</a></li>
+						<li><a href="/nl/">Nederlands</a></li>
+						<li><a href="/ro/">Română</a></li>
 					</menu>
 					<menu id="socials">
 						<li class="header">Segwina</li>
@@ -105,13 +108,13 @@
 						<li><a href="https://mastodon.world/@aphroconfuso">Mastodon</a></li>
 						<li><a href="https://youtube.com/@aphroconfuso">Youtube</a></li>
 						<li><a href="https://open.spotify.com/user/31rly4s75gfxs6li6bcxc5bqlgza">Spotify</a></li>
-						<!-- <li><a href="">Soundcloud</a></li> -->
+						{# <!-- <li><a href="">Soundcloud</a></li> --> #}
 					</menu>
 					<div id="logotype-container">
 						<a href="/"><img src="/img/logotype.svg" class="logotype" alt="logo: Aphroconfuso" /></a>
 					</div>
 					<div id="email"><a href="mailto:l-edituri@aphroconfuso.mt" class="email">l-edituri@aphroconfuso.mt</a></div>
-					<div id="copyright"><a href="/drittijiet" class="copyright">&copy; 2023 Aphroconfuso u l-kontributuri rispettivi</a></div>
+					<div id="copyright"><a href="/drittijiet/" class="copyright">&copy; 2023 Aphroconfuso u l-kontributuri rispettivi</a></div>
 				</nav>
 				<aside id="scroll-tools" class="outlined">
 					<p><span id="progress">0%</span> <a id="arrow-top" onclick="scrollToTop()">⤴</a>
@@ -119,6 +122,5 @@
 				</aside>
 			</footer>
 		</div>
-			<!-- Current page: {{ page.url | htmlBaseUrl }} -->
 	</body>
 </html>

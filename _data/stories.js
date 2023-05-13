@@ -45,6 +45,7 @@ async function getAllStories() {
 									appointment
 									showImagePromo
 									publicationHistory
+									updatedAt
 									promoImage {
 										data{
 											attributes {
@@ -252,6 +253,7 @@ async function getAllStories() {
 		return {
       title: atts.title,
 			body: atts.body,
+			updatedAt: atts.updatedAt.split("T")[0],
 			slug: makeTitleSlug(atts.title, authorFullName, translatorFullName),
 			endnote: atts.endnote,
 			monthYear: getMonthYear(atts.dateTimePublication),

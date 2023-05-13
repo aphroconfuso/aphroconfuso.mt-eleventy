@@ -4,7 +4,8 @@
 
 article {
 	border-bottom: $body-margin-quarter solid $paper;
-	margin: 0 auto $body-margin;
+	// margin: 0 auto $body-margin;
+	margin: 0 auto;
 	max-width: $max-width;
 	aside {
 		color: $lighter-brown;
@@ -63,7 +64,7 @@ article {
 		aside {
 			margin-bottom: 0;
 		}
-		padding-bottom: $body-margin;
+		// padding-bottom: $body-margin;
 	}
 }
 

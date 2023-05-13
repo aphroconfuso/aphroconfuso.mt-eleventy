@@ -3,60 +3,39 @@ pagination:
   data: stories
   size: 10
   alias: story
+eleventyExcludeFromCollections: true
+permalink: /admin/index.html
 ---
-<head>
-	<title>ADMIN</title>
-	<style>
-		body {
-			font-size: 1.2rem;
-			font-family: sans;
-			padding: 1rem;
-			line-height: l.4;
-		}
-		main {
-			max-width: 620px;
-			margin: 0 auto;
-		}
-		.description {
-			display: none;
-			font-size: 1rem;
-		}
-		.toggle:checked ~ .description {
-			display: block;
-		}
-		input[type=checkbox] {
-			visibility: hidden;
-		}
-		.vocabulary {
-			columns: 4;
-		}
-	</style>
-</head>
-<body>
+{% extends 'layouts/admin.njk' %}
+
+{% block content %}
 	<main>
 		<header>
 			<h1>admin</h1>
 		</header>
-		<ul>
-			{% for story in stories %}
-				<li><strong>{{ story.title }}</strong></li>
-					<ul>
-						{% for promo in story.endPromos %}
-							<li>
-								<label for="checkbox-{{ story.title | slugify }}-{{ promo.title | slugify }}-{{ loop.index }}">{{ promo.title }}</label>
-								<input type="checkbox" class="toggle" id="checkbox-{{ story.title | slugify }}-{{ promo.title | slugify }}-{{ loop.index }}">
-								<p class="description">{{ promo.description | prettifyMaltese | safe }}</p>
-							</li>
-						{% endfor %}
-					</ul>
-					<p>{{ story.vocabulary.length | slugify }}</p>
-					<ul class="vocabulary">
-						{% for word in story.vocabulary %}
-							<li>{{ word }}</li>
-						{% endfor %}
-					</ul>
-				</li>
-			{% endfor %}
-		</ul>
+		<section>
+			<ul>
+				{% for story in stories %}
+					<li><strong>{{ story.title | prettifyMaltese | safe }}</strong></li>
+						<ul>
+							{% for promo in story.endPromos %}
+								<li>
+									<label for="checkbox-{{ story.title | slugify }}-{{ promo.title | slugify }}-{{ loop.index }}">{{ promo.title | prettifyMaltese | safe }}</label>
+									<input type="checkbox" class="toggle" id="checkbox-{{ story.title | slugify }}-{{ promo.title | slugify }}-{{ loop.index }}">
+									<p class="description">{{ promo.description | prettifyMaltese | safe }}</p>
+								</li>
+							{% endfor %}
+						</ul>
+						{# <p>{{ story.vocabulary.length | slugify }}</p> #}
+						{# <ul class="vocabulary">
+							{% for word in story.vocabulary %}
+								<li>{{ word }}</li>
+							{% endfor %}
+						</ul> #}
+					</li>
+				{% endfor %}
+			</ul>
+		</section>
+		<textarea></textarea>
 	</main>
-</body>
+{% endblock %}

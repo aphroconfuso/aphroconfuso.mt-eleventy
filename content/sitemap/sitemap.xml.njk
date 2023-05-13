@@ -5,10 +5,13 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {%- for page in collections.all %}
-	{% set absoluteUrl %}{{ page.url | htmlBaseUrl(metadata.url) }}{% endset %}
+	{% set absoluteUrl %}{{ metadata.url }}{{ page.url }}{% endset %}
 	<url>
 		<loc>{{ absoluteUrl }}</loc>
-		<lastmod>{{ page.date | htmlDateString }}</lastmod>
+		{# <lastmod>{{ page.data.sitemapUpdated or page.date | htmlDateString }}</lastmod> #}
+		<lastmod>2023-05-08</lastmod>
+    <changefreq>{{ page.data.sitemapChangeFrequency | default("monthly") }}</changefreq>
+    <priority>{{ page.data.sitemapPriority | default(0.8) }}</priority>
 	</url>
 {%- endfor %}
 </urlset>

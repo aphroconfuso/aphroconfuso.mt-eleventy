@@ -82,15 +82,54 @@
 			"ga1"
 			"ga-editorial"
 			"ga2"
-			"ga4"
-			"ga-newsletter"
-			"ga5"
 			"ga3"
+			"ga-newsletter"
+			"ga4"
+			"ga5"
 			"ga6"
 			"ga7";
 	}
-	.ga2,
-	.ga6 {
+	.mga1 {
+		grid-area: ga1;
+	}
+	.mga2 {
+		grid-area: ga2;
+	}
+	.mga3 {
+		grid-area: ga3;
+	}
+	.mga4 {
+		grid-area: ga4;
+	}
+	.mga5 {
+		grid-area: ga5;
+	}
+	.mga6 {
+		grid-area: ga6;
+	}
+	.mga7 {
+		grid-area: ga7;
+	}
+	.mga8 {
+		grid-area: ga8;
+	}
+	.mga9 {
+		grid-area: ga9;
+	}
+	.mga10 {
+		grid-area: ga10;
+	}
+	.mga11 {
+		grid-area: ga11;
+	}
+	.mga12 {
+		grid-area: ga12;
+	}
+	.mga12 {
+		grid-area: ga12;
+	}
+	.mga2,
+	.mga6 {
 		padding-bottom: calc(#{$body-margin} - 1px);
 		border-bottom: 1px solid $grid-lines;
 	}

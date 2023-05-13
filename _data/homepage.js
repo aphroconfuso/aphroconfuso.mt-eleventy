@@ -27,6 +27,7 @@ async function getHomepage() {
                   }
                 }
 								promos {
+									mobilePriority
 									text
 									image {
 										data{
@@ -117,9 +118,10 @@ async function getHomepage() {
 		const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`
 
 		return {
+			mobilePriority: promo.mobilePriority || 9,
+			description: promo.text || promoAtts.description,
 			title: promoAtts.title,
 			monthYear: getMonthYear(promoAtts.dateTimePublication),
-			description: promo.text || promoAtts.description,
 			author: authorFullName,
 			translator: translatorFullName,
 			slug: makeTitleSlug(promoAtts.title, authorFullName, translatorFullName),

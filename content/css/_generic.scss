@@ -10,6 +10,10 @@
 		li {
 			margin-bottom: calc($body-margin - 1px);
 			border-bottom: 1px solid $faint-line;
+			&:last-of-type {
+				margin-bottom: 0;
+				border-bottom: none;
+			}
 		}
 		.promo {
 			@include clamp(7);
@@ -49,10 +53,24 @@
 }
 .contributors-menu {
 	font-size: 1rem;
+	li {
+		&::before {
+			color: $deco-brown;
+			content: "§";
+			display: inline-block;
+			font-family: $decorative;
+			width: $body-margin-half;
+		}
+		&.active {
+			&::before {
+				color: $lighter-brown;
+			}
+			color: $lighter-brown;
+		}
+	}
 	@media screen and (min-width: $laptop-breakpoint) {
-		a:hover {
-			@include ease-in(0.25s);
-			text-decoration-color: $dark-brown;
+		li a {
+			@include animated-underline($light-brown);
 		}
 	}
 }
@@ -64,5 +82,60 @@
 #grid-body {
 	.contributors-menu {
 		columns: 2;
+	}
+}
+#podcast-logos {
+	display: flex;
+	flex-direction: column;
+	margin-top: $body-margin * 2;
+	li a {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		margin-bottom: $body-margin;
+		align-items: center;
+		img {
+			-webkit-filter: sepia(1) brightness(50%);
+			filter: sepia(1) brightness(50%);
+			margin: 0 $body-margin 0 0;
+		}
+		p {
+			position: relative;
+			&::after {
+				@include animated-underline-pre($dark-brown);
+			}
+		}
+	}
+	@media screen and (min-width: $mobile-breakpoint-plusone) {
+		flex-direction: row;
+		justify-content: space-between;
+		li {
+			width: 20%;
+			a {
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				p {
+					margin-top: $body-margin-half;
+				}
+				img {
+					margin: 0;
+					height: 60px;
+					width: 60px;
+				}
+				&:hover {
+					img {
+						@include ease-out(0.25s);
+						-webkit-filter: sepia(0) brightness(100%);
+						filter: sepia(0) brightness(100%);
+					}
+					p {
+						&::after {
+							@include animated-underline-post();
+						}
+					}
+				}
+			}
+		}
 	}
 }

@@ -1,8 +1,9 @@
 ---
 pagination:
+  addAllPagesToCollections: true
+  alias: appointment
   data: appointments
   size: 1
-  alias: appointment
 permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
 ---
 {% extends 'layouts/base.njk' %}
@@ -23,32 +24,8 @@ permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
 	<div class="container">
 	<section>
 		<div class="generic-body-text editorial">{{ appointment.editorial | prettifyMaltese | endDotify | safe }}</div>
-		<ul class="promo-list">
-			{% for story in appointment.stories %}
-				<li>
-					<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.slug }}">
-						<header>
-							<h3>{{ story.monthYear | fixMonthMaltese }}</h5>
-							<h1>{{ story.title }}</h1>
-							<h2>
-								{% if story.translator %}
-									{{ story.author | prettifyMaltese }} <span class="translator">{{ story.translator | prettifyMaltese }}</span>
-								{% else %}
-									{{ story.author | prettifyMaltese }}
-								{% endif %}
-							</h2>
-						</header>
-						<div class="{{ story.cssClass }}">
-							{% if story.type === 'Poezija' %}
-								<p>{{ story.description | prettifyMaltese | versifyDescription | safe }}</p>
-							{% else %}
-								<p>{{ story.description | prettifyMaltese | safe }}</p>
-							{% endif %}
-						</div>
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
+		{% set promos = appointment.stories %}
+		{% include '_promo_list.njk' %}
 	</section>
 	<section id="grid-max-panel-left-top">
 		{# <section class="kittieba-menu">

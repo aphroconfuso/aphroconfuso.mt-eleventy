@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="mt" translate="no">
+	<head>
+		<title>ADMIN</title>
+		<style>
+			@font-face {
+				font-family: "Alegreya Sans";
+				src: url("/fonts/AlegreyaSans-Regular.ttf") format("truetype");
+				font-style: normal;
+				font-weight: 400;
+			}
+			@font-face {
+				font-family: "Alegreya Sans";
+				src: url("/fonts/AlegreyaSans-Italic.ttf") format("truetype");
+				font-style: italic;
+				font-weight: 400;
+			}
+			body {
+				background-color: #f9f9f0;
+				color: ;
+				font-size: 1.2rem;
+				font-family: "Alegreya Sans", sans;
+				line-height: l.4;
+			}
+			section {
+				padding: 1rem;
+			}
+			main {
+				margin: 0;
+				padding: 0;
+			}
+			.description {
+				display: none;
+				font-size: 1rem;
+			}
+			.toggle:checked ~ .description {
+				display: block;
+			}
+			input[type=checkbox] {
+				visibility: hidden;
+			}
+			.vocabulary {
+				columns: 4;
+			}
+			textarea {
+				background-color: #b63d43;
+				color: #f9f9f0;
+				font-size: 64px;
+				line-height: 1.4;
+				font-style: italic;
+				width: 100%;
+				height: 120vh;
+				padding: 100px 22px;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		{% block content %}{{ content | safe }}{% endblock %}
+	</body>
+</html>
