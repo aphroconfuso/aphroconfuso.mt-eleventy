@@ -28,7 +28,7 @@ permalink: /appuntamenti/index.html
 			<ul class="promo-list">
 				{% for appointment in appointments %}
 					<li>
-						<a class="promo {{ appointment.monthYear | slugify }}" href="/{{ appointment.monthYear | slugifyMaltese }}">
+						<a class="promo {{ appointment.monthYear | slugify }}" href="/{{ appointment.monthYear | slugifyMaltese }}/">
 							<header>
 								<h1>{{ appointment.monthYear | safe }}</h1>
 							</header>

@@ -1,8 +1,12 @@
 ---
 pagination:
+  addAllPagesToCollections: true
+  alias: story
   data: stories
   size: 1
-  alias: story
+sitemapChangeFrequency: weekly
+sitemapUpdated: 2023-05-08
+sitemapPriority: 1
 permalink: /{{ story.slug | slugifyMaltese }}/index.html
 ---
 {% extends 'layouts/base.njk' %}
@@ -25,9 +29,9 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 		<h1>{{ story.title | prettifyMaltese | safe }}</h1>
 		<h2>
 			{% if story.translator %}
-				{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}">{{ story.translator | prettifyMaltese | safe }}</a></span>
+				{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}/">{{ story.translator | prettifyMaltese | safe }}</a></span>
 			{% else %}
-				<a href="/{{story.author | slugifyMaltese }}">{{ story.author | prettifyMaltese | safe }}</a>
+				<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
 			{% endif %}
 		</h2>
 	</header>
@@ -86,9 +90,9 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 					{{ story.coda | restrictHtml | prettifyMaltese | safe }}
 				</aside>
 			{% endif %}
-				<aside id="publication-history">
-					Dan ix-xogħol ġie ppubblikat għall-ewwel darba fl-1 ta' Mejju 2023, f'dan il-ġurnal.
-				</aside>
+			<aside id="publication-history">
+				{{ story.publicationHistory | restrictHtml | prettifyMaltese | safe }}
+			</aside>
 		</section>
 		<section id="grid-max-panel-right-bottom">
 			{% if story.postscript %}
@@ -109,10 +113,10 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 			</section>
 	{% endif %}
 </article>
-<aside class="promos-container">
+<aside class="promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.title }}">
 	{% for promo in story.endPromos %}
 		<div class="promo-{{ loop.index }}">
-			<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug | slugifyMaltese }}/">
+			<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: {{ story.title }}', 'għal: {{ promo.title }}', {{ loop.index }}]);">
 				<header>
 					<h3>{{ promo.monthYear }}</h5>
 					<h1>{{ promo.title | prettifyMaltese | safe }}</h1>

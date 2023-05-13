@@ -1,0 +1,26 @@
+<ul class="promo-list">
+	{% for promo in promos %}
+		<li>
+			<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: {{ appointment.monthYear }}', 'għal: {{ promo.title }}', {{ loop.index }}]);">
+				<header>
+					<h3>{{ promo.monthYear | fixMonthMaltese }}</h5>
+					<h1>{{ promo.title }}</h1>
+					<h2>
+						{% if promo.translator %}
+							{{ promo.author | prettifyMaltese }} <span class="translator">{{ promo.translator | prettifyMaltese }}</span>
+						{% else %}
+							{{ promo.author | prettifyMaltese }}
+						{% endif %}
+					</h2>
+				</header>
+				<div class="{{ promo.cssClass }}">
+					{% if promo.type === 'Poezija' %}
+						<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
+					{% else %}
+						<p>{{ promo.description | prettifyMaltese | safe }}</p>
+					{% endif %}
+				</div>
+			</a>
+		</li>
+	{% endfor %}
+</ul>

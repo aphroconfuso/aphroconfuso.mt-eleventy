@@ -1,0 +1,13 @@
+<section id="grid-max-panel-left-top">
+	<section class="contributors-menu">
+		{% for item in contributors %}
+			{% if loop.first %}<ul>{% endif %}
+				{% if '/' + item.slug + '/' === page.url %}
+					<li class="active">{{ item.name }}</li>
+				{% else %}
+					<li><a href="/{{ item.slug }}/">{{ item.name }}</a></li>
+				{% endif %}
+			{% if loop.last %}</ul>{% endif %}
+		{% endfor %}
+	</section>
+</section>

@@ -29,8 +29,8 @@ permalink: /index.html
 				<script>initialiseAfterNewsletter();</script> #}
 			</div>
 			{% for promo in homepage.promos %}
-					<div class="ga{{ loop.index }}">
-					<a class="{{ promo.monthYear | slugify }} {{ promo.promoType }}" href="/{{ promo.slug | slugifyMaltese }}/">
+					<div class="ga{{ loop.index }} mga{{ promo.mobilePriority }}">
+					<a class="{{ promo.monthYear | slugify }} {{ promo.promoType }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
 						<header>
 							<h3>{{ promo.monthYear }}</h3>
 							<h1>{{ promo.title | prettifyMaltese | safe }}</h1>

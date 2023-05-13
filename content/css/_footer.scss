@@ -138,8 +138,11 @@ footer {
 			height: auto;
 			&:hover {
 				@include ease-in(0.25s);
-				text-decoration-color: $paper;
+				text-decoration-color: $dark-brown;
 			}
+		}
+		nav menu a:hover {
+			text-decoration-color: $paper;
 		}
 	}
 

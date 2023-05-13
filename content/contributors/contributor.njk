@@ -1,8 +1,9 @@
 ---
 pagination:
+  addAllPagesToCollections: true
+  alias: contributor
   data: contributors
   size: 1
-  alias: contributor
 permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 ---
 {% extends 'layouts/base.njk' %}
@@ -24,32 +25,32 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 		<section>
 			<div class="generic-body-text">{{ contributor.bioNote | prettifyMaltese | safe }}</div>
 			<ul class="promo-list">
-				{% for story in contributor.storiesAuthored %}
+				{% for promo in contributor.storiesAuthored %}
 					<li>
-						<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.slug }}">
+						<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: {{ contributor.name }}', 'għal: {{ promo.title }}', {{ loop.index }}]);">
 							<header>
-								<h3>{{ story.monthYear }}</h5>
-								<h1>{{ story.title }}</h1>
+								<h3>{{ promo.monthYear }}</h5>
+								<h1>{{ promo.title }}</h1>
 							</header>
-							<div class="{{ story.cssClass }}">
-								{% if story.type === 'Poezija' %}
-									<p>{{ story.description | prettifyMaltese | versifyDescription | safe }}</p>
+							<div class="{{ promo.cssClass }}">
+								{% if promo.type === 'Poezija' %}
+									<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
 								{% else %}
-									<p>{{ story.description | prettifyMaltese | safe }}</p>
+									<p>{{ promo.description | prettifyMaltese | safe }}</p>
 								{% endif %}
 							</div>
 						</a>
 					</li>
 				{% endfor %}
-				{% for story in contributor.storiesTranslated %}
+				{% for promo in contributor.storiesTranslated %}
 					<li>
-						<a class="promo {{ story.monthYear | slugify }}" href="/{{ story.slug }}">
+						<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: {{ contributor.name }}', 'għal: {{ promo.title }}', {{ loop.index }}]);">
 							<header>
-								<h3>{{ story.monthYear }}</h5>
-								<div class="as-translator"><h1>{{ story.title }}</h1><span> (tr)</span></div>
+								<h3>{{ promo.monthYear }}</h5>
+								<div class="as-translator"><h1>{{ promo.title }}</h1><span> (tr)</span></div>
 							</header>
 							<div class="body-text">
-									<p>{{ story.description | prettifyMaltese | safe }}</p>
+									<p>{{ promo.description | prettifyMaltese | safe }}</p>
 							</div>
 						</a>
 					</li>
@@ -57,15 +58,7 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 			</ul>
 		</section>
 		<section id="grid-max-panel-left-top">
-			<section class="contributors-menu">
-				{% for item in contributors %}
-					{% if loop.first %}<ul>{% endif %}
-						<li>
-							<a href="/{{ item.slug }}">{{ item.name }}</a>
-						</li>
-					{% if loop.last %}</ul>{% endif %}
-				{% endfor %}
-			</section>
+			{% include "_menu_contributors.njk" %}
 		</section>
 	</div>
 </article>

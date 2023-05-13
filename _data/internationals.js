@@ -5,11 +5,14 @@ const codes = {
 	"Catala": "ca",
 	"Deutsch": "de",
 	"English": "en",
-	"Francais": "fr",
-	"Italiano": "it",
 	"Espanol": "es",
-	"Hrvatski": "ro",
-	"Euskara": "pl",
+	"Euskara": "eu",
+	"Francais": "fr",
+	"Hrvatski": "hr",
+	"Italiano": "it",
+	"Nederlands": "nl",
+	"Polski": "pl",
+	"Romana": "ro",
 }
 
 async function getInternationals() {
@@ -51,7 +54,6 @@ async function getInternationals() {
 
 	const internationalsFormatted = internationals.data.map((international) => {
 		const atts = international.attributes;
-		console.log(atts.language, codes[atts.language]);
 		return {
 			code: codes[atts.language],
 			direction: (atts.language === 'alerbyt' ? 'rtl' : 'ltr'),

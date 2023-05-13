@@ -27,15 +27,7 @@ permalink: /kontributuri{% if pagination.pageNumber > 0 %}/p{{ pagination.pageNu
 			{# X #}
 		</section>
 		<section id="grid-body">
-			<section class="contributors-menu">
-				{% for item in contributors %}
-					{% if loop.first %}<ul>{% endif %}
-						<li>
-							<a href="/{{ item.slug }}">{{ item.name }}</a>
-						</li>
-					{% if loop.last %}</ul>{% endif %}
-				{% endfor %}
-			</section>
+			{% include "_menu_contributors.njk" %}
 		</section>
 		<section id="grid-max-panel-left-bottom">
 			<!-- X -->
