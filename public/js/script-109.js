@@ -11,6 +11,7 @@ var body,
 	screenHeight,
 	timeStarted,
 	title,
+	author,
 	wordcount,
 	wordsPerPixel;
 
@@ -79,24 +80,6 @@ const addRemoveFontSizeClass = (size) => {
 	setCookie('font', size);
 }
 
-const initialiseFontSize = () => {
-	const fontSize = getCookie('font') || 1;
-	addRemoveFontSizeClass(fontSize);
-}
-
-const initialiseFontSizeListeners = () => {
-	document.getElementById("font-size-1").addEventListener('click', () => addRemoveFontSizeClass(1));
-	document.getElementById("font-size-2").addEventListener('click', () => addRemoveFontSizeClass(2));
-	document.getElementById("font-size-3").addEventListener('click', () => addRemoveFontSizeClass(3));
-	document.getElementById("font-size-4").addEventListener('click', () => addRemoveFontSizeClass(4));
-};
-
-const initialiseReadingHeartbeat = () => {
-	lastReportedReadingTime = new Date() / 1000;
-	timeStarted = lastReportedReadingTime;
-	setInterval(heartbeat, 3000, wordsPerPixel, screenHeight, bodyStart, bodyEnd, title);
-}
-
 const heartbeat = (wordsPerPixel, screenHeight, bodyStart, bodyEnd, title) => {
 	const timeNow = new Date() / 1000;
 	const secondsElapsed = timeNow - lastReportedReadingTime;
@@ -115,6 +98,15 @@ const heartbeat = (wordsPerPixel, screenHeight, bodyStart, bodyEnd, title) => {
 			window._paq.push(['trackEvent', 'Qari', 'ħeffa', title, wordsPerSecond.toFixed(2)]);
 
 			// save bookmark
+			addBookmark(location.pathname, {
+				title,
+				author,
+				description: 'xxx',
+				wordcount,
+				speed: wordsPerSecond.toFixed(2),
+				percentage: percentageProgress,
+				scrollPosition: newScrollPosition
+			});
 			lastReportedScrollPosition = newScrollPosition;
 			lastReportedReadingTime = timeNow;
 			return;
@@ -124,12 +116,72 @@ const heartbeat = (wordsPerPixel, screenHeight, bodyStart, bodyEnd, title) => {
 	}
 }
 
+// BOOKMARKS *************************************************************************************
+
+let bookmarksList = {};
+
+const getBookmarksList = () => {
+	const list = localStorage.getItem("bookmarks");
+	if (!!list) {
+		return;
+	}
+	bookmarksList = JSON.parse(list);
+}
+
+const saveBookmarksList = () => {localStorage.setItem("bookmarks", JSON.stringify(bookmarksList));}
+
+// BETTER TO STORE AS ARRAY OF OBJECTS?
+const addBookmark = (url, bookmark) => {
+	const thisKey = url.replace(/\//g, '');
+	bookmarksList[thisKey] = bookmark;
+	saveBookmarksList();
+	updateBookmarksMenu();
+	saveBookmarksList();
+}
+
+const updateBookmarksMenu = () => {
+	if (!bookmarksList) {
+		return;
+	}
+	count = Object.keys(JSON.parse(bookmarksList)).length;
+	console.log(count);
+	document.getElementById("bookmarksTotal").innerHTML = ` (${ count })`
+}
+
+const deleteBookmark = () => {}
+
+const clearAllBookmarks = () => { localStorage.clear(); }
+
+
+// INITIALISE ******************************************************************************
+
+const initialiseFontSize = () => {
+	const fontSize = getCookie('font') || 1;
+	addRemoveFontSizeClass(fontSize);
+}
+
+const initialiseFontSizeListeners = () => {
+	document.getElementById("font-size-1").addEventListener('click', () => addRemoveFontSizeClass(1));
+	document.getElementById("font-size-2").addEventListener('click', () => addRemoveFontSizeClass(2));
+	document.getElementById("font-size-3").addEventListener('click', () => addRemoveFontSizeClass(3));
+	document.getElementById("font-size-4").addEventListener('click', () => addRemoveFontSizeClass(4));
+};
+
+const initialiseReadingHeartbeat = () => {
+	lastReportedReadingTime = new Date() / 1000;
+	timeStarted = lastReportedReadingTime;
+	setInterval(heartbeat, 3000, wordsPerPixel, screenHeight, bodyStart, bodyEnd, title);
+}
+
 const initialiseAfterWindow = () => {
+	initialiseAfterBody();
+	initialiseAfterNav();
 	if (!!wordcount) {
 		body = document.getElementById('body-text');
 		bodyHeight = body.offsetHeight;
 		bodyStart = body.offsetTop;
 		title = document.querySelector("h1").innerText;
+		author = document.querySelector("h2").innerText;
 		bodyEnd = bodyStart + bodyHeight;
 		screenHeight = window.innerHeight;
 		wordsPerPixel = wordcount / bodyHeight;
@@ -141,10 +193,12 @@ const initialiseAfterWindow = () => {
 	lastScrollPosition = getScrollPosition();
 	lastReportedScrollPosition = lastScrollPosition;
 	pageHeight = document.body.scrollHeight;
+	updateBookmarksMenu();
 }
 
 const initialiseAfterBody = () => {
 	initialiseFontSize();
+	getBookmarksList();
 }
 
 const initialiseAfterNav = () => {
