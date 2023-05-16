@@ -42,7 +42,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 				<p>
 					<span class="title">{{ book.title }}</span>
 					{% if book.author %}<span class="author"> ta’ {{ book.author }}</span>{% endif %}
-					{% if book.translator %}<span class="translator"> ta' {{ book.translator }} (tr)</span>{% endif %}
+					{% if book.translator %}<span class="translator"> {{ book.translator }}, tr.</span>{% endif %}
 					<span class="publisher">({{ book.publisherName }}, {{ book.publisherCity }} {{ book.publicationYear }})</span>
 				</p>
 				{% if loop.last %}</section>{% endif %}
