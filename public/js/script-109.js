@@ -81,6 +81,7 @@ const addRemoveFontSizeClass = (size) => {
 }
 
 const heartbeat = (wordsPerPixel, screenHeight, bodyStart, bodyEnd, title) => {
+	console.log('heartbeat...');
 	const timeNow = new Date() / 1000;
 	const secondsElapsed = timeNow - lastReportedReadingTime;
 	const newScrollPosition = getScrollPosition();
@@ -90,8 +91,13 @@ const heartbeat = (wordsPerPixel, screenHeight, bodyStart, bodyEnd, title) => {
 		const wordsRead = wordsPerPixel * pixelProgress;
 		const wordsPerSecond = wordsRead / secondsElapsed;
 
+		console.log('testing... words: ', wordsRead, 'wps: ', wordsPerSecond);
+
 		// Is it a plausible speed?
+		// threshold here really should be total not since last, right? (or maybe we should have two?)
 		if (wordsRead > thresholdWords && wordsPerSecond > minWordsperSecond && wordsPerSecond < maxWordsPerSecond) {
+			console.log('reporting...');
+
 			window._paq.push(['trackEvent', 'Qari', 'kliem', title, parseInt(wordsRead)]);
 			window._paq.push(['trackEvent', 'Qari', 'minuti', title, (secondsElapsed / 60).toFixed(2)]);
 			window._paq.push(['trackEvent', 'Qari', 'perċentwali', title, parseInt(percentageProgress)]);
@@ -118,20 +124,18 @@ const heartbeat = (wordsPerPixel, screenHeight, bodyStart, bodyEnd, title) => {
 
 // BOOKMARKS *************************************************************************************
 
-let bookmarksList = {};
+let bookmarksList;
 
 const getBookmarksList = () => {
-	const list = localStorage.getItem("bookmarks");
-	if (!!list) {
-		return;
-	}
-	bookmarksList = JSON.parse(list);
+	bookmarksList = JSON.parse(localStorage.getItem("bookmarks") || "{}");
+	showFullBookmarks();
 }
 
 const saveBookmarksList = () => {localStorage.setItem("bookmarks", JSON.stringify(bookmarksList));}
 
 // BETTER TO STORE AS ARRAY OF OBJECTS?
 const addBookmark = (url, bookmark) => {
+	console.log('Adding ', url, bookmark);
 	const thisKey = url.replace(/\//g, '');
 	bookmarksList[thisKey] = bookmark;
 	saveBookmarksList();
@@ -143,9 +147,31 @@ const updateBookmarksMenu = () => {
 	if (!bookmarksList) {
 		return;
 	}
-	count = Object.keys(JSON.parse(bookmarksList)).length;
+	count = Object.keys(bookmarksList).length;
 	console.log(count);
 	document.getElementById("bookmarksTotal").innerHTML = ` (${ count })`
+}
+
+const showFullBookmarks = () => {
+		console.log('full...');
+	const tbody = document.querySelector("ol");
+	const template = document.querySelector("template");
+	console.log(template);
+	if (!template) {
+		console.log('returning...');
+		return;
+	}
+	Object.keys(bookmarksList).forEach = (key) => {
+		const bookmark = bookmarksList[key];
+		console.log(bookmark);
+		const clone = template.content.cloneNode(true);
+		let h1 = clone.querySelectorAll("h1");
+		let h2 = clone.querySelectorAll("h2");
+		let body = clone.querySelectorAll(".body-text")[0];
+		h1.textContent = bookmark.title;
+		h2.textContent = bookmark.author;
+		tbody.appendChild(clone);
+	}
 }
 
 const deleteBookmark = () => {}
