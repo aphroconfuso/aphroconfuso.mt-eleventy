@@ -6,7 +6,7 @@ permalink: /{{ accessibility.title | slugifyMaltese }}/index.html
 {% block head %}
 	<title>{{ accessibility.title }} · Aphroconfuso</title>
 	<meta content="{{ contributor.metaDescription or metadata.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.socialImage }}">
+	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
 {% endblock %}
 
 {% block content %}

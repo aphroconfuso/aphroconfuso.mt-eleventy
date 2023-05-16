@@ -27,6 +27,7 @@ footer {
 			text-decoration-thickness: 1px;
 			text-underline-offset: 2px;
 			height: ($body-margin * 1.5);
+			padding: 0.25rem 0;
 		}
 	}
 
@@ -92,6 +93,7 @@ footer {
 	nav li.header {
 		column-span: all;
 		font-style: italic;
+		padding: 0.25rem 0;
 		text-transform: lowercase;
 	}
 
@@ -136,6 +138,7 @@ footer {
 
 		nav a {
 			height: auto;
+			padding: 0;
 			&:hover {
 				@include ease-in(0.25s);
 				text-decoration-color: $dark-brown;
@@ -143,6 +146,9 @@ footer {
 		}
 		nav menu a:hover {
 			text-decoration-color: $paper;
+		}
+		nav li.header {
+			padding: 0;
 		}
 	}
 
