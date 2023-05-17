@@ -118,7 +118,15 @@ footer {
 				"email email email email copyright logotype-container";
 		}
 
+		#housekeeping {
+			columns: 2;
+		}
+
 		#socials {
+			columns: 2;
+		}
+
+		#media {
 			columns: 2;
 		}
 
@@ -172,5 +180,29 @@ footer {
 	}
 	.scrolling #scroll-tools {
 		opacity: 1;
+	}
+
+	@media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
+		.logotype {
+			margin-top: 1rem;
+			width: 120%;
+		}
+		#copyright {
+			display: inline-flex;
+		}
+	}
+
+	@media screen and (min-width: $laptop-breakpoint) {
+		#housekeeping {
+			columns: 3;
+		}
+
+		#socials {
+			columns: 2;
+		}
+
+		#media {
+			columns: 3;
+		}
 	}
 }

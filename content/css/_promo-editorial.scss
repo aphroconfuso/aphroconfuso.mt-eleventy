@@ -10,11 +10,3 @@
 	font-size: $font-size-editorial;
 	padding: $body-margin;
 }
-
-.home {
-	.editorial {
-		.generic-body-text {
-			@include clamp(14);
-		}
-	}
-}

@@ -24,7 +24,7 @@
 			display: none;
 		}
 	}
-	@media screen and (min-width: $mobile-breakpoint-plusone) {
+	@media screen and (min-width: $laptop-breakpoint) {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		grid-template-rows: min-content min-content;

@@ -68,6 +68,10 @@
 .ga-newsletter {
 	grid-area: ga-newsletter;
 }
+.ga-editorial section {
+	height: $body-margin * 17;
+	@include clamp(18);
+}
 
 @media screen and (max-width: $mobile-breakpoint) {
 	.layout-1,
@@ -162,8 +166,8 @@
 			"ga-newsletter ga-newsletter"
 			"ga4 ga5"
 			"ga6 ga7";
-		.ga-editorial {
-			@include clamp(22);
+		.ga-editorial .body-text {
+			@include clamp(18);
 		}
 		.ga1 {
 			margin-bottom: $body-margin;
@@ -194,7 +198,7 @@
 @media screen and (min-width: $laptop-breakpoint) {
 	.layout-1 {
 		gap: ($body-margin * 1.5) ($body-margin * 1.5);
-		grid-template-rows: 36rem 17rem 9rem 17rem 17rem;
+		grid-template-rows: 36rem 16rem 10rem 17rem 17rem;
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 		grid-auto-columns: 1fr;
 		grid-auto-flow: row;
@@ -206,6 +210,7 @@
 			"ga3 ga3 ga6 ga6 ga7 ga7";
 		.ga-editorial section {
 			height: $body-margin * 13.5;
+			@include clamp(14);
 		}
 		.ga1 {
 			margin-bottom: $body-margin;
