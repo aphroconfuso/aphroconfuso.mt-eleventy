@@ -20,29 +20,6 @@ const thresholdWords = 100;
 const minWordsperSecond = 0.5;
 const maxWordsPerSecond = 4;
 
-const setCookie = (cname, cvalue, exdays = 36500) => {
-  const d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  let expires = "expires="+ d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-const getCookie = (cname) => {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
 const getScrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
 
 const scrolling = () => {
@@ -62,26 +39,20 @@ const scrolling = () => {
     hideScrollTools = setTimeout(() => {
       document.body.classList.remove('scrolling')
     }, 5000);
-    percentageProgress = parseInt(((newScrollPosition - bodyStart) * 100) / bodyHeight);
-    document.querySelector('#progress').innerHTML = `${ percentageProgress }%`;
-    lastScrollPosition = newScrollPosition;
+		percentageProgress = parseInt(((newScrollPosition - bodyStart) * 100) / bodyHeight);
+		if (percentageProgress >= 0) {
+			if (percentageProgress > 100) {
+				percentageProgress = 100;
+			}
+			document.querySelector('#progress').innerHTML = `${ percentageProgress }%`;
+		}
+		lastScrollPosition = newScrollPosition;
   }
   return;
 }
 
 const initialiseAfterNewsletter = () => {
 	return;
-}
-
-const addRemoveFontSizeClass = (size) => {
-	document.body.classList.remove('font-size-1','font-size-2','font-size-3','font-size-4');
-	document.body.classList.add(`font-size-${ size }`);
-	setCookie('font', size);
-}
-
-const initialiseFontSize = () => {
-	const fontSize = getCookie('font') || 1;
-	addRemoveFontSizeClass(fontSize);
 }
 
 const initialiseFontSizeListeners = () => {
@@ -124,33 +95,39 @@ const heartbeat = (wordsPerPixel, screenHeight, bodyStart, bodyEnd, title) => {
 	}
 }
 
-const initialiseAfterBody = () => {
-	initialiseFontSize();
-}
-
 const initialiseAfterNav = () => {
 	initialiseFontSizeListeners();
 }
 
 const initialiseAfterWindow = () => {
-	initialiseAfterBody();
 	initialiseAfterNav();
 	if (!!wordcount) {
+		screenHeight = window.innerHeight;
 		body = document.getElementById('body-text');
-		bodyHeight = body.offsetHeight;
+		bodyHeight = body.offsetHeight - screenHeight;
 		bodyStart = body.offsetTop;
 		title = document.querySelector("h1").innerText;
 		bodyEnd = bodyStart + bodyHeight;
-		screenHeight = window.innerHeight;
 		wordsPerPixel = wordcount / bodyHeight;
+		window.addEventListener('scroll', (event) => {
+			scrolling();
+		});
+		lastScrollPosition = getScrollPosition();
+		lastReportedScrollPosition = lastScrollPosition;
+		pageHeight = document.body.scrollHeight;
 		initialiseReadingHeartbeat(wordcount);
+
+		Splide.defaults = {
+			type: 'fade',
+			rewind: true,
+			speed: 2000,
+			padding: '2rem 0',
+		}
+		var slideshows = document.getElementsByClassName('splide');
+		for ( var i = 0; i < slideshows.length; i++ ) {
+			new Splide( slideshows[ i ] ).mount();
+		}
 	};
-	window.addEventListener('scroll', (event) => {
-		scrolling();
-	});
-	lastScrollPosition = getScrollPosition();
-	lastReportedScrollPosition = lastScrollPosition;
-	pageHeight = document.body.scrollHeight;
 }
 
 window.onload = initialiseAfterWindow;

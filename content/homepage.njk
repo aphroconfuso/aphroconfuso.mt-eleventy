@@ -44,10 +44,32 @@ permalink: /index.html
 						</header>
 						{% if promo.images %}
 							<figure>
-								<img
-									src="https://stampi.aphroconfuso.mt/{{ promo.images.social.hash }}{{ promo.images.social.ext }}"
-									alt="{{ promo.alternativeText }}"
-								>
+								<picture>
+									<source media="(min-width: {{ metadata.settings.breakpoints.mobile }})" type="{{ promo.images.twothirds_landscape_avif.mime }}" srcset="
+										{{ metadata.settings.imagesUrl }}{{ promo.images.twothirds_landscape_avif.hash }}{{ promo.images.twothirds_landscape_avif.ext }} 1x,
+										{{ metadata.settings.imagesUrl }}{{ promo.images.twothirds_landscape_avif_x2.hash }}{{ promo.images.twothirds_landscape_avif_x2.ext }} 2x,
+										{{ metadata.settings.imagesUrl }}{{ promo.images.twothirds_landscape_avif_x3.hash }}{{ promo.images.twothirds_landscape_avif_x3.ext }} 3x
+									">
+									<source media="(min-width: {{ metadata.settings.breakpoints.mobile }})" type="{{ promo.images.twothirds_landscape_jpeg.mime }}" srcset="
+										{{ metadata.settings.imagesUrl }}{{ promo.images.twothirds_landscape_jpeg.hash }}{{ promo.images.twothirds_landscape_jpeg.ext }} 1x,
+										{{ metadata.settings.imagesUrl }}{{ promo.images.twothirds_landscape_jpeg_x2.hash }}{{ promo.images.twothirds_landscape_jpeg_x2.ext }} 2x,
+										{{ metadata.settings.imagesUrl }}{{ promo.images.twothirds_landscape_jpeg_x3.hash }}{{ promo.images.twothirds_landscape_jpeg_x3.ext }} 3x
+									">
+									<source media="(min-width: 1px)" type="{{ promo.images.square_avif.mime }}" srcset="
+										{{ metadata.settings.imagesUrl }}{{ promo.images.square_avif.hash }}{{ promo.images.square_avif.ext }} 1x,
+										{{ metadata.settings.imagesUrl }}{{ promo.images.square_avif_x2.hash }}{{ promo.images.square_avif_x2.ext }} 2x,
+										{{ metadata.settings.imagesUrl }}{{ promo.images.square_avif_x3.hash }}{{ promo.images.square_avif_x3.ext }} 3x
+									">
+									<source media="(min-width: 1px)" type="{{ promo.images.square_jpeg.mime }}" srcset="
+										{{ metadata.settings.imagesUrl }}{{ promo.images.square_jpeg.hash }}{{ promo.images.square_jpeg.ext }} 1x,
+										{{ metadata.settings.imagesUrl }}{{ promo.images.square_jpeg_x2.hash }}{{ promo.images.square_jpeg_x2.ext }} 2x,
+										{{ metadata.settings.imagesUrl }}{{ promo.images.square_jpeg_x3.hash }}{{ promo.images.square_jpeg_x3.ext }} 3x
+									">
+									<img
+										src="{{ metadata.settings.imagesUrl }}{{ promo.images.social.hash }}{{ promo.images.social.ext }}"
+										alt="{{ promo.alternativeText }}"
+									>
+								</picture>
 							</figure>
 						{% endif %}
 						<div class="{{ promo.cssClass }}">

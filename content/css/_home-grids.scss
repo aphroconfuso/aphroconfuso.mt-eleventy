@@ -142,6 +142,13 @@
 	}
 }
 
+@media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
+	.ga1 {
+		margin-bottom: 0 !important;
+		padding-bottom: 0;
+	}
+}
+
 @media screen and (min-width: $mobile-breakpoint-plusone) {
 	.home {
 		padding-top: ($body-margin * 2);

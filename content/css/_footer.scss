@@ -50,6 +50,7 @@ footer {
 			"housekeeping"
 			"media"
 			"socials"
+			"podcast"
 			"logotype-container"
 			"copyright"
 			"email";
@@ -60,13 +61,18 @@ footer {
 		columns: 3;
 	}
 
+	#media {
+		grid-area: media;
+		columns: 3;
+	}
+
 	#socials {
 		grid-area: socials;
 		columns: 3;
 	}
 
-	#media {
-		grid-area: media;
+	#podcast {
+		grid-area: podcast;
 		columns: 3;
 	}
 
@@ -130,6 +136,10 @@ footer {
 			columns: 2;
 		}
 
+		#podcast {
+			display: none;
+		}
+
 		.logotype {
 			margin-top: -10px;
 			width: 80%;
@@ -160,9 +170,9 @@ footer {
 		}
 	}
 
-	body:not(.story) #scroll-tools {
-		display: none;
-	}
+	// body:not(.story) #scroll-tools {
+	// 	display: none;
+	// }
 
 	#scroll-tools {
 		@include ease-in();
@@ -177,9 +187,6 @@ footer {
 	}
 	#arrow-top {
 		padding: 1rem;
-	}
-	.scrolling #scroll-tools {
-		opacity: 1;
 	}
 
 	@media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
@@ -205,4 +212,8 @@ footer {
 			columns: 3;
 		}
 	}
+}
+
+body.scrolling #scroll-tools {
+	opacity: 1;
 }

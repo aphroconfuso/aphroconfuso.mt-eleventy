@@ -1,0 +1,29 @@
+<figure class="editorial-image">
+	<picture>
+		<source media="(min-width: {{ metadata.settings.breakpoints.mobile }})" type="{{ slide.twothirds_landscape_avif.mime }}" srcset="
+			{{ metadata.settings.imagesUrl }}{{ slide.twothirds_landscape_avif.hash }}{{ slide.twothirds_landscape_avif.ext }} 1x,
+			{{ metadata.settings.imagesUrl }}{{ slide.twothirds_landscape_avif_x2.hash }}{{ slide.twothirds_landscape_avif_x2.ext }} 2x,
+			{{ metadata.settings.imagesUrl }}{{ slide.twothirds_landscape_avif_x3.hash }}{{ slide.twothirds_landscape_avif_x3.ext }} 3x
+		">
+		<source media="(min-width: {{ metadata.settings.breakpoints.mobile }})" type="{{ slide.twothirds_landscape_jpeg.mime }}" srcset="
+			{{ metadata.settings.imagesUrl }}{{ slide.twothirds_landscape_jpeg.hash }}{{ slide.twothirds_landscape_jpeg.ext }} 1x,
+			{{ metadata.settings.imagesUrl }}{{ slide.twothirds_landscape_jpeg_x2.hash }}{{ slide.twothirds_landscape_jpeg_x2.ext }} 2x,
+			{{ metadata.settings.imagesUrl }}{{ slide.twothirds_landscape_jpeg_x3.hash }}{{ slide.twothirds_landscape_jpeg_x3.ext }} 3x
+		">
+		<source media="(min-width: 1px)" type="{{ slide.square_avif.mime }}" srcset="
+			{{ metadata.settings.imagesUrl }}{{ slide.square_avif.hash }}{{ slide.square_avif.ext }} 1x,
+			{{ metadata.settings.imagesUrl }}{{ slide.square_avif_x2.hash }}{{ slide.square_avif_x2.ext }} 2x,
+			{{ metadata.settings.imagesUrl }}{{ slide.square_avif_x3.hash }}{{ slide.square_avif_x3.ext }} 3x
+		">
+		<source media="(min-width: 1px)" type="{{ slide.square_jpeg.mime }}" srcset="
+			{{ metadata.settings.imagesUrl }}{{ slide.square_jpeg.hash }}{{ slide.square_jpeg.ext }} 1x,
+			{{ metadata.settings.imagesUrl }}{{ slide.square_jpeg_x2.hash }}{{ slide.square_jpeg_x2.ext }} 2x,
+			{{ metadata.settings.imagesUrl }}{{ slide.square_jpeg_x3.hash }}{{ slide.square_jpeg_x3.ext }} 3x
+		">
+		<img
+			src="{{ metadata.settings.imagesUrl }}{{ slide.social.hash }}{{ slide.social.ext }}"
+			alt="{{ image.attributes.alternativeText }}"
+		>
+	</picture>
+	<figcaption>{{ image.attributes.caption }}</figcaption>
+</figure>

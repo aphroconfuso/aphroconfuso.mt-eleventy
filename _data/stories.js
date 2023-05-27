@@ -46,6 +46,18 @@ async function getAllStories() {
 									showImagePromo
 									publicationHistory
 									updatedAt
+									images {
+										data{
+											attributes {
+												alternativeText
+												caption
+												formats
+											}
+										}
+									}
+									imagesType
+									useSquareOnMobile
+									imagesPositionText
 									promoImage {
 										data{
 											attributes {
@@ -275,6 +287,12 @@ async function getAllStories() {
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			vocabulary: vocabulary,
 			publicationHistory: atts.publicationHistory,
+			images: atts.images.data,
+			imagesType: atts.imagesType,
+			useSquareOnMobile: atts.useSquareOnMobile,
+			imagesPositionText: atts.imagesPositionText,
+			slideshow:  atts.images.data && atts.images.data.length > 1,
+			singleImage: atts.images.data && atts.images.data.length === 1,
     };
   });
 
