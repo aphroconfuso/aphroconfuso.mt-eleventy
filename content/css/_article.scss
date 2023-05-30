@@ -67,47 +67,6 @@ article {
 	font-size: 2rem !important;
 }
 
-.arrows {
-	font-family: $decorative;
-	font-size: 9rem;
-	button {
-		color: $deco-brown;
-		@include ease-in(1s);
-		position: absolute;
-		cursor: pointer;
-		&:hover {
-			color: $lighter-brown !important;
-			@include ease-in(0.25s);
-		}
-		&.arrow-previous {
-			left: -6rem;
-		}
-		&.arrow-next {
-			left: calc(100% + 6rem);
-		}
-	}
-}
-.editorial-image {
-	margin-bottom: $body-margin;
-}
-body.scrolling,
-.splide:hover {
-	.arrows button {
-		color: $lightester-brown;
-		@include ease-in(1s);
-	}
-}
-#lightbox {
-	background-color: $dark-brown;
-	height: 100%;
-	left: 0;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 100;
-	display: none;
-}
-
 @media screen and (min-width: $mobile-breakpoint-plusone) {
 	article {
 		aside {

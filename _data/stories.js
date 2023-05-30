@@ -218,7 +218,7 @@ async function getAllStories() {
 			};
 		});
 
-		const booksMentioned = !!atts.booksMentioned.data.length && atts.booksMentioned.data.map((book) => {
+		const booksMentioned = !!atts.booksMentioned.data.length && atts.booksMentioned.data.slice(0, atts.prominentMentions).map((book) => {
 			const bookAtts = book.attributes;
 			const author = !!bookAtts.authors.data.length && bookAtts.authors.data[0].attributes;
 			const translator = !!bookAtts.translators.data.length && bookAtts.translators.data[0].attributes;
@@ -263,36 +263,37 @@ async function getAllStories() {
 		// console.log(vocabulary);
 
 		return {
-      title: atts.title,
-			body: atts.body,
-			updatedAt: atts.updatedAt.split("T")[0],
-			slug: makeTitleSlug(atts.title, authorFullName, translatorFullName),
-			endnote: atts.endnote,
-			monthYear: getMonthYear(atts.dateTimePublication),
-			description: atts.description,
-			type: atts.type,
 			appointment: atts.appointment,
-			epigraphs: !!atts.epigraphs && atts.epigraphs,
-			introduction: atts.introduction,
-			podcastNote: atts.podcastNote,
-			coda: atts.coda,
-			postscript: atts.postscript,
 			author: authorFullName,
-			translator: translatorFullName,
-			endPromos: endPromosFormatted,
+			body: atts.body,
 			booksMentioned: booksMentioned,
+			coda: atts.coda,
+			description: atts.description,
 			displayTitle: displayTitle,
-			metaTitle: `${ displayTitle } · Aphroconfuso`,
-			showImagePromo: atts.showImagePromo,
-			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
-			vocabulary: vocabulary,
-			publicationHistory: atts.publicationHistory,
+			endnote: atts.endnote,
+			endPromos: endPromosFormatted,
+			epigraphs: !!atts.epigraphs && atts.epigraphs,
 			images: atts.images.data,
-			imagesType: atts.imagesType,
-			useSquareOnMobile: atts.useSquareOnMobile,
 			imagesPositionText: atts.imagesPositionText,
-			slideshow:  atts.images.data && atts.images.data.length > 1,
+			imagesType: atts.imagesType,
+			introduction: atts.introduction,
+			metaTitle: `${ displayTitle } · Aphroconfuso`,
+			monthYear: getMonthYear(atts.dateTimePublication),
+			podcastNote: atts.podcastNote,
+			postscript: atts.postscript,
+			prominentMentions: atts.prominentMentions,
+			publicationHistory: atts.publicationHistory,
+			showImagePromo: atts.showImagePromo,
 			singleImage: atts.images.data && atts.images.data.length === 1,
+			slideshow:  atts.images.data && atts.images.data.length > 1,
+			slug: makeTitleSlug(atts.title, authorFullName, translatorFullName),
+			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
+			translator: translatorFullName,
+			type: atts.type,
+			updatedAt: atts.updatedAt.split("T")[0],
+			useSquareOnMobile: atts.useSquareOnMobile,
+			vocabulary: vocabulary,
+      title: atts.title,
     };
   });
 
