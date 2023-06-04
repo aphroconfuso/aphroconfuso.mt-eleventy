@@ -8,7 +8,7 @@
 	&.content {
 		border-bottom-color: $colour;
 	}
-	h1 {
+	& > header > h1 {
 		color: $colour;
 	}
 	.dropcap {
@@ -31,7 +31,6 @@
 		}
 	}
 	.editorial {
-		border: 5px solid $colour;
 		.editorial-month-year {
 			display: inline;
 			font-size: 1.6rem;
@@ -40,8 +39,8 @@
 			text-transform: uppercase;
 			color: $colour;
 		}
-		p {
-			display: inline;
+		.text-container {
+			border-color: $colour;
 		}
 	}
 	@media screen and (min-width: $mobile-breakpoint-plusone) {

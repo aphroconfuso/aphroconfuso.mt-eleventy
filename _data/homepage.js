@@ -114,8 +114,10 @@ async function getHomepage() {
 		const author = promoAtts.authors.data.length && promoAtts.authors.data[0].attributes;
 		const translator = promoAtts.translators.data.length && promoAtts.translators.data[0].attributes;
 
-		const authorFullName = author && `${ author.forename } ${ author.surname }`
-		const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`
+		const authorFullName = author && `${ author.forename } ${ author.surname }`;
+		const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`;
+
+		const promoImageData = promo.image.data[0] || promoAtts.promoImage.data;
 
 		return {
 			mobilePriority: promo.mobilePriority || 9,
@@ -125,8 +127,8 @@ async function getHomepage() {
 			author: authorFullName,
 			translator: translatorFullName,
 			slug: makeTitleSlug(promoAtts.title, authorFullName, translatorFullName),
-			images: promoAtts.showImagePromo && promoAtts.promoImage.data && promoAtts.promoImage.data.attributes.formats,
-			alternativeText: promoAtts.promoImage.data.attributes.alternativeText,
+			images: promoAtts.showImagePromo && promoImageData && promoImageData.attributes.formats,
+			alternativeText: promoImageData.attributes.alternativeText,
 			type: promoAtts.type,
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			promoType: promoAtts.type === 'Poezija' ? 'promo-poetry promo' : (promoAtts.showImagePromo && promoAtts.promoImage.data ? 'promo-picture-1 promo' : 'promo'),

@@ -23,7 +23,7 @@ async function getAllAppointments() {
 							}
 						}
 					}
-					appointments(sort: "term:asc") {
+					appointments(sort: "dateTimePublication:desc") {
 						data {
 							attributes {
 								dateTimePublication

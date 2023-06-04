@@ -1,4 +1,3 @@
-<p>{{ story.imagesType  }} | {{ story.useSquareOnMobile  }} | {{ story.imagesPositionText }}</p>
 <section class="splide" aria-label="Stampi għal {{ story.title }}">
 	<div class="arrows splide__arrows">
 		<button class="arrow-previous splide__arrow--prev">
@@ -7,8 +6,8 @@
 		<button class="arrow-next splide__arrow--next">
 			»
 		</button>
+		<button type="button" id="lightbox-open" onclick="_paq.push(['trackEvent', 'Stampi', 'lightbox', '{{ story.title }}']);">&#128437;</button>
 	</div>
-	<button type="button" id="slideshow-open">Iftaħ</button>
 	<div class="splide__track">
 		<ul class="splide__list">
 			{% for image in story.images %}

@@ -64,15 +64,16 @@
 }
 .ga-editorial {
 	grid-area: ga-editorial;
+	&.editorial {
+		margin: $body-margin-half 0 $body-margin-half;
+	}
+	p {
+		@include clamp(18);
+	}
 }
 .ga-newsletter {
 	grid-area: ga-newsletter;
 }
-.ga-editorial section {
-	height: $body-margin * 17;
-	@include clamp(18);
-}
-
 @media screen and (max-width: $mobile-breakpoint) {
 	.layout-1,
 	.layout-2,
@@ -91,7 +92,12 @@
 			"ga4"
 			"ga5"
 			"ga6"
-			"ga7";
+			"ga7"
+			"ga8";
+		// "ga9"
+		// "ga10"
+		// "ga11"
+		// "ga12";
 	}
 	.mga1 {
 		grid-area: ga1;
@@ -117,23 +123,21 @@
 	.mga8 {
 		grid-area: ga8;
 	}
-	.mga9 {
-		grid-area: ga9;
-	}
-	.mga10 {
-		grid-area: ga10;
-	}
-	.mga11 {
-		grid-area: ga11;
-	}
-	.mga12 {
-		grid-area: ga12;
-	}
-	.mga12 {
-		grid-area: ga12;
-	}
+	// .mga9 {
+	// 	grid-area: ga9;
+	// }
+	// .mga10 {
+	// 	grid-area: ga10;
+	// }
+	// .mga11 {
+	// 	grid-area: ga11;
+	// }
+	// .mga12 {
+	// 	grid-area: ga12;
+	// }
 	.mga2,
-	.mga6 {
+	.mga6,
+	.mga7 {
 		padding-bottom: calc(#{$body-margin} - 1px);
 		border-bottom: 1px solid $grid-lines;
 	}
@@ -146,6 +150,10 @@
 	.ga1 {
 		margin-bottom: 0 !important;
 		padding-bottom: 0;
+	}
+	.ga-editorial {
+		margin: 0;
+		padding: 0;
 	}
 }
 
@@ -172,7 +180,8 @@
 			"ga3 ga-editorial"
 			"ga-newsletter ga-newsletter"
 			"ga4 ga5"
-			"ga6 ga7";
+			"ga6 ga7"
+			"ga8 ga8";
 		.ga-editorial .body-text {
 			@include clamp(18);
 		}
@@ -214,10 +223,16 @@
 			"ga2 ga2 ga2 ga-editorial ga-editorial ga-editorial"
 			"ga-newsletter ga-newsletter ga-newsletter ga-editorial ga-editorial ga-editorial"
 			"ga3 ga3 ga4 ga4 ga5 ga5"
-			"ga3 ga3 ga6 ga6 ga7 ga7";
-		.ga-editorial section {
-			height: $body-margin * 13.5;
-			@include clamp(14);
+			"ga3 ga3 ga6 ga6 ga7 ga7"
+			"ga8 ga8 ga8 ga8 ga8 ga8";
+		.ga-editorial {
+			margin: 0;
+			p {
+				@include clamp(14);
+			}
+			&.editorial {
+				margin-bottom: 0;
+			}
 		}
 		.ga1 {
 			margin-bottom: $body-margin;

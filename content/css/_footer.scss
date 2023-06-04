@@ -9,6 +9,7 @@ footer {
 	font-family: $sans-alt;
 	font-size: $body-font-size;
 	margin-top: $body-margin;
+	overflow: hidden;
 	padding: $body-margin;
 	.footer-content {
 		max-width: $max-width;
@@ -214,6 +215,9 @@ footer {
 	}
 }
 
-body.scrolling #scroll-tools {
-	opacity: 1;
+// body.scrolling #scroll-tools {
+// 	opacity: 1;
+// }
+#scroll-tools {
+	display: none;
 }

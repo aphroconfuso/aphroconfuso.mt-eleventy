@@ -262,6 +262,13 @@ async function getAllStories() {
 		const vocabulary = [];
 		// console.log(vocabulary);
 
+		const imageTypes = {
+			'Wisgha_tat_test': 'uncropped',
+			'Wisgha_tat_test 16:9': 'landscape',
+			'Wisgha_tal_pagna': 'uncropped',
+			'Wisgha_tal_pagna 16:9': 'landscape',
+		}
+
 		return {
 			appointment: atts.appointment,
 			author: authorFullName,
@@ -275,7 +282,7 @@ async function getAllStories() {
 			epigraphs: !!atts.epigraphs && atts.epigraphs,
 			images: atts.images.data,
 			imagesPositionText: atts.imagesPositionText,
-			imagesType: atts.imagesType,
+			imageCrop: imageTypes[atts.imagesType],
 			introduction: atts.introduction,
 			metaTitle: `${ displayTitle } · Aphroconfuso`,
 			monthYear: getMonthYear(atts.dateTimePublication),

@@ -23,11 +23,15 @@ permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
 	</header>
 	<div class="container">
 	<section>
-		<div class="generic-body-text editorial">{{ appointment.editorial | prettifyMaltese | endDotify | safe }}</div>
+		<div class="generic-body-text editorial">
+			<div class="text-container">
+				{{ appointment.editorial | prettifyMaltese | endDotify | safe }}
+			</div>
+		</div>
 		{% set promos = appointment.stories %}
 		{% include '_promo_list.njk' %}
 		{% if appointment.moreToCome %}
-			<div class="generic-body-text">{{ appointment.moreToCome | prettifyMaltese | safe }}</div>
+			<div class="generic-body-text more">{{ appointment.moreToCome | prettifyMaltese | safe }}</div>
 		{% endif %}
 	</section>
 	<section id="grid-max-panel-left-top">

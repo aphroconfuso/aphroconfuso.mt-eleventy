@@ -24,14 +24,14 @@
 	@media screen and (min-width: $laptop-breakpoint) {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
-		grid-template-rows: min-content min-content;
+		grid-template-rows: auto auto;
 		gap: $body-margin-half $body-margin;
 		grid-template-areas:
-			"promo-header promo-header promo-header"
-			"promo-body promo-image promo-image";
+			"promo-image promo-image promo-header "
+			"promo-image promo-image promo-body";
 		.body-text {
 			p {
-				@include clamp(17);
+				@include clamp(14);
 			}
 		}
 		figure {
@@ -41,7 +41,20 @@
 		}
 	}
 }
-
+@media screen and (min-width: $laptop-breakpoint) {
+	.mga1 {
+		.promo-picture-1 {
+			grid-template-areas:
+				"promo-header promo-header promo-header"
+				"promo-body promo-image promo-image";
+			.body-text {
+				p {
+					@include clamp(17);
+				}
+			}
+		}
+	}
+}
 .promo-picture-1b {
 	.body-text {
 		grid-area: promo-body;
