@@ -137,14 +137,18 @@ const initialiseAfterWindow = () => {
 		const closeLightbox = () => {
 			lightbox.classList.remove('open');
 		}
-		document.onkeydown = function(evt) {
-			evt = evt || window.event;
-			if (evt.keyCode === 27) {
-				closeLightbox();
-			}
-		};
-		document.getElementById('lightbox-open').addEventListener('click', () => openLightbox());
-		document.getElementById('lightbox-close').addEventListener('click', () => closeLightbox());
+		const lightboxOpen = document.getElementById('lightbox-open');
+		const lightboxClose = document.getElementById('lightbox-close');
+		lightboxOpen && lightboxOpen.addEventListener('click', () => openLightbox());
+		lightboxClose && lightboxClose.addEventListener('click', () => closeLightbox());
+		if (lightboxClose) {
+			document.onkeydown = function(evt) {
+				evt = evt || window.event;
+				if (evt.keyCode === 27) {
+					closeLightbox();
+				}
+			};
+		}
 	};
 }
 

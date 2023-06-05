@@ -26,7 +26,7 @@
 		}
 		&.arrow-previous,
 		&.arrow-next {
-			height: calc(100% - $body-margin);
+			height: calc(100% - ($body-margin * 2));
 			width: 6rem;
 			line-height: 6rem;
 		}
@@ -81,11 +81,11 @@
 		button {
 			&.arrow-previous,
 			&.arrow-next {
-				width: 12rem;
-				line-height: 12rem;
+				width: 9rem;
+				line-height: 9rem;
 			}
 			&.arrow-previous {
-				left: -12rem;
+				left: -9rem;
 			}
 		}
 	}
