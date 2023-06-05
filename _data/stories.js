@@ -78,6 +78,7 @@ async function getAllStories() {
 									}
 									introduction
 									podcastNote
+									podcastUrl
 									coda
 									postscript
 									authors {
@@ -288,6 +289,7 @@ async function getAllStories() {
 			dateTimePublication: atts.dateTimePublication,
 			monthYear: getMonthYear(atts.dateTimePublication),
 			podcastNote: atts.podcastNote,
+			podcastUrl: atts.podcastUrl,
 			postscript: atts.postscript,
 			prominentMentions: atts.prominentMentions,
 			publicationHistory: atts.publicationHistory,
@@ -303,9 +305,7 @@ async function getAllStories() {
 			vocabulary: vocabulary,
       title: atts.title,
     };
-  });
-
-  // return formatted stories
+	});
   return storiesFormatted;
 }
 

@@ -43,6 +43,13 @@
 			border-color: $colour;
 		}
 	}
+	aside {
+		.calamansi-skin--basic {
+			.clmns--slider .clmns--playback-progress {
+				background-color: $colour;
+			}
+		}
+	}
 	@media screen and (min-width: $mobile-breakpoint-plusone) {
 		h3 {
 			a:hover {
