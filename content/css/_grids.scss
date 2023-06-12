@@ -20,29 +20,12 @@
 	}
 	.promos-container {
 		max-width: $max-width;
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-		grid-template-rows: auto;
-		gap: $body-margin;
-		grid-auto-flow: row;
-		grid-template-areas: "promo-1 promo-2 promo-3";
-	}
-
-	.promo-1 {
-		grid-area: promo-1;
-	}
-	.promo-2 {
-		grid-area: promo-2;
-	}
-	.promo-3 {
-		grid-area: promo-3;
-	}
-
-	.promo-1,
-	.promo-2 {
-		border-right: 1px solid $grid-lines;
-		margin-right: $body-margin-half;
-		padding-right: calc(#{$body-margin * 1.27} - 1px);
+		columns: 3;
+		column-rule: 1px solid $grid-lines;
+		column-gap: $body-margin * 1.5;
+		& > div {
+			break-inside: avoid;
+		}
 	}
 }
 

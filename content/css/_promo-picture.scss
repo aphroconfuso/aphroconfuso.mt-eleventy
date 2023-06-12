@@ -27,7 +27,7 @@
 		grid-template-rows: auto auto;
 		gap: $body-margin-half $body-margin;
 		grid-template-areas:
-			"promo-image promo-image promo-header "
+			"promo-image promo-image promo-header"
 			"promo-image promo-image promo-body";
 		.body-text {
 			p {
@@ -42,7 +42,7 @@
 	}
 }
 @media screen and (min-width: $laptop-breakpoint) {
-	.mga1 {
+	.ga1 {
 		.promo-picture-1 {
 			grid-template-areas:
 				"promo-header promo-header promo-header"
@@ -55,6 +55,7 @@
 		}
 	}
 }
+
 .promo-picture-1b {
 	.body-text {
 		grid-area: promo-body;

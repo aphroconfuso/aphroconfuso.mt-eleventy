@@ -61,6 +61,7 @@ async function getAllStories() {
 									promoImage {
 										data{
 											attributes {
+												alternativeText
 												formats
 											}
 										}
@@ -68,6 +69,7 @@ async function getAllStories() {
 									promoImageMobile {
 										data{
 											attributes {
+												alternativeText
 												formats
 											}
 										}
@@ -86,6 +88,7 @@ async function getAllStories() {
 											attributes {
 												forename
 												surname
+												pronoun
 											}
 										}
 									}
@@ -94,6 +97,7 @@ async function getAllStories() {
 											attributes {
 												forename
 												surname
+												pronoun
 											}
 										}
 									}
@@ -270,6 +274,13 @@ async function getAllStories() {
 			'Wisgha_tal_pagna 16:9': 'landscape',
 		}
 
+		const reads = {
+			'hi': 'taqra',
+			'hu': 'jaqra',
+			'hi_hu': Math.round(Math.random()) ? 'taqra' : 'jaqra',
+			'huma': 'jaqraw',
+		}
+
 		return {
 			appointment: atts.appointment,
 			author: authorFullName,
@@ -285,19 +296,23 @@ async function getAllStories() {
 			imagesPositionText: atts.imagesPositionText,
 			imageCrop: imageTypes[atts.imagesType],
 			introduction: atts.introduction,
-			metaTitle: `${ displayTitle } · Aphroconfuso`,
+			metaTitle: `${ displayTitle }`,
 			dateTimePublication: atts.dateTimePublication,
 			monthYear: getMonthYear(atts.dateTimePublication),
 			podcastNote: atts.podcastNote,
 			podcastUrl: atts.podcastUrl,
+			// podcastUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+			// podcastUrl: 'https://sphinx.acast.com/p/open/s/63ef6b4c3642ca00119bcf72/e/644c12d50ace130011a72f8d/media.mp3',
 			postscript: atts.postscript,
 			prominentMentions: atts.prominentMentions,
 			publicationHistory: atts.publicationHistory,
+			reads: reads[translator.pronoun || author.pronoun],
 			showImagePromo: atts.showImagePromo,
 			singleImage: atts.images.data && atts.images.data.length === 1,
 			slideshow:  atts.images.data && atts.images.data.length > 1,
 			slug: makeTitleSlug(atts.title, authorFullName, translatorFullName),
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
+			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			translator: translatorFullName,
 			type: atts.type,
 			updatedAt: atts.updatedAt,

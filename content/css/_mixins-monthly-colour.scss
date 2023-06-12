@@ -43,11 +43,12 @@
 			border-color: $colour;
 		}
 	}
-	aside {
-		.calamansi-skin--basic {
-			.clmns--slider .clmns--playback-progress {
-				background-color: $colour;
-			}
+	figure#audio {
+		progress::-webkit-progress-value {
+			background-color: $colour !important;
+		}
+		progress::-moz-progress-bar {
+			background-color: $colour !important;
 		}
 	}
 	@media screen and (min-width: $mobile-breakpoint-plusone) {
