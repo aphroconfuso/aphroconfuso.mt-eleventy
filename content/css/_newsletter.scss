@@ -14,13 +14,12 @@
 	}
 
 	#form {
-		border: none;
 		display: block;
 		overflow: hidden;
 		width: 100%;
 		iframe {
 			border: none;
-			height: 240px;
+			height: 180px;
 			display: block;
 			width: 100%;
 		}
@@ -36,5 +35,11 @@
 
 	&.ga-newsletter {
 		flex-direction: column;
+	}
+}
+
+@media screen and (min-width: $mobile-breakpoint-plusone) {
+	#form iframe {
+		height: 240px;
 	}
 }

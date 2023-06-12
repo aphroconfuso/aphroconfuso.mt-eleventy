@@ -123,7 +123,10 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("fixMonthMaltese", function fixMonthMaltese(text) {
-		return (text || []).replace(/Gunju/gi, "Ġunju").replace(/Dicembru/gi, "Diċembru");
+		return (text || []).replace(/Gunju/gi, "Ġunju")
+			.replace(/Dicembru/gi, "Diċembru")
+			.replace(/gunju/gi, "ġunju")
+			.replace(/dicembru/gi, "diċembru");
 	});
 
 	eleventyConfig.addFilter("paragraphise", function paragraphise(text) {
@@ -144,15 +147,24 @@ module.exports = function(eleventyConfig) {
 		return stripTags(text || [], ['i', 'em']).replace(/\n/gm, '<br/>');
 	});
 
-	eleventyConfig.addFilter("dropCapsifyAndSectionise", function dropCapsifyAndSectionise(text) {
-		return (text || []).replace(/<p>\#\#\#<\/p>$/, '')
+	eleventyConfig.addFilter("dropCapsifyAndSectionise", function dropCapsifyAndSectionise(text, splitText, beforeOrAfter) {
+		const decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '')
 			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
 			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
-			.replace(/<p>(.)([\w\-]+)/, '<p><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;')
-			.replace(/<p>\#<\/p>\s*<p>(.)([\w\-]+)/gm, '<p class="break"><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;')
+			.replace(/<p(.*?)>(.)([\w\-]+)/, '<p$1><span class="initial"><span class="dropcap drop-$2">$2</span>$3</span>&nbsp;')
+			.replace(/<p>\#<\/p>\s*<p>(.)([\w\-\’]+)/gm, '<p class="break"><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;')
 			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+			.replace('drop-C">C</span>XG', 'drop-Ċ">Ċ</span>')
+			.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
 			.replace(/\[\+\]/gm, '<p>&nbsp;</p>');
+		if (!splitText) {
+			return decoratedText;
+		}
+		const regex = new RegExp(`${ splitText }</p>`);
+		const splitArray = decoratedText.split(regex);
+		const matchedText = decoratedText.match(regex)[0];
+		return beforeOrAfter === 0 ? splitArray[0] + matchedText : splitArray[1];
 	});
 
 	eleventyConfig.addFilter("sectioniseOnly", function sectioniseOnly(text) {
@@ -160,11 +172,11 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("endDotify", function endDotify(text) {
-		return (text || []).replace(/\.?\s*<\/p>\s*$/, '<span class="end-dot">.</span>');
+		return (text || []).replace(/\.?\s*<\/p>\s*$/, '&nbsp;<span class="end-dot">.</span></p>');
 	});
 
-	eleventyConfig.addFilter("restrictHtml", function restrictHtml(text) {
-		return stripTags(text || [], ['a', 'span', 'p', 'i', 'em']);
+	eleventyConfig.addFilter("restrictHtml", function restrictHtml(text, allowedTags) {
+		return stripTags(text || [], allowedTags || ['a', 'span', 'p', 'i', 'em']);
 	});
 
 	eleventyConfig.addFilter("getDescription", function getDescription(text) {

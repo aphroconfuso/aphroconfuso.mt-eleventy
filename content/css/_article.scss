@@ -1,6 +1,7 @@
 @use "constants" as *;
 @use "calculations" as *;
 @use "settings" as *;
+@use "mixins-etc" as *;
 
 article {
 	border-bottom: $body-margin-quarter solid $paper;
@@ -66,17 +67,20 @@ article {
 	font-size: 2rem !important;
 }
 
-@media screen and (min-width: $mobile-breakpoint-plusone) {
-	article {
-		aside {
-			margin-bottom: 0;
-		}
-		// padding-bottom: $body-margin;
-	}
-}
+// @media screen and (min-width: $mobile-breakpoint-plusone) {
+// 	article {
+// 		aside {
+// 			margin-bottom: 0;
+// 		}
+// 		// padding-bottom: $body-margin;
+// 	}
+// }
 
 @media screen and (min-width: $laptop-breakpoint) {
 	article {
 		padding-bottom: 0;
+		aside {
+			margin-bottom: 0;
+		}
 	}
 }

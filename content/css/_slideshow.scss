@@ -1,0 +1,210 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+#grid-body {
+	.splide {
+		padding: ($body-margin * 1.5) 0 $body-margin-half;
+		width: calc(100% + $body-margin);
+		margin-left: -$body-margin-half;
+	}
+}
+.arrows {
+	height: calc(100% - $body-margin);
+	display: none;
+	font-family: $decorative;
+	font-size: 9rem;
+	button {
+		@include ease-in(1s);
+		color: $deco-brown;
+		cursor: pointer;
+		position: absolute;
+		&:hover {
+			color: $lighter-brown !important;
+			@include ease-in(0.25s);
+		}
+		&.arrow-previous,
+		&.arrow-next {
+			height: calc(100% - ($body-margin * 2));
+			width: 6rem;
+			line-height: 6rem;
+		}
+		&.arrow-previous {
+			left: -6rem;
+		}
+		&.arrow-next {
+			left: 100%;
+			text-align: right;
+		}
+		&#lightbox-open {
+			top: $body-margin * 1.5;
+			left: calc(100% + $body-margin-half);
+			font-size: $body-font-size;
+		}
+	}
+}
+.splide__pagination {
+	height: $body-margin-half;
+	left: 0;
+	position: absolute;
+	top: $body-margin-half;
+	width: 100%;
+}
+.splide__pagination__page {
+	border-radius: 0;
+	background: $lightester-brown;
+	&.is-active {
+		background: $lightest-brown;
+	}
+}
+#lightbox {
+	display: none;
+}
+@media screen and (min-width: $laptop-breakpoint) {
+	body.scrolling,
+	.splide:hover {
+		.arrows button {
+			color: $lightester-brown;
+			@include ease-in(1s);
+		}
+	}
+	@keyframes showLightbox {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+	.arrows {
+		button {
+			&.arrow-previous,
+			&.arrow-next {
+				width: 9rem;
+				line-height: 9rem;
+			}
+			&.arrow-previous {
+				left: -9rem;
+			}
+		}
+	}
+	#lightbox {
+		background-color: $dark-brown;
+		display: none;
+		height: 100%;
+		left: 0;
+		padding: $body-margin;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 100;
+		align-items: center;
+		flex-direction: row;
+		&.open {
+			animation: showLightbox 0.25s;
+			animation-fill-mode: forwards;
+			display: flex;
+		}
+		.splide__pagination {
+			top: -$body-margin;
+		}
+		#lightbox-container {
+			.splide {
+				height: 100%;
+				margin: 0 10%;
+			}
+			figure {
+				align-items: center;
+				display: flex;
+				flex-direction: column;
+				picture {
+					border: 1px solid $light-brown;
+				}
+				img {
+					vertical-align: middle;
+				}
+				figcaption {
+					text-align: left;
+				}
+			}
+		}
+		#lightbox-open {
+			display: none;
+		}
+		.arrows {
+			z-index: 1000;
+		}
+		.arrows button {
+			color: $light-brown;
+		}
+	}
+	.arrows {
+		display: block;
+	}
+	#grid-body {
+		.splide {
+			margin-left: -18.75%;
+			padding: ($body-margin * 1.5) 0 $body-margin;
+			width: 137.5%;
+		}
+	}
+	#lightbox-close {
+		cursor: pointer;
+		font-size: 4rem;
+		position: absolute;
+		top: 0;
+		right: $body-margin;
+		z-index: 101;
+	}
+	figcaption {
+		padding-top: $body-margin-half;
+	}
+}
+
+#lightbox-container {
+	img {
+		height: 400px;
+	}
+}
+
+@media screen and (min-height: 700px) {
+	#lightbox-container {
+		img {
+			height: 600px;
+			object-fit: scale-down;
+		}
+	}
+}
+
+@media screen and (min-height: 800px) {
+	#lightbox-container {
+		img {
+			height: 700px;
+		}
+	}
+}
+
+@media screen and (min-height: 900px) {
+	#lightbox-container {
+		img {
+			height: 800px;
+		}
+	}
+}
+
+@media screen and (min-height: 1000px) {
+	#lightbox-container {
+		img {
+			height: 900px;
+		}
+	}
+}
+
+@media screen and (min-height: 1300px) {
+	#lightbox-container {
+		img {
+			height: 1200px;
+		}
+	}
+}

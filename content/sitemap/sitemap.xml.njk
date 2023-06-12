@@ -8,8 +8,7 @@ eleventyExcludeFromCollections: true
 	{% set absoluteUrl %}{{ metadata.url }}{{ page.url }}{% endset %}
 	<url>
 		<loc>{{ absoluteUrl }}</loc>
-		{# <lastmod>{{ page.data.sitemapUpdated or page.date | htmlDateString }}</lastmod> #}
-		<lastmod>2023-05-08</lastmod>
+		<lastmod>{{ collections.posts | getNewestCollectionItemDate | htmlDateString }}</lastmod>
     <changefreq>{{ page.data.sitemapChangeFrequency | default("monthly") }}</changefreq>
     <priority>{{ page.data.sitemapPriority | default(0.8) }}</priority>
 	</url>

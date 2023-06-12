@@ -46,9 +46,22 @@ async function getAllStories() {
 									showImagePromo
 									publicationHistory
 									updatedAt
+									images {
+										data{
+											attributes {
+												alternativeText
+												caption
+												formats
+											}
+										}
+									}
+									imagesType
+									useSquareOnMobile
+									imagesPositionText
 									promoImage {
 										data{
 											attributes {
+												alternativeText
 												formats
 											}
 										}
@@ -56,6 +69,7 @@ async function getAllStories() {
 									promoImageMobile {
 										data{
 											attributes {
+												alternativeText
 												formats
 											}
 										}
@@ -66,6 +80,7 @@ async function getAllStories() {
 									}
 									introduction
 									podcastNote
+									podcastUrl
 									coda
 									postscript
 									authors {
@@ -73,6 +88,7 @@ async function getAllStories() {
 											attributes {
 												forename
 												surname
+												pronoun
 											}
 										}
 									}
@@ -81,6 +97,7 @@ async function getAllStories() {
 											attributes {
 												forename
 												surname
+												pronoun
 											}
 										}
 									}
@@ -206,7 +223,7 @@ async function getAllStories() {
 			};
 		});
 
-		const booksMentioned = !!atts.booksMentioned.data.length && atts.booksMentioned.data.map((book) => {
+		const booksMentioned = !!atts.booksMentioned.data.length && atts.booksMentioned.data.slice(0, atts.prominentMentions).map((book) => {
 			const bookAtts = book.attributes;
 			const author = !!bookAtts.authors.data.length && bookAtts.authors.data[0].attributes;
 			const translator = !!bookAtts.translators.data.length && bookAtts.translators.data[0].attributes;
@@ -250,35 +267,60 @@ async function getAllStories() {
 		const vocabulary = [];
 		// console.log(vocabulary);
 
-		return {
-      title: atts.title,
-			body: atts.body,
-			updatedAt: atts.updatedAt.split("T")[0],
-			slug: makeTitleSlug(atts.title, authorFullName, translatorFullName),
-			endnote: atts.endnote,
-			monthYear: getMonthYear(atts.dateTimePublication),
-			description: atts.description,
-			type: atts.type,
-			appointment: atts.appointment,
-			epigraphs: !!atts.epigraphs && atts.epigraphs,
-			introduction: atts.introduction,
-			podcastNote: atts.podcastNote,
-			coda: atts.coda,
-			postscript: atts.postscript,
-			author: authorFullName,
-			translator: translatorFullName,
-			endPromos: endPromosFormatted,
-			booksMentioned: booksMentioned,
-			displayTitle: displayTitle,
-			metaTitle: `${ displayTitle } · Aphroconfuso`,
-			showImagePromo: atts.showImagePromo,
-			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
-			vocabulary: vocabulary,
-			publicationHistory: atts.publicationHistory,
-    };
-  });
+		const imageTypes = {
+			'Wisgha_tat_test': 'uncropped',
+			'Wisgha_tat_test 16:9': 'landscape',
+			'Wisgha_tal_pagna': 'uncropped',
+			'Wisgha_tal_pagna 16:9': 'landscape',
+		}
 
-  // return formatted stories
+		const reads = {
+			'hi': 'taqra',
+			'hu': 'jaqra',
+			'hi_hu': Math.round(Math.random()) ? 'taqra' : 'jaqra',
+			'huma': 'jaqraw',
+		}
+
+		return {
+			appointment: atts.appointment,
+			author: authorFullName,
+			body: atts.body,
+			booksMentioned: booksMentioned,
+			coda: atts.coda,
+			description: atts.description,
+			displayTitle: displayTitle,
+			endnote: atts.endnote,
+			endPromos: endPromosFormatted,
+			epigraphs: !!atts.epigraphs && atts.epigraphs,
+			images: atts.images.data,
+			imagesPositionText: atts.imagesPositionText,
+			imageCrop: imageTypes[atts.imagesType],
+			introduction: atts.introduction,
+			metaTitle: `${ displayTitle }`,
+			dateTimePublication: atts.dateTimePublication,
+			monthYear: getMonthYear(atts.dateTimePublication),
+			podcastNote: atts.podcastNote,
+			podcastUrl: atts.podcastUrl,
+			// podcastUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+			// podcastUrl: 'https://sphinx.acast.com/p/open/s/63ef6b4c3642ca00119bcf72/e/644c12d50ace130011a72f8d/media.mp3',
+			postscript: atts.postscript,
+			prominentMentions: atts.prominentMentions,
+			publicationHistory: atts.publicationHistory,
+			reads: reads[translator.pronoun || author.pronoun],
+			showImagePromo: atts.showImagePromo,
+			singleImage: atts.images.data && atts.images.data.length === 1,
+			slideshow:  atts.images.data && atts.images.data.length > 1,
+			slug: makeTitleSlug(atts.title, authorFullName, translatorFullName),
+			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
+			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
+			translator: translatorFullName,
+			type: atts.type,
+			updatedAt: atts.updatedAt,
+			useSquareOnMobile: atts.useSquareOnMobile,
+			vocabulary: vocabulary,
+      title: atts.title,
+    };
+	});
   return storiesFormatted;
 }
 

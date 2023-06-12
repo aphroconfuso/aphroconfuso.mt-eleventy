@@ -23,11 +23,12 @@ async function getAllAppointments() {
 							}
 						}
 					}
-					appointments(sort: "term:asc") {
+					appointments(sort: "dateTimePublication:desc") {
 						data {
 							attributes {
 								dateTimePublication
 								editorial
+								moreToCome
 								stories {
 									data {
 										attributes {
@@ -97,6 +98,7 @@ async function getAllAppointments() {
 		return {
 			title: appointment.attributes.title || null,
 			editorial: appointment.attributes.editorial,
+			moreToCome: appointment.attributes.moreToCome,
 			monthYear: getMonthYear(appointment.attributes.dateTimePublication),
 			stories: storiesFormatted
 		}

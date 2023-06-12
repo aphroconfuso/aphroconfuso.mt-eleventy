@@ -68,6 +68,15 @@ article > header {
 		max-width: $max-content-width;
 		margin: ($body-margin * 4) auto ($body-margin * 3);
 	}
+}
+
+@media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
+	.hide-tablet {
+		display: none !important;
+	}
+}
+
+@media screen and (min-width: $mobile-breakpoint-plusone) {
 	.hide-laptop {
 		display: none !important;
 	}

@@ -34,6 +34,11 @@
 			margin-bottom: $body-margin;
 		}
 	}
+	.more {
+		border-top: 1px solid $faint-line;
+		font-style: italic;
+		padding-top: $body-margin;
+	}
 	.definitions-list {
 		margin-top: $body-margin;
 		li {
@@ -78,11 +83,6 @@
 	width: 100%;
 	border: 1px solid $faint-line;
 	padding: 5px;
-}
-#grid-body {
-	.contributors-menu {
-		columns: 2;
-	}
 }
 #podcast-logos {
 	display: flex;
@@ -136,6 +136,13 @@
 					}
 				}
 			}
+		}
+	}
+}
+@media screen and (min-width: $mobile-breakpoint-plusone) {
+	#grid-body {
+		.contributors-menu {
+			columns: 2;
 		}
 	}
 }

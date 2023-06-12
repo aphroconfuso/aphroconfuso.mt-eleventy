@@ -3,18 +3,8 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-.editorial {
-	border: 5px solid red;
-	border-radius: $body-margin-eighth;
-	font-family: $sans-alt;
-	font-size: $font-size-editorial;
-	padding: $body-margin;
-}
-
-.home {
-	.editorial {
-		.generic-body-text {
-			@include clamp(14);
-		}
-	}
-}
+// .editorial {
+// 	font-family: $sans-alt;
+// 	font-size: $font-size-editorial;
+// 	padding: $body-margin;
+// }

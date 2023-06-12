@@ -9,6 +9,7 @@ footer {
 	font-family: $sans-alt;
 	font-size: $body-font-size;
 	margin-top: $body-margin;
+	overflow: hidden;
 	padding: $body-margin;
 	.footer-content {
 		max-width: $max-width;
@@ -50,6 +51,7 @@ footer {
 			"housekeeping"
 			"media"
 			"socials"
+			"podcast"
 			"logotype-container"
 			"copyright"
 			"email";
@@ -60,13 +62,18 @@ footer {
 		columns: 3;
 	}
 
+	#media {
+		grid-area: media;
+		columns: 3;
+	}
+
 	#socials {
 		grid-area: socials;
 		columns: 3;
 	}
 
-	#media {
-		grid-area: media;
+	#podcast {
+		grid-area: podcast;
 		columns: 3;
 	}
 
@@ -118,8 +125,20 @@ footer {
 				"email email email email copyright logotype-container";
 		}
 
+		#housekeeping {
+			columns: 2;
+		}
+
 		#socials {
 			columns: 2;
+		}
+
+		#media {
+			columns: 2;
+		}
+
+		#podcast {
+			display: none;
 		}
 
 		.logotype {
@@ -152,9 +171,9 @@ footer {
 		}
 	}
 
-	body:not(.story) #scroll-tools {
-		display: none;
-	}
+	// body:not(.story) #scroll-tools {
+	// 	display: none;
+	// }
 
 	#scroll-tools {
 		@include ease-in();
@@ -170,7 +189,35 @@ footer {
 	#arrow-top {
 		padding: 1rem;
 	}
-	.scrolling #scroll-tools {
-		opacity: 1;
+
+	@media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
+		.logotype {
+			margin-top: 1rem;
+			width: 120%;
+		}
+		#copyright {
+			display: inline-flex;
+		}
 	}
+
+	@media screen and (min-width: $laptop-breakpoint) {
+		#housekeeping {
+			columns: 3;
+		}
+
+		#socials {
+			columns: 2;
+		}
+
+		#media {
+			columns: 3;
+		}
+	}
+}
+
+// body.scrolling #scroll-tools {
+// 	opacity: 1;
+// }
+#scroll-tools {
+	display: none;
 }

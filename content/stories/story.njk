@@ -5,141 +5,214 @@ pagination:
   data: stories
   size: 1
 sitemapChangeFrequency: weekly
-sitemapUpdated: 2023-05-08
 sitemapPriority: 1
 permalink: /{{ story.slug | slugifyMaltese }}/index.html
 ---
 {% extends 'layouts/base.njk' %}
 
 {% block head %}
-	<title>{{ story.metaTitle or metadata.title }}</title>
+	<title>{{ story.metaTitle or metadata.title }} · Aphroconfuso</title>
 	<meta content="{{ story.description }}" name="description">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ story.socialImage }}">
 	{% if story.translator %}
 		<meta name="author" content="{{ story.author }} (tr {{ story.translator }})">
 	{% else %}
 		<meta name="author" content="{{ story.author }}">
 	{% endif %}
-	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}/{{ story.socialImage }}">
+	{% if story.images %}
+		<script src="/splide-4.1.3/dist/js/splide.min.js" defer></script>
+		<link rel="stylesheet" href="/splide-4.1.3/dist/css/splide.min.css">
+	{% endif %}
+	{% if story.podcastUrl %}
+		<script src="/amplitude/amplitude.min.js"></script>
+	{% endif %}
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@aphroconfuso">
+	<meta name="twitter:creator" content="@aphroconfuso">
+	<meta name="twitter:title" content="{{ story.metaTitle or metadata.title }}">
+	<meta name="twitter:description" content="{{ story.description }}">
+	<meta name="twitter:image" content="{{ metadata.settings.imagesUrl }}{{ story.socialImage }}">
+	<meta name="twitter:image:alt" content="{{ story.socialImageAlt }}">
 {% endblock %}
 
 {% block content %}
-<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }}">
-	<header>
-		<h3><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
-		<h1>{{ story.title | prettifyMaltese | safe }}</h1>
-		<h2>
-			{% if story.translator %}
-				{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}/">{{ story.translator | prettifyMaltese | safe }}</a></span>
-			{% else %}
-				<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
-			{% endif %}
-		</h2>
-	</header>
-	<div class="container">
-		<section id="grid-max-panel-left-top">
-			{% for book in story.booksMentioned %}
-				{% if loop.first %}<section class="reviewed">{% endif %}
-				<p>
-					<span class="title">{{ book.title }}</span>
-					{% if book.author %}<span class="author"> ta’ {{ book.author }}</span>{% endif %}
-					{% if book.translator %}<span class="translator"> {{ book.translator }}, tr.</span>{% endif %}
-					<span class="publisher">({{ book.publisherName }}, {{ book.publisherCity }} {{ book.publicationYear }})</span>
-				</p>
-				{% if loop.last %}</section>{% endif %}
-			{% endfor %}
-			{% if story.introduction %}
-				<aside id="introduction">
-					{{ story.introduction | restrictHtml | prettifyMaltese | safe }}
-				</aside>
-			{% endif %}
-		</section>
-		<section id="grid-max-panel-right-top">
-			{% if story.podcastNote %}
-				<aside id="podcastNote">
-					{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
-				</aside>
-			{% endif %}
-		</section>
-		<section id="grid-body">
-			{% for epigraph in story.epigraphs %}
-				{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
-					<figure class="epigraph">
-						{{ epigraph.quotation | restrictHtml | prettifyMaltese | safe }}
-						<figcaption>{{ epigraph.attribution | restrictHtml | prettifyMaltese | safe }}</figcaption>
-					</figure>
-				{% if loop.last %}</section>{% endif %}
-			{% endfor %}
-			{% if story.type == 'Poezija' %}
-				<section id="body-text" class="body-text poetry">
-					{{ story.body | prettifyMaltese | versify | safe }}
-				</section>
-			{% else %}
-				<section id="body-text" class="body-text">
-					{{ story.body | dropCapsifyAndSectionise | prettifyMaltese | endDotify | safe }}
-				</section>
-			{% endif %}
-			{% if story.endnote %}
-				<aside class="endnote body-text">
-					{{ story.endnote | restrictHtml | prettifyMaltese | safe }}
-				</aside>
-			{% endif %}
-		</section>
-		<section id="grid-max-panel-left-bottom">
-			{% if story.coda %}
-				<aside id="coda">
-					{{ story.coda | restrictHtml | prettifyMaltese | safe }}
-				</aside>
-			{% endif %}
-			<aside id="publication-history">
-				{{ story.publicationHistory | restrictHtml | prettifyMaltese | safe }}
-			</aside>
-		</section>
-		<section id="grid-max-panel-right-bottom">
-			{% if story.postscript %}
-				<aside id="postscript">
-					{{ story.postscript | restrictHtml | prettifyMaltese | safe }}
-				</aside>
-			{% endif %}
-			{% if story.type == 'Esej' %}
-				<aside id="letters-solicit">
-					<p>Iktbilna dwar dan ix-xogħol fuq <l-m>l-indirizz</l-m> <a href="mailto:ittri@aphroconfuso.mt?subject={{ story.displayTitle }}" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludi ismek u fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
-				</aside>
-			{% endif %}
-		</section>
-	</div>
-	{% if story.letters %}
-			<section class="letters">
-				<!-- X -->
+	<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }}">
+		<header>
+			<h3><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
+			<h1>{{ story.title | prettifyMaltese | safe }}</h1>
+			<h2>
+				{% if story.translator %}
+					{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}/">{{ story.translator | prettifyMaltese | safe }}</a></span>
+				{% else %}
+					<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
+				{% endif %}
+			</h2>
+		</header>
+		<div class="container">
+			<section id="grid-max-panel-left-top">
+				{% for book in story.booksMentioned %}
+					{% if loop.first %}<section class="reviewed">{% endif %}
+					<p>
+						<span class="title">{{ book.title }}</span>
+						{% if book.author %}<span class="author"> ta’ {{ book.author }}</span>{% endif %}
+						{% if book.translator %}<span class="translator"> {{ book.translator }}, tr.</span>{% endif %}
+						<span class="publisher">({{ book.publisherName }}, {{ book.publisherCity }} {{ book.publicationYear }})</span>
+					</p>
+					{% if loop.last %}</section>{% endif %}
+				{% endfor %}
+				{% if story.introduction %}
+					<aside id="introduction">
+						{{ story.introduction | restrictHtml | prettifyMaltese | safe }}
+					</aside>
+				{% endif %}
 			</section>
-	{% endif %}
-</article>
-<aside class="promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.title }}">
-	{% for promo in story.endPromos %}
-		<div class="promo-{{ loop.index }}">
-			<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: {{ story.title }}', 'għal: {{ promo.title }}', {{ loop.index }}]);">
-				<header>
-					<h3>{{ promo.monthYear }}</h5>
-					<h1>{{ promo.title | prettifyMaltese | safe }}</h1>
-					<h2>
-						{% if promo.translator %}
-							{{ promo.author | prettifyMaltese | safe }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
-						{% else %}
-							{{ promo.author | prettifyMaltese | safe }}
+			<section id="grid-max-panel-right-top">
+				{% if story.podcastNote and not story.podcastUrl %}
+					<aside id="podcast-note">
+						{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
+					</aside>
+				{% endif %}
+				{% if story.podcastUrl %}
+					<aside id="podcast-note">
+						<figure id="audio">
+							<div id="player">
+								<div class="control-container">
+									<button class="amplitude-play-pause" amplitude-main-play-pause="true" id="play-pause">
+								</div>
+								<div id="range">
+									<input type="range" id="range-input" class="amplitude-song-slider" step=".1">
+									<progress class="amplitude-song-played-progress" amplitude-main-song-played-progress="true" id="song-played-progress"></progress>
+								</div>
+								<div class="time-container">
+										<span class="amplitude-current-minutes" amplitude-main-current-minutes="true"></span>:<span class="amplitude-current-seconds" amplitude-main-current-seconds="true"></span>/<span class="amplitude-duration-minutes" amplitude-main-duration-minutes="true"></span>:<span class="amplitude-duration-seconds" amplitude-main-duration-seconds="true"></span>
+								</div>
+							</div>
+							<figcaption>
+								{% if not story.podcastNote %}
+									<p>{{ story.translator or story.author }} {{ story.reads }} “{{ story.title }}”. Abbona <l-m>fil-<a href="/podcast">podcast</a></l-m> ta’ Aphroconfuso biex tisma’ kulma nippubblikaw.</p>
+								{% else %}
+									{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
+								{% endif %}
+							</figcaption>
+						</figure>
+					</aside>
+				{% endif %}
+			</section>
+			<section id="grid-body">
+				{% for epigraph in story.epigraphs %}
+					{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
+						<figure class="epigraph">
+							{{ epigraph.quotation | restrictHtml | prettifyMaltese | safe }}
+							<figcaption>{{ epigraph.attribution | restrictHtml | prettifyMaltese | safe }}</figcaption>
+						</figure>
+					{% if loop.last %}</section>{% endif %}
+				{% endfor %}
+				{% if story.type == 'Poezija' %}
+					<section id="body-text" class="body-text poetry">
+						{{ story.body | prettifyMaltese | versify | safe }}
+					</section>
+				{% else %}
+					{% if story.imagesPositionText %}
+						<section id="body-text" class="body-text">
+							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 0) | prettifyMaltese | safe }}
+						</section>
+						{% set imageMode = 'regular' %}
+						{% if story.slideshow %}
+							{% include "_slideshow.njk" %}
 						{% endif %}
-					</h2>
-				</header>
-				<div class="{{ promo.cssClass }}">
-					{% if promo.type === 'Poezija' %}
-						<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
+						{% if story.singleImage %}
+							{% set image = story.images[0] %}
+							{% set slide = story.images[0].attributes.formats %}
+							{% include "_image.njk" %}
+						{% endif %}
+						<section id="body-text" class="body-text">
+							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 1) | prettifyMaltese | endDotify | safe }}
+						</section>
 					{% else %}
-						<p>{{ promo.description | prettifyMaltese | safe }}</p>
+						<section id="body-text" class="body-text">
+							{{ story.body | dropCapsifyAndSectionise | prettifyMaltese | endDotify | safe }}
+						</section>
 					{% endif %}
-				</div>
-			</a>
+				{% endif %}
+				{% if story.endnote %}
+					<aside class="endnote body-text">
+						{{ story.endnote | restrictHtml | prettifyMaltese | safe }}
+					</aside>
+				{% endif %}
+			</section>
+			<section id="grid-max-panel-left-bottom">
+				{% if story.coda %}
+					<aside id="coda">
+						{{ story.coda | restrictHtml | prettifyMaltese | safe }}
+					</aside>
+				{% endif %}
+				<aside id="publication-history">
+					{{ story.publicationHistory | restrictHtml | prettifyMaltese | safe }}
+				</aside>
+			</section>
+			<section id="grid-max-panel-right-bottom">
+				{% if story.postscript %}
+					<aside id="postscript">
+						{{ story.postscript | restrictHtml | prettifyMaltese | safe }}
+					</aside>
+				{% endif %}
+				{% if story.type == 'Esej' %}
+					<aside id="letters-solicit">
+						<p>Iktbilna dwar dan ix-xogħol fuq <l-m>l-indirizz</l-m> <a href="mailto:ittri@aphroconfuso.mt?subject={{ story.displayTitle }}" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludi ismek u fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
+					</aside>
+				{% endif %}
+			</section>
 		</div>
-	{% endfor %}
-</aside>
-<script>
-	wordcount = {{ story.body | wordcount }};
-</script>
+		{% if story.letters %}
+				<section class="letters">
+					<!-- X -->
+				</section>
+		{% endif %}
+	</article>
+	<aside class="promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.title }}">
+		{% for promo in story.endPromos %}
+			<div class="promo-{{ loop.index }}">
+				<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: {{ story.title }}', 'għal: {{ promo.title }}', {{ loop.index }}]);">
+					<header>
+						<h3>{{ promo.monthYear }}</h5>
+						<h1>{{ promo.title | prettifyMaltese | safe }}</h1>
+						<h2>
+							{% if promo.translator %}
+								{{ promo.author | prettifyMaltese | safe }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
+							{% else %}
+								{{ promo.author | prettifyMaltese | safe }}
+							{% endif %}
+						</h2>
+					</header>
+					<div class="{{ promo.cssClass }}">
+						{% if promo.type === 'Poezija' %}
+							<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
+						{% else %}
+							<p>{{ promo.description | prettifyMaltese | safe }}</p>
+						{% endif %}
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+	</aside>
+	<script>
+		wordcount = {{ story.body | wordcount }};
+		podcastUrl = '{{ story.podcastUrl}}' || null;
+	</script>
+	{% if story.slideshow or story.singleImage %}
+		{% set imageMode = 'lightbox' %}
+		<aside id="lightbox">
+			<div id="lightbox-container">
+				<button id="lightbox-close" type="button" onclick="_paq.push(['trackEvent', 'Stampi', 'lightbox [×]', '{{ story.title }}']);">×</button>
+				{% if story.slideshow %}
+					{% include "_slideshow.njk" %}
+				{% endif %}
+				{% if story.singleImage %}
+					{% set image = story.images[0] %}
+					{% set slide = story.images[0].attributes.formats %}
+					{% include "_image.njk" %}
+				{% endif %}
+			</div>
+		</aside>
+	{% endif %}
 {% endblock %}

@@ -1,0 +1,21 @@
+<section class="splide" aria-label="Stampi għal {{ story.title }}">
+	<div class="arrows splide__arrows">
+		<button class="arrow-previous splide__arrow--prev">
+			«
+		</button>
+		<button class="arrow-next splide__arrow--next">
+			»
+		</button>
+		<button type="button" id="lightbox-open" onclick="_paq.push(['trackEvent', 'Stampi', 'lightbox', '{{ story.title }}']);">&#128437;</button>
+	</div>
+	<div class="splide__track">
+		<ul class="splide__list">
+			{% for image in story.images %}
+				<li class="splide__slide">
+					{% set slide = image.attributes.formats %}
+					{% include "_image.njk" %}
+				</li>
+			{% endfor %}
+		</ul>
+	</div>
+</section>
