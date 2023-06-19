@@ -165,6 +165,9 @@ footer {
 		nav li.header {
 			padding: 0;
 		}
+		#podcast {
+			display: none;
+		}
 	}
 
 	@media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {

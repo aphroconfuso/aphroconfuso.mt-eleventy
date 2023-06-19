@@ -149,13 +149,9 @@ figure#audio {
 		white-space: nowrap;
 	}
 
-	figcaption {
-		display: none;
-	}
 	@media screen and (min-width: $laptop-breakpoint) {
 		margin: 0;
 		figcaption {
-			display: block;
 			padding-top: $body-margin-half;
 		}
 		button.amplitude-play-pause {
