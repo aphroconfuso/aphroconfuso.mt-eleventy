@@ -10,11 +10,16 @@ module.exports = {
 	},
 	"settings": {
 		"imagesUrl": "https://stampi.aphroconfuso.mt/",
-		"socialImage": "https://stampi.aphroconfuso.mt/social_aphroconfuso_logo_wallpaper_40f6589ea4.jpg",
+		"socialImage": "https://stampi.aphroconfuso.mt/social_aphroconfuso_logo_wallpaper_f1b0208899.jpg",
 		"breakpoints": {
 			"mobile": "749px",
 			"tablet": "1080px",
 			"laptop": "1200px"
 		}
+	},
+	"texts": {
+		"error404": "Din il-paġna ma teżistix.",
+		"error404AltText": "Sinjal ta' ottagonali aħmar bi 'Stop' miktuba bl-aħmar. Taħta, sinjal ieħor li jgħid ' Stop Tfisser Ieqaf'.",
+		"podcastMessage": "Abbona <l-m>fil-<a href=\"/podcast\">podcast</a></l-m> ta’ Aphroconfuso biex tisma’ kulma nippubblikaw."
 	}
 }

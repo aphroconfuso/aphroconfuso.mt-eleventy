@@ -2,7 +2,7 @@
 
 // contradiction here
 // hover doesn't come in but full nav already has
-$mobile-breakpoint: 749px;
+$mobile-breakpoint: 480px;
 $mobile-breakpoint-plusone: ($mobile-breakpoint + 1px);
 $tablet-mini-breakpoint: 620px;
 
@@ -14,13 +14,6 @@ $max-logo-width: 820px;
 $max-width: 1300px;
 
 $main-side-padding: 1.5rem;
-
-// Use this for underlined links:
-// @media (hover: none) {
-//   a {
-//     background: yellow;
-//   }
-// }
 
 $fade-in-short: 200ms;
 $fade-in-medium: 400ms;

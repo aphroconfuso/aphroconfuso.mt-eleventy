@@ -1,6 +1,7 @@
 @use "constants" as *;
 @use "calculations" as *;
 @use "settings" as *;
+@use "mixins-etc" as *;
 
 ::selection {
 	background: $highlight;
@@ -38,7 +39,7 @@ main {
 
 article > header {
 	max-width: $max-content-width;
-	margin: $body-margin auto;
+	margin: 0 auto $body-margin;
 }
 
 #skip {
@@ -58,6 +59,25 @@ article > header {
 	width: 90%;
 }
 
+#message {
+	@include ease-in(0.25s);
+	color: $green;
+	opacity: 0;
+	font-family: $sans-alt, sans-serif;
+	font-size: $body-font-size;
+	padding: $body-margin 0;
+	margin-top: $body-margin auto 0;
+	text-align: center;
+	@media screen and (max-width: $mobile-breakpoint) {
+		display: none;
+	}
+	&.active {
+		@include ease-in(0.25s);
+		display: block;
+		opacity: 1;
+	}
+}
+
 @media screen and (max-width: $mobile-breakpoint) {
 	.hide-mobile {
 		display: none !important;
@@ -66,7 +86,7 @@ article > header {
 @media screen and (min-width: $mobile-breakpoint-plusone) {
 	article > header {
 		max-width: $max-content-width;
-		margin: ($body-margin * 4) auto ($body-margin * 3);
+		margin: ($body-margin * 2) auto ($body-margin * 3);
 	}
 }
 

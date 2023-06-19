@@ -79,6 +79,9 @@
 		}
 	}
 }
+#optInOutWrapper {
+	display: flex;
+}
 #podcast-url {
 	width: 100%;
 	border: 1px solid $faint-line;
@@ -139,6 +142,22 @@
 		}
 	}
 }
+
+.error {
+	img {
+		-webkit-filter: sepia(1) brightness(75%);
+		filter: sepia(1) brightness(75%);
+		padding-bottom: $body-margin;
+		@media screen and (min-width: $mobile-breakpoint-plusone) {
+			&:hover {
+				@include ease-out(0.25s);
+				-webkit-filter: sepia(0) brightness(100%);
+				filter: sepia(0) brightness(100%);
+			}
+		}
+	}
+}
+
 @media screen and (min-width: $mobile-breakpoint-plusone) {
 	#grid-body {
 		.contributors-menu {

@@ -98,9 +98,6 @@
 .promo-picture-2 {
 	.body-text {
 		grid-area: promo-body;
-		// p {
-		//   @include clamp(3);
-		// }
 	}
 	header {
 		grid-area: promo-header;
@@ -130,5 +127,10 @@
 			column-rule: 1px dotted $faint-line;
 			column-fill: balance;
 		}
+	}
+}
+.promo-picture-4 {
+	.body-text {
+		grid-area: promo-body;
 	}
 }

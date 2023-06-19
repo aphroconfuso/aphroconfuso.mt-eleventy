@@ -122,6 +122,10 @@ module.exports = function(eleventyConfig) {
 		return slugifyStringMaltese(text);
 	});
 
+	eleventyConfig.addFilter("semiDeSlugify", function semiDeSlugify(text) {
+		return (text || []).replace(/\//g,'');
+	});
+
 	eleventyConfig.addFilter("fixMonthMaltese", function fixMonthMaltese(text) {
 		return (text || []).replace(/Gunju/gi, "Ġunju")
 			.replace(/Dicembru/gi, "Diċembru")

@@ -81,6 +81,7 @@ async function getAllStories() {
 									introduction
 									podcastNote
 									podcastUrl
+									useDefaultPodcastMessage
 									coda
 									postscript
 									authors {
@@ -300,8 +301,8 @@ async function getAllStories() {
 			dateTimePublication: atts.dateTimePublication,
 			monthYear: getMonthYear(atts.dateTimePublication),
 			podcastNote: atts.podcastNote,
-			podcastUrl: atts.podcastUrl,
-			// podcastUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+			// podcastUrl: atts.podcastUrl,
+			podcastUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
 			// podcastUrl: 'https://sphinx.acast.com/p/open/s/63ef6b4c3642ca00119bcf72/e/644c12d50ace130011a72f8d/media.mp3',
 			postscript: atts.postscript,
 			prominentMentions: atts.prominentMentions,
@@ -316,6 +317,7 @@ async function getAllStories() {
 			translator: translatorFullName,
 			type: atts.type,
 			updatedAt: atts.updatedAt,
+			useDefaultPodcastMessage: atts.useDefaultPodcastMessage,
 			useSquareOnMobile: atts.useSquareOnMobile,
 			vocabulary: vocabulary,
       title: atts.title,
