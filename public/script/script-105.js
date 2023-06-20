@@ -7,6 +7,8 @@ var
 	bodyStart,
 	bodyText,
 	bookmarksList,
+	charactersPerPixel,
+	charactersPerScreen,
 	currentTime,
 	duration,
 	elapsedTime,
@@ -30,15 +32,16 @@ var
 	wordcount,
 	wordsPerPixel,
 	wordsPerSecond,
-	wordsPerSecondAudio;
+	wordsPerSecondAudio,
+	wordsPerScreen;
 
 audioLoaded = false;
 percentageProgress = 0;
 storyCompleted = false;
 
 const thresholdWords = 100;
-const minWordsperSecond = 1; // was 0.5
-const maxWordsPerSecond = 5; // was 4
+const minWordsperSecond = 1;
+const maxWordsPerSecond = 5;
 
 const bookmarksMenuElement = document.getElementById("bookmarksTotal");
 const getScrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
@@ -82,7 +85,7 @@ const addBookmarkNow = () => {
 	});
 }
 
-const heartbeat = (wordsPerPixel, screenHeight, bodyStart, bodyEnd, title) => {
+const heartbeat = (wordsPerPixel, title) => {
 	const timeNow = new Date() / 1000;
 	const secondsElapsed = timeNow - lastReportedReadingTime;
 	const newScrollPosition = getScrollPosition();
@@ -120,7 +123,10 @@ const initialiseBookmarksList = () => {
 const saveBookmarksList = () => {localStorage.setItem("bookmarks", JSON.stringify(bookmarksList));}
 
 const addBookmark = (type, bookmark) => {
-	bookmarksList[`${type}-${slugifiedUrl}`] = bookmark;
+	bookmarksList[`${ type }-${ slugifiedUrl }`] = {
+		dateTime: new Date(),
+		...bookmark
+	};
 	saveBookmarksList();
 	updateBookmarksMenu();
 }
@@ -133,7 +139,7 @@ const deleteBookmark = (type) => {
 
 const getCurrentBlurb = (percent) => {
 	const currentPlace = parseInt(percent * bodyText.length / 100);
-	const blurb = bodyText.substring(currentPlace - 250, currentPlace + 250);
+	const blurb = bodyText.substring(currentPlace, currentPlace + (charactersPerScreen));
 	return blurb;
 }
 
@@ -233,15 +239,19 @@ const initialiseAfterWindow = () => {
 	showFullBookmarks();
 
 	if (!!wordcount) {
-		bodyText = document.getElementById('body-text').innerText.replace(/\s+/g, ' ');
+		// TODO: Fix enjambed
+		bodyText = Array.from(document.getElementById("grid-body").getElementsByClassName("body-text"), e => e.innerText).join(' ').replace(/\s+/g, ' ');
 		screenHeight = window.innerHeight;
-		body = document.getElementById('body-text');
+		body = document.getElementById('grid-body');
 		bodyHeight = body.offsetHeight - screenHeight;
 		bodyStart = body.offsetTop;
 		title = document.querySelector("h1").innerText;
 		author = document.querySelector("meta[name=author]").content;
 		bodyEnd = bodyStart + bodyHeight;
+		charactersPerPixel = bodyText.length / bodyHeight;
 		wordsPerPixel = wordcount / bodyHeight;
+		charactersPerScreen = parseInt(charactersPerPixel * screenHeight);
+		wordsPerScreen = parseInt(wordsPerPixel * screenHeight);
 		window.addEventListener('scroll', (event) => {
 			scrolling();
 		});
@@ -311,13 +321,10 @@ const initialiseAfterWindow = () => {
 			const addAudioBookmarkNow = (percentage) => {
 				let playPosition = audio.currentTime.toFixed(0);
 				percentageAudio = percentage || (parseInt(audio.currentTime) * 100 / duration).toFixed(2);
-				if (percentageAudio < 15) {
-					percentageAudio = 0;
-				}
 				addBookmark('audio', {
 					title,
 					author,
-					placeText: getCurrentBlurb(percentageProgress),
+					placeText: getCurrentBlurb(percentageAudio),
 					duration,
 					percentageAudio,
 					playPosition

@@ -109,12 +109,12 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 					{% if loop.last %}</section>{% endif %}
 				{% endfor %}
 				{% if story.type == 'Poezija' %}
-					<section id="body-text" class="body-text poetry">
+					<section class="body-text poetry">
 						{{ story.body | prettifyMaltese | versify | safe }}
 					</section>
 				{% else %}
 					{% if story.imagesPositionText %}
-						<section id="body-text" class="body-text">
+						<section class="body-text">
 							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 0) | prettifyMaltese | safe }}
 						</section>
 						{% set imageMode = 'regular' %}
@@ -126,11 +126,11 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 							{% set slide = story.images[0].attributes.formats %}
 							{% include "_image.njk" %}
 						{% endif %}
-						<section id="body-text" class="body-text">
+						<section class="body-text">
 							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 1) | prettifyMaltese | endDotify | safe }}
 						</section>
 					{% else %}
-						<section id="body-text" class="body-text">
+						<section class="body-text">
 							{{ story.body | dropCapsifyAndSectionise | prettifyMaltese | endDotify | safe }}
 						</section>
 					{% endif %}
