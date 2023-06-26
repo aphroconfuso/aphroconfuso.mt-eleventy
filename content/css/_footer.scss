@@ -137,10 +137,6 @@ footer {
 			columns: 2;
 		}
 
-		#podcast {
-			display: none;
-		}
-
 		.logotype {
 			margin-top: -10px;
 			width: 80%;
@@ -169,25 +165,9 @@ footer {
 		nav li.header {
 			padding: 0;
 		}
-	}
-
-	// body:not(.story) #scroll-tools {
-	// 	display: none;
-	// }
-
-	#scroll-tools {
-		@include ease-in();
-		bottom: 1rem;
-		font-weight: 500;
-		opacity: 0;
-		position: fixed;
-		right: 0;
-	}
-	#progress {
-		vertical-align: -0.5rem;
-	}
-	#arrow-top {
-		padding: 1rem;
+		#podcast {
+			display: none;
+		}
 	}
 
 	@media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
@@ -215,8 +195,19 @@ footer {
 	}
 }
 
-// body.scrolling #scroll-tools {
-// 	opacity: 1;
+// #scroll-tools {
+// 	@include ease-in();
+// 	bottom: 1rem;
+// 	font-weight: 500;
+// 	opacity: 0;
+// 	position: fixed;
+// 	right: 0;
+// }
+// #progress {
+// 	vertical-align: -0.5rem;
+// }
+// #arrow-top {
+// 	padding: 1rem;
 // }
 #scroll-tools {
 	display: none;

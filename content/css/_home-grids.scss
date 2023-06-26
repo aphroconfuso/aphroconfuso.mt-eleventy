@@ -16,7 +16,8 @@
 .ga11,
 .ga12,
 .ga-editorial,
-.ga-newsletter {
+.ga-newsletter,
+.ga-podcast {
 	display: flex;
 	position: relative;
 	// *:last-of-type {
@@ -74,6 +75,9 @@
 .ga-newsletter {
 	grid-area: ga-newsletter;
 }
+.ga-podcast {
+	grid-area: ga-podcast;
+}
 .layout-2 {
 	.mga1 {
 		.promo .body-text p {
@@ -92,6 +96,7 @@
 		gap: $body-margin $body-margin;
 		grid-template-areas:
 			"ga1"
+			"ga-podcast"
 			"ga-editorial"
 			"ga2"
 			"ga3"
@@ -173,7 +178,7 @@
 		.ga9 {
 			p {
 				@include clamp(999);
-				columns: 3;
+				columns: 2;
 				column-gap: $body-margin;
 			}
 		}
@@ -181,9 +186,6 @@
 }
 
 @media screen and (min-width: $mobile-breakpoint-plusone) {
-	.home {
-		padding-top: ($body-margin * 2);
-	}
 	.layout-1,
 	.layout-2,
 	.layout-3,
@@ -191,6 +193,10 @@
 		display: grid;
 		gap: $body-margin $body-margin;
 	}
+	.ga-podcast {
+		display: none;
+	}
+
 	.layout-1 {
 		gap: ($body-margin * 1.5) ($body-margin * 1.5);
 		grid-template-rows: auto auto auto ($body-margin * 6) auto auto;
