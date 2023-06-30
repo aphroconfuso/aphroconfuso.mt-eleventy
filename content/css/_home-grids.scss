@@ -318,8 +318,11 @@
 			}
 		}
 		.ga4 {
-			.body-text p {
-				@include clamp(15);
+			.promo-poetry {
+				.body-text p {
+					@include clamp(17);
+				}
+				padding: 1.4rem $body-margin;
 			}
 		}
 		.ga5 {
