@@ -44,7 +44,6 @@ async function getAllStories() {
 									type
 									appointment
 									showImagePromo
-									publicationHistory
 									updatedAt
 									images {
 										data{
@@ -83,6 +82,8 @@ async function getAllStories() {
 									podcastUrl
 									useDefaultPodcastMessage
 									coda
+									publicationHistory
+									triggerWarning
 									postscript
 									authors {
 										data {
@@ -313,6 +314,7 @@ async function getAllStories() {
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			translator: translatorFullName,
+			triggerWarning: atts.triggerWarning,
 			type: atts.type,
 			updatedAt: atts.updatedAt,
 			useDefaultPodcastMessage: atts.useDefaultPodcastMessage,

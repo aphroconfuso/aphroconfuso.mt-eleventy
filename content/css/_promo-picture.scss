@@ -5,6 +5,7 @@
 
 .promo-picture-1 {
 	.body-text {
+		grid-area: promo-body;
 		p {
 			@include clamp(7);
 		}
