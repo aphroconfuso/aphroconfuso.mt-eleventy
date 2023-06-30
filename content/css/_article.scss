@@ -52,7 +52,7 @@ article {
 			margin-bottom: 0;
 		}
 	}
-	@media screen and (min-width: $laptop-breakpoint) {
+	@media all and (min-width: $laptop-breakpoint) {
 		.title,
 		.author,
 		.publisher {
@@ -100,7 +100,7 @@ article {
 	font-size: 2rem !important;
 }
 
-@media screen and (min-width: $laptop-breakpoint) {
+@media all and (min-width: $laptop-breakpoint) {
 	article {
 		padding-bottom: 0;
 		aside {

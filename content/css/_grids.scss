@@ -2,7 +2,7 @@
 @use "calculations" as *;
 @use "settings" as *;
 
-@media screen and (max-width: $mobile-breakpoint) {
+@media all and (max-width: $mobile-breakpoint) {
 	.promo-1,
 	.promo-2 {
 		border-bottom: 1px solid $grid-lines;
@@ -11,7 +11,7 @@
 	}
 }
 
-@media screen and (min-width: $mobile-breakpoint-plusone) {
+@media all and (min-width: $mobile-breakpoint-plusone) {
 	.container,
 	.promos-container {
 		gap: $body-margin ($body-margin * 2);
@@ -29,7 +29,7 @@
 	}
 }
 
-@media screen and (min-width: $laptop-breakpoint) {
+@media all and (min-width: $laptop-breakpoint) {
 	.container {
 		max-width: $max-width;
 		display: grid;

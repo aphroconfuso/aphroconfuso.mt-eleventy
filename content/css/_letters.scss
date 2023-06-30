@@ -51,21 +51,21 @@
 		margin-bottom: 0;
 	}
 }
-@media screen and (min-width: $tablet-mini-breakpoint) {
+@media all and (min-width: $tablet-mini-breakpoint) {
 	#grid-bottom-full {
 		.letter-content {
 			columns: 2;
 		}
 	}
 }
-@media screen and (min-width: $tablet-breakpoint) {
+@media all and (min-width: $tablet-breakpoint) {
 	#grid-bottom-full {
 		.letter-content {
 			columns: 3;
 		}
 	}
 }
-@media screen and (min-width: $laptop-breakpoint) {
+@media all and (min-width: $laptop-breakpoint) {
 	#grid-bottom-full {
 		.letter-content {
 			columns: 4;

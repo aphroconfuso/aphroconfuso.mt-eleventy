@@ -51,7 +51,7 @@
 			background-color: $colour !important;
 		}
 	}
-	@media screen and (min-width: $mobile-breakpoint-plusone) {
+	@media all and (min-width: $mobile-breakpoint-plusone) {
 		h3 {
 			a:hover {
 				color: $colour;

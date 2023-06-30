@@ -149,7 +149,7 @@ figure#audio {
 		white-space: nowrap;
 	}
 
-	@media screen and (min-width: $laptop-breakpoint) {
+	@media all and (min-width: $laptop-breakpoint) {
 		margin: 0;
 		figcaption {
 			padding-top: $body-margin-half;

@@ -18,7 +18,7 @@
 	}
 }
 
-@media screen and (min-width: $mobile-breakpoint-plusone) {
+@media all and (min-width: $mobile-breakpoint-plusone) {
 	.appointments .promo p {
 		@include clamp(5);
 	}

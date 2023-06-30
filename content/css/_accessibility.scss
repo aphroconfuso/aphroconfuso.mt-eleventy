@@ -3,7 +3,7 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-@media screen and (max-width: $mobile-breakpoint) {
+@media all and (max-width: $mobile-breakpoint) {
 	#top-nav menu li#text-size-adjust {
 		align-items: baseline;
 		justify-content: center;

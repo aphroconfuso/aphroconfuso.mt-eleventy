@@ -108,7 +108,7 @@
 		color: $light-brown;
 	}
 }
-@media screen and (min-width: $laptop-breakpoint) {
+@media all and (min-width: $laptop-breakpoint) {
 	body.scrolling,
 	.splide:hover {
 		.arrows button {
@@ -159,8 +159,8 @@
 	}
 }
 
-@media screen and (max-width: $laptop-breakpoint) {
-	@media screen and (orientation: landscape) {
+@media all and (max-width: $laptop-breakpoint) {
+	@media all and (orientation: landscape) {
 		#lightbox {
 			animation: showLightbox 0.25s;
 			animation-fill-mode: forwards;
@@ -189,7 +189,7 @@
 	}
 }
 
-@media screen and (min-height: 700px) {
+@media all and (min-height: 700px) {
 	#lightbox-container {
 		img {
 			height: 600px;
@@ -198,7 +198,7 @@
 	}
 }
 
-@media screen and (min-height: 800px) {
+@media all and (min-height: 800px) {
 	#lightbox-container {
 		img {
 			height: 700px;
@@ -206,7 +206,7 @@
 	}
 }
 
-@media screen and (min-height: 900px) {
+@media all and (min-height: 900px) {
 	#lightbox-container {
 		img {
 			height: 800px;
@@ -214,7 +214,7 @@
 	}
 }
 
-@media screen and (min-height: 1000px) {
+@media all and (min-height: 1000px) {
 	#lightbox-container {
 		img {
 			height: 900px;
@@ -222,7 +222,7 @@
 	}
 }
 
-@media screen and (min-height: 1300px) {
+@media all and (min-height: 1300px) {
 	#lightbox-container {
 		img {
 			height: 1200px;

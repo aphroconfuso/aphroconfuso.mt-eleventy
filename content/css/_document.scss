@@ -68,7 +68,7 @@ article > header {
 	padding: $body-margin 0;
 	margin-top: $body-margin auto 0;
 	text-align: center;
-	@media screen and (max-width: $mobile-breakpoint) {
+	@media all and (max-width: $mobile-breakpoint) {
 		display: none;
 	}
 	&.active {
@@ -78,25 +78,25 @@ article > header {
 	}
 }
 
-@media screen and (max-width: $mobile-breakpoint) {
+@media all and (max-width: $mobile-breakpoint) {
 	.hide-mobile {
 		display: none !important;
 	}
 }
-@media screen and (min-width: $mobile-breakpoint-plusone) {
+@media all and (min-width: $mobile-breakpoint-plusone) {
 	article > header {
 		max-width: $max-content-width;
 		margin: ($body-margin * 2) auto ($body-margin * 3);
 	}
 }
 
-@media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
+@media all and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
 	.hide-tablet {
 		display: none !important;
 	}
 }
 
-@media screen and (min-width: $mobile-breakpoint-plusone) {
+@media all and (min-width: $mobile-breakpoint-plusone) {
 	.hide-laptop {
 		display: none !important;
 	}

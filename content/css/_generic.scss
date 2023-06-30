@@ -73,7 +73,7 @@
 			color: $lighter-brown;
 		}
 	}
-	@media screen and (min-width: $laptop-breakpoint) {
+	@media all and (min-width: $laptop-breakpoint) {
 		li a {
 			@include animated-underline($light-brown);
 		}
@@ -109,7 +109,7 @@
 			}
 		}
 	}
-	@media screen and (min-width: $mobile-breakpoint-plusone) {
+	@media all and (min-width: $mobile-breakpoint-plusone) {
 		flex-direction: row;
 		justify-content: space-between;
 		li {
@@ -148,7 +148,7 @@
 		-webkit-filter: sepia(1) brightness(75%);
 		filter: sepia(1) brightness(75%);
 		padding-bottom: $body-margin;
-		@media screen and (min-width: $mobile-breakpoint-plusone) {
+		@media all and (min-width: $mobile-breakpoint-plusone) {
 			&:hover {
 				@include ease-out(0.25s);
 				-webkit-filter: sepia(0) brightness(100%);
@@ -158,7 +158,7 @@
 	}
 }
 
-@media screen and (min-width: $mobile-breakpoint-plusone) {
+@media all and (min-width: $mobile-breakpoint-plusone) {
 	#grid-body {
 		.contributors-menu {
 			columns: 2;

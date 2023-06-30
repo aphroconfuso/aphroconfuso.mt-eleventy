@@ -30,7 +30,7 @@
 	}
 }
 
-@media screen and (min-width: $mobile-breakpoint-plusone) {
+@media all and (min-width: $mobile-breakpoint-plusone) {
 	.promo-quote {
 		p {
 			@include clamp(3);

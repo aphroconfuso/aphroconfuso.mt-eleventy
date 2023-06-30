@@ -13,6 +13,8 @@ const smartTruncate = require('smart-truncate');
 
 const slugifyStringMaltese = require("./src/slugifyMaltese.js");
 
+const QRCode = require('qrcode');
+
 module.exports = function(eleventyConfig) {
 	// Copy the contents of the `public` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
@@ -27,10 +29,11 @@ module.exports = function(eleventyConfig) {
 
 	// Watch content images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
+	eleventyConfig.watchIgnores.add("public/img/qr/*");
 
 	// App plugins
-	eleventyConfig.addPlugin(require("./eleventy.config.drafts.js"));
-	eleventyConfig.addPlugin(require("./eleventy.config.images.js"));
+	// eleventyConfig.addPlugin(require("./eleventy.config.drafts.js"));
+	// eleventyConfig.addPlugin(require("./eleventy.config.images.js"));
 
 	// Official plugins
 	eleventyConfig.addPlugin(pluginRss);
@@ -206,6 +209,16 @@ module.exports = function(eleventyConfig) {
 			level: [1,2,3,4],
 			slugify: eleventyConfig.getFilter("slugify")
 		});
+	});
+
+	eleventyConfig.addFilter("qrCodePng", function qrCodePng(path) {
+		const imageLocation = `/img/qr/${ path.replace(/\//gm, '') }.png`;
+		QRCode.toFile(`public${imageLocation}`, `https://aphroconfuso.mt${path}`, {
+			errorCorrectionLevel: 'H'
+		}, function(err) {
+			if (err) throw err;
+		});
+		return imageLocation;
 	});
 
 	// Features to make your build faster (when you need them)

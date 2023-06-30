@@ -176,7 +176,7 @@
 	}
 }
 
-@media screen and (min-width: $mobile-breakpoint-plusone) {
+@media all and (min-width: $mobile-breakpoint-plusone) {
 	body {
 		padding-top: 0;
 	}
