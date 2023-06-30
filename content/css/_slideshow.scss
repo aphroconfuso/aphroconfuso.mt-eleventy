@@ -59,7 +59,54 @@
 	}
 }
 #lightbox {
+	background-color: $dark-brown;
 	display: none;
+	height: 100%;
+	left: 0;
+	padding: $body-margin;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+	align-items: center;
+	flex-direction: row;
+	&.open {
+		animation: showLightbox 0.25s;
+		animation-fill-mode: forwards;
+		display: flex;
+	}
+	.splide__pagination {
+		top: -$body-margin;
+	}
+	#lightbox-container {
+		.splide {
+			height: 100%;
+			margin: 0 10%;
+		}
+		figure {
+			align-items: center;
+			display: flex;
+			flex-direction: column;
+			picture {
+				border: 1px solid $light-brown;
+			}
+			img {
+				vertical-align: middle;
+			}
+			figcaption {
+				text-align: left;
+			}
+		}
+	}
+	#lightbox-open {
+		display: none;
+	}
+	.arrows {
+		z-index: 1000;
+	}
+	.arrows button {
+		color: $light-brown;
+	}
 }
 @media screen and (min-width: $laptop-breakpoint) {
 	body.scrolling,
@@ -89,56 +136,6 @@
 			}
 		}
 	}
-	#lightbox {
-		background-color: $dark-brown;
-		display: none;
-		height: 100%;
-		left: 0;
-		padding: $body-margin;
-		position: fixed;
-		top: 0;
-		width: 100%;
-		z-index: 100;
-		align-items: center;
-		flex-direction: row;
-		&.open {
-			animation: showLightbox 0.25s;
-			animation-fill-mode: forwards;
-			display: flex;
-		}
-		.splide__pagination {
-			top: -$body-margin;
-		}
-		#lightbox-container {
-			.splide {
-				height: 100%;
-				margin: 0 10%;
-			}
-			figure {
-				align-items: center;
-				display: flex;
-				flex-direction: column;
-				picture {
-					border: 1px solid $light-brown;
-				}
-				img {
-					vertical-align: middle;
-				}
-				figcaption {
-					text-align: left;
-				}
-			}
-		}
-		#lightbox-open {
-			display: none;
-		}
-		.arrows {
-			z-index: 1000;
-		}
-		.arrows button {
-			color: $light-brown;
-		}
-	}
 	.arrows {
 		display: block;
 	}
@@ -159,6 +156,30 @@
 	}
 	figcaption {
 		padding-top: $body-margin-half;
+	}
+}
+
+@media screen and (max-width: $laptop-breakpoint) {
+	@media screen and (orientation: landscape) {
+		#lightbox {
+			animation: showLightbox 0.25s;
+			animation-fill-mode: forwards;
+			display: flex;
+			#lightbox-container {
+				img {
+					height: 80vh !important;
+				}
+				.splide__pagination {
+					top: -1.3rem !important;
+				}
+				#lightbox-close {
+					display: none;
+				}
+				.arrows {
+					display: block;
+				}
+			}
+		}
 	}
 }
 

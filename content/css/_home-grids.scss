@@ -85,7 +85,7 @@
 		}
 	}
 }
-@media screen and (max-width: $mobile-breakpoint) {
+@media screen and (max-width: ($laptop-breakpoint - 1)) {
 	.layout-1,
 	.layout-2,
 	.layout-3,
@@ -96,8 +96,8 @@
 		gap: $body-margin $body-margin;
 		grid-template-areas:
 			"ga1"
-			"ga-podcast"
 			"ga-editorial"
+			"ga-podcast"
 			"ga2"
 			"ga3"
 			"ga-newsletter"
@@ -106,8 +106,8 @@
 			"ga6"
 			"ga7"
 			"ga8"
-			"ga9";
-		// "ga10"
+			"ga9"
+			"ga10";
 		// "ga11"
 		// "ga12";
 	}
@@ -138,10 +138,9 @@
 	.mga9 {
 		grid-area: ga9;
 	}
-	// TODO: adjust by layout;
-	// .mga10 {
-	// 	grid-area: ga10;
-	// }
+	.mga10 {
+		grid-area: ga10;
+	}
 	// .mga11 {
 	// 	grid-area: ga11;
 	// }
@@ -150,40 +149,42 @@
 	// }
 	.mga2,
 	.mga6,
-	.mga7 {
+	.mga7,
+	.mga8,
+	.mga9 {
 		padding-bottom: calc(#{$body-margin} - 1px);
 		border-bottom: 1px solid $grid-lines;
 	}
-	.ga3 .body-text p {
-		@include clamp(7);
+	.home {
+		max-width: 640px;
+		margin: 0 auto;
 	}
 }
 
-@media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
-	.ga1 {
-		margin-bottom: 0 !important;
-		padding-bottom: 0;
-	}
-	.ga-editorial {
-		margin: 0;
-		padding: 0;
-	}
-}
+// @media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
+// 	.ga1 {
+// 		margin-bottom: 0 !important;
+// 		padding-bottom: 0;
+// 	}
+// 	.ga-editorial {
+// 		margin: 0;
+// 		padding: 0;
+// 	}
+// }
 
-@media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
-	.layout-2 {
-		.ga1,
-		.ga2,
-		.ga3,
-		.ga9 {
-			p {
-				@include clamp(999);
-				columns: 2;
-				column-gap: $body-margin;
-			}
-		}
-	}
-}
+// @media screen and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
+// 	.layout-2 {
+// 		.ga1,
+// 		.ga2,
+// 		.ga3,
+// 		.ga9 {
+// 			p {
+// 				@include clamp(999);
+// 				columns: 2;
+// 			}
+// 		}
+// 	}
+// }
 
 @media screen and (min-width: $mobile-breakpoint-plusone) {
 	.layout-1,
@@ -196,91 +197,136 @@
 	.ga-podcast {
 		display: none;
 	}
-
-	.layout-1 {
-		gap: ($body-margin * 1.5) ($body-margin * 1.5);
-		grid-template-rows: auto auto auto ($body-margin * 6) auto auto;
-		grid-template-columns: 1fr 1fr;
-		grid-auto-columns: 1fr;
-		grid-auto-flow: row;
-		grid-template-areas:
-			"ga1 ga1"
-			"ga2 ga2"
-			"ga3 ga-editorial"
-			"ga-newsletter ga-newsletter"
-			"ga4 ga5"
-			"ga6 ga7"
-			"ga8 ga8";
-		.ga-editorial .body-text {
-			@include clamp(18);
-		}
-		.ga1 {
-			margin-bottom: $body-margin;
-			.body-text p {
-				@include clamp(10);
-			}
-		}
-		.ga2 .body-text p {
-			@include clamp(7);
-		}
-		.ga3 {
-			display: inherit;
-			.body-text p {
-				@include clamp(15);
-			}
-		}
-		.ga4,
-		.ga5,
-		.ga6,
-		.ga7 {
-			.promo p {
-				@include clamp(7);
-			}
-		}
-	}
-	.layout-2 {
-		gap: ($body-margin * 1.5) ($body-margin * 1.5);
-		grid-template-rows: auto auto auto auto ($body-margin * 6) auto auto;
-		grid-template-columns: 1fr 1fr;
-		grid-auto-columns: 1fr;
-		grid-auto-flow: row;
-		grid-template-areas:
-			"ga1 ga1"
-			"ga2 ga2"
-			"ga3 ga3"
-			"ga4 ga-editorial"
-			"ga-newsletter ga-newsletter"
-			"ga5 ga6"
-			"ga7 ga8"
-			"ga9 ga9";
-		.ga-editorial .body-text {
-			@include clamp(18);
-		}
-		.ga2 {
-			margin-bottom: $body-margin;
-			.body-text p {
-				@include clamp(10);
-			}
-		}
-		.ga3 .body-text p {
-			@include clamp(7);
-		}
-		.ga4 {
-			display: inherit;
-			.body-text p {
-				@include clamp(15);
-			}
-		}
-		.ga5,
-		.ga6,
-		.ga7,
-		.ga8 {
-			.promo p {
-				@include clamp(7);
-			}
-		}
-	}
 }
+
+// 	.layout-1 {
+// 		gap: ($body-margin * 1.5) ($body-margin * 1.5);
+// 		grid-template-rows: auto auto auto ($body-margin * 6) auto auto;
+// 		grid-template-columns: 1fr 1fr;
+// 		grid-auto-columns: 1fr;
+// 		grid-auto-flow: row;
+// 		grid-template-areas:
+// 			"ga1 ga1"
+// 			"ga2 ga2"
+// 			"ga3 ga-editorial"
+// 			"ga-newsletter ga-newsletter"
+// 			"ga4 ga5"
+// 			"ga6 ga7"
+// 			"ga8 ga8";
+// 		.ga-editorial .body-text {
+// 			@include clamp(18);
+// 		}
+// 		.ga1 {
+// 			margin-bottom: $body-margin;
+// 			.body-text p {
+// 				@include clamp(10);
+// 			}
+// 		}
+// 		.ga2 .body-text p {
+// 			@include clamp(7);
+// 		}
+// 		.ga3 {
+// 			display: inherit;
+// 			.body-text p {
+// 				@include clamp(15);
+// 			}
+// 		}
+// 		.ga4,
+// 		.ga5,
+// 		.ga6,
+// 		.ga7 {
+// 			.promo p {
+// 				@include clamp(7);
+// 			}
+// 		}
+// 	}
+// 	.layout-2 {
+// 		gap: ($body-margin * 1.5) ($body-margin * 1.5);
+// 		grid-template-rows: auto auto auto auto ($body-margin * 6) auto auto;
+// 		grid-template-columns: 1fr 1fr;
+// 		grid-auto-columns: 1fr;
+// 		grid-auto-flow: row;
+// 		grid-template-areas:
+// 			"ga1 ga1"
+// 			"ga2 ga2"
+// 			"ga3 ga3"
+// 			"ga4 ga-editorial"
+// 			"ga-newsletter ga-newsletter"
+// 			"ga5 ga6"
+// 			"ga7 ga8"
+// 			"ga9 ga9";
+// 		.ga-editorial .body-text {
+// 			@include clamp(18);
+// 		}
+// 		.ga2 {
+// 			margin-bottom: $body-margin;
+// 			.body-text p {
+// 				@include clamp(10);
+// 			}
+// 		}
+// 		.ga3 .body-text p {
+// 			@include clamp(7);
+// 		}
+// 		.ga4 {
+// 			display: inherit;
+// 			.body-text p {
+// 				@include clamp(15);
+// 			}
+// 		}
+// 		.ga5,
+// 		.ga6,
+// 		.ga7,
+// 		.ga8 {
+// 			.promo p {
+// 				@include clamp(7);
+// 			}
+// 		}
+// 	}
+// 	.layout-3 {
+// 		gap: ($body-margin * 1.5) ($body-margin * 1.5);
+// 		grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+// 		grid-template-columns: 1fr 1fr;
+// 		grid-auto-columns: 1fr;
+// 		grid-auto-flow: row;
+// 		grid-template-areas:
+// 			"ga1 ga2"
+// 			"ga1 ga2"
+// 			"ga1 ga3"
+// 			"ga1 ga3"
+// 			"ga4 ga-editorial"
+// 			"ga-newsletter ga-newsletter"
+// 			"ga5 ga6"
+// 			"ga7 ga8"
+// 			"ga9 ga9"
+// 			"ga10 ga10";
+// 		.ga-editorial .body-text {
+// 			@include clamp(18);
+// 		}
+// 		.ga2 {
+// 			margin-bottom: $body-margin;
+// 			.body-text p {
+// 				@include clamp(10);
+// 			}
+// 		}
+// 		.ga3 .body-text p {
+// 			@include clamp(7);
+// 		}
+// 		.ga4 {
+// 			display: inherit;
+// 			.body-text p {
+// 				@include clamp(15);
+// 			}
+// 		}
+// 		.ga5,
+// 		.ga6,
+// 		.ga7,
+// 		.ga8 {
+// 			.promo p {
+// 				@include clamp(7);
+// 			}
+// 		}
+// 	}
+// }
 
 @media screen and (min-width: $laptop-breakpoint) {
 	.layout-1 {
@@ -366,6 +412,76 @@
 					@include clamp(14);
 				}
 			}
+		}
+	}
+	.layout-3 {
+		gap: ($body-margin * 1.5) ($body-margin * 1.5);
+		grid-template-rows: auto 16rem 10rem auto 17rem 17rem auto;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		grid-auto-columns: 1fr;
+		grid-auto-flow: row;
+		grid-template-areas:
+			"ga1 ga1 ga1 ga1 ga-editorial ga-editorial"
+			"ga2 ga2 ga2 ga3 ga3 ga3"
+			"ga-newsletter ga-newsletter ga-newsletter ga3 ga3 ga3"
+			"ga5 ga5 ga5 ga5 ga5 ga5"
+			"ga4 ga4 ga6 ga6 ga7 ga7"
+			"ga4 ga4 ga8 ga8 ga9 ga9"
+			"ga10 ga10 ga10 ga10 ga10 ga10";
+		.ga-editorial {
+			margin: 0;
+			p {
+				@include clamp(18);
+			}
+			&.editorial {
+				margin-bottom: 3rem;
+				margin-top: 7rem;
+			}
+		}
+		.ga1 {
+			padding-bottom: calc(#{$body-margin} - 1px);
+			.promo-picture-1 {
+				grid-template-columns: 1fr 1fr;
+				grid-template-rows: auto auto;
+				grid-template-areas:
+					"promo-header promo-header"
+					"promo-body promo-image";
+				.body-text p {
+					@include clamp(999);
+				}
+			}
+		}
+		.ga2 {
+			margin: 0;
+			.body-text p {
+				@include clamp(6);
+			}
+		}
+		.ga3 {
+			margin: 0;
+			.body-text p {
+				columns: 2;
+			}
+		}
+		.ga5 {
+			padding-bottom: calc(#{$body-margin} - 1px);
+			padding-top: calc(#{$body-margin} - 1px);
+			border-bottom: 1px solid $grid-lines;
+			border-top: 1px solid $grid-lines;
+			.promo-picture-1 {
+				grid-template-columns: 1fr 1fr 1fr;
+				grid-template-rows: auto auto;
+				grid-template-areas:
+					"promo-header promo-image promo-image"
+					"promo-body promo-image promo-image";
+				.body-text p {
+					@include clamp(14);
+				}
+			}
+		}
+		.ga10 {
+			padding-top: calc(#{$body-margin} - 1px);
+			border-top: 1px solid $grid-lines;
 		}
 	}
 }

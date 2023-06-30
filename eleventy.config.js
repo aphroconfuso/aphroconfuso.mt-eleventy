@@ -115,6 +115,7 @@ module.exports = function(eleventyConfig) {
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
 			.replace(/<\/blockquote>\s*<blockquote>/gm, "<br>")
 			.replace(/- </gm, "-<")
+			.replace(/(\d)\,(\d\d\d)/gm, "$1&hairsp;$2")
 			.replace(/&amp;shy;/gm, '<wbr>');
 	});
 
@@ -153,14 +154,16 @@ module.exports = function(eleventyConfig) {
 
 	eleventyConfig.addFilter("dropCapsifyAndSectionise", function dropCapsifyAndSectionise(text, splitText, beforeOrAfter) {
 		const decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '')
-			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
-			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
+			.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
+			.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
 			.replace(/<p(.*?)>(.)([\w\-]+)/, '<p$1><span class="initial"><span class="dropcap drop-$2">$2</span>$3</span>&nbsp;')
 			.replace(/<p>\#<\/p>\s*<p>(.)([\w\-\’]+)/gm, '<p class="break"><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>&nbsp;')
 			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
-			.replace('drop-C">C</span>XG', 'drop-Ċ">Ċ</span>')
+			.replace('drop-M">M</span>XC', 'drop-Ċ">Ċ</span>')
 			.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
+			.replace('drop-M">M</span>XH', 'drop-Ħ">Ħ</span>')
+			.replace('drop-M">M</span>XZ', 'drop-Ż">Ż</span>')
 			.replace(/\[\+\]/gm, '<p>&nbsp;</p>');
 		if (!splitText) {
 			return decoratedText;

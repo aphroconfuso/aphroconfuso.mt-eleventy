@@ -25,6 +25,9 @@ permalink: /admin/index.html
 									<p class="description">{{ promo.description | prettifyMaltese | safe }}</p>
 								</li>
 							{% endfor %}
+							{% if story.triggerWarning %}
+								<li style="color: red">{{ story.triggerWarning | prettifyMaltese | safe }}</li>
+							{% endif %}
 						</ul>
 						{# <p>{{ story.vocabulary.length | slugify }}</p> #}
 						{# <ul class="vocabulary">

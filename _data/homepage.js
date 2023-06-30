@@ -29,6 +29,7 @@ async function getHomepage() {
 								promos {
 									mobilePriority
 									text
+									imageCrop
 									image {
 										data{
 											attributes {
@@ -123,6 +124,7 @@ async function getHomepage() {
 			mobilePriority: promo.mobilePriority || 9,
 			description: promo.text || promoAtts.description,
 			title: promoAtts.title,
+			imageCrop: promo.imageCrop,
 			monthYear: getMonthYear(promoAtts.dateTimePublication),
 			author: authorFullName,
 			translator: translatorFullName,

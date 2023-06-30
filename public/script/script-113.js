@@ -25,7 +25,6 @@ var
 	progressElement,
 	screenHeight,
 	skippedTime,
-	slugifiedUrl,
 	storyCompleted,
 	timeStarted,
 	title,
@@ -39,6 +38,8 @@ audioLoaded = false;
 percentageProgress = 0;
 storyCompleted = false;
 
+const audioBookmarkingInterval = 10;
+const audioReportingInterval = 30;
 const thresholdWords = 100;
 const minWordsperSecond = 1;
 const maxWordsPerSecond = 5;
@@ -53,7 +54,10 @@ const scrolling = () => {
   } else {
     document.querySelector('#menu-toggle').checked = false;
     document.body.classList.remove('show-nav');
-  }
+	}
+	if (!wordcount) {
+		return;
+	}
   if (newScrollPosition !== lastScrollPosition) {
     document.body.classList.add('scrolling');
     clearTimeout(hideScrollTools);
@@ -193,7 +197,7 @@ const initialiseFontSizeListeners = () => {
 const initialiseReadingHeartbeat = () => {
 	lastReportedReadingTime = new Date() / 1000;
 	timeStarted = lastReportedReadingTime;
-	setInterval(heartbeat, 3000, wordsPerPixel, screenHeight, bodyStart, bodyEnd, title);
+	setInterval(heartbeat, 3000, wordsPerPixel, title);
 }
 
 const initialiseAfterNav = () => {
@@ -231,12 +235,14 @@ const initialiseMessage = () => {
 
 const initialiseAfterWindow = () => {
 	progressElement = document.getElementById('progress');
-	slugifiedUrl = location.pathname.replace(/\//g, '');
 
 	initialiseAfterNav();
 	initialiseMessage();
 	initialiseBookmarksList();
 	showFullBookmarks();
+	window.addEventListener('scroll', (event) => {
+		scrolling();
+	});
 
 	if (!!wordcount) {
 		// TODO: Fix enjambed
@@ -252,9 +258,6 @@ const initialiseAfterWindow = () => {
 		wordsPerPixel = wordcount / bodyHeight;
 		charactersPerScreen = parseInt(charactersPerPixel * screenHeight);
 		wordsPerScreen = parseInt(wordsPerPixel * screenHeight);
-		window.addEventListener('scroll', (event) => {
-			scrolling();
-		});
 		lastScrollPosition = getScrollPosition();
 		lastReportedScrollPosition = lastScrollPosition;
 		pageHeight = document.body.scrollHeight;
@@ -278,9 +281,11 @@ const initialiseAfterWindow = () => {
 		const lightbox = document.getElementById('lightbox');
 		const openLightbox = () => {
 			lightbox.classList.add('open');
+			window._paq.push(['trackEvent', 'Stampi', 'lightbox - iftaħ', title]);
 		}
 		const closeLightbox = () => {
 			lightbox.classList.remove('open');
+			window._paq.push(['trackEvent', 'Stampi', 'lightbox - għalaq', title]);
 		}
 		const lightboxOpen = document.getElementById('lightbox-open');
 		const lightboxClose = document.getElementById('lightbox-close');
@@ -294,6 +299,15 @@ const initialiseAfterWindow = () => {
 				}
 			};
 		}
+
+		const closeTriggerWarning = () => {
+			document.body.classList.add('trigger-warning-closed');
+			setCookie(`tw-${ slugifiedUrl }`, 'magħluq', 3);
+			window._paq.push(['trackEvent', 'Stampi', 'lightbox - għalaq', title]);
+		}
+		const triggerWarningClose = document.getElementById('trigger-warning-close');
+		triggerWarningClose && triggerWarningClose.addEventListener('click', () => closeTriggerWarning());
+
 
 		if (podcastUrl) {
 			Amplitude.init({
@@ -319,7 +333,7 @@ const initialiseAfterWindow = () => {
 			});
 
 			const addAudioBookmarkNow = (percentage) => {
-				let playPosition = audio.currentTime.toFixed(0);
+				let playPosition = parseInt(audio.currentTime);
 				percentageAudio = percentage || (parseInt(audio.currentTime) * 100 / duration).toFixed(2);
 				addBookmark('audio', {
 					title,
@@ -342,6 +356,10 @@ const initialiseAfterWindow = () => {
 			audio.addEventListener('seek', () => {
 				percentageAudio = (parseInt(audio.currentTime) * 100 / duration).toFixed(2);
 				window._paq.push(['trackEvent', 'Smiegħ', 'seek', title, percentageAudio]);
+				if (currentTime === 0) {
+					deleteBookmark('audio');
+					return;
+				}
 				addAudioBookmarkNow(percentageAudio);
 			});
 			audio.addEventListener('ended', () => {
@@ -351,23 +369,22 @@ const initialiseAfterWindow = () => {
 			audio.addEventListener('waiting', () => {
 				window._paq.push(['trackEvent', 'Smiegħ', 'buffering', title, 1]);
 			});
-
 			audio.addEventListener('timeupdate', () => {
 				currentTime = parseInt(audio.currentTime);
-				if (currentTime === 0 || (currentTime === previousTime)) {
+				if (currentTime === 0 || currentTime === previousTime) {
 					return;
 				}
 				elapsedTime = currentTime - previousTime;
-				if (elapsedTime > 3) {
+				if (elapsedTime > 10) {
 					window._paq.push(['trackEvent', 'Smiegħ', 'kliem maqbuż', parseInt(elapsedTime * wordsPerSecondAudio)]);
 				}
-				if (currentTime % 10 === 0) {
+				if (currentTime % audioBookmarkingInterval === 0) {
 					addAudioBookmarkNow();
 				}
-				if (currentTime % 30 === 0) {
-					window._paq.push(['trackEvent', 'Smiegħ', 'kliem', title, parseInt(elapsedTime * wordsPerSecondAudio)]);
-					window._paq.push(['trackEvent', 'Smiegħ', 'minuti', title, 0.5]);
-					window._paq.push(['trackEvent', 'Smiegħ', 'perċentwali', title, ((currentTime * 100) / duration).toFixed(2)]);
+				if (currentTime % audioReportingInterval === 0) {
+					window._paq.push(['trackEvent', 'Smiegħ', 'kliem (awdjo)', title, parseInt(audioReportingInterval * wordsPerSecondAudio)]);
+					window._paq.push(['trackEvent', 'Smiegħ', 'minuti (awdjo)', title, 0.5]);
+					window._paq.push(['trackEvent', 'Smiegħ', 'perċentwali (awdjo)', title, ((currentTime * 100) / duration).toFixed(2)]);
 				}
 				previousTime = currentTime;
 			});
