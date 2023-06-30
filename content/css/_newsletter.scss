@@ -36,10 +36,16 @@
 	&.ga-newsletter {
 		flex-direction: column;
 	}
-}
 
-@media screen and (min-width: $mobile-breakpoint-plusone) {
-	#form iframe {
-		height: 240px;
+	@media all and (min-width: $mobile-breakpoint-plusone) {
+		#form iframe {
+			height: 100px;
+		}
+	}
+
+	@media all and (min-width: $laptop-breakpoint) {
+		#form iframe {
+			height: 240px;
+		}
 	}
 }

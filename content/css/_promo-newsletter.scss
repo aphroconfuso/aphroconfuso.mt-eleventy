@@ -44,7 +44,7 @@
 	}
 }
 
-@media screen and (min-width: $mobile-breakpoint-plusone) {
+@media all and (min-width: $mobile-breakpoint-plusone) {
 	.newsletter-subscribe {
 		flex-direction: column;
 	}

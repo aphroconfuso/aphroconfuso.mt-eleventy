@@ -13,7 +13,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 {% block head %}
 	<title>{{ story.metaTitle or metadata.title }} · Aphroconfuso</title>
 	<meta content="{{ story.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ story.socialImage }}">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl + story.socialImage }}">
 	{% if story.translator %}
 		<meta name="author" content="{{ story.author }} (tr {{ story.translator }})">
 	{% else %}
@@ -31,7 +31,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 	<meta name="twitter:creator" content="@aphroconfuso">
 	<meta name="twitter:title" content="{{ story.metaTitle or metadata.title }}">
 	<meta name="twitter:description" content="{{ story.description }}">
-	<meta name="twitter:image" content="{{ metadata.settings.imagesUrl }}{{ story.socialImage }}">
+	<meta name="twitter:image" content="{{ metadata.settings.imagesUrl + story.socialImage }}">
 	<meta name="twitter:image:alt" content="{{ story.socialImageAlt }}">
 {% endblock %}
 
@@ -96,7 +96,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 					</aside>
 				{% endif %}
 				{% if story.triggerWarning %}
-					<aside id="trigger-warning">
+					<section id="trigger-warning">
 						<button id="trigger-warning-close" class="close">×</button>
 						{{ story.triggerWarning | prettifyMaltese | safe }}
 					</section>
@@ -139,9 +139,9 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 					{% endif %}
 				{% endif %}
 				{% if story.endnote %}
-					<aside class="endnote body-text">
+					<section class="endnote body-text">
 						{{ story.endnote | restrictHtml | prettifyMaltese | safe }}
-					</aside>
+					</section>
 				{% endif %}
 			</section>
 			<section id="grid-max-panel-left-bottom">

@@ -1,2 +1,86 @@
 @use "constants" as *;
 @use "calculations" as *;
+
+@media print {
+	.body-text p {
+		font-size: 12pt !important;
+	}
+	a {
+		content: "(" attr(href) ")" !important;
+		text-decoration: none !important;
+	}
+	footer,
+	section.endnote {
+		page-break-inside: avoid;
+	}
+	#logo {
+		width: 50%;
+		padding-bottom: $body-margin * 3;
+	}
+	#top-nav {
+		menu {
+			display: none;
+		}
+	}
+
+	article {
+		border: none;
+	}
+
+	aside {
+		display: none;
+	}
+
+	footer {
+		background-color: transparent;
+		border: none;
+		#housekeeping,
+		#media,
+		#socials,
+		#podcast {
+			display: none;
+		}
+		.footer-content {
+			grid-template-columns: auto;
+			grid-template-rows: auto auto auto auto;
+			gap: 0;
+			grid-template-areas:
+				"copyright"
+				"email"
+				"logotype-container"
+				"qrcode"
+				"url";
+			justify-content: center;
+		}
+		#logotype-container {
+			display: unset;
+			img {
+				height: 120px;
+				width: 120px;
+			}
+		}
+		#qrcode {
+			grid-area: qrcode;
+		}
+		#url {
+			grid-area: url;
+		}
+		#email,
+		#copyright,
+		#logotype-container,
+		#qrcode,
+		#url {
+			color: $light-brown !important;
+			display: block;
+			margin: 0 auto;
+			a {
+				justify-content: center;
+				position: relative;
+			}
+		}
+	}
+	@page {
+		size: A4 portrait;
+		margin: 2.5cm 4cm 4cm 2.5cm;
+	}
+}

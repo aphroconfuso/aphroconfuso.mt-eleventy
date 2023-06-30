@@ -171,7 +171,8 @@ strong {
 // }
 
 .generic-body-text,
-aside {
+aside,
+.endnote {
 	p {
 		a {
 			text-decoration: underline;
@@ -182,7 +183,7 @@ aside {
 	}
 }
 
-@media screen and (min-width: $laptop-breakpoint) {
+@media all and (min-width: $laptop-breakpoint) {
 	h1,
 	h2 {
 		font-size: 3rem;
