@@ -20,6 +20,6 @@ module.exports = {
 	"texts": {
 		"error404": "Din il-paġna ma teżistix.",
 		"error404AltText": "Sinjal ta' ottagonali aħmar bi 'Stop' miktuba bl-aħmar. Taħta, sinjal ieħor li jgħid ' Stop Tfisser Ieqaf'.",
-		"podcastMessage": "Abbona <l-m>fil-<a href=\"/podcast\">podcast</a></l-m> ta’ Aphroconfuso biex tisma’ kulma nippubblikaw."
+		"podcastMessage": "Abbona <l-m>fil-<a href=\"/podcast\">podcast</a></l-m> biex tisma’ kulma nippubblikaw."
 	}
 }

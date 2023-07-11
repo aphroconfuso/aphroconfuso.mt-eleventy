@@ -315,6 +315,7 @@
 			margin: 0;
 			.body-text p {
 				columns: 2;
+				@include clamp(999);
 			}
 		}
 		.ga4 {

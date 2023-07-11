@@ -110,7 +110,7 @@ module.exports = function(eleventyConfig) {
 			.replace(/ ?— ?| - | -- /gm, "&hairsp;—&hairsp;")
 			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
 			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
-			.replace(/([ \,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<])/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
+			.replace(/([ \,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
 			.replace(/(”)([,\.;:])/gm, "$1<span class=\"pull\">$2</span>")
 			.replace(/([,\.])(”)/gm, "$1<span class=\"pullsemi\">$2</span>")
 			.replace(/(’)([,\.;:])/gm, "$1<span class=\"pullsemi\">$2</span>")
@@ -182,7 +182,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("endDotify", function endDotify(text) {
-		return (text || []).replace(/\.?\s*<\/p>\s*$/, '&nbsp;<span class="end-dot">.</span></p>');
+		return (text || []).replace(/\.?\s*<\/(p|blockquote)>\s*$/, '&nbsp;<span class="end-dot">.</span></$1>');
 	});
 
 	eleventyConfig.addFilter("restrictHtml", function restrictHtml(text, allowedTags) {
