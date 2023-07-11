@@ -99,6 +99,9 @@ strong {
 			margin-bottom: 0;
 		}
 	}
+	p:last-of-type + blockquote {
+		margin-top: $body-margin-half !important;
+	}
 	figure {
 		padding-right: $body-margin;
 		margin-bottom: $body-margin;
