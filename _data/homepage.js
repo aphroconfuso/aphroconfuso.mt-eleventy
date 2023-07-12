@@ -26,7 +26,7 @@ async function getHomepage() {
                     }
                   }
                 }
-								promos {
+								promos(pagination: { page: 1, pageSize: 250 }) {
 									mobilePriority
 									text
 									imageCrop

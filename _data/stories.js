@@ -33,7 +33,7 @@ async function getAllStories() {
         },
         body: JSON.stringify({
           query: `{
-						stories {
+						stories(pagination: { page: 1, pageSize: 250 }) {
 							data {
 								attributes {
 									title

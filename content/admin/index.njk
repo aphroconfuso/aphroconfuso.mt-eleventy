@@ -1,7 +1,7 @@
 ---
 pagination:
   data: stories
-  size: 10
+  size: 250
   alias: story
 eleventyExcludeFromCollections: true
 permalink: /admin/index.html
@@ -16,7 +16,7 @@ permalink: /admin/index.html
 		<section>
 			<ul>
 				{% for story in stories %}
-					<li><strong>{{ story.title | prettifyMaltese | safe }}</strong></li>
+					<li><strong>{{ story.title | prettifyMaltese | safe }}</strong> <span style="color:#999;font-family:monospace;font-size:14px">{{ story.body | wordcount }}</span></li>
 						<ul>
 							{% for promo in story.endPromos %}
 								<li>
