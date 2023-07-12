@@ -57,12 +57,9 @@
 .ga11 {
 	grid-area: ga11;
 }
-.ga12 {
-	grid-area: ga12;
-}
-.ga12 {
-	grid-area: ga12;
-}
+// .ga12 {
+// 	grid-area: ga12;
+// }
 .ga-editorial {
 	grid-area: ga-editorial;
 	&.editorial {
@@ -376,7 +373,7 @@
 			.body-text p {
 				columns: 3;
 				column-gap: $body-margin * 1.5;
-				@include clamp(999);
+				display: block; // to unset clamp
 			}
 		}
 		.ga-editorial {
@@ -408,7 +405,7 @@
 			margin: 0;
 			.body-text p {
 				columns: 2;
-				@include clamp(999);
+				display: block;
 			}
 		}
 		.ga4 {

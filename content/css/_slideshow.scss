@@ -38,9 +38,19 @@
 			text-align: right;
 		}
 		&#lightbox-open {
+			background-color: $deco-brown;
+			cursor: pointer;
 			top: $body-margin * 1.5;
 			left: calc(100% + $body-margin-half);
-			font-size: $body-font-size;
+			display: block;
+			width: $body-margin;
+			height: $body-margin-half;
+			border: 1px solid $lightester-brown;
+			&:hover {
+				background-color: $lighter-brown !important;
+				border-color: $light-brown;
+				@include ease-in(0.25s);
+			}
 		}
 	}
 }
