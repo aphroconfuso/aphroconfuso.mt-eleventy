@@ -74,7 +74,7 @@ article {
 #trigger-warning {
 	border: 1px solid $faint-line;
 	font-size: 1rem;
-	margin-bottom: $body-margin;
+	margin-bottom: $body-margin * 1.5;
 	padding: $body-margin-half;
 	position: relative;
 	display: block;

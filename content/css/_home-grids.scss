@@ -162,6 +162,7 @@
 			.body-text p {
 				@include clamp(12);
 			}
+			padding-bottom: calc(#{$body-margin-half} - 1px);
 		}
 	}
 }

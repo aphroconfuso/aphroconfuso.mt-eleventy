@@ -43,8 +43,8 @@
 			top: $body-margin * 1.5;
 			left: calc(100% + $body-margin-half);
 			display: block;
-			width: $body-margin;
-			height: $body-margin-half;
+			width: 29px;
+			height: 16px;
 			border: 1px solid $lightester-brown;
 			&:hover {
 				background-color: $lighter-brown !important;
