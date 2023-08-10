@@ -68,6 +68,12 @@
 		background: $lightest-brown;
 	}
 }
+.single-image {
+	.arrows,
+	.splide__pagination {
+		display: none;
+	}
+}
 #lightbox {
 	background-color: $dark-brown;
 	display: none;

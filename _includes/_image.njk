@@ -40,6 +40,9 @@
 		<img
 			src="{{ url }}{{ slide.social.hash }}{{ slide.social.ext }}"
 			alt="{{ image.attributes.alternativeText }}"
+			{% if story.imageBorderColour %}
+				style="border: 1px solid {{ story.imageBorderColour }}"
+			{%endif %}
 		>
 	</picture>
 	<figcaption>{{ image.attributes.caption }}</figcaption>

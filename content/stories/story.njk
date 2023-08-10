@@ -117,19 +117,14 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 					</section>
 				{% else %}
 					{% if story.imagesPositionText %}
-						<section class="body-text">
+						<section class="body-text{% if story.useSeparators %} separated{% endif %}">
 							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 0) | prettifyMaltese | safe }}
 						</section>
 						{% set imageMode = 'regular' %}
-						{% if story.slideshow %}
+						{% if story.slideshow or story.singleImage %}
 							{% include "_slideshow.njk" %}
 						{% endif %}
-						{% if story.singleImage %}
-							{% set image = story.images[0] %}
-							{% set slide = story.images[0].attributes.formats %}
-							{% include "_image.njk" %}
-						{% endif %}
-						<section class="body-text">
+						<section class="body-text{% if story.useSeparators %} separated{% endif %}">
 							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 1) | prettifyMaltese | endDotify | safe }}
 						</section>
 					{% else %}
@@ -208,14 +203,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 		<aside id="lightbox">
 			<div id="lightbox-container">
 				<button id="lightbox-close" type="button" onclick="_paq.push(['trackEvent', 'Stampi', 'lightbox [×]', '{{ story.title }}']);">×</button>
-				{% if story.slideshow %}
 					{% include "_slideshow.njk" %}
-				{% endif %}
-				{% if story.singleImage %}
-					{% set image = story.images[0] %}
-					{% set slide = story.images[0].attributes.formats %}
-					{% include "_image.njk" %}
-				{% endif %}
 			</div>
 		</aside>
 	{% endif %}

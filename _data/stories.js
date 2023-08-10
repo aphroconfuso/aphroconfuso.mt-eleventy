@@ -45,6 +45,8 @@ async function getAllStories() {
 									appointment
 									showImagePromo
 									updatedAt
+									imageBorderColour
+									useSeparators
 									images {
 										data{
 											attributes {
@@ -289,17 +291,18 @@ async function getAllStories() {
 			body: atts.body,
 			booksMentioned: booksMentioned,
 			coda: atts.coda,
+			dateTimePublication: atts.dateTimePublication,
 			description: atts.description,
 			displayTitle: displayTitle,
 			endnote: atts.endnote,
 			endPromos: endPromosFormatted,
 			epigraphs: !!atts.epigraphs && atts.epigraphs,
+			imageBorderColour: atts.imageBorderColour,
+			imageCrop: imageTypes[atts.imagesType],
 			images: atts.images.data,
 			imagesPositionText: atts.imagesPositionText,
-			imageCrop: imageTypes[atts.imagesType],
 			introduction: atts.introduction,
 			metaTitle: `${ displayTitle }`,
-			dateTimePublication: atts.dateTimePublication,
 			monthYear: getMonthYear(atts.dateTimePublication),
 			podcastNote: atts.podcastNote,
 			podcastUrl: atts.podcastUrl,
@@ -313,14 +316,15 @@ async function getAllStories() {
 			slug: makeTitleSlug(atts.title, authorFullName, translatorFullName),
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
+			title: atts.title,
 			translator: translatorFullName,
 			triggerWarning: atts.triggerWarning,
 			type: atts.type,
 			updatedAt: atts.updatedAt,
 			useDefaultPodcastMessage: atts.useDefaultPodcastMessage,
+			useSeparators: atts.useSeparators,
 			useSquareOnMobile: atts.useSquareOnMobile,
 			vocabulary: vocabulary,
-      title: atts.title,
     };
 	});
   return storiesFormatted;
