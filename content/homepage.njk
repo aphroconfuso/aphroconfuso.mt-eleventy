@@ -51,31 +51,42 @@ permalink: /index.html
 				</figure>
 			</a>
 			{% for promo in homepage.promos %}
-					<div class="ga{{ loop.index }} mga{{ promo.mobilePriority }}">
+				<div class="ga-{{ loop.index }} mga-{{ promo.mobilePriority }}">
 					<a class="{{ promo.monthYear | slugify }} {{ promo.promoType }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
-						<header>
-							<h3>{{ promo.monthYear }}</h3>
-							<h1>{{ promo.title | prettifyMaltese | safe }}</h1>
-							<h2>
-								{% if promo.translator %}
-									{{ promo.author | prettifyMaltese }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
-								{% else %}
-									{{ promo.author | prettifyMaltese | safe }}
-								{% endif %}
-							</h2>
-						</header>
+						{% include "_promo_header.njk" %}
+						<div class="{{ promo.cssClass }}">
+							<p>{{ promo.description | prettifyMaltese | safe }}</p>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+			{% for promo in homepage.imagePromos %}
+				<div class="ga-image-{{ loop.index }} mga-image-{{ promo.mobilePriority }}">
+					<a class="{{ promo.monthYear | slugify }} {{ promo.promoType }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
+						{% include "_promo_header.njk" %}
 						{% if promo.images %}
 							{% set slide = promo.images %}
 							{% set imageCrop = promo.imageCrop or 'landscape' %}
 							{% include "_image.njk" %}
 						{% endif %}
 						<div class="{{ promo.cssClass }}">
-							{% if promo.type === 'Poezija' %}
-								<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
-							{% else %}
-								<p>{{ promo.description | prettifyMaltese | safe }}</p>
-							{% endif %}
-					</div>
+							<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+			{% for promo in homepage.poetryPromos %}
+				<div class="ga-poem-{{ loop.index }} mga-poem-{{ promo.mobilePriority }}">
+					<a class="{{ promo.monthYear | slugify }} {{ promo.promoType }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
+						{% include "_promo_header.njk" %}
+						{% if promo.images %}
+							{% set slide = promo.images %}
+							{% set imageCrop = promo.imageCrop or 'landscape' %}
+							{% include "_image.njk" %}
+						{% endif %}
+						<div class="{{ promo.cssClass }}">
+							<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
+						</div>
 					</a>
 				</div>
 			{% endfor %}

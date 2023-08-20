@@ -68,12 +68,6 @@
 		background: $lightest-brown;
 	}
 }
-.single-image {
-	.arrows,
-	.splide__pagination {
-		display: none;
-	}
-}
 #lightbox {
 	background-color: $dark-brown;
 	display: none;
@@ -85,6 +79,7 @@
 	width: 100%;
 	z-index: 100;
 	align-items: center;
+	justify-content: center;
 	flex-direction: row;
 	&.open {
 		animation: showLightbox 0.25s;
@@ -202,6 +197,13 @@
 #lightbox-container {
 	img {
 		height: 400px;
+	}
+}
+
+.single-image {
+	.arrows,
+	.splide__pagination {
+		display: none !important;
 	}
 }
 

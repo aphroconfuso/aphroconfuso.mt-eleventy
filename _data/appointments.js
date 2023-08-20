@@ -29,7 +29,7 @@ async function getAllAppointments() {
 								dateTimePublication
 								editorial
 								moreToCome
-								stories {
+								stories(sort: "dateTimePublication:desc") {
 									data {
 										attributes {
 											title
@@ -85,7 +85,7 @@ async function getAllAppointments() {
 
 			return {
 				title: storyAuthored.attributes.title,
-				slug: makeTitleSlug(storyAuthored.attributes.title, authorFullName, translatorFullName),
+				slug: storyAuthored.attributes.pageUrl || makeTitleSlug(storyAuthored.attributes.title, authorFullName, translatorFullName),
 				monthYear: getMonthYear(storyAuthored.attributes.dateTimePublication),
 				description: storyAuthored.attributes.description,
 				author: authorFullName,

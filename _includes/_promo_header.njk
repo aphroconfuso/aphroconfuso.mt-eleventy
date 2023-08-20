@@ -1,0 +1,11 @@
+<header>
+	<h3>{{ promo.monthYear }}</h3>
+	<h1>{{ promo.title | prettifyMaltese | safe }}</h1>
+	<h2>
+		{% if promo.translator %}
+			{{ promo.author | prettifyMaltese }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
+		{% else %}
+			{{ promo.author | prettifyMaltese | safe }}
+		{% endif %}
+	</h2>
+</header>

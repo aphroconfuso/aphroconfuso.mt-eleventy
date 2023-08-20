@@ -35,7 +35,9 @@ async function getAllStories() {
           query: `{
 						stories(pagination: { page: 1, pageSize: 250 }) {
 							data {
+								id
 								attributes {
+									pageUrl
 									title
 									body
 									description
@@ -47,6 +49,8 @@ async function getAllStories() {
 									updatedAt
 									imageBorderColour
 									useSeparators
+									dontUseDropCaps
+									useProseStyling
 									images {
 										data{
 											attributes {
@@ -145,6 +149,7 @@ async function getAllStories() {
 													dateTimePublication
 													title
 													description
+													pageUrl
 													type
 													authors {
 														data {
@@ -221,7 +226,7 @@ async function getAllStories() {
 				description: promo.text || promoAtts.description,
 				author: authorFullName,
 				translator: translatorFullName,
-				slug: makeTitleSlug(promoAtts.title, authorFullName, translatorFullName),
+				slug: promoAtts.pageUrl || makeTitleSlug(promoAtts.title, authorFullName, translatorFullName),
 				type: promoAtts.type,
 				cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			};
@@ -294,9 +299,11 @@ async function getAllStories() {
 			dateTimePublication: atts.dateTimePublication,
 			description: atts.description,
 			displayTitle: displayTitle,
+			dontUseDropCaps: atts.dontUseDropCaps,
 			endnote: atts.endnote,
 			endPromos: endPromosFormatted,
 			epigraphs: !!atts.epigraphs && atts.epigraphs,
+			id: story.id,
 			imageBorderColour: atts.imageBorderColour,
 			imageCrop: imageTypes[atts.imagesType],
 			images: atts.images.data,
@@ -313,7 +320,7 @@ async function getAllStories() {
 			showImagePromo: atts.showImagePromo,
 			singleImage: atts.images.data && atts.images.data.length === 1,
 			slideshow:  atts.images.data && atts.images.data.length > 1,
-			slug: makeTitleSlug(atts.title, authorFullName, translatorFullName),
+			slug: atts.pageUrl || makeTitleSlug(atts.title, authorFullName, translatorFullName),
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			title: atts.title,
@@ -321,9 +328,11 @@ async function getAllStories() {
 			triggerWarning: atts.triggerWarning,
 			type: atts.type,
 			updatedAt: atts.updatedAt,
-			useDefaultPodcastMessage: atts.useDefaultPodcastMessage,
-			useSeparators: atts.useSeparators,
-			useSquareOnMobile: atts.useSquareOnMobile,
+			useDefaultPodcastMessage: !!atts.useDefaultPodcastMessage,
+			dontUseDropCaps: !!atts.dontUseDropCaps,
+			useSeparators: !!atts.useSeparators,
+			useProseStyling: !!atts.useProseStyling,
+			useSquareOnMobile: !!atts.useSquareOnMobile,
 			vocabulary: vocabulary,
     };
 	});

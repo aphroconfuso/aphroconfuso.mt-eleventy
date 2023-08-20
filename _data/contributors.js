@@ -27,7 +27,7 @@ async function getAllContributors() {
 									forename
 									surname
 									bioNote
-									storiesAuthored {
+									storiesAuthored(sort: "dateTimePublication:desc") {
 										data {
 											id
 											attributes {
@@ -55,7 +55,7 @@ async function getAllContributors() {
 											}
 										}
 									}
-									storiesTranslated {
+									storiesTranslated(sort: "dateTimePublication:desc") {
 										data {
 											id
 											attributes {
@@ -119,7 +119,7 @@ async function getAllContributors() {
 			const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`
 			return {
 				title: storyAuthored.attributes.title,
-				slug: makeTitleSlug(storyAuthored.attributes.title, authorFullName, translatorFullName),
+				slug: storyAuthored.attributes.pageUrl || makeTitleSlug(storyAuthored.attributes.title, authorFullName, translatorFullName),
 				monthYear: getMonthYear(storyAuthored.attributes.dateTimePublication),
 				description: storyAuthored.attributes.description,
 				type: storyAuthored.attributes.type,
@@ -135,13 +135,14 @@ async function getAllContributors() {
 
 			return {
 				title: storyTranslated.attributes.title,
-				slug: makeTitleSlug(storyTranslated.attributes.title, authorFullName, translatorFullName),
+				slug: storyTranslated.attributes.pageUrl || makeTitleSlug(storyTranslated.attributes.title, authorFullName, translatorFullName),
 				monthYear: getMonthYear(storyTranslated.attributes.dateTimePublication),
 				description: storyTranslated.attributes.description,
 			};
 		});
 
 		return {
+			firstName: item.attributes.forename,
       name: `${ item.attributes.forename } ${ item.attributes.surname }`,
 			bioNote: item.attributes.bioNote,
 			slug: slugifyMaltese(`${ item.attributes.forename } ${ item.attributes.surname }`),

@@ -9,7 +9,7 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 {% extends 'layouts/base.njk' %}
 
 {% block head %}
-	<title>{{ contributor.name | prettifyMaltese }} · Aphroconfuso</title>
+	<title>{{ contributor.name }} · Aphroconfuso</title>
 	<meta content="{{ contributor.bioNote | getDescription }}" name="description">
 	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
 {% endblock %}
@@ -23,7 +23,15 @@ permalink: /{{ contributor.slug | slugifyMaltese }}/index.html
 	</header>
 	<div class="container">
 		<section>
-			<div class="generic-body-text">{{ contributor.bioNote | prettifyMaltese | safe }}</div>
+			<div class="generic-body-text">
+				{{ contributor.bioNote | prettifyMaltese | safe }}
+			</div>
+			<div class="generic-body-text">
+				<br/>
+				<p><em>kitba ta' {{ contributor.firstName | prettifyMaltese | safe }} fil-ġurnal:</em></p>
+				{# {% set firstName = contributor.firstName %}
+				<p>{{ metadata.texts.contributions | prettifyMaltese | safe  }}</p> #}
+			</div>
 			<ul class="promo-list">
 				{% for promo in contributor.storiesAuthored %}
 					<li>

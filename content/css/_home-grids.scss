@@ -3,18 +3,50 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-.ga1,
-.ga2,
-.ga3,
-.ga4,
-.ga5,
-.ga6,
-.ga7,
-.ga8,
-.ga9,
-.ga10,
-.ga11,
-.ga12,
+@mixin border-top() {
+	padding-top: calc(#{$body-margin} - 1px);
+	border-top: 1px solid $grid-lines;
+}
+
+@mixin border-bottom() {
+	padding-bottom: calc(#{$body-margin} - 1px);
+	border-bottom: 1px solid $grid-lines;
+}
+
+@mixin image-left() {
+	.promo-picture-1 {
+		grid-template-areas:
+			"promo-header promo-image promo-image"
+			"promo-body promo-image promo-image";
+	}
+}
+
+@mixin image-right() {
+	.promo-picture-1 {
+		grid-template-areas:
+			"promo-image promo-image promo-header"
+			"promo-image promo-image promo-body";
+	}
+}
+
+.ga-1,
+.ga-2,
+.ga-3,
+.ga-4,
+.ga-5,
+.ga-6,
+.ga-7,
+.ga-8,
+.ga-9,
+.ga-10,
+.ga-11,
+.ga-12,
+.ga-image-1,
+.ga-image-2,
+.ga-image-3,
+.ga-poem-1,
+.ga-poem-2,
+.ga-poem-3,
 .ga-editorial,
 .ga-newsletter,
 .ga-podcast {
@@ -24,47 +56,64 @@
 	// 	margin-bottom: 0;
 	// }
 }
-.ga1 {
+.ga-1 {
 	grid-area: ga1;
 }
-.ga2 {
+.ga-2 {
 	grid-area: ga2;
 }
-.ga3 {
+.ga-3 {
 	grid-area: ga3;
 }
-.ga4 {
+.ga-4 {
 	grid-area: ga4;
 }
-.ga5 {
+.ga-5 {
 	grid-area: ga5;
 }
-.ga6 {
+.ga-6 {
 	grid-area: ga6;
 }
-.ga7 {
+.ga-7 {
 	grid-area: ga7;
 }
-.ga8 {
+.ga-8 {
 	grid-area: ga8;
 }
-.ga9 {
+.ga-9 {
 	grid-area: ga9;
 }
-.ga10 {
+.ga-10 {
 	grid-area: ga10;
 }
-.ga11 {
+.ga-11 {
 	grid-area: ga11;
 }
-.ga12 {
+.ga-12 {
 	grid-area: ga12;
+}
+.ga-image-1 {
+	grid-area: ga-image-1;
+}
+.ga-image-2 {
+	grid-area: ga-image-2;
+}
+.ga-image-3 {
+	grid-area: ga-image-3;
+}
+.ga-poem-1 {
+	grid-area: ga-poem-1;
+}
+.ga-poem-2 {
+	grid-area: ga-poem-2;
+}
+.ga-poem-3 {
+	grid-area: ga-poem-3;
 }
 .ga-editorial {
 	grid-area: ga-editorial;
 	&.editorial {
 		margin-bottom: $body-margin-half;
-		// margin: $body-margin-half 0 $body-margin-half;
 	}
 	p {
 		@include clamp(18);
@@ -88,449 +137,265 @@
 	.layout-2,
 	.layout-3,
 	.layout-4,
-	.layout-5 {
+	.layout-5,
+	.layout-6,
+	.layout-7,
+	.layout-8,
+	.layout-9 {
 		display: grid;
 		grid-template-columns: auto;
 		grid-template-rows: auto auto auto auto auto auto auto auto auto;
 		gap: $body-margin $body-margin;
-		grid-template-areas:
-			"ga1"
-			"ga-editorial"
-			"ga-podcast"
-			"ga2"
-			"ga3"
-			"ga-newsletter"
-			"ga4"
-			"ga5"
-			"ga6"
-			"ga7"
-			"ga8"
-			"ga9"
-			"ga10"
-			"ga11"
-			"ga12";
-	}
-	.mga1 {
-		grid-area: ga1;
-	}
-	.mga2 {
-		grid-area: ga2;
-	}
-	.mga3 {
-		grid-area: ga3;
-	}
-	.mga4 {
-		grid-area: ga4;
-	}
-	.mga5 {
-		grid-area: ga5;
-	}
-	.mga6 {
-		grid-area: ga6;
-	}
-	.mga7 {
-		grid-area: ga7;
-	}
-	.mga8 {
-		grid-area: ga8;
-	}
-	.mga9 {
-		grid-area: ga9;
-	}
-	.mga10 {
-		grid-area: ga10;
-	}
-	.mga11 {
-		grid-area: ga11;
-	}
-	.mga12 {
-		grid-area: ga12;
-	}
-	.mga2,
-	.mga5,
-	.mga6,
-	.mga7,
-	.mga8,
-	.mga9,
-	.mga10,
-	.mga11 {
-		padding-bottom: calc(#{$body-margin} - 1px);
-		border-bottom: 1px solid $grid-lines;
-	}
-	.home {
-		max-width: 640px;
-		margin: 0 auto;
-	}
-	.layout-5 {
-		.ga1 {
-			.body-text p {
-				@include clamp(12);
-			}
-			padding-bottom: calc(#{$body-margin-half} - 1px);
-		}
 	}
 }
 
 // Tablet
-@media all and (min-width: $mobile-breakpoint-plusone) {
-	.layout-1,
-	.layout-2,
-	.layout-3,
-	.layout-4,
-	.layout-5 {
-		display: grid;
-		gap: $body-margin $body-margin;
-	}
-	.ga4 {
-		display: unset;
-		p {
-			@include clamp(15);
-		}
-	}
-	.ga-podcast {
-		display: none;
-	}
-}
+// @media all and (min-width: $mobile-breakpoint-plusone) {
+// 	.layout-1,
+// 	.layout-2,
+// 	.layout-3,
+// 	.layout-4,
+// 	.layout-5,
+// 	.layout-6 {
+// 		display: grid;
+// 		gap: $body-margin $body-margin;
+// 	}
+// 	.ga-4 {
+// 		display: unset;
+// 		p {
+// 			@include clamp(15);
+// 		}
+// 	}
+// 	.ga-podcast {
+// 		display: none;
+// 	}
+// }
 
-// Laptop
-@media all and (min-width: $laptop-breakpoint) {
-	// .layout-1 {
-	// 	gap: ($body-margin * 1.5) ($body-margin * 1.5);
-	// 	grid-template-rows: 36rem 16rem 10rem 17rem 17rem;
-	// 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-	// 	grid-auto-columns: 1fr;
-	// 	grid-auto-flow: row;
-	// 	grid-template-areas:
-	// 		"ga1 ga1 ga1 ga1 ga1 ga1"
-	// 		"ga2 ga2 ga2 ga-editorial ga-editorial ga-editorial"
-	// 		"ga-newsletter ga-newsletter ga-newsletter ga-editorial ga-editorial ga-editorial"
-	// 		"ga3 ga3 ga4 ga4 ga5 ga5"
-	// 		"ga3 ga3 ga6 ga6 ga7 ga7"
-	// 		"ga8 ga8 ga8 ga8 ga8 ga8";
-	// 	.ga-editorial {
-	// 		margin: 0;
-	// 		p {
-	// 			@include clamp(14);
-	// 		}
-	// 		&.editorial {
-	// 			margin-bottom: 0;
-	// 		}
-	// 	}
-	// 	.ga1 {
-	// 		margin-bottom: $body-margin;
-	// 		.body-text p {
-	// 			@include clamp(18);
-	// 		}
-	// 	}
-	// }
-	// .layout-2 {
-	// 	gap: ($body-margin * 1.5) ($body-margin * 1.5);
-	// 	grid-template-rows: auto auto 16rem 10rem 17rem 17rem auto;
-	// 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-	// 	grid-auto-columns: 1fr;
-	// 	grid-auto-flow: row;
-	// 	grid-template-areas:
-	// 		"ga1 ga1 ga1 ga1 ga1 ga1"
-	// 		"ga2 ga2 ga2 ga2 ga2 ga2"
-	// 		"ga3 ga3 ga3 ga-editorial ga-editorial ga-editorial"
-	// 		"ga-newsletter ga-newsletter ga-newsletter ga-editorial ga-editorial ga-editorial"
-	// 		"ga4 ga4 ga5 ga5 ga6 ga6"
-	// 		"ga4 ga4 ga7 ga7 ga8 ga8"
-	// 		"ga9 ga9 ga9 ga9 ga9 ga9";
-	// 	.ga-editorial {
-	// 		margin: 0;
-	// 		p {
-	// 			@include clamp(14);
-	// 		}
-	// 		&.editorial {
-	// 			margin-bottom: 0;
-	// 		}
-	// 	}
-	// 	.ga1 {
-	// 		padding-bottom: calc(#{$body-margin} - 1px);
-	// 		border-bottom: 1px solid $grid-lines;
-	// 		.body-text p {
-	// 			columns: 3;
-	// 			column-gap: $body-margin * 1.5;
-	// 			@include clamp(999);
-	// 		}
-	// 	}
-	// 	.ga2 {
-	// 		margin: 0;
-	// 		.body-text p {
-	// 			@include clamp(14);
-	// 		}
-	// 	}
-	// 	.ga3 {
-	// 		margin: 0;
-	// 		.body-text p {
-	// 			@include clamp(6);
-	// 		}
-	// 	}
-	// 	.ga9 {
-	// 		margin-bottom: $body-margin;
-	// 		.promo-picture-1 {
-	// 			grid-template-areas:
-	// 				"promo-header promo-image promo-image"
-	// 				"promo-body promo-image promo-image";
-	// 			.body-text p {
-	// 				@include clamp(14);
-	// 			}
-	// 		}
-	// 	}
-	// }
-	// .layout-3 {
-	// 	gap: ($body-margin * 1.5) ($body-margin * 1.5);
-	// 	grid-template-rows: auto 16rem 10rem auto 17rem 17rem auto;
-	// 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-	// 	grid-auto-columns: 1fr;
-	// 	grid-auto-flow: row;
-	// 	grid-template-areas:
-	// 		"ga1 ga1 ga1 ga1 ga-editorial ga-editorial"
-	// 		"ga2 ga2 ga2 ga3 ga3 ga3"
-	// 		"ga-newsletter ga-newsletter ga-newsletter ga3 ga3 ga3"
-	// 		"ga5 ga5 ga5 ga5 ga5 ga5"
-	// 		"ga4 ga4 ga6 ga6 ga7 ga7"
-	// 		"ga4 ga4 ga8 ga8 ga9 ga9"
-	// 		"ga10 ga10 ga10 ga10 ga10 ga10";
-	// 	.ga-editorial {
-	// 		margin: 0;
-	// 		p {
-	// 			@include clamp(20);
-	// 		}
-	// 		&.editorial {
-	// 			margin-bottom: 3rem;
-	// 			margin-top: 7rem;
-	// 		}
-	// 	}
-	// 	.ga1 {
-	// 		padding-bottom: calc(#{$body-margin} - 1px);
-	// 		.promo-picture-1 {
-	// 			grid-template-columns: 1fr 1fr;
-	// 			grid-template-rows: auto auto;
-	// 			grid-template-areas:
-	// 				"promo-header promo-header"
-	// 				"promo-body promo-image";
-	// 			.body-text p {
-	// 				@include clamp(999);
-	// 			}
-	// 		}
-	// 	}
-	// 	.ga2 {
-	// 		margin: 0;
-	// 		.body-text p {
-	// 			@include clamp(6);
-	// 		}
-	// 	}
-	// 	.ga3 {
-	// 		margin: 0;
-	// 		.body-text p {
-	// 			columns: 2;
-	// 			@include clamp(999);
-	// 		}
-	// 	}
-	// 	.ga4 {
-	// 		.promo-poetry {
-	// 			.body-text p {
-	// 				@include clamp(17);
-	// 			}
-	// 			padding: 1.4rem $body-margin;
-	// 		}
-	// 	}
-	// 	.ga5 {
-	// 		padding-bottom: calc(#{$body-margin} - 1px);
-	// 		padding-top: calc(#{$body-margin} - 1px);
-	// 		border-bottom: 1px solid $grid-lines;
-	// 		border-top: 1px solid $grid-lines;
-	// 		.promo-picture-1 {
-	// 			grid-template-columns: 1fr 1fr 1fr;
-	// 			grid-template-rows: auto auto;
-	// 			grid-template-areas:
-	// 				"promo-header promo-image promo-image"
-	// 				"promo-body promo-image promo-image";
-	// 			.body-text p {
-	// 				@include clamp(14);
-	// 			}
-	// 		}
-	// 	}
-	// 	.ga10 {
-	// 		padding-top: calc(#{$body-margin} - 1px);
-	// 		border-top: 1px solid $grid-lines;
-	// 	}
-	// }
-	// .layout-4 {
-	// 	gap: ($body-margin * 1.5) ($body-margin * 1.5);
-	// 	grid-template-rows: auto auto 16rem 10rem auto 17rem 17rem auto;
-	// 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-	// 	grid-auto-columns: 1fr;
-	// 	grid-auto-flow: row;
-	// 	grid-template-areas:
-	// 		"ga1 ga1 ga1 ga1 ga1 ga1"
-	// 		"ga2 ga2 ga2 ga2 ga-editorial ga-editorial"
-	// 		"ga3 ga3 ga3 ga5 ga5 ga5"
-	// 		"ga-newsletter ga-newsletter ga-newsletter ga5 ga5 ga5"
-	// 		"ga6 ga6 ga6 ga6 ga6 ga6"
-	// 		"ga4 ga4 ga7 ga7 ga8 ga8"
-	// 		"ga4 ga4 ga9 ga9 ga10 ga10"
-	// 		"ga11 ga11 ga11 ga11 ga11 ga11";
-	// 	.ga1 {
-	// 		padding-bottom: calc(#{$body-margin} - 1px);
-	// 		border-bottom: 1px solid $grid-lines;
-	// 		.body-text p {
-	// 			columns: 3;
-	// 			column-gap: $body-margin * 1.5;
-	// 			display: block; // to unset clamp
-	// 		}
-	// 	}
-	// 	.ga-editorial {
-	// 		margin-bottom: $body-margin * 2;
-	// 		p {
-	// 			@include clamp(20);
-	// 		}
-	// 	}
-	// 	.ga2 {
-	// 		padding-bottom: calc(#{$body-margin} - 1px);
-	// 		.promo-picture-1 {
-	// 			grid-template-columns: 1fr 1fr;
-	// 			grid-template-rows: auto auto;
-	// 			grid-template-areas:
-	// 				"promo-header promo-image"
-	// 				"promo-body promo-image";
-	// 			.body-text p {
-	// 				@include clamp(18);
-	// 			}
-	// 		}
-	// 	}
-	// 	.ga3 {
-	// 		margin: 0;
-	// 		.body-text p {
-	// 			@include clamp(6);
-	// 		}
-	// 	}
-	// 	.ga5 {
-	// 		margin: 0;
-	// 		.body-text p {
-	// 			columns: 2;
-	// 			display: block;
-	// 		}
-	// 	}
-	// 	.ga4 {
-	// 		.promo-poetry {
-	// 			.body-text p {
-	// 				@include clamp(17);
-	// 			}
-	// 			padding: 1.4rem $body-margin;
-	// 		}
-	// 	}
-	// 	.ga6 {
-	// 		padding-bottom: calc(#{$body-margin} - 1px);
-	// 		padding-top: calc(#{$body-margin} - 1px);
-	// 		border-bottom: 1px solid $grid-lines;
-	// 		border-top: 1px solid $grid-lines;
-	// 		.promo-picture-1 {
-	// 			grid-template-columns: 1fr 1fr 1fr;
-	// 			grid-template-rows: auto auto;
-	// 			grid-template-areas:
-	// 				"promo-header promo-image promo-image"
-	// 				"promo-body promo-image promo-image";
-	// 			.body-text p {
-	// 				@include clamp(14);
-	// 			}
-	// 		}
-	// 	}
-	// 	.ga11 {
-	// 		padding-top: calc(#{$body-margin} - 1px);
-	// 		border-top: 1px solid $grid-lines;
-	// 	}
-	// }
-	.layout-5 {
+// *************************************************************************
+// LAYOUT 6 ****************************************************************
+// Story, Poem and editorial on top
+
+.layout-6 {
+	grid-template-areas:
+		"ga-poem-1"
+		"ga1"
+		"ga-editorial"
+		"ga-podcast"
+		"ga2"
+		"ga-image-1"
+		"ga3"
+		"ga-newsletter"
+		"ga4"
+		"ga5"
+		"ga-image-2"
+		"ga6"
+		"ga7"
+		"ga8"
+		"ga9";
+	// "ga10"
+	// "ga11"
+	// "ga12";
+	.ga-1 {
+		padding: $body-margin-half 0 $body-margin;
+	}
+	.ga-2,
+	.ga-image-1,
+	.ga-4,
+	.ga-5,
+	.ga-image-2,
+	.ga-6,
+	.ga-7,
+	.ga-8 {
+		@include border-bottom();
+	}
+
+	@media all and (min-width: $laptop-breakpoint) {
+		.ga-podcast {
+			display: none;
+		}
+		.ga-2,
+		.ga-image-1,
+		.ga-4,
+		.ga-5,
+		.ga-image-2,
+		.ga-6,
+		.ga-7,
+		.ga-8 {
+			padding-bottom: 0;
+			border-bottom: none;
+		}
+		display: grid;
 		gap: ($body-margin * 1.5) ($body-margin * 1.5);
-		grid-template-rows: auto 15rem 10.5rem 17rem auto auto auto auto;
+		grid-template-rows: auto auto auto 12rem auto auto auto;
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 		grid-auto-columns: 1fr;
 		grid-auto-flow: row;
 		grid-template-areas:
-			"ga1 ga1 ga1 ga1 ga-editorial ga-editorial"
-			"ga3 ga3 ga3 ga5 ga5 ga5"
-			"ga-newsletter ga-newsletter ga-newsletter ga5 ga5 ga5"
-			"ga2 ga2 ga2 ga11 ga11 ga11"
-			"ga6 ga6 ga6 ga6 ga6 ga6"
-			"ga4 ga4 ga7 ga7 ga8 ga8"
-			"ga4 ga4 ga9 ga9 ga10 ga10"
-			"ga12 ga12 ga12 ga12 ga12 ga12";
-		.ga11 {
-			padding-bottom: calc(#{$body-margin} - 1px);
-			border-bottom: 1px solid $grid-lines;
-			.body-text p {
-				columns: 3;
-				column-gap: $body-margin * 1.5;
-				display: block; // to unset clamp
+			"ga1 ga1 ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
+			"ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
+			"ga2 ga2 ga2 ga3 ga3 ga3"
+			"ga-newsletter ga-newsletter ga-newsletter ga3 ga3 ga3"
+			"ga4 ga4 ga5 ga5 ga6 ga6"
+			"ga7 ga7 ga8 ga8 ga9 ga9"
+			"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2";
+		.ga-1,
+		.ga-3 {
+			p {
+				@include clamp(17);
+			}
+		}
+		.ga-2 {
+			p {
+				@include clamp(8);
+			}
+		}
+		.ga-3 {
+			p {
+				columns: 2;
+			}
+		}
+		.ga-poem-1 {
+			margin-bottom: 3rem;
+			margin-top: 5rem;
+			p {
+				@include clamp(12);
 			}
 		}
 		.ga-editorial {
 			margin: 0;
 			p {
-				@include clamp(10);
+				@include clamp(15);
 			}
 			&.editorial {
 				margin-bottom: 3rem;
 				margin-top: 5.5rem;
 			}
 		}
-		.ga3 {
+		.ga-image-1 {
+			@include border-top();
+			@include border-bottom();
+			@include image-right;
+		}
+		.ga-image-2 {
+			@include border-top();
+			@include image-left;
+		}
+	}
+}
+
+// *************************************************************************
+// LAYOUT 7 ****************************************************************
+// Large text story on top
+// Then Story, Poem and editorial on top
+
+.layout-7 {
+	grid-template-areas:
+		"ga1"
+		"ga-poem-1"
+		"ga2"
+		"ga-editorial"
+		"ga-podcast"
+		"ga3"
+		"ga-image-1"
+		"ga4"
+		"ga-newsletter"
+		"ga5"
+		"ga6"
+		"ga-image-2"
+		"ga7"
+		"ga8"
+		"ga9"
+		"ga10";
+	// "ga11"
+	// "ga12";
+	.ga-1 {
+		p {
+			@include clamp(15);
+		}
+	}
+	.ga-3,
+	.ga-image-1,
+	.ga-5,
+	.ga-6,
+	.ga-image-2,
+	.ga-7,
+	.ga-8,
+	.ga-9 {
+		@include border-bottom();
+	}
+
+	@media all and (min-width: $laptop-breakpoint) {
+		.ga-podcast {
+			display: none;
+		}
+		.ga-1,
+		.ga-3,
+		.ga-image-1,
+		.ga-5,
+		.ga-6,
+		.ga-image-2,
+		.ga-7,
+		.ga-8,
+		.ga-9 {
+			padding-bottom: 0;
+			border-bottom: none;
+		}
+		display: grid;
+		gap: ($body-margin * 1.25) $body-margin;
+		grid-template-rows: auto auto auto auto 12rem auto auto auto;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		grid-auto-columns: 1fr;
+		grid-auto-flow: row;
+		grid-template-areas:
+			"ga1 ga1 ga1 ga1 ga1 ga1"
+			"ga2 ga2 ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
+			"ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
+			"ga3 ga3 ga3 ga4 ga4 ga4"
+			"ga-newsletter ga-newsletter ga-newsletter ga4 ga4 ga4"
+			"ga5 ga5 ga6 ga6 ga7 ga7"
+			"ga8 ga8 ga9 ga9 ga10 ga10"
+			"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2";
+		.ga-1 {
+			@include border-bottom();
+			p {
+				@include clamp(999);
+				columns: 3;
+			}
+		}
+		.ga-2 {
+			p {
+				@include clamp(17);
+			}
+		}
+		.ga-4 {
+			p {
+				@include clamp(17);
+			}
+		}
+		.ga-3 {
+			p {
+				@include clamp(8);
+			}
+		}
+		.ga-poem-1 {
+			p {
+				@include clamp(15);
+			}
+		}
+		.ga-editorial {
 			margin: 0;
-			.body-text p {
-				@include clamp(6);
+			p {
+				@include clamp(17);
 			}
 		}
-		.ga1,
-		.ga2,
-		.ga5,
-		.ga11 {
-			margin: 0;
-			.body-text p {
-				columns: 2;
-				display: block;
-			}
+		.ga-image-1 {
+			@include border-top();
+			@include border-bottom();
+			@include image-right;
 		}
-		.ga4 {
-			.promo-poetry {
-				.body-text p {
-					@include clamp(17);
-				}
-				padding: 1.4rem $body-margin;
-			}
-		}
-		.ga6 {
-			padding-bottom: calc(#{$body-margin} - 1px);
-			padding-top: calc(#{$body-margin} - 1px);
-			margin-top: $body-margin;
-			border-bottom: 1px solid $grid-lines;
-			border-top: 1px solid $grid-lines;
-			.promo-picture-1 {
-				grid-template-columns: 1fr 1fr 1fr;
-				grid-template-rows: auto auto;
-				grid-template-areas:
-					"promo-header promo-image promo-image"
-					"promo-body promo-image promo-image";
-				.body-text p {
-					@include clamp(14);
-				}
-			}
-		}
-		.ga12 {
-			padding-top: calc(#{$body-margin} - 1px);
-			border-top: 1px solid $grid-lines;
-			.promo-picture-1 {
-				grid-template-columns: 1fr 1fr 1fr;
-				grid-template-rows: auto auto;
-				grid-template-areas:
-					"promo-image promo-image promo-header"
-					"promo-image promo-image promo-body";
-				.body-text p {
-					@include clamp(14);
-				}
-			}
+		.ga-image-2 {
+			@include border-top();
+			@include image-left;
 		}
 	}
 }

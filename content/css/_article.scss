@@ -112,3 +112,30 @@ article {
 		}
 	}
 }
+
+// mona | lisa (Awwissu 2023)
+.story-18 {
+	h1 {
+		width: 70%;
+	}
+	@media all and (min-width: $laptop-breakpoint) {
+		.body-text {
+			padding: 0 8rem;
+			border: 1px solid $grid-lines;
+			border-width: 0 1px;
+		}
+		h1 {
+			width: 100%;
+		}
+	}
+	.fx-1 {
+		transform: scale(-1, 1);
+		color: #666666;
+	}
+	p {
+		margin-bottom: $body-margin-half + $body-margin-quarter;
+		&.enjambed {
+			margin-bottom: $body-margin-quarter;
+		}
+	}
+}

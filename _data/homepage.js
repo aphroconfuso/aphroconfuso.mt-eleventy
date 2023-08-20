@@ -27,6 +27,67 @@ async function getHomepage() {
                   }
                 }
 								promos(pagination: { page: 1, pageSize: 250 }) {
+									text
+									story {
+										data {
+											attributes {
+												title
+												description
+												pageUrl
+												type
+												dateTimePublication
+												authors {
+													data {
+														attributes {
+															forename
+															surname
+														}
+													}
+												}
+												translators {
+													data {
+														attributes {
+															forename
+															surname
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								poetryPromos(pagination: { page: 1, pageSize: 250 }) {
+									mobilePriority
+									text
+									story {
+										data {
+											attributes {
+												title
+												description
+												pageUrl
+												type
+												dateTimePublication
+												authors {
+													data {
+														attributes {
+															forename
+															surname
+														}
+													}
+												}
+												translators {
+													data {
+														attributes {
+															forename
+															surname
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								imagePromos(pagination: { page: 1, pageSize: 250 }) {
 									mobilePriority
 									text
 									imageCrop
@@ -50,6 +111,7 @@ async function getHomepage() {
 											attributes {
 												title
 												description
+												pageUrl
 												type
 												dateTimePublication
 												showImagePromo
@@ -88,6 +150,7 @@ async function getHomepage() {
 										}
 									}
 								}
+
 							}
 						}
 					}
@@ -110,38 +173,62 @@ async function getHomepage() {
 
 	const atts = homepage.data.attributes;
 
-	const promosFormatted = atts.promos.length && atts.promos.map((promo) => {
-		const promoAtts = promo.story.data.attributes;
-		const author = promoAtts.authors.data.length && promoAtts.authors.data[0].attributes;
-		const translator = promoAtts.translators.data.length && promoAtts.translators.data[0].attributes;
+	const layouts = {
+		Layout_6: {
+			text: 9,
+			image: 2,
+			poem: 1,
+			promo_3_wordcount: 1640,
+		},
+		Layout_7: {
+			text: 10,
+			image: 2,
+			poem: 1,
+			promo_1_wordcount: 165,
+			promo_4_wordcount: 165,
+		}
+	}
 
-		const authorFullName = author && `${ author.forename } ${ author.surname }`;
-		const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`;
+	const promosFormatted = (promos, includesImages, number) => {
+		const result = promos.length && promos.map((promo) => {
+			const promoAtts = promo.story.data.attributes;
+			const author = promoAtts.authors.data.length && promoAtts.authors.data[0].attributes;
+			const translator = promoAtts.translators.data.length && promoAtts.translators.data[0].attributes;
+			const authorFullName = author && `${ author.forename } ${ author.surname }`;
+			const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`;
 
-		const promoImageData = promo.image.data[0] || promoAtts.promoImage.data;
+			let promos = {
+				mobilePriority: promo.mobilePriority || 9,
+				description: promo.text || promoAtts.description,
+				title: promoAtts.title,
+				monthYear: getMonthYear(promoAtts.dateTimePublication),
+				author: authorFullName,
+				translator: translatorFullName,
+				slug: promoAtts.pageUrl || makeTitleSlug(promoAtts.title, authorFullName, translatorFullName),
+				type: promoAtts.type,
+				cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
+				promoType: promoAtts.type === 'Poezija' ? 'promo-poetry promo' : (promoAtts.showImagePromo && promoAtts.promoImage.data ? 'promo-picture-1 promo' : 'promo'),
+			};
 
-		return {
-			mobilePriority: promo.mobilePriority || 9,
-			description: promo.text || promoAtts.description,
-			title: promoAtts.title,
-			imageCrop: promo.imageCrop,
-			monthYear: getMonthYear(promoAtts.dateTimePublication),
-			author: authorFullName,
-			translator: translatorFullName,
-			slug: makeTitleSlug(promoAtts.title, authorFullName, translatorFullName),
-			images: promoAtts.showImagePromo && promoImageData && promoImageData.attributes.formats,
-			alternativeText: promoImageData.attributes.alternativeText,
-			type: promoAtts.type,
-			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
-			promoType: promoAtts.type === 'Poezija' ? 'promo-poetry promo' : (promoAtts.showImagePromo && promoAtts.promoImage.data ? 'promo-picture-1 promo' : 'promo'),
-		};
-	});
+			if (includesImages) {
+				const promoImageData = promo.image.data[0] || promoAtts.promoImage.data;
+				promos.images = promoAtts.showImagePromo && promoImageData && promoImageData.attributes.formats,
+				promos.alternativeText = promoImageData.attributes.alternativeText,
+				promos.imageCrop = promo.imageCrop
+			}
+
+			return promos;
+		});
+		return result;
+	}
 
 	const homepageFormatted = {
 		layout: atts.layout,
 		editorial: atts.appointment.data.attributes.editorial,
 		monthYear: getMonthYear(atts.appointment.data.attributes.dateTimePublication),
-		promos: promosFormatted,
+		promos: promosFormatted(atts.promos, false, layouts[atts.layout]['text']),
+		imagePromos: promosFormatted(atts.imagePromos, true, layouts[atts.layout]['image']),
+		poetryPromos: promosFormatted(atts.poetryPromos, false, layouts[atts.layout]['poem']),
 	};
 
 	return homepageFormatted;

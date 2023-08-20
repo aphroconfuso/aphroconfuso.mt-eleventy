@@ -36,7 +36,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 {% endblock %}
 
 {% block content %}
-	<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }}">
+	<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }} story-{{ story.id }}">
 		<header>
 			<h3><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
 			<h1>{{ story.title | prettifyMaltese | safe }}</h1>
@@ -111,25 +111,25 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 						</figure>
 					{% if loop.last %}</section>{% endif %}
 				{% endfor %}
-				{% if story.type == 'Poezija' %}
+				{% if story.type === 'Poezija' and not story.useProseStyling %}
 					<section class="body-text poetry">
 						{{ story.body | prettifyMaltese | versify | safe }}
 					</section>
 				{% else %}
 					{% if story.imagesPositionText %}
 						<section class="body-text{% if story.useSeparators %} separated{% endif %}">
-							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 0) | prettifyMaltese | safe }}
+							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 0, story.dontUseDropCaps) | prettifyMaltese | safe }}
 						</section>
 						{% set imageMode = 'regular' %}
 						{% if story.slideshow or story.singleImage %}
 							{% include "_slideshow.njk" %}
 						{% endif %}
 						<section class="body-text{% if story.useSeparators %} separated{% endif %}">
-							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 1) | prettifyMaltese | endDotify | safe }}
+							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 1, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
 						</section>
 					{% else %}
 						<section class="body-text">
-							{{ story.body | dropCapsifyAndSectionise | prettifyMaltese | endDotify | safe }}
+							{{ story.body | dropCapsifyAndSectionise(null, null, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
 						</section>
 					{% endif %}
 				{% endif %}
@@ -200,7 +200,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 	</script>
 	{% if story.slideshow or story.singleImage %}
 		{% set imageMode = 'lightbox' %}
-		<aside id="lightbox">
+		<aside id="lightbox"{% if story.singleImage %} class="single-image"{% endif %}>
 			<div id="lightbox-container">
 				<button id="lightbox-close" type="button" onclick="_paq.push(['trackEvent', 'Stampi', 'lightbox [×]', '{{ story.title }}']);">×</button>
 					{% include "_slideshow.njk" %}

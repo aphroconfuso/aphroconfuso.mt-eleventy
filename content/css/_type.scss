@@ -108,6 +108,15 @@ strong {
 		&.enjambed {
 			margin-bottom: 0;
 		}
+		&.centred {
+			text-align: center;
+		}
+		&.right-aligned {
+			text-align: right;
+		}
+		&.justified {
+			text-align: justify;
+		}
 	}
 	p:last-of-type + blockquote {
 		margin-top: $body-margin-half !important;
@@ -193,6 +202,7 @@ aside,
 			text-decoration-thickness: 1px;
 			text-underline-offset: 2px;
 		}
+		margin-bottom: $body-margin-half;
 	}
 }
 
