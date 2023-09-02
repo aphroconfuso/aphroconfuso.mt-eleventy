@@ -29,6 +29,28 @@
 	}
 }
 
+@mixin image-left-top() {
+	.promo-picture-1 {
+		grid-template-areas:
+			"promo-header promo-header promo-header"
+			"promo-body promo-image promo-image";
+		&.promo .body-text p {
+			@include clamp(18);
+		}
+	}
+}
+
+@mixin image-right-top() {
+	.promo-picture-1 {
+		grid-template-areas:
+			"promo-header promo-header promo-header"
+			"promo-image promo-image promo-body";
+		&.promo .body-text p {
+			@include clamp(18);
+		}
+	}
+}
+
 .ga-1,
 .ga-2,
 .ga-3,
@@ -396,6 +418,99 @@
 		.ga-image-2 {
 			@include border-top();
 			@include image-left;
+		}
+	}
+}
+
+.layout-8 {
+	grid-template-areas:
+		"ga1"
+		"ga-poem-1"
+		"ga2"
+		"ga-editorial"
+		"ga-podcast"
+		"ga3"
+		"ga-image-1"
+		"ga4"
+		"ga-newsletter"
+		"ga5"
+		"ga6"
+		"ga-image-2"
+		"ga7"
+		"ga8"
+		"ga9"
+		"ga10";
+	// "ga11"
+	// "ga12";
+	.ga-1 {
+		p {
+			@include clamp(15);
+		}
+	}
+	.ga-3,
+	.ga-image-1,
+	.ga-5,
+	.ga-6,
+	.ga-image-2,
+	.ga-7,
+	.ga-8,
+	.ga-9 {
+		@include border-bottom();
+	}
+
+	@media all and (min-width: $laptop-breakpoint) {
+		.ga-podcast {
+			display: none;
+		}
+		.ga-1,
+		.ga-3,
+		.ga-image-1,
+		.ga-5,
+		.ga-6,
+		.ga-image-2,
+		.ga-7,
+		.ga-8,
+		.ga-9 {
+			padding-bottom: 0;
+			border-bottom: none;
+		}
+		display: grid;
+		gap: ($body-margin * 1.25) $body-margin;
+		grid-template-rows: auto auto 11rem auto auto auto;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		grid-auto-columns: 1fr;
+		grid-auto-flow: row;
+		grid-template-areas:
+			"ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
+			"ga1 ga1 ga1 ga-editorial ga-editorial ga-editorial"
+			"ga-newsletter ga-newsletter ga-newsletter ga-editorial ga-editorial ga-editorial"
+			"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
+			"ga-poem-1 ga-poem-1 ga2 ga2 ga3 ga3"
+			"ga-poem-1 ga-poem-1 ga4 ga4 ga5 ga5";
+		.ga-1 {
+			p {
+				@include clamp(9);
+			}
+		}
+		.ga-poem-1 {
+			p {
+				@include clamp(18);
+			}
+		}
+		.ga-editorial {
+			margin: 0;
+			p {
+				@include clamp(17);
+			}
+		}
+		.ga-image-1 {
+			@include border-bottom();
+			@include image-left-top;
+		}
+		.ga-image-2 {
+			@include border-top();
+			@include border-bottom();
+			@include image-right;
 		}
 	}
 }

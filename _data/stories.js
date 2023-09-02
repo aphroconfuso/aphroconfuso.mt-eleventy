@@ -64,7 +64,7 @@ async function getAllStories() {
 									useProseStyling
 									useSeparators
 									useSquareOnMobile
-									images {
+									images(pagination: { page: 1, pageSize: 250 }) {
 										${imageData}
 									}
 									promoImage {
