@@ -23,7 +23,7 @@
 		columns: 3;
 		column-rule: 1px solid $grid-lines;
 		column-gap: $body-margin * 1.5;
-		& > div {
+		li {
 			break-inside: avoid;
 		}
 	}

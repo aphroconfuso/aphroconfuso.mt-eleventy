@@ -12,6 +12,9 @@ h2 {
 h3 {
 	color: $h3-color;
 }
+h4 {
+	color: $h4-color;
+}
 
 // Make it this month
 // .editorial,
@@ -40,6 +43,14 @@ h3 {
 
 .awwissu-2023 {
 	@include monthly-colour($awwissu-2023);
+}
+
+.settembru-2023 {
+	@include monthly-colour($settembru-2023);
+}
+
+.ottubru-2023 {
+	@include monthly-colour($ottubru-2023);
 }
 
 // html {

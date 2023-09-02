@@ -6,7 +6,7 @@ pagination:
   size: 1
 sitemapChangeFrequency: weekly
 sitemapPriority: 1
-permalink: /{{ story.slug | slugifyMaltese }}/index.html
+permalink: /{{ story.slug }}/index.html
 ---
 {% extends 'layouts/base.njk' %}
 
@@ -38,8 +38,13 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 {% block content %}
 	<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }} story-{{ story.id }}">
 		<header>
-			<h3><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
-			<h1>{{ story.title | prettifyMaltese | safe }}</h1>
+			<h4><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
+			<h1>
+				{{ story.title | prettifyMaltese | safe }}
+				{% if story.isSequenceEpisode %}
+					<span class="episodeNumber">#{{ story.sequenceEpisodeNumber }}</span>
+				{% endif %}
+			</h1>
 			<h2>
 				{% if story.translator %}
 					{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}/">{{ story.translator | prettifyMaltese | safe }}</a></span>
@@ -84,7 +89,7 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 									<progress class="amplitude-song-played-progress" amplitude-main-song-played-progress="true" id="song-played-progress"></progress>
 								</div>
 								<div class="time-container">
-										<span class="amplitude-current-minutes" amplitude-main-current-minutes="true"></span>:<span class="amplitude-current-seconds" amplitude-main-current-seconds="true"></span>/<span class="amplitude-duration-minutes" amplitude-main-duration-minutes="true"></span>:<span class="amplitude-duration-seconds" amplitude-main-duration-seconds="true"></span>
+										<span class="amplitude-current-hours" amplitude-main-current-hours="true"></span>:<span class="amplitude-current-minutes" amplitude-main-current-minutes="true"></span>:<span class="amplitude-current-seconds" amplitude-main-current-seconds="true"></span>/<span class="amplitude-duration-hours" amplitude-main-duration-hours="true"></span>:<span class="amplitude-duration-minutes" amplitude-main-duration-minutes="true"></span>:<span class="amplitude-duration-seconds" amplitude-main-duration-seconds="true"></span>
 								</div>
 							</div>
 							<figcaption>
@@ -107,10 +112,13 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 					{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
 						<figure class="epigraph">
 							{{ epigraph.quotation | restrictHtml | prettifyMaltese | safe }}
-							<figcaption>{{ epigraph.attribution | restrictHtml | prettifyMaltese | safe }}</figcaption>
+							{% if epigraph.attribution %}<figcaption>{{ epigraph.attribution | restrictHtml | prettifyMaltese | safe }}</figcaption>{% endif %}
 						</figure>
 					{% if loop.last %}</section>{% endif %}
 				{% endfor %}
+				{% if story.isSequenceEpisode %}
+					<h3>{{ story.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
+				{% endif %}
 				{% if story.type === 'Poezija' and not story.useProseStyling %}
 					<section class="body-text poetry">
 						{{ story.body | prettifyMaltese | versify | safe }}
@@ -169,30 +177,8 @@ permalink: /{{ story.slug | slugifyMaltese }}/index.html
 		{% endif %}
 	</article>
 	<aside class="promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.title }}">
-		{% for promo in story.endPromos %}
-			<div class="promo-{{ loop.index }}">
-				<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: {{ story.title }}', 'għal: {{ promo.title }}', {{ loop.index }}]);">
-					<header>
-						<h3>{{ promo.monthYear }}</h5>
-						<h1>{{ promo.title | prettifyMaltese | safe }}</h1>
-						<h2>
-							{% if promo.translator %}
-								{{ promo.author | prettifyMaltese | safe }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
-							{% else %}
-								{{ promo.author | prettifyMaltese | safe }}
-							{% endif %}
-						</h2>
-					</header>
-					<div class="{{ promo.cssClass }}">
-						{% if promo.type === 'Poezija' %}
-							<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
-						{% else %}
-							<p>{{ promo.description | prettifyMaltese | safe }}</p>
-						{% endif %}
-					</div>
-				</a>
-			</div>
-		{% endfor %}
+		{% set promos = story.endPromos %}
+		{% include '_promo_list.njk' %}
 	</aside>
 	<script>
 		wordcount = {{ story.body | wordcount }};

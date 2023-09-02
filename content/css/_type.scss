@@ -11,14 +11,17 @@ h1 {
 	font-family: $serif, serif;
 	font-size: $font-size-story-header-mobile;
 	font-weight: 600;
-	line-height: 1.1;
+	line-height: $header-line-height;
+	.episodeNumber {
+		color: $lightest-brown;
+	}
 }
 
 h2 {
 	font-family: $serif, serif;
 	font-size: $font-size-story-header-mobile;
 	font-weight: 500;
-	line-height: 1.1;
+	line-height: $header-line-height;
 	.translator {
 		display: inline-block;
 		white-space: nowrap;
@@ -34,15 +37,20 @@ h2 {
 }
 
 h3 {
-	display: inline-block;
-	font-family: $sans-alt, sans-serif;
-	line-height: 1.1;
-	text-transform: uppercase;
-	font-size: $font-size-compact;
+	font-family: $serif, serif;
+	font-size: $font-size-story-episode-header-mobile;
+	font-style: italic;
+	font-weight: 600;
+	line-height: $header-line-height;
+	margin-bottom: $body-margin;
 }
 
 h4 {
-	color: red;
+	display: inline-block;
+	font-family: $sans-alt, sans-serif;
+	line-height: $header-line-height;
+	text-transform: uppercase;
+	font-size: $font-size-compact;
 }
 
 h6 {
@@ -209,7 +217,10 @@ aside,
 @media all and (min-width: $laptop-breakpoint) {
 	h1,
 	h2 {
-		font-size: 3rem;
+		font-size: $font-size-story-header;
+	}
+	h3 {
+		font-size: $font-size-story-episode-header;
 	}
 	h2 a {
 		@include animated-underline($lighter-brown);

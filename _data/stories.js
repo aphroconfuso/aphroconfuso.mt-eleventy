@@ -1,10 +1,12 @@
-const fetch = require("node-fetch");
-const smartTruncate = require("smart-truncate");
 // const stripTags = require("striptags");
 // const unique = require('unique-words');
-const makeTitleSlug = require("../src/makeTitleSlug.js");
-
+const fetch = require("node-fetch");
 const getMonthYear = require("../src/getMonthYear.js");
+const makeTitleSlug = require("../src/makeTitleSlug.js");
+const processPromos = require("../src/processPromos.js");
+
+const {imageData, linkedStoryData, personData} = require("./_fragments.js");
+
 
 // const fs = require('fs');
 // var Spellchecker = require("hunspell-spellchecker");
@@ -37,99 +39,61 @@ async function getAllStories() {
 							data {
 								id
 								attributes {
-									pageUrl
-									title
-									body
-									description
-									endnote
-									dateTimePublication
-									type
 									appointment
-									showImagePromo
-									updatedAt
-									imageBorderColour
-									useSeparators
+									body
+									coda
+									dateTimePublication
+									description
 									dontUseDropCaps
-									useProseStyling
-									images {
-										data{
-											attributes {
-												alternativeText
-												caption
-												formats
-											}
-										}
-									}
-									imagesType
-									useSquareOnMobile
+									endnote
+									imageBorderColour
 									imagesPositionText
-									promoImage {
-										data{
-											attributes {
-												alternativeText
-												formats
-											}
-										}
-									}
-									promoImageMobile {
-										data{
-											attributes {
-												alternativeText
-												formats
-											}
-										}
-									}
-									epigraphs {
-										quotation
-										attribution
-									}
+									imagesType
 									introduction
+									pageUrl
 									podcastNote
 									podcastUrl
-									useDefaultPodcastMessage
-									coda
-									publicationHistory
-									triggerWarning
 									postscript
+									publicationHistory
+									showImagePromo
+									title
+									triggerWarning
+									type
+									updatedAt
+									useDefaultPodcastMessage
+									useProseStyling
+									useSeparators
+									useSquareOnMobile
+									images {
+										${imageData}
+									}
+									promoImage {
+										${imageData}
+									}
+									promoImageMobile {
+										${imageData}
+									}
+									epigraphs {
+										attribution
+										quotation
+									}
 									authors {
-										data {
-											attributes {
-												forename
-												surname
-												pronoun
-											}
-										}
+										${personData}
 									}
 									translators {
-										data {
-											attributes {
-												forename
-												surname
-												pronoun
-											}
-										}
+										${personData}
 									}
 									booksMentioned {
 										data {
 											attributes {
 												title
 												publicationDate
-													authors {
-														data {
-															attributes {
-																forename
-																surname
-															}
-														}
-													}
+												authors {
+													${personData}
+												}
 												translators {
-														data {
-															attributes {
-																forename
-																surname
-															}
-														}
-													}
+													${personData}
+												}
 												publishers {
 													data {
 														attributes {
@@ -144,30 +108,13 @@ async function getAllStories() {
 									endPromos {
 										text
 										story {
-											data {
-												attributes {
-													dateTimePublication
-													title
-													description
-													pageUrl
-													type
-													authors {
-														data {
-															attributes {
-																forename
-																surname
-															}
-														}
-													}
-													translators {
-														data {
-															attributes {
-																forename
-																surname
-															}
-														}
-													}
-												}
+											${linkedStoryData}
+										}
+									}
+									sequence {
+										data {
+											attributes {
+												title
 											}
 										}
 									}
@@ -177,10 +124,8 @@ async function getAllStories() {
 					}`,
         }),
       });
-      // store the JSON response when promise resolves
       const response = await data.json();
 
-      // handle CMS errors
       if (response.errors) {
         let errors = response.errors;
         errors.map((error) => {
@@ -210,27 +155,8 @@ async function getAllStories() {
 		const atts = story.attributes;
 		const author = !!atts.authors.data.length && atts.authors.data[0].attributes;
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
-
-		const endPromosFormatted = atts.endPromos.length && atts.endPromos.map((promo) => {
-			const promoAtts = promo.story.data.attributes;
-			const author = promoAtts.authors.data.length && promoAtts.authors.data[0].attributes;
-			const translator = promoAtts.translators.data.length && promoAtts.translators.data[0].attributes;
-
-			const authorFullName = author && `${author.forename} ${author.surname}`
-			const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`
-
-			return {
-				title: promoAtts.title,
-				slug: promoAtts.title,
-				monthYear: getMonthYear(promoAtts.dateTimePublication),
-				description: promo.text || promoAtts.description,
-				author: authorFullName,
-				translator: translatorFullName,
-				slug: promoAtts.pageUrl || makeTitleSlug(promoAtts.title, authorFullName, translatorFullName),
-				type: promoAtts.type,
-				cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
-			};
-		});
+		const sequenceData = atts.sequence.data;
+		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
 
 		const booksMentioned = !!atts.booksMentioned.data.length && atts.booksMentioned.data.slice(0, atts.prominentMentions).map((book) => {
 			const bookAtts = book.attributes;
@@ -238,8 +164,8 @@ async function getAllStories() {
 			const translator = !!bookAtts.translators.data.length && bookAtts.translators.data[0].attributes;
 			const publisher = !!bookAtts.publishers.data.length && bookAtts.publishers.data[0].attributes;
 
-			const authorFullName = author && `${author.forename} ${author.surname}`
-			const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`
+			const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
+			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 
 			return {
 				title: bookAtts.title,
@@ -251,8 +177,8 @@ async function getAllStories() {
 			};
 		});
 
-		const authorFullName = !!author && `${ author.forename } ${ author.surname }`;
-		const translatorFullName = !!translator && `${ translator.forename } ${ translator.surname }`;
+		const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
+		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		const displayTitle = `${ author && authorFullName }: ${ atts.title }${ translatorFullName ? ' (tr ' + translatorFullName + ')' : '' }`;
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
 
@@ -299,6 +225,7 @@ async function getAllStories() {
 			dateTimePublication: atts.dateTimePublication,
 			description: atts.description,
 			displayTitle: displayTitle,
+			dontUseDropCaps: !!atts.dontUseDropCaps,
 			dontUseDropCaps: atts.dontUseDropCaps,
 			endnote: atts.endnote,
 			endPromos: endPromosFormatted,
@@ -309,6 +236,7 @@ async function getAllStories() {
 			images: atts.images.data,
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,
+			isSequenceEpisode: !!sequenceData,
 			metaTitle: `${ displayTitle }`,
 			monthYear: getMonthYear(atts.dateTimePublication),
 			podcastNote: atts.podcastNote,
@@ -317,21 +245,23 @@ async function getAllStories() {
 			prominentMentions: atts.prominentMentions,
 			publicationHistory: atts.publicationHistory,
 			reads: reads[translator.pronoun || author.pronoun],
+			sequence: sequenceData && sequenceData.attributes.title,
+			sequenceEpisodeNumber: 1,
+			sequenceEpisodeTitle: sequenceData && atts.title,
 			showImagePromo: atts.showImagePromo,
 			singleImage: atts.images.data && atts.images.data.length === 1,
 			slideshow:  atts.images.data && atts.images.data.length > 1,
-			slug: atts.pageUrl || makeTitleSlug(atts.title, authorFullName, translatorFullName),
+			slug: atts.pageUrl || makeTitleSlug(atts.title, authorFullName, translatorFullName, sequenceData && sequenceData.attributes.title, 1),
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
-			title: atts.title,
+			title: sequenceData && sequenceData.attributes.title || atts.title,
 			translator: translatorFullName,
 			triggerWarning: atts.triggerWarning,
 			type: atts.type,
 			updatedAt: atts.updatedAt,
 			useDefaultPodcastMessage: !!atts.useDefaultPodcastMessage,
-			dontUseDropCaps: !!atts.dontUseDropCaps,
-			useSeparators: !!atts.useSeparators,
 			useProseStyling: !!atts.useProseStyling,
+			useSeparators: !!atts.useSeparators,
 			useSquareOnMobile: !!atts.useSquareOnMobile,
 			vocabulary: vocabulary,
     };
