@@ -1,7 +1,8 @@
 <ul class="promo-list">
+	{% set promoFrom = promoFrom or page.url %}
 	{% for promo in promos %}
 		<li>
-			<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: {{ appointment.monthYear }}', 'għal: {{ promo.title }}', {{ loop.index }}]);">
+			<a class="promo {{ promo.monthYear | slugify }}" href="/{{ promo.slug }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: {{ promoFrom }}', 'għal: {{ promo.title }}', {{ loop.index }}]);">
 				{% include "_promo_header.njk" %}
 				<div class="{{ promo.cssClass }}">
 					{% if promo.type === 'Poezija' %}

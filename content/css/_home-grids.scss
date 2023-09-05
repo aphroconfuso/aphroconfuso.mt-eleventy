@@ -425,9 +425,9 @@
 .layout-8 {
 	grid-template-areas:
 		"ga-image-1"
+		"ga-editorial"
 		"ga1"
 		"ga2"
-		"ga-editorial"
 		"ga-newsletter"
 		"ga3"
 		"ga-poem-1"
@@ -449,8 +449,7 @@
 	}
 	.ga-1,
 	.ga-2,
-	.ga-image-1,
-	.ga-3 {
+	.ga-5 {
 		@include border-bottom();
 	}
 

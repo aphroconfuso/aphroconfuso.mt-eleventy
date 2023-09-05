@@ -102,37 +102,39 @@ async function getHomepage() {
 
 	const promosFormatted = (promos, includesImages, number) => {
 		const result = promos.length && promos.slice(0, number).map((promo) => {
-			const promoAtts = promo.story.data.attributes;
-			const author = promoAtts.authors.data.length && promoAtts.authors.data[0].attributes;
-			const translator = promoAtts.translators.data.length && promoAtts.translators.data[0].attributes;
+			const storyAtts = promo.story.data.attributes;
+			const author = storyAtts.authors.data.length && storyAtts.authors.data[0].attributes;
+			const translator = storyAtts.translators.data.length && storyAtts.translators.data[0].attributes;
 			const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
 			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
-			const promoSequenceData = promoAtts.sequence && promoAtts.sequence.data;
+			const promoSequenceData = storyAtts.sequence && storyAtts.sequence.data;
 
-			let promos = {
+			let formattedPromo = {
 				author: authorFullName,
-				cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
-				description: promo.text || promoAtts.description,
+				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
+				description: promo.text || storyAtts.description,
 				isSequenceEpisode: !!promoSequenceData,
 				mobilePriority: promo.mobilePriority || 9,
-				monthYear: getMonthYear(promoAtts.dateTimePublication),
-				promoType: promoAtts.type === 'Poezija' ? 'promo-poetry promo' : (promoAtts.showImagePromo && promoAtts.promoImage.data ? 'promo-picture-1 promo' : 'promo'),
+				monthYear: getMonthYear(storyAtts.dateTimePublication),
+				promoType: storyAtts.type === 'Poezija' ? 'promo-poetry promo' : (storyAtts.showImagePromo && storyAtts.promoImage.data ? 'promo-picture-1 promo' : 'promo'),
 				sequenceEpisodeNumber: 1,
 				sequenceEpisodeTitle: promoSequenceData && promoSequenceData.attributes.title,
-				slug: promoAtts.pageUrl || makeTitleSlug(promoAtts.title, authorFullName, translatorFullName, promoSequenceData && promoSequenceData.attributes.title, 1),
-				title: promoSequenceData && promoSequenceData.attributes.title || promoAtts.title,
+				slug: storyAtts.pageUrl || makeTitleSlug(storyAtts.title, authorFullName, translatorFullName, promoSequenceData && promoSequenceData.attributes.title, 1),
+				title: promoSequenceData && promoSequenceData.attributes.title || storyAtts.title,
 				translator: translatorFullName,
-				type: promoAtts.type,
+				type: storyAtts.type,
 			};
 
 			if (includesImages) {
-				const promoImageData = promo.image.data[0] || promoAtts.promoImage.data;
-				promos.images = promoAtts.showImagePromo && promoImageData && promoImageData.attributes.formats,
-				promos.imageCrop = promo.imageCrop,
-				promos.alternativeText = promoImageData.attributes.alternativeText
+				const promoImageData = promo.image.data[0] || storyAtts.promoImage.data;
+				const promoImageMobileData = promo.imageMobile && promo.imageMobile.data[0] || storyAtts.promoImageMobile.data;
+				formattedPromo.image = storyAtts.showImagePromo && promoImageData && promoImageData.attributes.formats,
+				formattedPromo.imageMobile = storyAtts.showImagePromo && promoImageMobileData && promoImageMobileData.attributes.formats,
+				formattedPromo.imageCrop = promo.imageCrop,
+				formattedPromo.alternativeText = promoImageData.attributes.alternativeText
 			}
 
-			return promos;
+			return formattedPromo;
 		});
 		return result;
 	}

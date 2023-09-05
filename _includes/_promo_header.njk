@@ -6,11 +6,11 @@
 			<span class="episodeNumber">#{{ promo.sequenceEpisodeNumber }}</span>
 		{% endif %}
 	</h1>
-	<h2>
-		{% if promo.translator %}
+	{% if promo.translator %}
+		<h2 class="translated">
 			{{ promo.author | prettifyMaltese }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
-		{% else %}
-			{{ promo.author | prettifyMaltese | safe }}
-		{% endif %}
-	</h2>
+		</h2>
+	{% else %}
+		<h2>{{ promo.author | prettifyMaltese | safe }}</h2>
+	{% endif %}
 </header>

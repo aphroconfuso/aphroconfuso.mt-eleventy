@@ -2,6 +2,7 @@
 // const unique = require('unique-words');
 const fetch = require("node-fetch");
 const getMonthYear = require("../src/getMonthYear.js");
+const makeSortableTitle = require("../src/makeSortableTitle.js");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
 const processPromos = require("../src/processPromos.js");
 
@@ -179,7 +180,8 @@ async function getAllStories() {
 
 		const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
 		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
-		const displayTitle = `${ author && authorFullName }: ${ atts.title }${ translatorFullName ? ' (tr ' + translatorFullName + ')' : '' }`;
+		// REFACTOR use titleArray to derive slug and title
+		const displayTitle = `${ sequenceData ? sequenceData.attributes.title + ' #1: ' : '' }${ atts.title } ta’ ${ author && authorFullName } ${ translatorFullName ? ' (tr ' + translatorFullName + ')' : '' }`;
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
 
 		// find total times a story is endPromoted
@@ -216,12 +218,15 @@ async function getAllStories() {
 			'huma': 'jaqraw',
 		}
 
+		const title = sequenceData && sequenceData.attributes.title || atts.title;
+
 		return {
 			appointment: atts.appointment,
 			author: authorFullName,
 			body: atts.body,
 			booksMentioned: booksMentioned,
 			coda: atts.coda,
+			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,
 			description: atts.description,
 			displayTitle: displayTitle,
@@ -243,6 +248,8 @@ async function getAllStories() {
 			podcastUrl: atts.podcastUrl,
 			postscript: atts.postscript,
 			prominentMentions: atts.prominentMentions,
+			promoImage: atts.promoImage.data,
+			promoImageMobile: atts.promoImageMobile.data,
 			publicationHistory: atts.publicationHistory,
 			reads: reads[translator.pronoun || author.pronoun],
 			sequence: sequenceData && sequenceData.attributes.title,
@@ -254,7 +261,8 @@ async function getAllStories() {
 			slug: atts.pageUrl || makeTitleSlug(atts.title, authorFullName, translatorFullName, sequenceData && sequenceData.attributes.title, 1),
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
-			title: sequenceData && sequenceData.attributes.title || atts.title,
+			sortTitle: makeSortableTitle(title),
+			title: title,
 			translator: translatorFullName,
 			triggerWarning: atts.triggerWarning,
 			type: atts.type,

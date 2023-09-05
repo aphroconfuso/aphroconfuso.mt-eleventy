@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 const processPromos = require("../src/processPromos.js");
 const slugifyMaltese = require("../src/slugifyMaltese.js");
+const getPersonName = require("../src/getPersonName.js");
 const smartTruncate = require("smart-truncate");
 const stripTags = require("striptags");
 
@@ -31,6 +32,7 @@ async function getAllContributors() {
 									bioNote
 									displayName
 									forename
+									initials
 									surname
 									storiesAuthored(sort: "dateTimePublication:desc") {
 										${linkedStoryData}
@@ -67,9 +69,9 @@ async function getAllContributors() {
   }
   const contributorsFormatted = contributors.map((item) => {
 
-		const storiesAuthored = item.attributes.storiesAuthored.data.length && processPromos(item.attributes.storiesAuthored.data, 'contributor');
-		const storiesTranslated = item.attributes.storiesTranslated.data.length && processPromos(item.attributes.storiesTranslated.data);
-		const useFullName = item.attributes.displayName || `${ item.attributes.forename } ${ item.attributes.surname }`;
+		const storiesAuthored = processPromos(item.attributes.storiesAuthored.data, 'contributor');
+		const storiesTranslated = processPromos(item.attributes.storiesTranslated.data);
+		const useFullName = getPersonName(item.attributes);
 
 		return {
 			bioNote: item.attributes.bioNote,

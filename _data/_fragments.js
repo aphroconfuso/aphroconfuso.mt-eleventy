@@ -10,6 +10,7 @@ const personData = `data {
 	attributes {
 		displayName
 		forename
+		initials
 		surname
 	}
 }`;

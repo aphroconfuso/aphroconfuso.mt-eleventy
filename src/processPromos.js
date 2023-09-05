@@ -2,6 +2,7 @@ const getMonthYear = require("../src/getMonthYear.js");
 const makeTitleSlug = require("./makeTitleSlug.js");
 
 module.exports = (promos, from) => {
+	if (!promos) return null;
 	return promos.map((promo) => {
 		const promoAtts = promo.story && promo.story.data.attributes || promo.attributes;
 		const author = promoAtts.authors.data.length && promoAtts.authors.data[0].attributes;

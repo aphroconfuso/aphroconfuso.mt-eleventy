@@ -21,22 +21,23 @@ permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
 		<h1>{{ appointment.monthYear | prettifyMaltese | safe }}</h1>
 		<h2></h2>
 	</header>
-	<div class="container">
-	<section>
-		<div class="generic-body-text editorial">
-			<div class="text-container">
-				{{ appointment.editorial | prettifyMaltese | endDotify | safe }}
+	<div class="container-generic">
+		<section>
+			<div class="generic-body-text editorial">
+				<div class="text-container">
+					{{ appointment.editorial | prettifyMaltese | endDotify | safe }}
+				</div>
 			</div>
-		</div>
-		{% set promos = appointment.stories %}
-		{% include '_promo_list.njk' %}
-		{% if appointment.moreToCome %}
-			<div class="generic-body-text more">{{ appointment.moreToCome | prettifyMaltese | safe }}</div>
-		{% endif %}
-	</section>
-	<section id="grid-max-panel-left-top">
-		<!-- X -->
-	</section>
-</div>
+			{% set promos = appointment.stories %}
+			{% set promoFrom = appointment.monthYear %}
+			{% include '_promo_list.njk' %}
+			{% if appointment.moreToCome %}
+				<div class="generic-body-text more">{{ appointment.moreToCome | prettifyMaltese | safe }}</div>
+			{% endif %}
+		</section>
+		<section id="grid-max-panel-left-top">
+			<!-- X -->
+		</section>
+	</div>
 </article>
 {% endblock %}

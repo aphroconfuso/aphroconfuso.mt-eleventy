@@ -42,7 +42,7 @@ h3 {
 	font-style: italic;
 	font-weight: 600;
 	line-height: $header-line-height;
-	margin-bottom: $body-margin;
+	padding-bottom: $body-margin;
 }
 
 h4 {
@@ -148,8 +148,19 @@ strong {
 		font-size: $font-size-blockquote;
 		padding: 0 $body-margin $body-margin-half;
 	}
-	.epigraph p {
+	.epigraph {
+		color: $lighter-brown;
 		font-size: $font-size-blockquote;
+		figcaption {
+			margin-top: $body-margin-quarter;
+			padding: 0;
+		}
+	}
+}
+
+.body-text-part-two {
+	& > p:nth-child(1).break {
+		margin-top: $body-margin-half;
 	}
 }
 

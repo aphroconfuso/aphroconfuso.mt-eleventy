@@ -11,7 +11,7 @@ permalink: /{{ story.slug }}/index.html
 {% extends 'layouts/base.njk' %}
 
 {% block head %}
-	<title>{{ story.metaTitle or metadata.title }} · Aphroconfuso</title>
+	<title>{{ story.metaTitle or metadata.title | safe }} · Aphroconfuso</title>
 	<meta content="{{ story.description }}" name="description">
 	<meta property="og:image" content="{{ metadata.settings.imagesUrl + story.socialImage }}">
 	{% if story.translator %}
@@ -96,6 +96,9 @@ permalink: /{{ story.slug }}/index.html
 								{% if story.useDefaultPodcastMessage %}
 									<p>{{ story.translator or story.author | prettifyMaltese | safe }} {{ story.reads }} “{{ story.title | prettifyMaltese | safe }}”. {{ metadata.texts.podcastMessage | prettifyMaltese | safe }}</p>
 								{% endif %}
+								{% if story.podcastNote %}
+									{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
+								{% endif %}
 							</figcaption>
 						</figure>
 					</aside>
@@ -132,7 +135,7 @@ permalink: /{{ story.slug }}/index.html
 						{% if story.slideshow or story.singleImage %}
 							{% include "_slideshow.njk" %}
 						{% endif %}
-						<section class="body-text{% if story.useSeparators %} separated{% endif %}">
+						<section class="body-text body-text-part-two{% if story.useSeparators %} separated{% endif %}">
 							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 1, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
 						</section>
 					{% else %}
@@ -178,6 +181,7 @@ permalink: /{{ story.slug }}/index.html
 	</article>
 	<aside class="promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.title }}">
 		{% set promos = story.endPromos %}
+		{% set promoFrom = story.title %}
 		{% include '_promo_list.njk' %}
 	</aside>
 	<script>

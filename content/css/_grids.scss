@@ -3,11 +3,15 @@
 @use "settings" as *;
 
 @media all and (max-width: $mobile-breakpoint) {
-	.promo-1,
-	.promo-2 {
+	.promos-container .promo-list li {
 		border-bottom: 1px solid $grid-lines;
 		margin: $body-margin auto;
 		padding-bottom: calc(#{$body-margin} - 1px);
+		&:last-of-type {
+			border-bottom: none;
+			margin: 0;
+			padding-bottom: 0;
+		}
 	}
 }
 
@@ -40,6 +44,15 @@
 			"grid-max-panel-left-top grid-max-body grid-max-panel-right-top"
 			"grid-max-panel-left-bottom grid-max-body grid-max-panel-right-bottom"
 			"grid-bottom-full grid-bottom-full grid-bottom-full";
+	}
+
+	.container-generic {
+		max-width: $max-width;
+		display: grid;
+		grid-template-columns: 1fr $max-content-width 1fr;
+		grid-template-rows: auto;
+		grid-auto-flow: row;
+		grid-template-areas: "grid-max-panel-left-top grid-max-body grid-max-panel-right-top";
 	}
 
 	#grid-body {
