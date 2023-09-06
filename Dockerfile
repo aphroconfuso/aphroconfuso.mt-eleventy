@@ -19,7 +19,7 @@ ENV PATH /opt/node_modules/.bin:$PATH
 RUN npm ci
 WORKDIR /opt/app
 COPY ./ .
-RUN npm run build
+RUN npm run debug
 
 FROM node:16-alpine
 # Installing libvips-dev for sharp Compatability
