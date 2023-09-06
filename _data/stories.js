@@ -268,7 +268,7 @@ async function getAllStories() {
 			title: title,
 			translator: translatorFullName,
 			triggerWarning: atts.triggerWarning,
-			type: 'djarju',
+			type: atts.type,
 			updatedAt: atts.updatedAt,
 			useDefaultPodcastMessage: !!atts.useDefaultPodcastMessage,
 			useProseStyling: !!atts.useProseStyling,
