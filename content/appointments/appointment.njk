@@ -28,8 +28,9 @@ permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
 					{{ appointment.editorial | prettifyMaltese | endDotify | safe }}
 				</div>
 			</div>
-			{% set promos = appointment.stories %}
 			{% set promoFrom = appointment.monthYear %}
+			{% set promos = appointment.stories %}
+			{% set showEpisodeTitle = true %}
 			{% include '_promo_list.njk' %}
 			{% if appointment.moreToCome %}
 				<div class="generic-body-text more">{{ appointment.moreToCome | prettifyMaltese | safe }}</div>

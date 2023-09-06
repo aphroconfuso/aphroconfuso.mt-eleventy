@@ -117,7 +117,7 @@ async function getHomepage() {
 				mobilePriority: promo.mobilePriority || 9,
 				monthYear: getMonthYear(storyAtts.dateTimePublication),
 				promoType: storyAtts.type === 'Poezija' ? 'promo-poetry promo' : (storyAtts.showImagePromo && storyAtts.promoImage.data ? 'promo-picture-1 promo' : 'promo'),
-				sequenceEpisodeNumber: 1,
+				sequenceEpisodeNumber: storyAtts.sequenceEpisodeNumber,
 				sequenceEpisodeTitle: promoSequenceData && promoSequenceData.attributes.title,
 				slug: storyAtts.pageUrl || makeTitleSlug(storyAtts.title, authorFullName, translatorFullName, promoSequenceData && promoSequenceData.attributes.title, 1),
 				title: promoSequenceData && promoSequenceData.attributes.title || storyAtts.title,

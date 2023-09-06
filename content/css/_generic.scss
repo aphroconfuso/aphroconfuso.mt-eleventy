@@ -56,6 +56,10 @@
 		border: none;
 	}
 }
+.promo h3 {
+	padding-bottom: 0;
+	padding-top: $body-margin;
+}
 .contributor {
 	h2:not(.translated) {
 		display: none;

@@ -19,6 +19,7 @@ const linkedStoriesAttributes = `
 	dateTimePublication
 	description
 	pageUrl
+	sequenceEpisodeNumber
 	title
 	type
 	authors {

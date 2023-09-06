@@ -56,6 +56,7 @@ async function getAllStories() {
 									podcastUrl
 									postscript
 									publicationHistory
+									sequenceEpisodeNumber
 									showImagePromo
 									title
 									triggerWarning
@@ -181,7 +182,7 @@ async function getAllStories() {
 		const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
 		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		// REFACTOR use titleArray to derive slug and title
-		const displayTitle = `${ sequenceData ? sequenceData.attributes.title + ' #1: ' : '' }${ atts.title } ta’ ${ author && authorFullName } ${ translatorFullName ? ' (tr ' + translatorFullName + ')' : '' }`;
+		const displayTitle = `${ sequenceData ? sequenceData.attributes.title + '#' + atts.sequenceEpisodeNumber : '' }${ atts.title } ta’ ${ author && authorFullName } ${ translatorFullName ? ' (tr ' + translatorFullName + ')' : '' }`;
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
 
 		// find total times a story is endPromoted
@@ -253,12 +254,12 @@ async function getAllStories() {
 			publicationHistory: atts.publicationHistory,
 			reads: reads[translator.pronoun || author.pronoun],
 			sequence: sequenceData && sequenceData.attributes.title,
-			sequenceEpisodeNumber: 1,
+			sequenceEpisodeNumber: atts.sequenceEpisodeNumber,
 			sequenceEpisodeTitle: sequenceData && atts.title,
 			showImagePromo: atts.showImagePromo,
 			singleImage: atts.images.data && atts.images.data.length === 1,
 			slideshow:  atts.images.data && atts.images.data.length > 1,
-			slug: atts.pageUrl || makeTitleSlug(atts.title, authorFullName, translatorFullName, sequenceData && sequenceData.attributes.title, 1),
+			slug: atts.pageUrl || makeTitleSlug(atts.title, authorFullName, translatorFullName, sequenceData && sequenceData.attributes.title, atts.sequenceEpisodeNumber),
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			sortTitle: makeSortableTitle(title),

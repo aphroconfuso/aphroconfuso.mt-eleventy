@@ -21,7 +21,7 @@ module.exports = (promos, from) => {
 			description: promo.text || promoAtts.description,
 			isSequenceEpisode: !!sequence,
 			monthYear: getMonthYear(promoAtts.dateTimePublication),
-			sequenceEpisodeNumber: 1,
+			sequenceEpisodeNumber: promoAtts.sequenceEpisodeNumber,
 			sequenceEpisodeTitle: sequenceEpisodeTitle,
 			slug: promoAtts.pageUrl || makeTitleSlug(computedTitle, authorFullName, translatorFullName, sequenceTitle, 1, sequenceEpisodeTitle),
 			title: computedTitle,

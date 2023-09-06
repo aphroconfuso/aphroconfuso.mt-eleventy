@@ -230,8 +230,11 @@ aside,
 	h2 {
 		font-size: $font-size-story-header;
 	}
-	h3 {
-		font-size: $font-size-story-episode-header;
+	// Only bigger in main title
+	.container {
+		h3 {
+			font-size: $font-size-story-episode-header;
+		}
 	}
 	h2 a {
 		@include animated-underline($lighter-brown);

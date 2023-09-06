@@ -180,8 +180,9 @@ permalink: /{{ story.slug }}/index.html
 		{% endif %}
 	</article>
 	<aside class="promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.title }}">
-		{% set promos = story.endPromos %}
 		{% set promoFrom = story.title %}
+		{% set promos = story.endPromos %}
+		{% set showEpisodeTitle = true %}
 		{% include '_promo_list.njk' %}
 	</aside>
 	<script>

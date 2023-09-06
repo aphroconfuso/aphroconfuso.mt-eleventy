@@ -8,9 +8,12 @@
 	</h1>
 	{% if promo.translator %}
 		<h2 class="translated">
-			{{ promo.author | prettifyMaltese }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
+			{{ promo.author | prettifyMaltese | safe }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
 		</h2>
 	{% else %}
 		<h2>{{ promo.author | prettifyMaltese | safe }}</h2>
+	{% endif %}
+	{% if showEpisodeTitle and promo.sequenceEpisodeTitle %}
+		<h3>{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
 	{% endif %}
 </header>
