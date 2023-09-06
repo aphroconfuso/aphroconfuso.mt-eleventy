@@ -26,7 +26,7 @@
 		&:before {
 			@include diagonal-stripes($colour);
 		}
-		h3 {
+		h4 {
 			color: $colour;
 		}
 	}
@@ -52,7 +52,7 @@
 		}
 	}
 	@media all and (min-width: $mobile-breakpoint-plusone) {
-		h3 {
+		h4 {
 			a:hover {
 				color: $colour;
 				@include ease-out($fade-in-short);
@@ -71,7 +71,7 @@
 					@include animated-underline-pre($colour, $interval: $fade-in-short);
 				}
 			}
-			h3 {
+			h4 {
 				display: block;
 			}
 		}
@@ -80,7 +80,11 @@
 			h1::after {
 				@include animated-underline-post();
 			}
-			h3 {
+			h1 span.episodeNumber {
+				color: $colour;
+				@include ease-out($fade-in-long);
+			}
+			h4 {
 				color: $colour;
 				@include ease-out($fade-in-long);
 			}

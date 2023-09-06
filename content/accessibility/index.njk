@@ -3,4 +3,11 @@ permalink: /{{ accessibility.title | slugifyMaltese }}/index.html
 ---
 {% extends 'layouts/base.njk' %}
 {% set generic = accessibility %}
-{% include "_generic.njk" %}
+
+{% block head %}
+	{% include "_generic_head.njk" %}
+{% endblock %}
+
+{% block content %}
+	{% include "_generic.njk" %}
+{% endblock %}

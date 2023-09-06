@@ -27,6 +27,13 @@
 }
 
 @font-face {
+	font-family: "Alegreya";
+	src: url("/fonts/Alegreya-SemiBoldItalic.ttf") format("truetype");
+	font-style: italic;
+	font-weight: 600;
+}
+
+@font-face {
 	font-family: "Alegreya Sans";
 	src: url("/fonts/AlegreyaSans-Bold.ttf") format("truetype");
 	font-style: normal;

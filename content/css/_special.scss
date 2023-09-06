@@ -1,0 +1,16 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+.body-text {
+	// Il-Lanza, Il-Labra, Il-Qoffa, l-Azzarin
+	.special-100 {
+		display: inline-block;
+		margin-left: 70%;
+	}
+	.special-101 {
+		display: inline-block;
+		margin-left: calc(70% + 40px);
+	}
+}

@@ -11,14 +11,17 @@ h1 {
 	font-family: $serif, serif;
 	font-size: $font-size-story-header-mobile;
 	font-weight: 600;
-	line-height: 1.1;
+	line-height: $header-line-height;
+	.episodeNumber {
+		color: $lightest-brown;
+	}
 }
 
 h2 {
 	font-family: $serif, serif;
 	font-size: $font-size-story-header-mobile;
 	font-weight: 500;
-	line-height: 1.1;
+	line-height: $header-line-height;
 	.translator {
 		display: inline-block;
 		white-space: nowrap;
@@ -34,15 +37,20 @@ h2 {
 }
 
 h3 {
-	display: inline-block;
-	font-family: $sans-alt, sans-serif;
-	line-height: 1.1;
-	text-transform: uppercase;
-	font-size: $font-size-compact;
+	font-family: $serif, serif;
+	font-size: $font-size-story-episode-header-mobile;
+	font-style: italic;
+	font-weight: 600;
+	line-height: $header-line-height;
+	padding-bottom: $body-margin;
 }
 
 h4 {
-	color: red;
+	display: inline-block;
+	font-family: $sans-alt, sans-serif;
+	line-height: $header-line-height;
+	text-transform: uppercase;
+	font-size: $font-size-compact;
 }
 
 h6 {
@@ -91,6 +99,16 @@ strong {
 	p.break {
 		margin-top: $body-margin * 2;
 	}
+	&.separated {
+		p.break {
+			margin-top: $body-margin * 1;
+			padding-top: $body-margin * 2;
+			background-image: url(/img/deco-100.svg);
+			background-position: center top;
+			background-size: 75%;
+			background-repeat: no-repeat;
+		}
+	}
 	p {
 		font-size: $body-font-size;
 		margin-bottom: $body-margin-half;
@@ -98,6 +116,18 @@ strong {
 		&.enjambed {
 			margin-bottom: 0;
 		}
+		&.centred {
+			text-align: center;
+		}
+		&.right-aligned {
+			text-align: right;
+		}
+		&.justified {
+			text-align: justify;
+		}
+	}
+	p:last-of-type + blockquote {
+		margin-top: $body-margin-half !important;
 	}
 	figure {
 		padding-right: $body-margin;
@@ -118,8 +148,19 @@ strong {
 		font-size: $font-size-blockquote;
 		padding: 0 $body-margin $body-margin-half;
 	}
-	.epigraph p {
+	.epigraph {
+		color: $lighter-brown;
 		font-size: $font-size-blockquote;
+		figcaption {
+			margin-top: $body-margin-quarter;
+			padding: 0;
+		}
+	}
+}
+
+.body-text-part-two {
+	& > p:nth-child(1).break {
+		margin-top: $body-margin-half;
 	}
 }
 
@@ -180,13 +221,17 @@ aside,
 			text-decoration-thickness: 1px;
 			text-underline-offset: 2px;
 		}
+		margin-bottom: $body-margin-half;
 	}
 }
 
 @media all and (min-width: $laptop-breakpoint) {
 	h1,
 	h2 {
-		font-size: 3rem;
+		font-size: $font-size-story-header;
+	}
+	h3 {
+		font-size: $font-size-story-episode-header;
 	}
 	h2 a {
 		@include animated-underline($lighter-brown);
@@ -195,6 +240,13 @@ aside,
 		a:hover {
 			@include ease-in(0.25s);
 			text-decoration-color: $dark-brown;
+		}
+	}
+	.body-text.separated {
+		p.break {
+			margin-top: $body-margin * 2;
+			padding-top: $body-margin * 3;
+			background-size: 50%;
 		}
 	}
 }

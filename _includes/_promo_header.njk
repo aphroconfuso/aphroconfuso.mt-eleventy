@@ -1,0 +1,16 @@
+<header>
+	<h4>{{ promo.monthYear }}</h4>
+	<h1>
+		{{ promo.title | prettifyMaltese | safe }}
+		{% if promo.isSequenceEpisode %}
+			<span class="episodeNumber">#{{ promo.sequenceEpisodeNumber }}</span>
+		{% endif %}
+	</h1>
+	{% if promo.translator %}
+		<h2 class="translated">
+			{{ promo.author | prettifyMaltese }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
+		</h2>
+	{% else %}
+		<h2>{{ promo.author | prettifyMaltese | safe }}</h2>
+	{% endif %}
+</header>

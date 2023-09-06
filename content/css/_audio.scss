@@ -150,7 +150,7 @@ figure#audio {
 	}
 
 	@media all and (min-width: $laptop-breakpoint) {
-		margin: 0;
+		margin: 0 0 $body-margin;
 		figcaption {
 			padding-top: $body-margin-half;
 		}

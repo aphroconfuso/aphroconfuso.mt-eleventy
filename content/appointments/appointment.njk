@@ -17,34 +17,27 @@ permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
 {% block content %}
 <article class="generic {{ appointment.monthYear | slugify }}">
 	<header>
-		<h3><a href="/appuntamenti">Appuntamenti</a></h5>
+		<h4><a href="/appuntamenti">Appuntamenti</a></h5>
 		<h1>{{ appointment.monthYear | prettifyMaltese | safe }}</h1>
 		<h2></h2>
 	</header>
-	<div class="container">
-	<section>
-		<div class="generic-body-text editorial">
-			<div class="text-container">
-				{{ appointment.editorial | prettifyMaltese | endDotify | safe }}
+	<div class="container-generic">
+		<section>
+			<div class="generic-body-text editorial">
+				<div class="text-container">
+					{{ appointment.editorial | prettifyMaltese | endDotify | safe }}
+				</div>
 			</div>
-		</div>
-		{% set promos = appointment.stories %}
-		{% include '_promo_list.njk' %}
-		{% if appointment.moreToCome %}
-			<div class="generic-body-text more">{{ appointment.moreToCome | prettifyMaltese | safe }}</div>
-		{% endif %}
-	</section>
-	<section id="grid-max-panel-left-top">
-		{# <section class="kittieba-menu">
-			{% for item in appointments %}
-				{% if loop.first %}<ul>{% endif %}
-					<li>
-						<a href="/{{ item.slug }}">{{ item.name }}</a>
-					</li>
-				{% if loop.last %}</ul>{% endif %}
-			{% endfor %}
-		</section> #}
-	</section>
-</div>
+			{% set promos = appointment.stories %}
+			{% set promoFrom = appointment.monthYear %}
+			{% include '_promo_list.njk' %}
+			{% if appointment.moreToCome %}
+				<div class="generic-body-text more">{{ appointment.moreToCome | prettifyMaltese | safe }}</div>
+			{% endif %}
+		</section>
+		<section id="grid-max-panel-left-top">
+			<!-- X -->
+		</section>
+	</div>
 </article>
 {% endblock %}

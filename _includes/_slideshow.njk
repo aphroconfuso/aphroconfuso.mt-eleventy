@@ -1,12 +1,14 @@
-<section class="splide" aria-label="Stampi għal {{ story.title }}">
+<section class="splide{% if story.singleImage %} single-image{% endif %}" aria-label="Stampi għal {{ story.title }}">
 	<div class="arrows splide__arrows">
-		<button class="arrow-previous splide__arrow--prev">
-			«
-		</button>
-		<button class="arrow-next splide__arrow--next">
-			»
-		</button>
-		<button type="button" id="lightbox-open" onclick="_paq.push(['trackEvent', 'Stampi', 'lightbox', '{{ story.title }}']);">&#128437;</button>
+		{% if story.slideshow %}
+			<button class="arrow-previous splide__arrow--prev">
+				«
+			</button>
+			<button class="arrow-next splide__arrow--next">
+				»
+			</button>
+		{% endif %}
+		<button type="button" id="lightbox-open" onclick="_paq.push(['trackEvent', 'Stampi', 'lightbox', '{{ story.title }}']);">&nbsp;</button>
 	</div>
 	<div class="splide__track">
 		<ul class="splide__list">

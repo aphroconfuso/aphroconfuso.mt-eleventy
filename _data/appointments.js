@@ -1,8 +1,11 @@
 const fetch = require("node-fetch");
+const getMonthYear = require("../src/getMonthYear.js");
+const makeTitleSlug = require("../src/makeTitleSlug.js");
+const processPromos = require("../src/processPromos.js");
 const smartTruncate = require("smart-truncate");
 const stripTags = require("striptags");
-const makeTitleSlug = require("../src/makeTitleSlug.js");
-const getMonthYear = require("../src/getMonthYear.js");
+
+const {linkedStoryData} = require("./_fragments.js");
 
 async function getAllAppointments() {
   let appointmentsData;
@@ -26,35 +29,11 @@ async function getAllAppointments() {
 					appointments(sort: "dateTimePublication:desc") {
 						data {
 							attributes {
-								dateTimePublication
-								editorial
 								moreToCome
-								stories {
-									data {
-										attributes {
-											title
-											dateTimePublication
-											description
-											pageUrl
-											type
-											authors {
-												data {
-													attributes {
-														forename
-														surname
-													}
-												}
-											}
-											translators {
-												data {
-													attributes {
-														forename
-														surname
-													}
-												}
-											}
-										}
-									}
+								editorial
+								dateTimePublication
+								stories(sort: "dateTimePublication:desc") {
+									${linkedStoryData}
 								}
 							}
 						}
@@ -76,24 +55,7 @@ async function getAllAppointments() {
 	}
 
 	const appointments = appointmentsData.appointments.data.map((appointment) => {
-		const storiesFormatted = !!appointment.attributes.stories.data.length && appointment.attributes.stories.data.map((storyAuthored) => {
-
-			const author = storyAuthored.attributes.authors.data.length && storyAuthored.attributes.authors.data[0].attributes;
-			const translator = storyAuthored.attributes.translators.data.length && storyAuthored.attributes.translators.data[0].attributes;
-			const authorFullName = author && `${author.forename} ${author.surname}`
-			const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`
-
-			return {
-				title: storyAuthored.attributes.title,
-				slug: makeTitleSlug(storyAuthored.attributes.title, authorFullName, translatorFullName),
-				monthYear: getMonthYear(storyAuthored.attributes.dateTimePublication),
-				description: storyAuthored.attributes.description,
-				author: authorFullName,
-				translator: translatorFullName,
-				type: storyAuthored.attributes.type,
-				cssClass: storyAuthored.attributes.type === 'Poezija' ? 'body-text poetry' : 'body-text',
-			};
-		});
+		const storiesFormatted = !!appointment.attributes.stories.data.length && processPromos(appointment.attributes.stories.data);
 
 		return {
 			title: appointment.attributes.title || null,
