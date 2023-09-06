@@ -442,10 +442,8 @@
 	// "ga10";
 	// "ga11"
 	// "ga12";
-	.ga-1 {
-		p {
-			@include clamp(15);
-		}
+	.ga-image-1 {
+		margin-bottom: $body-margin-half;
 	}
 	.ga-1,
 	.ga-2,

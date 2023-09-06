@@ -31,4 +31,4 @@ ENV PATH /opt/node_modules/.bin:$PATH
 WORKDIR /opt/app
 COPY --from=build /opt/app ./
 EXPOSE 8080
-CMD ["npm", "run","build"]
+CMD ["npm", "run","debug"]
