@@ -1,0 +1,29 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+article.djarju {
+	.container {
+		grid-template-areas:
+			"grid-max-panel-left-top grid-max-body grid-max-panel-right-top"
+			"grid-max-panel-left-bottom grid-max-body grid-max-panel-right-bottom"
+			"grid-bottom-full grid-bottom-full grid-bottom-full";
+	}
+	@media all and (min-width: $laptop-breakpoint) {
+		.container {
+			grid-template-areas:
+				"grid-max-panel-left-top grid-max-body grid-max-panel-right-top"
+				"grid-max-panel-left-bottom grid-max-body grid-max-panel-right-bottom"
+				"grid-bottom-full grid-bottom-full grid-bottom-full";
+		}
+		#grid-body {
+			border: 1px dashed $lightester-brown;
+			border-width: 0 1px;
+			box-sizing: content-box;
+			margin-left: $body-margin * -1;
+			padding: 0 $body-margin;
+			width: calc(100% + $body-margin * 2);
+		}
+	}
+}

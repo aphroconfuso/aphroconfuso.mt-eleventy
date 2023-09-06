@@ -46,12 +46,23 @@ permalink: /{{ story.slug }}/index.html
 				{% endif %}
 			</h1>
 			<h2>
-				{% if story.translator %}
-					{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}/">{{ story.translator | prettifyMaltese | safe }}</a></span>
-				{% else %}
-					<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
-				{% endif %}
-			</h2>
+			{% if story.translator %}
+				{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}/">{{ story.translator | prettifyMaltese | safe }}</a></span>
+			{% else %}
+				<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
+			{% endif %}
+		</h2>
+			{% for epigraph in story.epigraphs %}
+				{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
+					<figure class="epigraph">
+						{{ epigraph.quotation | restrictHtml | prettifyMaltese | safe }}
+						{% if epigraph.attribution %}<figcaption>{{ epigraph.attribution | restrictHtml | prettifyMaltese | safe }}</figcaption>{% endif %}
+					</figure>
+				{% if loop.last %}</section>{% endif %}
+			{% endfor %}
+			{% if story.isSequenceEpisode %}
+				<h3>{{ story.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
+			{% endif %}
 		</header>
 		<div class="container">
 			<section id="grid-max-panel-left-top">
@@ -89,7 +100,7 @@ permalink: /{{ story.slug }}/index.html
 									<progress class="amplitude-song-played-progress" amplitude-main-song-played-progress="true" id="song-played-progress"></progress>
 								</div>
 								<div class="time-container">
-										<span class="amplitude-current-hours" amplitude-main-current-hours="true"></span>:<span class="amplitude-current-minutes" amplitude-main-current-minutes="true"></span>:<span class="amplitude-current-seconds" amplitude-main-current-seconds="true"></span>/<span class="amplitude-duration-hours" amplitude-main-duration-hours="true"></span>:<span class="amplitude-duration-minutes" amplitude-main-duration-minutes="true"></span>:<span class="amplitude-duration-seconds" amplitude-main-duration-seconds="true"></span>
+										{% if story.podcastLengthMinutes >= 60 %}<span class="amplitude-current-hours" amplitude-main-current-hours="true"></span>:{% endif %}<span class="amplitude-current-minutes" amplitude-main-current-minutes="true"></span>:<span class="amplitude-current-seconds" amplitude-main-current-seconds="true"></span>/{% if story.podcastLengthMinutes >= 60 %}<span class="amplitude-duration-hours" amplitude-main-duration-hours="true"></span>:{% endif %}<span class="amplitude-duration-minutes" amplitude-main-duration-minutes="true"></span>:<span class="amplitude-duration-seconds" amplitude-main-duration-seconds="true"></span>
 								</div>
 							</div>
 							<figcaption>
@@ -111,20 +122,13 @@ permalink: /{{ story.slug }}/index.html
 				{% endif %}
 			</section>
 			<section id="grid-body">
-				{% for epigraph in story.epigraphs %}
-					{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
-						<figure class="epigraph">
-							{{ epigraph.quotation | restrictHtml | prettifyMaltese | safe }}
-							{% if epigraph.attribution %}<figcaption>{{ epigraph.attribution | restrictHtml | prettifyMaltese | safe }}</figcaption>{% endif %}
-						</figure>
-					{% if loop.last %}</section>{% endif %}
-				{% endfor %}
-				{% if story.isSequenceEpisode %}
-					<h3>{{ story.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
-				{% endif %}
 				{% if story.type === 'Poezija' and not story.useProseStyling %}
-					<section class="body-text poetry">
+					<section class="body-text">
 						{{ story.body | prettifyMaltese | versify | safe }}
+					</section>
+				{% elif story.type === 'Djarju' %}
+					<section class="body-text">
+						{{ story.body | dropCapsifyAndSectionise(null, null, true) | prettifyMaltese | safe }}
 					</section>
 				{% else %}
 					{% if story.imagesPositionText %}

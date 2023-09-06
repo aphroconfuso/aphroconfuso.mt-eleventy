@@ -39,7 +39,7 @@ main {
 
 article > header {
 	max-width: $max-content-width;
-	margin: 0 auto $body-margin;
+	margin: 0 auto;
 }
 
 #skip {
@@ -86,7 +86,8 @@ article > header {
 @media all and (min-width: $mobile-breakpoint-plusone) {
 	article > header {
 		max-width: $max-content-width;
-		margin: ($body-margin * 2) auto ($body-margin * 3);
+		margin: ($body-margin * 2) auto 0;
+		min-height: $body-margin * 6;
 	}
 }
 

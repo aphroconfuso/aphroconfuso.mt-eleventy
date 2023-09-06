@@ -11,6 +11,7 @@ const personData = `data {
 		displayName
 		forename
 		initials
+		pronoun
 		surname
 	}
 }`;

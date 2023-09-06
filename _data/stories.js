@@ -52,6 +52,7 @@ async function getAllStories() {
 									imagesType
 									introduction
 									pageUrl
+									podcastLengthMinutes
 									podcastNote
 									podcastUrl
 									postscript
@@ -245,6 +246,7 @@ async function getAllStories() {
 			isSequenceEpisode: !!sequenceData,
 			metaTitle: `${ displayTitle }`,
 			monthYear: getMonthYear(atts.dateTimePublication),
+			podcastLengthMinutes: atts.podcastLengthMinutes,
 			podcastNote: atts.podcastNote,
 			podcastUrl: atts.podcastUrl,
 			postscript: atts.postscript,
@@ -266,7 +268,7 @@ async function getAllStories() {
 			title: title,
 			translator: translatorFullName,
 			triggerWarning: atts.triggerWarning,
-			type: atts.type,
+			type: 'djarju',
 			updatedAt: atts.updatedAt,
 			useDefaultPodcastMessage: !!atts.useDefaultPodcastMessage,
 			useProseStyling: !!atts.useProseStyling,
