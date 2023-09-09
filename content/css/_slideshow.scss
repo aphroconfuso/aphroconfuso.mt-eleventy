@@ -9,13 +9,11 @@
 		width: calc(100% + $body-margin);
 		margin-left: -$body-margin-half;
 	}
-	#grid-body {
-		section.single-image {
-			padding: $body-margin 0;
-			.arrows,
-			.splide__pagination {
-				display: none !important;
-			}
+	section.single-image {
+		padding: $body-margin 0;
+		.arrows,
+		.splide__pagination {
+			display: none !important;
 		}
 	}
 }
