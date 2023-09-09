@@ -154,6 +154,7 @@
 		}
 	}
 }
+
 @media all and (max-width: ($laptop-breakpoint - 1)) {
 	.layout-1,
 	.layout-2,
@@ -171,27 +172,11 @@
 	}
 }
 
-// Tablet
-// @media all and (min-width: $mobile-breakpoint-plusone) {
-// 	.layout-1,
-// 	.layout-2,
-// 	.layout-3,
-// 	.layout-4,
-// 	.layout-5,
-// 	.layout-6 {
-// 		display: grid;
-// 		gap: $body-margin $body-margin;
-// 	}
-// 	.ga-4 {
-// 		display: unset;
-// 		p {
-// 			@include clamp(15);
-// 		}
-// 	}
-// 	.ga-podcast {
-// 		display: none;
-// 	}
-// }
+@media all and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
+	article.home {
+		margin: 0 15%;
+	}
+}
 
 // *************************************************************************
 // LAYOUT 6 ****************************************************************
@@ -422,6 +407,11 @@
 	}
 }
 
+// *************************************************************************
+// LAYOUT 8 ****************************************************************
+// Large image story on top
+// Then Story and editorial
+
 .layout-8 {
 	grid-template-areas:
 		"ga-image-1"
@@ -435,13 +425,6 @@
 		"ga-podcast"
 		"ga5"
 		"ga-image-2";
-	// "ga6"
-	// "ga7"
-	// "ga8"
-	// "ga9"
-	// "ga10";
-	// "ga11"
-	// "ga12";
 	.ga-image-1 {
 		margin-bottom: $body-margin-half;
 	}
@@ -456,6 +439,7 @@
 			display: none;
 		}
 		.ga-1,
+		.ga-2,
 		.ga-3,
 		.ga-image-1,
 		.ga-5,
@@ -484,6 +468,10 @@
 			p {
 				@include clamp(9);
 			}
+		}
+		.ga-2,
+		.ga-3 {
+			@include border-bottom();
 		}
 		.ga-poem-1 {
 			p {

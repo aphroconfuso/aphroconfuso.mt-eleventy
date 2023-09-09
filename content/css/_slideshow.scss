@@ -9,6 +9,15 @@
 		width: calc(100% + $body-margin);
 		margin-left: -$body-margin-half;
 	}
+	#grid-body {
+		section.single-image {
+			padding: $body-margin 0;
+			.arrows,
+			.splide__pagination {
+				display: none !important;
+			}
+		}
+	}
 }
 .arrows {
 	height: calc(100% - $body-margin);
@@ -153,9 +162,9 @@
 	#grid-body {
 		.splide {
 			margin-left: -30%;
-			padding: ($body-margin * 1.5) 0 $body-margin;
 			width: 160%;
 			img {
+				border: 1px solid $lightest-brown;
 				width: 100%;
 			}
 		}
@@ -200,13 +209,6 @@
 #lightbox-container {
 	img {
 		height: 400px;
-	}
-}
-
-.single-image {
-	.arrows,
-	.splide__pagination {
-		display: none !important;
 	}
 }
 
