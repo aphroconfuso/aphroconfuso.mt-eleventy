@@ -9,6 +9,19 @@ article.djarju {
 			"grid-max-panel-left-top grid-max-body grid-max-panel-right-top"
 			"grid-max-panel-left-bottom grid-max-body grid-max-panel-right-bottom"
 			"grid-bottom-full grid-bottom-full grid-bottom-full";
+		.end-dot {
+			color: $lighter-brown;
+			background-color: $lighter-brown;
+		}
+	}
+	&.content {
+		h1 {
+			color: $lighter-brown;
+		}
+		border-bottom-color: $lighter-brown;
+		p.break {
+			margin-top: $body-margin;
+		}
 	}
 	@media all and (min-width: $laptop-breakpoint) {
 		.container {
@@ -24,6 +37,25 @@ article.djarju {
 			margin-left: $body-margin * -1;
 			padding: 0 $body-margin;
 			width: calc(100% + $body-margin * 2);
+		}
+	}
+}
+a.promo-djarju {
+	p {
+		@include clamp(3);
+	}
+	@media all and (min-width: $laptop-breakpoint) {
+		&:hover {
+			header {
+				h3 {
+					&::after {
+						@include animated-underline-post();
+					}
+				}
+				h4 {
+					color: $dark-brown;
+				}
+			}
 		}
 	}
 }

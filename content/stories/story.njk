@@ -36,22 +36,33 @@ permalink: /{{ story.slug }}/index.html
 {% endblock %}
 
 {% block content %}
-	<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }} story-{{ story.id }}">
+	<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }} story story-{{ story.id }}">
 		<header>
-			<h4><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
-			<h1>
-				{{ story.title | prettifyMaltese | safe }}
-				{% if story.isSequenceEpisode %}
-					<span class="episodeNumber">#{{ story.sequenceEpisodeNumber }}</span>
-				{% endif %}
-			</h1>
-			<h2>
-			{% if story.translator %}
-				{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}/">{{ story.translator | prettifyMaltese | safe }}</a></span>
+			{% if story.type === 'Djarju' %}
+				<h4><span class="diaryTitle">Djarju</span>
+					{% if story.diaryDate %}
+						<span class="diaryDate">{{ story.diaryDate | diaryDate }}</span>
+					{% endif %}
+				</h4>
+				<h2>
+					<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
+				</h2>
 			{% else %}
-				<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
+				<h4><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
+				<h1>
+					{{ story.title | prettifyMaltese | safe }}
+					{% if story.isSequenceEpisode %}
+						<span class="episodeNumber">#{{ story.sequenceEpisodeNumber }}</span>
+					{% endif %}
+				</h1>
+				<h2>
+					{% if story.translator %}
+						{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}/">{{ story.translator | prettifyMaltese | safe }}</a></span>
+					{% else %}
+						<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
+					{% endif %}
+				</h2>
 			{% endif %}
-		</h2>
 			{% for epigraph in story.epigraphs %}
 				{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
 					<figure class="epigraph">
@@ -128,7 +139,7 @@ permalink: /{{ story.slug }}/index.html
 					</section>
 				{% elif story.type === 'Djarju' %}
 					<section class="body-text">
-						{{ story.body | dropCapsifyAndSectionise(null, null, true) | prettifyMaltese | safe }}
+						{{ story.body | diarySectionise(null, null, true) | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% else %}
 					{% if story.imagesPositionText %}
@@ -170,7 +181,7 @@ permalink: /{{ story.slug }}/index.html
 						{{ story.postscript | restrictHtml | prettifyMaltese | safe }}
 					</aside>
 				{% endif %}
-				{% if story.type == 'Esej' %}
+				{% if story.type == 'Esej' or story.type == 'Djarju' %}
 					<aside id="letters-solicit">
 						<p>Iktbilna dwar dan ix-xogħol fuq <l-m>l-indirizz</l-m> <a href="mailto:ittri@aphroconfuso.mt?subject={{ story.displayTitle }}" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludi ismek u fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
 					</aside>
@@ -190,8 +201,10 @@ permalink: /{{ story.slug }}/index.html
 		{% include '_promo_list.njk' %}
 	</aside>
 	<script>
-		wordcount = {{ story.body | wordcount }};
-		podcastUrl = '{{ story.podcastUrl}}' || null;
+		monthYear = '{{ story.monthYear | slugify }}' || null;
+		podcastUrl = '{{ story.podcastUrl }}' || null;
+		storyId = '{{ story.id }}' || null;
+		wordcount = {{ story.body | wordcount }} || null;
 	</script>
 	{% if story.slideshow or story.singleImage %}
 		{% set imageMode = 'lightbox' %}

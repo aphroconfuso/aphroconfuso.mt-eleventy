@@ -9,6 +9,25 @@
 	font-size: $font-size-nav;
 	letter-spacing: 1px;
 	text-transform: uppercase;
+	#bookmarks-number {
+		align-content: space-between;
+		align-items: center;
+		background-color: $paper;
+		border-radius: 8px;
+		display: inline-flex;
+		font-family: "Fira Sans";
+		font-size: 9px;
+		height: 16px;
+		justify-content: center;
+		vertical-align: -2px;
+		width: 16px;
+		&.populated {
+			background-color: red;
+			color: red;
+		}
+		@include ease-in(1s, "background-color");
+		@include ease-in(1s, "color");
+	}
 }
 
 @media screen and (max-width: $mobile-breakpoint) {

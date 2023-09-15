@@ -1,13 +1,58 @@
 ---
+eleventyExcludeFromCollections: true
 permalink: /bookmarks/index.html
 ---
 {% extends 'layouts/base.njk' %}
 {% set generic = bookmark %}
 
 {% block head %}
-	{% include "_generic_head.njk" %}
+	<title>{{ bookmark.title }} · Aphroconfuso</title>
+	<meta content="{{ metadata.description }}" name="description">
+	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
 {% endblock %}
 
 {% block content %}
-	{% include "_generic.njk" %}
+	<article class="generic" id="bookmarks">
+		<header>
+			<h4>&nbsp;</h5>
+			<h1>{{ bookmark.title }}</h1>
+			<h2>&nbsp;</h2>
+		</header>
+		<div class="container-generic bookmarks">
+			<section id="grid-max-panel-left-top">
+				<!-- -->
+			</section>
+			<section id="grid-max-panel-right-top">
+				<!-- X -->
+			</section>
+			<section id="grid-body">
+				<div id="bookmarks-container" class="generic-body-text">
+					{{ bookmark.body | prettifyMaltese | safe }}
+					<template id="bookmark-item">
+						<li>
+							<a>
+								<header>
+									<h4></h4>
+									<h1></h1>
+									<h2></h2>
+									<h3></h3>
+									<h5></h5>
+								</header>
+								<div class="body-text">
+									<p></p>
+								</div>
+							</a>
+						</li>
+					</template>
+					<ul id="bookmark-list" class="promo-list"></ul>
+				</div>
+			</section>
+			<section id="grid-max-panel-left-bottom">
+				<!-- X -->
+			</section>
+			<section id="grid-max-panel-right-bottom">
+				<!-- X -->
+			</section>
+		</div>
+	</article>
 {% endblock %}

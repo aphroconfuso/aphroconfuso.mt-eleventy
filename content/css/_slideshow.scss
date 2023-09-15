@@ -9,6 +9,9 @@
 		width: calc(100% + $body-margin);
 		margin-left: -$body-margin-half;
 	}
+}
+#grid-body,
+#lightbox-container {
 	section.single-image {
 		padding: $body-margin 0;
 		.arrows,

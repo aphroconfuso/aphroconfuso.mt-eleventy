@@ -45,6 +45,7 @@ async function getAllStories() {
 									coda
 									dateTimePublication
 									description
+									diaryDate
 									dontUseDropCaps
 									endnote
 									imageBorderColour
@@ -118,6 +119,7 @@ async function getAllStories() {
 										data {
 											attributes {
 												title
+												description
 											}
 										}
 									}
@@ -231,6 +233,7 @@ async function getAllStories() {
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,
 			description: atts.description,
+			diaryDate:atts.diaryDate,
 			displayTitle: displayTitle,
 			dontUseDropCaps: !!atts.dontUseDropCaps,
 			dontUseDropCaps: atts.dontUseDropCaps,
@@ -244,6 +247,7 @@ async function getAllStories() {
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,
 			isSequenceEpisode: !!sequenceData,
+			listable: atts.type !== 'Djarju',
 			metaTitle: `${ displayTitle }`,
 			monthYear: getMonthYear(atts.dateTimePublication),
 			podcastLengthMinutes: atts.podcastLengthMinutes,

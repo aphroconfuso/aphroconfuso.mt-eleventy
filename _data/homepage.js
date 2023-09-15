@@ -6,7 +6,7 @@ const getMonthYear = require("../src/getMonthYear.js");
 const { imageData, linkedStoryData, linkedStoryDataWithImage } = require("./_fragments.js");
 
 async function getHomepage() {
-	let homepage;
+	let homepage, diaryEntries;
 	try {
 		const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
 			method: "POST",
@@ -56,6 +56,13 @@ async function getHomepage() {
 							}
 						}
 					}
+					diaryEntries: stories(
+						pagination: { page: 1, pageSize: 1 },
+						sort: ["diaryDate:desc"],
+						filters: {type: { eq: "Djarju"}}
+					) {
+						${linkedStoryData}
+					}
 				}`
 			}),
 		});
@@ -69,40 +76,53 @@ async function getHomepage() {
 			throw new Error("Problem fetching data at homepage.js");
 		}
 		homepage = response.data.homepage;
+		diaryEntries = response.data.diaryEntries;
 	} catch (error) {
 		throw new Error(error);
 	}
 
 	const atts = homepage.data.attributes;
+	const diaryPromos = diaryEntries;
 
 	const layouts = {
-		Layout_6: {
-			text: 9,
+		Layout_1: {
+			diary: 1,
 			image: 2,
 			poem: 1,
+			text: 4,
+			promo_1_characters: 165,
+			promo_4_characters: 165,
+		},
+		Layout_6: {
+			diary: 1,
+			image: 2,
+			poem: 1,
+			text: 9,
 			promo_3_characters: 1640,
 		},
 		Layout_7: {
-			text: 10,
+			diary: 1,
 			image: 2,
 			poem: 1,
+			text: 10,
 			promo_1_characters: 2430,
 			promo_4_characters: 1331,
 		},
 		Layout_8: {
-			text: 5,
+			diary: 1,
 			image: 2,
 			poem: 1,
+			text: 5,
 			promo_1_characters: 165,
 			promo_4_characters: 165,
-		}
+		},
 	}
 
 	const layoutConfig = layouts[atts.layout];
 
 	const promosFormatted = (promos, includesImages, number) => {
 		const result = promos.length && promos.slice(0, number).map((promo) => {
-			const storyAtts = promo.story.data.attributes;
+			const storyAtts = (promo.story && promo.story.data.attributes) || promo.attributes;
 			const author = storyAtts.authors.data.length && storyAtts.authors.data[0].attributes;
 			const translator = storyAtts.translators.data.length && storyAtts.translators.data[0].attributes;
 			const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
@@ -113,14 +133,14 @@ async function getHomepage() {
 				author: authorFullName,
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 				description: promo.text || storyAtts.description,
+				diaryDate: storyAtts.diaryDate,
 				isSequenceEpisode: !!promoSequenceData,
 				mobilePriority: promo.mobilePriority || 9,
 				monthYear: getMonthYear(storyAtts.dateTimePublication),
-				promoType: storyAtts.type === 'Poezija' ? 'promo-poetry promo' : (storyAtts.showImagePromo && storyAtts.promoImage.data ? 'promo-picture-1 promo' : 'promo'),
 				sequenceEpisodeNumber: storyAtts.sequenceEpisodeNumber,
-				sequenceEpisodeTitle: promoSequenceData && promoSequenceData.attributes.title,
+				sequenceEpisodeTitle: !!promoSequenceData && storyAtts.title,
 				slug: storyAtts.pageUrl || makeTitleSlug(storyAtts.title, authorFullName, translatorFullName, promoSequenceData && promoSequenceData.attributes.title, 1),
-				title: promoSequenceData && promoSequenceData.attributes.title || storyAtts.title,
+				title: !!promoSequenceData ? promoSequenceData.attributes.title : storyAtts.title,
 				translator: translatorFullName,
 				type: storyAtts.type,
 			};
@@ -133,7 +153,6 @@ async function getHomepage() {
 				formattedPromo.imageCrop = promo.imageCrop,
 				formattedPromo.alternativeText = promoImageData.attributes.alternativeText
 			}
-
 			return formattedPromo;
 		});
 		return result;
@@ -146,6 +165,7 @@ async function getHomepage() {
 		monthYear: getMonthYear(atts.appointment.data.attributes.dateTimePublication),
 		poetryPromos: promosFormatted(atts.poetryPromos, false, layoutConfig['poem']),
 		promos: promosFormatted(atts.promos, false, layoutConfig['text']),
+		diaryEntries: promosFormatted(diaryPromos.data, false, layoutConfig['diary']),
 	};
 
 	return homepageFormatted;

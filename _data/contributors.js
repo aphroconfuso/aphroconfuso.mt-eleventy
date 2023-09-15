@@ -34,7 +34,16 @@ async function getAllContributors() {
 									forename
 									initials
 									surname
-									storiesAuthored(sort: "dateTimePublication:desc") {
+									storiesAuthored(
+										sort: "dateTimePublication:desc",
+										filters: {type: { ne: "Djarju"}}
+									) {
+										${linkedStoryData}
+									}
+									diaryEntries: storiesAuthored(
+										sort: "dateTimePublication:desc",
+										filters: {type: { eq: "Djarju"}}
+									) {
 										${linkedStoryData}
 									}
 									storiesTranslated(sort: "dateTimePublication:desc") {
@@ -69,8 +78,9 @@ async function getAllContributors() {
   }
   const contributorsFormatted = contributors.map((item) => {
 
-		const storiesAuthored = processPromos(item.attributes.storiesAuthored.data, 'contributor');
+		const storiesAuthored = processPromos(item.attributes.storiesAuthored.data);
 		const storiesTranslated = processPromos(item.attributes.storiesTranslated.data);
+		const diaryEntries = processPromos(item.attributes.diaryEntries.data);
 		const useFullName = getPersonName(item.attributes);
 
 		return {
@@ -81,6 +91,7 @@ async function getAllContributors() {
 			slug: slugifyMaltese(useFullName),
 			storiesAuthored: storiesAuthored,
 			storiesTranslated: storiesTranslated,
+			diaryEntries: diaryEntries,
       name: useFullName,
     };
   });

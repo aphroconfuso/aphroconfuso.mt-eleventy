@@ -3,41 +3,41 @@
 @use "settings" as *;
 
 @mixin clamp($lines: 9) {
-	display: -webkit-box;
-	-webkit-line-clamp: $lines;
 	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $lines;
+	display: -webkit-box;
 	line-clamp: $lines;
-	text-overflow: ellipsis;
 	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-@mixin ease-in($interval: 1s) {
-	-moz-transition: all $interval ease-in;
-	-o-transition: all $interval ease-in;
-	-webkit-transition: all $interval ease-in;
-	transition: all $interval ease-in;
+@mixin ease-in($interval: 1s, $property: all) {
+	-moz-transition: $property $interval ease-in;
+	-o-transition: $property $interval ease-in;
+	-webkit-transition: $property $interval ease-in;
+	transition: $property $interval ease-in;
 }
 
-@mixin ease-out($interval: 1s) {
-	-moz-transition: all $interval ease-out;
-	-o-transition: all $interval ease-out;
-	-webkit-transition: all $interval ease-out;
-	transition: all $interval ease-out;
+@mixin ease-out($interval: 1s, $property: all) {
+	-moz-transition: $property $interval ease-out;
+	-o-transition: $property $interval ease-out;
+	-webkit-transition: $property $interval ease-out;
+	transition: $property $interval ease-out;
 }
 
 @mixin animated-underline-pre($colour, $interval: $fade-in-short) {
-	content: "";
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 1px;
 	background-color: $colour;
+	bottom: 0;
+	content: "";
+	height: 1px;
+	left: 0;
 	opacity: 0;
-	transition: opacity $interval, transform $interval;
 	opacity: 1;
-	transform: scale(0);
+	position: absolute;
 	transform-origin: center;
+	transform: scale(0);
+	transition: opacity $interval, transform $interval;
+	width: 100%;
 }
 
 @mixin animated-underline-post() {

@@ -18,21 +18,13 @@ async function getAllAppointments() {
 			},
 			body: JSON.stringify({
 				query: `{
-					appointmentIndex {
-						data {
-							attributes {
-								title
-								body
-							}
-						}
-					}
 					appointments(sort: "dateTimePublication:desc") {
 						data {
 							attributes {
 								moreToCome
 								editorial
 								dateTimePublication
-								stories(sort: "dateTimePublication:desc") {
+								stories(sort: "dateTimePublication:asc") {
 									${linkedStoryData}
 								}
 							}
@@ -49,12 +41,12 @@ async function getAllAppointments() {
 			});
 			throw new Error("Houston... We have a CMS problem");
 		}
-		appointmentsData = response.data;
+		appointmentsData = response.data.appointments.data;
 	} catch (error) {
 		throw new Error(error);
 	}
 
-	const appointments = appointmentsData.appointments.data.map((appointment) => {
+	const appointments = appointmentsData.map((appointment) => {
 		const storiesFormatted = !!appointment.attributes.stories.data.length && processPromos(appointment.attributes.stories.data);
 
 		return {

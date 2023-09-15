@@ -19,6 +19,7 @@ const personData = `data {
 const linkedStoriesAttributes = `
 	dateTimePublication
 	description
+	diaryDate
 	pageUrl
 	sequenceEpisodeNumber
 	title
@@ -33,6 +34,7 @@ const linkedStoriesAttributes = `
 		data {
 			attributes {
 				title
+				description
 			}
 		}
 	}

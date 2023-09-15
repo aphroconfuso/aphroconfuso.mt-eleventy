@@ -1,7 +1,7 @@
 const getMonthYear = require("../src/getMonthYear.js");
 const makeTitleSlug = require("./makeTitleSlug.js");
 
-module.exports = (promos, from) => {
+module.exports = (promos) => {
 	if (!promos) return null;
 	return promos.map((promo) => {
 		const promoAtts = promo.story && promo.story.data.attributes || promo.attributes;
@@ -19,6 +19,8 @@ module.exports = (promos, from) => {
 			author: authorFullName,
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			description: promo.text || promoAtts.description,
+			diaryDate: promoAtts.diaryDate,
+			id: promo.id,
 			isSequenceEpisode: !!sequence,
 			monthYear: getMonthYear(promoAtts.dateTimePublication),
 			sequenceEpisodeNumber: promoAtts.sequenceEpisodeNumber,

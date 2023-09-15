@@ -75,8 +75,8 @@
 				display: block;
 			}
 		}
-		&.promo:hover,
-		&.promo:focus {
+		&.promo:hover:not(.promo-diary),
+		&.promo:focus:not(.promo-diary) {
 			h1::after {
 				@include animated-underline-post();
 			}

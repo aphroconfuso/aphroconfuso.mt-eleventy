@@ -12,8 +12,12 @@ h1 {
 	font-size: $font-size-story-header-mobile;
 	font-weight: 600;
 	line-height: $header-line-height;
-	.episodeNumber {
+	.episodeNumber,
+	.diaryDate {
 		color: $lightest-brown;
+	}
+	.diaryTitle {
+		color: $brown;
 	}
 }
 
@@ -42,7 +46,7 @@ h3 {
 	font-style: italic;
 	font-weight: 600;
 	line-height: $header-line-height;
-	margin-bottom: $body-margin;
+	margin-bottom: 0;
 }
 
 h4 {
@@ -231,7 +235,6 @@ aside,
 	.container {
 		h3 {
 			font-size: $font-size-story-episode-header;
-			margin-bottom: $body-margin;
 		}
 	}
 	h2 a {
@@ -240,7 +243,7 @@ aside,
 	#grid-body {
 		a:hover {
 			@include ease-in(0.25s);
-			text-decoration-color: $dark-brown;
+			text-decoration-color: $brown;
 		}
 	}
 	.body-text.separated {

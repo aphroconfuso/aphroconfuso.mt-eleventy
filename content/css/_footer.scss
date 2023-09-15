@@ -200,20 +200,20 @@ footer {
 	}
 }
 
-// #scroll-tools {
-// 	@include ease-in();
-// 	bottom: 1rem;
-// 	font-weight: 500;
-// 	opacity: 0;
-// 	position: fixed;
-// 	right: 0;
-// }
-// #progress {
-// 	vertical-align: -0.5rem;
-// }
-// #arrow-top {
-// 	padding: 1rem;
-// }
 #scroll-tools {
-	display: none;
+	@include ease-in();
+	bottom: 1rem;
+	font-weight: 500;
+	opacity: 0;
+	position: fixed;
+	right: 0;
 }
+#progress {
+	vertical-align: -0.5rem;
+}
+#arrow-top {
+	padding: 1rem;
+}
+// #scroll-tools {
+// 	display: none;
+// }

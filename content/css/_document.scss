@@ -39,7 +39,7 @@ main {
 
 article > header {
 	max-width: $max-content-width;
-	margin: 0 auto;
+	margin: 0 auto $body-margin;
 }
 
 #skip {
