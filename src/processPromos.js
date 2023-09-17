@@ -9,8 +9,8 @@ module.exports = (promos) => {
 		const translator = promoAtts.translators.data.length && promoAtts.translators.data[0].attributes;
 		const sequence = promoAtts.sequence.data && promoAtts.sequence.data.attributes;
 
-		const authorFullName = author && `${ author.forename } ${ author.surname }`;
-		const translatorFullName = translator && `${ translator.forename } ${ translator.surname }`;
+		const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
+		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		const sequenceTitle = sequence && sequence.title;
 		const computedTitle = sequenceTitle || promoAtts.title;
 		const sequenceEpisodeTitle = sequence && promoAtts.title;
@@ -25,7 +25,15 @@ module.exports = (promos) => {
 			monthYear: getMonthYear(promoAtts.dateTimePublication),
 			sequenceEpisodeNumber: promoAtts.sequenceEpisodeNumber,
 			sequenceEpisodeTitle: sequenceEpisodeTitle,
-			slug: promoAtts.pageUrl || makeTitleSlug(computedTitle, authorFullName, translatorFullName, sequenceTitle, 1, sequenceEpisodeTitle),
+			slug: promoAtts.pageUrl || makeTitleSlug(
+				promoAtts.title,
+				authorFullName,
+				translatorFullName,
+				sequenceTitle,
+				promoAtts.sequenceEpisodeNumber,
+				promoAtts.diaryDate,
+				!!sequence && promoAtts.title
+			),
 			title: computedTitle,
 			translator: translatorFullName,
 			type: promoAtts.type,

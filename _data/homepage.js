@@ -125,8 +125,8 @@ async function getHomepage() {
 			const storyAtts = (promo.story && promo.story.data.attributes) || promo.attributes;
 			const author = storyAtts.authors.data.length && storyAtts.authors.data[0].attributes;
 			const translator = storyAtts.translators.data.length && storyAtts.translators.data[0].attributes;
-			const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
-			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
+			const authorFullName = !!author && (author.displayName || `${ author.forename }${ author.initials ? ' ' + author.initials + ' ' : ' ' }${ author.surname }`);
+			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename }${ translator.initials ? ' ' + translator.initials + ' ' : ' ' }${ translator.surname }`);
 			const promoSequenceData = storyAtts.sequence && storyAtts.sequence.data;
 
 			let formattedPromo = {
@@ -139,7 +139,15 @@ async function getHomepage() {
 				monthYear: getMonthYear(storyAtts.dateTimePublication),
 				sequenceEpisodeNumber: storyAtts.sequenceEpisodeNumber,
 				sequenceEpisodeTitle: !!promoSequenceData && storyAtts.title,
-				slug: storyAtts.pageUrl || makeTitleSlug(storyAtts.title, authorFullName, translatorFullName, promoSequenceData && promoSequenceData.attributes.title, 1),
+				slug: storyAtts.pageUrl || makeTitleSlug(
+					storyAtts.title,
+					authorFullName,
+					translatorFullName,
+					promoSequenceData && promoSequenceData.attributes.title,
+					storyAtts.sequenceEpisodeNumber,
+					storyAtts.diaryDate,
+					!!promoSequenceData && storyAtts.title
+				),
 				title: !!promoSequenceData ? promoSequenceData.attributes.title : storyAtts.title,
 				translator: translatorFullName,
 				type: storyAtts.type,

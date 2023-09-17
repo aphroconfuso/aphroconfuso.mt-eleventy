@@ -1,13 +1,12 @@
-const slugifyMaltese = require("./slugifyMaltese.js");
+const fixDiaryDate = require("../src/fixDiaryDate.js");
 
-module.exports = (title, author, translator, sequenceTitle, sequenceNumber, sequenceEpisodeTitle) => {
-	return slugifyMaltese(
-		`
-			${ author ? author + ' ' : '' }
-			${ translator ? translator + ' ' : '' }
-			${ sequenceTitle ? sequenceTitle + ' ' : '' }
-			${ sequenceTitle ? sequenceNumber + ' ' : '' }
-			${ sequenceEpisodeTitle || title }
-		`
-	);
+module.exports = (title, author, translator, sequenceTitle, sequenceNumber, diaryDate, sequenceEpisodeTitle) => {
+	return [
+		diaryDate ? 'Djarju ' : sequenceTitle,
+		diaryDate && fixDiaryDate(diaryDate) || sequenceNumber && (`#${sequenceNumber}`),
+		sequenceEpisodeTitle || title,
+		"ta’",
+		author,
+		translator && `(tr ${translator})`
+	].filter(elm => elm).join(" ");
 }

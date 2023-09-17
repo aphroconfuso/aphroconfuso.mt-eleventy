@@ -26,6 +26,6 @@
 		{% endif %}
 	{% endif %}
 	{% if promo.type === 'Djarju' or (showEpisodeTitle and promo.sequenceEpisodeTitle) %}
-		<h3>{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
+		<h3{% if promo.image %} class="hide-mobile"{% endif %}>{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
 	{% endif %}
 </header>

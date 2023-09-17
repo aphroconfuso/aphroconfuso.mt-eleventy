@@ -1,16 +1,18 @@
 const { DateTime } = require("luxon");
 const markdownItAnchor = require("markdown-it-anchor");
 
-const pluginRss = require("@11ty/eleventy-plugin-rss");
-const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const pluginBundle = require("@11ty/eleventy-plugin-bundle");
-const pluginNavigation = require("@11ty/eleventy-navigation");
 const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
 const eleventySass = require("eleventy-sass");
+const pluginBundle = require("@11ty/eleventy-plugin-bundle");
+const pluginNavigation = require("@11ty/eleventy-navigation");
 const pluginRev = require("eleventy-plugin-rev");
-const stripTags = require("striptags");
-const smartTruncate = require('smart-truncate');
+const pluginRss = require("@11ty/eleventy-plugin-rss");
+const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
+const smartTruncate = require('smart-truncate');
+const stripTags = require("striptags");
+
+const fixDiaryDate = require('./src/fixDiaryDate.js');
 const slugifyStringMaltese = require("./src/slugifyMaltese.js");
 
 const QRCode = require('qrcode');
@@ -30,6 +32,25 @@ module.exports = function(eleventyConfig) {
 	// Watch content images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
+
+	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
+		console.log('Checking urls...');
+		let urlsInContent = [];
+		// Add URL checks
+		// console.log('BUILT', dir.output);
+		results.forEach(i => {
+			urlsInContent = urlsInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
+			console.log(i.outputPath, i.url);
+
+		}
+		);
+		// console.log(urlsInContent);
+		const uniqueArray = [...new Set(urlsInContent)].sort();
+		console.log(uniqueArray.length);
+		uniqueArray.forEach(i => console.log(i));
+		// Make 3 arrays check that they are identical (otherwise diff)
+	});
+
 
 	// App plugins
 	// eleventyConfig.addPlugin(require("./eleventy.config.drafts.js"));
@@ -71,7 +92,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter('diaryDate', function diaryDate(dateString) {
-		return dateString.split('-').reverse().join('.');
+		return fixDiaryDate(dateString);
 	});
 
 	// Get the first `n` elements of a collection.

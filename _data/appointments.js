@@ -1,9 +1,6 @@
 const fetch = require("node-fetch");
 const getMonthYear = require("../src/getMonthYear.js");
-const makeTitleSlug = require("../src/makeTitleSlug.js");
 const processPromos = require("../src/processPromos.js");
-const smartTruncate = require("smart-truncate");
-const stripTags = require("striptags");
 
 const {linkedStoryData} = require("./_fragments.js");
 
