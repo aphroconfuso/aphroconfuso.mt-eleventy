@@ -1,16 +1,31 @@
 <header>
-	<h4>{{ promo.monthYear }}</h4>
-	<h1>
-		{{ promo.title | prettifyMaltese | safe }}
-		{% if promo.isSequenceEpisode %}
-			<span class="episodeNumber">#{{ promo.sequenceEpisodeNumber }}</span>
-		{% endif %}
-	</h1>
-	{% if promo.translator %}
-		<h2 class="translated">
-			{{ promo.author | prettifyMaltese }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
+	{% if promo.type === 'Djarju' %}
+		<h4>
+			DJARJU
+			{% if promo.diaryDate %}
+				<span class="diaryDate">{{ promo.diaryDate | diaryDate }}</span>
+			{% endif %}
+		</h4>
+		<h2>
+			{{ promo.author | prettifyMaltese | safe }}
 		</h2>
 	{% else %}
-		<h2>{{ promo.author | prettifyMaltese | safe }}</h2>
+		<h4>{{ promo.monthYear }}</h4>
+		<h1>
+			{{ promo.title | prettifyMaltese | safe }}
+			{% if promo.isSequenceEpisode %}
+				<span class="episodeNumber">#{{ promo.sequenceEpisodeNumber }}</span>
+			{% endif %}
+		</h1>
+		{% if promo.translator %}
+			<h2 class="translated">
+				{{ promo.author | prettifyMaltese | safe }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
+			</h2>
+		{% else %}
+			<h2>{{ promo.author | prettifyMaltese | safe }}</h2>
+		{% endif %}
+	{% endif %}
+	{% if promo.type === 'Djarju' or (showEpisodeTitle and promo.sequenceEpisodeTitle) %}
+		<h3{% if promo.image %} class="hide-mobile"{% endif %}>{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
 	{% endif %}
 </header>

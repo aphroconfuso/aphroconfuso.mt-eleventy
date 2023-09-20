@@ -11,6 +11,7 @@ const personData = `data {
 		displayName
 		forename
 		initials
+		pronoun
 		surname
 	}
 }`;
@@ -18,7 +19,9 @@ const personData = `data {
 const linkedStoriesAttributes = `
 	dateTimePublication
 	description
+	diaryDate
 	pageUrl
+	sequenceEpisodeNumber
 	title
 	type
 	authors {
@@ -31,6 +34,7 @@ const linkedStoriesAttributes = `
 		data {
 			attributes {
 				title
+				description
 			}
 		}
 	}

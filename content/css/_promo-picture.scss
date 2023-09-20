@@ -29,7 +29,7 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		grid-template-rows: auto auto;
-		gap: $body-margin-half $body-margin;
+		gap: $body-margin-quarter $body-margin;
 		grid-template-areas:
 			"promo-image promo-image promo-header"
 			"promo-image promo-image promo-body";

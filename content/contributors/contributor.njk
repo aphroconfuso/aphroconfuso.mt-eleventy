@@ -32,6 +32,8 @@ permalink: /{{ contributor.slug }}/index.html
 			{% include '_promo_list.njk' %}
 			{% set promos = contributor.storiesTranslated %}
 			{% include '_promo_list.njk' %}
+			{% set promos = contributor.diaryEntries %}
+			{% include '_promo_list.njk' %}
 		</section>
 		<section id="grid-max-panel-left-top">
 			{% include "_menu_contributors.njk" %}

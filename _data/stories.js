@@ -2,6 +2,7 @@
 // const unique = require('unique-words');
 const fetch = require("node-fetch");
 const getMonthYear = require("../src/getMonthYear.js");
+const makePageTitle = require("../src/makePageTitle.js");
 const makeSortableTitle = require("../src/makeSortableTitle.js");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
 const processPromos = require("../src/processPromos.js");
@@ -45,6 +46,7 @@ async function getAllStories() {
 									coda
 									dateTimePublication
 									description
+									diaryDate
 									dontUseDropCaps
 									endnote
 									imageBorderColour
@@ -52,10 +54,12 @@ async function getAllStories() {
 									imagesType
 									introduction
 									pageUrl
+									podcastLengthMinutes
 									podcastNote
 									podcastUrl
 									postscript
 									publicationHistory
+									sequenceEpisodeNumber
 									showImagePromo
 									title
 									triggerWarning
@@ -116,6 +120,7 @@ async function getAllStories() {
 										data {
 											attributes {
 												title
+												description
 											}
 										}
 									}
@@ -165,8 +170,8 @@ async function getAllStories() {
 			const translator = !!bookAtts.translators.data.length && bookAtts.translators.data[0].attributes;
 			const publisher = !!bookAtts.publishers.data.length && bookAtts.publishers.data[0].attributes;
 
-			const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
-			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
+			const authorFullName = !!author && (author.displayName || `${ author.forename }${ author.initials ? ' ' + author.initials + ' ' : ' ' }${ author.surname }`);
+			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename }${ translator.initials ? ' ' + translator.initials + ' ' : ' ' }${ translator.surname }`);
 
 			return {
 				title: bookAtts.title,
@@ -178,10 +183,10 @@ async function getAllStories() {
 			};
 		});
 
-		const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
-		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
+		const authorFullName = !!author && (author.displayName || `${ author.forename }${ author.initials ? ' ' + author.initials + ' ' : ' ' }${ author.surname }`);
+		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename }${ translator.initials ? ' ' + translator.initials + ' ' : ' ' }${ translator.surname }`);
+
 		// REFACTOR use titleArray to derive slug and title
-		const displayTitle = `${ sequenceData ? sequenceData.attributes.title + ' #1: ' : '' }${ atts.title } ta’ ${ author && authorFullName } ${ translatorFullName ? ' (tr ' + translatorFullName + ')' : '' }`;
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
 
 		// find total times a story is endPromoted
@@ -220,6 +225,16 @@ async function getAllStories() {
 
 		const title = sequenceData && sequenceData.attributes.title || atts.title;
 
+		const displayTitle = makePageTitle(
+			atts.title,
+			authorFullName,
+			translatorFullName,
+			sequenceData && sequenceData.attributes.title,
+			atts.sequenceEpisodeNumber,
+			atts.diaryDate,
+			!!sequenceData && atts.title
+		);
+
 		return {
 			appointment: atts.appointment,
 			author: authorFullName,
@@ -229,6 +244,7 @@ async function getAllStories() {
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,
 			description: atts.description,
+			diaryDate: atts.diaryDate,
 			displayTitle: displayTitle,
 			dontUseDropCaps: !!atts.dontUseDropCaps,
 			dontUseDropCaps: atts.dontUseDropCaps,
@@ -242,8 +258,10 @@ async function getAllStories() {
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,
 			isSequenceEpisode: !!sequenceData,
-			metaTitle: `${ displayTitle }`,
+			listable: atts.type !== 'Djarju',
+			metaTitle: displayTitle,
 			monthYear: getMonthYear(atts.dateTimePublication),
+			podcastLengthMinutes: atts.podcastLengthMinutes,
 			podcastNote: atts.podcastNote,
 			podcastUrl: atts.podcastUrl,
 			postscript: atts.postscript,
@@ -253,12 +271,20 @@ async function getAllStories() {
 			publicationHistory: atts.publicationHistory,
 			reads: reads[translator.pronoun || author.pronoun],
 			sequence: sequenceData && sequenceData.attributes.title,
-			sequenceEpisodeNumber: 1,
+			sequenceEpisodeNumber: atts.sequenceEpisodeNumber,
 			sequenceEpisodeTitle: sequenceData && atts.title,
 			showImagePromo: atts.showImagePromo,
 			singleImage: atts.images.data && atts.images.data.length === 1,
 			slideshow:  atts.images.data && atts.images.data.length > 1,
-			slug: atts.pageUrl || makeTitleSlug(atts.title, authorFullName, translatorFullName, sequenceData && sequenceData.attributes.title, 1),
+			slug: atts.pageUrl || makeTitleSlug(
+				atts.title,
+				authorFullName,
+				translatorFullName,
+				sequenceData && sequenceData.attributes.title,
+				atts.sequenceEpisodeNumber,
+				atts.diaryDate,
+				!!sequenceData && atts.title
+			),
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			sortTitle: makeSortableTitle(title),

@@ -36,22 +36,44 @@ permalink: /{{ story.slug }}/index.html
 {% endblock %}
 
 {% block content %}
-	<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }} story-{{ story.id }}">
+	<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }} story story-{{ story.id }}">
 		<header>
-			<h4><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
-			<h1>
-				{{ story.title | prettifyMaltese | safe }}
-				{% if story.isSequenceEpisode %}
-					<span class="episodeNumber">#{{ story.sequenceEpisodeNumber }}</span>
-				{% endif %}
-			</h1>
-			<h2>
-				{% if story.translator %}
-					{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}/">{{ story.translator | prettifyMaltese | safe }}</a></span>
-				{% else %}
+			{% if story.type === 'Djarju' %}
+				<h4><span class="diaryTitle">Djarju</span>
+					{% if story.diaryDate %}
+						<span class="diaryDate">{{ story.diaryDate | diaryDate }}</span>
+					{% endif %}
+				</h4>
+				<h2>
 					<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
-				{% endif %}
-			</h2>
+				</h2>
+			{% else %}
+				<h4><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
+				<h1>
+					{{ story.title | prettifyMaltese | safe }}
+					{% if story.isSequenceEpisode %}
+						<span class="episodeNumber">#{{ story.sequenceEpisodeNumber }}</span>
+					{% endif %}
+				</h1>
+				<h2>
+					{% if story.translator %}
+						{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}/">{{ story.translator | prettifyMaltese | safe }}</a></span>
+					{% else %}
+						<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
+					{% endif %}
+				</h2>
+			{% endif %}
+			{% for epigraph in story.epigraphs %}
+				{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
+					<figure class="epigraph">
+						{{ epigraph.quotation | restrictHtml | prettifyMaltese | safe }}
+						{% if epigraph.attribution %}<figcaption>{{ epigraph.attribution | restrictHtml | prettifyMaltese | safe }}</figcaption>{% endif %}
+					</figure>
+				{% if loop.last %}</section>{% endif %}
+			{% endfor %}
+			{% if story.isSequenceEpisode %}
+				<h3>{{ story.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
+			{% endif %}
 		</header>
 		<div class="container">
 			<section id="grid-max-panel-left-top">
@@ -89,7 +111,7 @@ permalink: /{{ story.slug }}/index.html
 									<progress class="amplitude-song-played-progress" amplitude-main-song-played-progress="true" id="song-played-progress"></progress>
 								</div>
 								<div class="time-container">
-										<span class="amplitude-current-hours" amplitude-main-current-hours="true"></span>:<span class="amplitude-current-minutes" amplitude-main-current-minutes="true"></span>:<span class="amplitude-current-seconds" amplitude-main-current-seconds="true"></span>/<span class="amplitude-duration-hours" amplitude-main-duration-hours="true"></span>:<span class="amplitude-duration-minutes" amplitude-main-duration-minutes="true"></span>:<span class="amplitude-duration-seconds" amplitude-main-duration-seconds="true"></span>
+										{% if story.podcastLengthMinutes >= 60 %}<span class="amplitude-current-hours" amplitude-main-current-hours="true"></span>:{% endif %}<span class="amplitude-current-minutes" amplitude-main-current-minutes="true"></span>:<span class="amplitude-current-seconds" amplitude-main-current-seconds="true"></span>/{% if story.podcastLengthMinutes >= 60 %}<span class="amplitude-duration-hours" amplitude-main-duration-hours="true"></span>:{% endif %}<span class="amplitude-duration-minutes" amplitude-main-duration-minutes="true"></span>:<span class="amplitude-duration-seconds" amplitude-main-duration-seconds="true"></span>
 								</div>
 							</div>
 							<figcaption>
@@ -111,20 +133,13 @@ permalink: /{{ story.slug }}/index.html
 				{% endif %}
 			</section>
 			<section id="grid-body">
-				{% for epigraph in story.epigraphs %}
-					{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
-						<figure class="epigraph">
-							{{ epigraph.quotation | restrictHtml | prettifyMaltese | safe }}
-							{% if epigraph.attribution %}<figcaption>{{ epigraph.attribution | restrictHtml | prettifyMaltese | safe }}</figcaption>{% endif %}
-						</figure>
-					{% if loop.last %}</section>{% endif %}
-				{% endfor %}
-				{% if story.isSequenceEpisode %}
-					<h3>{{ story.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
-				{% endif %}
 				{% if story.type === 'Poezija' and not story.useProseStyling %}
-					<section class="body-text poetry">
+					<section class="body-text">
 						{{ story.body | prettifyMaltese | versify | safe }}
+					</section>
+				{% elif story.type === 'Djarju' %}
+					<section class="body-text">
+						{{ story.body | diarySectionise(null, null, true) | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% else %}
 					{% if story.imagesPositionText %}
@@ -166,7 +181,7 @@ permalink: /{{ story.slug }}/index.html
 						{{ story.postscript | restrictHtml | prettifyMaltese | safe }}
 					</aside>
 				{% endif %}
-				{% if story.type == 'Esej' %}
+				{% if story.type == 'Esej' or story.type == 'Djarju' %}
 					<aside id="letters-solicit">
 						<p>Iktbilna dwar dan ix-xogħol fuq <l-m>l-indirizz</l-m> <a href="mailto:ittri@aphroconfuso.mt?subject={{ story.displayTitle }}" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludi ismek u fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
 					</aside>
@@ -180,13 +195,16 @@ permalink: /{{ story.slug }}/index.html
 		{% endif %}
 	</article>
 	<aside class="promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.title }}">
-		{% set promos = story.endPromos %}
 		{% set promoFrom = story.title %}
+		{% set promos = story.endPromos %}
+		{% set showEpisodeTitle = true %}
 		{% include '_promo_list.njk' %}
 	</aside>
 	<script>
-		wordcount = {{ story.body | wordcount }};
-		podcastUrl = '{{ story.podcastUrl}}' || null;
+		monthYear = '{{ story.monthYear | slugify }}' || null;
+		podcastUrl = '{{ story.podcastUrl }}' || null;
+		storyId = '{{ story.id }}' || null;
+		wordcount = {{ story.body | wordcount }} || null;
 	</script>
 	{% if story.slideshow or story.singleImage %}
 		{% set imageMode = 'lightbox' %}

@@ -10,6 +10,16 @@
 		margin-left: -$body-margin-half;
 	}
 }
+#grid-body,
+#lightbox-container {
+	section.single-image {
+		padding: $body-margin 0;
+		.arrows,
+		.splide__pagination {
+			display: none !important;
+		}
+	}
+}
 .arrows {
 	height: calc(100% - $body-margin);
 	display: none;
@@ -152,9 +162,12 @@
 	}
 	#grid-body {
 		.splide {
-			margin-left: -18.75%;
-			padding: ($body-margin * 1.5) 0 0;
-			width: 137.5%;
+			margin-left: -30%;
+			width: 160%;
+			img {
+				border: 1px solid $lightest-brown;
+				width: 100%;
+			}
 		}
 	}
 	#lightbox-close {
@@ -197,13 +210,6 @@
 #lightbox-container {
 	img {
 		height: 400px;
-	}
-}
-
-.single-image {
-	.arrows,
-	.splide__pagination {
-		display: none !important;
 	}
 }
 

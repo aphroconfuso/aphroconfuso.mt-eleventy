@@ -1,16 +1,18 @@
 const { DateTime } = require("luxon");
 const markdownItAnchor = require("markdown-it-anchor");
 
-const pluginRss = require("@11ty/eleventy-plugin-rss");
-const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const pluginBundle = require("@11ty/eleventy-plugin-bundle");
-const pluginNavigation = require("@11ty/eleventy-navigation");
 const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
 const eleventySass = require("eleventy-sass");
+const pluginBundle = require("@11ty/eleventy-plugin-bundle");
+const pluginNavigation = require("@11ty/eleventy-navigation");
 const pluginRev = require("eleventy-plugin-rev");
-const stripTags = require("striptags");
-const smartTruncate = require('smart-truncate');
+const pluginRss = require("@11ty/eleventy-plugin-rss");
+const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
+const smartTruncate = require('smart-truncate');
+const stripTags = require("striptags");
+
+const fixDiaryDate = require('./src/fixDiaryDate.js');
 const slugifyStringMaltese = require("./src/slugifyMaltese.js");
 
 const QRCode = require('qrcode');
@@ -30,6 +32,25 @@ module.exports = function(eleventyConfig) {
 	// Watch content images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
+
+	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
+		console.log('Checking urls...');
+		let urlsInContent = [];
+		// Add URL checks
+		// console.log('BUILT', dir.output);
+		results.forEach(i => {
+			urlsInContent = urlsInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
+			console.log(i.outputPath, i.url);
+
+		}
+		);
+		// console.log(urlsInContent);
+		const uniqueArray = [...new Set(urlsInContent)].sort();
+		console.log(uniqueArray.length);
+		uniqueArray.forEach(i => console.log(i));
+		// Make 3 arrays check that they are identical (otherwise diff)
+	});
+
 
 	// App plugins
 	// eleventyConfig.addPlugin(require("./eleventy.config.drafts.js"));
@@ -68,6 +89,10 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addFilter('htmlDateString', (dateObj) => {
 		// dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
 		return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
+	});
+
+	eleventyConfig.addFilter('diaryDate', function diaryDate(dateString) {
+		return fixDiaryDate(dateString);
 	});
 
 	// Get the first `n` elements of a collection.
@@ -120,6 +145,10 @@ module.exports = function(eleventyConfig) {
 			.replace(/- </gm, "-<")
 			.replace(/(\d)\,(\d\d\d)/gm, "$1&hairsp;$2")
 			.replace(/&amp;shy;/gm, '<wbr>');
+	});
+
+	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text) {
+		return (text || []).replace(/(\d)\,(\d\d\d)/gm, "$1&hairsp;$2");
 	});
 
 	eleventyConfig.addFilter("slugifyMaltese", function slugifyMaltese(text) {
@@ -177,6 +206,22 @@ module.exports = function(eleventyConfig) {
 		const splitArray = decoratedText.split(regex);
 		const matchedText = decoratedText.match(regex)[0];
 		return beforeOrAfter === 0 ? splitArray[0] + matchedText : splitArray[1];
+	});
+
+	eleventyConfig.addFilter("diarySectionise", function diarySectionise(text, splitText, beforeOrAfter, dontUseDropcaps) {
+		let decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '');
+		decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
+			.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
+			.replace(/<p(.*?)>(.)([\w\-]+)/, '<p$1><span class="initial">$2$3</span>')
+			.replace(/<p>\#<\/p>\s*<p>(.)([\w\-\’]+)/gm, '<p class="break"><span class="initial">$1$2</span>')
+			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
+			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+			.replace('drop-M">M</span>XC', 'drop-Ċ">Ċ</span>')
+			.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
+			.replace('drop-M">M</span>XH', 'drop-Ħ">Ħ</span>')
+			.replace('drop-M">M</span>XZ', 'drop-Ż">Ż</span>')
+			.replace(/\[\+\]/gm, '<p>&nbsp;</p>');
+		return decoratedText;
 	});
 
 	eleventyConfig.addFilter("sectioniseOnly", function sectioniseOnly(text) {

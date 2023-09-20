@@ -11,6 +11,11 @@
 		h2 {
 			font-size: 2rem;
 		}
+		h3 {
+			margin-bottom: 0;
+			padding-bottom: 0;
+			padding-top: $body-margin-half;
+		}
 	}
 	p {
 		color: $lighter-ink;
@@ -36,6 +41,18 @@
 			}
 		}
 	}
+	.promo-diary {
+		header {
+			h1 {
+				color: $lighter-brown;
+				text-decoration: none;
+			}
+			h4 {
+				display: block;
+			}
+		}
+	}
+
 	// &.mejju-2023 .mejju-2023,
 	// &.gunju-2023 .gunju-2023,
 	// &.lulju-2023 .lulju-2023,

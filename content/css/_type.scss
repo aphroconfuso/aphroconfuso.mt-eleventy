@@ -12,8 +12,12 @@ h1 {
 	font-size: $font-size-story-header-mobile;
 	font-weight: 600;
 	line-height: $header-line-height;
-	.episodeNumber {
+	.episodeNumber,
+	.diaryDate {
 		color: $lightest-brown;
+	}
+	.diaryTitle {
+		color: $brown;
 	}
 }
 
@@ -42,7 +46,7 @@ h3 {
 	font-style: italic;
 	font-weight: 600;
 	line-height: $header-line-height;
-	padding-bottom: $body-margin;
+	margin-bottom: 0;
 }
 
 h4 {
@@ -86,10 +90,6 @@ strong {
 .details {
 	color: #757575;
 	font-family: $sans, sans-serif;
-}
-
-#epigraphs {
-	padding-bottom: $body-margin;
 }
 
 .generic-body-text,
@@ -143,18 +143,19 @@ strong {
 				padding-right: 3px;
 			}
 		}
+		&.epigraph {
+			color: $lighter-brown;
+			font-size: $font-size-blockquote;
+			margin: ($body-margin * 2) 0 $body-margin;
+			figcaption {
+				margin-top: $body-margin-quarter;
+				padding: 0;
+			}
+		}
 	}
 	blockquote {
 		font-size: $font-size-blockquote;
 		padding: 0 $body-margin $body-margin-half;
-	}
-	.epigraph {
-		color: $lighter-brown;
-		font-size: $font-size-blockquote;
-		figcaption {
-			margin-top: $body-margin-quarter;
-			padding: 0;
-		}
 	}
 }
 
@@ -230,8 +231,11 @@ aside,
 	h2 {
 		font-size: $font-size-story-header;
 	}
-	h3 {
-		font-size: $font-size-story-episode-header;
+	// Only bigger in main title
+	.container {
+		h3 {
+			font-size: $font-size-story-episode-header;
+		}
 	}
 	h2 a {
 		@include animated-underline($lighter-brown);
@@ -239,7 +243,7 @@ aside,
 	#grid-body {
 		a:hover {
 			@include ease-in(0.25s);
-			text-decoration-color: $dark-brown;
+			text-decoration-color: $brown;
 		}
 	}
 	.body-text.separated {

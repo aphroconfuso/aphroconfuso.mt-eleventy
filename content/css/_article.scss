@@ -8,6 +8,27 @@ article {
 	// margin: 0 auto $body-margin;
 	margin: 0 auto;
 	max-width: $max-width;
+	&.story {
+		header {
+			h1,
+			h2,
+			h3 {
+				margin-bottom: $body-margin-half;
+			}
+			h1 + h2,
+			h2 + h3 {
+				margin-bottom: $body-margin;
+			}
+			@media all and (min-width: $laptop-breakpoint) {
+				h2 + h3 {
+					margin-top: $body-margin * 3;
+				}
+				h1 + h3 {
+					margin-top: $body-margin * 3;
+				}
+			}
+		}
+	}
 	aside {
 		color: $lighter-brown;
 		font-family: $sans-alt;
@@ -15,7 +36,6 @@ article {
 		margin-bottom: $body-margin;
 	}
 }
-
 #grid-max-panel-left-top,
 #grid-max-panel-right-top,
 #grid-max-panel-left-bottom,
@@ -113,29 +133,42 @@ article {
 	}
 }
 
-// mona | lisa (Awwissu 2023)
-.story-18 {
-	h1 {
-		width: 70%;
-	}
-	@media all and (min-width: $laptop-breakpoint) {
-		.body-text {
-			padding: 0 8rem;
-			border: 1px solid $grid-lines;
-			border-width: 0 1px;
+@media all and (min-width: $laptop-breakpoint) {
+	article.story {
+		// Il-Lanza... (Lulju 2023)
+		&.story-16 {
+			h1 {
+				font-size: 2.9rem;
+				white-space: nowrap;
+				letter-spacing: -1px;
+			}
 		}
-		h1 {
-			width: 100%;
-		}
-	}
-	.fx-1 {
-		transform: scale(-1, 1);
-		color: #666666;
-	}
-	p {
-		margin-bottom: $body-margin-half + $body-margin-quarter;
-		&.enjambed {
-			margin-bottom: $body-margin-quarter;
+
+		// mona | lisa (Awwissu 2023)
+		&.story-18 {
+			h1 {
+				width: 70%;
+			}
+			@media all and (min-width: $laptop-breakpoint) {
+				.body-text {
+					padding: 0 8rem;
+					border: 1px solid $grid-lines;
+					border-width: 0 1px;
+				}
+				h1 {
+					width: 100%;
+				}
+			}
+			.fx-1 {
+				transform: scale(-1, 1);
+				color: #666666;
+			}
+			p {
+				margin-bottom: $body-margin-half + $body-margin-quarter;
+				&.enjambed {
+					margin-bottom: $body-margin-quarter;
+				}
+			}
 		}
 	}
 }
