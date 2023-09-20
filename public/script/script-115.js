@@ -274,7 +274,7 @@ const initialiseAfterWindow = () => {
 		body = document.getElementById('grid-body');
 		bodyHeight = body.offsetHeight - screenHeight;
 		bodyStart = body.offsetTop;
-		title = document.querySelector("h1").innerText;
+		title = document.querySelector("article > header h1") ? document.querySelector("article > header h1").innerText : 'Djarju: ' + document.querySelector("article > header h3").innerText;
 		author = document.querySelector("meta[name=author]").content;
 		bodyEnd = bodyStart + bodyHeight;
 		charactersPerPixel = bodyText.length / bodyHeight;

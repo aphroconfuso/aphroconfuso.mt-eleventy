@@ -1,7 +1,7 @@
 <ul class="promo-list">
 	{% set promoFrom = promoFrom or page.url %}
-	{% set promoTo = promo.sequenceEpisodeTitle or promo.title %}
 	{% for promo in promos %}
+		{% set promoTo = promoTo or (promo.sequenceEpisodeTitle and 'Djarju: ' + promo.sequenceEpisodeTitle) or promo.title %}
 		<li>
 			<a class="promo {{ promo.monthYear | slugify }} promo-{{ promo.type | slugify }} story-{{ promo.id }}" href="/{{ promo.slug }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: {{ promoFrom }}', 'għal: {{ promoTo }}', {{ loop.index }}]);">
 				{% include "_promo_header.njk" %}

@@ -20,7 +20,7 @@ article.djarju {
 		}
 		border-bottom-color: $lighter-brown;
 		p.break {
-			margin-top: $body-margin;
+			margin-top: $body-margin * 1.5;
 		}
 	}
 	@media all and (min-width: $laptop-breakpoint) {
