@@ -170,8 +170,8 @@ async function getAllStories() {
 			const translator = !!bookAtts.translators.data.length && bookAtts.translators.data[0].attributes;
 			const publisher = !!bookAtts.publishers.data.length && bookAtts.publishers.data[0].attributes;
 
-			const authorFullName = !!author && (author.displayName || `${ author.forename }${ author.initials ? ' ' + author.initials + ' ' : ' ' }${ author.surname }`);
-			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename }${ translator.initials ? ' ' + translator.initials + ' ' : ' ' }${ translator.surname }`);
+			const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
+			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 
 			return {
 				title: bookAtts.title,
@@ -183,10 +183,11 @@ async function getAllStories() {
 			};
 		});
 
-		const authorFullName = !!author && (author.displayName || `${ author.forename }${ author.initials ? ' ' + author.initials + ' ' : ' ' }${ author.surname }`);
-		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename }${ translator.initials ? ' ' + translator.initials + ' ' : ' ' }${ translator.surname }`);
-
+		const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
+		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		// REFACTOR use titleArray to derive slug and title
+
+		if (!atts.promoImage) console.log("Image missing! An image was probably deleted from the media loibrary after it had been added as the social image.");
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
 
 		// find total times a story is endPromoted

@@ -93,6 +93,14 @@ async function getHomepage() {
 			promo_1_characters: 165,
 			promo_4_characters: 165,
 		},
+		Layout_2: {
+			diary: 1,
+			image: 2,
+			poem: 1,
+			text: 5,
+			promo_1_characters: 165,
+			promo_4_characters: 165,
+		},
 		Layout_6: {
 			diary: 1,
 			image: 2,
