@@ -121,6 +121,18 @@ async function getAllStories() {
 											attributes {
 												title
 												description
+												stories {
+													data {
+														attributes {
+															dateTimePublication
+															description
+															diaryDate
+															pageUrl
+															sequenceEpisodeNumber
+															title
+														}
+													}
+												}
 											}
 										}
 									}
@@ -236,6 +248,42 @@ async function getAllStories() {
 			!!sequenceData && atts.title
 		);
 
+		const pageSlug = atts.pageUrl || makeTitleSlug(
+			atts.title,
+			authorFullName,
+			translatorFullName,
+			sequenceData && sequenceData.attributes.title,
+			atts.sequenceEpisodeNumber,
+			atts.diaryDate,
+			!!sequenceData && atts.title
+		);
+
+		let sequenceEpisodes = sequenceData
+			&& sequenceData.attributes.stories.data.length > 1
+			&& sequenceData.attributes.stories.data.map((episode) => {
+				const episodeAtts = episode.attributes;
+
+				const episodeSlug = episodeAtts.pageUrl || makeTitleSlug(
+					episodeAtts.title,
+					authorFullName,
+					translatorFullName,
+					sequenceData && sequenceData.attributes.title,
+					episodeAtts.sequenceEpisodeNumber,
+					episodeAtts.diaryDate,
+					!!sequenceData && episodeAtts.title
+				);
+
+				return {
+				date: episodeAtts.diaryDate,
+				number: episodeAtts.sequenceEpisodeNumber,
+				title: episodeAtts.title,
+				slug: episodeSlug !== pageSlug && episodeSlug,
+			}
+		});
+		if (sequenceEpisodes && sequenceEpisodes[0].date) {
+			sequenceEpisodes.reverse();
+		}
+
 		return {
 			appointment: atts.appointment,
 			author: authorFullName,
@@ -273,19 +321,12 @@ async function getAllStories() {
 			reads: reads[translator.pronoun || author.pronoun],
 			sequence: sequenceData && sequenceData.attributes.title,
 			sequenceEpisodeNumber: atts.sequenceEpisodeNumber,
+			sequenceEpisodes: sequenceEpisodes,
 			sequenceEpisodeTitle: sequenceData && atts.title,
 			showImagePromo: atts.showImagePromo,
 			singleImage: atts.images.data && atts.images.data.length === 1,
 			slideshow:  atts.images.data && atts.images.data.length > 1,
-			slug: atts.pageUrl || makeTitleSlug(
-				atts.title,
-				authorFullName,
-				translatorFullName,
-				sequenceData && sequenceData.attributes.title,
-				atts.sequenceEpisodeNumber,
-				atts.diaryDate,
-				!!sequenceData && atts.title
-			),
+			slug: pageSlug,
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			sortTitle: makeSortableTitle(title),

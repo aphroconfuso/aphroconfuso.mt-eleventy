@@ -172,3 +172,34 @@ article {
 		}
 	}
 }
+
+.sequence-menu {
+	@media all and (max-width: ($laptop-breakpoint - 1)) {
+		border: 1px dashed $light-brown;
+		padding: $body-margin-half;
+		li.actual {
+			display: none;
+		}
+		margin: $body-margin 0;
+	}
+	li {
+		&.actual {
+			color: $lightest-brown;
+		}
+		.order {
+			font-family: $sans;
+			width: 30%;
+		}
+		.title {
+			font-size: $body-font-size;
+			font-style: italic;
+		}
+		font-family: $serif;
+		padding-bottom: $body-margin-quarter;
+		@media all and (min-width: $laptop-breakpoint) {
+			a {
+				@include animated-underline($light-brown);
+			}
+		}
+	}
+}

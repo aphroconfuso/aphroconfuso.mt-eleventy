@@ -57,7 +57,7 @@ async function getHomepage() {
 						}
 					}
 					diaryEntries: stories(
-						pagination: { page: 1, pageSize: 1 },
+						pagination: { page: 1, pageSize: 3 },
 						sort: ["diaryDate:desc"],
 						filters: {type: { eq: "Djarju"}}
 					) {
