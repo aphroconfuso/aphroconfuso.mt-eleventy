@@ -57,6 +57,18 @@ article.djarju {
 			margin-top: $body-margin * 1.5;
 		}
 	}
+	@media all and (max-width: ($laptop-breakpoint - 1)) {
+		table.sequence-menu {
+			border: 1px dashed $light-brown;
+			tr {
+				padding: $body-margin-half;
+				&.actual {
+					display: none;
+				}
+			}
+			margin: $body-margin 0;
+		}
+	}
 	@media all and (min-width: $laptop-breakpoint) {
 		.container {
 			gap: $body-margin $body-margin-half;
