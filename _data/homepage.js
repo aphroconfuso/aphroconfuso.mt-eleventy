@@ -57,7 +57,7 @@ async function getHomepage() {
 						}
 					}
 					diaryEntries: stories(
-						pagination: { page: 1, pageSize: 1 },
+						pagination: { page: 1, pageSize: 3 },
 						sort: ["diaryDate:desc"],
 						filters: {type: { eq: "Djarju"}}
 					) {
@@ -90,49 +90,58 @@ async function getHomepage() {
 			image: 2,
 			poem: 1,
 			text: 4,
-			promo_1_characters: 165,
-			promo_4_characters: 165,
+		},
+		Layout_2: {
+			diary: 1,
+			image: 2,
+			poem: 1,
+			text: 5,
+		},
+		Layout_3: {
+			diary: 1,
+			image: 2,
+			poem: 1,
+			text: 6,
+			lengths: [1740],
 		},
 		Layout_6: {
 			diary: 1,
 			image: 2,
 			poem: 1,
 			text: 9,
-			promo_3_characters: 1640,
+			lengths: [1640],
 		},
 		Layout_7: {
 			diary: 1,
 			image: 2,
 			poem: 1,
 			text: 10,
-			promo_1_characters: 2430,
-			promo_4_characters: 1331,
+			lengths: [2430, 1331],
 		},
 		Layout_8: {
 			diary: 1,
 			image: 2,
 			poem: 1,
 			text: 5,
-			promo_1_characters: 165,
-			promo_4_characters: 165,
 		},
 	}
 
 	const layoutConfig = layouts[atts.layout];
 
-	const promosFormatted = (promos, includesImages, number) => {
-		const result = promos.length && promos.slice(0, number).map((promo) => {
+	const promosFormatted = (promos, includesImages, number, lengths) => {
+		const result = promos.length && promos.slice(0, number).map((promo, index) => {
 			const storyAtts = (promo.story && promo.story.data.attributes) || promo.attributes;
 			const author = storyAtts.authors.data.length && storyAtts.authors.data[0].attributes;
 			const translator = storyAtts.translators.data.length && storyAtts.translators.data[0].attributes;
 			const authorFullName = !!author && (author.displayName || `${ author.forename }${ author.initials ? ' ' + author.initials + ' ' : ' ' }${ author.surname }`);
 			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename }${ translator.initials ? ' ' + translator.initials + ' ' : ' ' }${ translator.surname }`);
 			const promoSequenceData = storyAtts.sequence && storyAtts.sequence.data;
+			const descriptionLength = lengths && lengths[index] || 9999;
 
 			let formattedPromo = {
 				author: authorFullName,
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
-				description: promo.text || storyAtts.description,
+				description: smartTruncate(promo.text || storyAtts.description, descriptionLength),
 				diaryDate: storyAtts.diaryDate,
 				isSequenceEpisode: !!promoSequenceData,
 				mobilePriority: promo.mobilePriority || 9,
@@ -153,6 +162,8 @@ async function getHomepage() {
 				type: storyAtts.type,
 			};
 
+			console.log(formattedPromo.title, lengths, index, descriptionLength);
+
 			if (includesImages) {
 				const promoImageData = promo.image.data[0] || storyAtts.promoImage.data;
 				const promoImageMobileData = promo.imageMobile && promo.imageMobile.data[0] || storyAtts.promoImageMobile.data;
@@ -171,9 +182,9 @@ async function getHomepage() {
 		imagePromos: promosFormatted(atts.imagePromos, true, layoutConfig['image']),
 		layout: atts.layout,
 		monthYear: getMonthYear(atts.appointment.data.attributes.dateTimePublication),
-		poetryPromos: promosFormatted(atts.poetryPromos, false, layoutConfig['poem']),
-		promos: promosFormatted(atts.promos, false, layoutConfig['text']),
-		diaryEntries: promosFormatted(diaryPromos.data, false, layoutConfig['diary']),
+		poetryPromos: promosFormatted(atts.poetryPromos, false, layoutConfig.poem),
+		promos: promosFormatted(atts.promos, false, layoutConfig.text, layoutConfig.lengths),
+		diaryEntries: promosFormatted(diaryPromos.data, false, layoutConfig.diary),
 	};
 
 	return homepageFormatted;

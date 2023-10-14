@@ -1,0 +1,52 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+@mixin border-top() {
+	padding-top: calc(#{$body-margin} - 1px);
+	border-top: 1px solid $grid-lines;
+}
+
+@mixin border-bottom() {
+	padding-bottom: calc(#{$body-margin} - 1px);
+	border-bottom: 1px solid $grid-lines;
+}
+
+@mixin image-left() {
+	.promo-picture-1 {
+		grid-template-areas:
+			"promo-header promo-image promo-image"
+			"promo-body promo-image promo-image";
+	}
+}
+
+@mixin image-right() {
+	.promo-picture-1 {
+		grid-template-areas:
+			"promo-image promo-image promo-header"
+			"promo-image promo-image promo-body";
+	}
+}
+
+@mixin image-left-top() {
+	.promo-picture-1 {
+		grid-template-areas:
+			"promo-header promo-header promo-header"
+			"promo-body promo-image promo-image";
+		&.promo .body-text p {
+			@include clamp(18);
+		}
+	}
+}
+
+@mixin image-right-top() {
+	.promo-picture-1 {
+		grid-template-areas:
+			"promo-header promo-header promo-header"
+			"promo-image promo-image promo-body";
+		&.promo .body-text p {
+			@include clamp(18);
+		}
+	}
+}

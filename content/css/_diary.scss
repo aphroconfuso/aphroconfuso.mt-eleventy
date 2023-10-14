@@ -4,11 +4,45 @@
 @use "mixins-etc" as *;
 
 article.djarju {
+	#grid-body {
+		grid-area: grid-max-body;
+	}
+	#grid-max-panel-left-top {
+		grid-area: grid-max-panel-left-top;
+	}
+	#grid-max-panel-right-top {
+		grid-area: grid-max-panel-right-top;
+	}
+	#grid-max-panel-left-bottom {
+		grid-area: grid-max-panel-left-bottom;
+	}
+	#grid-max-panel-right-bottom {
+		grid-area: grid-max-panel-right-bottom;
+	}
+	#grid-bottom-full {
+		grid-area: grid-bottom-full;
+	}
+
+	#grid-max-panel-left-top,
+	#grid-max-panel-right-top,
+	#grid-max-panel-left-bottom,
+	#grid-max-panel-right-bottom,
+	#grid-bottom-full {
+		margin: 0;
+	}
+
 	.container {
+		display: grid;
+		gap: 0;
 		grid-template-areas:
-			"grid-max-panel-left-top grid-max-body grid-max-panel-right-top"
-			"grid-max-panel-left-bottom grid-max-body grid-max-panel-right-bottom"
-			"grid-bottom-full grid-bottom-full grid-bottom-full";
+			"grid-max-body"
+			"grid-max-panel-left-top"
+			"grid-max-panel-right-top"
+			"grid-max-panel-left-bottom"
+			"grid-max-panel-right-bottom"
+			"grid-bottom-full";
+		grid-template-columns: auto;
+		grid-template-rows: auto auto auto auto auto auto;
 		.end-dot {
 			color: $lighter-brown;
 			background-color: $lighter-brown;
@@ -23,20 +57,43 @@ article.djarju {
 			margin-top: $body-margin * 1.5;
 		}
 	}
+	@media all and (max-width: ($laptop-breakpoint - 1)) {
+		table.sequence-menu {
+			border: 1px dashed $light-brown;
+			tr {
+				padding: $body-margin-half;
+				&.actual {
+					display: none;
+				}
+			}
+			margin: $body-margin 0;
+		}
+	}
 	@media all and (min-width: $laptop-breakpoint) {
 		.container {
+			gap: $body-margin $body-margin-half;
 			grid-template-areas:
 				"grid-max-panel-left-top grid-max-body grid-max-panel-right-top"
 				"grid-max-panel-left-bottom grid-max-body grid-max-panel-right-bottom"
 				"grid-bottom-full grid-bottom-full grid-bottom-full";
+			grid-template-columns: 1fr $max-content-width 1fr;
+			grid-template-rows: auto auto auto;
 		}
 		#grid-body {
 			border: 1px dashed $lightester-brown;
 			border-width: 0 1px;
 			box-sizing: content-box;
-			margin-left: $body-margin * -1;
-			padding: 0 $body-margin;
-			width: calc(100% + $body-margin * 2);
+			margin-left: $body-margin-half * -1;
+			padding: 0 $body-margin-half;
+			width: calc(100% + $body-margin);
+		}
+		#grid-max-panel-left-top,
+		#grid-max-panel-left-bottom {
+			padding-right: $body-margin-half;
+		}
+		#grid-max-panel-right-top,
+		#grid-max-panel-right-bottom {
+			padding-left: $body-margin-half;
 		}
 	}
 }

@@ -92,6 +92,20 @@ permalink: /{{ story.slug }}/index.html
 						{{ story.introduction | restrictHtml | prettifyMaltese | safe }}
 					</aside>
 				{% endif %}
+				{% for episode in story.sequenceEpisodes %}
+					{% if loop.first %}<table class="sequence-menu">{% endif %}
+						<tr{% if not episode.slug %} class="actual"{% endif %}>
+							<td class="order">{% if episode.date %}{{ episode.date | diaryDate }}{% else %}{{ episode.number }}.{% endif %}</td>
+							<td class="title">
+							{% if episode.slug %}
+								<a href="/{{ episode.slug }}/">{{ episode.title }}</a>
+							{% else %}
+								{{ episode.title | prettifyMaltese | safe }}
+							{% endif %}
+							</td>
+						</tr>
+					{% if loop.last %}</table>{% endif %}
+				{% endfor %}
 			</section>
 			<section id="grid-max-panel-right-top">
 				{% if story.podcastNote and not story.podcastUrl %}
