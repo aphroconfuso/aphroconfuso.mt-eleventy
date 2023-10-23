@@ -184,6 +184,11 @@
 }
 
 @media all and (max-width: $laptop-breakpoint) {
+	.splide {
+		img {
+			width: 100%;
+		}
+	}
 	@media all and (orientation: landscape) {
 		#lightbox {
 			animation: showLightbox 0.25s;

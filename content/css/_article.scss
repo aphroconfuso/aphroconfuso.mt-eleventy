@@ -186,15 +186,15 @@ table.sequence-menu {
 			color: $lightest-brown;
 		}
 		td.order {
-			font-family: $sans;
+			font-family: $sans-alt;
 			padding-right: $body-margin-quarter;
 		}
 		.title {
-			font-size: $body-font-size;
 			font-style: italic;
 		}
 		td {
 			font-family: $serif;
+			font-size: $body-font-size;
 			padding-bottom: $body-margin-quarter;
 			@media all and (min-width: $laptop-breakpoint) {
 				a {
