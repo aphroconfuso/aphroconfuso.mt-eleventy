@@ -171,6 +171,11 @@ article {
 				}
 			}
 		}
+		&.story-25 {
+			h1 {
+				letter-spacing: -0.15px;
+			}
+		}
 	}
 }
 table.sequence-menu {
@@ -209,6 +214,23 @@ article.esej {
 	@media all and (max-width: ($laptop-breakpoint - 1)) {
 		table.sequence-menu {
 			display: none;
+		}
+	}
+}
+
+@media all and (min-width: $laptop-breakpoint) {
+	.promos-container {
+		.is-episode,
+		.story-16 {
+			header {
+				margin-bottom: $body-margin-quarter;
+				h3 {
+					padding-top: $body-margin-quarter;
+				}
+			}
+			p {
+				@include clamp(6);
+			}
 		}
 	}
 }

@@ -38,6 +38,13 @@
 				@include clamp(14);
 			}
 		}
+		&.is-episode {
+			.body-text {
+				p {
+					@include clamp(13);
+				}
+			}
+		}
 		figure {
 			margin: 0;
 			padding: 0;

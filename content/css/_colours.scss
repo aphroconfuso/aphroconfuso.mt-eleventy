@@ -26,7 +26,7 @@ h4 {
 
 // FIXME
 * {
-	-webkit-tap-highlight-color: rgba($color: $ottubru-2023, $alpha: 0.2);
+	-webkit-tap-highlight-color: rgba($color: $novembru-2023, $alpha: 0.2);
 }
 
 .mejju-2023 {
@@ -53,12 +53,6 @@ h4 {
 	@include monthly-colour($ottubru-2023);
 }
 
-// html {
-//   scrollbar-face-color: #eec800;
-//   scrollbar-shadow-color: #006cb4;
-//   scrollbar-highlight-color: #006cb4;
-//   scrollbar-3dlight-color: #006cb4;
-//   scrollbar-darkshadow-color: #006cb4;
-//   scrollbar-track-color: #006cb4;
-//   scrollbar-arrow-color: #c1c1d1;
-// }
+.novembru-2023 {
+	@include monthly-colour($novembru-2023);
+}

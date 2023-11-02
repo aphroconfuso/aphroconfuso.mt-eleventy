@@ -143,6 +143,7 @@ async function getHomepage() {
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 				description: smartTruncate(promo.text || storyAtts.description, descriptionLength),
 				diaryDate: storyAtts.diaryDate,
+				id: promo.story && promo.story.data.id,
 				isSequenceEpisode: !!promoSequenceData,
 				mobilePriority: promo.mobilePriority || 9,
 				monthYear: getMonthYear(storyAtts.dateTimePublication),
