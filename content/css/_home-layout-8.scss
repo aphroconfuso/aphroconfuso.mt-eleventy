@@ -78,12 +78,6 @@
 				@include clamp(18);
 			}
 		}
-		.ga-editorial {
-			margin: 0;
-			p {
-				@include clamp(17);
-			}
-		}
 		.ga-image-1 {
 			@include border-bottom();
 			@include image-left-top;
