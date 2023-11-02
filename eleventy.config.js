@@ -132,7 +132,7 @@ module.exports = function(eleventyConfig) {
 			.replace(/  +/gm, " ")
 			.replace(/<p> */gm, "<p>")
 			.replace(/ *<\/p>/gm, "</p>")
-			.replace(/ ?— ?| - | -- /gm, "&hairsp;—&hairsp;")
+			.replace(/ ?— ?| - | -- /gm, String.fromCharCode(8202, 8212, 8202))
 			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
 			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
 			.replace(/([ \,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
@@ -143,12 +143,12 @@ module.exports = function(eleventyConfig) {
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
 			.replace(/<\/blockquote>\s*<blockquote>/gm, "<br>")
 			.replace(/- </gm, "-<")
-			.replace(/(\d)\,(\d\d\d)/gm, "$1&hairsp;$2")
+			.replace(/(\d)\,(\d\d\d)/gm, `$1${String.fromCharCode(8202)}$2`)
 			.replace(/&amp;shy;/gm, '<wbr>');
 	});
 
 	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text) {
-		return (text || []).replace(/(\d)\,(\d\d\d)/gm, "$1&hairsp;$2");
+		return (text || []).replace(/(\d)\,(\d\d\d)/gm, `$1${String.fromCharCode(8202)}$2`);
 	});
 
 	eleventyConfig.addFilter("slugifyMaltese", function slugifyMaltese(text) {
@@ -197,7 +197,7 @@ module.exports = function(eleventyConfig) {
 				.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
 				.replace('drop-M">M</span>XH', 'drop-Ħ">Ħ</span>')
 				.replace('drop-M">M</span>XZ', 'drop-Ż">Ż</span>')
-				.replace(/\[\+\]/gm, '<p>&nbsp;</p>');
+				.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 		}
 		if (!splitText) {
 			return decoratedText;
@@ -220,7 +220,7 @@ module.exports = function(eleventyConfig) {
 			.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
 			.replace('drop-M">M</span>XH', 'drop-Ħ">Ħ</span>')
 			.replace('drop-M">M</span>XZ', 'drop-Ż">Ż</span>')
-			.replace(/\[\+\]/gm, '<p>&nbsp;</p>');
+			.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 		return decoratedText;
 	});
 
@@ -229,7 +229,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("endDotify", function endDotify(text) {
-		return (text || []).replace(/([^ ]+)([.?!])\s*<\/(p|blockquote)>\s*$/, '<l-m>$1&nbsp;<span class="end-dot">.</span></l-m></$3>');
+		return (text || []).replace(/([^ ]+)([.?!]|<span class="pull">.<\/span>)\s*<\/(p|blockquote)>\s*$/, '<l-m>$1 <span class="end-dot">.</span></l-m></$3>');
 	});
 
 	eleventyConfig.addFilter("restrictHtml", function restrictHtml(text, allowedTags) {
