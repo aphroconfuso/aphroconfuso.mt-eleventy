@@ -39,7 +39,7 @@ module.exports = function(eleventyConfig) {
 		let urlsInContent = [], imagesInContent = [];
 		results.forEach(i => {
 			urlsInContent = urlsInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
-			imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|webp)/g));
+			imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|jpeg|webp)/g));
 		});
 
 		const uniqueUrlsArray = [...new Set(urlsInContent)].filter(n => n).sort();
