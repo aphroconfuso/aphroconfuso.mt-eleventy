@@ -163,8 +163,6 @@ async function getHomepage() {
 				type: storyAtts.type,
 			};
 
-			console.log(formattedPromo.title, lengths, index, descriptionLength);
-
 			if (includesImages) {
 				const promoImageData = promo.image.data[0] || storyAtts.promoImage.data;
 				const promoImageMobileData = promo.imageMobile && promo.imageMobile.data[0] || storyAtts.promoImageMobile.data;

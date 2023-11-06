@@ -3,6 +3,8 @@ const markdownItAnchor = require("markdown-it-anchor");
 
 const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
 const eleventySass = require("eleventy-sass");
+const fetch = require('node-fetch');
+const fs = require('fs');
 const pluginBundle = require("@11ty/eleventy-plugin-bundle");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 const pluginRev = require("eleventy-plugin-rev");
@@ -34,23 +36,58 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
 
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
-		console.log('Checking urls...');
-		let urlsInContent = [];
-		// Add URL checks
-		// console.log('BUILT', dir.output);
+		let urlsInContent = [], imagesInContent = [];
 		results.forEach(i => {
 			urlsInContent = urlsInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
-			console.log(i.outputPath, i.url);
+			imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|webp)/g));
+		});
 
+		const uniqueUrlsArray = [...new Set(urlsInContent)].filter(n => n).sort();
+		uniqueUrlsArray.forEach(i => {
+			if (!i) { return; }
+			const fileLocation = i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html");
+			if (!fs.existsSync(fileLocation)) {
+				throw new Error(`${fileLocation} is linked but does not exist!`);
+			};
+		});
+
+		const uniqueImagesArray = [...new Set(imagesInContent)].filter(n => n).sort();
+		uniqueImagesArray.forEach(i => {
+			if (!i) { return; }
+			const saveToFileLocation = i.replace(/\/stampi/g, "./image-cache/");
+			if (fs.existsSync(saveToFileLocation)) { return; }
+			console.log(`Fetching ${i} ...`);
+			const imageUrl = i.replace(/\/stampi/g, "https://stampi.aphroconfuso.mt");
+			fetch(imageUrl).then(res =>
+				res.body.pipe(fs.createWriteStream(saveToFileLocation))
+			)
+		});
+
+		const webImagesFolder = "./aphroconfuso.mt/site/stampi";
+		if (!fs.existsSync(webImagesFolder)){
+			fs.mkdirSync(webImagesFolder);
 		}
-		);
-		// console.log(urlsInContent);
-		const uniqueArray = [...new Set(urlsInContent)].sort();
-		console.log(uniqueArray.length);
-		uniqueArray.forEach(i => console.log(i));
-		// Make 3 arrays check that they are identical (otherwise diff)
-	});
 
+		uniqueImagesArray.forEach(i => {
+			if (!i) {return;}
+			const image = i.replace(/\/stampi/g, "")
+			const cachedFileLocation = `./image-cache${image}`;
+			const webFileLocation = `${webImagesFolder}${image}`;
+
+			if (fs.existsSync(webFileLocation)) {return;}
+			if (fs.existsSync(cachedFileLocation)) {
+				fs.copyFile(cachedFileLocation, webFileLocation, (err) => {
+				if (err) throw err;
+					console.log(`${i} copied to web folder`);
+				});
+			}
+		});
+		fs.readdir("./aphroconfuso.mt/site/stampi", (err, files) => {
+			if (files.length !== uniqueImagesArray.length) {
+				throw new Error(`ERROR: Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
+			}
+		});
+	});
 
 	// App plugins
 	// eleventyConfig.addPlugin(require("./eleventy.config.drafts.js"));

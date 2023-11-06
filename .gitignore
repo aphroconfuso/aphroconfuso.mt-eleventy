@@ -3,3 +3,5 @@ node_modules/
 aphroconfuso.mt/
 public/img/qr/
 *.dic
+image-cache/*
+!image-cache/.gitkeep

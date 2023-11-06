@@ -9,8 +9,8 @@ module.exports = {
 		"url": "https://aphroconfuso.mt"
 	},
 	"settings": {
-		"imagesUrl": "https://stampi.aphroconfuso.mt/",
-		"socialImage": "https://stampi.aphroconfuso.mt/social_aphroconfuso_logo_wallpaper_f1b0208899.jpg",
+		"imagesUrl": "/stampi/",
+		"socialImage": "social_aphroconfuso_logo_wallpaper_f1b0208899.jpg",
 		"breakpoints": {
 			"mobile": "749px",
 			"tablet": "1080px",

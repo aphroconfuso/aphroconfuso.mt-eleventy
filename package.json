@@ -45,6 +45,7 @@
 		"eleventy-plugin-rev": "^1.1.1",
 		"eleventy-sass": "^2.2.1",
 		"hunspell-spellchecker": "^1.0.2",
+		"node-fetch": "^2.7.0",
 		"qrcode": "^1.5.3",
 		"smart-truncate": "^1.0.1",
 		"string-strip-html": "^8.4.0",
