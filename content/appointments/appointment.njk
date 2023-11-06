@@ -11,7 +11,7 @@ permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
 {% block head %}
 	<title>{{ appointment.monthYear | prettifyMaltese | safe }} · Aphroconfuso</title>
 	<meta content="{{ appointment.editorial | getDescription }}" name="description">
-	<meta property="og:image" content=""{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 {% endblock %}
 
 {% block content %}

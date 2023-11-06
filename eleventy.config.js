@@ -39,7 +39,7 @@ module.exports = function(eleventyConfig) {
 		let urlsInContent = [], imagesInContent = [];
 		results.forEach(i => {
 			urlsInContent = urlsInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
-			imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|webp)/g));
+			imagesInContent = imagesInContent.concat(i.content.match(/\.\.\/stampi\/(.*?)\.(avif|jpg|webp)/g));
 		});
 
 		const uniqueUrlsArray = [...new Set(urlsInContent)].filter(n => n).sort();
@@ -54,10 +54,10 @@ module.exports = function(eleventyConfig) {
 		const uniqueImagesArray = [...new Set(imagesInContent)].filter(n => n).sort();
 		uniqueImagesArray.forEach(i => {
 			if (!i) { return; }
-			const saveToFileLocation = i.replace(/\/stampi/g, "./image-cache/");
+			const saveToFileLocation = i.replace(/\.\.\/stampi/g, "./image-cache/");
 			if (fs.existsSync(saveToFileLocation)) { return; }
 			console.log(`Fetching ${i} ...`);
-			const imageUrl = i.replace(/\/stampi/g, "https://stampi.aphroconfuso.mt");
+			const imageUrl = i.replace(/\.\.\/stampi/g, "https://stampi.aphroconfuso.mt");
 			fetch(imageUrl).then(res =>
 				res.body.pipe(fs.createWriteStream(saveToFileLocation))
 			)
@@ -70,7 +70,7 @@ module.exports = function(eleventyConfig) {
 
 		uniqueImagesArray.forEach(i => {
 			if (!i) {return;}
-			const image = i.replace(/\/stampi/g, "")
+			const image = i.replace(/\.\.\/stampi/g, "")
 			const cachedFileLocation = `./image-cache${image}`;
 			const webFileLocation = `${webImagesFolder}${image}`;
 
