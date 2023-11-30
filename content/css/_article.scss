@@ -135,6 +135,14 @@ article {
 }
 
 @media all and (min-width: $laptop-breakpoint) {
+	.promo.promo-plain.story-16 {
+		header {
+			margin: 0;
+		}
+		p {
+			@include clamp(6);
+		}
+	}
 	article.story {
 		// Il-Lanza... (Lulju 2023)
 		&.story-16 {
@@ -162,7 +170,7 @@ article {
 			}
 			.fx-1 {
 				transform: scale(-1, 1);
-				color: hsl(0, 0%, 40%);
+				color: hsl(0, 0%, 39%);
 			}
 			p {
 				margin-bottom: $body-margin-half + $body-margin-quarter;
@@ -176,9 +184,18 @@ article {
 				letter-spacing: -0.15px;
 			}
 		}
+		&.story-27 {
+			.fx-1 {
+				white-space: nowrap;
+			}
+		}
 	}
 }
 table.sequence-menu {
+	font-family: $serif;
+	font-size: $body-font-size - 0.1;
+	font-style: italic;
+	letter-spacing: -0.2px;
 	@media all and (max-width: ($laptop-breakpoint - 1)) {
 		tr.actual {
 			display: none;
@@ -191,16 +208,9 @@ table.sequence-menu {
 			color: $lightest-brown;
 		}
 		td.order {
-			font-family: $sans-alt;
-			padding-right: $body-margin-quarter;
-		}
-		.title {
-			font-style: italic;
+			padding-right: $body-margin-quarter * 0.25;
 		}
 		td {
-			font-family: $serif;
-			font-size: $body-font-size;
-			padding-bottom: $body-margin-quarter;
 			@media all and (min-width: $laptop-breakpoint) {
 				a {
 					@include animated-underline($light-brown);
@@ -221,6 +231,7 @@ article.esej {
 @media all and (min-width: $laptop-breakpoint) {
 	.promos-container {
 		.is-episode,
+		// Il-Lanza... (Lulju 2023)
 		.story-16 {
 			header {
 				margin-bottom: $body-margin-quarter;

@@ -69,6 +69,14 @@
 		@include clamp(13);
 	}
 }
+a.promo-poetry {
+	&:after {
+		content: ". . .";
+		position: absolute;
+		bottom: $body-margin-half;
+		right: $body-margin-half;
+	}
+}
 
 .ga-1,
 .ga-2,

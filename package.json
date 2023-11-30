@@ -5,6 +5,7 @@
 	"scripts": {
 		"build": "npx @11ty/eleventy",
 		"build-ghpages": "npx @11ty/eleventy --pathprefix=/eleventy-base-blog/",
+		"interface": "node server.js",
 		"start": "npx @11ty/eleventy --serve --quiet",
 		"debug": "DEBUG=Eleventy* npx @11ty/eleventy",
 		"debugstart": "DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
@@ -44,6 +45,7 @@
 	"dependencies": {
 		"eleventy-plugin-rev": "^1.1.1",
 		"eleventy-sass": "^2.2.1",
+		"express": "^4.18.2",
 		"hunspell-spellchecker": "^1.0.2",
 		"node-fetch": "^2.7.0",
 		"qrcode": "^1.5.3",

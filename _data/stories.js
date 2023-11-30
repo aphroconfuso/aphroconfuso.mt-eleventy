@@ -9,6 +9,8 @@ const processPromos = require("../src/processPromos.js");
 
 const {imageData, linkedStoryData, personData} = require("./_fragments.js");
 
+const vocabulary = [];
+
 
 // const fs = require('fs');
 // var Spellchecker = require("hunspell-spellchecker");
@@ -209,17 +211,20 @@ async function getAllStories() {
 		// const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa"));
 		// const vocabulary = unique(body).filter((word) => {
 		// 	const fixedWord = word.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à");
-		// 	const check = spellchecker.check(fixedWord);
-		// 	if (check) {
-		// 		return true;
-		// 	} else {
-		// 		console.log(fixedWord);
-		// 		return false;
-		// 	}
+			// const check = spellchecker.check(fixedWord);
+			// if (check) {
+			// 	return true;
+			// } else {
+			// 	console.log(fixedWord);
+			// 	return false;
+			// }
+		// 	return true;
+		// }).sort().map((word) => {
+		// 	return word.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à");
 		// });
 		// console.log('tul', vocabulary.length);
 
-		const vocabulary = [];
+		vocabulary.concat(['aaa', 'bbb' ,'ccc']);
 		// console.log(vocabulary);
 
 		const imageTypes = {
@@ -339,9 +344,9 @@ async function getAllStories() {
 			useProseStyling: !!atts.useProseStyling,
 			useSeparators: !!atts.useSeparators,
 			useSquareOnMobile: !!atts.useSquareOnMobile,
-			vocabulary: vocabulary,
     };
 	});
+	storiesFormatted[0].vocabulary = vocabulary;
   return storiesFormatted;
 }
 

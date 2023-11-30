@@ -104,6 +104,19 @@ async function getHomepage() {
 			text: 6,
 			lengths: [1740],
 		},
+		Layout_4: {
+			diary: 1,
+			image: 2,
+			poem: 1,
+			text: 5,
+		},
+		Layout_5: {
+			diary: 1,
+			image: 2,
+			poem: 2,
+			text: 5,
+			lengths: [1740],
+		},
 		Layout_6: {
 			diary: 1,
 			image: 2,

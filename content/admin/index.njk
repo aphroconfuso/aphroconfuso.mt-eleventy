@@ -29,13 +29,13 @@ permalink: /admin/index.html
 								<li style="color: red">{{ story.triggerWarning | prettifyMaltese | safe }}</li>
 							{% endif %}
 						</ul>
-						{# <p>{{ story.vocabulary.length | slugify }}</p> #}
-						{# <ul class="vocabulary">
-							{% for word in story.vocabulary %}
-								<li>{{ word }}</li>
-							{% endfor %}
-						</ul> #}
 					</li>
+				{% endfor %}
+			</ul>
+			<p>{{ stories[0].vocabulary.length | slugify }}</p>
+			<ul class="vocabulary">
+				{% for word in stories[0].vocabulary %}
+					<li>{{ word }}</li>
 				{% endfor %}
 			</ul>
 		</section>
