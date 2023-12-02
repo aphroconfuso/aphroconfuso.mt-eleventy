@@ -61,6 +61,12 @@
 		.ga-2 {
 			@include border-bottom();
 		}
+		.ga-diary,
+		.ga-editorial {
+			p {
+				@include clamp(15);
+			}
+		}
 		.ga-poem-1 {
 			p {
 				@include clamp(18);
@@ -68,8 +74,10 @@
 		}
 		.ga-image-1 {
 			@include image-left-top;
+			@include border-bottom();
 		}
 		.ga-image-2 {
+			@include border-top();
 			@include border-bottom();
 			@include image-right;
 		}

@@ -57,6 +57,13 @@ h4 {
 	font-size: $font-size-compact;
 }
 
+h5 {
+	font-size: $body-font-size-slightly-larger;
+	font-style: italic;
+	font-weight: 600;
+	margin-top: $body-margin-half;
+}
+
 h6 {
 	font-size: $body-font-size;
 	font-weight: 600;
@@ -98,6 +105,22 @@ strong {
 	font-family: $serif, serif;
 	p.break {
 		margin-top: $body-margin * 2;
+	}
+	h5 {
+		&:has(+ p.break) {
+			margin-bottom: $body-margin-quarter;
+			margin-left: $body-margin-half * -0.5;
+			margin-top: $body-margin;
+		}
+		& + p.break {
+			margin-top: 0;
+		}
+	}
+	// If no drop-cap follows gallery we'll have a superfluous indent
+	& h5:first-child {
+		margin-bottom: $body-margin-quarter;
+		margin-left: $body-margin-half * -0.5;
+		margin-top: 0;
 	}
 	&.separated {
 		p.break {
@@ -162,6 +185,9 @@ strong {
 
 .body-text-part-two {
 	& > p:nth-child(1).break {
+		margin-top: $body-margin-half;
+	}
+	& > h5:nth-child(1) {
 		margin-top: $body-margin-half;
 	}
 }

@@ -50,6 +50,7 @@ $faint-line: $faint-brown;
 $light-text: $lighter-ink;
 
 $body-font-size: 1.2rem;
+$body-font-size-slightly-larger: 1.4rem;
 $font-size-furniture: 1rem;
 $font-size-compact: 0.85rem;
 $body-line-height: 1.5;
@@ -63,16 +64,17 @@ $font-size-larger: 2rem;
 $font-size-largest-mobile: 2.2rem;
 $font-size-largest: 3rem;
 
-$EXAMPLE: hsl(282, 50%, 47.5%);
+$EXAMPLE: hsl(258, 50%, 68%);
 
 $blue-hue: 177;
+$blue2-hue: 196;
 $dark-blue-hue: 233;
 $green-hue: 98;
 $magenta-hue: 320;
+$mustard-hue: 78;
 $orange-hue: 27;
 $pink-hue: 310;
-$violet-hue: 282;
 $red-hue: 0;
 $reddish-pink-hue: 340;
-$blue2-hue: 196;
+$violet-hue: 282;
 $yellow-hue: 51;

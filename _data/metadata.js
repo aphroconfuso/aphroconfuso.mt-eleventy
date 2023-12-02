@@ -22,6 +22,7 @@ module.exports = {
 		"error404": "Din il-paġna ma teżistix.",
 		"error404AltText": "Sinjal ta' ottagonali aħmar bi 'Stop' miktuba bl-aħmar. Taħta, sinjal ieħor li jgħid ' Stop Tfisser Ieqaf'.",
 		"contributions": "kitba ta' ${forename} fil-ġurnal:",
+		"newsletterMessage": "Abbona <l-m>fin-<a href=\"/newsletter/\">newsletter</a></l-m> biex dejjem issir taf meta nippubblikaw xi ħaġa ġdida.",
 		"podcastMessage": "Abbona <l-m>fil-<a href=\"/podcast/\">podcast</a></l-m> biex tisma’ kulma nippubblikaw."
 	}
 }
