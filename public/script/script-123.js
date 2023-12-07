@@ -166,6 +166,7 @@ const addBookmark = (type = 'text', bookmark) => {
 		...bookmark
 	};
 	saveBookmarksList();
+	if (type === 'audio') return;
 	updateBookmarksMenu(bookmarksArray);
 	window._paq.push(['trackEvent', 'Bookmarks', 'żid', bookmark.title, bookmark.percentage]);
 }
