@@ -217,7 +217,7 @@ strong {
 	text-transform: uppercase;
 }
 
-.endnote {
+#endnote {
 	font-style: italic;
 	margin-top: $body-margin;
 }
@@ -241,7 +241,7 @@ strong {
 
 .generic-body-text,
 aside,
-.endnote {
+#endnote {
 	p {
 		a {
 			text-decoration: underline;

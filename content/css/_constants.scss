@@ -53,6 +53,7 @@ $body-font-size: 1.2rem;
 $body-font-size-slightly-larger: 1.4rem;
 $font-size-furniture: 1rem;
 $font-size-compact: 0.85rem;
+$font-size-tiny: 0.75rem;
 $body-line-height: 1.5;
 $body-margin: $body-font-size * $body-line-height;
 $body-margin-half: math.div($body-margin, 2);
@@ -64,7 +65,7 @@ $font-size-larger: 2rem;
 $font-size-largest-mobile: 2.2rem;
 $font-size-largest: 3rem;
 
-$EXAMPLE: hsl(258, 50%, 68%);
+$EXAMPLE: rgb(133, 146, 214);
 
 $blue-hue: 177;
 $blue2-hue: 196;
@@ -77,4 +78,4 @@ $pink-hue: 310;
 $red-hue: 0;
 $reddish-pink-hue: 340;
 $violet-hue: 282;
-$yellow-hue: 51;
+$yellow-hue: 50;

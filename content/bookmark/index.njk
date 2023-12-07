@@ -30,19 +30,19 @@ permalink: /bookmarks/index.html
 					{{ bookmark.body | prettifyMaltese | safe }}
 					<template id="bookmark-item">
 						<li>
-							<button>ħassar X</button>
-							<a>
+							<a class="promo bookmark-promo">
 								<header>
 									<h4></h4>
 									<h1></h1>
 									<h2></h2>
 									<h3></h3>
-									<h5></h5>
 								</header>
 								<div class="body-text">
 									<p></p>
 								</div>
+								<span class="bookmark"></span>
 							</a>
+							<button>✕</button>
 						</li>
 					</template>
 					<ul id="bookmark-list" class="promo-list"></ul>

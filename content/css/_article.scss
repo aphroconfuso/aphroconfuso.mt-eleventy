@@ -10,6 +10,7 @@ article {
 	max-width: $max-width;
 	&.story {
 		header {
+			position: relative;
 			h1,
 			h2,
 			h3 {

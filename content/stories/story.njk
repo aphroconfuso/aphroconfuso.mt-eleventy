@@ -145,6 +145,7 @@ permalink: /{{ story.slug }}/index.html
 						{{ story.triggerWarning | prettifyMaltese | safe }}
 					</section>
 				{% endif %}
+				<div class="promo bookmark-shortcut"><!-- --></div>
 			</section>
 			<section id="grid-body">
 				{% if story.type === 'Poezija' and not story.useProseStyling %}
@@ -174,7 +175,7 @@ permalink: /{{ story.slug }}/index.html
 					{% endif %}
 				{% endif %}
 				{% if story.endnote %}
-					<section class="endnote body-text">
+					<section id="endnote" class="body-text">
 						{{ story.endnote | restrictHtml | prettifyMaltese | safe }}
 					</section>
 				{% endif %}
@@ -215,9 +216,15 @@ permalink: /{{ story.slug }}/index.html
 		{% include '_promo_list.njk' %}
 	</aside>
 	<script>
-		monthYear = '{{ story.monthYear | slugify }}' || null;
-		podcastUrl = '{{ story.podcastUrl }}' || null;
-		storyId = '{{ story.id }}' || null;
+		author = "{{ story.author }}" || null;
+		monthYear = "{{ story.monthYear | slugify }}" || null;
+		podcastUrl = "{{ story.podcastUrl }}" || null;
+		sequenceEpisodeNumber = "{{ story.sequenceEpisodeNumber }}" || null;
+		storyId = "{{ story.id }}" || null;
+		storyType = "{{ story.type }}" || null;
+		sequenceEpisodeTitle = "{{ story.sequenceEpisodeTitle }}" || null;
+		title = "{{ story.title }}" || null;
+		translator = "{{ story.translator }}" || null;
 		wordcount = {{ story.body | wordcount }} || null;
 	</script>
 	{% if story.slideshow or story.singleImage %}

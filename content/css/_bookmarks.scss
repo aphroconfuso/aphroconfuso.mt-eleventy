@@ -2,18 +2,40 @@
 @use "calculations" as *;
 @use "settings" as *;
 
+#bookmark-list li {
+	position: relative;
+	button {
+		color: $lightester-brown;
+		cursor: pointer;
+		display: block;
+		font-size: 1rem;
+		position: absolute;
+		right: -1.5rem;
+		top: 0;
+		&:hover {
+			color: $brown;
+		}
+	}
+}
 .bookmark {
 	align-items: center;
-	border: 12px solid $light-brown;
-	border-bottom: 12px solid transparent;
+	border: 14px solid $lightest-brown;
+	border-top: 13px;
+	border-bottom: 10px solid transparent;
 	box-sizing: border-box;
-	color: $lightest-brown;
+	color: $paper;
 	cursor: pointer;
 	display: flex;
 	font-size: 1rem;
 	height: 45px;
 	justify-content: center;
 	width: 0;
+	font-family: $sans;
+	font-size: $font-size-tiny;
+	overflow: visible;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 @keyframes fadeOut {
 	0% {
@@ -32,21 +54,14 @@
 	opacity: 0;
 }
 
-.ga1,
-.ga2,
-.ga3,
-.ga4,
-.ga5,
-.ga6,
-.ga7,
-.ga8,
-.ga9,
-.ga10,
-.ga11,
-.ga12 {
-	.bookmark {
-		position: absolute;
-		right: 1rem;
-		top: -6px;
-	}
+.promo {
+	position: relative;
+	// .bookmark {
+	// 	font-family: $sans;
+	// 	font-size: $font-size-tiny;
+	// 	overflow: visible;
+	// 	position: absolute;
+	// 	right: 1rem;
+	// 	top: 0;
+	// }
 }

@@ -16,7 +16,8 @@
 			}
 		}
 		.promo {
-			@include clamp(7);
+			display: block;
+			margin-bottom: $body-margin;
 			header {
 				margin: 0 0 $body-margin-quarter !important;
 				.as-translator {
@@ -31,7 +32,6 @@
 					}
 				}
 			}
-			margin-bottom: $body-margin;
 		}
 	}
 	.more {
