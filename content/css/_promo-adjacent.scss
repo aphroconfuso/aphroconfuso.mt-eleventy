@@ -1,0 +1,30 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+.promo-adjacent {
+	h3,
+	p {
+		color: $lighter-brown;
+	}
+	a:hover {
+		p,
+		h3 {
+			color: $text-brown;
+		}
+	}
+	p {
+		font-size: 1.1rem;
+		line-height: 1.17;
+		@include clamp(7);
+	}
+}
+
+.promo-previous {
+	margin-top: $body-margin;
+}
+
+.promo-next {
+	margin-bottom: $body-margin;
+}

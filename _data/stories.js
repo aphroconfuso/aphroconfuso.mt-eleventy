@@ -9,8 +9,7 @@ const processPromos = require("../src/processPromos.js");
 
 const {imageData, linkedStoryData, personData} = require("./_fragments.js");
 
-const vocabulary = [];
-
+let vocabulary = [];
 
 // const fs = require('fs');
 // var Spellchecker = require("hunspell-spellchecker");
@@ -201,7 +200,7 @@ async function getAllStories() {
 		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		// REFACTOR use titleArray to derive slug and title
 
-		if (!atts.promoImage) console.log("Image missing! An image was probably deleted from the media loibrary after it had been added as the social image.");
+		if (!atts.promoImage) console.log("Image missing! An image was probably deleted from the media library after it had been added as the social image.");
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
 
 		// find total times a story is endPromoted
@@ -263,6 +262,7 @@ async function getAllStories() {
 			!!sequenceData && atts.title
 		);
 
+		let sequencePreviousPromo, sequenceNextPromo;
 		let sequenceEpisodes = sequenceData
 			&& sequenceData.attributes.stories.data.length > 1
 			&& sequenceData.attributes.stories.data.map((episode) => {
@@ -277,6 +277,14 @@ async function getAllStories() {
 					episodeAtts.diaryDate,
 					!!sequenceData && episodeAtts.title
 				);
+
+				// if (episodeAtts.sequenceEpisodeNumber === atts.sequenceEpisodeNumber - 1) {
+				// 	sequencePreviousPromo = { slug: episodeSlug, ...episodeAtts };
+				// }
+
+				// if (episodeAtts.sequenceEpisodeNumber === atts.sequenceEpisodeNumber + 1) {
+				// 	sequenceNextPromo = { slug: episodeSlug, ...episodeAtts };
+				// }
 
 				return {
 				date: episodeAtts.diaryDate,
@@ -328,6 +336,8 @@ async function getAllStories() {
 			sequenceEpisodeNumber: atts.sequenceEpisodeNumber,
 			sequenceEpisodes: sequenceEpisodes,
 			sequenceEpisodeTitle: sequenceData && atts.title,
+			sequencePreviousPromo,
+			sequenceNextPromo,
 			showImagePromo: atts.showImagePromo,
 			singleImage: atts.images.data && atts.images.data.length === 1,
 			slideshow:  atts.images.data && atts.images.data.length > 1,

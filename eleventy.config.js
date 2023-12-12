@@ -83,7 +83,7 @@ module.exports = function(eleventyConfig) {
 			}
 		});
 		fs.readdir("./aphroconfuso.mt/site/stampi", (err, files) => {
-			if (files.length !== uniqueImagesArray.length) {
+			if (files.length < uniqueImagesArray.length) {
 				throw new Error(`ERROR: Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
 			}
 		});
@@ -207,6 +207,11 @@ module.exports = function(eleventyConfig) {
 		return (text || []).replace(/\\n\\n/gm, '\n').split('\n')
 			.map(p => p && p.length && `<p>${ p }</p>`)
 			.join('\n');
+	});
+
+	eleventyConfig.addFilter("wrapInQuotes", function wrapInQuotes(text) {
+		if (!text) return "null";
+		return `"${ text }"`;
 	});
 
 	//  REMOVE NBSP;

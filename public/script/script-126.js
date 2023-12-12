@@ -33,6 +33,7 @@ var
 	storyCompleted,
 	storyId,
 	storyType,
+	subtitle,
 	sequenceEpisodeTitle,
 	timeStarted,
 	title,
@@ -71,12 +72,12 @@ const scrolling = () => {
     hideScrollTools = setTimeout(() => {
       document.body.classList.remove('scrolling')
     }, 5000);
-		percentageProgress = Math.round(((newScrollPosition - bodyStart) * 100) / bodyHeight);
+		percentageProgress = (((newScrollPosition - bodyStart) * 100) / bodyHeight).toFixed(2);
 		if (percentageProgress >= 0) {
 			if (percentageProgress > 100) {
 				percentageProgress = 100;
 			}
-			progressElement.textContent = percentageProgress > 0 && percentageProgress < 100 ? `${ percentageProgress }%`: '';
+			progressElement.textContent = percentageProgress > 0 && percentageProgress < 100 ? `${ Math.round(percentageProgress) }%`: '';
 		}
 		lastScrollPosition = newScrollPosition;
   }
@@ -85,6 +86,7 @@ const scrolling = () => {
 
 const addBookmarkNow = () => {
 	if (!percentageProgress || (wordcount * (percentageProgress / 100)) < bookmarkThresholdWords || percentageProgress > 98) {
+		console.log('NOT SAVING BM 2');
 		return;
 	}
 	addBookmark('text', {
@@ -118,9 +120,10 @@ const heartbeat = (wordsPerPixel, title) => {
 
 		// Is it a plausible speed?
 		if (wordsRead > thresholdWords && wordsPerSecond > minWordsPerSecond && wordsPerSecond < maxWordsPerSecond) {
+			console.log('REPORTING');
 			window._paq.push(['trackEvent', 'Qari', 'kliem', title, parseInt(wordsRead)]);
 			window._paq.push(['trackEvent', 'Qari', 'minuti', title, (secondsElapsed / 60).toFixed(2)]);
-			window._paq.push(['trackEvent', 'Qari', 'perċentwali', title, parseInt(percentageProgress)]);
+			window._paq.push(['trackEvent', 'Qari', 'perċentwali', title, parseInt(Math.round(percentageProgress))]);
 			window._paq.push(['trackEvent', 'Qari', 'ħeffa', title, wordsPerSecond.toFixed(2)]);
 
 			// save bookmark
@@ -168,6 +171,7 @@ const addBookmark = (type = 'text', bookmark) => {
 	saveBookmarksList();
 	if (type === 'audio') return;
 	updateBookmarksMenu(bookmarksArray);
+	console.log('Adding bookmark');
 	window._paq.push(['trackEvent', 'Bookmarks', 'żid', bookmark.title, bookmark.percentage]);
 }
 
@@ -205,14 +209,14 @@ const showBookmarksInPromos = (bookmarksArray) => {
 		const { percentage, storyId, urlSlug } = bookmark;
 		document.querySelectorAll(`a.story-${ storyId }`).forEach((element) => {
 			const bookmarkLink = document.createElement("a");
-			bookmarkLink.textContent = `${percentage}%`;
+			bookmarkLink.textContent = `${Math.round(percentage)}%`;
 			bookmarkLink.classList.add("bookmark");
 			bookmarkLink.href = `/${ urlSlug }/#b-${ percentage }`;
 			element.appendChild(bookmarkLink);
 		});
 		document.querySelectorAll(`article.story-${ storyId } header`).forEach((element) => {
 			const bookmarkLink = document.createElement("a");
-			bookmarkLink.textContent = `${percentage}%`;
+			bookmarkLink.textContent = `${Math.round(percentage)}%`;
 			bookmarkLink.classList.add("bookmark");
 			bookmarkLink.href = `/${ urlSlug }/#b-${ percentage }`;
 			bookmarkLink.addEventListener('click', () => window.scrollTo({top: calculateScrollPosition(percentage), left: 0, behavior: 'smooth'}))
@@ -243,7 +247,7 @@ const showFullBookmarkList = () => {
 			clone.querySelector("a").href = `/${ urlSlug }/#b-${ percentage }`;
 			clone.querySelector("a").classList.add(`promo-${ monthYear }`, monthYear, `story-${ storyId }`, storyType);
 			clone.querySelector("a").id = `link-${ storyId }`;
-			clone.querySelector(".bookmark").textContent = `${percentage}%`;
+			clone.querySelector(".bookmark").textContent = `${Math.round(percentage)}%`;
 			clone.querySelector("h1").textContent = title;
 			clone.querySelector("h2").textContent = author;
 			if (sequenceEpisodeTitle) clone.querySelector("h3").textContent = sequenceEpisodeTitle;

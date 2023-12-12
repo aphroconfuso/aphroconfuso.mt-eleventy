@@ -29,7 +29,7 @@ permalink: /index.html
 			</a>
 			<div class="ga-newsletter" id="newsletter-container">
 				<section id="form" data-track-content data-content-name="Homepage" data-content-piece="formola">
-					<iframe src="https://newsletter.aphroconfuso.mt/subscription/form#3D51B6|#f6f6f0|0|442093344ewr" scrolling="no"></iframe>
+					<iframe src="https://newsletter.aphroconfuso.mt/subscription/form#3D51B6|#f6f6f0|0|442093344ewr" scrolling="no" title="Abbona fin-newsletter"></iframe>
 				</section>
 			</div>
 			<a href="/podcast/" class="ga-podcast" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: Podcast']);">
@@ -89,9 +89,15 @@ permalink: /index.html
 				<div class="ga-poem-{{ loop.index }}">
 					<a class="{{ promo.monthYear | slugify }} promo promo-poetry story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
 						{% include "_promo_header.njk" %}
-						<div class="{{ promo.cssClass }}">
-							<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
-						</div>
+						{% if promo.text %}
+							<div class="{{ promo.cssClass }}">
+								<p>{{ promo.text | prettifyMaltese | safe }}</p>
+							</div>
+						{% else %}
+							<div class="{{ promo.cssClass }}">
+								<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
+							</div>
+						{% endif %}
 					</a>
 				</div>
 			{% endfor %}

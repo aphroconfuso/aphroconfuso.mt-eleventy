@@ -250,6 +250,9 @@ aside,
 			text-underline-offset: 2px;
 		}
 		margin-bottom: $body-margin-half;
+		&:last-of-type {
+			margin-bottom: 0;
+		}
 	}
 }
 
@@ -259,11 +262,11 @@ aside,
 		font-size: $font-size-story-header;
 	}
 	// Only bigger in main title
-	.container {
-		h3 {
-			font-size: $font-size-story-episode-header;
-		}
-	}
+	// .container {
+	// 	h3 {
+	// 		font-size: $font-size-story-episode-header;
+	// 	}
+	// }
 	h2 a {
 		@include animated-underline($lighter-brown);
 	}
