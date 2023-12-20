@@ -3,54 +3,6 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-@mixin border-top() {
-	padding-top: calc(#{$body-margin} - 1px);
-	border-top: 1px solid $grid-lines;
-}
-
-@mixin border-bottom() {
-	padding-bottom: calc(#{$body-margin} - 1px);
-	border-bottom: 1px solid $grid-lines;
-}
-
-@mixin image-left() {
-	.promo-picture-1 {
-		grid-template-areas:
-			"promo-header promo-image promo-image"
-			"promo-body promo-image promo-image";
-	}
-}
-
-@mixin image-right() {
-	.promo-picture-1 {
-		grid-template-areas:
-			"promo-image promo-image promo-header"
-			"promo-image promo-image promo-body";
-	}
-}
-
-@mixin image-left-top() {
-	.promo-picture-1 {
-		grid-template-areas:
-			"promo-header promo-header promo-header"
-			"promo-body promo-image promo-image";
-		&.promo .body-text p {
-			@include clamp(18);
-		}
-	}
-}
-
-@mixin image-right-top() {
-	.promo-picture-1 {
-		grid-template-areas:
-			"promo-header promo-header promo-header"
-			"promo-image promo-image promo-body";
-		&.promo .body-text p {
-			@include clamp(18);
-		}
-	}
-}
-
 .ga-podcast {
 	background-color: #ac9393;
 	display: flex;
@@ -163,6 +115,9 @@ a.promo-poetry {
 .ga-diary {
 	flex-direction: column;
 	grid-area: ga-diary;
+	p {
+		@include clamp(12);
+	}
 }
 .ga-editorial {
 	grid-area: ga-editorial;
@@ -189,7 +144,13 @@ a.promo-poetry {
 	.layout-6,
 	.layout-7,
 	.layout-8,
-	.layout-9 {
+	.layout-9,
+	.layout-10,
+	.layout-11,
+	.layout-12,
+	.layout-13,
+	.layout-14,
+	.layout-15 {
 		display: grid;
 		grid-template-columns: auto;
 		grid-template-rows: auto auto auto auto auto auto auto auto auto;
@@ -204,7 +165,21 @@ a.promo-poetry {
 }
 
 @media all and (min-width: $laptop-breakpoint) {
+	.ga-editorial {
+		&.editorial {
+			height: 100%;
+			.text-container {
+				height: 100%;
+			}
+			margin-bottom: 0;
+		}
+	}
 	.promo.story-25 h1 {
 		letter-spacing: -1px;
+	}
+	.home .ga-diary .story-23 {
+		h3 {
+			letter-spacing: -0.5px;
+		}
 	}
 }

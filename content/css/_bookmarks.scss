@@ -10,16 +10,16 @@
 		display: block;
 		font-size: 1rem;
 		position: absolute;
-		right: -1.5rem;
+		right: 2.5rem;
 		top: 0;
 		&:hover {
-			color: $brown;
+			color: $light-brown;
 		}
 	}
 }
 .bookmark {
 	align-items: center;
-	border: 14px solid $lightest-brown;
+	border: 14px solid $light-brown;
 	border-top: 13px;
 	border-bottom: 10px solid transparent;
 	box-sizing: border-box;
@@ -32,6 +32,7 @@
 	width: 0;
 	font-family: $sans;
 	font-size: $font-size-tiny;
+	opacity: 0.33;
 	overflow: visible;
 	position: absolute;
 	right: 0;
@@ -64,4 +65,26 @@
 	// 	right: 1rem;
 	// 	top: 0;
 	// }
+}
+
+.bookmark-promo.promo.Djarju header h1 {
+	display: none;
+}
+
+#bookmarks-one,
+#bookmarks-none,
+#bookmarks-multiple {
+	display: none;
+}
+
+.bookmarks-one #bookmarks-one {
+	display: block;
+}
+
+.bookmarks-none #bookmarks-none {
+	display: block;
+}
+
+.bookmarks-multiple #bookmarks-multiple {
+	display: block;
 }

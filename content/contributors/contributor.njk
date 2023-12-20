@@ -25,7 +25,7 @@ permalink: /{{ contributor.slug }}/index.html
 		<section>
 			<div class="generic-body-text">
 				{{ contributor.bioNote | prettifyMaltese | safe }}
-				<p><em>kitba ta' {{ contributor.forename | prettifyMaltese | safe }} fil-ġurnal:</em></p>
+				<p class="continuity">Kitba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> fil-ġurnal:</p>
 			</div>
 			{% set promoFrom = contributor.name %}
 			{% set promos = contributor.storiesAuthored %}

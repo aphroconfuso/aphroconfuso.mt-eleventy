@@ -95,7 +95,7 @@ permalink: /{{ story.slug }}/index.html
 				{% for episode in story.sequenceEpisodes %}
 					{% if loop.first %}<table class="sequence-menu">{% endif %}
 						<tr{% if not episode.slug %} class="actual"{% endif %}>
-							<td class="order">{% if episode.date %}{{ episode.date | diaryDate }}{% else %}{{ episode.number }}.{% endif %}</td>
+							<td class="order">{% if episode.date %}{{ episode.date | diaryDateShort }}{% else %}{{ episode.number }}.{% endif %}</td>
 							<td class="title">
 							{% if episode.slug %}
 								<a href="/{{ episode.slug }}/">{{ episode.title }}</a>
@@ -108,7 +108,11 @@ permalink: /{{ story.slug }}/index.html
 				{% endfor %}
 				{% if story.sequencePreviousPromo %}
 					<div class="body-text promo-adjacent promo-previous">
-						<p>aqra l-parti ta' qabel din:</p>
+						{% if story.type == 'Djarju' %}
+							<p class="continuity">{{ metadata.texts.previousDiary | prettifyMaltese | safe }}</p>
+						{% else %}
+							<p class="continuity">{{ metadata.texts.previous | prettifyMaltese | safe }}</p>
+						{% endif %}
 						<a href="/{{ story.sequencePreviousPromo.slug }}/">
 							<header>
 								<h3>{{ story.sequencePreviousPromo.title | prettifyMaltese | safe }}</h3>
@@ -207,6 +211,11 @@ permalink: /{{ story.slug }}/index.html
 				</section> #}
 				{% if story.sequenceNextPromo %}
 					<div class="body-text promo-adjacent promo-next">
+						{% if story.type == 'Djarju' %}
+							<p class="continuity">{{ metadata.texts.nextDiary | prettifyMaltese | safe }}</p>
+						{% else %}
+							<p class="continuity">{{ metadata.texts.next | prettifyMaltese | safe }}</p>
+						{% endif %}
 						<a href="/{{ story.sequenceNextPromo.slug }}/">
 							<header>
 								<h3>{{ story.sequenceNextPromo.title | prettifyMaltese | safe }}</h3>
@@ -240,14 +249,14 @@ permalink: /{{ story.slug }}/index.html
 		{% include '_promo_list.njk' %}
 	</aside>
 	<script>
-		author = "{{ story.author }}" || null;
+		author = "{{ story.author | safe }}" || null;
 		monthYear = "{{ story.monthYear | slugify }}" || null;
 		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
 		sequenceEpisodeNumber = {{ story.sequenceEpisodeNumber | wrapInQuotes | safe}};
 		sequenceEpisodeTitle = {{ story.sequenceEpisodeTitle | wrapInQuotes | safe}};
 		storyId = "{{ story.id }}" || null;
 		storyType = "{{ story.type }}" || null;
-		title = "{{ story.title }}" || null;
+		title = "{{ story.title | safe}}" || null;
 		translator = {{ story.translator | wrapInQuotes | safe}};
 		wordcount = {{ story.body | wordcount }} || null;
 	</script>

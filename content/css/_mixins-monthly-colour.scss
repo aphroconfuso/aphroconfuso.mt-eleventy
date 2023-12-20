@@ -81,12 +81,14 @@
 				display: block;
 			}
 		}
-		a.bookmark-promo:hover .bookmark,
-		.bookmark:hover {
+		header a.bookmark:hover,
+		&.bookmark-promo:hover:not(.Djarju) .bookmark,
+		&.promo > .bookmark:hover:not(.Djarju) {
 			border-color: $colour;
 			border-bottom-color: transparent;
 			color: $paper;
 			// top: -6px;
+			opacity: 1;
 			@include ease-out($fade-in-short);
 		}
 		&.promo:hover:not(.promo-diary),

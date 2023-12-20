@@ -137,6 +137,20 @@ async function getHomepage() {
 			poem: 1,
 			text: 5,
 		},
+		Layout_9: {
+			diary: 1,
+			image: 2,
+			poem: 1,
+			text: 8,
+			lengths: [2150, 1300],
+		},
+		Layout_10: {
+			diary: 1,
+			image: 2,
+			poem: 1,
+			text: 5,
+			lengths: [2150],
+		},
 	}
 
 	const layoutConfig = layouts[atts.layout];
@@ -156,7 +170,7 @@ async function getHomepage() {
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 				description: smartTruncate(promo.text || storyAtts.description, descriptionLength),
 				diaryDate: storyAtts.diaryDate,
-				id: promo.story && promo.story.data.id,
+				id: promo.story && promo.story.data.id || promo.id,
 				isSequenceEpisode: !!promoSequenceData,
 				mobilePriority: promo.mobilePriority || 9,
 				monthYear: getMonthYear(storyAtts.dateTimePublication),

@@ -86,7 +86,7 @@ article > header {
 @media all and (min-width: $mobile-breakpoint-plusone) {
 	article > header {
 		max-width: $max-content-width;
-		margin: ($body-margin * 2) auto 0;
+		margin: ($body-margin-double) auto 0;
 		min-height: $body-margin * 6;
 	}
 }

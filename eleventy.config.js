@@ -132,6 +132,10 @@ module.exports = function(eleventyConfig) {
 		return fixDiaryDate(dateString);
 	});
 
+	eleventyConfig.addFilter('diaryDateShort', function diaryDateShort(dateString) {
+		return fixDiaryDate(dateString).replace(/\.20/, ".");
+	});
+
 	// Get the first `n` elements of a collection.
 	eleventyConfig.addFilter("head", (array, n) => {
 		if(!Array.isArray(array) || array.length === 0) {
@@ -165,14 +169,18 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addFilter("prettifyMaltese", function prettifyMaltese(text) {
 		return (text || []).replace(/<p>\s*<\/p>/gm, "")
 			.replace(/-</gm, "- <")
-			.replace(/'/gm, "’")
 			.replace(/  +/gm, " ")
 			.replace(/<p> */gm, "<p>")
 			.replace(/ *<\/p>/gm, "</p>")
 			.replace(/ ?— ?| - | -- /gm, String.fromCharCode(8202, 8212, 8202))
 			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
 			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
-			.replace(/([ \,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
+			.replace(/([ \'\"\,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
+			.replace(/\'/gm, "’")
+			.replace(/ \"/gm, " “")
+			.replace(/\"/gm, "”")
+			.replace(/”>/gm, "\">")
+			.replace(/\=”/gm, "=\"")
 			.replace(/(”)([,\.;:])/gm, "$1<span class=\"pull\">$2</span>")
 			.replace(/([,\.])(”)/gm, "$1<span class=\"pullsemi\">$2</span>")
 			.replace(/(’)([,\.;:])/gm, "$1<span class=\"pullsemi\">$2</span>")
@@ -181,15 +189,31 @@ module.exports = function(eleventyConfig) {
 			.replace(/<\/blockquote>\s*<blockquote>/gm, "<br>")
 			.replace(/- </gm, "-<")
 			.replace(/(\d)\,(\d\d\d)/gm, `$1${String.fromCharCode(8202)}$2`)
-			.replace(/&amp;shy;/gm, '<wbr>');
+			.replace(/&amp;shy;/gm, '<wbr>')
+			.replace(/<l-m>fx-1<\/l-m>/gm, "fx-1")
+			.replace(/<l-m>right-aligned<\/l-m>/gm, "right-aligned");
 	});
 
-	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text) {
-		return (text || []).replace(/(\d)\,(\d\d\d)/gm, `$1${String.fromCharCode(8202)}$2`);
+	eleventyConfig.addFilter("anchorise", function anchorise(sentence, useVerb = 'ara') {
+		const [verb, destination] = sentence.split(' ');
+		console.log(verb, destination, verb.toLowerCase() !== useVerb);
+		if (verb.toLowerCase() !== useVerb) return sentence;
+		return `${ verb } <a href="#${destination}">${slugifyStringMaltese(destination)}</a>`;
+	});
+
+	eleventyConfig.addFilter("anchorise", function anchorise(sentence, useVerb = 'ara') {
+		var regex = new RegExp(`(<p>${useVerb} “?"?)(\\w+)("?”?\.?<\\/p>)`, 'i');
+		var match = sentence.match(regex);
+		if (!match) return sentence;
+		return `${match[1]}<a href="#${slugifyStringMaltese(match[2])}">${match[2]}</a>${match[3]}`;
 	});
 
 	eleventyConfig.addFilter("slugifyMaltese", function slugifyMaltese(text) {
 		return slugifyStringMaltese(text);
+	});
+
+	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text) {
+		return (text || []).replace(/(\d)\,(\d\d\d)/gm, `$1${String.fromCharCode(8202)}$2`);
 	});
 
 	eleventyConfig.addFilter("semiDeSlugify", function semiDeSlugify(text) {

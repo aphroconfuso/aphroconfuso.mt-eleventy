@@ -3,28 +3,45 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-.promo-adjacent {
-	h3,
-	p {
-		color: $lighter-brown;
-	}
-	a:hover {
+article.story {
+	.promo-adjacent {
 		p,
 		h3 {
-			color: $text-brown;
+			color: $lighter-brown;
+		}
+		p {
+			font-size: $body-font-size-smaller;
+			@include clamp(7);
+		}
+		header {
+			h3 {
+				font-size: $body-font-size;
+				margin-bottom: $body-margin-quarter;
+			}
+		}
+		.continuity {
+			margin-bottom: $body-margin-quarter;
 		}
 	}
-	p {
-		font-size: 1.1rem;
-		line-height: 1.17;
-		@include clamp(7);
+	.promo-previous {
+		display: none;
 	}
-}
-
-.promo-previous {
-	margin-top: $body-margin;
-}
-
-.promo-next {
-	margin-bottom: $body-margin;
+	.promo-next {
+		margin-bottom: $body-margin;
+	}
+	@media all and (min-width: $laptop-breakpoint) {
+		a:hover {
+			p,
+			h3 {
+				color: $text-brown;
+			}
+		}
+		.promo-previous {
+			display: block;
+			margin-top: $body-margin-double;
+		}
+		.promo-next {
+			margin-bottom: $body-margin-double;
+		}
+	}
 }

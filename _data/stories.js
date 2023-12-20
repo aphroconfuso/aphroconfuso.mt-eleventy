@@ -278,13 +278,13 @@ async function getAllStories() {
 					!!sequenceData && episodeAtts.title
 				);
 
-				// if (episodeAtts.sequenceEpisodeNumber === atts.sequenceEpisodeNumber - 1) {
-				// 	sequencePreviousPromo = { slug: episodeSlug, ...episodeAtts };
-				// }
+				if (episodeAtts.sequenceEpisodeNumber === atts.sequenceEpisodeNumber - 1) {
+					sequencePreviousPromo = { slug: episodeSlug, ...episodeAtts };
+				}
 
-				// if (episodeAtts.sequenceEpisodeNumber === atts.sequenceEpisodeNumber + 1) {
-				// 	sequenceNextPromo = { slug: episodeSlug, ...episodeAtts };
-				// }
+				if (episodeAtts.sequenceEpisodeNumber === atts.sequenceEpisodeNumber + 1) {
+					sequenceNextPromo = { slug: episodeSlug, ...episodeAtts };
+				}
 
 				return {
 				date: episodeAtts.diaryDate,

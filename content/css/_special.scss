@@ -3,14 +3,88 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-.body-text {
-	// Il-Lanza, Il-Labra, Il-Qoffa, l-Azzarin
-	.special-100 {
-		display: inline-block;
-		margin-left: 70%;
+// .body-text {
+// 	// Il-Lanza, Il-Labra, Il-Qoffa, l-Azzarin
+// 	.special-100 {
+// 		display: inline-block;
+// 		margin-left: 70%;
+// 	}
+// 	.special-101 {
+// 		display: inline-block;
+// 		margin-left: calc(70% + 40px);
+// 	}
+// }
+
+@media all and (min-width: $laptop-breakpoint) {
+	.promo.promo-plain.story-16 {
+		// Il-Lanza... (Lulju 2023)
+		header {
+			margin: 0;
+		}
+		p {
+			@include clamp(6);
+		}
 	}
-	.special-101 {
-		display: inline-block;
-		margin-left: calc(70% + 40px);
+
+	article.story {
+		// Il-Lanza... (Lulju 2023)
+		&.story-16 {
+			h1 {
+				font-size: 2.9rem;
+				white-space: nowrap;
+				letter-spacing: -1px;
+			}
+		}
+
+		// mona | lisa (Awwissu 2023)
+		&.story-18 {
+			// h1 {
+			// 	width: 70%;
+			// }
+			.body-text {
+				padding: 0 8rem;
+				border: 1px solid $grid-lines;
+				border-width: 0 1px;
+			}
+			h1 {
+				width: 100%;
+			}
+			.fx-1 {
+				transform: scale(-1, 1);
+				color: hsl(0, 0%, 39%);
+			}
+			p {
+				margin-bottom: $body-margin-half + $body-margin-quarter;
+				&.enjambed {
+					margin-bottom: $body-margin-quarter;
+				}
+			}
+		}
+		&.story-25 {
+			h1 {
+				letter-spacing: -0.15px;
+			}
+		}
+		&.story-27 {
+			.fx-1 {
+				white-space: nowrap;
+			}
+		}
+	}
+
+	.promos-container {
+		.is-episode,
+		// Il-Lanza... (Lulju 2023)
+		.story-16 {
+			header {
+				margin-bottom: $body-margin-quarter;
+				h3 {
+					padding-top: $body-margin-quarter;
+				}
+			}
+			p {
+				@include clamp(6);
+			}
+		}
 	}
 }
