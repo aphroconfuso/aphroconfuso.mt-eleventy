@@ -256,7 +256,7 @@ permalink: /{{ story.slug }}/index.html
 		sequenceEpisodeTitle = {{ story.sequenceEpisodeTitle | wrapInQuotes | safe}};
 		storyId = "{{ story.id }}" || null;
 		storyType = "{{ story.type }}" || null;
-		title = "{{ story.title | safe}}" || null;
+		pageTitle = "{{ story.title | safe}}" || null;
 		translator = {{ story.translator | wrapInQuotes | safe}};
 		wordcount = {{ story.body | wordcount }} || null;
 	</script>

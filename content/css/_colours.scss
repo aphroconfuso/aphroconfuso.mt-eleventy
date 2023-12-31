@@ -29,7 +29,7 @@ h5 {
 
 // FIXME
 * {
-	-webkit-tap-highlight-color: rgba($color: $diċembru-2023, $alpha: 0.2);
+	-webkit-tap-highlight-color: rgba($color: $this-month, $alpha: 0.2);
 }
 
 .mejju-2023 {
@@ -62,4 +62,16 @@ h5 {
 
 .dicembru-2023 {
 	@include monthly-colour($diċembru-2023);
+}
+
+.jannar-2024 {
+	@include monthly-colour($jannar-2024);
+}
+
+.frar-2024 {
+	@include monthly-colour($frar-2024);
+}
+
+.marzu-2024 {
+	@include monthly-colour($marzu-2024);
 }

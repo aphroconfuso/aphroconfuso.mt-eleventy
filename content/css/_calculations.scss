@@ -1,7 +1,8 @@
 @use "constants" as *;
 
 $blue: hsl($blue-hue, $saturation, $lightness);
-$blue2: hsl($blue2-hue, $saturation, $lightness);
+$blue-green: hsl($blue-green-hue, $saturation, $lightness);
+$blue3: hsl($blue3-hue, $saturation, $lightness);
 $dark-blue: hsl($dark-blue-hue, $saturation, $lightness);
 $green: hsl($green-hue, $saturation, $lightness);
 $magenta: hsl($magenta-hue, $saturation, $lightness);

@@ -15,6 +15,13 @@
 // 	}
 // }
 
+article.story.story-33 {
+	// Joey Tilbes (Diċembru 2023)
+	h1 {
+		letter-spacing: -0.15px;
+	}
+}
+
 @media all and (min-width: $laptop-breakpoint) {
 	.promo.promo-plain.story-16 {
 		// Il-Lanza... (Lulju 2023)
@@ -68,6 +75,12 @@
 		&.story-27 {
 			.fx-1 {
 				white-space: nowrap;
+			}
+		}
+		&.story-33 {
+			// Reset Joey Tilbes (Diċembru 2023)
+			h1 {
+				letter-spacing: 0;
 			}
 		}
 	}
