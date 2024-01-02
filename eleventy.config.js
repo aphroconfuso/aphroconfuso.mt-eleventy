@@ -35,7 +35,7 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
 
-		const fetchImage = async (imageUrl) => fetch(imageUrl).then(res =>
+		const fetchImage = async (imageUrl, saveToFileLocation) => fetch(imageUrl).then(res =>
 			res.body.pipe(fs.createWriteStream(saveToFileLocation))
 		);
 
@@ -62,7 +62,7 @@ module.exports = function(eleventyConfig) {
 			if (fs.existsSync(saveToFileLocation)) { return; }
 			console.log(`Fetching ${i} ...`);
 			const imageUrl = i.replace(/\/stampi/g, "https://stampi.aphroconfuso.mt");
-			fetchImage(imageUrl);
+			fetchImage(imageUrl, saveToFileLocation);
 			// fetch(imageUrl).then(res =>
 			// 	res.body.pipe(fs.createWriteStream(saveToFileLocation))
 			// )
