@@ -68,6 +68,8 @@ async function getHomepage() {
 		});
 		const response = await data.json();
 
+		console.log('RESPONSE', response);
+
 		if (response.errors) {
 			let errors = response.errors;
 			errors.map((error) => {
@@ -191,7 +193,7 @@ async function getHomepage() {
 			};
 
 			if (includesImages) {
-				const promoImageData = promo.image.data[0] || storyAtts.promoImage.data;
+				const promoImageData = promo && promo.image.data[0] || storyAtts.promoImage.data;
 				const promoImageMobileData = promo.imageMobile && promo.imageMobile.data[0] || storyAtts.promoImageMobile.data;
 				formattedPromo.image = storyAtts.showImagePromo && promoImageData && promoImageData.attributes.formats,
 				formattedPromo.imageMobile = storyAtts.showImagePromo && promoImageMobileData && promoImageMobileData.attributes.formats,

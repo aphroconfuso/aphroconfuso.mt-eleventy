@@ -22,6 +22,15 @@ article.story.story-33 {
 	}
 }
 
+@media all and (max-width: $laptop-breakpoint) {
+	.story-34 {
+		// Manifest Kontra ż-Żmien
+		h1 {
+			letter-spacing: -1px;
+		}
+	}
+}
+
 @media all and (min-width: $laptop-breakpoint) {
 	.promo.promo-plain.story-16 {
 		// Il-Lanza... (Lulju 2023)
