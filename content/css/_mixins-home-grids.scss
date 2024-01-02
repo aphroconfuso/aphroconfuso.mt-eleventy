@@ -35,7 +35,7 @@
 			"promo-header promo-header promo-header"
 			"promo-body promo-image promo-image";
 		&.promo .body-text p {
-			@include clamp(18);
+			@include clamp(19);
 		}
 	}
 }
@@ -46,7 +46,7 @@
 			"promo-header promo-header promo-header"
 			"promo-image promo-image promo-body";
 		&.promo .body-text p {
-			@include clamp(18);
+			@include clamp(19);
 		}
 	}
 }

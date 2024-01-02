@@ -10,12 +10,12 @@
 	border-image-slice: 80;
 	border-image-source: url(/img/deco/frame-02-faint.svg);
 	border-image-width: 80px;
-	margin-bottom: $body-margin * 2;
+	margin-bottom: $body-margin-double;
 	background-color: $deco-brown;
 	.text-container {
 		display: block !important;
 		border: 10px double red;
-		padding: $body-margin;
+		padding: 2.2rem $body-margin;
 	}
 	.end-dot {
 		border-radius: 0;
@@ -27,7 +27,7 @@
 	border-image-outset: 10px;
 	border-image-repeat: repeat;
 	border-image-slice: 80;
-	border-image-source: url(/img/deco/frame-02-faint-ottubru-2023.svg);
+	border-image-source: url(/img/deco/frame-02-faint-jannar-2024.svg);
 	border-image-width: 40px;
-	background-color: complement($ottubru-2023);
+	background-color: complement($this-month);
 }

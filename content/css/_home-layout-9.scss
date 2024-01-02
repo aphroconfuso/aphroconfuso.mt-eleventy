@@ -5,29 +5,50 @@
 @use "mixins-home-grids" as *;
 
 // *************************************************************************
-// LAYOUT 1 ****************************************************************
+// LAYOUT 9 ****************************************************************
 // Large image story on top
 // Then Story and editorial
 
-.layout-1 {
+.layout-9 {
 	grid-template-areas:
-		"ga-image-1"
-		"ga-editorial"
-		"ga-diary"
 		"ga1"
 		"ga2"
-		"ga-newsletter"
-		"ga3"
 		"ga-poem-1"
+		"ga-editorial"
+		"ga-diary"
+		"ga-newsletter"
+		"ga-image-1"
+		"ga3"
 		"ga4"
 		"ga-podcast"
-		"ga-image-2";
+		"ga5"
+		"ga6"
+		"ga-image-2"
+		"ga7"
+		"ga8";
 	.ga-image-1 {
 		margin-bottom: $body-margin-half;
 	}
 	.ga-1,
-	.ga-5 {
+	.ga-3,
+	.ga-5,
+	.ga-7,
+	.ga-image-1,
+	.ga-image-2 {
 		@include border-bottom();
+	}
+	.ga-image-2 {
+		@include border-top();
+	}
+	.ga-1 {
+		p {
+			@include clamp(12);
+		}
+	}
+	.ga-poem-1 {
+		p {
+			@include clamp(16);
+		}
 	}
 
 	@media all and (min-width: $laptop-breakpoint) {
@@ -46,19 +67,35 @@
 		}
 		display: grid;
 		gap: ($body-margin * 1.25) $body-margin;
-		grid-template-rows: auto 14rem 15rem auto auto auto;
+		grid-template-rows: auto auto 14rem 15rem auto auto auto auto;
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 		grid-auto-columns: 1fr;
 		grid-auto-flow: row;
 		grid-template-areas:
-			"ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
+			"ga1 ga1 ga1 ga1 ga1 ga1"
+			"ga-poem-1 ga-poem-1 ga2 ga2 ga2 ga2"
 			"ga-diary ga-diary ga-newsletter ga-newsletter ga-editorial ga-editorial"
 			"ga-diary ga-diary ga-podcast ga-podcast ga-editorial ga-editorial"
-			"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
-			"ga-poem-1 ga-poem-1 ga1 ga1 ga2 ga2"
-			"ga-poem-1 ga-poem-1 ga3 ga3 ga4 ga4";
-		.ga-1,
+			"ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
+			"ga3 ga3 ga4 ga4 ga5 ga5"
+			"ga6 ga6 ga7 ga7 ga8 ga8"
+			"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2";
+		.ga-1 {
+			p {
+				@include clamp(999);
+				columns: 3;
+			}
+		}
 		.ga-2 {
+			p {
+				@include clamp(999);
+				columns: 2;
+			}
+		}
+		.ga-1,
+		.ga-3,
+		.ga-4,
+		.ga-5 {
 			@include border-bottom();
 		}
 		.ga-editorial {
@@ -68,16 +105,16 @@
 		}
 		.ga-poem-1 {
 			p {
-				@include clamp(18);
+				@include clamp(9);
 			}
 		}
 		.ga-image-1 {
-			@include image-left-top;
+			@include image-left;
+			@include border-top();
 			@include border-bottom();
 		}
 		.ga-image-2 {
 			@include border-top();
-			@include border-bottom();
 			@include image-right;
 		}
 	}

@@ -6,7 +6,7 @@ permalink: /appuntamenti/index.html
 {% block head %}
 	<title>{{ appointmentIndex.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 {% endblock %}
 
 {% block content %}
@@ -33,7 +33,7 @@ permalink: /appuntamenti/index.html
 								<h1>{{ appointment.monthYear | safe }}</h1>
 							</header>
 							<div class="body-text">
-								<p>{{ appointment.editorial | prettifyMaltese | safe }}</p>
+								{{ appointment.editorial | prettifyMaltese | safe }}
 							</div>
 						</a>
 					</li>

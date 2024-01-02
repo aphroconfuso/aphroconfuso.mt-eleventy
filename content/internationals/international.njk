@@ -10,7 +10,7 @@ permalink: /{{ international.code }}/index.html
 {% block head %}
 	<title>{{ international.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 	{% for page in internationals %}
 		<link rel="alternate" hreflang="{{ page.code }}" href="https://aphroconfuso.mt/{{ page.code }}/" />
 	{% endfor %}

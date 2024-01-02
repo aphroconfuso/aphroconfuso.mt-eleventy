@@ -51,6 +51,12 @@
 			background-color: $colour !important;
 		}
 	}
+	#progress {
+		text-decoration: line-through;
+		text-shadow: -1px -1px 0 $paper, 0 -1px 0 $paper, 1px -1px 0 $paper,
+			1px 0 0 $paper, 1px 1px 0 $paper, 0 1px 0 $paper, -1px 1px 0 $paper,
+			-1px 0 0 $paper;
+	}
 	@media all and (min-width: $mobile-breakpoint-plusone) {
 		h4 {
 			a:hover {
@@ -74,6 +80,16 @@
 			h4 {
 				display: block;
 			}
+		}
+		header a.bookmark:hover,
+		&.bookmark-promo:hover:not(.Djarju) .bookmark,
+		&.promo > .bookmark:hover:not(.Djarju) {
+			border-color: $colour;
+			border-bottom-color: transparent;
+			color: $paper;
+			// top: -6px;
+			opacity: 1;
+			@include ease-out($fade-in-short);
 		}
 		&.promo:hover:not(.promo-diary),
 		&.promo:focus:not(.promo-diary) {

@@ -9,8 +9,8 @@ module.exports = {
 		"url": "https://aphroconfuso.mt"
 	},
 	"settings": {
-		"imagesUrl": "https://stampi.aphroconfuso.mt/",
-		"socialImage": "https://stampi.aphroconfuso.mt/social_aphroconfuso_logo_wallpaper_f1b0208899.jpg",
+		"imagesUrl": "/stampi/",
+		"socialImage": "social_aphroconfuso_logo_wallpaper_f1b0208899.jpg",
 		"breakpoints": {
 			"mobile": "749px",
 			"tablet": "1080px",
@@ -21,7 +21,13 @@ module.exports = {
 		"contents": "Dan huwa x-xogħol li ppubblikajna fil-ġurnal s'issa, f'ordni alfabetika skont it-titlu. Tista' wkoll tqalleb <a href=\"/appuntamenti/\">bix-xahar</a> jew skont <a href=\"/kontributuri/\">il-kontributur</a>.",
 		"error404": "Din il-paġna ma teżistix.",
 		"error404AltText": "Sinjal ta' ottagonali aħmar bi 'Stop' miktuba bl-aħmar. Taħta, sinjal ieħor li jgħid ' Stop Tfisser Ieqaf'.",
-		"contributions": "kitba ta' ${forename} fil-ġurnal:",
-		"podcastMessage": "Abbona <l-m>fil-<a href=\"/podcast/\">podcast</a></l-m> biex tisma’ kulma nippubblikaw."
+		"contributions": "Kitba ta' ${forename} fil-ġurnal:",
+		"newsletterMessage": "Abbona <l-m>fin-<a href=\"/newsletter/\">newsletter</a></l-m> biex dejjem issir taf meta nippubblikaw xi ħaġa ġdida.",
+		"podcastMessage": "Abbona <l-m>fil-<a href=\"/podcast/\">podcast</a></l-m> biex tisma’ kulma nippubblikaw.",
+		"previous": "Aqra l-parti ta' qabel:",
+		"next": "Aqra l-parti li jmiss:",
+		"previousDiary": "Aqra l-entrata ta' qabel:",
+		"nextDiary": "Aqra l-entrata li jmiss:",
+		"noBookmarks": "Bħalissa m'għandek ebda bookmark; Kompli aqra u jinġabru waħedhom"
 	}
 }

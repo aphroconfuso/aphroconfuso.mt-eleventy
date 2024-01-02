@@ -11,13 +11,13 @@ permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
 {% block head %}
 	<title>{{ appointment.monthYear | prettifyMaltese | safe }} · Aphroconfuso</title>
 	<meta content="{{ appointment.editorial | getDescription }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 {% endblock %}
 
 {% block content %}
 <article class="generic {{ appointment.monthYear | slugify }}">
 	<header>
-		<h4><a href="/appuntamenti">Appuntamenti</a></h5>
+		<h4><a href="/appuntamenti">Appuntamenti</a></h4>
 		<h1>{{ appointment.monthYear | prettifyMaltese | safe }}</h1>
 		<h2></h2>
 	</header>
@@ -32,9 +32,13 @@ permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
 			{% set promos = appointment.stories %}
 			{% set showEpisodeTitle = true %}
 			{% include '_promo_list.njk' %}
-			{% if appointment.moreToCome %}
-				<div class="generic-body-text more">{{ appointment.moreToCome | prettifyMaltese | safe }}</div>
-			{% endif %}
+			<div class="generic-body-text more">
+				{% if appointment.moreToCome %}
+					{{ appointment.moreToCome | prettifyMaltese | safe }}
+				{% else %}
+					<p>{{ metadata.texts.newsletterMessage | safe }}</p>
+				{% endif %}
+			</div>
 		</section>
 		<section id="grid-max-panel-left-top">
 			<!-- X -->

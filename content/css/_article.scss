@@ -10,6 +10,7 @@ article {
 	max-width: $max-width;
 	&.story {
 		header {
+			position: relative;
 			h1,
 			h2,
 			h3 {
@@ -49,6 +50,12 @@ article {
 #grid-max-panel-left-bottom,
 #grid-max-panel-right-bottom {
 	margin: $body-margin auto 0 auto;
+}
+
+@media all and (max-width: ($laptop-breakpoint - 1)) {
+	.djarju #grid-body {
+		margin-bottom: $body-margin;
+	}
 }
 
 .reviewed {
@@ -134,46 +141,11 @@ article {
 	}
 }
 
-@media all and (min-width: $laptop-breakpoint) {
-	article.story {
-		// Il-Lanza... (Lulju 2023)
-		&.story-16 {
-			h1 {
-				font-size: 2.9rem;
-				white-space: nowrap;
-				letter-spacing: -1px;
-			}
-		}
-
-		// mona | lisa (Awwissu 2023)
-		&.story-18 {
-			h1 {
-				width: 70%;
-			}
-			@media all and (min-width: $laptop-breakpoint) {
-				.body-text {
-					padding: 0 8rem;
-					border: 1px solid $grid-lines;
-					border-width: 0 1px;
-				}
-				h1 {
-					width: 100%;
-				}
-			}
-			.fx-1 {
-				transform: scale(-1, 1);
-				color: #666666;
-			}
-			p {
-				margin-bottom: $body-margin-half + $body-margin-quarter;
-				&.enjambed {
-					margin-bottom: $body-margin-quarter;
-				}
-			}
-		}
-	}
-}
 table.sequence-menu {
+	font-family: $serif;
+	font-size: $body-font-size - 0.1;
+	font-style: italic;
+	letter-spacing: -0.2px;
 	@media all and (max-width: ($laptop-breakpoint - 1)) {
 		tr.actual {
 			display: none;
@@ -186,16 +158,9 @@ table.sequence-menu {
 			color: $lightest-brown;
 		}
 		td.order {
-			font-family: $sans;
-			padding-right: $body-margin-quarter;
-		}
-		.title {
-			font-size: $body-font-size;
-			font-style: italic;
+			padding-right: $body-margin-quarter * 0.25;
 		}
 		td {
-			font-family: $serif;
-			padding-bottom: $body-margin-quarter;
 			@media all and (min-width: $laptop-breakpoint) {
 				a {
 					@include animated-underline($light-brown);
@@ -204,8 +169,7 @@ table.sequence-menu {
 		}
 	}
 }
-// FIXME
-article.esej {
+article {
 	@media all and (max-width: ($laptop-breakpoint - 1)) {
 		table.sequence-menu {
 			display: none;

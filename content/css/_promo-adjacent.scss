@@ -1,0 +1,47 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+article.story {
+	.promo-adjacent {
+		p,
+		h3 {
+			color: $lighter-brown;
+		}
+		p {
+			font-size: $body-font-size-smaller;
+			@include clamp(7);
+		}
+		header {
+			h3 {
+				font-size: $body-font-size;
+				margin-bottom: $body-margin-quarter;
+			}
+		}
+		.continuity {
+			margin-bottom: $body-margin-quarter;
+		}
+	}
+	.promo-previous {
+		display: none;
+	}
+	.promo-next {
+		margin-bottom: $body-margin;
+	}
+	@media all and (min-width: $laptop-breakpoint) {
+		a:hover {
+			p,
+			h3 {
+				color: $text-brown;
+			}
+		}
+		.promo-previous {
+			display: block;
+			margin-top: $body-margin-double;
+		}
+		.promo-next {
+			margin-bottom: $body-margin-double;
+		}
+	}
+}

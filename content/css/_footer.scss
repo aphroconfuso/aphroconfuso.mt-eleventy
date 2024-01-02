@@ -200,20 +200,31 @@ footer {
 	}
 }
 
+body.scrolling {
+	#scroll-tools {
+		opacity: 1;
+	}
+}
+
 #scroll-tools {
 	@include ease-in();
-	bottom: 1rem;
-	font-weight: 500;
+	font-family: $serif;
+	font-size: $body-font-size;
 	opacity: 0;
+	right: 1rem;
 	position: fixed;
-	right: 0;
+	font-weight: 500;
+	bottom: 1rem;
 }
 #progress {
+	text-shadow: -2px -2px 0 $paper, 0 -2px 0 $paper, 2px -2px 0 $paper,
+		2px 0 0 $paper, 2px 2px 0 $paper, 0 2px 0 $paper, -2px 2px 0 $paper,
+		-2px 0 0 $paper;
 	vertical-align: -0.5rem;
 }
 #arrow-top {
 	padding: 1rem;
 }
-// #scroll-tools {
-// 	display: none;
-// }
+#scroll-tools {
+	display: none !important;
+}

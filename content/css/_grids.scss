@@ -18,7 +18,7 @@
 @media all and (min-width: $mobile-breakpoint-plusone) {
 	.container,
 	.promos-container {
-		gap: $body-margin ($body-margin * 2);
+		gap: $body-margin ($body-margin-double);
 		margin: $body-margin auto 0;
 		max-width: $max-content-width;
 	}

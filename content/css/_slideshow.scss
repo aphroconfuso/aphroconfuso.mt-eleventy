@@ -36,7 +36,7 @@
 		}
 		&.arrow-previous,
 		&.arrow-next {
-			height: calc(100% - ($body-margin * 2));
+			height: calc(100% - ($body-margin-double));
 			width: 6rem;
 			line-height: 6rem;
 		}
@@ -184,6 +184,11 @@
 }
 
 @media all and (max-width: $laptop-breakpoint) {
+	.splide {
+		img {
+			width: 100%;
+		}
+	}
 	@media all and (orientation: landscape) {
 		#lightbox {
 			animation: showLightbox 0.25s;

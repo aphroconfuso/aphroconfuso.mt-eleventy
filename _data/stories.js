@@ -9,6 +9,7 @@ const processPromos = require("../src/processPromos.js");
 
 const {imageData, linkedStoryData, personData} = require("./_fragments.js");
 
+let vocabulary = [];
 
 // const fs = require('fs');
 // var Spellchecker = require("hunspell-spellchecker");
@@ -199,7 +200,7 @@ async function getAllStories() {
 		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		// REFACTOR use titleArray to derive slug and title
 
-		if (!atts.promoImage) console.log("Image missing! An image was probably deleted from the media loibrary after it had been added as the social image.");
+		if (!atts.promoImage) console.log("Image missing! An image was probably deleted from the media library after it had been added as the social image.");
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
 
 		// find total times a story is endPromoted
@@ -209,17 +210,20 @@ async function getAllStories() {
 		// const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa"));
 		// const vocabulary = unique(body).filter((word) => {
 		// 	const fixedWord = word.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à");
-		// 	const check = spellchecker.check(fixedWord);
-		// 	if (check) {
-		// 		return true;
-		// 	} else {
-		// 		console.log(fixedWord);
-		// 		return false;
-		// 	}
+			// const check = spellchecker.check(fixedWord);
+			// if (check) {
+			// 	return true;
+			// } else {
+			// 	console.log(fixedWord);
+			// 	return false;
+			// }
+		// 	return true;
+		// }).sort().map((word) => {
+		// 	return word.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à");
 		// });
 		// console.log('tul', vocabulary.length);
 
-		const vocabulary = [];
+		vocabulary.concat(['aaa', 'bbb' ,'ccc']);
 		// console.log(vocabulary);
 
 		const imageTypes = {
@@ -258,6 +262,7 @@ async function getAllStories() {
 			!!sequenceData && atts.title
 		);
 
+		let sequencePreviousPromo, sequenceNextPromo;
 		let sequenceEpisodes = sequenceData
 			&& sequenceData.attributes.stories.data.length > 1
 			&& sequenceData.attributes.stories.data.map((episode) => {
@@ -272,6 +277,14 @@ async function getAllStories() {
 					episodeAtts.diaryDate,
 					!!sequenceData && episodeAtts.title
 				);
+
+				if (episodeAtts.sequenceEpisodeNumber === atts.sequenceEpisodeNumber - 1) {
+					sequencePreviousPromo = { slug: episodeSlug, ...episodeAtts };
+				}
+
+				if (episodeAtts.sequenceEpisodeNumber === atts.sequenceEpisodeNumber + 1) {
+					sequenceNextPromo = { slug: episodeSlug, ...episodeAtts };
+				}
 
 				return {
 				date: episodeAtts.diaryDate,
@@ -323,6 +336,8 @@ async function getAllStories() {
 			sequenceEpisodeNumber: atts.sequenceEpisodeNumber,
 			sequenceEpisodes: sequenceEpisodes,
 			sequenceEpisodeTitle: sequenceData && atts.title,
+			sequencePreviousPromo,
+			sequenceNextPromo,
 			showImagePromo: atts.showImagePromo,
 			singleImage: atts.images.data && atts.images.data.length === 1,
 			slideshow:  atts.images.data && atts.images.data.length > 1,
@@ -339,9 +354,9 @@ async function getAllStories() {
 			useProseStyling: !!atts.useProseStyling,
 			useSeparators: !!atts.useSeparators,
 			useSquareOnMobile: !!atts.useSquareOnMobile,
-			vocabulary: vocabulary,
     };
 	});
+	storiesFormatted[0].vocabulary = vocabulary;
   return storiesFormatted;
 }
 

@@ -3,54 +3,6 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-@mixin border-top() {
-	padding-top: calc(#{$body-margin} - 1px);
-	border-top: 1px solid $grid-lines;
-}
-
-@mixin border-bottom() {
-	padding-bottom: calc(#{$body-margin} - 1px);
-	border-bottom: 1px solid $grid-lines;
-}
-
-@mixin image-left() {
-	.promo-picture-1 {
-		grid-template-areas:
-			"promo-header promo-image promo-image"
-			"promo-body promo-image promo-image";
-	}
-}
-
-@mixin image-right() {
-	.promo-picture-1 {
-		grid-template-areas:
-			"promo-image promo-image promo-header"
-			"promo-image promo-image promo-body";
-	}
-}
-
-@mixin image-left-top() {
-	.promo-picture-1 {
-		grid-template-areas:
-			"promo-header promo-header promo-header"
-			"promo-body promo-image promo-image";
-		&.promo .body-text p {
-			@include clamp(18);
-		}
-	}
-}
-
-@mixin image-right-top() {
-	.promo-picture-1 {
-		grid-template-areas:
-			"promo-header promo-header promo-header"
-			"promo-image promo-image promo-body";
-		&.promo .body-text p {
-			@include clamp(18);
-		}
-	}
-}
-
 .ga-podcast {
 	background-color: #ac9393;
 	display: flex;
@@ -66,7 +18,15 @@
 		text-transform: uppercase;
 	}
 	p {
-		@include clamp(14);
+		@include clamp(13);
+	}
+}
+a.promo-poetry {
+	&:after {
+		content: ". . .";
+		position: absolute;
+		bottom: $body-margin-half;
+		right: $body-margin-half;
 	}
 }
 
@@ -155,6 +115,9 @@
 .ga-diary {
 	flex-direction: column;
 	grid-area: ga-diary;
+	p {
+		@include clamp(12);
+	}
 }
 .ga-editorial {
 	grid-area: ga-editorial;
@@ -162,7 +125,7 @@
 		margin-bottom: $body-margin-half;
 	}
 	p {
-		@include clamp(18);
+		@include clamp(16);
 	}
 }
 .ga-newsletter {
@@ -170,13 +133,6 @@
 }
 .ga-podcast {
 	grid-area: ga-podcast;
-}
-.layout-2 {
-	.mga1 {
-		.promo .body-text p {
-			@include clamp(14);
-		}
-	}
 }
 
 @media all and (max-width: ($laptop-breakpoint - 1)) {
@@ -188,7 +144,13 @@
 	.layout-6,
 	.layout-7,
 	.layout-8,
-	.layout-9 {
+	.layout-9,
+	.layout-10,
+	.layout-11,
+	.layout-12,
+	.layout-13,
+	.layout-14,
+	.layout-15 {
 		display: grid;
 		grid-template-columns: auto;
 		grid-template-rows: auto auto auto auto auto auto auto auto auto;
@@ -202,405 +164,22 @@
 	}
 }
 
-// *************************************************************************
-// LAYOUT 6 ****************************************************************
-// Story, Poem and editorial on top
-
-.layout-6 {
-	grid-template-areas:
-		"ga-poem-1"
-		"ga1"
-		"ga-editorial"
-		"ga-podcast"
-		"ga2"
-		"ga-image-1"
-		"ga3"
-		"ga-newsletter"
-		"ga4"
-		"ga5"
-		"ga-image-2"
-		"ga6"
-		"ga7"
-		"ga8"
-		"ga9";
-	// "ga10"
-	// "ga11"
-	// "ga12";
-	.ga-1 {
-		padding: $body-margin-half 0 $body-margin;
-	}
-	.ga-2,
-	.ga-image-1,
-	.ga-4,
-	.ga-5,
-	.ga-image-2,
-	.ga-6,
-	.ga-7,
-	.ga-8 {
-		@include border-bottom();
-	}
-
-	@media all and (min-width: $laptop-breakpoint) {
-		.ga-podcast {
-			display: none;
-		}
-		.ga-2,
-		.ga-image-1,
-		.ga-4,
-		.ga-5,
-		.ga-image-2,
-		.ga-6,
-		.ga-7,
-		.ga-8 {
-			padding-bottom: 0;
-			border-bottom: none;
-		}
-		display: grid;
-		gap: ($body-margin * 1.5) ($body-margin * 1.5);
-		grid-template-rows: auto auto auto 12rem auto auto auto;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-		grid-auto-columns: 1fr;
-		grid-auto-flow: row;
-		grid-template-areas:
-			"ga1 ga1 ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
-			"ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
-			"ga2 ga2 ga2 ga3 ga3 ga3"
-			"ga-newsletter ga-newsletter ga-newsletter ga3 ga3 ga3"
-			"ga4 ga4 ga5 ga5 ga6 ga6"
-			"ga7 ga7 ga8 ga8 ga9 ga9"
-			"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2";
-		.ga-1,
-		.ga-3 {
-			p {
-				@include clamp(17);
+@media all and (min-width: $laptop-breakpoint) {
+	.ga-editorial {
+		&.editorial {
+			height: 100%;
+			.text-container {
+				height: 100%;
 			}
-		}
-		.ga-2 {
-			p {
-				@include clamp(8);
-			}
-		}
-		.ga-3 {
-			p {
-				columns: 2;
-			}
-		}
-		.ga-poem-1 {
-			margin-bottom: 3rem;
-			margin-top: 5rem;
-			p {
-				@include clamp(12);
-			}
-		}
-		.ga-editorial {
-			margin: 0;
-			p {
-				@include clamp(15);
-			}
-			&.editorial {
-				margin-bottom: 3rem;
-				margin-top: 5.5rem;
-			}
-		}
-		.ga-image-1 {
-			@include border-top();
-			@include border-bottom();
-			@include image-right;
-		}
-		.ga-image-2 {
-			@include border-top();
-			@include image-left;
+			margin-bottom: 0;
 		}
 	}
-}
-
-// *************************************************************************
-// LAYOUT 7 ****************************************************************
-// Large text story on top
-// Then Story, Poem and editorial on top
-
-.layout-7 {
-	.ga-diary {
-		display: none;
+	.promo.story-25 h1 {
+		letter-spacing: -1px;
 	}
-	grid-template-areas:
-		"ga1"
-		"ga-poem-1"
-		"ga2"
-		"ga-editorial"
-		"ga-podcast"
-		"ga3"
-		"ga-image-1"
-		"ga4"
-		"ga-newsletter"
-		"ga5"
-		"ga6"
-		"ga-image-2"
-		"ga7"
-		"ga8"
-		"ga9"
-		"ga10";
-	// "ga11"
-	// "ga12";
-	.ga-1 {
-		p {
-			@include clamp(15);
-		}
-	}
-	.ga-3,
-	.ga-image-1,
-	.ga-5,
-	.ga-6,
-	.ga-image-2,
-	.ga-7,
-	.ga-8,
-	.ga-9 {
-		@include border-bottom();
-	}
-
-	@media all and (min-width: $laptop-breakpoint) {
-		.ga-podcast {
-			display: none;
-		}
-		.ga-1,
-		.ga-3,
-		.ga-image-1,
-		.ga-5,
-		.ga-6,
-		.ga-image-2,
-		.ga-7,
-		.ga-8,
-		.ga-9 {
-			padding-bottom: 0;
-			border-bottom: none;
-		}
-		display: grid;
-		gap: ($body-margin * 1.25) $body-margin;
-		grid-template-rows: auto auto auto auto 12rem auto auto auto;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-		grid-auto-columns: 1fr;
-		grid-auto-flow: row;
-		grid-template-areas:
-			"ga1 ga1 ga1 ga1 ga1 ga1"
-			"ga2 ga2 ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
-			"ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
-			"ga3 ga3 ga3 ga4 ga4 ga4"
-			"ga-newsletter ga-newsletter ga-newsletter ga4 ga4 ga4"
-			"ga5 ga5 ga6 ga6 ga7 ga7"
-			"ga8 ga8 ga9 ga9 ga10 ga10"
-			"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2";
-		.ga-1 {
-			@include border-bottom();
-			p {
-				@include clamp(999);
-				columns: 3;
-			}
-		}
-		.ga-2 {
-			p {
-				@include clamp(17);
-			}
-		}
-		.ga-4 {
-			p {
-				@include clamp(999);
-				columns: 2;
-			}
-		}
-		.ga-3 {
-			p {
-				@include clamp(8);
-			}
-		}
-		.ga-poem-1 {
-			p {
-				@include clamp(15);
-			}
-		}
-		.ga-editorial {
-			margin: 0;
-			p {
-				@include clamp(17);
-			}
-		}
-		.ga-image-1 {
-			@include border-top();
-			@include border-bottom();
-			@include image-right;
-		}
-		.ga-image-2 {
-			@include border-top();
-			@include image-left;
-		}
-	}
-}
-
-// *************************************************************************
-// LAYOUT 8 ****************************************************************
-// Large image story on top
-// Then Story and editorial
-
-.layout-8 {
-	.ga-diary {
-		display: none;
-	}
-	grid-template-areas:
-		"ga-image-1"
-		"ga-editorial"
-		"ga1"
-		"ga2"
-		"ga-newsletter"
-		"ga3"
-		"ga-poem-1"
-		"ga4"
-		"ga-podcast"
-		"ga5"
-		"ga-image-2";
-	.ga-image-1 {
-		margin-bottom: $body-margin-half;
-	}
-	.ga-1,
-	.ga-2,
-	.ga-5 {
-		@include border-bottom();
-	}
-
-	@media all and (min-width: $laptop-breakpoint) {
-		.ga-podcast {
-			display: none;
-		}
-		.ga-1,
-		.ga-2,
-		.ga-3,
-		.ga-image-1,
-		.ga-5,
-		.ga-6,
-		.ga-image-2,
-		.ga-7,
-		.ga-8,
-		.ga-9 {
-			padding-bottom: 0;
-			border-bottom: none;
-		}
-		display: grid;
-		gap: ($body-margin * 1.25) $body-margin;
-		grid-template-rows: auto auto 11rem auto auto auto;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-		grid-auto-columns: 1fr;
-		grid-auto-flow: row;
-		grid-template-areas:
-			"ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
-			"ga1 ga1 ga1 ga-editorial ga-editorial ga-editorial"
-			"ga-newsletter ga-newsletter ga-newsletter ga-editorial ga-editorial ga-editorial"
-			"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
-			"ga-poem-1 ga-poem-1 ga2 ga2 ga3 ga3"
-			"ga-poem-1 ga-poem-1 ga4 ga4 ga5 ga5";
-		.ga-1 {
-			p {
-				@include clamp(9);
-			}
-		}
-		.ga-2,
-		.ga-3 {
-			@include border-bottom();
-		}
-		.ga-poem-1 {
-			p {
-				@include clamp(18);
-			}
-		}
-		.ga-editorial {
-			margin: 0;
-			p {
-				@include clamp(17);
-			}
-		}
-		.ga-image-1 {
-			@include border-bottom();
-			@include image-left-top;
-		}
-		.ga-image-2 {
-			@include border-top();
-			@include border-bottom();
-			@include image-right;
-		}
-	}
-}
-
-// *************************************************************************
-// LAYOUT 1 ****************************************************************
-// Large image story on top
-// Then Story and editorial
-
-.layout-1 {
-	grid-template-areas:
-		"ga-image-1"
-		"ga-editorial"
-		"ga-diary"
-		"ga1"
-		"ga2"
-		"ga-newsletter"
-		"ga3"
-		"ga-poem-1"
-		"ga4"
-		"ga-podcast"
-		"ga-image-2";
-	.ga-image-1 {
-		margin-bottom: $body-margin-half;
-	}
-	.ga-1,
-	.ga-5 {
-		@include border-bottom();
-	}
-
-	@media all and (min-width: $laptop-breakpoint) {
-		.ga-1,
-		.ga-2,
-		.ga-3,
-		.ga-image-1,
-		.ga-5,
-		.ga-6,
-		.ga-image-2,
-		.ga-7,
-		.ga-8,
-		.ga-9 {
-			padding-bottom: 0;
-			border-bottom: none;
-		}
-		display: grid;
-		gap: ($body-margin * 1.25) $body-margin;
-		grid-template-rows: auto 15rem auto auto auto auto;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-		grid-auto-columns: 1fr;
-		grid-auto-flow: row;
-		grid-template-areas:
-			"ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
-			"ga-diary ga-diary ga-newsletter ga-newsletter ga-editorial ga-editorial"
-			"ga-diary ga-diary ga-podcast ga-podcast ga-editorial ga-editorial"
-			"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
-			"ga-poem-1 ga-poem-1 ga1 ga1 ga2 ga2"
-			"ga-poem-1 ga-poem-1 ga3 ga3 ga4 ga4";
-		.ga-1,
-		.ga-2 {
-			@include border-bottom();
-		}
-		.ga-poem-1 {
-			p {
-				@include clamp(18);
-			}
-		}
-		.ga-editorial {
-			margin: 0;
-			p {
-				@include clamp(17);
-			}
-		}
-		.ga-image-1 {
-			@include image-left-top;
-		}
-		.ga-image-2 {
-			@include border-bottom();
-			@include image-right;
+	.home .ga-diary .story-23 {
+		h3 {
+			letter-spacing: -0.5px;
 		}
 	}
 }

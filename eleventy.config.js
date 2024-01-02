@@ -3,6 +3,8 @@ const markdownItAnchor = require("markdown-it-anchor");
 
 const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
 const eleventySass = require("eleventy-sass");
+const fetch = require('node-fetch');
+const fs = require('fs');
 const pluginBundle = require("@11ty/eleventy-plugin-bundle");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 const pluginRev = require("eleventy-plugin-rev");
@@ -34,23 +36,58 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
 
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
-		console.log('Checking urls...');
-		let urlsInContent = [];
-		// Add URL checks
-		// console.log('BUILT', dir.output);
+		let urlsInContent = [], imagesInContent = [];
 		results.forEach(i => {
 			urlsInContent = urlsInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
-			console.log(i.outputPath, i.url);
+			imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|jpeg|webp)/g));
+		});
 
+		const uniqueUrlsArray = [...new Set(urlsInContent)].filter(n => n).sort();
+		uniqueUrlsArray.forEach(i => {
+			if (!i) { return; }
+			const fileLocation = i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html");
+			if (!fs.existsSync(fileLocation)) {
+				throw new Error(`${fileLocation} is linked but does not exist!`);
+			};
+		});
+
+		const uniqueImagesArray = [...new Set(imagesInContent)].filter(n => n).sort();
+		uniqueImagesArray.forEach(i => {
+			if (!i) { return; }
+			const saveToFileLocation = i.replace(/\/stampi/g, "./image-cache/");
+			if (fs.existsSync(saveToFileLocation)) { return; }
+			console.log(`Fetching ${i} ...`);
+			const imageUrl = i.replace(/\/stampi/g, "https://stampi.aphroconfuso.mt");
+			fetch(imageUrl).then(res =>
+				res.body.pipe(fs.createWriteStream(saveToFileLocation))
+			)
+		});
+
+		const webImagesFolder = "./aphroconfuso.mt/site/stampi";
+		if (!fs.existsSync(webImagesFolder)){
+			fs.mkdirSync(webImagesFolder);
 		}
-		);
-		// console.log(urlsInContent);
-		const uniqueArray = [...new Set(urlsInContent)].sort();
-		console.log(uniqueArray.length);
-		uniqueArray.forEach(i => console.log(i));
-		// Make 3 arrays check that they are identical (otherwise diff)
-	});
 
+		uniqueImagesArray.forEach(i => {
+			if (!i) {return;}
+			const image = i.replace(/\/stampi/g, "")
+			const cachedFileLocation = `./image-cache${image}`;
+			const webFileLocation = `${webImagesFolder}${image}`;
+
+			if (fs.existsSync(webFileLocation)) {return;}
+			if (fs.existsSync(cachedFileLocation)) {
+				fs.copyFile(cachedFileLocation, webFileLocation, (err) => {
+				if (err) throw err;
+					console.log(`${i} copied to web folder`);
+				});
+			}
+		});
+		fs.readdir("./aphroconfuso.mt/site/stampi", (err, files) => {
+			if (files.length < uniqueImagesArray.length) {
+				throw new Error(`ERROR: Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
+			}
+		});
+	});
 
 	// App plugins
 	// eleventyConfig.addPlugin(require("./eleventy.config.drafts.js"));
@@ -95,6 +132,10 @@ module.exports = function(eleventyConfig) {
 		return fixDiaryDate(dateString);
 	});
 
+	eleventyConfig.addFilter('diaryDateShort', function diaryDateShort(dateString) {
+		return fixDiaryDate(dateString).replace(/\.20/, ".");
+	});
+
 	// Get the first `n` elements of a collection.
 	eleventyConfig.addFilter("head", (array, n) => {
 		if(!Array.isArray(array) || array.length === 0) {
@@ -128,14 +169,18 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addFilter("prettifyMaltese", function prettifyMaltese(text) {
 		return (text || []).replace(/<p>\s*<\/p>/gm, "")
 			.replace(/-</gm, "- <")
-			.replace(/'/gm, "’")
 			.replace(/  +/gm, " ")
 			.replace(/<p> */gm, "<p>")
 			.replace(/ *<\/p>/gm, "</p>")
-			.replace(/ ?— ?| - | -- /gm, "&hairsp;—&hairsp;")
+			.replace(/ ?— ?| - | -- /gm, String.fromCharCode(8202, 8212, 8202))
 			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
 			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
-			.replace(/([ \,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
+			.replace(/([ \'\"\,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
+			.replace(/\'/gm, "’")
+			.replace(/ \"/gm, " “")
+			.replace(/\"/gm, "”")
+			.replace(/”>/gm, "\">")
+			.replace(/\=”/gm, "=\"")
 			.replace(/(”)([,\.;:])/gm, "$1<span class=\"pull\">$2</span>")
 			.replace(/([,\.])(”)/gm, "$1<span class=\"pullsemi\">$2</span>")
 			.replace(/(’)([,\.;:])/gm, "$1<span class=\"pullsemi\">$2</span>")
@@ -143,16 +188,32 @@ module.exports = function(eleventyConfig) {
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
 			.replace(/<\/blockquote>\s*<blockquote>/gm, "<br>")
 			.replace(/- </gm, "-<")
-			.replace(/(\d)\,(\d\d\d)/gm, "$1&hairsp;$2")
-			.replace(/&amp;shy;/gm, '<wbr>');
+			.replace(/(\d)\,(\d\d\d)/gm, `$1${String.fromCharCode(8202)}$2`)
+			.replace(/&amp;shy;/gm, '<wbr>')
+			.replace(/<l-m>fx-1<\/l-m>/gm, "fx-1")
+			.replace(/<l-m>right-aligned<\/l-m>/gm, "right-aligned");
 	});
 
-	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text) {
-		return (text || []).replace(/(\d)\,(\d\d\d)/gm, "$1&hairsp;$2");
+	eleventyConfig.addFilter("anchorise", function anchorise(sentence, useVerb = 'ara') {
+		const [verb, destination] = sentence.split(' ');
+		console.log(verb, destination, verb.toLowerCase() !== useVerb);
+		if (verb.toLowerCase() !== useVerb) return sentence;
+		return `${ verb } <a href="#${destination}">${slugifyStringMaltese(destination)}</a>`;
+	});
+
+	eleventyConfig.addFilter("anchorise", function anchorise(sentence, useVerb = 'ara') {
+		var regex = new RegExp(`(<p>${useVerb} “?"?)(\\w+)("?”?\.?<\\/p>)`, 'i');
+		var match = sentence.match(regex);
+		if (!match) return sentence;
+		return `${match[1]}<a href="#${slugifyStringMaltese(match[2])}">${match[2]}</a>${match[3]}`;
 	});
 
 	eleventyConfig.addFilter("slugifyMaltese", function slugifyMaltese(text) {
 		return slugifyStringMaltese(text);
+	});
+
+	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text) {
+		return (text || []).replace(/(\d)\,(\d\d\d)/gm, `$1${String.fromCharCode(8202)}$2`);
 	});
 
 	eleventyConfig.addFilter("semiDeSlugify", function semiDeSlugify(text) {
@@ -170,6 +231,11 @@ module.exports = function(eleventyConfig) {
 		return (text || []).replace(/\\n\\n/gm, '\n').split('\n')
 			.map(p => p && p.length && `<p>${ p }</p>`)
 			.join('\n');
+	});
+
+	eleventyConfig.addFilter("wrapInQuotes", function wrapInQuotes(text) {
+		if (!text) return "null";
+		return `"${ text }"`;
 	});
 
 	//  REMOVE NBSP;
@@ -190,14 +256,16 @@ module.exports = function(eleventyConfig) {
 			decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
 				.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
 				.replace(/<p(.*?)>(.)([\w\-]+)/, '<p$1><span class="initial"><span class="dropcap drop-$2">$2</span>$3</span>')
-				.replace(/<p>\#<\/p>\s*<p>(.)([\w\-\’]+)/gm, '<p class="break"><span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>')
+				.replace(/<p>\#<\/p>\s*(<h5>.*?<\/h5>)?\s*<p>(.)([\w\-\’]+)/gm, '$1<p class="break"><span class="initial"><span class="dropcap drop-$2">$2</span>$3</span>')
 				.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
 				.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+				.replace('drop-I">I</span>e', 'drop-Ie">IE</span>')
+				.replace('drop-G">G</span>ħ', 'drop-Għ">GĦ</span>')
 				.replace('drop-M">M</span>XC', 'drop-Ċ">Ċ</span>')
 				.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
 				.replace('drop-M">M</span>XH', 'drop-Ħ">Ħ</span>')
 				.replace('drop-M">M</span>XZ', 'drop-Ż">Ż</span>')
-				.replace(/\[\+\]/gm, '<p>&nbsp;</p>');
+				.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 		}
 		if (!splitText) {
 			return decoratedText;
@@ -216,11 +284,13 @@ module.exports = function(eleventyConfig) {
 			.replace(/<p>\#<\/p>\s*<p>(.)([\w\-\’]+)/gm, '<p class="break"><span class="initial">$1$2</span>')
 			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+			.replace('drop-I">I</span>e', 'drop-Ie">IE</span>')
+			.replace('drop-G">G</span>ħ', 'drop-Għ">GĦ</span>')
 			.replace('drop-M">M</span>XC', 'drop-Ċ">Ċ</span>')
 			.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
 			.replace('drop-M">M</span>XH', 'drop-Ħ">Ħ</span>')
 			.replace('drop-M">M</span>XZ', 'drop-Ż">Ż</span>')
-			.replace(/\[\+\]/gm, '<p>&nbsp;</p>');
+			.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 		return decoratedText;
 	});
 
@@ -229,7 +299,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("endDotify", function endDotify(text) {
-		return (text || []).replace(/([^ ]+)([.?!])\s*<\/(p|blockquote)>\s*$/, '<l-m>$1&nbsp;<span class="end-dot">.</span></l-m></$3>');
+		return (text || []).replace(/([^ ]+)([.?!]|<span class="pull">.<\/span>)\s*<\/(p|blockquote)>\s*$/, '<l-m>$1 <span class="end-dot">.</span></l-m></$3>');
 	});
 
 	eleventyConfig.addFilter("restrictHtml", function restrictHtml(text, allowedTags) {

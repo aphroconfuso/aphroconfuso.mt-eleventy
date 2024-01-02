@@ -8,7 +8,7 @@ permalink: /bookmarks/index.html
 {% block head %}
 	<title>{{ bookmark.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 {% endblock %}
 
 {% block content %}
@@ -28,23 +28,27 @@ permalink: /bookmarks/index.html
 			<section id="grid-body">
 				<div id="bookmarks-container" class="generic-body-text">
 					{{ bookmark.body | prettifyMaltese | safe }}
+					<p id="bookmarks-none" class="continuity">{{ metadata.texts.noBookmarks | prettifyMaltese | safe }}</p>
+					<p id="bookmarks-one" class="continuity">bħalissa għandek bookmark wieħed biss:</p>
+					<p id="bookmarks-multiple" class="continuity">bħalissa għandek <span id="bookmarks-number-inline"><!-- --></span>:</p>
 					<template id="bookmark-item">
 						<li>
-							<a>
+							<a class="promo bookmark-promo">
 								<header>
 									<h4></h4>
 									<h1></h1>
 									<h2></h2>
 									<h3></h3>
-									<h5></h5>
 								</header>
 								<div class="body-text">
 									<p></p>
 								</div>
+								<span class="bookmark"></span>
 							</a>
+							<button>✕</button>
 						</li>
 					</template>
-					<ul id="bookmark-list" class="promo-list"></ul>
+					<ul id="bookmark-list" class="promo-list"><!-- --></ul>
 				</div>
 			</section>
 			<section id="grid-max-panel-left-bottom">

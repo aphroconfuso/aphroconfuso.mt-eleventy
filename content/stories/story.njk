@@ -95,7 +95,7 @@ permalink: /{{ story.slug }}/index.html
 				{% for episode in story.sequenceEpisodes %}
 					{% if loop.first %}<table class="sequence-menu">{% endif %}
 						<tr{% if not episode.slug %} class="actual"{% endif %}>
-							<td class="order">{% if episode.date %}{{ episode.date | diaryDate }}{% else %}{{ episode.number }}.{% endif %}</td>
+							<td class="order">{% if episode.date %}{{ episode.date | diaryDateShort }}{% else %}{{ episode.number }}.{% endif %}</td>
 							<td class="title">
 							{% if episode.slug %}
 								<a href="/{{ episode.slug }}/">{{ episode.title }}</a>
@@ -106,6 +106,21 @@ permalink: /{{ story.slug }}/index.html
 						</tr>
 					{% if loop.last %}</table>{% endif %}
 				{% endfor %}
+				{% if story.sequencePreviousPromo %}
+					<div class="body-text promo-adjacent promo-previous">
+						{% if story.type == 'Djarju' %}
+							<p class="continuity">{{ metadata.texts.previousDiary | prettifyMaltese | safe }}</p>
+						{% else %}
+							<p class="continuity">{{ metadata.texts.previous | prettifyMaltese | safe }}</p>
+						{% endif %}
+						<a href="/{{ story.sequencePreviousPromo.slug }}/">
+							<header>
+								<h3>{{ story.sequencePreviousPromo.title | prettifyMaltese | safe }}</h3>
+							</header>
+							<p>{{ story.sequencePreviousPromo.description | prettifyMaltese | safe }}</p>
+						</a>
+					</div>
+				{% endif %}
 			</section>
 			<section id="grid-max-panel-right-top">
 				{% if story.podcastNote and not story.podcastUrl %}
@@ -145,6 +160,7 @@ permalink: /{{ story.slug }}/index.html
 						{{ story.triggerWarning | prettifyMaltese | safe }}
 					</section>
 				{% endif %}
+				<div class="promo bookmark-shortcut"><!-- --></div>
 			</section>
 			<section id="grid-body">
 				{% if story.type === 'Poezija' and not story.useProseStyling %}
@@ -174,7 +190,7 @@ permalink: /{{ story.slug }}/index.html
 					{% endif %}
 				{% endif %}
 				{% if story.endnote %}
-					<section class="endnote body-text">
+					<section id="endnote" class="body-text">
 						{{ story.endnote | restrictHtml | prettifyMaltese | safe }}
 					</section>
 				{% endif %}
@@ -190,6 +206,24 @@ permalink: /{{ story.slug }}/index.html
 				</aside>
 			</section>
 			<section id="grid-max-panel-right-bottom">
+				{# <section id="form" data-track-content data-content-name="Newsletter" data-content-piece="formola">
+					<iframe src="https://newsletter.aphroconfuso.mt/subscription/form#newsletter-page" scrolling="no" title="Abbona fin-newsletter" style="width: 100%; border: none; height: 12rem;"></iframe>
+				</section> #}
+				{% if story.sequenceNextPromo %}
+					<div class="body-text promo-adjacent promo-next">
+						{% if story.type == 'Djarju' %}
+							<p class="continuity">{{ metadata.texts.nextDiary | prettifyMaltese | safe }}</p>
+						{% else %}
+							<p class="continuity">{{ metadata.texts.next | prettifyMaltese | safe }}</p>
+						{% endif %}
+						<a href="/{{ story.sequenceNextPromo.slug }}/">
+							<header>
+								<h3>{{ story.sequenceNextPromo.title | prettifyMaltese | safe }}</h3>
+							</header>
+							<p>{{ story.sequenceNextPromo.description | prettifyMaltese | safe }}</p>
+						</a>
+					</div>
+				{% endif %}
 				{% if story.postscript %}
 					<aside id="postscript">
 						{{ story.postscript | restrictHtml | prettifyMaltese | safe }}
@@ -215,9 +249,15 @@ permalink: /{{ story.slug }}/index.html
 		{% include '_promo_list.njk' %}
 	</aside>
 	<script>
-		monthYear = '{{ story.monthYear | slugify }}' || null;
-		podcastUrl = '{{ story.podcastUrl }}' || null;
-		storyId = '{{ story.id }}' || null;
+		author = "{{ story.author | safe }}" || null;
+		monthYear = "{{ story.monthYear | slugify }}" || null;
+		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
+		sequenceEpisodeNumber = {{ story.sequenceEpisodeNumber | wrapInQuotes | safe}};
+		sequenceEpisodeTitle = {{ story.sequenceEpisodeTitle | wrapInQuotes | safe}};
+		storyId = "{{ story.id }}" || null;
+		storyType = "{{ story.type }}" || null;
+		pageTitle = "{{ story.title | safe}}" || null;
+		translator = {{ story.translator | wrapInQuotes | safe}};
 		wordcount = {{ story.body | wordcount }} || null;
 	</script>
 	{% if story.slideshow or story.singleImage %}

@@ -2,7 +2,7 @@
 @use "calculations" as *;
 @use "settings" as *;
 
-#newsletter-container {
+.newsletter-container {
 	#pending,
 	#subscribed,
 	#message,
@@ -37,6 +37,11 @@
 		flex-direction: column;
 	}
 
+	&#newsletter-container-bottom {
+		margin: $body-margin;
+		height: 140px;
+	}
+
 	@media all and (min-width: $mobile-breakpoint-plusone) {
 		#form iframe {
 			height: 140px;
@@ -46,6 +51,9 @@
 	@media all and (min-width: $laptop-breakpoint) {
 		#form iframe {
 			height: 240px;
+		}
+		&#newsletter-container-bottom {
+			display: none;
 		}
 	}
 }

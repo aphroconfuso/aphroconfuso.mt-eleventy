@@ -68,6 +68,8 @@ async function getHomepage() {
 		});
 		const response = await data.json();
 
+		console.log('RESPONSE', response);
+
 		if (response.errors) {
 			let errors = response.errors;
 			errors.map((error) => {
@@ -104,6 +106,19 @@ async function getHomepage() {
 			text: 6,
 			lengths: [1740],
 		},
+		Layout_4: {
+			diary: 1,
+			image: 2,
+			poem: 1,
+			text: 5,
+		},
+		Layout_5: {
+			diary: 1,
+			image: 2,
+			poem: 2,
+			text: 5,
+			lengths: [1740],
+		},
 		Layout_6: {
 			diary: 1,
 			image: 2,
@@ -124,6 +139,20 @@ async function getHomepage() {
 			poem: 1,
 			text: 5,
 		},
+		Layout_9: {
+			diary: 1,
+			image: 2,
+			poem: 1,
+			text: 8,
+			lengths: [2150, 1300],
+		},
+		Layout_10: {
+			diary: 1,
+			image: 2,
+			poem: 1,
+			text: 5,
+			lengths: [2150],
+		},
 	}
 
 	const layoutConfig = layouts[atts.layout];
@@ -143,6 +172,7 @@ async function getHomepage() {
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 				description: smartTruncate(promo.text || storyAtts.description, descriptionLength),
 				diaryDate: storyAtts.diaryDate,
+				id: promo.story && promo.story.data.id || promo.id,
 				isSequenceEpisode: !!promoSequenceData,
 				mobilePriority: promo.mobilePriority || 9,
 				monthYear: getMonthYear(storyAtts.dateTimePublication),
@@ -162,10 +192,8 @@ async function getHomepage() {
 				type: storyAtts.type,
 			};
 
-			console.log(formattedPromo.title, lengths, index, descriptionLength);
-
 			if (includesImages) {
-				const promoImageData = promo.image.data[0] || storyAtts.promoImage.data;
+				const promoImageData = promo && promo.image.data[0] || storyAtts.promoImage.data;
 				const promoImageMobileData = promo.imageMobile && promo.imageMobile.data[0] || storyAtts.promoImageMobile.data;
 				formattedPromo.image = storyAtts.showImagePromo && promoImageData && promoImageData.attributes.formats,
 				formattedPromo.imageMobile = storyAtts.showImagePromo && promoImageMobileData && promoImageMobileData.attributes.formats,

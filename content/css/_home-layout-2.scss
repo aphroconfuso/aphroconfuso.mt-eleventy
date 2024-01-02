@@ -23,6 +23,11 @@
 		"ga-podcast"
 		"ga5"
 		"ga-image-2";
+	.mga1 {
+		.promo .body-text p {
+			@include clamp(14);
+		}
+	}
 	.ga-image-1 {
 		@include border-bottom();
 		margin-bottom: $body-margin-half;
@@ -80,12 +85,6 @@
 		.ga-poem-1 {
 			p {
 				@include clamp(18);
-			}
-		}
-		.ga-editorial {
-			margin: 0;
-			p {
-				@include clamp(17);
 			}
 		}
 		.ga-image-1 {

@@ -20,7 +20,7 @@ module.exports = (promos) => {
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			description: promo.text || promoAtts.description,
 			diaryDate: promoAtts.diaryDate,
-			id: promo.id,
+			id: promo.id || (promo.story && promo.story.data.id),
 			isSequenceEpisode: !!sequence,
 			monthYear: getMonthYear(promoAtts.dateTimePublication),
 			sequenceEpisodeNumber: promoAtts.sequenceEpisodeNumber,

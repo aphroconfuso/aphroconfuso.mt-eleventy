@@ -6,7 +6,7 @@ permalink: /gwida-tal-istil/index.html
 {% block head %}
 	<title>{{ styleguide.title }} · Aphroconfuso</title>
 	<meta content="{{ styleguide.body | getDescription }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 {% endblock %}
 
 {% block content %}
@@ -29,7 +29,7 @@ permalink: /gwida-tal-istil/index.html
 				{% for entry in styleguide.entries %}
 					<li>
 						<h6 id="{{ entry.attributes.term | slugifyMaltese | safe }}">{{ entry.attributes.term | prettifyMaltese | safe }}</h6>
-						{{ entry.attributes.definition | prettifyMaltese | safe }}
+						{{ entry.attributes.definition | prettifyMaltese | anchorise | safe }}
 					</li>
 				{% endfor %}
 				</ol>

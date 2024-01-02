@@ -40,12 +40,14 @@ const linkedStoriesAttributes = `
 	}
 `;
 
-const linkedStoryData = `data {
-	id
-	attributes {
-		${linkedStoriesAttributes}
+const linkedStoryData = `
+	data {
+		id
+		attributes {
+			${linkedStoriesAttributes}
+		}
 	}
-}`;
+`;
 
 const linkedStoryDataWithImage = `data {
 	id

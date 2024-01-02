@@ -5,13 +5,13 @@ permalink: /index.html
 {% block head %}
 	<title>Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.socialImage }}">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@aphroconfuso">
 	<meta name="twitter:creator" content="@aphroconfuso">
 	<meta name="twitter:title" content="Aphroconfuso">
 	<meta name="twitter:description" content="ġurnal letterarju bil-Malti">
-	<meta name="twitter:image" content="{{ metadata.settings.socialImage }}">
+	<meta name="twitter:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 	<meta name="twitter:image:alt" content="ġurnal letterarju">
 {% endblock %}
 
@@ -22,14 +22,14 @@ permalink: /index.html
 				<section class="generic-body-text">
 					<div class="text-container">
 						<p>
-							<span class="editorial-month-year">{{ homepage.monthYear }}</span> {{ homepage.editorial | prettifyMaltese | restrictHtml([]) | safe }}
+							<span class="editorial-month-year">{{ homepage.monthYear }}</span> {{ homepage.editorial | prettifyMaltese | safe }}
 						</p>
 					</div>
 				</section>
 			</a>
-			<div class="ga-newsletter" id="newsletter-container">
+			<div class="ga-newsletter newsletter-container">
 				<section id="form" data-track-content data-content-name="Homepage" data-content-piece="formola">
-					<iframe src="https://newsletter.aphroconfuso.mt/subscription/form#893db6|#f6f6f0|0|442093344ewr" scrolling="no"></iframe>
+					<iframe src="https://newsletter.aphroconfuso.mt/subscription/form#b65b3d|#f6f6f0|0|442093344ewr" scrolling="no" title="Abbona fin-newsletter"></iframe>
 				</section>
 			</div>
 			<a href="/podcast/" class="ga-podcast" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: Podcast']);">
@@ -51,8 +51,9 @@ permalink: /index.html
 				</figure>
 			</a>
 			{% for promo in homepage.promos %}
+				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 				<div class="ga-{{ loop.index }}">
-					<a class="{{ promo.monthYear | slugify }} promo promo-plain" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
+					<a class="{{ promo.monthYear | slugify }} promo promo-plain story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
 						{% include "_promo_header.njk" %}
 						<div class="{{ promo.cssClass }}">
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
@@ -61,8 +62,9 @@ permalink: /index.html
 				</div>
 			{% endfor %}
 			{% for promo in homepage.imagePromos %}
+				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 				<div class="ga-image-{{ loop.index }}">
-					<a class="{{ promo.monthYear | slugify }} promo promo-picture-1" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
+					<a class="{{ promo.monthYear | slugify }} promo promo-picture-1 story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
 						{% set showEpisodeTitle = true %}
 						{% include "_promo_header.njk" %}
 						{% set imageMode = 'promo' %}
@@ -85,17 +87,23 @@ permalink: /index.html
 			{% endfor %}
 			{% for promo in homepage.poetryPromos %}
 				<div class="ga-poem-{{ loop.index }}">
-					<a class="{{ promo.monthYear | slugify }} promo promo-poetry" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
+					<a class="{{ promo.monthYear | slugify }} promo promo-poetry story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
 						{% include "_promo_header.njk" %}
-						<div class="{{ promo.cssClass }}">
-							<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
-						</div>
+						{% if promo.text %}
+							<div class="{{ promo.cssClass }}">
+								<p>{{ promo.text | prettifyMaltese | safe }}</p>
+							</div>
+						{% else %}
+							<div class="{{ promo.cssClass }}">
+								<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
+							</div>
+						{% endif %}
 					</a>
 				</div>
 			{% endfor %}
 			<div class="ga-diary">
 				{% for promo in homepage.diaryEntries %}
-					<a class="{{ promo.monthYear | slugify }} promo promo-diary" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
+					<a class="{{ promo.monthYear | slugify }} promo promo-diary story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.title }}', {{ loop.index }}]);">
 						{% include "_promo_header.njk" %}
 						<div class="{{ promo.cssClass }}">
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
