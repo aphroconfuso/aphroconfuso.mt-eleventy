@@ -37,7 +37,7 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
 
-		const fetchImage = async (imageUrl, saveToFileLocation) => fetch(imageUrl).then(res =>
+		const fetchImage = async (imageUrl, saveToFileLocation) => await fetch(imageUrl).then(res =>
 			res.body.pipe(fs.createWriteStream(saveToFileLocation))
 		);
 
