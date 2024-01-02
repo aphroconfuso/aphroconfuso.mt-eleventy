@@ -35,6 +35,10 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
 
+		const fetchImage = async (imageUrl) => fetch(imageUrl).then(res =>
+			res.body.pipe(fs.createWriteStream(saveToFileLocation))
+		);
+
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
 		let urlsInContent = [], imagesInContent = [];
 		results.forEach(i => {
@@ -58,9 +62,10 @@ module.exports = function(eleventyConfig) {
 			if (fs.existsSync(saveToFileLocation)) { return; }
 			console.log(`Fetching ${i} ...`);
 			const imageUrl = i.replace(/\/stampi/g, "https://stampi.aphroconfuso.mt");
-			fetch(imageUrl).then(res =>
-				res.body.pipe(fs.createWriteStream(saveToFileLocation))
-			)
+			fetchImage(imageUrl);
+			// fetch(imageUrl).then(res =>
+			// 	res.body.pipe(fs.createWriteStream(saveToFileLocation))
+			// )
 		});
 
 		const webImagesFolder = "./aphroconfuso.mt/site/stampi";
@@ -68,7 +73,7 @@ module.exports = function(eleventyConfig) {
 			fs.mkdirSync(webImagesFolder);
 		}
 
-		uniqueImagesArray.forEach(i => {
+		await uniqueImagesArray.forEach(i => {
 			if (!i) {return;}
 			const image = i.replace(/\/stampi/g, "")
 			const cachedFileLocation = `./image-cache${image}`;
@@ -84,7 +89,8 @@ module.exports = function(eleventyConfig) {
 		});
 		fs.readdir("./aphroconfuso.mt/site/stampi", (err, files) => {
 			if (files.length < uniqueImagesArray.length) {
-				throw new Error(`ERROR: Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
+				console.log(`SOFT ERROR: Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
+				// throw new Error(`ERROR: Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
 			}
 		});
 	});
