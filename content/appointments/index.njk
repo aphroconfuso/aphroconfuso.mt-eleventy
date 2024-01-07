@@ -23,29 +23,29 @@ permalink: /appuntamenti/index.html
 		<section id="grid-max-panel-right-top">
 		<!-- X -->
 		</section>
-	<section id="grid-body">
-			<div class="generic-body-text">{{ appointmentIndex.body | prettifyMaltese | safe }}</div>
-			<ul class="promo-list">
-				{% for appointment in appointments %}
-					<li>
-						<a class="promo {{ appointment.monthYear | slugify }}" href="/{{ appointment.monthYear | slugifyMaltese }}/">
-							<header>
-								<h1>{{ appointment.monthYear | safe }}</h1>
-							</header>
-							<div class="body-text">
-								{{ appointment.editorial | prettifyMaltese | safe }}
-							</div>
-						</a>
-					</li>
-				{% endfor %}
-			</ul>
-	</section>
-	<section id="grid-max-panel-left-bottom">
-		<!-- X -->
-	</section>
-	<section id="grid-max-panel-right-bottom">
-		<!-- X -->
-	</section>
-</div>
+		<section id="grid-body">
+				<div class="generic-body-text">{{ appointmentIndex.body | prettifyMaltese | safe }}</div>
+				<ul class="promo-list">
+					{% for appointment in appointments %}
+						<li>
+							<a class="promo {{ appointment.monthYear | slugify }}" href="/{{ appointment.monthYear | slugifyMaltese }}/">
+								<header>
+									<h1>{{ appointment.monthYear | safe }}</h1>
+								</header>
+								<div class="body-text">
+									{{ appointment.editorial | prettifyMaltese | safe }}
+								</div>
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+		</section>
+		<section id="grid-max-panel-left-bottom">
+			<!-- X -->
+		</section>
+		<section id="grid-max-panel-right-bottom">
+			<!-- X -->
+		</section>
+	</div>
 </article>
 {% endblock %}
