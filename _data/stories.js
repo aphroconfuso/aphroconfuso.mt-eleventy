@@ -54,6 +54,7 @@ async function getAllStories() {
 									imagesPositionText
 									imagesType
 									introduction
+									moreToCome
 									pageUrl
 									podcastLengthMinutes
 									podcastNote
