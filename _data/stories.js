@@ -337,6 +337,8 @@ async function getAllStories() {
 			listable: atts.type !== 'Djarju',
 			metaTitle: displayTitle,
 			monthYear: getMonthYear(atts.dateTimePublication),
+			moreToCome: atts.moreToCome,
+			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-diary' : 'sidebar-series',
 			podcastLengthMinutes: atts.podcastLengthMinutes,
 			podcastNote: atts.podcastNote,
 			podcastUrl: atts.podcastUrl,
