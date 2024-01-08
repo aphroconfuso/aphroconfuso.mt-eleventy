@@ -1,5 +1,5 @@
-// const stripTags = require("striptags");
-// const unique = require('unique-words');
+const stripTags = require("striptags");
+const unique = require('unique-words');
 const fetch = require("node-fetch");
 const getMonthYear = require("../src/getMonthYear.js");
 const makePageTitle = require("../src/makePageTitle.js");
@@ -9,7 +9,7 @@ const processPromos = require("../src/processPromos.js");
 
 const {imageData, linkedStoryData, personData} = require("./_fragments.js");
 
-let vocabulary = [];
+let cumulativeBody;
 
 // const fs = require('fs');
 // var Spellchecker = require("hunspell-spellchecker");
@@ -169,6 +169,30 @@ async function getAllStories() {
     }
   }
 
+	const getWordFrequency = (text) => {
+		const cleanedText = stripTags(text).toLowerCase().replace(/\b\d+\b/g, " ").replace(/f\’/g, "f’ ").replace(/b\’/g, "b’ ").replace(/[\-]/g, "- ").replace(/[\—]/g, " ").replace(/[.,\/#!$%\^&\*;:{}=_`“”~()]/g, "").replace(/\s+/g, " ");
+		const words = cleanedText.split(/\s+/);
+		const wordFrequency = {};
+		words.forEach((word) => {
+			wordFrequency[word] = (wordFrequency[word] || 0) + 1;
+		});
+		const result = Object.entries(wordFrequency).map(([word, frequency]) => ({ word, frequency }));
+
+		const filteredResult = result.filter((word) => word.frequency === 1);
+		filteredResult.sort((a, b) => {
+			if (a.frequency === b.frequency) {
+				return a.word.localeCompare(b.word);
+			}
+			return a.frequency - b.frequency;
+		});
+		return filteredResult;
+	};
+
+	// const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "czMXc").replace(/ġ/gm, "gzMXg").replace(/ħ/gm, "hzMXh").replace(/ż/gm, "zzMXz").replace(/à/gm, "azMXa"));
+	// const vocabulary = unique(body).sort().map((word) => {
+	// 	return word.replace(/czMXc/gm, "ċ").replace(/gzMXg/gm, "ġ").replace(/hzMXh/gm, "ħ").replace(/zzMXz/gm, "ż").replace(/azMXa/gm, "à");
+	// });
+
   // format stories objects
 	const storiesFormatted = stories.map((story) => {
 		const atts = story.attributes;
@@ -207,24 +231,11 @@ async function getAllStories() {
 		// const timesStoryPromoted = stories.map((story) => story.attributes.endPromos
 		// promo.story.data.attributes.title)
 
-		// const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa"));
-		// const vocabulary = unique(body).filter((word) => {
-		// 	const fixedWord = word.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à");
-			// const check = spellchecker.check(fixedWord);
-			// if (check) {
-			// 	return true;
-			// } else {
-			// 	console.log(fixedWord);
-			// 	return false;
-			// }
-		// 	return true;
-		// }).sort().map((word) => {
-		// 	return word.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à");
-		// });
-		// console.log('tul', vocabulary.length);
+		const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "czMXc").replace(/ġ/gm, "gzMXg").replace(/ħ/gm, "hzMXh").replace(/ż/gm, "zzMXz").replace(/à/gm, "azMXa"));
 
-		vocabulary.concat(['aaa', 'bbb' ,'ccc']);
-		// console.log(vocabulary);
+		const vocabulary = unique(body).sort().map((word) => {
+			return word.replace(/czMXc/gm, "ċ").replace(/gzMXg/gm, "ġ").replace(/hzMXh/gm, "ħ").replace(/zzMXz/gm, "ż").replace(/azMXa/gm, "à");
+		});
 
 		const imageTypes = {
 			'Wisgha_tat_test': 'uncropped',
@@ -297,6 +308,8 @@ async function getAllStories() {
 			sequenceEpisodes.reverse();
 		}
 
+		cumulativeBody += " " + atts.body;
+
 		return {
 			appointment: atts.appointment,
 			author: authorFullName,
@@ -356,8 +369,11 @@ async function getAllStories() {
 			useSquareOnMobile: !!atts.useSquareOnMobile,
     };
 	});
+
+	const vocabulary = getWordFrequency(cumulativeBody);
 	storiesFormatted[0].vocabulary = vocabulary;
-  return storiesFormatted;
+
+	return storiesFormatted;
 }
 
 // export for 11ty

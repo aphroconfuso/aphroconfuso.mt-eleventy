@@ -68,8 +68,6 @@ async function getHomepage() {
 		});
 		const response = await data.json();
 
-		console.log('RESPONSE', response);
-
 		if (response.errors) {
 			let errors = response.errors;
 			errors.map((error) => {
