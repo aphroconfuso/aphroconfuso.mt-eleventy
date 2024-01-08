@@ -26,7 +26,7 @@ permalink: /djarju/index.html
 				<!-- X -->
 			</section>
 			<section id="grid-body" class="generic-body-text">
-				<aside><p>{{ metadata.texts.contents | prettifyMaltese | safe}}</p></aside>
+				<aside><p>{{ metadata.texts.diary | prettifyMaltese | safe}}</p></aside>
 				{% set promoFrom = "Djarju" %}
 				{% set promos = stories | rejectattr("listable") | sort(false, false, "sortTitle") %}
 				{% set showEpisodeTitle = true %}
