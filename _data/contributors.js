@@ -24,7 +24,7 @@ async function getAllContributors() {
           query: `{
 						people(
 							pagination: { page: 1, pageSize: 999 },
-							sort: ["surname:asc", "name:asc"],
+							sort: ["surname:asc", "forename:asc"],
 							filters: {contributor: { eq: true}}
 							) {
 							data {

@@ -1,0 +1,97 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+@use "mixins-home-grids" as *;
+
+// *************************************************************************
+// LAYOUT 11 ****************************************************************
+
+.layout-12 {
+	grid-template-areas:
+		"ga1"
+		"ga-diary"
+		"ga-image-1"
+		"ga-poem-1"
+		"ga-editorial"
+		"ga2"
+		"ga-newsletter"
+		"ga3"
+		"ga-podcast"
+		"ga4";
+	.ga-image-1 {
+		margin-bottom: $body-margin-half;
+	}
+	.ga-1 {
+		p {
+			@include clamp(12);
+		}
+	}
+	.diary {
+		p {
+			@include clamp(9);
+		}
+	}
+	.ga-poem-1 {
+		p {
+			@include clamp(16);
+		}
+	}
+
+	@media all and (min-width: $laptop-breakpoint) {
+		.ga-1,
+		.ga-2,
+		.ga-3,
+		.ga-4,
+		.ga-image-1 {
+			padding-bottom: 0;
+			border-bottom: none;
+		}
+		display: grid;
+		gap: ($body-margin * 1.25) $body-margin;
+		grid-template-rows: auto auto auto auto auto auto;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		grid-auto-columns: 1fr;
+		grid-auto-flow: row;
+		grid-template-areas:
+			"ga1 ga1 ga1 ga1 ga1 ga1"
+			"ga-diary ga-diary ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
+			"ga-diary ga-diary ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
+			"ga-diary ga-diary ga-podcast ga-podcast ga-newsletter ga-newsletter"
+			"ga2 ga2 ga3 ga3 ga4 ga4"
+			"ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1";
+		.ga-1 {
+			p {
+				@include clamp(999);
+				columns: 3;
+				letter-spacing: -0.2px;
+			}
+		}
+		.ga-1 {
+			@include border-bottom();
+		}
+		.ga-editorial {
+			p:nth-of-type(2) {
+				@include clamp(16);
+			}
+		}
+		.ga-diary {
+			p {
+				@include clamp(11);
+			}
+		}
+		.ga-newsletter #form iframe {
+			height: auto;
+			margin: 1rem 0;
+		}
+		.ga-poem-1 {
+			p {
+				@include clamp(15);
+			}
+		}
+		.ga-image-1 {
+			@include image-left;
+			@include border-top();
+		}
+	}
+}

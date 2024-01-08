@@ -20,6 +20,12 @@
 	p {
 		@include clamp(13);
 	}
+	a {
+		margin-bottom: 1rem;
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
 }
 a.promo-poetry {
 	&:after {
@@ -174,10 +180,7 @@ a.promo-poetry {
 			margin-bottom: 0;
 		}
 	}
-	.promo.story-25 h1 {
-		letter-spacing: -1px;
-	}
-	.home .ga-diary .story-23 {
+	.home .ga-diary {
 		h3 {
 			letter-spacing: -0.5px;
 		}
