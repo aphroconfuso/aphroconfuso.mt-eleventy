@@ -209,6 +209,10 @@ module.exports = function(eleventyConfig) {
 		return `${ verb } <a href="#${destination}">${slugifyStringMaltese(destination)}</a>`;
 	});
 
+	eleventyConfig.addFilter("escapeQuote", function escapeQuote(text) {
+		return (text || []).replace(/'/g, "\\'");
+	});
+
 	eleventyConfig.addFilter("anchorise", function anchorise(sentence, useVerb = 'ara') {
 		var regex = new RegExp(`(<p>${useVerb} “?"?)(\\w+)("?”?\.?<\\/p>)`, 'i');
 		var match = sentence.match(regex);
