@@ -338,7 +338,7 @@ async function getAllStories() {
 			metaTitle: displayTitle,
 			monthYear: getMonthYear(atts.dateTimePublication),
 			moreToCome: atts.moreToCome,
-			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-diary' : 'sidebar-series',
+			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
 			podcastLengthMinutes: atts.podcastLengthMinutes,
 			podcastNote: atts.podcastNote,
 			podcastUrl: atts.podcastUrl,

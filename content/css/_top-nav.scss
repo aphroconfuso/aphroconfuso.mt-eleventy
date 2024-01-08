@@ -183,7 +183,7 @@
 		border-bottom: 1px solid $lighter-brown;
 		height: 4em;
 		transition: height $fade-in-medium cubic-bezier(0.23, 1, 0.32, 1);
-		&:nth-child(5),
+		&:nth-child(6),
 		&:last-child {
 			border: none;
 		}

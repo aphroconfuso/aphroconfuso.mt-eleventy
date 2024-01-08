@@ -129,6 +129,10 @@ article {
 	font-size: 2rem !important;
 }
 
+#grid-max-panel-right-bottom #form iframe {
+	height: 7rem;
+}
+
 @media all and (min-width: $laptop-breakpoint) {
 	article {
 		padding-bottom: 0;
@@ -137,11 +141,6 @@ article {
 		}
 		aside + aside {
 			margin-top: $body-margin;
-		}
-	}
-	#grid-max-panel-right-bottom {
-		iframe {
-			height: 7rem;
 		}
 	}
 }

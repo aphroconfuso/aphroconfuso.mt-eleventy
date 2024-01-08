@@ -2,6 +2,18 @@
 @use "calculations" as *;
 @use "settings" as *;
 
+#form {
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	iframe {
+		border: none;
+		height: 12rem;
+		display: block;
+		width: 100%;
+	}
+}
+
 .newsletter-container {
 	#pending,
 	#subscribed,
@@ -11,18 +23,6 @@
 		display: block;
 		margin-top: $body-margin;
 		overflow: hidden;
-	}
-
-	#form {
-		display: block;
-		overflow: hidden;
-		width: 100%;
-		iframe {
-			border: none;
-			height: 180px;
-			display: block;
-			width: 100%;
-		}
 	}
 
 	&hide-form #form,
