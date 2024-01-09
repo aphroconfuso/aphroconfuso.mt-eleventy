@@ -9,7 +9,7 @@ const processPromos = require("../src/processPromos.js");
 
 const {imageData, linkedStoryData, personData} = require("./_fragments.js");
 
-let cumulativeBody;
+let cumulativeBody, cumulativeWordcount;
 
 // const fs = require('fs');
 // var Spellchecker = require("hunspell-spellchecker");
@@ -173,6 +173,7 @@ async function getAllStories() {
 	const getWordFrequency = (text) => {
 		const cleanedText = stripTags(text).toLowerCase().replace(/\b\d+\b/g, " ").replace(/f\’/g, "f’ ").replace(/b\’/g, "b’ ").replace(/[\-]/g, "- ").replace(/[\—]/g, " ").replace(/[.,\/#!$%\^&\*;:{}=_`“”~()]/g, "").replace(/\s+/g, " ");
 		const words = cleanedText.split(/\s+/);
+		cumulativeWordcount = words.length;
 		const wordFrequency = {};
 		words.forEach((word) => {
 			wordFrequency[word] = (wordFrequency[word] || 0) + 1;
@@ -375,6 +376,7 @@ async function getAllStories() {
 
 	const vocabulary = getWordFrequency(cumulativeBody);
 	storiesFormatted[0].vocabulary = vocabulary;
+	storiesFormatted[0].cumulativeWordcount = cumulativeWordcount;
 
 	return storiesFormatted;
 }
