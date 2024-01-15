@@ -180,7 +180,7 @@ async function getAllStories() {
 		});
 		const result = Object.entries(wordFrequency).map(([word, frequency]) => ({ word, frequency }));
 
-		const filteredResult = result.filter((word) => word.frequency === 1);
+		const filteredResult = result; // .filter((word) => word.frequency === 1);
 		filteredResult.sort((a, b) => {
 			if (a.frequency === b.frequency) {
 				return a.word.localeCompare(b.word);
