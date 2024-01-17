@@ -5,6 +5,12 @@ const maxWordsPerSecond = 5;
 const minWordsPerSecond = 1;
 const thresholdWords = 100;
 
+const fixReportingTitle = (storyType, sequenceEpisodeNumber, author, pageTitle) => {
+	if (storyType === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ author }`;
+	if (!!sequenceEpisodeNumber) return `${ pageTitle } #${ sequenceEpisodeNumber }`;
+	return pageTitle;
+}
+
 const getScrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
 
 const scrolling = () => {
@@ -57,7 +63,7 @@ const addBookmarkNow = () => {
 	});
 }
 
-const heartbeat = (wordsPerPixel, title) => {
+const heartbeat = (wordsPerPixel, reportingTitle) => {
 	const timeNow = new Date() / 1000;
 	const secondsElapsed = timeNow - lastReportedReadingTime;
 	const newScrollPosition = getScrollPosition();
@@ -69,10 +75,10 @@ const heartbeat = (wordsPerPixel, title) => {
 
 		// Is it a plausible speed?
 		if (wordsRead > thresholdWords && wordsPerSecond > minWordsPerSecond && wordsPerSecond < maxWordsPerSecond) {
-			window._paq.push(['trackEvent', 'Qari', 'kliem', title, parseInt(wordsRead)]);
-			window._paq.push(['trackEvent', 'Qari', 'minuti', title, (secondsElapsed / 60).toFixed(2)]);
-			window._paq.push(['trackEvent', 'Qari', 'perċentwali', title, parseInt(Math.round(percentageProgress))]);
-			window._paq.push(['trackEvent', 'Qari', 'ħeffa', title, wordsPerSecond.toFixed(2)]);
+			window._paq.push(['trackEvent', 'Qari', 'kliem', reportingTitle, parseInt(wordsRead)]);
+			window._paq.push(['trackEvent', 'Qari', 'minuti', reportingTitle, (secondsElapsed / 60).toFixed(2)]);
+			window._paq.push(['trackEvent', 'Qari', 'perċentwali', reportingTitle, parseInt(Math.round(percentageProgress))]);
+			window._paq.push(['trackEvent', 'Qari', 'ħeffa', reportingTitle, wordsPerSecond.toFixed(2)]);
 
 			// save bookmark
 			addBookmarkNow();
@@ -153,14 +159,14 @@ const calculateScrollPosition = (percentage) => Math.round(bodyStart + bodyHeigh
 
 const showBookmarksInPromos = (bookmarksArray) => {
 	bookmarksArray.forEach((bookmark) => {
-		const {percentage, storyId, title, urlSlug} = bookmark;
+		const { percentage, storyId, title, urlSlug } = bookmark;
 		const roundedPercentage = Math.round(percentage);
 		document.querySelectorAll(`a.story-${ storyId }`).forEach((element) => {
 			const bookmarkLink = document.createElement("a");
 			bookmarkLink.textContent = `${roundedPercentage}%`;
 			bookmarkLink.classList.add("bookmark");
 			bookmarkLink.href = `/${ urlSlug }/#b-${ percentage }`;
-			bookmarkLink.addEventListener("click", () => {_paq.push(['trackEvent', 'Promo', `minn: ${ pageTitle } (bookmark)`, `għal: ${ title } (${ roundedPercentage }%)`, roundedPercentage])});
+			bookmarkLink.addEventListener("click", () => {_paq.push(['trackEvent', 'Promo', `minn: ${ reportingTitle } (bookmark)`, `għal: ${ title } (${ roundedPercentage }%)`, roundedPercentage])});
 			element.appendChild(bookmarkLink);
 		});
 		document.querySelectorAll(`article.story-${ storyId } > header`).forEach((element) => {
@@ -169,7 +175,7 @@ const showBookmarksInPromos = (bookmarksArray) => {
 			bookmarkLink.classList.add("bookmark");
 			bookmarkLink.href = `/${ urlSlug }/#b-${ percentage }`;
 			bookmarkLink.addEventListener('click', () => {
-				_paq.push(['trackEvent', 'Bookmark (scroll)', title, `${ roundedPercentage }%`, roundedPercentage]);
+				_paq.push(['trackEvent', 'Bookmark (scroll)', reportingTitle, `${ roundedPercentage }%`, roundedPercentage]);
 				window.scrollTo({top: calculateScrollPosition(percentage), left: 0, behavior: 'smooth'});
 			})
 			element.appendChild(bookmarkLink);
@@ -203,18 +209,24 @@ const showFullBookmarkList = () => {
 
 	if (list && browserTemplating && template) {
 		bookmarksArray.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)).forEach((bookmark, index) => {
-			var { author, monthYear, percentage, placeText, storyId, storyType, sequenceEpisodeTitle, title, urlSlug } = bookmark;
+			var { author, monthYear, percentage, placeText, storyId, storyType, reportingTitle, sequenceEpisodeNumber, sequenceEpisodeTitle, title, urlSlug } = bookmark;
 			const clone = template.content.cloneNode(true);
+			// THIS SHOULD BECOME OBSOLETE (IMPLEMENTED 17.01.2024)
+			if (!reportingTitle) {
+				reportingTitle = fixReportingTitle(storyType, sequenceEpisodeNumber, author, title);
+			}
 			if (title.startsWith('Djarju: ')) {
 				({title, sequenceEpisodeTitle} = title.split(': '));
 				storyType = 'djarju';
+			} else if (!!sequenceEpisodeNumber) {
+				title = title + ` <span class="episodeNumber">#${ sequenceEpisodeNumber }</span>`;
 			}
 			clone.querySelector("li").id = `bookmark-${ storyId }`;
 			clone.querySelector("a").href = `/${ urlSlug }/#b-${ percentage }`;
 			clone.querySelector("a").classList.add(`promo-${ monthYear }`, monthYear, `story-${ storyId }`, storyType);
 			clone.querySelector("a").id = `link-${ storyId }`;
 			clone.querySelector(".bookmark").textContent = `${Math.round(percentage)}%`;
-			clone.querySelector("h1").textContent = title;
+			clone.querySelector("h1").innerHTML = title;
 			clone.querySelector("h2").textContent = author;
 			if (sequenceEpisodeTitle) clone.querySelector("h3").textContent = sequenceEpisodeTitle;
 			clone.querySelector("h4").textContent = monthYear && monthYear.replace(/-/, ' ').replace(/gunju/, 'ġunju').replace(/dicembru/, 'diċembru');
@@ -222,7 +234,7 @@ const showFullBookmarkList = () => {
 			clone.querySelector(".body-text p").textContent = placeText.replace(/.*?\w\b\s+/, "… ");
 			list.appendChild(clone);
 			document.getElementById(`delete-${ storyId }`).addEventListener("click", () => deleteBookmark('text', urlSlug, storyId));
-			document.getElementById(`link-${ storyId }`).addEventListener("click", () => _paq.push(['trackEvent', 'Promo', 'minn: Bookmarks', `għal: ${ title }`, index]));
+			document.getElementById(`link-${ storyId }`).addEventListener("click", () => _paq.push(['trackEvent', 'Promo', 'minn: Bookmarks', `għal: ${ reportingTitle }`, index]));
 		});
 	}
 }
@@ -364,7 +376,7 @@ const initialiseAfterWindow = () => {
 		const closeTriggerWarning = () => {
 			document.body.classList.add('trigger-warning-closed');
 			setCookie(`tw-${ urlSlug }`, 'magħluq', 3);
-			window._paq.push(['trackEvent', 'Stampi', 'lightbox - għalaq', pageTitle]);
+			window._paq.push(['trackEvent', 'Stampi', 'lightbox - għalaq', reportingTitle]);
 		}
 
 		document.getElementById('trigger-warning-close')?.addEventListener('click', () => closeTriggerWarning());
@@ -401,6 +413,7 @@ const initialiseAfterWindow = () => {
 					placeText: getCurrentBlurb(percentageAudio),
 					playPosition,
 					urlSlug,
+					reportingTitle,
 					sequenceEpisodeNumber,
 					sequenceEpisodeTitle,
 					storyId,
@@ -411,16 +424,16 @@ const initialiseAfterWindow = () => {
 			}
 
 			audio.addEventListener('play', () => {
-				window._paq.push(['trackEvent', 'Smiegħ', 'play', pageTitle]);
+				window._paq.push(['trackEvent', 'Smiegħ', 'play', reportingTitle]);
 			});
 			audio.addEventListener('pause', () => {
 				percentageAudio = (parseInt(audio.currentTime) * 100 / duration).toFixed(2);
-				window._paq.push(['trackEvent', 'Smiegħ', 'pause', pageTitle, percentageAudio]);
+				window._paq.push(['trackEvent', 'Smiegħ', 'pause', reportingTitle, percentageAudio]);
 				addAudioBookmarkNow(percentageAudio);
 			});
 			audio.addEventListener('seek', () => {
 				percentageAudio = (parseInt(audio.currentTime) * 100 / duration).toFixed(2);
-				window._paq.push(['trackEvent', 'Smiegħ', 'seek', pageTitle, percentageAudio]);
+				window._paq.push(['trackEvent', 'Smiegħ', 'seek', reportingTitle, percentageAudio]);
 				if (currentTime === 0) {
 					deleteBookmark('audio');
 					return;
@@ -428,11 +441,11 @@ const initialiseAfterWindow = () => {
 				addAudioBookmarkNow(percentageAudio);
 			});
 			audio.addEventListener('ended', () => {
-				window._paq.push(['trackEvent', 'Smiegħ', 'spiċċa', pageTitle]);
+				window._paq.push(['trackEvent', 'Smiegħ', 'spiċċa', reportingTitle]);
 				deleteBookmark('audio');
 			});
 			audio.addEventListener('waiting', () => {
-				window._paq.push(['trackEvent', 'Smiegħ', 'buffering', pageTitle, 1]);
+				window._paq.push(['trackEvent', 'Smiegħ', 'buffering', reportingTitle, 1]);
 			});
 			audio.addEventListener('timeupdate', () => {
 				currentTime = parseInt(audio.currentTime);
@@ -441,9 +454,9 @@ const initialiseAfterWindow = () => {
 				if (elapsedTime > 10) window._paq.push(['trackEvent', 'Smiegħ', 'kliem maqbuż', parseInt(elapsedTime * wordsPerSecondAudio)]);
 				if (currentTime % audioBookmarkingInterval === 0) addAudioBookmarkNow();
 				if (currentTime % audioReportingInterval === 0) {
-					window._paq.push(['trackEvent', 'Smiegħ', 'kliem (awdjo)', pageTitle, parseInt(audioReportingInterval * wordsPerSecondAudio)]);
-					window._paq.push(['trackEvent', 'Smiegħ', 'minuti (awdjo)', pageTitle, 0.5]);
-					window._paq.push(['trackEvent', 'Smiegħ', 'perċentwali (awdjo)', pageTitle, ((currentTime * 100) / duration).toFixed(2)]);
+					window._paq.push(['trackEvent', 'Smiegħ', 'kliem (awdjo)', reportingTitle, parseInt(audioReportingInterval * wordsPerSecondAudio)]);
+					window._paq.push(['trackEvent', 'Smiegħ', 'minuti (awdjo)', reportingTitle, 0.5]);
+					window._paq.push(['trackEvent', 'Smiegħ', 'perċentwali (awdjo)', reportingTitle, ((currentTime * 100) / duration).toFixed(2)]);
 				}
 				previousTime = currentTime;
 			});
