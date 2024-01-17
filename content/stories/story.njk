@@ -245,7 +245,7 @@ permalink: /{{ story.slug }}/index.html
 		{% endif %}
 	</article>
 	<aside class="promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.title }}">
-		{% set promoFrom = story.title %}
+		{% set promoFrom = story.reportingTitle %}
 		{% set promos = story.endPromos %}
 		{% set showEpisodeTitle = true %}
 		{% include '_promo_list.njk' %}
@@ -254,6 +254,7 @@ permalink: /{{ story.slug }}/index.html
 		author = "{{ story.author | safe }}" || null;
 		monthYear = "{{ story.monthYear | slugify }}" || null;
 		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
+		reportingTitle = "{{ story.reportingTitle | safe}}" || null;
 		sequenceEpisodeNumber = {{ story.sequenceEpisodeNumber | wrapInQuotes | safe}};
 		sequenceEpisodeTitle = {{ story.sequenceEpisodeTitle | wrapInQuotes | safe}};
 		storyId = "{{ story.id }}" || null;

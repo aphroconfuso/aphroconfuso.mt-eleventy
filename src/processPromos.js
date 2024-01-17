@@ -1,6 +1,14 @@
 const getMonthYear = require("../src/getMonthYear.js");
 const makeTitleSlug = require("./makeTitleSlug.js");
 
+// REFACTOR: Save externally
+const fixReportingTitle = (processedPromo) => {
+	const { type, sequenceEpisodeNumber, author, title } = processedPromo;
+	if (type === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ author }`;
+	if (!!sequenceEpisodeNumber) return `${ title } #${ sequenceEpisodeNumber }`;
+	return title;
+}
+
 module.exports = (promos) => {
 	if (!promos) return null;
 	return promos.map((promo) => {
@@ -15,7 +23,7 @@ module.exports = (promos) => {
 		const computedTitle = sequenceTitle || promoAtts.title;
 		const sequenceEpisodeTitle = sequence && promoAtts.title;
 
-		return {
+		const processedPromo = {
 			author: authorFullName,
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			description: promo.text || promoAtts.description,
@@ -38,5 +46,9 @@ module.exports = (promos) => {
 			translator: translatorFullName,
 			type: promoAtts.type,
 		};
+
+		processedPromo.reportingTitle = fixReportingTitle(processedPromo);
+
+		return processedPromo;
 	});
 }

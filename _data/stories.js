@@ -38,7 +38,10 @@ async function getAllStories() {
         },
         body: JSON.stringify({
           query: `{
-						stories(pagination: { page: 1, pageSize: 250 }) {
+						stories(
+							pagination: { page: 1, pageSize: 250 },
+							sort: ["diaryDate:desc", "dateTimePublication:desc"],
+							) {
 							data {
 								id
 								attributes {
@@ -233,11 +236,11 @@ async function getAllStories() {
 		// const timesStoryPromoted = stories.map((story) => story.attributes.endPromos
 		// promo.story.data.attributes.title)
 
-		const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "czMXc").replace(/ġ/gm, "gzMXg").replace(/ħ/gm, "hzMXh").replace(/ż/gm, "zzMXz").replace(/à/gm, "azMXa"));
+		// const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "czMXc").replace(/ġ/gm, "gzMXg").replace(/ħ/gm, "hzMXh").replace(/ż/gm, "zzMXz").replace(/à/gm, "azMXa"));
 
-		const vocabulary = unique(body).sort().map((word) => {
-			return word.replace(/czMXc/gm, "ċ").replace(/gzMXg/gm, "ġ").replace(/hzMXh/gm, "ħ").replace(/zzMXz/gm, "ż").replace(/azMXa/gm, "à");
-		});
+		// const vocabulary = unique(body).sort().map((word) => {
+		// 	return word.replace(/czMXc/gm, "ċ").replace(/gzMXg/gm, "ġ").replace(/hzMXh/gm, "ħ").replace(/zzMXz/gm, "ż").replace(/azMXa/gm, "à");
+		// });
 
 		const imageTypes = {
 			'Wisgha_tat_test': 'uncropped',
@@ -264,6 +267,14 @@ async function getAllStories() {
 			atts.diaryDate,
 			!!sequenceData && atts.title
 		);
+
+		// REFACTOR: Save externally
+		const fixReportingTitle = (processedStory) => {
+			const { type, sequenceEpisodeNumber, author, title } = processedStory;
+			if (type === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ author }`;
+			if (!!sequenceEpisodeNumber) return `${ title } #${ sequenceEpisodeNumber }`;
+			return title;
+		}
 
 		const pageSlug = atts.pageUrl || makeTitleSlug(
 			atts.title,
@@ -312,7 +323,7 @@ async function getAllStories() {
 
 		cumulativeBody += " " + atts.body;
 
-		return {
+		const processedStory = {
 			appointment: atts.appointment,
 			author: authorFullName,
 			body: atts.body,
@@ -371,7 +382,11 @@ async function getAllStories() {
 			useProseStyling: !!atts.useProseStyling,
 			useSeparators: !!atts.useSeparators,
 			useSquareOnMobile: !!atts.useSquareOnMobile,
-    };
+		};
+
+		processedStory.reportingTitle = fixReportingTitle(processedStory);
+
+		return processedStory;
 	});
 
 	const vocabulary = getWordFrequency(cumulativeBody);

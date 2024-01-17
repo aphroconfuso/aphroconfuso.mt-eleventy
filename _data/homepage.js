@@ -179,6 +179,14 @@ async function getHomepage() {
 			const promoSequenceData = storyAtts.sequence && storyAtts.sequence.data;
 			const descriptionLength = lengths && lengths[index] || 9999;
 
+			// REFACTOR: Save externally
+			const fixReportingTitle = (formattedPromo) => {
+				const { type, sequenceEpisodeNumber, author, title } = formattedPromo;
+				if (type === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ author }`;
+				if (!!sequenceEpisodeNumber) return `${ title } #${ sequenceEpisodeNumber }`;
+				return title;
+			}
+
 			let formattedPromo = {
 				author: authorFullName,
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
@@ -203,6 +211,8 @@ async function getHomepage() {
 				translator: translatorFullName,
 				type: storyAtts.type,
 			};
+
+			formattedPromo.reportingTitle = fixReportingTitle(formattedPromo);
 
 			if (includesImages) {
 				const promoImageData = promo && promo.image.data[0] || storyAtts.promoImage.data;
