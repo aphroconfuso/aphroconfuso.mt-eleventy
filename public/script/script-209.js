@@ -261,7 +261,7 @@ const initialiseFontSizeListeners = () => {
 const initialiseReadingHeartbeat = () => {
 	lastReportedReadingTime = new Date() / 1000;
 	timeStarted = lastReportedReadingTime;
-	setInterval(heartbeat, 3000, wordsPerPixel, pageTitle);
+	setInterval(heartbeat, 3000, wordsPerPixel, reportingTitle);
 }
 
 const initialiseAfterNav = () => {
@@ -347,18 +347,18 @@ const initialiseAfterWindow = () => {
 			for (var i = 0; i < slideshows.length; i++) {
 				const newSplide = new Splide(slideshows[i]).mount();
 				newSplide.on('visible', function (slide) {
-					window._paq.push(['trackEvent', 'Stampi', 'slideshow', pageTitle, slide.index + 1]);
+					window._paq.push(['trackEvent', 'Stampi', 'slideshow', reportingTitle, slide.index + 1]);
 				});
 			}
 		}
 		const lightbox = document.getElementById('lightbox');
 		const openLightbox = () => {
 			lightbox.classList.add('open');
-			window._paq.push(['trackEvent', 'Stampi', 'lightbox - iftaħ', pageTitle]);
+			window._paq.push(['trackEvent', 'Stampi', 'lightbox - iftaħ', reportingTitle]);
 		}
 		const closeLightbox = () => {
 			lightbox.classList.remove('open');
-			window._paq.push(['trackEvent', 'Stampi', 'lightbox - għalaq', pageTitle]);
+			window._paq.push(['trackEvent', 'Stampi', 'lightbox - għalaq', reportingTitle]);
 		}
 		const lightboxOpen = document.getElementById('lightbox-open');
 		const lightboxClose = document.getElementById('lightbox-close');
