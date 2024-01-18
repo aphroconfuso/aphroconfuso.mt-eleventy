@@ -326,6 +326,7 @@ async function getAllStories() {
 		const processedStory = {
 			appointment: atts.appointment,
 			author: authorFullName,
+			authorForename: (author && author.forename) || authorFullName,
 			body: atts.body,
 			booksMentioned: booksMentioned,
 			coda: atts.coda,
@@ -375,6 +376,7 @@ async function getAllStories() {
 			sortTitle: makeSortableTitle(title),
 			title: title,
 			translator: translatorFullName,
+			translatorForename: (translator && translator.forename) || translatorFullName,
 			triggerWarning: atts.triggerWarning,
 			type: atts.type,
 			updatedAt: atts.updatedAt,

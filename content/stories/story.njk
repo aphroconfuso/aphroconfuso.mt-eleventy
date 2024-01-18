@@ -145,7 +145,7 @@ permalink: /{{ story.slug }}/index.html
 							</div>
 							<figcaption>
 								{% if story.useDefaultPodcastMessage %}
-									<p>{{ story.translator or story.author | prettifyMaltese | safe }} {{ story.reads }} “{{ story.title | prettifyMaltese | safe }}”. {{ metadata.texts.podcastMessage | prettifyMaltese | safe }}</p>
+									<p>{{ story.translatorForename or story.authorForename | prettifyMaltese | safe }} {{ story.reads }} “{{ story.title | prettifyMaltese | safe }}”. {{ metadata.texts.podcastMessage | prettifyMaltese | safe }}</p>
 								{% endif %}
 								{% if story.podcastNote %}
 									{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
