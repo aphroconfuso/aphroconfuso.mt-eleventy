@@ -23,7 +23,7 @@ permalink: /{{ story.slug }}/index.html
 		<script src="/splide-4.1.3/dist/js/splide.min.js" defer></script>
 		<link rel="stylesheet" href="/splide-4.1.3/dist/css/splide.min.css">
 	{% endif %}
-	{% if story.podcastUrl %}
+	{% if story.mainPlayer or story.audioPlayers.length %}
 		<script src="/amplitude/amplitude.min.js"></script>
 	{% endif %}
 	<meta name="twitter:card" content="summary_large_image">
@@ -39,16 +39,28 @@ permalink: /{{ story.slug }}/index.html
 	<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }} story story-{{ story.id }}">
 		<header>
 			{% if story.type === 'Djarju' %}
-				<h4><a href="/djarju/" class="diaryTitle">Djarju</a>
-					{% if story.diaryDate %}
-						<span class="diaryDate">{{ story.diaryDate | diaryDate }}</span>
+				<p class="header-label"><a href="/djarju/" class="diaryTitle">Djarju</a>
+					{% if story.subjectDate %}
+						<span class="subjectDate">{{ story.subjectDate | subjectDate }}</span>
 					{% endif %}
-				</h4>
+				</p>
 				<h2>
 					<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
 				</h2>
+			{% elif story.type === 'Poddata' %}
+				<p class="header-label"><a href="/podcast/" class="diaryTitle">Poddata</a>
+					{% if story.subjectDate %}
+						<span class="subjectDate">{{ story.subjectDate | subjectDate }}</span>
+					{% endif %}
+				</p>
+				<h1>
+					{{ story.title | fixPodcastTitle | prettifyMaltese | safe }}
+				</h1>
+				<h2>
+					<span class="with">ma’</span> <a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
+				</h2>
 			{% else %}
-				<h4><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></h5>
+				<p class="header-label"><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></p>
 				<h1>
 					{{ story.title | prettifyMaltese | safe }}
 					{% if story.isSequenceEpisode %}
@@ -95,7 +107,7 @@ permalink: /{{ story.slug }}/index.html
 				{% for episode in story.sequenceEpisodes %}
 					{% if loop.first %}<table class="sequence-menu">{% endif %}
 						<tr{% if not episode.slug %} class="actual"{% endif %}>
-							<td class="order">{% if episode.date %}{{ episode.date | diaryDateShort }}{% else %}{{ episode.number }}.{% endif %}</td>
+							<td class="order">{% if episode.date %}{{ episode.date | subjectDateShort }}{% else %}{{ episode.number }}.{% endif %}</td>
 							<td class="title">
 							{% if episode.slug %}
 								<a href="/{{ episode.slug }}/">{{ episode.title }}</a>
@@ -128,32 +140,16 @@ permalink: /{{ story.slug }}/index.html
 						{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
 					</aside>
 				{% endif %}
-				{% if story.podcastUrl %}
-					<aside id="podcast-note">
-						<figure id="audio">
-							<div id="player">
-								<div class="control-container">
-									<button class="amplitude-play-pause" amplitude-main-play-pause="true" id="play-pause">
-								</div>
-								<div id="range">
-									<input type="range" id="range-input" class="amplitude-song-slider" step=".1">
-									<progress class="amplitude-song-played-progress" amplitude-main-song-played-progress="true" id="song-played-progress"></progress>
-								</div>
-								<div class="time-container">
-										{% if story.podcastLengthMinutes >= 60 %}<span class="amplitude-current-hours" amplitude-main-current-hours="true"></span>:{% endif %}<span class="amplitude-current-minutes" amplitude-main-current-minutes="true"></span>:<span class="amplitude-current-seconds" amplitude-main-current-seconds="true"></span>/{% if story.podcastLengthMinutes >= 60 %}<span class="amplitude-duration-hours" amplitude-main-duration-hours="true"></span>:{% endif %}<span class="amplitude-duration-minutes" amplitude-main-duration-minutes="true"></span>:<span class="amplitude-duration-seconds" amplitude-main-duration-seconds="true"></span>
-								</div>
-							</div>
-							<figcaption>
-								{% if story.useDefaultPodcastMessage %}
-									<p>{{ story.translatorForename or story.authorForename | prettifyMaltese | safe }} {{ story.reads }} “{{ story.title | prettifyMaltese | safe }}”. {{ metadata.texts.podcastMessage | prettifyMaltese | safe }}</p>
-								{% endif %}
-								{% if story.podcastNote %}
-									{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
-								{% endif %}
-							</figcaption>
-						</figure>
-					</aside>
-				{% endif %}
+				{% for player in story.audioPlayers %}
+					{% if loop.first %}<aside id="audio">{% endif %}
+					{% if story.mainPlayer %}
+						{% set playerIndex = loop.index %}
+					{% else %}
+						{% set playerIndex = loop.index0 %}
+					{% endif %}
+					{% include "_player.njk" %}
+					{% if loop.last %}</aside>{% endif %}
+				{% endfor %}
 				{% if story.triggerWarning %}
 					<section id="trigger-warning">
 						<button id="trigger-warning-close" class="close">×</button>
@@ -163,12 +159,21 @@ permalink: /{{ story.slug }}/index.html
 				<div class="promo bookmark-shortcut"><!-- --></div>
 			</section>
 			<section id="grid-body">
+				{% if story.mainPlayer %}
+					{% set player = story.mainPlayer %}
+					{% set playerIndex = 0 %}
+					{% include "_player.njk" %}
+				{% endif %}
 				{% if story.type === 'Poezija' and not story.useProseStyling %}
 					<section class="body-text">
 						{{ story.body | prettifyMaltese | versify | safe }}
 					</section>
 				{% elif story.type === 'Djarju' %}
 					<section class="body-text">
+						{{ story.body | diarySectionise(null, null, true) | prettifyMaltese | endDotify | safe }}
+					</section>
+				{% elif story.type === 'Poddata' %}
+					<section class="generic-body-text">
 						{{ story.body | diarySectionise(null, null, true) | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% else %}
@@ -251,6 +256,9 @@ permalink: /{{ story.slug }}/index.html
 		{% include '_promo_list.njk' %}
 	</aside>
 	<script>
+		{# {% if audioUrls.length %} #}
+			audioUrls = { "songs": {{ story.audioUrlsString | safe }} };
+		{# {% endif %} #}
 		author = "{{ story.author | safe }}" || null;
 		monthYear = "{{ story.monthYear | slugify }}" || null;
 		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};

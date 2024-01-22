@@ -3,14 +3,24 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-figure#audio {
+aside#audio {
 	margin: ($body-margin * 1.5) 0;
+}
+
+figure.audio {
+	margin-bottom: $body-margin;
 	opacity: 0;
 	&.initialised {
 		@include ease-in(0.5s);
 		opacity: 1;
 	}
-	#player {
+	&.highlighted {
+		border: 1px solid $lightester-brown;
+		margin-bottom: $body-margin;
+		padding: $body-margin;
+	}
+
+	.player {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -33,7 +43,7 @@ figure#audio {
 		background-color: $paper;
 	}
 
-	#range {
+	.range {
 		height: $body-margin-quarter;
 		position: relative;
 		margin: 0 $body-margin-half 0;
@@ -70,7 +80,7 @@ figure#audio {
 		}
 	}
 
-	#range {
+	.range {
 		cursor: pointer;
 		height: 1.35rem;
 	}
@@ -129,18 +139,18 @@ figure#audio {
 		background-color: $lightest-brown;
 	}
 
-	progress::-webkit-progress-value {
-		background-color: red !important;
-	}
+	// progress::-webkit-progress-value {
+	// 	background-color: red !important;
+	// }
 
 	/* For Firefox */
 	progress {
 		background-color: $lightest-brown;
 	}
 
-	progress::-moz-progress-bar {
-		background-color: red !important;
-	}
+	// progress::-moz-progress-bar {
+	// 	background-color: red !important;
+	// }
 
 	.time-container {
 		font-family: monospace;
@@ -148,9 +158,13 @@ figure#audio {
 		height: 24px;
 		white-space: nowrap;
 	}
+}
 
-	@media all and (min-width: $laptop-breakpoint) {
+@media all and (min-width: $laptop-breakpoint) {
+	aside#audio {
 		margin: 0 0 $body-margin;
+	}
+	figure.audio {
 		figcaption {
 			padding-top: $body-margin-half;
 		}

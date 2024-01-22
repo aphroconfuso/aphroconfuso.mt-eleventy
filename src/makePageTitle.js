@@ -1,12 +1,12 @@
-const fixDiaryDate = require("../src/fixDiaryDate.js");
+const fixSubjectDate = require("../src/fixSubjectDate.js");
 
-module.exports = (title, author, translator, sequenceTitle, sequenceNumber, diaryDate, sequenceEpisodeTitle) => {
+module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subjectDate, sequenceEpisodeTitle) => {
 	return [
-		diaryDate ? 'Djarju ' : sequenceTitle,
-		diaryDate && fixDiaryDate(diaryDate) || sequenceNumber && (`#${sequenceNumber}`),
+		subjectDate ? 'Djarju ' : sequenceTitle,
+		subjectDate && fixSubjectDate(subjectDate) || sequenceNumber && (`#${sequenceNumber}`),
 		sequenceEpisodeTitle || title,
 		"ta’",
 		author,
 		translator && `(tr ${translator})`
-	].filter(elm => elm).join(" ");
+	].filter(e => e).join(" ");
 }

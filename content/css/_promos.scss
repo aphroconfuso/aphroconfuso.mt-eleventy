@@ -36,7 +36,7 @@
 			h2 {
 				font-size: 2rem;
 			}
-			h4 {
+			p.header-label {
 				display: none;
 			}
 		}
@@ -47,7 +47,7 @@
 				color: $lighter-brown;
 				text-decoration: none;
 			}
-			h4 {
+			p.header-label {
 				display: block;
 			}
 		}
@@ -73,7 +73,7 @@
 	// &.ottubru-2024 .ottubru-2024,
 	// &.novembru-2024 .novembru-2024,
 	// &.dicembru-2024 .dicembru-2024 {
-	// 	h4 {
+	// 	.header-label {
 	// 		display: none;
 	// 	}
 	// }

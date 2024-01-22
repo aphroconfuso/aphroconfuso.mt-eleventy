@@ -21,6 +21,9 @@ const linkedStoriesAttributes = `
 	description
 	diaryDate
 	pageUrl
+	podcastLengthMinutes
+	podcastNote
+	podcastUrl
 	sequenceEpisodeNumber
 	title
 	type

@@ -14,7 +14,7 @@ const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const smartTruncate = require('smart-truncate');
 const stripTags = require("striptags");
 
-const fixDiaryDate = require('./src/fixDiaryDate.js');
+const fixSubjectDate = require('./src/fixSubjectDate.js');
 const slugifyStringMaltese = require("./src/slugifyMaltese.js");
 
 const QRCode = require('qrcode');
@@ -136,12 +136,12 @@ module.exports = function(eleventyConfig) {
 		return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
 	});
 
-	eleventyConfig.addFilter('diaryDate', function diaryDate(dateString) {
-		return fixDiaryDate(dateString);
+	eleventyConfig.addFilter('subjectDate', function subjectDate(dateString) {
+		return fixSubjectDate(dateString);
 	});
 
-	eleventyConfig.addFilter('diaryDateShort', function diaryDateShort(dateString) {
-		return fixDiaryDate(dateString).replace(/\.20/, ".");
+	eleventyConfig.addFilter('subjectDateShort', function subjectDateShort(dateString) {
+		return fixSubjectDate(dateString).replace(/\.20/, ".");
 	});
 
 	// Get the first `n` elements of a collection.
@@ -250,7 +250,7 @@ module.exports = function(eleventyConfig) {
 		return `"${ text }"`;
 	});
 
-	//  REMOVE NBSP;
+	// REMOVE NBSP;
 	// REDO THIS ALGORITHM
 	eleventyConfig.addFilter("versify", function versify(text1) {
 		const text = text1.replace("&nbsp;", "").replace(/<p>\s*<\/p>\s*/gm, '#').replace(/#\s*#/gm, '#');
@@ -338,6 +338,11 @@ module.exports = function(eleventyConfig) {
 			level: [1,2,3,4],
 			slugify: eleventyConfig.getFilter("slugify")
 		});
+	});
+
+	eleventyConfig.addFilter("fixPodcastTitle", function wordcount(text) {
+		return stripTags(text || []).replace(/(Noti Editorjali)(\:.*$)/i, "$1")
+			.replace(/(.*?)( \(taħdita\)$)/i, "$1");
 	});
 
 	eleventyConfig.addFilter("qrCodePng", function qrCodePng(path) {

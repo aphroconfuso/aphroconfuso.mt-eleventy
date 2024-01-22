@@ -1,0 +1,22 @@
+<figure class="audio{% if player.highlight %} highlighted{% endif %} {{ player.monthYear | slugify }}" id="audio-{{ playerIndex }}">
+	<div class="player" id="player-{{ playerIndex }}">
+		<div class="control-container">
+			<button class="amplitude-play-pause" amplitude-play-pause="true" id="play-pause-{{ playerIndex }}" data-amplitude-song-index="{{ playerIndex }}">
+		</div>
+		<div class="range" id="range-{{ playerIndex }}">
+			<input type="range" id="range-input-{{ playerIndex }}" class="amplitude-song-slider" step=".1" data-amplitude-song-index="{{ playerIndex }}">
+			<progress class="amplitude-song-played-progress" amplitude-song-played-progress="true" id="song-played-progress-{{ playerIndex }}" data-amplitude-song-index="{{ playerIndex }}"></progress>
+		</div>
+		<div class="time-container">
+			{% if player.podcastLengthMinutes >= 60 %}<span class="amplitude-current-hours" amplitude-current-hours="true" data-amplitude-song-index="{{ playerIndex }}"></span>:{% endif %}<span class="amplitude-current-minutes" amplitude-current-minutes="true" data-amplitude-song-index="{{ playerIndex }}"></span>:<span class="amplitude-current-seconds" amplitude-current-seconds="true" data-amplitude-song-index="{{ playerIndex }}"></span>/{% if player.podcastLengthMinutes >= 60 %}<span class="amplitude-duration-hours" amplitude-duration-hours="true" data-amplitude-song-index="{{ playerIndex }}"></span>:{% endif %}<span class="amplitude-duration-minutes" amplitude-duration-minutes="true" data-amplitude-song-index="{{ playerIndex }}"></span>:<span class="amplitude-duration-seconds" amplitude-duration-seconds="true" data-amplitude-song-index="{{ playerIndex }}"></span>
+		</div>
+	</div>
+	<figcaption>
+		{% if player.useDefaultPodcastMessage %}
+			<p>{{ player.translatorName or player.authorName | prettifyMaltese | safe }} {{ player.reads }} “{{ player.title | prettifyMaltese | safe }}”. {{ metadata.texts.podcastMessage | prettifyMaltese | safe }}</p>
+		{% endif %}
+		{% if player.podcastNote %}
+			{{ player.podcastNote | restrictHtml | prettifyMaltese | safe }}
+		{% endif %}
+	</figcaption>
+</figure>

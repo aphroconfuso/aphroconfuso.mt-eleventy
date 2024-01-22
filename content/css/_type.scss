@@ -7,55 +7,59 @@ body {
 	font-size: $font-size-compact;
 }
 
-h1 {
-	font-family: $serif, serif;
-	font-size: $font-size-story-header-mobile;
-	font-weight: 600;
-	line-height: $header-line-height;
-	.episodeNumber,
-	.diaryDate {
-		color: $lightest-brown;
+header {
+	h1 {
+		font-family: $serif, serif;
+		font-size: $font-size-story-header-mobile;
+		font-weight: 600;
+		line-height: $header-line-height;
+		.episodeNumber,
+		.subjectDate {
+			color: $lightest-brown;
+		}
+		.diaryTitle {
+			color: $brown;
+		}
 	}
-	.diaryTitle {
-		color: $brown;
-	}
-}
 
-h2 {
-	font-family: $serif, serif;
-	font-size: $font-size-story-header-mobile;
-	font-weight: 500;
-	line-height: $header-line-height;
-	.translator {
+	h2 {
+		font-family: $serif, serif;
+		font-size: $font-size-story-header-mobile;
+		font-weight: 500;
+		line-height: $header-line-height;
+		.translator {
+			display: inline-block;
+			white-space: nowrap;
+			&:before {
+				color: $lightest-brown;
+				content: "(\2009tr\2009";
+			}
+			&:after {
+				color: $lightest-brown;
+				content: "\2009)";
+			}
+		}
+	}
+
+	h3 {
+		font-family: $serif, serif;
+		font-size: $font-size-story-episode-header-mobile;
+		font-style: italic;
+		font-weight: 600;
+		line-height: $header-line-height;
+		margin-bottom: 0;
+	}
+
+	p.header-label {
 		display: inline-block;
-		white-space: nowrap;
-		&:before {
-			color: $lightest-brown;
-			content: "(\2009tr\2009";
-		}
-		&:after {
-			color: $lightest-brown;
-			content: "\2009)";
-		}
+		font-family: $sans-alt, sans-serif;
+		line-height: $header-line-height;
+		text-transform: uppercase;
+		font-size: $font-size-compact;
 	}
 }
 
-h3 {
-	font-family: $serif, serif;
-	font-size: $font-size-story-episode-header-mobile;
-	font-style: italic;
-	font-weight: 600;
-	line-height: $header-line-height;
-	margin-bottom: 0;
-}
-
-h4 {
-	display: inline-block;
-	font-family: $sans-alt, sans-serif;
-	line-height: $header-line-height;
-	text-transform: uppercase;
-	font-size: $font-size-compact;
-}
+// FIXME: h4 is skipped!
 
 h5 {
 	font-size: $body-font-size-slightly-larger;

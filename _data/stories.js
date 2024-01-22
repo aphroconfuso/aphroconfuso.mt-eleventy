@@ -121,6 +121,13 @@ async function getAllStories() {
 											${linkedStoryData}
 										}
 									}
+									audio {
+										highlight
+										note
+										story {
+											${linkedStoryData}
+										}
+									}
 									sequence {
 										data {
 											attributes {
@@ -205,6 +212,7 @@ async function getAllStories() {
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 		const sequenceData = atts.sequence.data;
 		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
+		const audioPromosFormatted = atts.audio.length && processPromos(atts.audio);
 
 		const booksMentioned = !!atts.booksMentioned.data.length && atts.booksMentioned.data.slice(0, atts.prominentMentions).map((book) => {
 			const bookAtts = book.attributes;
@@ -272,6 +280,7 @@ async function getAllStories() {
 		const fixReportingTitle = (processedStory) => {
 			const { type, sequenceEpisodeNumber, author, title } = processedStory;
 			if (type === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ author }`;
+			if (type === 'Poddata') return `Poddata #${ sequenceEpisodeNumber } ${ author }`;
 			if (!!sequenceEpisodeNumber) return `${ title } #${ sequenceEpisodeNumber }`;
 			return title;
 		}
@@ -333,7 +342,6 @@ async function getAllStories() {
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,
 			description: atts.description,
-			diaryDate: atts.diaryDate,
 			displayTitle: displayTitle,
 			dontUseDropCaps: !!atts.dontUseDropCaps,
 			dontUseDropCaps: atts.dontUseDropCaps,
@@ -347,14 +355,16 @@ async function getAllStories() {
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,
 			isSequenceEpisode: !!sequenceData,
-			listable: atts.type !== 'Djarju',
+			listable: atts.type !== 'Djarju' && atts.type !== 'Poddata',
+			listableDiary: atts.type === 'Djarju',
+			listablePodcast: atts.type === 'Poddata',
 			metaTitle: displayTitle,
 			monthYear: getMonthYear(atts.dateTimePublication),
 			moreToCome: atts.moreToCome,
 			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
-			podcastLengthMinutes: atts.podcastLengthMinutes,
-			podcastNote: atts.podcastNote,
-			podcastUrl: atts.podcastUrl,
+			// podcastLengthMinutes: atts.podcastLengthMinutes,
+			// podcastNote: atts.podcastNote,
+			// podcastUrl: atts.podcastUrl,
 			postscript: atts.postscript,
 			prominentMentions: atts.prominentMentions,
 			promoImage: atts.promoImage.data,
@@ -374,19 +384,84 @@ async function getAllStories() {
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			sortTitle: makeSortableTitle(title),
+			subjectDate: atts.diaryDate,
 			title: title,
 			translator: translatorFullName,
 			translatorForename: (translator && translator.forename) || translatorFullName,
 			triggerWarning: atts.triggerWarning,
 			type: atts.type,
 			updatedAt: atts.updatedAt,
-			useDefaultPodcastMessage: !!atts.useDefaultPodcastMessage,
+			// useDefaultPodcastMessage: !!atts.useDefaultPodcastMessage,
 			useProseStyling: !!atts.useProseStyling,
 			useSeparators: !!atts.useSeparators,
 			useSquareOnMobile: !!atts.useSquareOnMobile,
 		};
 
 		processedStory.reportingTitle = fixReportingTitle(processedStory);
+		const audioUrls = [];
+		const audioPlayers = [];
+		if (atts.podcastUrl) {
+			audioUrls.push({
+				pageSlug,
+				reportingTitle: processedStory.reportingTitle,
+				url: atts.podcastUrl,
+				// author,
+				// duration,
+				monthYear: processedStory.monthYear,
+				// sequenceEpisodeNumber,
+				// sequenceEpisodeTitle,
+				// storyId,
+				// title: pageTitle,
+				// translator,
+				// type
+			});
+			audioPlayers.push({
+				authorName: processedStory.authorForename,
+				monthYear: processedStory.monthYear,
+				podcastLengthMinutes: atts.podcastLengthMinutes,
+				podcastNote: atts.podcastNote,
+				reads: processedStory.reads,
+				reportingTitle: processedStory.reportingTitle,
+				title: processedStory.title,
+				translatorName: processedStory.translatorForename,
+				useDefaultPodcastMessage: !!atts.useDefaultPodcastMessage,
+			});
+		}
+		if (audioPromosFormatted.length) {
+			audioPromosFormatted.forEach(promo => {
+				audioUrls.push({
+					pageSlug: promo.slug,
+					reportingTitle: promo.reportingTitle,
+					title: promo.title,
+					url: promo.podcastUrl,
+					monthYear: promo.monthYear,
+				});
+				audioPlayers.push({
+					authorName: promo.authorForename,
+					highlight: promo.audioHighlight,
+					podcastLengthMinutes: promo.podcastLengthMinutes,
+					podcastNote: promo.audioNote || promo.podcastNote,
+					monthYear: promo.monthYear,
+					reads: promo.reads,
+					reportingTitle: promo.reportingTitle,
+					title: promo.title,
+					translatorName: promo.translatorForename,
+					useDefaultPodcastMessage: !!promo.useDefaultPodcastMessage,
+				});
+			});
+		}
+
+		var mainPlayer, mainUrl;
+
+		if (processedStory.type === 'Poddata') {
+			mainPlayer = audioPlayers.shift();
+			mainUrl = audioUrls.shift();
+			audioUrls.push(mainUrl);
+		}
+
+		processedStory.audioUrlsString = JSON.stringify(audioUrls);
+		processedStory.audioPlayers = audioPlayers;
+		processedStory.mainPlayer = mainPlayer;
 
 		return processedStory;
 	});

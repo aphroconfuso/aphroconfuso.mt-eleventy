@@ -26,7 +26,7 @@
 		&:before {
 			@include diagonal-stripes($colour);
 		}
-		h4 {
+		.header-label {
 			color: $colour;
 		}
 	}
@@ -43,7 +43,7 @@
 			border-color: $colour;
 		}
 	}
-	figure#audio {
+	&.audio > div.player > div.range {
 		progress::-webkit-progress-value {
 			background-color: $colour !important;
 		}
@@ -58,7 +58,7 @@
 			-1px 0 0 $paper;
 	}
 	@media all and (min-width: $mobile-breakpoint-plusone) {
-		h4 {
+		.header-label {
 			a:hover {
 				color: $colour;
 				@include ease-out($fade-in-short);
@@ -77,7 +77,7 @@
 					@include animated-underline-pre($colour, $interval: $fade-in-short);
 				}
 			}
-			h4 {
+			.header-label {
 				display: block;
 			}
 		}
@@ -100,7 +100,7 @@
 				color: $colour;
 				@include ease-out($fade-in-long);
 			}
-			h4 {
+			.header-label {
 				color: $colour;
 				@include ease-out($fade-in-long);
 			}

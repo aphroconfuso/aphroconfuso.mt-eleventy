@@ -54,7 +54,6 @@ const addBookmarkNow = () => {
 		speed: wordsPerSecond && wordsPerSecond.toFixed(2),
 		storyId,
 		storyType,
-		subtitle: pageSubtitle,
 		title: pageTitle,
 		translator,
 		urlSlug,
@@ -381,16 +380,10 @@ const initialiseAfterWindow = () => {
 
 		document.getElementById('trigger-warning-close')?.addEventListener('click', () => closeTriggerWarning());
 
-		if (podcastUrl) {
-			Amplitude.init({
-				songs: [
-					{
-						url: podcastUrl
-					}
-				]
-			});
-			const audio = Amplitude.getAudio();
-
+		if (audioUrls) {
+			Amplitude.init(audioUrls);
+			var audio, activeReportingTitle;
+			audio = Amplitude.getAudio();
 			audio.addEventListener('canplaythrough', () => {
 				if (audioLoaded) return;
 				duration = parseInt(audio.duration);
@@ -405,6 +398,7 @@ const initialiseAfterWindow = () => {
 			const addAudioBookmarkNow = (percentage) => {
 				let playPosition = parseInt(audio.currentTime);
 				const percentageAudio = percentage || (parseInt(audio.currentTime) * 100 / duration).toFixed(2);
+
 				addBookmark('audio', {
 					author,
 					duration,
@@ -412,28 +406,30 @@ const initialiseAfterWindow = () => {
 					percentageAudio,
 					placeText: getCurrentBlurb(percentageAudio),
 					playPosition,
-					urlSlug,
-					reportingTitle,
+					// activeUrlSlug,
+					activeReportingTitle,
 					sequenceEpisodeNumber,
 					sequenceEpisodeTitle,
 					storyId,
-					subtitle: pageSubtitle,
 					title: pageTitle,
 					translator,
 				});
 			}
 
 			audio.addEventListener('play', () => {
-				window._paq.push(['trackEvent', 'Smiegħ', 'play', reportingTitle]);
+				audio = Amplitude.getAudio();
+				activeReportingTitle = Amplitude.getActiveSongMetadata().reportingTitle;
+				window._paq.push(['trackEvent', 'Smiegħ', 'play', activeReportingTitle]);
 			});
 			audio.addEventListener('pause', () => {
+				activeReportingTitle = Amplitude.getActiveSongMetadata().reportingTitle;
 				percentageAudio = (parseInt(audio.currentTime) * 100 / duration).toFixed(2);
-				window._paq.push(['trackEvent', 'Smiegħ', 'pause', reportingTitle, percentageAudio]);
+				window._paq.push(['trackEvent', 'Smiegħ', 'pause', activeReportingTitle, percentageAudio]);
 				addAudioBookmarkNow(percentageAudio);
 			});
 			audio.addEventListener('seek', () => {
 				percentageAudio = (parseInt(audio.currentTime) * 100 / duration).toFixed(2);
-				window._paq.push(['trackEvent', 'Smiegħ', 'seek', reportingTitle, percentageAudio]);
+				window._paq.push(['trackEvent', 'Smiegħ', 'seek', activeReportingTitle, percentageAudio]);
 				if (currentTime === 0) {
 					deleteBookmark('audio');
 					return;
@@ -441,11 +437,11 @@ const initialiseAfterWindow = () => {
 				addAudioBookmarkNow(percentageAudio);
 			});
 			audio.addEventListener('ended', () => {
-				window._paq.push(['trackEvent', 'Smiegħ', 'spiċċa', reportingTitle]);
+				window._paq.push(['trackEvent', 'Smiegħ', 'spiċċa', activeReportingTitle]);
 				deleteBookmark('audio');
 			});
 			audio.addEventListener('waiting', () => {
-				window._paq.push(['trackEvent', 'Smiegħ', 'buffering', reportingTitle, 1]);
+				window._paq.push(['trackEvent', 'Smiegħ', 'buffering', activeReportingTitle, 1]);
 			});
 			audio.addEventListener('timeupdate', () => {
 				currentTime = parseInt(audio.currentTime);
@@ -454,18 +450,21 @@ const initialiseAfterWindow = () => {
 				if (elapsedTime > 10) window._paq.push(['trackEvent', 'Smiegħ', 'kliem maqbuż', parseInt(elapsedTime * wordsPerSecondAudio)]);
 				if (currentTime % audioBookmarkingInterval === 0) addAudioBookmarkNow();
 				if (currentTime % audioReportingInterval === 0) {
-					window._paq.push(['trackEvent', 'Smiegħ', 'kliem (awdjo)', reportingTitle, parseInt(audioReportingInterval * wordsPerSecondAudio)]);
-					window._paq.push(['trackEvent', 'Smiegħ', 'minuti (awdjo)', reportingTitle, 0.5]);
-					window._paq.push(['trackEvent', 'Smiegħ', 'perċentwali (awdjo)', reportingTitle, ((currentTime * 100) / duration).toFixed(2)]);
+					window._paq.push(['trackEvent', 'Smiegħ', 'kliem (awdjo)', activeReportingTitle, parseInt(audioReportingInterval * wordsPerSecondAudio)]);
+					window._paq.push(['trackEvent', 'Smiegħ', 'minuti (awdjo)', activeReportingTitle, 0.5]);
+					window._paq.push(['trackEvent', 'Smiegħ', 'perċentwali (awdjo)', activeReportingTitle, ((currentTime * 100) / duration).toFixed(2)]);
 				}
 				previousTime = currentTime;
 			});
-			document.getElementById('range').addEventListener('click', function(e){
-				var offset = this.getBoundingClientRect();
-				var x = e.pageX - offset.left;
-				Amplitude.setSongPlayedPercentage((parseFloat(x) / parseFloat( this.offsetWidth) ) * 100);
+
+			document.querySelectorAll('.audio .range').forEach(element => {
+				element.addEventListener('click', function (e) {
+					var offset = this.getBoundingClientRect();
+					var x = e.pageX - offset.left;
+					Amplitude.setSongPlayedPercentage((parseFloat(x) / parseFloat(this.offsetWidth)) * 100);
+				})
 			});
-			document.getElementById('audio').classList.add('initialised');
+			document.querySelectorAll('.audio').forEach(element => element.classList.add('initialised'));
 		}
 	};
 	initialiseMessage();
