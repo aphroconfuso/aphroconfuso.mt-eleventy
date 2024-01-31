@@ -10,5 +10,8 @@
 				<p>{{ promo.description | prettifyMaltese | safe }}</p>
 			{% endif %}
 		</div>
+		{% if promo.wordcount %}
+			<aside><p>{{ promo.wordcount | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</p></aside>
+		{% endif %}
 	</a>
 </li>

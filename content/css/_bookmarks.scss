@@ -4,17 +4,25 @@
 @use "mixins-etc" as *;
 
 #bookmark-list li {
+	opacity: 1;
+	height: 100%;
+	@include ease-out();
 	position: relative;
 	button {
-		color: $lightester-brown;
+		color: $lightest-brown;
 		cursor: pointer;
 		display: block;
 		font-size: 1rem;
 		position: absolute;
-		right: 3.5rem;
-		top: 0;
+		right: 0;
+		bottom: 0.75rem;
 		&:hover {
 			color: $light-brown;
+		}
+	}
+	&:last-of-type {
+		button {
+			bottom: 0;
 		}
 	}
 }

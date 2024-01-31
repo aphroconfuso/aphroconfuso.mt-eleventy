@@ -6,10 +6,11 @@ const makePageTitle = require("../src/makePageTitle.js");
 const makeSortableTitle = require("../src/makeSortableTitle.js");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
 const processPromos = require("../src/processPromos.js");
+const slugifyStringMaltese = require("../src/slugifyMaltese.js");
 
-const {imageData, linkedStoryData, personData} = require("./_fragments.js");
+const { imageData, linkedStoryData, personData } = require("./_fragments.js");
 
-let cumulativeBody, cumulativeWordcount;
+let wordcount, cumulativeBody, cumulativeWordcount;
 
 // const fs = require('fs');
 // var Spellchecker = require("hunspell-spellchecker");
@@ -180,16 +181,22 @@ async function getAllStories() {
     }
   }
 
+	const splitText = (text) => {
+		const cleanedText = stripTags(text).toLowerCase().replace(/\b\d+\b/g, " ").replace(/f\’/g, "f’ ").replace(/b\’/g, "b’ ").replace(/[\—]/g, " ").replace(/[.,\/#!$%\^&\*;:{}=_`“”~()]/g, "").replace(/\s+/g, " ");
+		// .replace(/[\-]/g, "- ")
+		// FIXME: avoid doing this twice, maybe concatenate arrays and split at the end
+		return cleanedText.split(/\s+/);
+	}
+
 	const getWordFrequency = (text) => {
-		const cleanedText = stripTags(text).toLowerCase().replace(/\b\d+\b/g, " ").replace(/f\’/g, "f’ ").replace(/b\’/g, "b’ ").replace(/[\-]/g, "- ").replace(/[\—]/g, " ").replace(/[.,\/#!$%\^&\*;:{}=_`“”~()]/g, "").replace(/\s+/g, " ");
-		const words = cleanedText.split(/\s+/);
-		cumulativeWordcount = words.length;
+		const wordsArray = splitText(text);
+		wordcount = wordsArray.length;
+		cumulativeWordcount += wordcount;
 		const wordFrequency = {};
-		words.forEach((word) => {
+		wordsArray.forEach((word) => {
 			wordFrequency[word] = (wordFrequency[word] || 0) + 1;
 		});
 		const result = Object.entries(wordFrequency).map(([word, frequency]) => ({ word, frequency }));
-
 		const filteredResult = result; // .filter((word) => word.frequency === 1);
 		filteredResult.sort((a, b) => {
 			if (a.frequency === b.frequency) {
@@ -208,6 +215,23 @@ async function getAllStories() {
   // format stories objects
 	const storiesFormatted = stories.map((story) => {
 		const atts = story.attributes;
+
+		// Add anchors
+		const anchoredBody = atts.body.replace(/(<h[56])>(.*?)(<\/h[56]>)/gmi, (full, openingTag, headline, closingTag) => `<hr>${ openingTag } id="${ slugifyStringMaltese(headline) }">${ headline }${ closingTag }`)
+
+		// Check anchors
+		const anchors = anchoredBody.match(/(?<=href="#).*?(?=">)/gm);
+		let anchorErrors = false;
+		anchors && anchors.forEach(anchor => {
+			if (!anchoredBody.includes(`id=\"${ anchor }\"`)) {
+				anchorErrors = true;
+				console.log(`Link to "${ anchor }" but no anchor!`);
+			}
+		});
+		if (anchorErrors) {
+			throw new Error(`${ atts.title } has anchor errors!`)
+		}
+
 		const author = !!atts.authors.data.length && atts.authors.data[0].attributes;
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 		const sequenceData = atts.sequence.data;
@@ -336,7 +360,7 @@ async function getAllStories() {
 			appointment: atts.appointment,
 			author: authorFullName,
 			authorForename: (author && author.forename) || authorFullName,
-			body: atts.body,
+			body: anchoredBody,
 			booksMentioned: booksMentioned,
 			coda: atts.coda,
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
@@ -395,6 +419,7 @@ async function getAllStories() {
 			useProseStyling: !!atts.useProseStyling,
 			useSeparators: !!atts.useSeparators,
 			useSquareOnMobile: !!atts.useSquareOnMobile,
+			wordcount: splitText(atts.body).length,
 		};
 
 		processedStory.reportingTitle = fixReportingTitle(processedStory);
@@ -451,24 +476,15 @@ async function getAllStories() {
 			});
 		}
 
-		var mainPlayer, mainUrl;
-
-		if (processedStory.type === 'Poddata') {
-			mainPlayer = audioPlayers.shift();
-			mainUrl = audioUrls.shift();
-			audioUrls.push(mainUrl);
-		}
-
 		processedStory.audioUrlsString = JSON.stringify(audioUrls);
 		processedStory.audioPlayers = audioPlayers;
-		processedStory.mainPlayer = mainPlayer;
 
 		return processedStory;
 	});
 
 	const vocabulary = getWordFrequency(cumulativeBody);
 	storiesFormatted[0].vocabulary = vocabulary;
-	storiesFormatted[0].cumulativeWordcount = cumulativeWordcount;
+	storiesFormatted[0].cumulativeWordcount = splitText(cumulativeBody).length;
 
 	return storiesFormatted;
 }

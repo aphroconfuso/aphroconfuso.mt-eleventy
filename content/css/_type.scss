@@ -70,7 +70,7 @@ h5 {
 
 h6 {
 	font-size: $body-font-size;
-	font-weight: 600;
+	font-weight: 700;
 }
 
 l-m {
@@ -253,6 +253,7 @@ p.continuity {
 // 	}
 // }
 
+.body-text,
 .generic-body-text,
 aside,
 #endnote {
@@ -302,7 +303,7 @@ aside,
 article.generic[lang="ar"] {
 	p,
 	h1 {
-		font-family: "Noto Sans Arabic", "Alegreya Sans Arabic Fallback", $sans,
+		font-family: "Noto Sans Arabic", "Alegreya Sans Arabic Fallback", sans-serif,
 			sans-serif;
 	}
 }

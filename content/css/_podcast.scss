@@ -25,13 +25,10 @@ article.poddata {
 			margin-top: $body-margin * 1.5;
 		}
 	}
-	// #audio .audio:first-of-type {
-	// 	background-color: $deco-brown;
-	// 	border: 1px solid $lightester-brown;
-	// 	margin-bottom: $body-margin;
-	// 	padding: $body-margin;
-	// }
-	#grid-max-panel-right-top {
-		padding-top: $body-margin * 2.5;
+	#audio .audio:first-of-type {
+		background-color: $deco-brown;
+		border: 1px solid $lightester-brown;
+		margin-bottom: $body-margin;
+		padding: $body-margin;
 	}
 }

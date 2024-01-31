@@ -2,7 +2,6 @@
 @use "calculations" as *;
 @use "settings" as *;
 @use "mixins-etc" as *;
-@use "sass:math";
 
 .promo {
 	header {
@@ -77,22 +76,6 @@
 	// 		display: none;
 	// 	}
 	// }
-}
-
-@mixin image-fit($width-ratio: 16, $height-ratio: 9) {
-	margin: 0;
-	overflow: hidden;
-	padding-top: (math.div($height-ratio, $width-ratio) * 100%);
-	position: relative;
-	width: 100%;
-	img {
-		left: 50%;
-		object-fit: cover;
-		position: absolute;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		width: 100%;
-	}
 }
 
 .image-16-by-9 {

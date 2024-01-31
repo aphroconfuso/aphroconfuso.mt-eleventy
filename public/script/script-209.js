@@ -134,7 +134,9 @@ const deleteBookmark = (type = 'text', slug = urlSlug, id = storyId) => {
 	const bookmark = bookmarksArray.find(i => i.urlSlug);
 	bookmarksArray = bookmarksArray.filter(i => i.urlSlug !== slug);
 	updateBookmarksMenu(bookmarksArray);
-	document.getElementById(`bookmark-${ id }`)?.remove();
+	const removeBookmark = document.getElementById(`bookmark-${ id }`);
+	removeBookmark.style.opacity = '0';
+	setTimeout(() => removeBookmark.remove(), 1000);
 	window._paq.push(['trackEvent', 'Bookmarks', 'armi', bookmark.title, bookmark.percentage]);
 }
 
@@ -182,6 +184,22 @@ const showBookmarksInPromos = (bookmarksArray) => {
 	});
 }
 
+// bundle from shared component
+const numberify = (number, words = ['kelma', 'kelmiet']) => {
+	// kelma, kelmiet
+	if (!number) return "null";
+	const digits = parseInt(number.toString().slice(-2));
+	if (digits >= 2 && digits <= 10) return `${ number } ${ words[1] }`;
+	if (digits >= 11 && digits <= 20) return `${ number }-il ${ words[0]}`;
+	return `${ number } ${ words[0] }`;
+};
+
+// bundle from shared, testable component
+function prettifyNumbers(text, punctuation = String.fromCharCode(8201)) {
+	if(!text) return null;
+	return text.toString().replace(/\d{1,3}(?=(\d{3})+(?!\d))/g, `$&${ punctuation }`);
+};
+
 const showFullBookmarkList = () => {
 	const list = document.getElementById("bookmark-list");
 	const bookmarksContainer = document.getElementById("bookmarks-container");
@@ -208,7 +226,7 @@ const showFullBookmarkList = () => {
 
 	if (list && browserTemplating && template) {
 		bookmarksArray.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)).forEach((bookmark, index) => {
-			var { author, monthYear, percentage, placeText, storyId, storyType, reportingTitle, sequenceEpisodeNumber, sequenceEpisodeTitle, title, urlSlug } = bookmark;
+			var { author, monthYear, percentage, placeText, storyId, storyType, reportingTitle, sequenceEpisodeNumber, sequenceEpisodeTitle, title, urlSlug, wordcount } = bookmark;
 			const clone = template.content.cloneNode(true);
 			// THIS SHOULD BECOME OBSOLETE (IMPLEMENTED 17.01.2024)
 			if (!reportingTitle) {
@@ -220,6 +238,11 @@ const showFullBookmarkList = () => {
 			} else if (!!sequenceEpisodeNumber) {
 				title = title + ` <span class="episodeNumber">#${ sequenceEpisodeNumber }</span>`;
 			}
+			var remaining = parseInt(wordcount * ((100 - percentage) / 100));
+			var readersWordsPerSecond = 2.9;
+			const minutes = numberify(parseInt(remaining / (readersWordsPerSecond * 60)), ['minuta', 'minuti']);
+			remaining = numberify(prettifyNumbers(remaining));
+			// wordcount = numberify(prettifyNumbers(wordcount));
 			clone.querySelector("li").id = `bookmark-${ storyId }`;
 			clone.querySelector("a").href = `/${ urlSlug }/#b-${ percentage }`;
 			clone.querySelector("a").classList.add(`promo-${ monthYear }`, monthYear, `story-${ storyId }`, storyType);
@@ -228,11 +251,12 @@ const showFullBookmarkList = () => {
 			clone.querySelector("h1").innerHTML = title;
 			clone.querySelector("h2").textContent = author;
 			if (sequenceEpisodeTitle) clone.querySelector("h3").textContent = sequenceEpisodeTitle;
-			clone.querySelector("h4").textContent = monthYear && monthYear.replace(/-/, ' ').replace(/gunju/, 'ġunju').replace(/dicembru/, 'diċembru');
+			clone.querySelector("p.header-label").textContent = monthYear && monthYear.replace(/-/, ' ').replace(/gunju/, 'ġunju').replace(/dicembru/, 'diċembru');
 			clone.querySelector("button").id = `delete-${ storyId }`;
 			clone.querySelector(".body-text p").textContent = placeText.replace(/.*?\w\b\s+/, "… ");
+			clone.querySelector("aside p").textContent = `Fadallek ${ remaining }, madwar ${ minutes } qari`;
 			list.appendChild(clone);
-			document.getElementById(`delete-${ storyId }`).addEventListener("click", () => deleteBookmark('text', urlSlug, storyId));
+			document.getElementById(`delete-${ storyId }`).addEventListener("click", (event) => { deleteBookmark('text', urlSlug, storyId); event.stopPropagation(); });
 			document.getElementById(`link-${ storyId }`).addEventListener("click", () => _paq.push(['trackEvent', 'Promo', 'minn: Bookmarks', `għal: ${ reportingTitle }`, index]));
 		});
 	}

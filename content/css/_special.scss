@@ -22,6 +22,35 @@ article.story.story-33 {
 	}
 }
 
+.story-40 {
+	// Il-Mara tas-Suldat
+	#grid-body {
+		hr {
+			visibility: none;
+			margin-bottom: $body-margin-half + $body-margin-quarter;
+		}
+		h6 {
+			display: inline;
+			text-transform: uppercase;
+			& + p {
+				display: inline;
+			}
+		}
+		p {
+			a[href^="#"] {
+				font-weight: 600;
+			}
+			& + p {
+				margin-bottom: 0;
+				margin-top: $body-margin-half;
+			}
+			&.enjambed + p {
+				margin-top: 0;
+			}
+		}
+	}
+}
+
 @media all and (max-width: $laptop-breakpoint) {
 	.story-34 {
 		// Manifest Kontra ż-Żmien

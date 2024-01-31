@@ -28,6 +28,7 @@ module.exports = function(eleventyConfig) {
 		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css"
 	});
 
+	// Copy redirects for Cloudflare
 	fs.copyFile("./_redirects", "./aphroconfuso.mt/_redirects", () => console.log("_redirects copied"));
 
 	// Run Eleventy when these files change:
@@ -37,9 +38,9 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
 
-		const fetchImage = async (imageUrl, saveToFileLocation) => await fetch(imageUrl).then(res =>
-			res.body.pipe(fs.createWriteStream(saveToFileLocation))
-		);
+	const fetchImage = async (imageUrl, saveToFileLocation) => await fetch(imageUrl).then(res =>
+		res.body.pipe(fs.createWriteStream(saveToFileLocation))
+	);
 
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
 		let urlsInContent = [], imagesInContent = [];
@@ -196,10 +197,11 @@ module.exports = function(eleventyConfig) {
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
 			.replace(/<\/blockquote>\s*<blockquote>/gm, "<br>")
 			.replace(/- </gm, "-<")
-			.replace(/(\d)\,(\d\d\d)/gm, `$1${String.fromCharCode(8202)}$2`)
+			.replace(/(\d)\,(\d\d\d)/gm, `$1${String.fromCharCode(8201)}$2`)
 			.replace(/&amp;shy;/gm, '<wbr>')
 			.replace(/<l-m>fx-1<\/l-m>/gm, "fx-1")
-			.replace(/<l-m>right-aligned<\/l-m>/gm, "right-aligned");
+			.replace(/<l-m>right-aligned<\/l-m>/gm, "right-aligned")
+			.replace(/(<h[56] id=".*?)(<l-m>)(.*?)(<\/l-m>)(.*?<\/h[56]>)/gm, "$1$3$5");
 	});
 
 	eleventyConfig.addFilter("anchorise", function anchorise(sentence, useVerb = 'ara') {
@@ -224,8 +226,8 @@ module.exports = function(eleventyConfig) {
 		return slugifyStringMaltese(text);
 	});
 
-	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text) {
-		return (text || []).replace(/(\d)\,(\d\d\d)/gm, `$1${String.fromCharCode(8202)}$2`);
+	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text, punctuation = String.fromCharCode(8201)) {
+		return (text.toString() || []).replace(/\d{1,3}(?=(\d{3})+(?!\d))/g, `$&${ punctuation }`);
 	});
 
 	eleventyConfig.addFilter("semiDeSlugify", function semiDeSlugify(text) {
@@ -250,6 +252,15 @@ module.exports = function(eleventyConfig) {
 		return `"${ text }"`;
 	});
 
+	eleventyConfig.addFilter("numberify", function numberify(number, words) {
+		// kelma, kelmiet
+		if (!number) return "null";
+		const digits = parseInt(number.toString().slice(-2));
+		if (digits >= 2 && digits <= 10) return `${ number } ${ words[1] }`;
+		if (digits >= 11 && digits <= 20) return `${ number }-il ${ words[0]}`;
+		return `${ number } ${ words[0] }`;
+	});
+
 	// REMOVE NBSP;
 	// REDO THIS ALGORITHM
 	eleventyConfig.addFilter("versify", function versify(text1) {
@@ -268,7 +279,7 @@ module.exports = function(eleventyConfig) {
 			decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
 				.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
 				.replace(/<p(.*?)>(.)([\w\-]+)/, '<p$1><span class="initial"><span class="dropcap drop-$2">$2</span>$3</span>')
-				.replace(/<p>\#<\/p>\s*(<h5>.*?<\/h5>)?\s*<p>(.)([\w\-\’]+)/gm, '$1<p class="break"><span class="initial"><span class="dropcap drop-$2">$2</span>$3</span>')
+				.replace(/<p>\#<\/p>\s*(<h[56].*?<\/h[56]>)?\s*<p>(.)([\w\-\’]+)/gm, '$1<p class="break"><span class="initial"><span class="dropcap drop-$2">$2</span>$3</span>')
 				.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
 				.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
 				.replace('drop-I">I</span>e', 'drop-Ie">IE</span>')
