@@ -15,37 +15,74 @@
 // 	}
 // }
 
-article.story.story-33 {
-	// Joey Tilbes (Diċembru 2023)
-	h1 {
-		letter-spacing: -0.15px;
+article.story {
+	&.story-33 {
+		// Joey Tilbes (Diċembru 2023)
+		h1 {
+			letter-spacing: -0.15px;
+		}
 	}
-}
-
-.story-40 {
-	// Il-Mara tas-Suldat
-	#grid-body {
-		hr {
-			visibility: none;
-			margin-bottom: $body-margin-half + $body-margin-quarter;
-		}
-		h6 {
-			display: inline;
-			text-transform: uppercase;
-			& + p {
+	&.story-40 {
+		// Il-Mara tas-Suldat
+		#grid-body {
+			hr {
+				visibility: none;
+				margin-bottom: $body-margin-half + $body-margin-quarter;
+			}
+			h5,
+			h6 {
+				font-synthesis-small-caps: none;
+				font-family: "Alegreya Sans", sans-serif;
+				font-variant: small-caps;
+				font-size: $font-size-smallcaps;
+				font-style: normal;
+				font-weight: 700;
+				position: relative;
+				text-transform: lowercase;
+				.fx-1 {
+					font-variant: normal;
+					position: absolute;
+					text-align: right;
+					width: 5px;
+					left: -5px;
+					text-transform: lowercase;
+					font-size: 1rem;
+					font-weight: 400;
+					top: 1px;
+				}
+			}
+			h5 {
 				display: inline;
+				& + p {
+					display: inline;
+				}
 			}
-		}
-		p {
-			a[href^="#"] {
-				font-weight: 600;
-			}
-			& + p {
-				margin-bottom: 0;
-				margin-top: $body-margin-half;
-			}
-			&.enjambed + p {
-				margin-top: 0;
+			p {
+				a[href^="#"] {
+					font-weight: 600;
+					position: relative;
+					&:has(.fx-1) {
+						padding-left: 5px;
+					}
+					.fx-1 {
+						font-variant: normal;
+						position: absolute;
+						text-align: right;
+						width: 5px;
+						left: 0px;
+						text-transform: lowercase;
+						font-size: 0.9rem;
+						font-weight: 600;
+						top: 1px;
+					}
+				}
+				& + p {
+					margin-bottom: 0;
+					margin-top: $body-margin-half;
+				}
+				&.enjambed + p {
+					margin-top: 0;
+				}
 			}
 		}
 	}
@@ -71,9 +108,9 @@ article.story.story-33 {
 		}
 	}
 
-	.promo.story-25 h1 {
-		letter-spacing: -1px;
-	}
+	// .promo.story-25 h1 {
+	// 	letter-spacing: -1px;
+	// }
 
 	article.story {
 		// Il-Lanza... (Lulju 2023)
@@ -109,11 +146,11 @@ article.story.story-33 {
 				}
 			}
 		}
-		&.story-25 {
-			h1 {
-				letter-spacing: -0.15px;
-			}
-		}
+		// &.story-25 {
+		// 	h1 {
+		// 		letter-spacing: -0.15px;
+		// 	}
+		// }
 		&.story-27 {
 			.fx-1 {
 				white-space: nowrap;

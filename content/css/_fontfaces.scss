@@ -93,17 +93,19 @@
 // Small caps
 
 @font-face {
-	font-family: "Alegreya Sans SC";
+	font-family: "Alegreya Sans";
 	src: url("/fonts/AlegreyaSansSC-Medium.ttf") format("truetype");
 	font-style: normal;
+	font-variant: small-caps;
 	font-weight: 500;
 	text-transform: lowercase;
 }
 
 @font-face {
-	font-family: "Alegreya Sans SC";
+	font-family: "Alegreya Sans";
 	src: url("/fonts/AlegreyaSansSC-Bold.ttf") format("truetype");
 	font-style: normal;
+	font-variant: small-caps;
 	font-weight: 700;
 	text-transform: lowercase;
 }

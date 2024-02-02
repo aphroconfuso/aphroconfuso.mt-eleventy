@@ -76,7 +76,9 @@
 	}
 }
 .contributors-menu {
-	font-size: 1rem;
+	columns: 2;
+	font-size: 1.1rem;
+	margin-left: $body-margin-half * -1;
 	li {
 		&::before {
 			color: $deco-brown;
@@ -84,6 +86,11 @@
 			display: inline-block;
 			font-family: $decorative;
 			width: $body-margin-half;
+		}
+		&:hover {
+			&::before {
+				color: $lightest-brown;
+			}
 		}
 		&.active {
 			&::before {
@@ -94,7 +101,7 @@
 	}
 	@media all and (min-width: $laptop-breakpoint) {
 		li a {
-			@include animated-underline($light-brown);
+			@include animated-underline($lighter-brown);
 		}
 	}
 }
@@ -178,9 +185,12 @@
 }
 
 @media all and (min-width: $mobile-breakpoint-plusone) {
+	.contributors-menu {
+		padding-right: $body-margin;
+	}
 	#grid-body {
 		.contributors-menu {
-			columns: 2;
+			columns: 3;
 		}
 	}
 }

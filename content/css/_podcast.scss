@@ -32,3 +32,16 @@ article.poddata {
 		padding: $body-margin;
 	}
 }
+
+.promo-poddata {
+	h1 {
+		color: #241b1c;
+		// color: $lighter-brown;
+	}
+	h2 {
+		.with {
+			color: $lightest-brown;
+			font-style: italic;
+		}
+	}
+}

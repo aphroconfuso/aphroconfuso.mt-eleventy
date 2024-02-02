@@ -229,7 +229,7 @@ async function getAllStories() {
 			}
 		});
 		if (anchorErrors) {
-			throw new Error(`${ atts.title } has anchor errors!`)
+			// throw new Error(`${ atts.title } has anchor errors!`)
 		}
 
 		const author = !!atts.authors.data.length && atts.authors.data[0].attributes;

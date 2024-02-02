@@ -86,10 +86,13 @@
 		&.promo > .bookmark:hover:not(.Djarju) {
 			border-color: $colour;
 			border-bottom-color: transparent;
-			color: $paper;
-			// top: -6px;
 			opacity: 1;
 			@include ease-out($fade-in-short);
+			span {
+				border-color: $colour;
+				border-bottom-color: transparent;
+				color: $paper;
+			}
 		}
 		&.promo:hover:not(.promo-diary),
 		&.promo:focus:not(.promo-diary) {

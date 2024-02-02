@@ -6,8 +6,11 @@
 				<span class="subjectDate">{{ promo.subjectDate | subjectDate }}</span>
 			{% endif %}
 		</p>
+		<h1>
+			{{ promo.title | fixPodcastTitle | prettifyMaltese | safe }}
+		</h1>
 		<h2>
-			{{ promo.author | prettifyMaltese | safe }}
+			<span class="with">ma’</span> {{ promo.author | prettifyMaltese | safe }}
 		</h2>
 	{% elif promo.type === 'Djarju' %}
 		<p class="header-label">

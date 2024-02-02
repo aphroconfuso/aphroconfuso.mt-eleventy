@@ -75,3 +75,8 @@ h5 {
 .marzu-2024 {
 	@include monthly-colour($marzu-2024);
 }
+
+.story.poddata,
+.promo.promo-poddata {
+	@include monthly-colour($podcast-beige);
+}

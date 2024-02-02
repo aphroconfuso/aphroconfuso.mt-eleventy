@@ -182,8 +182,8 @@ module.exports = function(eleventyConfig) {
 			.replace(/<p> */gm, "<p>")
 			.replace(/ *<\/p>/gm, "</p>")
 			.replace(/ ?— ?| - | -- /gm, String.fromCharCode(8202, 8212, 8202))
-			.replace(/ċ/gm,"MXc").replace(/ġ/gm,"MXg").replace(/ħ/gm,"MXh").replace(/ż/gm,"MXz").replace(/à/gm,"MXa")
-			.replace(/Ċ/gm,"MXC").replace(/Ġ/gm,"MXG").replace(/Ħ/gm,"MXH").replace(/Ż/gm,"MXZ").replace(/À/gm,"MXA")
+			.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
+			.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
 			.replace(/([ \'\"\,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
 			.replace(/\'/gm, "’")
 			.replace(/ \"/gm, " “")
@@ -197,11 +197,13 @@ module.exports = function(eleventyConfig) {
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
 			.replace(/<\/blockquote>\s*<blockquote>/gm, "<br>")
 			.replace(/- </gm, "-<")
-			.replace(/(\d)\,(\d\d\d)/gm, `$1${String.fromCharCode(8201)}$2`)
+			.replace(/(\d)\,(\d\d\d)/gm, `$1${ String.fromCharCode(8201) }$2`)
 			.replace(/&amp;shy;/gm, '<wbr>')
 			.replace(/<l-m>fx-1<\/l-m>/gm, "fx-1")
 			.replace(/<l-m>right-aligned<\/l-m>/gm, "right-aligned")
-			.replace(/(<h[56] id=".*?)(<l-m>)(.*?)(<\/l-m>)(.*?<\/h[56]>)/gm, "$1$3$5");
+			.replace(/(<h[56] id=".*?)(<l-m>)(.*?)(<\/l-m>)(.*?<\/h[56]>)/gm, "$1$3$5")
+			.replace(/(id=")<i-class=fx-\d+>(.)<-i>/gm, "$1$2")
+			.replace(/(=")<l-m>/gm, "$1");
 	});
 
 	eleventyConfig.addFilter("anchorise", function anchorise(sentence, useVerb = 'ara') {
