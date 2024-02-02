@@ -54,3 +54,11 @@ article.poddata {
 		font-family: $sans, sans-serif;
 	}
 }
+
+@media all and (max-width: $laptop-breakpoint) {
+	figure.audio {
+		figcaption {
+			display: none;
+		}
+	}
+}

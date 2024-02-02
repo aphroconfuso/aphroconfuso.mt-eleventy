@@ -50,12 +50,12 @@ header {
 		margin-bottom: 0;
 	}
 
-	p.header-label {
+	& > p.header-label {
 		display: inline-block;
 		font-family: $sans, sans-serif;
 		line-height: $header-line-height;
 		text-transform: uppercase;
-		font-size: $font-size-compact;
+		font-size: $font-size-compact !important;
 		font-variant: small-caps;
 	}
 }
