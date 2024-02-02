@@ -24,13 +24,18 @@ module.exports = (promos) => {
 		const sequenceEpisodeTitle = sequence && promoAtts.title;
 
 		const processedPromo = {
+			audioNote: promo.note,
+			audioHighlight: promo.highlight,
 			author: authorFullName,
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			description: promo.text || promoAtts.description,
-			diaryDate: promoAtts.diaryDate,
+			subjectDate: promoAtts.diaryDate,
 			id: promo.id || (promo.story && promo.story.data.id),
 			isSequenceEpisode: !!sequence,
 			monthYear: getMonthYear(promoAtts.dateTimePublication),
+			podcastLengthMinutes: promoAtts.podcastLengthMinutes,
+			podcastNote: promoAtts.podcastNote,
+			podcastUrl: promoAtts.podcastUrl,
 			sequenceEpisodeNumber: promoAtts.sequenceEpisodeNumber,
 			sequenceEpisodeTitle: sequenceEpisodeTitle,
 			slug: promoAtts.pageUrl || makeTitleSlug(

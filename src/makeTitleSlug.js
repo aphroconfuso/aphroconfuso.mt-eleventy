@@ -1,13 +1,13 @@
-const fixDiaryDate = require("../src/fixDiaryDate.js");
+const fixSubjectDate = require("../src/fixSubjectDate.js");
 const slugifyMaltese = require("./slugifyMaltese.js");
 
-module.exports = (title, author, translator, sequenceTitle, sequenceNumber, diaryDate, sequenceEpisodeTitle) => {
+module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subjectDate, sequenceEpisodeTitle) => {
 	return slugifyMaltese(
 		`
 			${ author || '' }
 			${ translator || '' }
-			${ diaryDate ? 'Djarju' : (sequenceTitle || '') }
-			${ diaryDate && fixDiaryDate(diaryDate).replace(/\./g, '-') || sequenceNumber || '' }
+			${ subjectDate ? 'Djarju' : (sequenceTitle || '') }
+			${ subjectDate && fixSubjectDate(subjectDate).replace(/\./g, '-') || sequenceNumber || '' }
 			${ sequenceEpisodeTitle || title }
 		`
 	);

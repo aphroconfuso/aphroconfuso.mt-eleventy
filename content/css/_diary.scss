@@ -98,9 +98,6 @@ article.djarju {
 	}
 }
 a.promo-djarju {
-	p {
-		@include clamp(3);
-	}
 	@media all and (min-width: $laptop-breakpoint) {
 		&:hover {
 			header {
@@ -109,7 +106,7 @@ a.promo-djarju {
 						@include animated-underline-post();
 					}
 				}
-				h4 {
+				.header-label {
 					color: $dark-brown;
 				}
 			}

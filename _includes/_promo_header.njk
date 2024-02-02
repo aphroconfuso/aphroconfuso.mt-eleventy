@@ -1,16 +1,29 @@
 <header>
-	{% if promo.type === 'Djarju' %}
-		<h4>
-			DJARJU
-			{% if promo.diaryDate %}
-				<span class="diaryDate">{{ promo.diaryDate | diaryDate }}</span>
+	{% if promo.type === 'Poddata' %}
+		<p class="header-label">
+			Poddata
+			{% if promo.subjectDate %}
+				<span class="subjectDate">{{ promo.subjectDate | subjectDate }}</span>
 			{% endif %}
-		</h4>
+		</p>
+		<h1>
+			{{ promo.title | fixPodcastTitle | prettifyMaltese | safe }}
+		</h1>
+		<h2>
+			<span class="with">ma’</span> {{ promo.author | prettifyMaltese | safe }}
+		</h2>
+	{% elif promo.type === 'Djarju' %}
+		<p class="header-label">
+			Djarju
+			{% if promo.subjectDate %}
+				<span class="subjectDate">{{ promo.subjectDate | subjectDate }}</span>
+			{% endif %}
+		</p>
 		<h2>
 			{{ promo.author | prettifyMaltese | safe }}
 		</h2>
 	{% else %}
-		<h4>{{ promo.monthYear }}</h4>
+		<p class="header-label">{{ promo.monthYear }}</p>
 		<h1>
 			{{ promo.title | prettifyMaltese | safe }}
 			{% if promo.isSequenceEpisode %}
