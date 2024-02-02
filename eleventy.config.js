@@ -324,7 +324,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("endDotify", function endDotify(text) {
-		return (text || []).replace(/([^ ]+)([.?!]|<span class="pull">.<\/span>)\s*<\/(p|blockquote)>\s*$/, '<l-m>$1 <span class="end-dot">.</span></l-m></$3>');
+		return (text || []).replace(/([^ ]+)([.?!]|<span class="pull.*?">.<\/span>)\s*<\/(p|blockquote)>\s*$/, '<l-m>$1 <span class="end-dot">.</span></l-m></$3>');
 	});
 
 	eleventyConfig.addFilter("restrictHtml", function restrictHtml(text, allowedTags) {

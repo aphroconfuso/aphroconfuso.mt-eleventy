@@ -6,13 +6,12 @@
 article.poddata {
 	.container {
 		.end-dot {
-			color: $lighter-brown;
-			background-color: $lighter-brown;
+			border-radius: 0;
 		}
 	}
 	&.content {
 		h1 {
-			color: $lighter-brown;
+			color: $podcast-beige;
 		}
 		h2 {
 			.with {
@@ -31,17 +30,27 @@ article.poddata {
 		margin-bottom: $body-margin;
 		padding: $body-margin;
 	}
+	#audio > figure:first-of-type.audio > div.player > div.range {
+		progress::-webkit-progress-value {
+			background-color: $podcast-beige !important;
+		}
+		progress::-moz-progress-bar {
+			background-color: $podcast-beige !important;
+		}
+	}
 }
 
 .promo-poddata {
 	h1 {
-		color: #241b1c;
-		// color: $lighter-brown;
+		color: $podcast-beige;
 	}
 	h2 {
 		.with {
 			color: $lightest-brown;
 			font-style: italic;
 		}
+	}
+	p {
+		font-family: $sans, sans-serif;
 	}
 }

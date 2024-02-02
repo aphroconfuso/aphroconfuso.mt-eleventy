@@ -12,6 +12,7 @@ html {
 	-moz-text-size-adjust: none;
 	-webkit-text-size-adjust: none;
 	scroll-behavior: smooth;
+	scroll-padding-top: calc(80px + $body-margin);
 	overflow-y: scroll;
 	text-size-adjust: none;
 }
@@ -22,7 +23,7 @@ body {
 	-webkit-print-color-adjust: exact;
 	background-color: $paper;
 	color: $lighter-brown;
-	font-family: $sans-alt, sans;
+	font-family: $sans, sans;
 	font-size: $font-size-furniture;
 	font-weight: 400;
 	line-height: 1.4;
@@ -64,7 +65,7 @@ article > header {
 	@include ease-in(0.25s);
 	color: $green;
 	opacity: 0;
-	font-family: $sans-alt, sans-serif;
+	font-family: $sans, sans-serif;
 	font-size: $body-font-size;
 	padding: $body-margin 0;
 	margin-top: $body-margin auto 0;
@@ -93,6 +94,9 @@ article > header {
 }
 
 @media all and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
+	html {
+		scroll-padding-top: $body-margin;
+	}
 	.hide-tablet {
 		display: none !important;
 	}

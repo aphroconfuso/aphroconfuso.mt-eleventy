@@ -1,4 +1,4 @@
-<figure class="audio{% if player.highlight %} highlighted{% endif %} {{ player.monthYear | slugify }}" id="audio-{{ playerIndex }}">
+<figure class="audio{% if player.highlight %} highlighted{% endif %} {{ player.monthYear | slugify }} {{ player.type }}" id="audio-{{ playerIndex }}">
 	<div class="player" id="player-{{ playerIndex }}">
 		<div class="control-container">
 			<button class="amplitude-play-pause" amplitude-play-pause="true" id="play-pause-{{ playerIndex }}" data-amplitude-song-index="{{ playerIndex }}">

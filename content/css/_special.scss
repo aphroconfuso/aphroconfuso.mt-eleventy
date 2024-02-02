@@ -83,6 +83,9 @@ article.story {
 				&.enjambed + p {
 					margin-top: 0;
 				}
+				&.centred + p.centred {
+					margin-top: 0;
+				}
 			}
 		}
 	}
