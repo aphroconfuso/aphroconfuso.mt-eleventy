@@ -1,4 +1,8 @@
 ---
+pagination:
+  data: stories
+  size: 250
+  alias: story
 permalink: /podcast/index.html
 ---
 {% extends 'layouts/base.njk' %}
@@ -12,7 +16,7 @@ permalink: /podcast/index.html
 {% block content %}
 	<article class="generic">
 		<header>
-			<h4>&nbsp;</h4>
+			<p class="header-label">&nbsp;</p>
 			<h1>{{ podcast.title }}</h1>
 			<h2>&nbsp;</h2>
 		</header>
@@ -27,6 +31,12 @@ permalink: /podcast/index.html
 				<div class="generic-body-text">
 					{{ podcast.body | prettifyMaltese | safe }}
 					<p><input id="podcast-url" type="text" value="https://feeds.acast.com/public/shows/aphroconfuso"></p>
+					{# <aside><p>{{ metadata.texts.podcastList | prettifyMaltese | safe}}</p></aside> #}
+					{% set promoFrom = "Podcast" %}
+					{% set promos = stories | selectattr("listablePodcast") %}
+					{% set showEpisodeTitle = true %}
+					{% set showLengths = true %}
+					{% include "_promo_list.njk" %}
 					<ul id="podcast-logos">
 						<li>
 							<a href="https://podcasts.apple.com/us/podcast/aphroconfuso/id1686567243" onclick="_paq.push(['trackEvent', 'Podcast', 'logo', 'Apple']);">

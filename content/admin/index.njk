@@ -32,7 +32,8 @@ permalink: /admin/index.html
 					</li>
 				{% endfor %}
 			</ul>
-			<p>{{ stories[0].vocabulary.length | slugify }}</p>
+			<p>wordcount: {{ stories[0].cumulativeWordcount | slugify }}</p>
+			<p>vocabulary: {{ stories[0].vocabulary.length | slugify }}</p>
 			<ul class="vocabulary">
 				{% for word in stories[0].vocabulary %}
 					<li>{{ word }}</li>

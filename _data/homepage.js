@@ -169,6 +169,7 @@ async function getHomepage() {
 
 	const layoutConfig = layouts[atts.layout];
 
+	// REFACTOR
 	const promosFormatted = (promos, includesImages, number, lengths) => {
 		const result = promos.length && promos.slice(0, number).map((promo, index) => {
 			const storyAtts = (promo.story && promo.story.data.attributes) || promo.attributes;
@@ -191,7 +192,7 @@ async function getHomepage() {
 				author: authorFullName,
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 				description: smartTruncate(promo.text || storyAtts.description, descriptionLength),
-				diaryDate: storyAtts.diaryDate,
+				subjectDate: storyAtts.subjectDate,
 				id: promo.story && promo.story.data.id || promo.id,
 				isSequenceEpisode: !!promoSequenceData,
 				mobilePriority: promo.mobilePriority || 9,

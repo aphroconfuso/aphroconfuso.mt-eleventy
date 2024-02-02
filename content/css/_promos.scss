@@ -2,7 +2,6 @@
 @use "calculations" as *;
 @use "settings" as *;
 @use "mixins-etc" as *;
-@use "sass:math";
 
 .promo {
 	header {
@@ -36,7 +35,7 @@
 			h2 {
 				font-size: 2rem;
 			}
-			h4 {
+			p.header-label {
 				display: none;
 			}
 		}
@@ -47,7 +46,7 @@
 				color: $lighter-brown;
 				text-decoration: none;
 			}
-			h4 {
+			p.header-label {
 				display: block;
 			}
 		}
@@ -73,26 +72,10 @@
 	// &.ottubru-2024 .ottubru-2024,
 	// &.novembru-2024 .novembru-2024,
 	// &.dicembru-2024 .dicembru-2024 {
-	// 	h4 {
+	// 	.header-label {
 	// 		display: none;
 	// 	}
 	// }
-}
-
-@mixin image-fit($width-ratio: 16, $height-ratio: 9) {
-	margin: 0;
-	overflow: hidden;
-	padding-top: (math.div($height-ratio, $width-ratio) * 100%);
-	position: relative;
-	width: 100%;
-	img {
-		left: 50%;
-		object-fit: cover;
-		position: absolute;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		width: 100%;
-	}
 }
 
 .image-16-by-9 {

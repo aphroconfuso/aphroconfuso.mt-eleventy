@@ -12,8 +12,8 @@ h2 {
 h3 {
 	color: $h3-color;
 }
-h4 {
-	color: $h4-color;
+.header-label {
+	color: $header-label-color;
 }
 h5 {
 	color: $h5-color;
@@ -74,4 +74,9 @@ h5 {
 
 .marzu-2024 {
 	@include monthly-colour($marzu-2024);
+}
+
+.story.poddata,
+.promo.promo-poddata {
+	@include monthly-colour($podcast-beige);
 }

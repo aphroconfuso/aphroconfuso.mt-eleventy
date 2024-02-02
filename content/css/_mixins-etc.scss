@@ -1,6 +1,7 @@
 @use "constants" as *;
 @use "calculations" as *;
 @use "settings" as *;
+@use "sass:math";
 
 @mixin clamp($lines: 9) {
 	-webkit-box-orient: vertical;
@@ -53,5 +54,21 @@
 	&:hover::after,
 	&:focus::after {
 		@include animated-underline-post();
+	}
+}
+
+@mixin image-fit($width-ratio: 16, $height-ratio: 9) {
+	margin: 0;
+	overflow: hidden;
+	padding-top: (math.div($height-ratio, $width-ratio) * 100%);
+	position: relative;
+	width: 100%;
+	img {
+		left: 50%;
+		object-fit: cover;
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 100%;
 	}
 }
