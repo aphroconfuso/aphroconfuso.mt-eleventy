@@ -184,6 +184,15 @@
 	}
 }
 
+.generic .contributor {
+	.promo-list {
+		li:last-of-type {
+			margin-bottom: calc($body-margin - 1px);
+			border-bottom: 1px solid $faint-line;
+		}
+	}
+}
+
 @media all and (min-width: $mobile-breakpoint-plusone) {
 	.contributors-menu {
 		padding-right: $body-margin;

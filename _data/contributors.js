@@ -36,13 +36,19 @@ async function getAllContributors() {
 									surname
 									storiesAuthored(
 										sort: "dateTimePublication:desc",
-										filters: {type: { ne: "Djarju"}}
+										filters: {type: { notIn: ["Djarju", "Poddata"]}}
 									) {
 										${linkedStoryData}
 									}
 									diaryEntries: storiesAuthored(
 										sort: "dateTimePublication:desc",
 										filters: {type: { eq: "Djarju"}}
+									) {
+										${linkedStoryData}
+									}
+									podcastEpisodes: storiesAuthored(
+										sort: "dateTimePublication:desc",
+										filters: {type: { eq: "Poddata"}}
 									) {
 										${linkedStoryData}
 									}
@@ -81,6 +87,7 @@ async function getAllContributors() {
 		const storiesAuthored = processPromos(item.attributes.storiesAuthored.data);
 		const storiesTranslated = processPromos(item.attributes.storiesTranslated.data);
 		const diaryEntries = processPromos(item.attributes.diaryEntries.data);
+		const podcastEpisodes = processPromos(item.attributes.podcastEpisodes.data);
 		const useFullName = getPersonName(item.attributes);
 
 		return {
@@ -92,6 +99,7 @@ async function getAllContributors() {
 			storiesAuthored: storiesAuthored,
 			storiesTranslated: storiesTranslated,
 			diaryEntries: diaryEntries,
+			podcastEpisodes: podcastEpisodes,
       name: useFullName,
     };
   });

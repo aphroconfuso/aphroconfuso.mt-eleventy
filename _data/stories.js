@@ -223,7 +223,6 @@ async function getAllStories() {
 		const anchors = anchoredBody.match(/(?<=href="#).*?(?=">)/gm);
 		let anchorErrors = false;
 		anchors && anchors.forEach(anchor => {
-			console.log(anchor);
 			if (!anchoredBody.includes(`id=\"${ anchor }\"`)) {
 				anchorErrors = true;
 				console.log(`Link to "${ anchor }" but no anchor!`);
