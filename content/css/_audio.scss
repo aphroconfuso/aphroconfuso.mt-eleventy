@@ -62,7 +62,7 @@ figure.audio {
 			position: absolute;
 			top: 5px;
 			width: 100%;
-			// z-index: -1;
+			z-index: -1;
 		}
 	}
 
@@ -116,7 +116,6 @@ figure.audio {
 		/*custom styles*/
 		background-color: $lightest-brown;
 		height: $body-margin-half;
-		margin-left: 5px;
 		width: $body-margin-half;
 	}
 
@@ -125,7 +124,6 @@ figure.audio {
 		border-radius: 0;
 		background-color: $lightest-brown;
 		height: $body-margin-half;
-		margin-left: 5px;
 		width: $body-margin-half;
 	}
 
