@@ -89,6 +89,14 @@ article.story {
 				}
 			}
 		}
+		@media all and (min-width: $laptop-breakpoint) {
+			#grid-body {
+				.splide {
+					margin-left: 0;
+					width: 100%;
+				}
+			}
+		}
 	}
 }
 

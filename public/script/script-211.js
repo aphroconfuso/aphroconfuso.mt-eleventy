@@ -299,12 +299,18 @@ const initialiseScrollPosition = () => {
 }
 
 const initialiseMessage = () => {
+	var salted;
 	if (getCookie('newsletter') === 'pendenti') {
 		message = 'Bgħatnielek email biex tikkonferma <l-m>l-abbonament</l-m> tiegħek fin-newsletter.';
 	}
 	if (!!location.hash && document.referrer.indexOf('//newsletter.aphroconfuso.mt')) {
-    // REVIEW escape is deprecated
-    const salted = decodeURIComponent(escape(window.atob((location.hash.substring(1)))));
+		// REVIEW escape is deprecated
+		try {
+			salted = decodeURIComponent(escape(window.atob((location.hash.substring(1)))));
+		} catch(err) {
+			console.log(err.message);
+			return;
+		}
     [salt, message] = salted.split('|');
 		if (salt === 'aaaASUDHASUWYQQU55%$ASGDGAS*Jhh23423') {
       if (message.indexOf('biex tikkonferma l-abbonament')) {
@@ -326,12 +332,19 @@ const initialiseMessage = () => {
 	}
 }
 
+const initialiseAnchorEvents = () => {
+	document.querySelectorAll("#grid-body a[href^='\#']").forEach((anchor, index) => {
+		anchor.addEventListener("click", () => _paq.push(['trackEvent', 'Ankri', `${ reportingTitle }`, `# ${ anchor }`, index + 1]));
+	});
+}
+
 const initialiseAfterWindow = () => {
 	progressElement = document.getElementById('progress');
 	bookmarksMenuElement = document.getElementById('bookmarks-number');
 	initialiseAfterNav();
 	initialiseBookmarksList();
 	showFullBookmarkList();
+	initialiseAnchorEvents();
 	window.addEventListener('scroll', (event) => {
 		scrolling();
 	});
@@ -404,7 +417,7 @@ const initialiseAfterWindow = () => {
 
 		document.getElementById('trigger-warning-close')?.addEventListener('click', () => closeTriggerWarning());
 
-		if (audioUrls) {
+		if (audioUrls && audioUrls.songs.length) {
 			Amplitude.init(audioUrls);
 			var audio, activeReportingTitle;
 			audio = Amplitude.getAudio();
