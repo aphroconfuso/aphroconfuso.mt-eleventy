@@ -160,7 +160,7 @@ async function getHomepage() {
 		},
 		Layout_12: {
 			diary: 2,
-			image: 1,
+			image: 2,
 			poem: 1,
 			text: 4,
 			lengths: [2150],

@@ -225,6 +225,9 @@ body.scrolling {
 #arrow-top {
 	padding: 1rem;
 }
-#scroll-tools {
-	display: none !important;
+
+@media all and (min-width: $laptop-breakpoint) {
+	#scroll-tools {
+		display: none !important;
+	}
 }
