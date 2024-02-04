@@ -281,7 +281,7 @@ module.exports = function(eleventyConfig) {
 			decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
 				.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
 				.replace(/<p(.*?)>(.)([\w\-]+)/, '<p$1><span class="initial"><span class="dropcap drop-$2">$2</span>$3</span>')
-				.replace(/<p>\#<\/p>\s*(<h[56].*?<\/h[56]>)?\s*<p>(.)([\w\-\’]+)/gm, '$1<p class="break"><span class="initial"><span class="dropcap drop-$2">$2</span>$3</span>')
+				.replace(/<p>\#<\/p>\s*(<hr>)?(<h[56].*?<\/h[56]>)?\s*<p>(.)([\w\-\’]+)/gm, '$1$2<p class="break"><span class="initial"><span class="dropcap drop-$3">$3</span>$4</span>')
 				.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
 				.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
 				.replace('drop-I">I</span>e', 'drop-Ie">IE</span>')
@@ -324,7 +324,11 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("endDotify", function endDotify(text) {
-		return (text || []).replace(/([^ ]+)([.?!]|<span class="pull">.<\/span>)\s*<\/(p|blockquote)>\s*$/, '<l-m>$1 <span class="end-dot">.</span></l-m></$3>');
+		let fixedText = (text || []).replace(/([^ ]+)([\.\?\!]|<span class="pull">.<\/span>)\s*<\/(p|blockquote)>\s*$/, '<l-m>$1 <span class="end-dot">.</span></l-m></$3>');
+		if (!fixedText.match(/class=\"end\-dot\"/m)) {
+			fixedText = text.replace(/<\/(p|blockquote)>\s*$/, '&nbsp;<span class="end-dot">.</span></$1>');
+		}
+		return fixedText;
 	});
 
 	eleventyConfig.addFilter("restrictHtml", function restrictHtml(text, allowedTags) {
