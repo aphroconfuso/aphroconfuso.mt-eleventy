@@ -159,6 +159,10 @@ permalink: /{{ story.slug }}/index.html
 					<section class="body-text">
 						{{ story.body | prettifyMaltese | versify | safe }}
 					</section>
+				{% elif story.type === 'Poezija' and story.useProseStyling %}
+					<section class="body-text">
+						{{ story.body | prettifyMaltese | safe }}
+					</section>
 				{% elif story.type === 'Djarju' %}
 					<section class="body-text">
 						{{ story.body | diarySectionise(null, null, true) | prettifyMaltese | endDotify | safe }}
