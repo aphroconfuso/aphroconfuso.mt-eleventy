@@ -334,7 +334,7 @@ const initialiseMessage = () => {
 
 const initialiseAnchorEvents = () => {
 	document.querySelectorAll("#grid-body a[href^='\#']").forEach((anchor, index) => {
-		anchor.addEventListener("click", () => _paq.push(['trackEvent', 'Ankri', `${ reportingTitle }`, `# ${ anchor }`, index + 1]));
+		anchor.addEventListener("click", () => _paq.push(['trackEvent', 'A#', `${ reportingTitle }`, `# ${ anchor.textContent }`, index + 1]));
 	});
 }
 
