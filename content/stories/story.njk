@@ -25,13 +25,14 @@ permalink: /{{ story.slug }}/index.html
 	{% endif %}
 	{% if story.mainPlayer or story.audioPlayers.length %}
 		<script src="/amplitude/amplitude.min.js"></script>
+		{# <script src="/green-audio-player/script.js"></script> #}
 	{% endif %}
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@aphroconfuso">
 	<meta name="twitter:creator" content="@aphroconfuso">
 	<meta name="twitter:title" content="{{ story.metaTitle or metadata.title }}">
 	<meta name="twitter:description" content="{{ story.description }}">
-	<meta name="twitter:image" content="{{ metadata.settings.imagesUrl + story.socialImage }}">
+	<meta name="twitter:image" content="https://aphroconfuso.mt{{ metadata.settings.imagesUrl + story.socialImage }}">
 	<meta name="twitter:image:alt" content="{{ story.socialImageAlt }}">
 {% endblock %}
 
@@ -250,9 +251,7 @@ permalink: /{{ story.slug }}/index.html
 		{% include '_promo_list.njk' %}
 	</aside>
 	<script>
-		{# {% if audioUrls.length %} #}
-			audioUrls = { "songs": {{ story.audioUrlsString | safe }} };
-		{# {% endif %} #}
+		audioUrls = { "songs": {{ story.audioUrlsString | safe }} };
 		author = "{{ story.author | safe }}" || null;
 		monthYear = "{{ story.monthYear | slugify }}" || null;
 		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
