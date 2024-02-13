@@ -43,8 +43,8 @@ export function getTemplate({
       <main>
         <article>
           <hgroup>
-            <h1>Password v3</h1>
-            <h2>Please enter your password for this site. v3</h2>
+            <h1>Password v2</h1>
+            <h2>Please enter your password for this site. v2</h2>
           </hgroup>
           ${withError ? `<p class="error">Incorrect password, please try again.</p>` : ''}
           <form method="post" action="/cfp_login">
