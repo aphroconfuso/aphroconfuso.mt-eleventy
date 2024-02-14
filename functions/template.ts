@@ -48,7 +48,7 @@ export function getTemplate({
           </hgroup>
           ${withError ? `<p class="error">Incorrect password, please try again.</p>` : ''}
           <form method="post" action="/cfp_login">
-            <input type="hidden" name="redirect" value="${redirectPath}" />
+            <input type="text" name="redirect" value="${redirectPath}" />
             <input type="password" name="password" placeholder="Password" aria-label="Password" autocomplete="current-password" required autofocus>
             <button type="submit" class="contrast">Login</button>
           </form>
