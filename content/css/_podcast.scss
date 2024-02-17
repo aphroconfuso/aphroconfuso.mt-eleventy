@@ -24,19 +24,16 @@ article.poddata {
 			margin-top: $body-margin * 1.5;
 		}
 	}
-	#audio .audio:first-of-type {
+	#audio > figure:first-of-type.audio > div.player .slider {
+		.gap-progress {
+			background-color: $podcast-beige;
+		}
+	}
+	#audio .audio:not(:first-of-type) {
 		background-color: $deco-brown;
 		border: 1px solid $lightester-brown;
 		margin-bottom: $body-margin;
 		padding: $body-margin;
-	}
-	#audio > figure:first-of-type.audio > div.player > div.range {
-		progress::-webkit-progress-value {
-			background-color: $podcast-beige !important;
-		}
-		progress::-moz-progress-bar {
-			background-color: $podcast-beige !important;
-		}
 	}
 }
 
@@ -60,5 +57,11 @@ article.poddata {
 		figcaption {
 			display: none;
 		}
+	}
+}
+
+@media all and (min-width: $laptop-breakpoint) {
+	#audio .audio:first-of-type {
+		margin-bottom: $body-margin * 1.5;
 	}
 }

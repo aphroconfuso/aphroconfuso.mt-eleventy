@@ -264,6 +264,7 @@ aside,
 			text-decoration-color: $lightester-brown;
 			text-decoration-thickness: 1px;
 			text-underline-offset: 2px;
+			text-decoration-skip-ink: auto;
 		}
 		margin-bottom: $body-margin-half;
 		&:last-of-type {

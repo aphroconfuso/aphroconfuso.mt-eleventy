@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 
 async function getGeneric(page) {
+	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
 	let generic;
 	try {
 		const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
@@ -11,7 +12,9 @@ async function getGeneric(page) {
 			},
 			body: JSON.stringify({
 				query: `{
-					${page} {
+					${page} (
+            publicationState: ${ fetchStatus },
+					) {
 						data {
 							attributes {
 								title

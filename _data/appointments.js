@@ -5,6 +5,7 @@ const processPromos = require("../src/processPromos.js");
 const {linkedStoryData} = require("./_fragments.js");
 
 async function getAllAppointments() {
+	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
   let appointmentsData;
 	try {
 		const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
@@ -15,7 +16,10 @@ async function getAllAppointments() {
 			},
 			body: JSON.stringify({
 				query: `{
-					appointments(sort: "dateTimePublication:desc") {
+					appointments(
+            publicationState: ${ fetchStatus },
+						sort: "dateTimePublication:desc"
+						) {
 						data {
 							attributes {
 								moreToCome

@@ -8,6 +8,7 @@ const stripTags = require("striptags");
 const { linkedStoryData } = require("./_fragments.js");
 
 async function getAllContributors() {
+	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
   const recordsPerQuery = 100;
   let recordsToSkip = 0;
   let makeNewQuery = true;
@@ -23,6 +24,7 @@ async function getAllContributors() {
         body: JSON.stringify({
           query: `{
 						people(
+	            publicationState: ${ fetchStatus },
 							pagination: { page: 1, pageSize: 999 },
 							sort: ["surname:asc", "forename:asc"],
 							filters: {contributor: { eq: true}}

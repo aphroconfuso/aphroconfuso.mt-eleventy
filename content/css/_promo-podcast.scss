@@ -4,5 +4,7 @@
 @use "mixins-etc" as *;
 
 .promo-poddata {
-	font-family: $sans, sans-serif;
+	.body-text p {
+		font-family: $sans, sans-serif;
+	}
 }

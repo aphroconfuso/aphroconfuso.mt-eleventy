@@ -24,7 +24,8 @@ let wordcount, cumulativeBody, cumulativeWordcount;
 
 // function to get stories
 async function getAllStories() {
-  const recordsPerQuery = 100;
+	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
+	const recordsPerQuery = 100;
   let recordsToSkip = 0;
   let makeNewQuery = true;
   let stories = [];
@@ -40,6 +41,7 @@ async function getAllStories() {
         body: JSON.stringify({
           query: `{
 						stories(
+	            publicationState: ${ fetchStatus },
 							pagination: { page: 1, pageSize: 250 },
 							sort: ["diaryDate:desc", "dateTimePublication:desc"],
 							) {
@@ -215,6 +217,7 @@ async function getAllStories() {
   // format stories objects
 	const storiesFormatted = stories.map((story) => {
 		const atts = story.attributes;
+		console.log(atts.title + '...');
 
 		// Add anchors
 		const anchoredBody = atts.body.replace(/(<h[56])>(.*?)(<\/h[56]>)/gmi, (full, openingTag, headline, closingTag) => `<hr>${ openingTag } id="${ slugifyStringMaltese(headline) }">${ headline }${ closingTag }`)
@@ -388,7 +391,7 @@ async function getAllStories() {
 			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
 			// podcastLengthMinutes: atts.podcastLengthMinutes,
 			// podcastNote: atts.podcastNote,
-			// podcastUrl: atts.podcastUrl,
+			podcastUrl: atts.podcastUrl,
 			postscript: atts.postscript,
 			prominentMentions: atts.prominentMentions,
 			promoImage: atts.promoImage.data,
@@ -422,26 +425,47 @@ async function getAllStories() {
 			wordcount: splitText(atts.body).length,
 		};
 
+
+			// 	addBookmark('audio', {
+			// 		author,
+			// 		duration,
+			// 		monthYear,
+			// 		percentageAudio,
+			// 		placeText: getCurrentBlurb(percentageAudio),
+			// 		playPosition,
+			// 		// activeUrlSlug,
+			// 		audioReportingTitle,
+			// 		sequenceEpisodeNumber,
+			// 		sequenceEpisodeTitle,
+			// 		storyId,
+			// 		title: pageTitle,
+				// 		translator,
+				// v:3,
+			// 	});
+
+
 		processedStory.reportingTitle = fixReportingTitle(processedStory);
 		const audioUrls = [];
 		const audioPlayers = [];
 		if (atts.podcastUrl) {
 			audioUrls.push({
-				pageSlug,
-				reportingTitle: processedStory.reportingTitle,
-				url: atts.podcastUrl,
-				// author,
-				// duration,
+				author: processedStory.author,
+				storyId: story.id,
 				monthYear: processedStory.monthYear,
-				// sequenceEpisodeNumber,
-				// sequenceEpisodeTitle,
-				// storyId,
-				// title: pageTitle,
-				// translator,
-				// type
+				pageSlug,
+				podcastLengthMinutes: atts.podcastLengthMinutes,
+				podcastNote: atts.podcastNote,
+				reads: processedStory.reads,
+				reportingTitle: processedStory.reportingTitle,
+				sequenceEpisodeNumber: processedStory.sequenceEpisodeNumber,
+				sequenceEpisodeTitle: processedStory.sequenceEpisodeTitle,
+				title: processedStory.title,
+				translatorName: processedStory.translatorForename,
+				type: processedStory.type,
+				url: atts.podcastUrl,
 			});
 			audioPlayers.push({
-				authorName: processedStory.authorForename,
+				authorName: processedStory.author,
 				monthYear: processedStory.monthYear,
 				podcastLengthMinutes: atts.podcastLengthMinutes,
 				podcastNote: atts.podcastNote,
@@ -449,20 +473,26 @@ async function getAllStories() {
 				reportingTitle: processedStory.reportingTitle,
 				title: processedStory.title,
 				translatorName: processedStory.translatorForename,
+				url: processedStory.podcastUrl,
 				useDefaultPodcastMessage: !!atts.useDefaultPodcastMessage,
 			});
 		}
 		if (audioPromosFormatted.length) {
 			audioPromosFormatted.forEach(promo => {
+				if (promo.url === audioUrls[0].url) return;
 				audioUrls.push({
+					storyId: promo.id,
 					pageSlug: promo.slug,
 					reportingTitle: promo.reportingTitle,
 					title: promo.title,
 					url: promo.podcastUrl,
 					monthYear: promo.monthYear,
+				sequenceEpisodeNumber: promo.sequenceEpisodeNumber,
+					sequenceEpisodeTitle: promo.sequenceEpisodeTitle,
+				type: promo.type,
 				});
 				audioPlayers.push({
-					authorName: promo.authorForename,
+					authorName: promo.author,
 					highlight: promo.audioHighlight,
 					podcastLengthMinutes: promo.podcastLengthMinutes,
 					podcastNote: promo.audioNote || promo.podcastNote,
@@ -471,6 +501,7 @@ async function getAllStories() {
 					reportingTitle: promo.reportingTitle,
 					title: promo.title,
 					translatorName: promo.translatorForename,
+					url: promo.podcastUrl,
 					useDefaultPodcastMessage: !!promo.useDefaultPodcastMessage,
 				});
 			});
@@ -478,6 +509,8 @@ async function getAllStories() {
 
 		processedStory.audioUrlsString = JSON.stringify(audioUrls);
 		processedStory.audioPlayers = audioPlayers;
+
+		console.log('OK');
 
 		return processedStory;
 	});

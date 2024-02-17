@@ -16,6 +16,7 @@ const codes = {
 }
 
 async function getInternationals() {
+	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
 	let internationals;
 	try {
 		const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
@@ -26,7 +27,9 @@ async function getInternationals() {
 			},
 			body: JSON.stringify({
 				query: `{
-					internationalMedias {
+					internationalMedias(
+            publicationState: ${ fetchStatus },
+					) {
 						data {
 							attributes {
 								language
