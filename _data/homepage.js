@@ -7,6 +7,7 @@ const { imageData, linkedStoryData, linkedStoryDataWithImage } = require("./_fra
 
 async function getHomepage() {
 	let homepage, diaryEntries;
+	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
 	try {
 		const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
 			method: "POST",
@@ -28,19 +29,28 @@ async function getHomepage() {
                     }
                   }
                 }
-								promos(pagination: { page: 1, pageSize: 250 }) {
+								promos(
+			            publicationState: ${ fetchStatus },
+									pagination: { page: 1, pageSize: 250 }
+								) {
 									text
 									story {
 										${linkedStoryData}
 									}
 								}
-								poetryPromos(pagination: { page: 1, pageSize: 250 }) {
+								poetryPromos(
+			            publicationState: ${ fetchStatus },
+									pagination: { page: 1, pageSize: 250 }
+								) {
 									text
 									story {
 										${linkedStoryData}
 									}
 								}
-								imagePromos(pagination: { page: 1, pageSize: 250 }) {
+								imagePromos(
+			            publicationState: ${ fetchStatus },
+									pagination: { page: 1, pageSize: 250 }
+								) {
 									text
 									imageCrop
 									image {
@@ -57,6 +67,7 @@ async function getHomepage() {
 						}
 					}
 					diaryEntries: stories(
+            publicationState: ${ fetchStatus },
 						pagination: { page: 1, pageSize: 3 },
 						sort: ["diaryDate:desc"],
 						filters: {type: { eq: "Djarju"}}
