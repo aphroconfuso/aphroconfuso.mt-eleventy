@@ -29,28 +29,19 @@ async function getHomepage() {
                     }
                   }
                 }
-								promos(
-			            publicationState: ${ fetchStatus },
-									pagination: { page: 1, pageSize: 250 }
-								) {
+								promos(pagination: { page: 1, pageSize: 250 }) {
 									text
 									story {
 										${linkedStoryData}
 									}
 								}
-								poetryPromos(
-			            publicationState: ${ fetchStatus },
-									pagination: { page: 1, pageSize: 250 }
-								) {
+								poetryPromos(pagination: { page: 1, pageSize: 250 }) {
 									text
 									story {
 										${linkedStoryData}
 									}
 								}
-								imagePromos(
-			            publicationState: ${ fetchStatus },
-									pagination: { page: 1, pageSize: 250 }
-								) {
+								imagePromos(pagination: { page: 1, pageSize: 250 }) {
 									text
 									imageCrop
 									image {
@@ -67,7 +58,7 @@ async function getHomepage() {
 						}
 					}
 					diaryEntries: stories(
-            publicationState: ${ fetchStatus },
+						publicationState: ${ fetchStatus }
 						pagination: { page: 1, pageSize: 3 },
 						sort: ["diaryDate:desc"],
 						filters: {type: { eq: "Djarju"}}
