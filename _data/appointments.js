@@ -18,6 +18,7 @@ async function getAllAppointments() {
 				query: `{
 					appointments(
             publicationState: ${ fetchStatus },
+						pagination: { page: 1, pageSize: 250 },
 						sort: "dateTimePublication:desc"
 						) {
 						data {
