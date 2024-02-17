@@ -177,7 +177,8 @@ article.story {
 	}
 
 	.promos-container {
-		.is-episode,
+		// REFACTOR ... this is not a special
+		a:not(.promo-djarju).is-episode,
 		// Il-Lanza... (Lulju 2023)
 		.story-16 {
 			header {

@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 
 async function getStyleGuide() {
+	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
 	let styleguideData;
 	try {
 		const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
@@ -19,7 +20,11 @@ async function getStyleGuide() {
 							}
 						}
 					}
-					styleGuideEntries(sort: "term:asc", pagination: { page: 1, pageSize: 250 }) {
+					styleGuideEntries(
+            publicationState: ${ fetchStatus },
+						sort: "term:asc",
+						pagination: { page: 1, pageSize: 250 }
+						) {
 						data {
 							attributes {
 								term

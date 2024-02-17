@@ -43,20 +43,24 @@
 			border-color: $colour;
 		}
 	}
-	&.audio > div.player > div.range {
-		progress::-webkit-progress-value {
-			background-color: $colour !important;
-		}
-		progress::-moz-progress-bar {
-			background-color: $colour !important;
+	&.audio > div.player .slider {
+		.gap-progress {
+			background-color: $colour;
 		}
 	}
+	// #progress {
+	// 	text-decoration: line-through;
+	// 	text-shadow: -1px -1px 0 $paper, 0 -1px 0 $paper, 1px -1px 0 $paper,
+	// 		1px 0 0 $paper, 1px 1px 0 $paper, 0 1px 0 $paper, -1px 1px 0 $paper,
+	// 		-1px 0 0 $paper;
+	// }
 	#progress {
-		text-decoration: line-through;
-		text-shadow: -1px -1px 0 $paper, 0 -1px 0 $paper, 1px -1px 0 $paper,
-			1px 0 0 $paper, 1px 1px 0 $paper, 0 1px 0 $paper, -1px 1px 0 $paper,
-			-1px 0 0 $paper;
+		text-shadow: -2px -2px 0 $colour, 0 -2px 0 $colour, 2px -2px 0 $colour,
+			2px 0 0 $colour, 2px 2px 0 $colour, 0 2px 0 $colour, -2px 2px 0 $colour,
+			-2px 0 0 $colour;
+		vertical-align: -0.5rem;
 	}
+
 	@media all and (min-width: $mobile-breakpoint-plusone) {
 		.header-label {
 			a:hover {
@@ -94,8 +98,8 @@
 				color: $paper;
 			}
 		}
-		&.promo:hover:not(.promo-diary),
-		&.promo:focus:not(.promo-diary) {
+		&.promo:hover:not(.promo-djarju),
+		&.promo:focus:not(.promo-djarju) {
 			h1::after {
 				@include animated-underline-post();
 			}

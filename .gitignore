@@ -5,3 +5,4 @@ public/img/qr/
 *.dic
 image-cache/*
 !image-cache/.gitkeep
+.env

@@ -1,0 +1,176 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+aside#audio {
+	margin: ($body-margin * 1.5) 0;
+}
+
+figure.audio {
+	margin-bottom: $body-margin;
+	opacity: 0;
+	&.initialised {
+		@include ease-in(0.5s);
+		opacity: 1;
+	}
+	&.highlighted {
+		border: 1px solid $lightester-brown;
+		margin-bottom: $body-margin;
+		padding: $body-margin;
+	}
+
+	.player {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+	}
+
+	progress.amplitude-song-played-progress:not([value]) {
+		background-color: $lightest-brown;
+	}
+
+	progress[value]::-webkit-progress-bar {
+		background-color: $lightest-brown;
+		border-radius: 0;
+	}
+
+	progress[value]::-moz-progress-bar {
+		background-color: $paper;
+	}
+
+	progress[value]::-webkit-progress-value {
+		background-color: $paper;
+	}
+
+	.range {
+		height: $body-margin-quarter;
+		position: relative;
+		margin: 0 $body-margin-half 0;
+		width: 100%;
+		progress {
+			-moz-appearance: none;
+			-webkit-appearance: none;
+			appearance: none;
+			background-color: $lightest-brown;
+			border: none;
+			cursor: pointer;
+			display: block;
+			height: $body-margin-quarter * 0.66;
+			left: 0;
+			margin: 0;
+			position: absolute;
+			top: 5px;
+			width: 100%;
+			z-index: -1;
+		}
+	}
+
+	button.amplitude-play-pause {
+		cursor: pointer;
+		width: 24px;
+		height: 32px;
+		&.amplitude-paused {
+			background: url("/img/play.png") no-repeat center;
+			background-size: contain;
+		}
+		&.amplitude-playing {
+			background: url("/img/pause.png") no-repeat center;
+			background-size: contain;
+		}
+	}
+
+	.range {
+		cursor: pointer;
+		height: 1.35rem;
+	}
+
+	/********** Range Input Styles **********/
+	/*Range Reset*/
+	input[type="range"] {
+		-webkit-appearance: none;
+		appearance: none;
+		background: transparent;
+		cursor: pointer;
+		width: 100%;
+	}
+
+	/* Removes default focus */
+	input[type="range"]:focus {
+		outline: none;
+	}
+
+	/***** Chrome, Safari, Opera and Edge Chromium styles *****/
+	/* slider track */
+	input[type="range"]::-webkit-slider-runnable-track {
+		background-color: transparent;
+		height: $body-line-height;
+	}
+
+	/* slider thumb */
+	input[type="range"]::-webkit-slider-thumb {
+		-webkit-appearance: none; /* Override default look */
+		appearance: none;
+		margin-top: $body-margin-quarter * -2.25;
+
+		/*custom styles*/
+		background-color: $lightest-brown;
+		height: $body-margin-half;
+		width: $body-margin-half;
+	}
+
+	input[type="range"]::-moz-range-thumb {
+		border: none;
+		border-radius: 0;
+		background-color: $lightest-brown;
+		height: $body-margin-half;
+		width: $body-margin-half;
+	}
+
+	/******** Firefox styles ********/
+	/* slider track */
+	input[type="range"]::-moz-range-track {
+		background-color: transparent;
+		height: $body-margin-quarter;
+	}
+
+	/* For Chrome or Safari */
+	progress::-webkit-progress-bar {
+		background-color: $lightest-brown;
+	}
+
+	// progress::-webkit-progress-value {
+	// 	background-color: red !important;
+	// }
+
+	/* For Firefox */
+	progress {
+		background-color: $lightest-brown;
+	}
+
+	// progress::-moz-progress-bar {
+	// 	background-color: red !important;
+	// }
+
+	.time-container {
+		font-family: monospace;
+		font-size: $font-size-compact;
+		height: 24px;
+		white-space: nowrap;
+	}
+}
+
+@media all and (min-width: $laptop-breakpoint) {
+	aside#audio {
+		margin: 0 0 $body-margin;
+	}
+	figure.audio {
+		figcaption {
+			padding-top: $body-margin-half;
+		}
+		button.amplitude-play-pause {
+			width: 18px;
+			height: 22px;
+		}
+	}
+}

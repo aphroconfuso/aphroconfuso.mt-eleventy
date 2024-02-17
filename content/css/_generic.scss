@@ -171,14 +171,14 @@
 
 .error {
 	img {
-		-webkit-filter: sepia(1) brightness(75%);
-		filter: sepia(1) brightness(75%);
+		-webkit-filter: sepia(0.2) grayscale(1);
+		filter: sepia(0.2) grayscale(1);
 		padding-bottom: $body-margin;
 		@media all and (min-width: $mobile-breakpoint-plusone) {
 			&:hover {
 				@include ease-out(0.25s);
-				-webkit-filter: sepia(0) brightness(100%);
-				filter: sepia(0) brightness(100%);
+				-webkit-filter: sepia(0) grayscale(0);
+				filter: sepia(0) grayscale(0);
 			}
 		}
 	}

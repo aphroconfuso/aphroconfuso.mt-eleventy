@@ -27,6 +27,7 @@ footer {
 			text-decoration-color: $light-brown;
 			text-decoration-thickness: 1px;
 			text-underline-offset: 2px;
+			text-decoration-skip-ink: auto;
 			height: ($body-margin * 1.5);
 			padding: 0.25rem 0;
 		}
