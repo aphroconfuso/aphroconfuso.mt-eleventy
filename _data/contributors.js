@@ -37,24 +37,30 @@ async function getAllContributors() {
 									initials
 									surname
 									storiesAuthored(
+				            publicationState: ${ fetchStatus },
 										sort: "dateTimePublication:desc",
 										filters: {type: { notIn: ["Djarju", "Poddata"]}}
 									) {
 										${linkedStoryData}
 									}
 									diaryEntries: storiesAuthored(
+				            publicationState: ${ fetchStatus },
 										sort: "dateTimePublication:desc",
 										filters: {type: { eq: "Djarju"}}
 									) {
 										${linkedStoryData}
 									}
 									podcastEpisodes: storiesAuthored(
+				            publicationState: ${ fetchStatus },
 										sort: "dateTimePublication:desc",
 										filters: {type: { eq: "Poddata"}}
 									) {
 										${linkedStoryData}
 									}
-									storiesTranslated(sort: "dateTimePublication:desc") {
+									storiesTranslated(
+				            publicationState: ${ fetchStatus },
+										sort: "dateTimePublication:desc"
+									) {
 										${linkedStoryData}
 									}
 								}

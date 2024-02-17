@@ -26,7 +26,10 @@ async function getAllAppointments() {
 								moreToCome
 								editorial
 								dateTimePublication
-								stories(sort: "dateTimePublication:asc") {
+								stories(
+			            publicationState: ${ fetchStatus },
+									sort: "dateTimePublication:asc"
+									) {
 									${linkedStoryData}
 								}
 							}
