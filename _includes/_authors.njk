@@ -1,0 +1,19 @@
+{% set item = promo or story %}
+<h2{% if item.type === 'Poddata' %} class="contains-with"{% endif %}>
+	{% if item.translator %}
+		<span class="author">{{ item.author | prettifyMaltese | safe }}</span> <span class="translator">(tr <a href="/{{ item.translator | slugifyMaltese }}/">{{ item.translator | prettifyMaltese | safe }}</a>)</span>
+	{%- else %}
+		{% if item.type === 'Poddata' %}
+			<span class="with">ma’</span>
+		{%- endif %}
+		{% for author in item.authors %}
+			{% if loop.index === 1 or (item.authorsType !== 'solo' and item.authorsType !== 'kollettiva') %}
+				{% if promo or item.translator %}
+					<span class="author">{{ author | prettifyMaltese | safe }}</span>
+				{%- else %}
+					<a href="/{{ author | slugifyMaltese }}/">{{ author | prettifyMaltese | safe }}</a>
+				{%- endif %}{% if loop.index > 1 and loop.revindex === 2 %} & {% elif loop.revindex > 2 and item.authorsType !== 'kollettiva' %}, {% endif %}
+			{%- endif %}
+		{%- endfor %}
+	{%- endif %}
+</h2>

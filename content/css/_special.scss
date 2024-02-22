@@ -110,16 +110,6 @@ article.story {
 }
 
 @media all and (min-width: $laptop-breakpoint) {
-	.promo.promo-plain.story-16 {
-		// Il-Lanza... (Lulju 2023)
-		header {
-			margin: 0;
-		}
-		p {
-			@include clamp(6);
-		}
-	}
-
 	// .promo.story-25 h1 {
 	// 	letter-spacing: -1px;
 	// }
@@ -180,7 +170,8 @@ article.story {
 		// REFACTOR ... this is not a special
 		a:not(.promo-djarju).is-episode,
 		// Il-Lanza... (Lulju 2023)
-		.story-16 {
+		.story-16,
+		.story-39 {
 			header {
 				margin-bottom: $body-margin-quarter;
 				h3 {

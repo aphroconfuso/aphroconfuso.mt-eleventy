@@ -25,19 +25,15 @@ header {
 	h2 {
 		font-family: $serif, serif;
 		font-size: $font-size-story-header-mobile;
-		font-weight: 500;
 		line-height: $header-line-height;
+		a,
+		.author {
+			font-weight: 500;
+			white-space: nowrap;
+		}
 		.translator {
 			display: inline-block;
 			white-space: nowrap;
-			&:before {
-				color: $lightest-brown;
-				content: "(\2009tr\2009";
-			}
-			&:after {
-				color: $lightest-brown;
-				content: "\2009)";
-			}
 		}
 	}
 

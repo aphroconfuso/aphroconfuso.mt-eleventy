@@ -14,9 +14,12 @@ article.poddata {
 			color: $podcast-beige;
 		}
 		h2 {
+			padding-left: $body-margin-double;
+			position: relative;
 			.with {
-				color: $lightest-brown;
 				font-style: italic;
+				left: 0;
+				position: absolute;
 			}
 		}
 		border-bottom-color: $lighter-brown;
@@ -29,11 +32,24 @@ article.poddata {
 			background-color: $podcast-beige;
 		}
 	}
-	#audio .audio:not(:first-of-type) {
-		background-color: $deco-brown;
-		border: 1px solid $lightester-brown;
-		margin-bottom: $body-margin;
-		padding: $body-margin;
+	#audio {
+		.audio:not(:first-of-type) {
+			background-color: $deco-brown;
+			border: 1px solid $lightester-brown;
+			border-bottom-width: 0;
+			border-top-width: 0;
+			margin-bottom: 0;
+			padding: $body-margin;
+			padding-bottom: 0;
+		}
+		.audio:nth-of-type(2) {
+			border-top-width: 1px;
+		}
+		.audio:last-of-type {
+			border-bottom-width: 1px;
+			margin-bottom: $body-margin;
+			padding-bottom: $body-margin;
+		}
 	}
 }
 
@@ -42,8 +58,15 @@ article.poddata {
 		color: $podcast-beige;
 	}
 	h2 {
+		padding-left: $body-margin-double;
+		position: relative;
+		a,
+		.author {
+			white-space: unset;
+		}
 		.with {
-			color: $lightest-brown;
+			left: 0;
+			position: absolute;
 			font-style: italic;
 		}
 	}

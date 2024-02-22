@@ -116,7 +116,7 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPlugin(eleventySass, {
     compileOptions: {
       permalink: function(contents, inputPath) {
-        return (data) => data.page.filePathStem.replace(/^\/scss\//, "/css/") + ".css";
+        return (data) => data.page.filePathStem && data.page.filePathStem.replace(/^\/scss\//, "/css/") + ".css";
       }
     },
     sass: {
@@ -138,10 +138,12 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter('subjectDate', function subjectDate(dateString) {
+		if (!dateString) return null;
 		return fixSubjectDate(dateString);
 	});
 
 	eleventyConfig.addFilter('subjectDateShort', function subjectDateShort(dateString) {
+		if (!dateString) return null;
 		return fixSubjectDate(dateString).replace(/\.20/, ".");
 	});
 
@@ -176,6 +178,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("prettifyMaltese", function prettifyMaltese(text) {
+		if (!text) return "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 		return (text || []).replace(/<p>\s*<\/p>/gm, "")
 			.replace(/-</gm, "- <")
 			.replace(/  +/gm, " ")
@@ -225,6 +228,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("slugifyMaltese", function slugifyMaltese(text) {
+		if (!text) return "XXXXXXXXXXXXXXXXXXXXXXXXX";
 		return slugifyStringMaltese(text);
 	});
 
@@ -358,7 +362,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("fixPodcastTitle", function wordcount(text) {
-		return stripTags(text || []).replace(/(Noti Editorjali)(\:.*$)/i, "$1")
+		return stripTags(text || []).replace(/(Noti Editorjali)( *?\#?\d*)(\:.*$)/i, "$1<span class=\"episodeNumber\">$2</span>")
 			.replace(/(.*?)( \(taħdita\)$)/i, "$1");
 	});
 

@@ -9,9 +9,6 @@
 		<h1>
 			{{ promo.title | fixPodcastTitle | prettifyMaltese | safe }}
 		</h1>
-		<h2>
-			<span class="with">ma’</span> {{ promo.author | prettifyMaltese | safe }}
-		</h2>
 	{% elif promo.type === 'Djarju' %}
 		<p class="header-label">
 			Djarju
@@ -19,9 +16,6 @@
 				<span class="subjectDate">{{ promo.subjectDate | subjectDate }}</span>
 			{% endif %}
 		</p>
-		<h2>
-			{{ promo.author | prettifyMaltese | safe }}
-		</h2>
 	{% else %}
 		<p class="header-label">{{ promo.monthYear }}</p>
 		<h1>
@@ -30,14 +24,8 @@
 				<span class="episodeNumber">#{{ promo.sequenceEpisodeNumber }}</span>
 			{% endif %}
 		</h1>
-		{% if promo.translator %}
-			<h2 class="translated">
-				{{ promo.author | prettifyMaltese | safe }} <span class="translator">{{ promo.translator | prettifyMaltese | safe }}</span>
-			</h2>
-		{% else %}
-			<h2>{{ promo.author | prettifyMaltese | safe }}</h2>
-		{% endif %}
 	{% endif %}
+	{% include '_authors.njk' %}
 	{% if promo.type === 'Djarju' or (showEpisodeTitle and promo.sequenceEpisodeTitle) %}
 		<h3{% if promo.image %} class="hide-mobile"{% endif %}>{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
 	{% endif %}

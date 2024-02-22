@@ -53,7 +53,7 @@ permalink: /index.html
 			{% for promo in homepage.promos %}
 				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 				<div class="ga-{{ loop.index }}">
-					<a class="{{ promo.monthYear | slugify }} promo promo-plain story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+					<a class="{{ promo.monthYear | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% include "_promo_header.njk" %}
 						<div class="{{ promo.cssClass }}">
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>

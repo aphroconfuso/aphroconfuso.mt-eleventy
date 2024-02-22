@@ -15,9 +15,9 @@ permalink: /{{ story.slug }}/index.html
 	<meta content="{{ story.description }}" name="description">
 	<meta property="og:image" content="https://aphroconfuso.mt{{ metadata.settings.imagesUrl + story.socialImage }}">
 	{% if story.translator %}
-		<meta name="author" content="{{ story.author }} (tr {{ story.translator }})">
+		<meta name="author" content="{{ story.authorsString }} (tr {{ story.translator }})">
 	{% else %}
-		<meta name="author" content="{{ story.author }}">
+		<meta name="author" content="{{ story.authorsString }}">
 	{% endif %}
 	{% if story.images.length %}
 		<script src="/splide-4.1.3/dist/js/splide.min.js" defer></script>
@@ -44,9 +44,6 @@ permalink: /{{ story.slug }}/index.html
 						<span class="subjectDate">{{ story.subjectDate | subjectDate }}</span>
 					{% endif %}
 				</p>
-				<h2>
-					<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
-				</h2>
 			{% elif story.type === 'Poddata' %}
 				<p class="header-label"><a href="/podcast/" class="diaryTitle">Poddata</a>
 					{% if story.subjectDate %}
@@ -56,9 +53,6 @@ permalink: /{{ story.slug }}/index.html
 				<h1>
 					{{ story.title | fixPodcastTitle | prettifyMaltese | safe }}
 				</h1>
-				<h2>
-					<span class="with">ma’</span> <a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
-				</h2>
 			{% else %}
 				<p class="header-label"><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></p>
 				<h1>
@@ -67,14 +61,8 @@ permalink: /{{ story.slug }}/index.html
 						<span class="episodeNumber">#{{ story.sequenceEpisodeNumber }}</span>
 					{% endif %}
 				</h1>
-				<h2>
-					{% if story.translator %}
-						{{ story.author | prettifyMaltese | safe }} <span class="translator"><a href="/{{story.translator | slugifyMaltese }}/">{{ story.translator | prettifyMaltese | safe }}</a></span>
-					{% else %}
-						<a href="/{{story.author | slugifyMaltese }}/">{{ story.author | prettifyMaltese | safe }}</a>
-					{% endif %}
-				</h2>
 			{% endif %}
+			{% include "_authors.njk" %}
 			{% for epigraph in story.epigraphs %}
 				{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
 					<figure class="epigraph">
@@ -110,7 +98,7 @@ permalink: /{{ story.slug }}/index.html
 							<td class="order">{% if episode.date %}{{ episode.date | subjectDateShort }}{% else %}{{ episode.number }}.{% endif %}</td>
 							<td class="title">
 							{% if episode.slug %}
-								<a href="/{{ episode.slug }}/">{{ episode.title }}</a>
+								<a href="/{{ episode.slug }}/">{{ episode.title | prettifyMaltese | safe }}</a>
 							{% else %}
 								{{ episode.title | prettifyMaltese | safe }}
 							{% endif %}
@@ -151,6 +139,11 @@ permalink: /{{ story.slug }}/index.html
 						<button id="trigger-warning-close" class="close">×</button>
 						{{ story.triggerWarning | prettifyMaltese | safe }}
 					</section>
+				{% endif %}
+				{% if story.type === 'Poddata' %}
+					<aside>
+						<p>Tista’ tabbona fil-podcast fuq <a href="https://podcasts.apple.com/us/podcast/aphroconfuso/id1686567243">Apple Podcasts</a>, <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5hY2FzdC5jb20vcHVibGljL3Nob3dzL2FwaHJvY29uZnVzbw">Google Podcasts</a>, <a href="https://pca.st/podcast/af8c44c0-c823-013b-f432-0acc26574db2">Pocket Casts</a>, <a href="https://open.spotify.com/show/75Lt3UMvC1jE15SGrNFMww">Spotify</a>, jew billi tfittex “Aphroconfuso” fuq l-app li tuża. Tista’ wkoll iżżid dan l-<a href="https://feeds.acast.com/public/shows/aphroconfuso">RSS feed</a> fl-app tiegħek.</p>
+					</aside>
 				{% endif %}
 				<div class="promo bookmark-shortcut"><!-- --></div>
 			</section>
@@ -251,7 +244,7 @@ permalink: /{{ story.slug }}/index.html
 	</aside>
 	<script>
 		audioUrls = { "songs": {{ story.audioUrlsString | safe }} };
-		author = "{{ story.author | safe }}" || null;
+		author = "{{ story.authorString | safe }}" || null;
 		monthYear = "{{ story.monthYear | slugify }}" || null;
 		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
 		reportingTitle = "{{ story.reportingTitle | safe}}" || null;

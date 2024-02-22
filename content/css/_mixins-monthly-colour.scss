@@ -81,9 +81,6 @@
 					@include animated-underline-pre($colour, $interval: $fade-in-short);
 				}
 			}
-			.header-label {
-				display: block;
-			}
 		}
 		header a.bookmark:hover,
 		&.bookmark-promo:hover:not(.Djarju) .bookmark,

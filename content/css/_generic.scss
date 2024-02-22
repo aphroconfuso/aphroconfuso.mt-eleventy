@@ -184,11 +184,14 @@
 	}
 }
 
-.generic .contributor {
-	.promo-list {
-		li:last-of-type {
-			margin-bottom: calc($body-margin - 1px);
-			border-bottom: 1px solid $faint-line;
+.generic {
+	.contributor,
+	.podcasts {
+		.promo-list {
+			li:last-of-type {
+				margin-bottom: calc($body-margin - 1px);
+				border-bottom: 1px solid $faint-line;
+			}
 		}
 	}
 }
