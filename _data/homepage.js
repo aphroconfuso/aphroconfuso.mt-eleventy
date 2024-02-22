@@ -1,7 +1,8 @@
 const fetch = require("node-fetch");
 const smartTruncate = require("smart-truncate");
-const makeTitleSlug = require("../src/makeTitleSlug.js");
 const getMonthYear = require("../src/getMonthYear.js");
+const makeTitleSlug = require("../src/makeTitleSlug.js");
+const parseAuthors = require("../src/parseAuthors.js");
 
 const { imageData, linkedStoryData, linkedStoryDataWithImage } = require("./_fragments.js");
 
@@ -171,13 +172,13 @@ async function getHomepage() {
 
 	const layoutConfig = layouts[atts.layout];
 
-	// REFACTOR
+	// REFACTOR ... use processPromos?S
 	const promosFormatted = (promos, includesImages, number, lengths) => {
 		const result = promos.length && promos.slice(0, number).map((promo, index) => {
 			const storyAtts = (promo.story && promo.story.data.attributes) || promo.attributes;
-			const author = storyAtts.authors.data.length && storyAtts.authors.data[0].attributes;
+			const authorsType = storyAtts.authorsType && storyAtts.authorsType.replace(/\_.*/, '') || 'solo';
+			const { authors, authorsString } = storyAtts.authors.data.length && parseAuthors(storyAtts.authors.data, authorsType);
 			const translator = storyAtts.translators.data.length && storyAtts.translators.data[0].attributes;
-			const authorFullName = !!author && (author.displayName || `${ author.forename }${ author.initials ? ' ' + author.initials + ' ' : ' ' }${ author.surname }`);
 			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename }${ translator.initials ? ' ' + translator.initials + ' ' : ' ' }${ translator.surname }`);
 			const promoSequenceData = storyAtts.sequence && storyAtts.sequence.data;
 			const descriptionLength = lengths && lengths[index] || 9999;
@@ -191,10 +192,12 @@ async function getHomepage() {
 			}
 
 			let formattedPromo = {
-				author: authorFullName,
+				authorsType,
+				author: authorsString,
+				authors,
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 				description: smartTruncate(promo.text || storyAtts.description, descriptionLength),
-				subjectDate: storyAtts.subjectDate,
+				subjectDate: storyAtts.diaryDate,
 				id: promo.story && promo.story.data.id || promo.id,
 				isSequenceEpisode: !!promoSequenceData,
 				mobilePriority: promo.mobilePriority || 9,
@@ -203,12 +206,13 @@ async function getHomepage() {
 				sequenceEpisodeTitle: !!promoSequenceData && storyAtts.title,
 				slug: storyAtts.pageUrl || makeTitleSlug(
 					storyAtts.title,
-					authorFullName,
+					authorsString,
 					translatorFullName,
 					promoSequenceData && promoSequenceData.attributes.title,
 					storyAtts.sequenceEpisodeNumber,
 					storyAtts.diaryDate,
-					!!promoSequenceData && storyAtts.title
+					!!promoSequenceData && storyAtts.title,
+					storyAtts.type
 				),
 				title: !!promoSequenceData ? promoSequenceData.attributes.title : storyAtts.title,
 				translator: translatorFullName,

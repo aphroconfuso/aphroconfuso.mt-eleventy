@@ -1,8 +1,8 @@
 const fixSubjectDate = require("../src/fixSubjectDate.js");
 
-module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subjectDate, sequenceEpisodeTitle) => {
+module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subjectDate, sequenceEpisodeTitle, type) => {
 	return [
-		subjectDate ? 'Djarju ' : sequenceTitle,
+		subjectDate ? (type === 'Djarju' ? 'Djarju ' : 'Poddata') : sequenceTitle,
 		subjectDate && fixSubjectDate(subjectDate) || sequenceNumber && (`#${sequenceNumber}`),
 		sequenceEpisodeTitle || title,
 		"ta’",

@@ -5,7 +5,9 @@ const getMonthYear = require("../src/getMonthYear.js");
 const makePageTitle = require("../src/makePageTitle.js");
 const makeSortableTitle = require("../src/makeSortableTitle.js");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
+const parseAuthors = require("../src/parseAuthors.js");
 const processPromos = require("../src/processPromos.js");
+const reads = require("../src/getReads.js");
 const slugifyStringMaltese = require("../src/slugifyMaltese.js");
 
 const { imageData, linkedStoryData, personData } = require("./_fragments.js");
@@ -49,6 +51,7 @@ async function getAllStories() {
 								id
 								attributes {
 									appointment
+									authorsType
 									body
 									coda
 									dateTimePublication
@@ -145,6 +148,7 @@ async function getAllStories() {
 															pageUrl
 															sequenceEpisodeNumber
 															title
+															type
 														}
 													}
 												}
@@ -214,34 +218,8 @@ async function getAllStories() {
 	// 	return word.replace(/czMXc/gm, "ċ").replace(/gzMXg/gm, "ġ").replace(/hzMXh/gm, "ħ").replace(/zzMXz/gm, "ż").replace(/azMXa/gm, "à");
 	// });
 
-  // format stories objects
-	const storiesFormatted = stories.map((story) => {
-		const atts = story.attributes;
-		console.log(atts.title + '...');
-
-		// Add anchors
-		const anchoredBody = atts.body.replace(/(<h[56])>(.*?)(<\/h[56]>)/gmi, (full, openingTag, headline, closingTag) => `<hr>${ openingTag } id="${ slugifyStringMaltese(headline) }">${ headline }${ closingTag }`)
-
-		// Check anchors
-		const anchors = anchoredBody.match(/(?<=href="#).*?(?=">)/gm);
-		let anchorErrors = false;
-		anchors && anchors.forEach(anchor => {
-			if (!anchoredBody.includes(`id=\"${ anchor }\"`)) {
-				anchorErrors = true;
-				console.log(`Link to "${ anchor }" but no anchor!`);
-			}
-		});
-		if (anchorErrors) {
-			// throw new Error(`${ atts.title } has anchor errors!`)
-		}
-
-		const author = !!atts.authors.data.length && atts.authors.data[0].attributes;
-		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
-		const sequenceData = atts.sequence.data;
-		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
-		const audioPromosFormatted = atts.audio.length && processPromos(atts.audio);
-
-		const booksMentioned = !!atts.booksMentioned.data.length && atts.booksMentioned.data.slice(0, atts.prominentMentions).map((book) => {
+	const processBooksMentioned = (booksData, prominentMentions) => {
+		booksData.slice(0, prominentMentions).map((book) => {
 			const bookAtts = book.attributes;
 			const author = !!bookAtts.authors.data.length && bookAtts.authors.data[0].attributes;
 			const translator = !!bookAtts.translators.data.length && bookAtts.translators.data[0].attributes;
@@ -259,8 +237,36 @@ async function getAllStories() {
 				translator: translatorFullName
 			};
 		});
+	}
 
-		const authorFullName = !!author && (author.displayName || `${ author.forename } ${ author.surname }`);
+  // format stories objects
+	const storiesFormatted = stories.map((story) => {
+		const atts = story.attributes;
+		console.log(atts.title);
+
+		// Add anchors
+		const anchoredBody = atts.body.replace(/(<h[56])>(.*?)(<\/h[56]>)/gmi, (full, openingTag, headline, closingTag) => `<hr>${ openingTag } id="${ slugifyStringMaltese(headline) }">${ headline }${ closingTag }`)
+
+		// Check anchors
+		const anchors = anchoredBody.match(/(?<=href="#).*?(?=">)/gm);
+		let anchorErrors = false;
+		anchors && anchors.forEach(anchor => {
+			if (!anchoredBody.includes(`id=\"${ anchor }\"`)) {
+				anchorErrors = true;
+				console.log(`Link to "${ anchor }" but no anchor!`);
+			}
+		});
+		if (anchorErrors) {
+			// throw new Error(`${ atts.title } has anchor errors!`)
+		}
+
+		const booksMentioned = !!atts.booksMentioned.data.length && processBooksMentioned(atts.booksMentioned.data, atts.prominentMentions);
+		const authorsType = atts.authorsType && atts.authorsType.replace(/\_.*/, '') || 'solo';
+		const { authors, authorForename, authorsString, authorPronoun } = parseAuthors(atts.authors.data, authorsType);
+		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
+		const sequenceData = atts.sequence.data;
+		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
+		const audioPromosFormatted = atts.audio.length && processPromos(atts.audio);
 		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		// REFACTOR use titleArray to derive slug and title
 
@@ -284,23 +290,17 @@ async function getAllStories() {
 			'Wisgha_tal_pagna 16:9': 'landscape',
 		}
 
-		const reads = {
-			'hi': 'taqra',
-			'hu': 'jaqra',
-			'hi_hu': Math.round(Math.random()) ? 'taqra' : 'jaqra',
-			'huma': 'jaqraw',
-		}
-
 		const title = sequenceData && sequenceData.attributes.title || atts.title;
 
 		const displayTitle = makePageTitle(
 			atts.title,
-			authorFullName,
+			authorsString,
 			translatorFullName,
 			sequenceData && sequenceData.attributes.title,
 			atts.sequenceEpisodeNumber,
 			atts.diaryDate,
-			!!sequenceData && atts.title
+			!!sequenceData && atts.title,
+			atts.type,
 		);
 
 		// REFACTOR: Save externally
@@ -314,12 +314,13 @@ async function getAllStories() {
 
 		const pageSlug = atts.pageUrl || makeTitleSlug(
 			atts.title,
-			authorFullName,
+			authorsString,
 			translatorFullName,
 			sequenceData && sequenceData.attributes.title,
 			atts.sequenceEpisodeNumber,
 			atts.diaryDate,
-			!!sequenceData && atts.title
+			!!sequenceData && atts.title,
+			atts.type
 		);
 
 		let sequencePreviousPromo, sequenceNextPromo;
@@ -330,12 +331,13 @@ async function getAllStories() {
 
 				const episodeSlug = episodeAtts.pageUrl || makeTitleSlug(
 					episodeAtts.title,
-					authorFullName,
+					authorsString,
 					translatorFullName,
 					sequenceData && sequenceData.attributes.title,
 					episodeAtts.sequenceEpisodeNumber,
 					episodeAtts.diaryDate,
-					!!sequenceData && episodeAtts.title
+					!!sequenceData && episodeAtts.title,
+					episodeAtts.type
 				);
 
 				if (episodeAtts.sequenceEpisodeNumber === atts.sequenceEpisodeNumber - 1) {
@@ -361,14 +363,17 @@ async function getAllStories() {
 
 		const processedStory = {
 			appointment: atts.appointment,
-			author: authorFullName,
-			authorForename: (author && author.forename) || authorFullName,
+			authorForename,
+			authors,
+			authorPronoun,
+			authorsString,
+			authorsType,
 			body: anchoredBody,
-			booksMentioned: booksMentioned,
+			booksMentioned,
 			coda: atts.coda,
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,
-			description: atts.description,
+			description: atts.description || stripTags(atts.body.substring(0, 400)),
 			displayTitle: displayTitle,
 			dontUseDropCaps: !!atts.dontUseDropCaps,
 			dontUseDropCaps: atts.dontUseDropCaps,
@@ -389,15 +394,15 @@ async function getAllStories() {
 			monthYear: getMonthYear(atts.dateTimePublication),
 			moreToCome: atts.moreToCome,
 			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
-			// podcastLengthMinutes: atts.podcastLengthMinutes,
-			// podcastNote: atts.podcastNote,
+			podcastLengthMinutes: atts.podcastLengthMinutes,
+			podcastNote: atts.podcastNote,
 			podcastUrl: atts.podcastUrl,
 			postscript: atts.postscript,
 			prominentMentions: atts.prominentMentions,
 			promoImage: atts.promoImage.data,
 			promoImageMobile: atts.promoImageMobile.data,
 			publicationHistory: atts.publicationHistory,
-			reads: reads[translator.pronoun || author.pronoun],
+			reads: reads(authorPronoun),
 			sequence: sequenceData && sequenceData.attributes.title,
 			sequenceEpisodeNumber: atts.sequenceEpisodeNumber,
 			sequenceEpisodes: sequenceEpisodes,
@@ -418,89 +423,71 @@ async function getAllStories() {
 			triggerWarning: atts.triggerWarning,
 			type: atts.type,
 			updatedAt: atts.updatedAt,
-			// useDefaultPodcastMessage: !!atts.useDefaultPodcastMessage,
+			useDefaultPodcastMessage: !!atts.useDefaultPodcastMessage,
 			useProseStyling: !!atts.useProseStyling,
 			useSeparators: !!atts.useSeparators,
 			useSquareOnMobile: !!atts.useSquareOnMobile,
 			wordcount: splitText(atts.body).length,
 		};
 
-
-			// 	addBookmark('audio', {
-			// 		author,
-			// 		duration,
-			// 		monthYear,
-			// 		percentageAudio,
-			// 		placeText: getCurrentBlurb(percentageAudio),
-			// 		playPosition,
-			// 		// activeUrlSlug,
-			// 		audioReportingTitle,
-			// 		sequenceEpisodeNumber,
-			// 		sequenceEpisodeTitle,
-			// 		storyId,
-			// 		title: pageTitle,
-				// 		translator,
-				// v:3,
-			// 	});
-
-
 		processedStory.reportingTitle = fixReportingTitle(processedStory);
 		const audioUrls = [];
 		const audioPlayers = [];
 		if (atts.podcastUrl) {
 			audioUrls.push({
-				author: processedStory.author,
+				author: processedStory.authorsString,
 				storyId: story.id,
 				monthYear: processedStory.monthYear,
 				pageSlug,
-				podcastLengthMinutes: atts.podcastLengthMinutes,
-				podcastNote: atts.podcastNote,
-				reads: processedStory.reads,
+				podcastLengthMinutes: processedStory.podcastLengthMinutes,
+				podcastNote: processedStory.podcastNote,
 				reportingTitle: processedStory.reportingTitle,
 				sequenceEpisodeNumber: processedStory.sequenceEpisodeNumber,
 				sequenceEpisodeTitle: processedStory.sequenceEpisodeTitle,
 				title: processedStory.title,
-				translatorName: processedStory.translatorForename,
+				translatorName: processedStory.translatorFullName,
 				type: processedStory.type,
-				url: atts.podcastUrl,
+				url: processedStory.podcastUrl,
 			});
 			audioPlayers.push({
-				authorName: processedStory.author,
+				authorName: processedStory.translatorForename || processedStory.authorForename,
 				monthYear: processedStory.monthYear,
-				podcastLengthMinutes: atts.podcastLengthMinutes,
-				podcastNote: atts.podcastNote,
-				reads: processedStory.reads,
+				podcastLengthMinutes: processedStory.podcastLengthMinutes,
+				podcastNote: processedStory.type !== "Poddata" && processedStory.podcastNote,
+				reads: reads(processedStory.authorPronoun),
 				reportingTitle: processedStory.reportingTitle,
 				title: processedStory.title,
-				translatorName: processedStory.translatorForename,
+				type: processedStory.type,
 				url: processedStory.podcastUrl,
-				useDefaultPodcastMessage: !!atts.useDefaultPodcastMessage,
+				useDefaultPodcastMessage: !!processedStory.useDefaultPodcastMessage,
 			});
 		}
 		if (audioPromosFormatted.length) {
 			audioPromosFormatted.forEach(promo => {
 				if (promo.url === audioUrls[0].url) return;
 				audioUrls.push({
-					storyId: promo.id,
+					// add description
+					authorName: promo.authorsString,
+					monthYear: promo.monthYear,
 					pageSlug: promo.slug,
 					reportingTitle: promo.reportingTitle,
-					title: promo.title,
-					url: promo.podcastUrl,
-					monthYear: promo.monthYear,
-				sequenceEpisodeNumber: promo.sequenceEpisodeNumber,
+					sequenceEpisodeNumber: promo.sequenceEpisodeNumber,
 					sequenceEpisodeTitle: promo.sequenceEpisodeTitle,
-				type: promo.type,
+					storyId: promo.id,
+					title: promo.title,
+					type: promo.type,
+					url: promo.podcastUrl,
 				});
 				audioPlayers.push({
-					authorName: promo.author,
+					authorName: promo.translatorForename || promo.authorForename,
 					highlight: promo.audioHighlight,
 					podcastLengthMinutes: promo.podcastLengthMinutes,
-					podcastNote: promo.audioNote || promo.podcastNote,
+					podcastNote: (promo.audioNote || promo.podcastNote),
 					monthYear: promo.monthYear,
-					reads: promo.reads,
+					reads: reads(promo.authorPronoun),
 					reportingTitle: promo.reportingTitle,
 					title: promo.title,
-					translatorName: promo.translatorForename,
+					type: promo.type,
 					url: promo.podcastUrl,
 					useDefaultPodcastMessage: !!promo.useDefaultPodcastMessage,
 				});
@@ -510,7 +497,7 @@ async function getAllStories() {
 		processedStory.audioUrlsString = JSON.stringify(audioUrls);
 		processedStory.audioPlayers = audioPlayers;
 
-		console.log('OK');
+		console.log('---------------------------------------------------------');
 
 		return processedStory;
 	});

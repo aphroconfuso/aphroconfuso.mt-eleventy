@@ -1,3 +1,1 @@
-module.exports = (dateString) => {
-	return dateString.split('-').reverse().join('.');
-}
+module.exports = (dateString) => dateString.split('-').reverse().join('.');

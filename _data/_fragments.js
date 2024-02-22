@@ -8,6 +8,7 @@ const imageData = `data {
 
 const personData = `data {
 	attributes {
+		contributor
 		displayName
 		forename
 		initials
@@ -17,6 +18,7 @@ const personData = `data {
 }`;
 
 const linkedStoriesAttributes = `
+	authorsType
 	dateTimePublication
 	description
 	diaryDate
@@ -27,6 +29,7 @@ const linkedStoriesAttributes = `
 	sequenceEpisodeNumber
 	title
 	type
+	useDefaultPodcastMessage
 	authors {
 		${personData}
 	}
