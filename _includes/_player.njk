@@ -6,15 +6,16 @@
 	</div>
 		{% if player.useDefaultPodcastMessage or player.podcastNote %}
 			<figcaption>
-				{% if player.podcastNote %}
-					{{ player.podcastNote | restrictHtml | prettifyMaltese | safe }}
-				{% elif player.type !== 'Poddata' and player.useDefaultPodcastMessage %}
+				{% if player.useDefaultPodcastMessage %}
 					<p>
 						{{ player.authorName | prettifyMaltese | safe }} {{ player.reads }} “{{ player.title | prettifyMaltese | safe }}”.
-						{% if loop.last %}
+						{# {% if loop.last %}
 							{{ metadata.texts.podcastMessage | prettifyMaltese | safe }}
-						{% endif %}
+						{% endif %} #}
 					</p>
+				{% endif %}
+				{% if player.podcastNote %}
+					{{ player.podcastNote | restrictHtml | prettifyMaltese | safe }}
 				{% endif %}
 			</figcaption>
 		{% endif %}

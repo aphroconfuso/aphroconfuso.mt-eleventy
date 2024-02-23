@@ -185,8 +185,8 @@
 }
 
 .generic {
-	.contributor,
-	.podcasts {
+	&.podcasts,
+	.contributor {
 		.promo-list {
 			li:last-of-type {
 				margin-bottom: calc($body-margin - 1px);
