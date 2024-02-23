@@ -81,6 +81,12 @@ article.poddata {
 			display: none;
 		}
 	}
+	// REVIEW: use gride put at bottom instead of hiding
+	#audio {
+		.audio:not(:first-of-type) {
+			display: none;
+		}
+	}
 }
 
 @media all and (min-width: $laptop-breakpoint) {
