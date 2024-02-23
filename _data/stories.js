@@ -69,6 +69,7 @@ async function getAllStories() {
 									podcastNote
 									podcastUrl
 									postscript
+									prominentMentions
 									publicationHistory
 									sequenceEpisodeNumber
 									showImagePromo
@@ -219,15 +220,14 @@ async function getAllStories() {
 	// });
 
 	const processBooksMentioned = (booksData, prominentMentions) => {
-		booksData.slice(0, prominentMentions).map((book) => {
+		return booksData.slice(0, prominentMentions).map((book) => {
 			const bookAtts = book.attributes;
+			console.log('·', bookAtts.title);
 			const author = !!bookAtts.authors.data.length && bookAtts.authors.data[0].attributes;
 			const translator = !!bookAtts.translators.data.length && bookAtts.translators.data[0].attributes;
 			const publisher = !!bookAtts.publishers.data.length && bookAtts.publishers.data[0].attributes;
-
 			const authorFullName = !!author && (author.displayName || `${ author.forename }${ author.initials ? ' ' + author.initials + ' ' : ' ' }${ author.surname }`);
 			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename }${ author.initials ? ' ' + author.initials + ' ' : ' ' }${ translator.surname }`);
-
 			return {
 				title: bookAtts.title,
 				publicationYear: new Date(bookAtts.publicationDate).getFullYear(),
