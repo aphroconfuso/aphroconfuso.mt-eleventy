@@ -43,6 +43,7 @@ module.exports = (promos) => {
 			id: promo.id || (promo.story && promo.story.data.id),
 			isSequenceEpisode: !!sequence,
 			monthYear: getMonthYear(promoAtts.dateTimePublication),
+			note: promo.note,
 			podcastLengthMinutes: promoAtts.podcastLengthMinutes,
 			podcastNote: promoAtts.podcastNote,
 			podcastUrl: promoAtts.podcastUrl,

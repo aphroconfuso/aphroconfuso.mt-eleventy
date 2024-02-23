@@ -482,7 +482,7 @@ async function getAllStories() {
 					authorName: promo.translatorForename || promo.authorForename,
 					highlight: promo.audioHighlight,
 					podcastLengthMinutes: promo.podcastLengthMinutes,
-					podcastNote: (promo.audioNote || promo.podcastNote),
+					podcastNote: (promo.note || promo.podcastNote),
 					monthYear: promo.monthYear,
 					reads: reads(promo.authorPronoun),
 					reportingTitle: promo.reportingTitle,

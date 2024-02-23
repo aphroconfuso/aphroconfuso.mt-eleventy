@@ -27,29 +27,29 @@ article.poddata {
 			margin-top: $body-margin * 1.5;
 		}
 	}
-	#audio > figure:first-of-type.audio > div.player .slider {
-		.gap-progress {
-			background-color: $podcast-beige;
-		}
+}
+#audio > figure:first-of-type.audio > div.player .slider {
+	.gap-progress {
+		background-color: $podcast-beige;
 	}
-	#audio {
-		.audio:not(:first-of-type) {
-			background-color: $deco-brown;
-			border: 1px solid $lightester-brown;
-			border-bottom-width: 0;
-			border-top-width: 0;
-			margin-bottom: 0;
-			padding: $body-margin;
-			padding-bottom: 0;
-		}
-		.audio:nth-of-type(2) {
-			border-top-width: 1px;
-		}
-		.audio:last-of-type {
-			border-bottom-width: 1px;
-			margin-bottom: $body-margin;
-			padding-bottom: $body-margin;
-		}
+}
+#audio {
+	.audio:not(:first-of-type) {
+		background-color: $deco-brown;
+		border: 1px solid $lightester-brown;
+		border-bottom-width: 0;
+		border-top-width: 0;
+		margin-bottom: 0;
+		padding: $body-margin;
+		padding-bottom: 0;
+	}
+	.audio:nth-of-type(2) {
+		border-top-width: 1px;
+	}
+	.audio:last-of-type {
+		border-bottom-width: 1px;
+		margin-bottom: $body-margin;
+		padding-bottom: $body-margin;
 	}
 }
 
