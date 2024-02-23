@@ -41,7 +41,7 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-	& > span {
+	& > span.bookmark-percentage {
 		align-items: center;
 		border: 14px solid $paper;
 		border-top: 13px;

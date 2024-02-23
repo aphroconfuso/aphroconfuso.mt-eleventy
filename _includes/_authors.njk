@@ -1,7 +1,9 @@
 {% set item = promo or story %}
 <h2{% if item.type === 'Poddata' %} class="contains-with"{% endif %}>
-	{% if item.translator %}
-		<span class="author">{{ item.author | prettifyMaltese | safe }}</span> <span class="translator">(tr <a href="/{{ item.translator | slugifyMaltese }}/">{{ item.translator | prettifyMaltese | safe }}</a>)</span>
+	{% if promo and item.translator %}
+		<span class="author">{{ item.authorsString | prettifyMaltese | safe }}</span> <span class="translator">(tr {{ item.translator | prettifyMaltese | safe }})</span>
+	{% elif item.translator %}
+		<span class="author">{{ item.authorsString | prettifyMaltese | safe }}</span> <span class="translator">(tr <a href="/{{ item.translator | slugifyMaltese }}/">{{ item.translator | prettifyMaltese | safe }}</a>)</span>
 	{%- else %}
 		{% if item.type === 'Poddata' %}
 			<span class="with">ma’</span>

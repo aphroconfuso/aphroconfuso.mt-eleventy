@@ -197,7 +197,7 @@ const showBookmarksInPromos = (bookmarksArray) => {
 		const roundedPercentage = Math.round(percentage);
 		document.querySelectorAll(`a.story-${ storyId }`).forEach((element) => {
 			const bookmarkLink = document.createElement("a");
-			bookmarkLink.innerHTML = `<span>${roundedPercentage}%</span>`;
+			bookmarkLink.innerHTML = `<span class="bookmark-percentage">${roundedPercentage}%</span>`;
 			bookmarkLink.classList.add("bookmark");
 			bookmarkLink.href = `/${ urlSlug }/#b-${ percentage }`;
 			bookmarkLink.addEventListener("click", () => {_paq.push(['trackEvent', 'Promo', `minn: ${ reportingTitle } (bookmark)`, `għal: ${ title } (${ roundedPercentage }%)`, roundedPercentage])});
@@ -205,7 +205,7 @@ const showBookmarksInPromos = (bookmarksArray) => {
 		});
 		document.querySelectorAll(`article.story-${ storyId } > header`).forEach((element) => {
 			const bookmarkLink = document.createElement("a");
-			bookmarkLink.innerHTML = `<span>${roundedPercentage}%</span>`;
+			bookmarkLink.innerHTML = `<span class="bookmark-percentage">${roundedPercentage}%</span>`;
 			bookmarkLink.classList.add("bookmark");
 			bookmarkLink.href = `/${ urlSlug }/#b-${ percentage }`;
 			bookmarkLink.addEventListener('click', () => {
@@ -280,7 +280,7 @@ const showFullBookmarkList = () => {
 			clone.querySelector("a").href = `/${ urlSlug }/#b-${ percentage }`;
 			clone.querySelector("a").classList.add(`promo-${ monthYear }`, monthYear, `story-${ storyId }`, storyType);
 			clone.querySelector("a").id = `link-${ storyId }`;
-			clone.querySelector(".bookmark span").textContent = `${Math.round(percentage)}%`;
+			clone.querySelector(".bookmark span.bookmark-percentage").textContent = `${Math.round(percentage)}%`;
 			clone.querySelector("h1").innerHTML = title;
 			clone.querySelector("h2").textContent = author;
 			if (sequenceEpisodeTitle) clone.querySelector("h3").textContent = sequenceEpisodeTitle;
