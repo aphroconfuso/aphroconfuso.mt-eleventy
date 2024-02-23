@@ -44,7 +44,7 @@ const addBookmarkNow = () => {
 	if (!percentageProgress || (wordcount * (percentageProgress / 100)) < bookmarkThresholdWords || percentageProgress > 98) {
 		return;
 	}
-	addBookmark('text', {
+	addBookmark('text', storyId, {
 		author,
 		monthYear,
 		percentage: percentageProgress,
@@ -56,7 +56,7 @@ const addBookmarkNow = () => {
 		title: pageTitle,
 		translator,
 		urlSlug,
-		v: 3,
+		v: 4,
 		wordcount,
 		wordsPerSecond: wordsPerSecond && wordsPerSecond.toFixed(2),
 	});
@@ -103,7 +103,7 @@ const initialiseBookmarksList = () => {
 
 		const { dateTime, monthYear, percentage, playPosition, title, urlSlug, wordcount } = item;
 		const [, oldKeyType, oldKeyId] = oldKey.split(/(text|audio)-/);
-		// console.log('oldKeyType', oldKeyType);
+		// // console.log('oldKeyType', oldKeyType);
 		let updateFormat = false;
 		let discardBookmark = false;
 
@@ -138,7 +138,7 @@ const initialiseBookmarksList = () => {
 			bookmarksArray.push(item);
 		}
 
-		console.log(bookmarksArray);
+		// console.log(bookmarksArray);
 
 		if (updateFormat || discardBookmark) delete bookmarksList[oldKey];
 	});
@@ -146,13 +146,12 @@ const initialiseBookmarksList = () => {
 }
 
 const addBookmark = (type = 'text', thisStoryId = storyId, bookmark) => {
-	console.log(bookmark);
+	// console.log('ADDING BOOKMARK', type, thisStoryId, urlSlug, bookmark.urlSlug, bookmark.author, bookmark.title, bookmark);
 	bookmarksList[`${ type }-${ thisStoryId }`] = {
 		dateTime: new Date(),
 		type,
 		...bookmark
 	};
-	console.log(bookmarksList);
 	saveBookmarksList();
 	if (type === 'audio') return;
 	updateBookmarksMenu(bookmarksArray);
@@ -165,7 +164,6 @@ const deleteBookmark = (type = 'text', id = storyId) => {
 	if (type === 'audio') return;
 	const bookmark = bookmarksArray.find(i => i.id);
 	bookmarksArray = bookmarksArray.filter(i => i.id !== id);
-	console.log('DELETE', id, bookmark);
 	updateBookmarksMenu(bookmarksArray);
 	const removeBookmark = document.getElementById(`bookmark-${ id }`);
 	removeBookmark.style.opacity = '0';
@@ -298,7 +296,6 @@ const showFullBookmarkList = () => {
 const clearAllBookmarks = () => localStorage.clear();
 
 const getPreviousAudioTime = (id) => {
-	console.log('PREVIOUS TIME', bookmarksList, id);
 	return bookmarksList[`audio-${ id }`] && bookmarksList[`audio-${ id }`].playPosition || 0;
 }
 
@@ -454,7 +451,6 @@ const initialiseAfterWindow = () => {
 		if (audioUrls && audioUrls.songs.length) {
 			audioUrls.songs.forEach((song, index) => {
 				const { storyId, reportingTitle: thisReportingTitle } = song;
-				console.log(index, storyId, getPreviousAudioTime(storyId));
 				GreenAudioPlayer.init({
 					selector: `#player-${ index }`,
 					stopOthersOnPlay: true,
@@ -468,8 +464,6 @@ const initialiseAfterWindow = () => {
 				// Amplitude.init(audioUrls);
 				// var audio, audioReportingTitle;
 				const audio = document.querySelector(`#audio-${ index }`);
-
-				console.log(audio, audioReportingTitle);
 
 				audio.addEventListener('canplaythrough', () => {
 					if (song.loaded) return;
@@ -489,16 +483,12 @@ const initialiseAfterWindow = () => {
 			// 	audioLoaded = true;
 				// });
 
-				console.log(duration);
-
 
 			const getPercentageAudio = (audio) => (audio.currentTime * 100 / audio.duration).toFixed(2);
 
 			const addAudioBookmarkNow = (percentage, song, audio) => {
 
 				const audioPercentage = percentage || getPercentageAudio(audio);
-
-				console.log('audio bookmarking...', song.storyId, song.title, audioPercentage, audio.currentTime);
 				addBookmark('audio', song.storyId, {
 					author: song.author,
 					duration: audio.duration,
@@ -511,7 +501,7 @@ const initialiseAfterWindow = () => {
 					storyId: song.storyId,
 					title: song.title,
 					translator:song.translator,
-					urlSlug: song.urlSlug,
+					urlSlug: song.pageSlug,
 				});
 			}
 
@@ -523,7 +513,7 @@ const initialiseAfterWindow = () => {
 
 			audio.addEventListener('play', () => {
 				window._paq.push(['trackEvent', 'Smiegħ', 'play', audioReportingTitle]);
-				console.log(`Player ${ index }`, 'play', audioReportingTitle);
+				// console.log(`Player ${ index }`, 'play', audioReportingTitle);
 			});
 			audio.addEventListener('pause', () => {
 				percentageAudio = getPercentageAudio(audio);
@@ -545,7 +535,7 @@ const initialiseAfterWindow = () => {
 			});
 			audio.addEventListener('waiting', () => {
 				window._paq.push(['trackEvent', 'Smiegħ', 'buffering', audioReportingTitle, 1]);
-				console.log(`Player ${ index }`, 'waiting', audioReportingTitle);
+				// console.log(`Player ${ index }`, 'waiting', audioReportingTitle);
 			});
 			audio.addEventListener('timeupdate', () => {
 				currentTime = parseInt(audio.currentTime);

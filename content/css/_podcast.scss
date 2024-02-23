@@ -28,11 +28,11 @@ article.poddata {
 		}
 	}
 }
-#audio > figure:first-of-type.audio > div.player .slider {
-	.gap-progress {
-		background-color: $podcast-beige;
-	}
-}
+// #audio > figure:first-of-type.audio > div.player .slider {
+// 	.gap-progress {
+// 		background-color: $podcast-beige;
+// 	}
+// }
 #audio {
 	.audio:not(:first-of-type) {
 		background-color: $deco-brown;
