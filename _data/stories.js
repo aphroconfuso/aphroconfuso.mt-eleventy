@@ -305,9 +305,8 @@ async function getAllStories() {
 
 		// REFACTOR: Save externally
 		const fixReportingTitle = (processedStory) => {
-			const { type, sequenceEpisodeNumber, author, title } = processedStory;
-			if (type === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ author }`;
-			if (type === 'Poddata') return `Poddata #${ sequenceEpisodeNumber } ${ author }`;
+			const { type, sequenceEpisodeNumber, authorsString, title } = processedStory;
+			if (type === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ authorsString }`;
 			if (!!sequenceEpisodeNumber) return `${ title } #${ sequenceEpisodeNumber }`;
 			return title;
 		}
