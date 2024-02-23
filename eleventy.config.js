@@ -52,7 +52,7 @@ module.exports = function(eleventyConfig) {
 		const uniqueUrlsArray = [...new Set(urlsInContent)].filter(n => n).sort();
 		uniqueUrlsArray.forEach(i => {
 			if (!i) { return; }
-			const fileLocation = i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html");
+			const fileLocation = decodeURIComponent(i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html"));
 			if (!fs.existsSync(fileLocation)) {
 				throw new Error(`${fileLocation} is linked but does not exist!`);
 			};
