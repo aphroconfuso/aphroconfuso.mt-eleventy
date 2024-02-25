@@ -51,18 +51,23 @@ permalink: /{{ story.slug }}/index.html
 					{% endif %}
 				</p>
 				<h1>
-					{{ story.title | fixPodcastTitle | prettifyMaltese | safe }}
+					{{ story.mainTitle | fixPodcastTitle | prettifyMaltese | safe }}
 				</h1>
 			{% else %}
 				<p class="header-label"><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></p>
 				<h1>
-					{{ story.title | prettifyMaltese | safe }}
+					{{ story.mainTitle | prettifyMaltese | safe }}
 					{% if story.isSequenceEpisode %}
 						<span class="episodeNumber">#{{ story.sequenceEpisodeNumber }}</span>
 					{% endif %}
 				</h1>
 			{% endif %}
 			{% include "_authors.njk" %}
+			{% if story.subtitle %}
+				<h3>{{ story.subtitle | prettifyMaltese | safe }}</h3>
+			{% elif story.isSequenceEpisode %}
+				<h3>{{ story.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
+			{% endif %}
 			{% for epigraph in story.epigraphs %}
 				{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
 					<figure class="epigraph">
@@ -71,9 +76,6 @@ permalink: /{{ story.slug }}/index.html
 					</figure>
 				{% if loop.last %}</section>{% endif %}
 			{% endfor %}
-			{% if story.isSequenceEpisode %}
-				<h3>{{ story.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
-			{% endif %}
 		</header>
 		<div class="container">
 			<section id="grid-max-panel-left-top">
@@ -236,7 +238,7 @@ permalink: /{{ story.slug }}/index.html
 				</section>
 		{% endif %}
 	</article>
-	<aside class="promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.title }}">
+	<aside class="promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
 		{% set promoFrom = story.reportingTitle %}
 		{% set promos = story.endPromos %}
 		{% set showEpisodeTitle = true %}
@@ -260,7 +262,7 @@ permalink: /{{ story.slug }}/index.html
 		{% set imageMode = 'lightbox' %}
 		<aside id="lightbox"{% if story.singleImage %} class="single-image"{% endif %}>
 			<div id="lightbox-container">
-				<button id="lightbox-close" type="button" onclick="_paq.push(['trackEvent', 'Stampi', 'lightbox [×]', '{{ story.title }}']);">×</button>
+				<button id="lightbox-close" type="button" onclick="_paq.push(['trackEvent', 'Stampi', 'lightbox [×]', '{{ story.reportingTitle }}']);">×</button>
 					{% include "_slideshow.njk" %}
 			</div>
 		</aside>

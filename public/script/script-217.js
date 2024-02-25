@@ -257,7 +257,7 @@ const showFullBookmarkList = () => {
 
 	if (list && browserTemplating && template) {
 		bookmarksArray.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)).forEach((bookmark, index) => {
-			var { author, monthYear, percentage, placeText, storyId, storyType, reportingTitle, sequenceEpisodeNumber, sequenceEpisodeTitle, title, urlSlug, wordcount } = bookmark;
+			var { author, monthYear, percentage, placeText, storyId, storyType, reportingTitle, sequenceEpisodeNumber, sequenceEpisodeTitle, title, urlSlug, wordcount, translator } = bookmark;
 			const clone = template.content.cloneNode(true);
 			// THIS SHOULD BECOME OBSOLETE (IMPLEMENTED 17.01.2024)
 			if (!reportingTitle) {
@@ -280,7 +280,11 @@ const showFullBookmarkList = () => {
 			clone.querySelector("a").id = `link-${ storyId }`;
 			clone.querySelector(".bookmark span.bookmark-percentage").textContent = `${Math.round(percentage)}%`;
 			clone.querySelector("h1").innerHTML = title;
-			clone.querySelector("h2").textContent = author;
+			if (translator) {
+				clone.querySelector("h2 ").innerHTML = `<span class=\"author\">${ author }</span> (tr <span class=\"translator\">${ translator }</span>)`;
+			} else {
+				clone.querySelector("h2 ").innerHTML = `<span class=\"author\">${ author }</span>`;
+			}
 			if (sequenceEpisodeTitle) clone.querySelector("h3").textContent = sequenceEpisodeTitle;
 			clone.querySelector("p.header-label").textContent = monthYear && monthYear.replace(/-/, ' ').replace(/gunju/, 'ġunju').replace(/dicembru/, 'diċembru');
 			clone.querySelector("button").id = `delete-${ storyId }`;

@@ -94,13 +94,19 @@ async function getAllStories() {
 										attribution
 										quotation
 									}
-									authors {
+									authors (
+				            publicationState: ${ fetchStatus },
+									) {
 										${personData}
 									}
-									translators {
+									translators (
+				            publicationState: ${ fetchStatus },
+									) {
 										${personData}
 									}
-									booksMentioned {
+									booksMentioned (
+				            publicationState: ${ fetchStatus },
+									) {
 										data {
 											attributes {
 												title
@@ -290,7 +296,9 @@ async function getAllStories() {
 			'Wisgha_tal_pagna 16:9': 'landscape',
 		}
 
+				// REFACTOR: rationalise titles mainTitle, subtitle, metaTitle, displayTitle, reportingTitle
 		const title = sequenceData && sequenceData.attributes.title || atts.title;
+		const [mainTitle, subtitle] = title.split(": ");
 
 		const displayTitle = makePageTitle(
 			atts.title,
@@ -389,6 +397,7 @@ async function getAllStories() {
 			listable: atts.type !== 'Djarju' && atts.type !== 'Poddata',
 			listableDiary: atts.type === 'Djarju',
 			listablePodcast: atts.type === 'Poddata',
+			mainTitle,
 			metaTitle: displayTitle,
 			monthYear: getMonthYear(atts.dateTimePublication),
 			moreToCome: atts.moreToCome,
@@ -416,7 +425,8 @@ async function getAllStories() {
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			sortTitle: makeSortableTitle(title),
 			subjectDate: atts.diaryDate,
-			title: title,
+			subtitle,
+			title,
 			translator: translatorFullName,
 			translatorForename: (translator && translator.forename) || translatorFullName,
 			triggerWarning: atts.triggerWarning,
