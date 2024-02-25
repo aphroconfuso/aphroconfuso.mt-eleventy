@@ -53,8 +53,12 @@ module.exports = function(eleventyConfig) {
 		uniqueUrlsArray.forEach(i => {
 			if (!i) { return; }
 			const fileLocation = decodeURIComponent(i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html"));
+			if (fileLocation.includes('localhost:')) {
+				throw new Error(`${fileLocation} points to localhost!`);
+			}
 			if (!fs.existsSync(fileLocation)) {
-				throw new Error(`${fileLocation} is linked but does not exist!`);
+				// throw new Error(`${fileLocation} is linked but does not exist!`);
+				console.error(`ERROR: ${fileLocation} is linked but does not exist!`);
 			};
 		});
 

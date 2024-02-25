@@ -96,19 +96,19 @@ async function getAllContributors() {
 		const storiesTranslated = processPromos(item.attributes.storiesTranslated.data);
 		const diaryEntries = processPromos(item.attributes.diaryEntries.data);
 		const podcastEpisodes = processPromos(item.attributes.podcastEpisodes.data);
-		const useFullName = getPersonName(item.attributes);
+		const displayContributorName = getPersonName(item.attributes);
 
 		return {
 			bioNote: item.attributes.bioNote,
 			forename: item.attributes.forename,
 			metaDescription: smartTruncate(stripTags(item.attributes.bioNote), 155),
-			metaTitle: `${ useFullName } · Aphroconfuso`,
-			slug: slugifyMaltese(useFullName),
+			metaTitle: `${ displayContributorName } · Aphroconfuso`,
+			slug: slugifyMaltese(displayContributorName),
 			storiesAuthored: storiesAuthored,
 			storiesTranslated: storiesTranslated,
 			diaryEntries: diaryEntries,
 			podcastEpisodes: podcastEpisodes,
-      name: useFullName,
+      name: displayContributorName,
     };
   });
 	return contributorsFormatted;

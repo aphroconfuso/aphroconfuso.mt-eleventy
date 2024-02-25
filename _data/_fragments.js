@@ -1,3 +1,5 @@
+const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
+
 const imageData = `data {
 	attributes {
 		alternativeText
@@ -30,10 +32,14 @@ const linkedStoriesAttributes = `
 	title
 	type
 	useDefaultPodcastMessage
-	authors {
+	authors (
+		publicationState: ${ fetchStatus },
+	) {
 		${personData}
 	}
-	translators {
+	translators (
+		publicationState: ${ fetchStatus },
+	) {
 		${personData}
 	}
 	sequence {
