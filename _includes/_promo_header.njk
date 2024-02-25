@@ -19,7 +19,7 @@
 	{% else %}
 		<p class="header-label">{{ promo.monthYear }}</p>
 		<h1>
-			{{ promo.title | prettifyMaltese | safe }}
+			{{ promo.mainTitle | prettifyMaltese | safe }}
 			{% if promo.isSequenceEpisode %}
 				<span class="episodeNumber">#{{ promo.sequenceEpisodeNumber }}</span>
 			{% endif %}

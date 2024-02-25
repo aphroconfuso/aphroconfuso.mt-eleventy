@@ -182,6 +182,8 @@ async function getHomepage() {
 			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename }${ translator.initials ? ' ' + translator.initials + ' ' : ' ' }${ translator.surname }`);
 			const promoSequenceData = storyAtts.sequence && storyAtts.sequence.data;
 			const descriptionLength = lengths && lengths[index] || 9999;
+			const title = !!promoSequenceData ? promoSequenceData.attributes.title : storyAtts.title
+			const [mainTitle, subtitle] = title.split(": ");
 
 			// REFACTOR: Save externally
 			const fixReportingTitle = (formattedPromo) => {
@@ -193,13 +195,14 @@ async function getHomepage() {
 
 			let formattedPromo = {
 				authorsType,
-				author: authorsString,
+				authorsString,
 				authors,
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 				description: smartTruncate(promo.text || storyAtts.description, descriptionLength),
 				subjectDate: storyAtts.diaryDate,
 				id: promo.story && promo.story.data.id || promo.id,
 				isSequenceEpisode: !!promoSequenceData,
+				mainTitle,
 				mobilePriority: promo.mobilePriority || 9,
 				monthYear: getMonthYear(storyAtts.dateTimePublication),
 				sequenceEpisodeNumber: storyAtts.sequenceEpisodeNumber,
@@ -214,7 +217,8 @@ async function getHomepage() {
 					!!promoSequenceData && storyAtts.title,
 					storyAtts.type
 				),
-				title: !!promoSequenceData ? promoSequenceData.attributes.title : storyAtts.title,
+				subtitle,
+				title,
 				translator: translatorFullName,
 				type: storyAtts.type,
 			};
