@@ -60,12 +60,13 @@ permalink: /{{ story.slug }}/index.html
 					{% if story.isSequenceEpisode %}
 						<span class="episodeNumber">#{{ story.sequenceEpisodeNumber }}</span>
 					{% endif %}
+					{% if story.subtitle %}
+						<br /><span class="subtitle">{{ story.subtitle | prettifyMaltese | safe }}</span>
+					{% endif %}
 				</h1>
 			{% endif %}
 			{% include "_authors.njk" %}
-			{% if story.subtitle %}
-				<h3>{{ story.subtitle | prettifyMaltese | safe }}</h3>
-			{% elif story.isSequenceEpisode %}
+			{% if story.isSequenceEpisode %}
 				<h3>{{ story.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
 			{% endif %}
 			{% for epigraph in story.epigraphs %}

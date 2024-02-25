@@ -10,6 +10,9 @@
 	}
 	& > header > h1 {
 		color: $colour;
+		.subtitle {
+			color: lighten($colour, $lighter);
+		}
 	}
 	.dropcap {
 		&::before,

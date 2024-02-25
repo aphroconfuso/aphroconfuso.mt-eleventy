@@ -1,34 +1,50 @@
 @font-face {
 	font-family: "Alegreya";
-	src: url("/fonts/Alegreya-Regular.ttf") format("truetype");
+	src: url("/fonts/Alegreya-VariableFont_wght.ttf") format("truetype");
+	// src: url("/fonts/Alegreya-Regular.ttf") format("truetype");
 	font-style: normal;
 	font-weight: 400;
 }
 
 @font-face {
 	font-family: "Alegreya";
-	src: url("/fonts/Alegreya-Medium.ttf") format("truetype");
+	src: url("/fonts/Alegreya-VariableFont_wght.ttf") format("truetype");
+	// src: url("/fonts/Alegreya-Medium.ttf") format("truetype");
 	font-style: normal;
 	font-weight: 500;
 }
 
 @font-face {
 	font-family: "Alegreya";
-	src: url("/fonts/Alegreya-Italic.ttf") format("truetype");
+	// src: url("/fonts/Alegreya-MediumItalic.ttf") format("truetype");
+	src: url("/fonts/Alegreya-Italic-VariableFont_wght.ttf") format("truetype");
+	font-style: italic;
+	font-weight: 500;
+}
+
+// Alegreya-VariableFont_wght.ttf
+// Alegreya-Italic-VariableFont_wght.ttf
+
+@font-face {
+	font-family: "Alegreya";
+	src: url("/fonts/Alegreya-Italic-VariableFont_wght.ttf") format("truetype");
+	// src: url("/fonts/Alegreya-Italic.ttf") format("truetype");
 	font-style: italic;
 	font-weight: 400;
 }
 
 @font-face {
 	font-family: "Alegreya";
-	src: url("/fonts/Alegreya-SemiBold.ttf") format("truetype");
+	src: url("/fonts/Alegreya-VariableFont_wght.ttf") format("truetype");
+	// src: url("/fonts/Alegreya-SemiBold.ttf") format("truetype");
 	font-style: normal;
 	font-weight: 600;
 }
 
 @font-face {
 	font-family: "Alegreya";
-	src: url("/fonts/Alegreya-SemiBoldItalic.ttf") format("truetype");
+	src: url("/fonts/Alegreya-Italic-VariableFont_wght.ttf") format("truetype");
+	// src: url("/fonts/Alegreya-SemiBoldItalic.ttf") format("truetype");
 	font-style: italic;
 	font-weight: 600;
 }
