@@ -25,8 +25,9 @@ module.exports = (promos) => {
 		const sequence = promoAtts.sequence.data && promoAtts.sequence.data.attributes;
 		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		const sequenceTitle = sequence && sequence.title;
-		const computedTitle = sequenceTitle || promoAtts.title;
+		const title = sequenceTitle || promoAtts.title;
 		const sequenceEpisodeTitle = sequence && promoAtts.title;
+		const [mainTitle, subtitle] = title.split(": ");
 
 		const processedPromo = {
 			audioNote: promo.note,
@@ -42,6 +43,7 @@ module.exports = (promos) => {
 			subjectDate: promoAtts.diaryDate,
 			id: promo.id || (promo.story && promo.story.data.id),
 			isSequenceEpisode: !!sequence,
+			mainTitle,
 			monthYear: getMonthYear(promoAtts.dateTimePublication),
 			note: promo.note,
 			podcastLengthMinutes: promoAtts.podcastLengthMinutes,
@@ -60,7 +62,8 @@ module.exports = (promos) => {
 				!!sequence && promoAtts.title,
 				promoAtts.type
 			),
-			title: computedTitle,
+			subtitle,
+			title,
 			translator: translatorFullName,
 			translatorForename: (translator && translator.forename) || translatorFullName,
 			translatorPronoun: (translator && translator.pronoun) || 'huma',

@@ -296,7 +296,7 @@ async function getAllStories() {
 			'Wisgha_tal_pagna 16:9': 'landscape',
 		}
 
-				// REFACTOR: rationalise titles mainTitle, subtitle, metaTitle, displayTitle, reportingTitle
+		// REFACTOR: rationalise titles mainTitle, subtitle, metaTitle, displayTitle, reportingTitle, fixPodcastTitle
 		const title = sequenceData && sequenceData.attributes.title || atts.title;
 		const [mainTitle, subtitle] = title.split(": ");
 
