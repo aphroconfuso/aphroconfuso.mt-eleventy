@@ -76,7 +76,7 @@
 }
 
 .container-collection {
-	.promo-list li {
+	.promo-list > ul > li {
 		padding-bottom: $body-margin-half;
 		&:last-of-type {
 			border-bottom: 1px solid $faint-line;
