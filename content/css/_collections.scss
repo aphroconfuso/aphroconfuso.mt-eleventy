@@ -1,0 +1,108 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+@use "mixins-home-grids" as *;
+
+@mixin collection-colour($hue: 0, $saturation: 35%) {
+	background-color: hsl($hue, $saturation, 80%);
+	h3,
+	.pilcrow {
+		color: hsl($hue, $saturation, 30%);
+	}
+	p {
+		color: hsl($hue, $saturation, 20%);
+	}
+	.end-dot {
+		background-color: hsl($hue, $saturation, 40%);
+		color: hsl($hue, $saturation, 40%);
+	}
+	&.header-label {
+		background-color: unset;
+		a {
+			padding: 0 2px;
+			&:hover {
+				background-color: hsl($hue, $saturation, 80%);
+				color: hsl($hue, $saturation, 30%) !important;
+			}
+		}
+	}
+	@media all and (min-width: $mobile-breakpoint-plusone) {
+		&.collection-sidebar {
+			a:hover {
+				h3,
+				p {
+					color: hsl($hue, $saturation, 30%);
+				}
+			}
+		}
+	}
+}
+
+.collection-sidebar {
+	padding: $body-margin-half;
+	h3 {
+		font-style: normal;
+	}
+	p {
+		@include clamp(7);
+	}
+}
+
+.end-dot {
+	border-radius: 0;
+}
+
+.collection.introduction {
+	.fx-1 {
+		font-family: "Alegreya Sans SC Regular";
+		font-variant: small-caps;
+		text-transform: lowercase;
+		font-size: $body-font-size-slightly-larger;
+	}
+}
+
+.pilcrow {
+	font-family: $decorative, cursive;
+	padding: 0 $body-margin-quarter * 0.5;
+}
+
+.collection-2 {
+	@include collection-colour(177);
+}
+
+.collection-3 {
+	@include collection-colour(280);
+}
+
+@media all and (min-width: $mobile-breakpoint-plusone) {
+	.container-collection {
+		max-width: $max-width;
+		display: grid;
+		grid-template-columns: 1fr ($max-content-width * 0.5) (
+				$max-content-width * 0.5
+			) 1fr;
+		grid-template-rows: auto;
+		grid-auto-flow: row;
+		grid-template-areas: "grid-max-body grid-max-body grid-max-panel-right-top grid-max-panel-right-top";
+		column-gap: $body-margin;
+
+		#grid-body {
+			max-width: 100%;
+			width: 100%;
+			.introduction {
+				padding: $body-margin-half;
+				p {
+					columns: 2;
+				}
+			}
+		}
+		#grid-max-panel-right-top {
+			max-width: 100%;
+			padding-right: $body-margin-double;
+		}
+		#form {
+			width: 75%;
+		}
+	}
+}

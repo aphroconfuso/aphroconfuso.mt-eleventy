@@ -29,6 +29,7 @@ header {
 	h2 {
 		font-family: $serif, serif;
 		font-size: $font-size-story-header-mobile;
+		font-weight: 500;
 		line-height: $header-line-height;
 		a,
 		.author {
@@ -50,13 +51,16 @@ header {
 		margin-bottom: 0;
 	}
 
-	& > p.header-label {
-		display: inline-block;
-		font-family: $sans, sans-serif;
+	& > ul {
+		display: flex;
+		font-family: "Alegreya Sans SC Regular";
 		line-height: $header-line-height;
-		text-transform: uppercase;
-		font-size: $font-size-compact !important;
-		font-variant: small-caps;
+		font-size: 1.1rem;
+		text-transform: lowercase;
+		li:not(:first-of-type)::before {
+			content: "•";
+			padding: 0 2px 0 4px;
+		}
 	}
 }
 

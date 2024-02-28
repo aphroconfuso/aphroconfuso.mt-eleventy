@@ -7,7 +7,7 @@
 	// font-size: $font-size-furniture;
 	.promo-list {
 		margin-top: $body-margin;
-		li {
+		& > li {
 			margin-bottom: calc($body-margin - 1px);
 			border-bottom: 1px solid $faint-line;
 			&:last-of-type {
@@ -187,11 +187,9 @@
 .generic {
 	&.podcasts,
 	.contributor {
-		.promo-list {
-			li:last-of-type {
-				margin-bottom: calc($body-margin - 1px);
-				border-bottom: 1px solid $faint-line;
-			}
+		.promo-list > li:last-of-type {
+			margin-bottom: calc($body-margin - 1px);
+			border-bottom: 1px solid $faint-line;
 		}
 	}
 }

@@ -38,23 +38,35 @@ permalink: /{{ story.slug }}/index.html
 {% block content %}
 	<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }} story story-{{ story.id }}">
 		<header>
-			{% if story.type === 'Djarju' %}
-				<p class="header-label"><a href="/djarju/" class="diaryTitle">Djarju</a>
-					{% if story.subjectDate %}
-						<span class="subjectDate">{{ story.subjectDate | subjectDate }}</span>
+			<ul>
+				<li class="header-label">
+					{% if story.type === 'Djarju' %}
+						<a href="/djarju/" class="diaryTitle">Djarju</a>
+							{% if story.subjectDate %}
+								<span class="subjectDate">{{ story.subjectDate | subjectDate }}</span>
+							{% endif %}
+						</p>
+					{% elif story.type === 'Poddata' %}
+						<a href="/podcast/" class="diaryTitle">Poddata</a>
+							{% if story.subjectDate %}
+								<span class="subjectDate">{{ story.subjectDate | subjectDate }}</span>
+							{% endif %}
+
+					{% else %}
+						<a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a>
 					{% endif %}
-				</p>
-			{% elif story.type === 'Poddata' %}
-				<p class="header-label"><a href="/podcast/" class="diaryTitle">Poddata</a>
-					{% if story.subjectDate %}
-						<span class="subjectDate">{{ story.subjectDate | subjectDate }}</span>
-					{% endif %}
-				</p>
+				</li>
+				{% for storycollection in story.storycollections %}
+					<li class="header-label collection-slug collection-{{ storycollection.id }}">
+						<a href="/{{ storycollection.title | slugifyMaltese }}/">{{ storycollection.title }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+			{% if story.type === 'Poddata' %}
 				<h1>
 					{{ story.mainTitle | fixPodcastTitle | prettifyMaltese | safe }}
 				</h1>
 			{% else %}
-				<p class="header-label"><a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a></p>
 				<h1>
 					{{ story.mainTitle | prettifyMaltese | safe }}
 					{% if story.isSequenceEpisode %}
@@ -110,7 +122,7 @@ permalink: /{{ story.slug }}/index.html
 					{% if loop.last %}</table>{% endif %}
 				{% endfor %}
 				{% if story.sequencePreviousPromo %}
-					<div class="body-text promo-adjacent promo-previous">
+					<aside class="body-text promo-adjacent promo-previous">
 						{% if story.type == 'Djarju' %}
 							<p class="continuity">{{ metadata.texts.previousDiary | prettifyMaltese | safe }}</p>
 						{% else %}
@@ -122,8 +134,18 @@ permalink: /{{ story.slug }}/index.html
 							</header>
 							<p>{{ story.sequencePreviousPromo.description | prettifyMaltese | safe }}</p>
 						</a>
-					</div>
+					</aside>
 				{% endif %}
+				{% for storycollection in story.storycollections %}
+					<aside class="collection-sidebar collection-{{ storycollection.id }} generic-body-text hide-mobile">
+						<a href="/{{ storycollection.title | slugifyMaltese }}/">
+								<header>
+									<h3>{{ storycollection.title }}</h3>
+								</header>
+								<p>{{ storycollection.description | prettifyMaltese | safe }}</p>
+						</a>
+					</aside>
+				{% endfor %}
 			</section>
 			<section id="grid-max-panel-right-top">
 				{% if story.podcastNote and not story.podcastUrl %}
@@ -202,6 +224,16 @@ permalink: /{{ story.slug }}/index.html
 				</aside>
 			</section>
 			<section id="grid-max-panel-right-bottom">
+				{% for storycollection in story.storycollections %}
+					<aside class="collection-sidebar collection-{{ storycollection.id }} generic-body-text hide-laptop">
+						<a href="/{{ storycollection.title | slugifyMaltese }}/">
+								<header>
+									<h3>{{ storycollection.title }}</h3>
+								</header>
+								<p>{{ storycollection.description | prettifyMaltese | safe }}</p>
+						</a>
+					</aside>
+				{% endfor %}
 				{% if story.postscript %}
 					<aside id="postscript">
 						{{ story.postscript | restrictHtml | prettifyMaltese | safe }}
@@ -248,6 +280,7 @@ permalink: /{{ story.slug }}/index.html
 	<script>
 		audioUrls = { "songs": {{ story.audioUrlsString | safe }} };
 		author = "{{ story.authorsString | safe }}" || null;
+		collections = storycollectionsString || null;
 		monthYear = "{{ story.monthYear | slugify }}" || null;
 		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
 		reportingTitle = "{{ story.reportingTitle | safe}}" || null;

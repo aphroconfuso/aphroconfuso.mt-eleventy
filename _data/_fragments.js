@@ -50,6 +50,16 @@ const linkedStoriesAttributes = `
 			}
 		}
 	}
+	collections (
+		publicationState: ${ fetchStatus },
+	) {
+		data {
+			id
+			attributes {
+				title
+			}
+		}
+	}
 `;
 
 const linkedStoryData = `

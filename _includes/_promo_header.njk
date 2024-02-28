@@ -1,23 +1,34 @@
 <header>
+	<ul>
 	{% if promo.type === 'Poddata' %}
-		<p class="header-label">
+		<li class="header-label">
 			Poddata
 			{% if promo.subjectDate %}
 				<span class="subjectDate">{{ promo.subjectDate | subjectDate }}</span>
 			{% endif %}
-		</p>
-		<h1>
-			{{ promo.title | fixPodcastTitle | prettifyMaltese | safe }}
-		</h1>
+		</li>
 	{% elif promo.type === 'Djarju' %}
-		<p class="header-label">
+		<li class="header-label">
 			Djarju
 			{% if promo.subjectDate %}
 				<span class="subjectDate">{{ promo.subjectDate | subjectDate }}</span>
 			{% endif %}
-		</p>
+		</li>
 	{% else %}
-		<p class="header-label">{{ promo.monthYear }}</p>
+		<li class="header-label">{{ promo.monthYear }}</li>
+	{% endif %}
+	{% for storycollection in promo.storycollections %}
+		<li class="header-label collection-slug collection-{{ storycollection.id }}">
+			{{ storycollection.title }}
+		</li>
+	{% endfor %}
+	</ul>
+	{% if promo.type === 'Poddata' %}
+		<h1>
+			{{ promo.title | fixPodcastTitle | prettifyMaltese | safe }}
+		</h1>
+	{% elif promo.type === 'Djarju' %}
+	{% else %}
 		<h1>
 			{{ promo.mainTitle | prettifyMaltese | safe }}
 			{% if promo.isSequenceEpisode %}
