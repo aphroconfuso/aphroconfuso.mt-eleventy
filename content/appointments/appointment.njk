@@ -9,7 +9,7 @@ permalink: /{{ appointment.monthYear | slugifyMaltese }}/index.html
 {% extends 'layouts/base.njk' %}
 
 {% block head %}
-	<title>{{ appointment.monthYear | prettifyMaltese | safe }} · Aphroconfuso</title>
+	<title>{{ appointment.monthYear }} · Aphroconfuso</title>
 	<meta content="{{ appointment.editorial | getDescription }}" name="description">
 	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 {% endblock %}

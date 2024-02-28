@@ -9,7 +9,7 @@ permalink: /{{ storycollection.title | slugifyMaltese }}/index.html
 {% extends 'layouts/base.njk' %}
 
 {% block head %}
-	<title>{{ storycollection.title | prettifyMaltese | safe }} · Aphroconfuso</title>
+	<title>{{ storycollection.title }} · Aphroconfuso</title>
 	<meta content="{{ storycollection.description }}" name="description">
 	<meta property="og:image" content="https://aphroconfuso.mt{{ metadata.settings.imagesUrl + storycollection.socialImage }}">
 	<meta name="twitter:card" content="summary_large_image">
