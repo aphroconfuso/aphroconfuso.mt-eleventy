@@ -77,7 +77,7 @@
 
 .container-collection {
 	.promo-list li {
-		padding-bottom: $body-margin;
+		padding-bottom: $body-margin-half;
 		&:last-of-type {
 			border-bottom: 1px solid $faint-line;
 			margin-bottom: calc($body-margin - 1px);
