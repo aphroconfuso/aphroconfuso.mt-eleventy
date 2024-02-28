@@ -65,8 +65,6 @@ async function getAllcollections() {
 		if (!atts.promoImage) console.log("Image missing! An image was probably deleted from the media library after it had been added as the social image.");
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
 
-		console.log(promoImageFormats.social);
-
 		return {
 			id: collection.id,
 			body: `<p>${ stripTags(atts.body, ['i', 'em', 'span']).trim().replace(/\n+/g,"<span class=\"pilcrow\">¶</span>") }</p>`,
