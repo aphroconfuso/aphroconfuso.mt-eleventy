@@ -185,7 +185,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("prettifyMaltese", function prettifyMaltese(text) {
-		if (!text) return "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+		if (!text) return "XXXXXXprettifyMalteseXXX";
 		return (text || []).replace(/<p>\s*<\/p>/gm, "")
 			.replace(/-</gm, "- <")
 			.replace(/  +/gm, " ")
@@ -235,7 +235,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("slugifyMaltese", function slugifyMaltese(text) {
-		if (!text) return "XXXXXXXXXXXXXXXXXXXXXXXXX";
+		if (!text) return "XXXXXXslugifyMalteseXXX";
 		return slugifyStringMaltese(text);
 	});
 

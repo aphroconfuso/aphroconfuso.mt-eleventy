@@ -2,6 +2,7 @@ const fixAuthorsType = require("./fixAuthorsType.js");
 const getMonthYear = require("./getMonthYear.js");
 const makeTitleSlug = require("./makeTitleSlug.js");
 const parseAuthors = require("./parseAuthors.js");
+const processCollections = require("./processCollections.js");
 const reads = require("./getReads.js");
 
 // REFACTOR: Save externally
@@ -28,6 +29,8 @@ module.exports = (promos) => {
 		const title = sequenceTitle || promoAtts.title;
 		const sequenceEpisodeTitle = sequence && promoAtts.title;
 		const [mainTitle, subtitle] = title.split(": ");
+
+		const storycollections = promoAtts.collections && processCollections(promoAtts.collections.data);
 
 		const processedPromo = {
 			audioNote: promo.note,
@@ -62,6 +65,7 @@ module.exports = (promos) => {
 				!!sequence && promoAtts.title,
 				promoAtts.type
 			),
+			storycollections,
 			subtitle,
 			title,
 			translator: translatorFullName,

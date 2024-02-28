@@ -38,7 +38,7 @@
 			h2 {
 				font-size: 2rem;
 			}
-			p.header-label {
+			li.header-label {
 				display: none;
 			}
 		}
@@ -49,7 +49,7 @@
 				color: $lighter-brown;
 				text-decoration: none;
 			}
-			p.header-label {
+			li.header-label {
 				display: block;
 			}
 		}

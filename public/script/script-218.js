@@ -274,7 +274,7 @@ const showFullBookmarkList = () => {
 			const minutes = numberify(parseInt(remaining / (readersWordsPerSecond * 60)), ['minuta', 'minuti']);
 			remaining = numberify(prettifyNumbers(remaining));
 			// wordcount = numberify(prettifyNumbers(wordcount));
-			clone.querySelector("li").id = `bookmark-${ storyId }`;
+			clone.querySelector("li:first-of-type.header-label").id = `bookmark-${ storyId }`;
 			clone.querySelector("a").href = `/${ urlSlug }/#b-${ percentage }`;
 			clone.querySelector("a").classList.add(`promo-${ monthYear }`, monthYear, `story-${ storyId }`, storyType);
 			clone.querySelector("a").id = `link-${ storyId }`;
@@ -286,7 +286,8 @@ const showFullBookmarkList = () => {
 				clone.querySelector("h2 ").innerHTML = `<span class=\"author\">${ author }</span>`;
 			}
 			if (sequenceEpisodeTitle) clone.querySelector("h3").textContent = sequenceEpisodeTitle;
-			clone.querySelector("p.header-label").textContent = monthYear && monthYear.replace(/-/, ' ').replace(/gunju/, 'ġunju').replace(/dicembru/, 'diċembru');
+			// TODO: Add collections
+			clone.querySelector("li:first-of-type.header-label").textContent = monthYear && monthYear.replace(/-/, ' ').replace(/gunju/, 'ġunju').replace(/dicembru/, 'diċembru');
 			clone.querySelector("button").id = `delete-${ storyId }`;
 			clone.querySelector(".body-text p").textContent = placeText.replace(/.*?\w\b\s+/, "… ");
 			clone.querySelector("aside p").textContent = `Fadallek ${ remaining }, madwar ${ minutes } qari`;

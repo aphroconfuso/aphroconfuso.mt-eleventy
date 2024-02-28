@@ -6,6 +6,7 @@ const makePageTitle = require("../src/makePageTitle.js");
 const makeSortableTitle = require("../src/makeSortableTitle.js");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
 const parseAuthors = require("../src/parseAuthors.js");
+const processCollections = require("../src/processCollections.js");
 const processPromos = require("../src/processPromos.js");
 const reads = require("../src/getReads.js");
 const slugifyStringMaltese = require("../src/slugifyMaltese.js");
@@ -145,6 +146,31 @@ async function getAllStories() {
 										data {
 											attributes {
 												title
+												description
+												stories {
+													data {
+														attributes {
+															dateTimePublication
+															description
+															diaryDate
+															pageUrl
+															sequenceEpisodeNumber
+															title
+															type
+														}
+													}
+												}
+											}
+										}
+									}
+									collections(
+				            publicationState: ${ fetchStatus },
+									) {
+										data {
+											id
+											attributes {
+												title
+												moreToCome
 												description
 												stories {
 													data {
@@ -366,6 +392,8 @@ async function getAllStories() {
 			sequenceEpisodes.reverse();
 		}
 
+		const storycollections = atts.collections && processCollections(atts.collections.data);
+
 		cumulativeBody += " " + atts.body;
 
 		const processedStory = {
@@ -400,7 +428,7 @@ async function getAllStories() {
 			mainTitle,
 			metaTitle: displayTitle,
 			monthYear: getMonthYear(atts.dateTimePublication),
-			moreToCome: atts.moreToCome,
+			moreToCome: atts.moreToCome || storycollections.length, // FIXME
 			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
 			podcastLengthMinutes: atts.podcastLengthMinutes,
 			podcastNote: atts.podcastNote,
@@ -424,6 +452,7 @@ async function getAllStories() {
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			sortTitle: makeSortableTitle(title),
+			storycollections,
 			subjectDate: atts.diaryDate,
 			subtitle,
 			title,

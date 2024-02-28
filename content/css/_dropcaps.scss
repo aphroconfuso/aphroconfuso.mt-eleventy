@@ -35,6 +35,16 @@
 	}
 }
 
+.drop-¶ {
+	margin-left: 0.1rem;
+	padding-right: 0.6rem;
+	&::before {
+		content: "¶";
+		left: -0.9rem;
+		opacity: 0.5;
+	}
+}
+
 .drop-A {
 	margin-left: 0.1rem;
 	padding-right: 0.6rem;
