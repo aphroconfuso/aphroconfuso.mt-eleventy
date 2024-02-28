@@ -280,7 +280,7 @@ permalink: /{{ story.slug }}/index.html
 	<script>
 		audioUrls = { "songs": {{ story.audioUrlsString | safe }} };
 		author = "{{ story.authorsString | safe }}" || null;
-		collections = storycollectionsString || null;
+		collections = "{{ story.storycollectionsString }}" || null;
 		monthYear = "{{ story.monthYear | slugify }}" || null;
 		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
 		reportingTitle = "{{ story.reportingTitle | safe}}" || null;
