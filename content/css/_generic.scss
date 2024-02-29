@@ -186,10 +186,20 @@
 
 .generic {
 	&.podcasts,
-	.contributor {
-		.promo-list > li:last-of-type {
-			margin-bottom: calc($body-margin - 1px);
-			border-bottom: 1px solid $faint-line;
+	.container-collection {
+		.promo-list > li {
+			&:last-of-type {
+				margin-bottom: calc($body-margin - 1px);
+				border-bottom: 1px solid $faint-line;
+			}
+		}
+	}
+	.contributor,
+	.container-collection {
+		.promo-list > li {
+			a {
+				margin-bottom: $body-margin;
+			}
 		}
 	}
 }
