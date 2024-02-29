@@ -75,16 +75,6 @@
 	@include collection-colour(280);
 }
 
-.container-collection {
-	.promo-list > ul > li {
-		padding-bottom: $body-margin-half;
-		&:last-of-type {
-			border-bottom: 1px solid $faint-line;
-			margin-bottom: calc($body-margin - 1px);
-		}
-	}
-}
-
 @media all and (min-width: $mobile-breakpoint-plusone) {
 	.container-collection {
 		max-width: $max-width;
