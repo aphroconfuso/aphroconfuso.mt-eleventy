@@ -79,6 +79,10 @@ h5 {
 	@include monthly-colour($marzu-2024);
 }
 
+.april-2024 {
+	@include monthly-colour($april-2024);
+}
+
 figure.poddata,
 .story.poddata,
 .promo.promo-poddata {
