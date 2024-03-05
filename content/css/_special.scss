@@ -164,6 +164,31 @@ article.story {
 				letter-spacing: 0;
 			}
 		}
+		&.story-48 {
+			.body-text {
+				table {
+					margin-top: $body-margin-half;
+					max-width: 100%;
+					tr {
+						&:hover {
+							background-color: $faint-brown;
+						}
+						td:first-of-type {
+							font-variant-numeric: tabular-nums;
+						}
+						td {
+							padding-right: $body-margin-half;
+							white-space: nowrap;
+						}
+						td:last-of-type {
+							overflow: hidden;
+							padding-right: 0;
+							text-overflow: ellipsis;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	.promos-container {

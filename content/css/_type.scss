@@ -13,7 +13,7 @@ header {
 		font-size: $font-size-story-header-mobile;
 		font-weight: 600;
 		line-height: $header-line-height;
-		.episodeNumber,
+		.episode-number,
 		.subjectDate {
 			color: $lightest-brown;
 		}
@@ -257,6 +257,10 @@ p.continuity {
 // 		}
 // 	}
 // }
+
+table {
+	font-size: $body-font-size;
+}
 
 .body-text,
 .generic-body-text,

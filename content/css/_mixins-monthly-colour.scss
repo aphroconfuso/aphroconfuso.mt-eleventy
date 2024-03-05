@@ -103,11 +103,12 @@
 			h1::after {
 				@include animated-underline-post();
 			}
-			h1 span.episodeNumber {
+			h1 span.episode-umber {
 				color: $colour;
 				@include ease-out($fade-in-long);
 			}
-			.header-label {
+			.header-label,
+			h3 {
 				color: $colour;
 				@include ease-out($fade-in-long);
 			}

@@ -70,7 +70,7 @@ permalink: /{{ story.slug }}/index.html
 				<h1>
 					{{ story.mainTitle | prettifyMaltese | safe }}
 					{% if story.isSequenceEpisode %}
-						<span class="episodeNumber">#{{ story.sequenceEpisodeNumber }}</span>
+						<span class="episode-number">#{{ story.sequenceEpisodeNumber }}</span>
 					{% endif %}
 					{% if story.subtitle %}
 						<br /><span class="subtitle">{{ story.subtitle | prettifyMaltese | safe }}</span>
@@ -199,7 +199,7 @@ permalink: /{{ story.slug }}/index.html
 							{% include "_slideshow.njk" %}
 						{% endif %}
 						<section class="body-text body-text-part-two{% if story.useSeparators %} separated{% endif %}">
-							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 1, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
+							{{ story.body | stripDataAttributes | dropCapsifyAndSectionise(story.imagesPositionText, 1, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
 						</section>
 					{% else %}
 						<section class="body-text">

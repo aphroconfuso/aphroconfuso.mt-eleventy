@@ -301,6 +301,7 @@ module.exports = function(eleventyConfig) {
 				.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
 				.replace('drop-M">M</span>XH', 'drop-Ħ">Ħ</span>')
 				.replace('drop-M">M</span>XZ', 'drop-Ż">Ż</span>')
+				.replace('drop-1">1</span>6', 'drop-16">16</span>')
 				.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 		}
 		if (!splitText) {
@@ -326,8 +327,18 @@ module.exports = function(eleventyConfig) {
 			.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
 			.replace('drop-M">M</span>XH', 'drop-Ħ">Ħ</span>')
 			.replace('drop-M">M</span>XZ', 'drop-Ż">Ż</span>')
+			.replace('drop-1">1</span>6', 'drop-16">16</span>')
 			.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 		return decoratedText;
+	});
+
+	eleventyConfig.addFilter("stripDataAttributes", function stripDataAttributes(html) {
+		if (!html || !html.match(/data-/)) return html;
+		var tags = html.match(/(<\/?[\S][^>]*>)/gi);
+		tags.forEach(function(tag){
+			html = html.replace(tag, tag.replace(/(data-.+?=".*?")|(data-.+?='.*?')|(data-[a-zA-Z0-9-]+)/g, ''));
+		});
+		return html;
 	});
 
 	eleventyConfig.addFilter("sectioniseOnly", function sectioniseOnly(text) {
@@ -337,7 +348,7 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addFilter("endDotify", function endDotify(text) {
 		let fixedText = (text || []).replace(/([^ ]+)([\.\?\!]|<span class="pull">.<\/span>)\s*<\/(p|blockquote)>\s*$/, '<l-m>$1 <span class="end-dot">.</span></l-m></$3>');
 		if (!fixedText.match(/class=\"end\-dot\"/m)) {
-			fixedText = text.replace(/<\/(p|blockquote)>\s*$/, '&nbsp;<span class="end-dot">.</span></$1>');
+			fixedText = text.replace(/<\/(p|blockquote)>\s*$/, '&nbsp;<span class="end-dot">.</span></$1>').replace(/<\/td><\/tr><\/table>\s*$/, '<span class="end-dot">.</span></td></tr></table>');
 		}
 		return fixedText;
 	});
