@@ -8,5 +8,6 @@ module.exports = (title) => {
 		.replace(/ħ/gi, 'gae')
 		.replace(/z/gi, 'zb')
 		.replace(/ż/gi, 'za')
-		.replace(/[Ii]?[lrstċdnxzż]\-/, '');
+		.replace(/^\W/, '')
+		.replace(/^[Ii]?[lrstċdnxzż]\-/, '');
 }

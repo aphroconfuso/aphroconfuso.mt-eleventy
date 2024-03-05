@@ -7,6 +7,7 @@
 @use "article" as *;
 @use "diary" as *;
 @use "podcast" as *;
+@use "collections" as *;
 @use "slideshow" as *;
 @use "letters" as *;
 @use "generic" as *;
@@ -40,7 +41,9 @@
 @use "home-layout-10" as *;
 @use "home-layout-11" as *;
 @use "home-layout-12" as *;
-@use "collections" as *;
+
+@use "contents" as *;
+
 @use "deco" as *;
 @use "colours" as *;
 @use "special" as *;

@@ -451,7 +451,7 @@ async function getAllStories() {
 			slug: pageSlug,
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
-			sortTitle: makeSortableTitle(title),
+			sortTitle: makeSortableTitle(title + atts.sequenceEpisodeNumber),
 			storycollections,
 			subjectDate: atts.diaryDate,
 			subtitle,

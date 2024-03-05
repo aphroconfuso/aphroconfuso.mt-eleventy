@@ -32,12 +32,17 @@
 		<h1>
 			{{ promo.mainTitle | prettifyMaltese | safe }}
 			{% if promo.isSequenceEpisode %}
-				<span class="episodeNumber">#{{ promo.sequenceEpisodeNumber }}</span>
+				<span class="episode-number">#{{ promo.sequenceEpisodeNumber }}</span>
 			{% endif %}
 		</h1>
 	{% endif %}
 	{% include '_authors.njk' %}
 	{% if promo.type === 'Djarju' or (showEpisodeTitle and promo.sequenceEpisodeTitle) %}
-		<h3{% if promo.image %} class="hide-mobile"{% endif %}>{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
+		<h3 {% if promo.image %} class="hide-mobile"{% endif %}>
+			{% if promoFrom === 'Werrej' and promo.sequenceEpisodes.length > 1 %}
+				<span class="episode-number">{{ promo.sequenceEpisodeNumber }}. </span>
+			{% endif %}
+			{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}
+		</h3>
 	{% endif %}
 </header>

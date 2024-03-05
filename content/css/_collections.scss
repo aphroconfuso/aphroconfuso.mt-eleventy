@@ -27,7 +27,7 @@
 			}
 		}
 	}
-	@media all and (min-width: $mobile-breakpoint-plusone) {
+	@media all and (min-width: $laptop-breakpoint) {
 		&.collection-sidebar {
 			a:hover {
 				h3,
