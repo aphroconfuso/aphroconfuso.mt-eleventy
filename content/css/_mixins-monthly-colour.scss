@@ -111,6 +111,10 @@
 				color: $colour;
 				@include ease-out($fade-in-long);
 			}
+			p.link-text {
+				color: $colour;
+				@include ease-out($fade-in-long);
+			}
 			// h2,
 			// h3,
 			// p {

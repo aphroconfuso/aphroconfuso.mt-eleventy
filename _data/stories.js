@@ -13,7 +13,8 @@ const slugifyStringMaltese = require("../src/slugifyMaltese.js");
 
 const { imageData, linkedStoryData, personData } = require("./_fragments.js");
 
-let wordcount, cumulativeBody, cumulativeWordcount;
+let abecedaireArray = [];
+let abecedaireString, cumulativeBody, cumulativeWordcount;
 
 // const fs = require('fs');
 // var Spellchecker = require("hunspell-spellchecker");
@@ -244,6 +245,14 @@ async function getAllStories() {
 		return cleanedText.split(/\s+/);
 	}
 
+	const shuffleArray = (array) => {
+		for (let i = array.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[array[i], array[j]] = [array[j], array[i]];
+		}
+		return array;
+	}
+
 	const getWordFrequency = (text) => {
 		const wordsArray = splitText(text, true);
 		wordcount = wordsArray.length;
@@ -312,7 +321,7 @@ async function getAllStories() {
 
 		const booksMentioned = !!atts.booksMentioned.data.length && processBooksMentioned(atts.booksMentioned.data, atts.prominentMentions);
 		const authorsType = atts.authorsType && atts.authorsType.replace(/\_.*/, '') || 'solo';
-		const { authors, authorForename, authorsString, authorPronoun } = parseAuthors(atts.authors.data, authorsType);
+		const {authors, authorForename, authorsString, authorPronoun} = parseAuthors(atts.authors.data, authorsType);
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 		const sequenceData = atts.sequence.data;
 		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
@@ -357,7 +366,7 @@ async function getAllStories() {
 
 		// REFACTOR: Save externally
 		const fixReportingTitle = (processedStory) => {
-			const { type, sequenceEpisodeNumber, authorsString, title } = processedStory;
+			const {type, sequenceEpisodeNumber, authorsString, title} = processedStory;
 			if (type === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ authorsString }`;
 			if (!!sequenceEpisodeNumber) return `${ title } #${ sequenceEpisodeNumber }`;
 			return title;
@@ -373,6 +382,8 @@ async function getAllStories() {
 			!!sequenceData && atts.title,
 			atts.type
 		);
+
+		const monthYear = getMonthYear(atts.dateTimePublication)
 
 		let sequencePreviousPromo, sequenceNextPromo;
 		let sequenceEpisodes = sequenceData
@@ -392,27 +403,44 @@ async function getAllStories() {
 				);
 
 				if (episodeAtts.sequenceEpisodeNumber === atts.sequenceEpisodeNumber - 1) {
-					sequencePreviousPromo = { slug: episodeSlug, ...episodeAtts };
+					sequencePreviousPromo = {slug: episodeSlug, ...episodeAtts};
 				}
 
 				if (episodeAtts.sequenceEpisodeNumber === atts.sequenceEpisodeNumber + 1) {
-					sequenceNextPromo = { slug: episodeSlug, ...episodeAtts };
+					sequenceNextPromo = {slug: episodeSlug, ...episodeAtts};
 				}
 
 				return {
-				date: episodeAtts.diaryDate,
-				number: episodeAtts.sequenceEpisodeNumber,
-				title: episodeAtts.title,
-				slug: episodeSlug !== pageSlug && episodeSlug,
-			}
-		});
+					date: episodeAtts.diaryDate,
+					number: episodeAtts.sequenceEpisodeNumber,
+					title: episodeAtts.title,
+					slug: episodeSlug !== pageSlug && episodeSlug,
+				}
+			});
 		if (sequenceEpisodes && sequenceEpisodes[0].date) {
 			sequenceEpisodes.reverse();
 		}
 
 		const storycollections = atts.collections && processCollections(atts.collections.data);
-
 		cumulativeBody += " " + atts.body;
+
+		if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju') {
+			const abecedaireMatches = atts.body.replace(/\n+/, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.{0,1500})/g);
+			// console.log(JSON.stringify(Array.from(abecedaireMatches)));
+			abecedaireMatches && shuffleArray(Array.from(abecedaireMatches)).forEach(match => {
+				let snippet = match[2] + match[3];
+				if ((snippet.match(/<em>/g) || []).length > (snippet.match(/<\/em>/g) || []).length) snippet += '</em>';
+				abecedaireArray.push({
+					authorsString,
+					letter: makeSortableTitle(match[2]).toLowerCase(),
+					monthYear,
+					slug: pageSlug,
+					snippet,
+					title,
+				});
+			console.log(makeSortableTitle(match[2]));
+			});
+		}
 
 		const processedStory = {
 			appointment: atts.appointment,
@@ -445,7 +473,7 @@ async function getAllStories() {
 			listablePodcast: atts.type === 'Poddata',
 			mainTitle,
 			metaTitle: displayTitle,
-			monthYear: getMonthYear(atts.dateTimePublication),
+			monthYear,
 			moreToCome: atts.moreToCome || storycollections.length, // FIXME
 			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
 			podcastLengthMinutes: atts.podcastLengthMinutes,
@@ -573,6 +601,13 @@ async function getAllStories() {
 	const vocabulary = getWordFrequency(cumulativeBody);
 	storiesFormatted[0].vocabulary = vocabulary;
 	storiesFormatted[0].cumulativeWordcount = splitText(cumulativeBody).length;
+
+	// shuffleArray(abecedaireArray).forEach(match => {
+	// 	abecedaireString += `<p class="${ match.monthYear }">${ match.snippet }<br/>—<a href="/${ match.slug }/">${ match.title } ta’ ${ match.authorsString }</a></p><p>#</p>`;
+	// });
+
+	storiesFormatted[0].abecedaire = [...new Map(shuffleArray(abecedaireArray).map(item => [item.letter, item])).values()].sort((a, b) => (a.letter > b.letter) ? 1 : ((b.letter > a.letter) ? -1 : 0));
+
 
 	return storiesFormatted;
 }

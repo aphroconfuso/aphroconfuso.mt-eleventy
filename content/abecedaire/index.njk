@@ -1,0 +1,38 @@
+---
+pagination:
+  data: stories
+  size: 250
+  alias: story
+eleventyExcludeFromCollections: false
+permalink: /abeċedarju/index.html
+---
+{% extends 'layouts/base.njk' %}
+
+{% block head %}
+	<title>Abeċedarju · Aphroconfuso</title>
+{% endblock %}
+
+{% block content %}
+	<article>
+		<header>
+			<ul><li>&nbsp;</li></ul>
+			<h1>Abeċedarju</h1>
+			<h2></h2>
+		</header>
+		<div class="abecedaire">
+			<section id="grid-body">
+				<div class="body-text">
+					<ul>
+						{% for snippet in stories[0].abecedaire %}
+							<li>
+								<a class="break {{ snippet.monthYear | slugify }}" href="/{{ snippet.slug }}/" onclick="console.log('xyz');">
+									<p>{{ snippet.snippet | prettifyMaltese | simpleDropCapsify | safe }}</p>
+									<p>—{{ snippet.title }} ta’ {{ snippet.authorsString }}</p>
+								</a>
+							</li>
+						{% endfor %}
+				</div>
+			</section>
+		</div>
+	</article>
+{% endblock %}
