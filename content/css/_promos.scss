@@ -43,7 +43,7 @@
 			}
 		}
 	}
-	.promo-djarju {
+	.promo-diary {
 		header {
 			h1 {
 				color: $lighter-brown;
@@ -51,6 +51,9 @@
 			}
 			li.header-label {
 				display: block;
+				.subject-date {
+					display: none;
+				}
 			}
 		}
 	}
