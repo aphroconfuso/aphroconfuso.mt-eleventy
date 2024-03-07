@@ -4,14 +4,14 @@
 		<li class="header-label">
 			Poddata
 			{% if promo.subjectDate %}
-				<span class="subjectDate">{{ promo.subjectDate | subjectDate }}</span>
+				<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
 			{% endif %}
 		</li>
 	{% elif promo.type === 'Djarju' %}
 		<li class="header-label">
 			Djarju
 			{% if promo.subjectDate %}
-				<span class="subjectDate">{{ promo.subjectDate | subjectDate }}</span>
+				<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
 			{% endif %}
 		</li>
 	{% else %}
