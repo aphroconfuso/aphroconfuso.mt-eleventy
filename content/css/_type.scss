@@ -275,7 +275,9 @@ table {
 .generic-body-text,
 aside,
 #endnote {
-	p {
+	p,
+	h5,
+	h6 {
 		a {
 			text-decoration: underline;
 			text-decoration-color: $lightester-brown;
