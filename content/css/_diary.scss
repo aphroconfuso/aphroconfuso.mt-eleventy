@@ -4,6 +4,9 @@
 @use "mixins-etc" as *;
 
 article.djarju {
+	h1 {
+		display: none;
+	}
 	#grid-body {
 		grid-area: grid-max-body;
 	}

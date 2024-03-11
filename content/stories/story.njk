@@ -41,13 +41,13 @@ permalink: /{{ story.slug }}/index.html
 			<ul>
 				<li class="header-label">
 					{% if story.type === 'Djarju' %}
-						<a href="/djarju/" class="diaryTitle">Djarju</a>
+						<a href="/djarju/" class="diary-title">Djarju</a>
 							{% if story.subjectDate %}
 								<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 							{% endif %}
 						</p>
 					{% elif story.type === 'Poddata' %}
-						<a href="/podcast/" class="diaryTitle">Poddata</a>
+						<a href="/podcast/" class="podcast-title">Poddata</a>
 							{% if story.subjectDate %}
 								<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 							{% endif %}
