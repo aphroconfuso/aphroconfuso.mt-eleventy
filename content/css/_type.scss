@@ -123,8 +123,12 @@ p.continuity {
 .body-text {
 	color: $ink;
 	font-family: $serif, serif;
-	p.break {
-		margin-top: $body-margin-double;
+	h5,
+	h6,
+	p {
+		&.break {
+			margin-top: $body-margin-double;
+		}
 	}
 	h5 {
 		&:has(+ p.break) {
@@ -143,13 +147,17 @@ p.continuity {
 		margin-top: 0;
 	}
 	&.separated {
-		p.break {
-			margin-top: $body-margin * 1;
-			padding-top: $body-margin-double;
-			background-image: url(/img/deco-100.svg);
-			background-position: center top;
-			background-size: 75%;
-			background-repeat: no-repeat;
+		h5,
+		h6,
+		p {
+			&.break {
+				margin-top: $body-margin * 1;
+				padding-top: $body-margin-double;
+				background-image: url(/img/deco-100.svg);
+				background-position: center top;
+				background-size: 75%;
+				background-repeat: no-repeat;
+			}
 		}
 	}
 	p {
@@ -303,10 +311,14 @@ aside,
 		}
 	}
 	.body-text.separated {
-		p.break {
-			margin-top: $body-margin-double;
-			padding-top: $body-margin * 3;
-			background-size: 50%;
+		h5,
+		h6,
+		p {
+			&.break {
+				margin-top: $body-margin-double;
+				padding-top: $body-margin * 3;
+				background-size: 50%;
+			}
 		}
 	}
 }

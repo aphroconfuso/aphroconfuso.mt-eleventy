@@ -31,7 +31,7 @@ permalink: /{{ international.code }}/index.html
 				<!-- X -->
 			</section>
 			<section id="grid-body">
-				<div class="generic-body-text">{{ international.body | safe }}</div>
+				<div class="generic-body-text separated">{{ international.body | prettifyMaltese | sectionise | safe }}</div>
 			</section>
 			<section id="grid-max-panel-left-bottom">
 				<!-- X -->

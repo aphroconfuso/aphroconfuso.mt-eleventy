@@ -286,6 +286,17 @@ module.exports = function(eleventyConfig) {
 		return stripTags(text || [], ['i', 'em']).replace(/\n/gm, '<br/>');
 	});
 
+	eleventyConfig.addFilter("sectionise", function sectionise(text) {
+		let decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '');
+		decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
+			.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
+			.replace(/<p>\#<\/p>\s*(<hr>)?(<h[56])>(.*?<\/h[56]>)?\s*<p>/gm, '$1$2 class="break">$3<p>')
+			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
+			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+			.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
+		return decoratedText;
+	});
+
 	eleventyConfig.addFilter("dropCapsifyAndSectionise", function dropCapsifyAndSectionise(text, splitText, beforeOrAfter, dontUseDropcaps) {
 		let decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '');
 		if (!dontUseDropcaps) {
