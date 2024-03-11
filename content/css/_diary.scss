@@ -56,8 +56,12 @@ article.djarju {
 			color: $lighter-brown;
 		}
 		border-bottom-color: $lighter-brown;
-		p.break {
-			margin-top: $body-margin * 1.5;
+		h5,
+		h6,
+		p {
+			&.break {
+				margin-top: $body-margin * 1.5;
+			}
 		}
 	}
 	@media all and (max-width: ($laptop-breakpoint - 1)) {
