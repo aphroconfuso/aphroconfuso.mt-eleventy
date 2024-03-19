@@ -39,6 +39,12 @@
 	}
 }
 
+.container-collection {
+	li.collection-slug {
+		display: none;
+	}
+}
+
 .collection-sidebar {
 	padding: $body-margin-half;
 	h3 {
