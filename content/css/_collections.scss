@@ -39,9 +39,13 @@
 	}
 }
 
-.container-collection {
-	li.collection-slug {
-		display: none;
+div.container-collection {
+	.promo {
+		header {
+			li.collection-slug {
+				display: none;
+			}
+		}
 	}
 }
 
