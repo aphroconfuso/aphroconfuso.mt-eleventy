@@ -1,0 +1,65 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+@use "mixins-home-grids" as *;
+
+.promo-terminu {
+	h2 {
+		display: none;
+	}
+}
+
+article.terminu {
+	.container {
+		.end-dot {
+			color: $light-brown;
+			background-color: $light-brown;
+		}
+	}
+	&.content {
+		border-bottom-color: $light-brown;
+	}
+
+	header {
+		h1 {
+			color: $light-brown;
+		}
+		h2 {
+			font-size: $body-font-size;
+		}
+	}
+	.body-text {
+		&:first-child {
+			margin-top: $body-margin * -1.5;
+		}
+		h5 {
+			display: inline-block;
+			font-size: $body-font-size;
+			font-style: normal;
+			margin: $body-margin-half 0 0;
+			& + p {
+				display: inline;
+			}
+		}
+		p + p {
+			&::before {
+				color: $light-brown;
+				content: " ¶ ";
+				font-family: $decorative;
+			}
+			display: inline;
+		}
+		p {
+			margin-bottom: 0;
+			a[href^="http"]:hover {
+				color: blue;
+				text-decoration-color: blue;
+			}
+			.fx-1 {
+				color: red;
+				font-weight: 500;
+			}
+		}
+	}
+}
