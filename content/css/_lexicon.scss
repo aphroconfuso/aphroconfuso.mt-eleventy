@@ -40,6 +40,9 @@ article.terminu {
 				margin-top: $body-margin * -1.5;
 			}
 		}
+		h6[id^="ar"] {
+			color: $terminu-color;
+		}
 		h5 {
 			display: inline-block;
 			font-size: $body-font-size;
