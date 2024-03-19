@@ -4,7 +4,12 @@
 @use "mixins-etc" as *;
 @use "mixins-home-grids" as *;
 
+$terminu-color: $light-brown;
+
 .promo-terminu {
+	h1 {
+		color: $terminu-color !important;
+	}
 	h2 {
 		display: none;
 	}
@@ -13,17 +18,17 @@
 article.terminu {
 	.container {
 		.end-dot {
-			color: $light-brown;
-			background-color: $light-brown;
+			color: $terminu-color;
+			background-color: $terminu-color;
 		}
 	}
 	&.content {
-		border-bottom-color: $light-brown;
+		border-bottom-color: $terminu-color;
 	}
 
 	header {
 		h1 {
-			color: $light-brown;
+			color: $terminu-color;
 		}
 		h2 {
 			font-size: $body-font-size;
@@ -44,7 +49,7 @@ article.terminu {
 		}
 		p + p {
 			&::before {
-				color: $light-brown;
+				color: $terminu-color;
 				content: " ¶ ";
 				font-family: $decorative;
 			}

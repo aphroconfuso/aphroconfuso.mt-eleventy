@@ -1,6 +1,12 @@
 <header>
 	<ul>
-	{% if promo.type === 'Poddata' %}
+	{% if promo.type === 'Terminu' %}
+		<li class="header-label">
+			{% if promo.subjectDate %}
+				<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
+			{% endif %}
+		</li>
+	{% elif promo.type === 'Poddata' %}
 		<li class="header-label">
 			Poddata
 			{% if promo.subjectDate %}
