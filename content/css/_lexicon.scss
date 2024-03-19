@@ -35,8 +35,10 @@ article.terminu {
 		}
 	}
 	.body-text {
-		&:first-child {
-			margin-top: $body-margin * -1.5;
+		@media all and (min-width: $laptop-breakpoint) {
+			&:first-child {
+				margin-top: $body-margin * -1.5;
+			}
 		}
 		h5 {
 			display: inline-block;
