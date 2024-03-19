@@ -51,7 +51,10 @@ permalink: /{{ story.slug }}/index.html
 							{% if story.subjectDate %}
 								<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 							{% endif %}
-
+					{% elif story.type === 'Terminu' %}
+						{% if story.subjectDate %}
+							<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
+						{% endif %}
 					{% else %}
 						<a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a>
 					{% endif %}
