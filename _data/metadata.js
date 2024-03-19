@@ -10,7 +10,7 @@ module.exports = {
 	},
 	"settings": {
 		"imagesUrl": "/stampi/",
-		"socialImage": "social_aphroconfuso_logo_wallpaper_f1b0208899.jpg",
+		"socialImage": "social_aphroconfuso_logo_full_social_bd6b6ab4cf.jpg",
 		"breakpoints": {
 			"mobile": "749px",
 			"tablet": "1080px",
