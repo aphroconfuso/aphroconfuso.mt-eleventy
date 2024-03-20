@@ -42,27 +42,28 @@ module.exports = function(eleventyConfig) {
 		res.body.pipe(fs.createWriteStream(saveToFileLocation))
 	);
 
+	const handleError = (message, fatal = true) => {
+		if (!fatal || process.env.NODE_ENV === 'development') {
+		console.error('\x1b[31m%s\x1b[0m', message);
+			return;
+		}
+		throw new Error(`\x1b[31m${message}\x1b[0m`);
+	}
+
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
 		let urlsInContent = [], imagesInContent = [];
 		results.forEach(i => {
 			urlsInContent = urlsInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
 			imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|jpeg|webp)/g));
-			if (i.content.match(/xxx/i)) {
-				console.error(`XXX detected in ${i.url} !!!`);
-			}
+			if (i.content.match(/xxx/i)) handleError(`XXX detected in ${i.url} !!!`);
 		});
 
 		const uniqueUrlsArray = [...new Set(urlsInContent)].filter(n => n).sort();
 		uniqueUrlsArray.forEach(i => {
 			if (!i) { return; }
 			const fileLocation = decodeURIComponent(i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html"));
-			if (fileLocation.includes('localhost:')) {
-				throw new Error(`${fileLocation} points to localhost!`);
-			}
-			if (!fs.existsSync(fileLocation)) {
-				// throw new Error(`${fileLocation} is linked but does not exist!`);
-				console.error(`ERROR: ${fileLocation} is linked but does not exist!`);
-			};
+			if (fileLocation.includes('localhost:')) handleError(`${fileLocation} points to localhost!`);
+			if (!fs.existsSync(fileLocation)) handleError(`ERROR: ${ fileLocation } is linked but does not exist!`);
 		});
 
 		const uniqueImagesArray = [...new Set(imagesInContent)].filter(n => n).sort();
@@ -99,8 +100,7 @@ module.exports = function(eleventyConfig) {
 		});
 		fs.readdir("./aphroconfuso.mt/site/stampi", (err, files) => {
 			if (files.length < uniqueImagesArray.length) {
-				console.log(`SOFT ERROR: Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
-				// throw new Error(`ERROR: Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
+				console.error("\x1b[33m%s\x1b[0m", `Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
 			}
 		});
 	});
