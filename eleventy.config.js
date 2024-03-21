@@ -50,13 +50,19 @@ module.exports = function(eleventyConfig) {
 	}
 
 	eleventyConfig.on('eleventy.before', async ({dir, results, runMode, outputMode}) => {
-		fs.readdir('./aphroconfuso.mt/site/css/', (err, files) => {
-			if (err) console.log(err);
-			files && files.forEach(file => {
-				const fileDir = path.join('./aphroconfuso.mt/site/css/', file);
-				if (file.startsWith('style-')) fs.rmSync(fileDir);
+		const cssDir = path.join('./aphroconfuso.mt/site/css/');
+		if (!fs.existsSync(cssDir)) {
+			fs.mkdirSync('./aphroconfuso.mt/site/')
+			fs.mkdirSync('./aphroconfuso.mt/site/css/')
+		} else {
+			fs.readdir(cssDir, (err, files) => {
+				if (err) console.log(err);
+				files && files.forEach(file => {
+					const fileDir = path.join('./aphroconfuso.mt/site/css/', file);
+					if (file.startsWith('style-')) fs.rmSync(fileDir);
+				});
 			});
-		});
+		}
 
 		// fs.readdir('./aphroconfuso.mt/site/crr/, files) => {
 		// 	if (err) console.log(err);
@@ -65,8 +71,6 @@ module.exports = function(eleventyConfig) {
 		// 		if (file !== 'stampi') fs.rmSync(fileDir, {recursive: true, force: true,});
 		// 	});
 		// });
-		// const cssDir = path.join('./aphroconfuso.mt/site/css/');
-		// if (!fs.existsSync(cssDir)) fs.mkdirSync(cssDir);
 	});
 
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
