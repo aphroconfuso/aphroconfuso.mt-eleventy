@@ -50,15 +50,23 @@ module.exports = function(eleventyConfig) {
 	}
 
 	eleventyConfig.on('eleventy.before', async ({dir, results, runMode, outputMode}) => {
-		fs.readdir(dir.output, (err, files) => {
+		fs.readdir(dir.output + 'css', (err, files) => {
 			if (err) console.log(err);
 			files.forEach(file => {
 				const fileDir = path.join(dir.output, file);
-				if (file !== 'stampi') fs.rmSync(fileDir, {recursive: true, force: true,});
+				if (file.startsWith('style-')) fs.rmSync(fileDir);
 			});
 		});
-		const cssDir = path.join(dir.output, 'css');
-		if (!fs.existsSync(cssDir)) fs.mkdirSync(cssDir);
+
+		// fs.readdir(dir.output, (err, files) => {
+		// 	if (err) console.log(err);
+		// 	files.forEach(file => {
+		// 		const fileDir = path.join(dir.output, file);
+		// 		if (file !== 'stampi') fs.rmSync(fileDir, {recursive: true, force: true,});
+		// 	});
+		// });
+		// const cssDir = path.join(dir.output, 'css');
+		// if (!fs.existsSync(cssDir)) fs.mkdirSync(cssDir);
 	});
 
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
