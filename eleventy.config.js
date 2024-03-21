@@ -50,10 +50,10 @@ module.exports = function(eleventyConfig) {
 	}
 
 	eleventyConfig.on('eleventy.before', async ({dir, results, runMode, outputMode}) => {
-		fs.readdir(dir.output + 'css', (err, files) => {
+		fs.readdir(path.join(dir.output, 'css'), (err, files) => {
 			if (err) console.log(err);
-			files.forEach(file => {
-				const fileDir = path.join(dir.output, file);
+			files && files.forEach(file => {
+				const fileDir = path.join(dir.output, 'css', file);
 				if (file.startsWith('style-')) fs.rmSync(fileDir);
 			});
 		});
