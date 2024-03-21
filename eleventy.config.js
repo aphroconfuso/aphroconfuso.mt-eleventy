@@ -50,22 +50,22 @@ module.exports = function(eleventyConfig) {
 	}
 
 	eleventyConfig.on('eleventy.before', async ({dir, results, runMode, outputMode}) => {
-		fs.readdir(path.join(dir.output, 'css'), (err, files) => {
+		fs.readdir('./aphroconfuso.mt/site/css/', (err, files) => {
 			if (err) console.log(err);
 			files && files.forEach(file => {
-				const fileDir = path.join(dir.output, 'css', file);
+				const fileDir = path.join('./aphroconfuso.mt/site/css/', file);
 				if (file.startsWith('style-')) fs.rmSync(fileDir);
 			});
 		});
 
-		// fs.readdir(dir.output, (err, files) => {
+		// fs.readdir('./aphroconfuso.mt/site/crr/, files) => {
 		// 	if (err) console.log(err);
 		// 	files.forEach(file => {
-		// 		const fileDir = path.join(dir.output, file);
+		// 		const fileDir = path.join('./aphroconfuso.mt/site/cle/);
 		// 		if (file !== 'stampi') fs.rmSync(fileDir, {recursive: true, force: true,});
 		// 	});
 		// });
-		// const cssDir = path.join(dir.output, 'css');
+		// const cssDir = path.join('./aphroconfuso.mt/site/css/');
 		// if (!fs.existsSync(cssDir)) fs.mkdirSync(cssDir);
 	});
 
