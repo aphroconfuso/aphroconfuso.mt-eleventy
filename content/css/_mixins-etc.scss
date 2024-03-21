@@ -4,71 +4,95 @@
 @use "sass:math";
 
 @mixin clamp($lines: 9) {
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: $lines;
-	display: -webkit-box;
-	line-clamp: $lines;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  display: -webkit-box;
+  line-clamp: $lines;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @mixin ease-in($interval: 1s, $property: all) {
-	-moz-transition: $property $interval ease-in;
-	-o-transition: $property $interval ease-in;
-	-webkit-transition: $property $interval ease-in;
-	transition: $property $interval ease-in;
+  -moz-transition: $property $interval ease-in;
+  -o-transition: $property $interval ease-in;
+  -webkit-transition: $property $interval ease-in;
+  transition: $property $interval ease-in;
 }
 
 @mixin ease-out($interval: 1s, $property: all) {
-	-moz-transition: $property $interval ease-out;
-	-o-transition: $property $interval ease-out;
-	-webkit-transition: $property $interval ease-out;
-	transition: $property $interval ease-out;
+  -moz-transition: $property $interval ease-out;
+  -o-transition: $property $interval ease-out;
+  -webkit-transition: $property $interval ease-out;
+  transition: $property $interval ease-out;
 }
 
 @mixin animated-underline-pre($colour, $interval: $fade-in-short) {
-	background-color: $colour;
-	bottom: 0;
-	content: "";
-	height: 1px;
-	left: 0;
-	opacity: 0;
-	opacity: 1;
-	position: absolute;
-	transform-origin: center;
-	transform: scale(0);
-	transition: opacity $interval, transform $interval;
-	width: 100%;
+  background-color: $colour;
+  bottom: 0;
+  content: "";
+  height: 1px;
+  left: 0;
+  opacity: 0;
+  opacity: 1;
+  position: absolute;
+  transform-origin: center;
+  transform: scale(0);
+  transition: opacity $interval, transform $interval;
+  width: 100%;
 }
 
 @mixin animated-underline-post() {
-	transform: scale(1);
+  transform: scale(1);
 }
 
 @mixin animated-underline($colour: red, $interval: $fade-in-short) {
-	display: inline-block;
-	position: relative;
-	&::after {
-		@include animated-underline-pre($colour, $interval: $fade-in-short);
-	}
-	&:hover::after,
-	&:focus::after {
-		@include animated-underline-post();
-	}
+  display: inline-block;
+  position: relative;
+  &::after {
+    @include animated-underline-pre($colour, $interval: $fade-in-short);
+  }
+  &:hover::after,
+  &:focus::after {
+    @include animated-underline-post();
+  }
 }
 
 @mixin image-fit($width-ratio: 16, $height-ratio: 9) {
-	margin: 0;
-	overflow: hidden;
-	padding-top: (math.div($height-ratio, $width-ratio) * 100%);
-	position: relative;
-	width: 100%;
-	img {
-		left: 50%;
-		object-fit: cover;
-		position: absolute;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		width: 100%;
-	}
+  margin: 0;
+  overflow: hidden;
+  padding-top: (math.div($height-ratio, $width-ratio) * 100%);
+  position: relative;
+  width: 100%;
+  img {
+    left: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+}
+
+@function str-replace($inputString, $inputSearch, $replace: "") {
+  $string: #{$inputString};
+  $search: #{$inputSearch};
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(
+        str-slice($string, $index + str-length($search)),
+        $search,
+        $replace
+      );
+  }
+  @return $string;
+}
+
+@function slugifyColour($hslColour) {
+  $slug: str-replace($hslColour, "(", "-");
+  $slug: str-replace($slug, ")");
+  $slug: str-replace($slug, "%");
+  $slug: str-replace($slug, ", ", "-");
+  $slug: str-replace($slug, "#");
+  @return $slug;
 }

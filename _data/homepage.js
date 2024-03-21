@@ -168,9 +168,16 @@ async function getHomepage() {
 			text: 4,
 			lengths: [2150],
 		},
+		Layout_200: {
+			diary: 2,
+			image: 2,
+			poem: 1,
+			text: 11,
+			lengths: [2150],
+		},
 	}
 
-	const layoutConfig = layouts[atts.layout];
+	const layoutConfig = layouts['Layout_200']; // layouts[atts.layout];
 
 	// REFACTOR ... use processPromos?S
 	const promosFormatted = (promos, includesImages, number, lengths) => {
@@ -197,6 +204,7 @@ async function getHomepage() {
 				authorsType,
 				authorsString,
 				authors,
+				collections: storyAtts.collections && storyAtts.collections.data.map(collection => { return { id: collection.id, title: collection.attributes.title }}),
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 				description: smartTruncate(promo.text || storyAtts.description, descriptionLength),
 				subjectDate: storyAtts.diaryDate,
@@ -233,6 +241,7 @@ async function getHomepage() {
 				formattedPromo.imageCrop = promo.imageCrop,
 				formattedPromo.alternativeText = promoImageData.attributes.alternativeText
 			}
+
 			return formattedPromo;
 		});
 		return result;
@@ -241,7 +250,7 @@ async function getHomepage() {
 	const homepageFormatted = {
 		editorial: atts.appointment.data.attributes.editorial,
 		imagePromos: promosFormatted(atts.imagePromos, true, layoutConfig['image']),
-		layout: atts.layout,
+		layout: 'Layout_200', //atts.layout,
 		monthYear: getMonthYear(atts.appointment.data.attributes.dateTimePublication),
 		poetryPromos: promosFormatted(atts.poetryPromos, false, layoutConfig.poem),
 		promos: promosFormatted(atts.promos, false, layoutConfig.text, layoutConfig.lengths),
