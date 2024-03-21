@@ -3,31 +3,34 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
+$slugifiedColour: slugifyColour($this-month);
+
 .editorial {
-	padding: 0;
-	border-image-outset: 40px;
-	border-image-repeat: repeat;
-	border-image-slice: 80;
-	border-image-source: url(/img/deco/frame-02-faint.svg);
-	border-image-width: 80px;
-	margin-bottom: $body-margin-double;
-	background-color: $deco-brown;
-	.text-container {
-		display: block !important;
-		border: 10px double red;
-		padding: 2.2rem $body-margin;
-	}
-	.end-dot {
-		border-radius: 0;
-	}
+  padding: $body-margin 0;
+  border-image-outset: 40px;
+  border-image-repeat: repeat;
+  border-image-slice: 80;
+  border-image-source: url(/img/deco/frame-02-faint-TEMPLATE.svg);
+  border-image-width: 80px;
+  border-radius: 25px;
+  margin-bottom: $body-margin-double;
+  background-color: $deco-brown;
+  .text-container {
+    display: block !important;
+    // border: 10px double red;
+    padding: 2.2rem $body-margin;
+  }
+  .end-dot {
+    border-radius: 0;
+  }
 }
 
 .ga-newsletter {
-	padding: 32px;
-	border-image-outset: 10px;
-	border-image-repeat: repeat;
-	border-image-slice: 80;
-	border-image-source: url(/img/deco/frame-02-faint-marzu-2024.svg);
-	border-image-width: 40px;
-	background-color: complement($this-month);
+  padding: 32px;
+  border-image-outset: 10px;
+  border-image-repeat: repeat;
+  border-image-slice: 80;
+  border-image-source: url(/img/deco/frame-02-faint-#{$slugifiedColour}.svg);
+  border-image-width: 40px;
+  background-color: complement($this-month);
 }

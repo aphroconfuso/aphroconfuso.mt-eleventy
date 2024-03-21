@@ -5,126 +5,129 @@
 @use "mixins-backgrounds" as *;
 
 @mixin monthly-colour($colour) {
-	&.content {
-		border-bottom-color: $colour;
-	}
-	& > header > h1 {
-		color: $colour;
-		.subtitle {
-			color: lighten($colour, $lighter);
-		}
-	}
-	.dropcap {
-		&::before,
-		&::after {
-			color: lighten($colour, $lightest);
-		}
-	}
-	.end-dot {
-		color: $colour;
-		background-color: $colour;
-	}
-	.letters {
-		border-color: lighten($colour, $lighter);
-		&:before {
-			@include diagonal-stripes($colour);
-		}
-		.header-label {
-			color: $colour;
-		}
-	}
-	.editorial {
-		.editorial-month-year {
-			display: inline;
-			font-size: 1.6rem;
-			font-weight: 600;
-			margin-right: $body-margin-quarter;
-			text-transform: uppercase;
-			color: $colour;
-		}
-		.text-container {
-			border-color: $colour;
-		}
-	}
-	&.audio > div.player .slider {
-		.gap-progress {
-			background-color: $colour;
-		}
-	}
-	// #progress {
-	// 	text-decoration: line-through;
-	// 	text-shadow: -1px -1px 0 $paper, 0 -1px 0 $paper, 1px -1px 0 $paper,
-	// 		1px 0 0 $paper, 1px 1px 0 $paper, 0 1px 0 $paper, -1px 1px 0 $paper,
-	// 		-1px 0 0 $paper;
-	// }
-	#progress {
-		text-shadow: -2px -2px 0 $colour, 0 -2px 0 $colour, 2px -2px 0 $colour,
-			2px 0 0 $colour, 2px 2px 0 $colour, 0 2px 0 $colour, -2px 2px 0 $colour,
-			-2px 0 0 $colour;
-		vertical-align: -0.5rem;
-	}
+  $slugifiedColour: slugifyColour(lighten($colour, 30%));
+  &.content {
+    border-bottom-color: $colour;
+  }
+  & > header > h1 {
+    color: $colour;
+    .subtitle {
+      color: lighten($colour, $lighter);
+    }
+  }
+  .dropcap {
+    &::before,
+    &::after {
+      color: lighten($colour, $lightest);
+    }
+  }
+  .end-dot {
+    color: $colour;
+    background-color: $colour;
+  }
+  .letters {
+    border-color: lighten($colour, $lighter);
+    &:before {
+      @include diagonal-stripes($colour);
+    }
+    .header-label {
+      color: $colour;
+    }
+  }
+  .editorial {
+    background-color: lighten($colour, 50%);
+    border-image-source: url(/img/deco/frame-02-faint-#{$slugifiedColour}.svg);
+    .editorial-month-year {
+      display: inline;
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-right: $body-margin-quarter;
+      text-transform: uppercase;
+      color: $colour;
+    }
+    // .text-container {
+    // 	border-color: $colour;
+    // }
+  }
+  &.audio > div.player .slider {
+    .gap-progress {
+      background-color: $colour;
+    }
+  }
+  // #progress {
+  // 	text-decoration: line-through;
+  // 	text-shadow: -1px -1px 0 $paper, 0 -1px 0 $paper, 1px -1px 0 $paper,
+  // 		1px 0 0 $paper, 1px 1px 0 $paper, 0 1px 0 $paper, -1px 1px 0 $paper,
+  // 		-1px 0 0 $paper;
+  // }
+  #progress {
+    text-shadow: -2px -2px 0 $colour, 0 -2px 0 $colour, 2px -2px 0 $colour,
+      2px 0 0 $colour, 2px 2px 0 $colour, 0 2px 0 $colour, -2px 2px 0 $colour,
+      -2px 0 0 $colour;
+    vertical-align: -0.5rem;
+  }
 
-	@media all and (min-width: $mobile-breakpoint-plusone) {
-		.header-label {
-			a:hover {
-				color: $colour;
-				@include ease-out($fade-in-short);
-			}
-		}
-		// a:hover {
-		// 	text-decoration-color: $colour;
-		// 	@include ease-out($fade-in-short);
-		// }
-		&.promo {
-			h1 {
-				clear: both;
-				display: inline-block;
-				position: relative;
-				&::after {
-					@include animated-underline-pre($colour, $interval: $fade-in-short);
-				}
-			}
-		}
-		header a.bookmark:hover,
-		&.bookmark-promo:hover:not(.Djarju) .bookmark,
-		&.promo > .bookmark:hover:not(.Djarju) {
-			border-color: $colour;
-			border-bottom-color: transparent;
-			opacity: 1;
-			@include ease-out($fade-in-short);
-			span {
-				border-color: $colour;
-				border-bottom-color: transparent;
-				color: $paper;
-			}
-		}
-		&.promo:hover:not(.promo-djarju),
-		&.promo:focus:not(.promo-djarju) {
-			h1::after {
-				@include animated-underline-post();
-			}
-			h1 span.episode-umber {
-				color: $colour;
-				@include ease-out($fade-in-long);
-			}
-			.header-label {
-				color: $colour;
-				@include ease-out($fade-in-long);
-			}
-			p.link-text {
-				color: $colour;
-				@include ease-out($fade-in-long);
-			}
-			// h2,
-			// h3,
-			// p {
-			//   color: $colour;
-			//   @include ease-out(10s);
-			// }
-		}
-		& ~ .bookmark:hover {
-			border: 12px solid $colour !important;
-			border-bottom: 12px solid transparent;
-		}
-	}
+  @media all and (min-width: $mobile-breakpoint-plusone) {
+    .header-label {
+      a:hover {
+        color: $colour;
+        @include ease-out($fade-in-short);
+      }
+    }
+    // a:hover {
+    // 	text-decoration-color: $colour;
+    // 	@include ease-out($fade-in-short);
+    // }
+    &.promo {
+      h1 {
+        clear: both;
+        display: inline-block;
+        position: relative;
+        &::after {
+          @include animated-underline-pre($colour, $interval: $fade-in-short);
+        }
+      }
+    }
+    header a.bookmark:hover,
+    &.bookmark-promo:hover:not(.Djarju) .bookmark,
+    &.promo > .bookmark:hover:not(.Djarju) {
+      border-color: $colour;
+      border-bottom-color: transparent;
+      opacity: 1;
+      @include ease-out($fade-in-short);
+      span {
+        border-color: $colour;
+        border-bottom-color: transparent;
+        color: $paper;
+      }
+    }
+    &.promo:hover:not(.promo-djarju),
+    &.promo:focus:not(.promo-djarju) {
+      h1::after {
+        @include animated-underline-post();
+      }
+      h1 span.episode-umber {
+        color: $colour;
+        @include ease-out($fade-in-long);
+      }
+      .header-label,
+      h3 {
+        color: $colour;
+        @include ease-out($fade-in-long);
+      }
+      p.link-text {
+        color: $colour;
+        @include ease-out($fade-in-long);
+      }
+      // h2,
+      // p {
+      //   color: $colour;
+      //   @include ease-out(10s);
+      // }
+    }
+    & ~ .bookmark:hover {
+      border: 12px solid $colour !important;
+      border-bottom: 12px solid transparent;
+    }
+  }
 }

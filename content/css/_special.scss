@@ -131,10 +131,14 @@ article.story {
 }
 
 @media all and (min-width: $laptop-breakpoint) {
-	// .promo.story-25 h1 {
-	// 	letter-spacing: -1px;
-	// }
-
+	.promo {
+		&.story-16,
+		&.story-25 {
+			h1 {
+				letter-spacing: -1px;
+			}
+		}
+	}
 	article.story {
 		// Il-Lanza... (Lulju 2023)
 		&.story-16 {

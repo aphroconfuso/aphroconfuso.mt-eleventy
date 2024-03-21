@@ -111,18 +111,14 @@ permalink: /{{ story.slug }}/index.html
 					</aside>
 				{% endif %}
 				{% for episode in story.sequenceEpisodes %}
-					{% if loop.first %}<table class="sequence-menu">{% endif %}
-						<tr{% if not episode.slug %} class="actual"{% endif %}>
-							<td class="order">{% if episode.date %}{{ episode.date | subjectDateShort }}{% else %}{{ episode.number }}.{% endif %}</td>
-							<td class="title">
-							{% if episode.slug %}
-								<a href="/{{ episode.slug }}/">{{ episode.title | prettifyMaltese | safe }}</a>
-							{% else %}
-								{{ episode.title | prettifyMaltese | safe }}
-							{% endif %}
-							</td>
-						</tr>
-					{% if loop.last %}</table>{% endif %}
+					{% if loop.first %}<ul class="generic-menu sequence-menu">{% endif %}
+						<li{% if not episode.slug %} class="active"{% endif %}>
+							{% if episode.slug %}<a href="/{{ episode.slug }}/">{% endif %}
+								{% if episode.date %}{{ episode.date | subjectDateShort }}{% else %}{{ episode.number }}.{% endif %}&nbsp;
+								{{ episode.title | prettifyMaltese | safe }}</a>
+							{% if episode.slug %}</a>{% endif %}
+						</li>
+					{% if loop.last %}</ul>{% endif %}
 				{% endfor %}
 				{% if story.sequencePreviousPromo %}
 					<aside class="body-text promo-adjacent promo-previous">

@@ -8,100 +8,100 @@
 // LAYOUT 11 ****************************************************************
 
 .layout-11 {
-	grid-template-areas:
-		"ga-image-1"
-		"ga1"
-		"ga-diary"
-		"ga-poem-1"
-		"ga-editorial"
-		"ga2"
-		"ga-newsletter"
-		"ga3"
-		"ga-podcast"
-		"ga4"
-		"ga5"
-		"ga6";
-	.ga-image-1 {
-		@include border-bottom();
-	}
-	.ga-4,
-	.ga-5 {
-		@include border-bottom();
-	}
-	.ga-1 {
-		p {
-			@include clamp(12);
-		}
-	}
-	.diary {
-		p {
-			@include clamp(9);
-		}
-	}
-	.ga-poem-1 {
-		p {
-			@include clamp(16);
-		}
-	}
+  grid-template-areas:
+    "ga-image-1"
+    "ga1"
+    "ga-diary"
+    "ga-poem-1"
+    "ga-editorial"
+    "ga2"
+    "ga-newsletter"
+    "ga3"
+    "ga-podcast"
+    "ga4"
+    "ga5"
+    "ga6";
+  .ga-image-1 {
+    @include border-bottom();
+  }
+  .ga-4,
+  .ga-5 {
+    @include border-bottom();
+  }
+  .ga-1 {
+    p {
+      @include clamp(12);
+    }
+  }
+  .diary {
+    p {
+      @include clamp(9);
+    }
+  }
+  .ga-poem-1 {
+    p {
+      @include clamp(16);
+    }
+  }
 
-	@media all and (min-width: $laptop-breakpoint) {
-		.ga-newsletter,
-		.ga-podcast {
-			display: none;
-		}
-		.ga-1,
-		.ga-2,
-		.ga-3,
-		.ga-4,
-		.ga-5,
-		.ga-6,
-		.ga-image-1 {
-			padding-bottom: 0;
-			border-bottom: none;
-		}
-		display: grid;
-		gap: ($body-margin * 1.25) $body-margin;
-		grid-template-rows: auto auto auto auto auto auto;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-		grid-auto-columns: 1fr;
-		grid-auto-flow: row;
-		grid-template-areas:
-			"ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
-			"ga1 ga1 ga1 ga1 ga1 ga1"
-			"ga-diary ga-diary ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
-			"ga-diary ga-diary ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
-			"ga-diary ga-diary ga2 ga2 ga3 ga3"
-			"ga4 ga4 ga5 ga5 ga6 ga6";
-		.ga-1 {
-			p {
-				@include clamp(999);
-				columns: 3;
-				letter-spacing: -0.2px;
-			}
-		}
-		.ga-1,
-		.ga-2,
-		.ga-3 {
-			@include border-bottom();
-		}
-		.ga-editorial {
-			p:nth-of-type(2) {
-				@include clamp(14);
-			}
-		}
-		.ga-diary {
-			p {
-				@include clamp(11);
-			}
-		}
-		.ga-poem-1 {
-			p {
-				@include clamp(13);
-			}
-		}
-		.ga-image-1 {
-			@include image-left-top;
-			@include border-bottom();
-		}
-	}
+  @media all and (min-width: $laptop-breakpoint) {
+    .ga-newsletter,
+    .ga-podcast {
+      display: none;
+    }
+    .ga-1,
+    .ga-2,
+    .ga-3,
+    .ga-4,
+    .ga-5,
+    .ga-6,
+    .ga-image-1 {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    display: grid;
+    gap: ($body-margin * 1.25) $body-margin;
+    grid-template-rows: auto auto auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
+      "ga1 ga1 ga1 ga1 ga1 ga1"
+      "ga-diary ga-diary ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
+      "ga-diary ga-diary ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
+      "ga-diary ga-diary ga2 ga2 ga3 ga3"
+      "ga4 ga4 ga5 ga5 ga6 ga6";
+    .ga-1 {
+      p {
+        @include clamp(999);
+        columns: 3;
+        letter-spacing: -0.2px;
+      }
+    }
+    .ga-1,
+    .ga-2,
+    .ga-3 {
+      @include border-bottom();
+    }
+    .ga-editorial {
+      p:nth-of-type(2) {
+        @include clamp(12);
+      }
+    }
+    .ga-diary {
+      p {
+        @include clamp(11);
+      }
+    }
+    .ga-poem-1 {
+      p {
+        @include clamp(13);
+      }
+    }
+    .ga-image-1 {
+      @include image-left-top;
+      @include border-bottom();
+    }
+  }
 }

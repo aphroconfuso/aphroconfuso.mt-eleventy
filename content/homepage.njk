@@ -21,9 +21,8 @@ permalink: /index.html
 			<a class="ga-editorial editorial" href="/{{ homepage.monthYear | fixMonthMaltese | slugifyMaltese }}/">
 				<section class="generic-body-text">
 					<div class="text-container">
-						<p>
-							<span class="editorial-month-year">{{ homepage.monthYear }}</span> {{ homepage.editorial | prettifyMaltese | safe }}
-						</p>
+						<p class="editorial-month-year">{{ homepage.monthYear }}</p>
+						{{ homepage.editorial | prettifyMaltese | safe }}
 					</div>
 				</section>
 			</a>
@@ -53,12 +52,22 @@ permalink: /index.html
 			{% for promo in homepage.promos %}
 				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 				<div class="ga-{{ loop.index }}">
-					<a class="{{ promo.monthYear | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+					{# REVIEW: Not sure we will ever use multiple collections #}
+					{% if promo.collections.length %}
+						{% set collection = promo.collections[0] %}
+						{% set collectionId = 'collection-' + collection.id %}
+						<div class="promo-collections {{ collectionId }}">
+							<a href="/{{ collection.title | slugifyMaltese }}/">{{ collection.title | prettifyMaltese | safe }}</a>
+						</div>
+					{% endif %}
+					<a class="{{ promo.monthYear | slugify }} {{ collectionId }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% include "_promo_header.njk" %}
 						<div class="{{ promo.cssClass }}">
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
 						</div>
 					</a>
+					{# reset #}
+					{% set collectionId = '' %}
 				</div>
 			{% endfor %}
 			{% for promo in homepage.imagePromos %}
@@ -97,14 +106,18 @@ permalink: /index.html
 				</div>
 			{% endfor %}
 			<div class="ga-diary">
+				<ul>
 				{% for promo in homepage.diaryEntries %}
-					<a class="{{ promo.monthYear | slugify }} promo promo-diary story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
-						{% include "_promo_header.njk" %}
-						<div class="{{ promo.cssClass }}">
-							<p>{{ promo.description | prettifyMaltese | safe }}</p>
-						</div>
-					</a>
+					<li>
+						<a class="{{ promo.monthYear | slugify }} promo promo-diary story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+							{% include "_promo_header.njk" %}
+							<div class="{{ promo.cssClass }}">
+								<p>{{ promo.description | prettifyMaltese | safe }}</p>
+							</div>
+						</a>
+					</li>
 				{% endfor %}
+				</ul>
 			</div>
 		</div>
 	</article>

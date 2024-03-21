@@ -59,6 +59,7 @@ a.promo-poetry {
 .ga-newsletter,
 .ga-podcast {
 	display: flex;
+	flex-direction: column;
 	position: relative;
 	// *:last-of-type {
 	// 	margin-bottom: 0;
@@ -156,7 +157,8 @@ a.promo-poetry {
 	.layout-12,
 	.layout-13,
 	.layout-14,
-	.layout-15 {
+	.layout-15,
+	.layout-200 {
 		display: grid;
 		grid-template-columns: auto;
 		grid-template-rows: auto auto auto auto auto auto auto auto auto;

@@ -5,6 +5,7 @@ const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
 const eleventySass = require("eleventy-sass");
 const fetch = require('node-fetch');
 const fs = require('fs');
+const path = require('path');
 const pluginBundle = require("@11ty/eleventy-plugin-bundle");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 const pluginRev = require("eleventy-plugin-rev");
@@ -23,13 +24,11 @@ module.exports = function(eleventyConfig) {
 	// Copy the contents of the `public` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig.addPassthroughCopy({
+		"./_redirects": "/",
 		"./public/": "/",
 		"./scss/style.css": "/css",
 		"./node_modules/prismjs/themes/prism-okaidia.css": "/css/prism-okaidia.css"
 	});
-
-	// Copy redirects for Cloudflare
-	fs.copyFile("./_redirects", "./aphroconfuso.mt/_redirects", () => console.log("_redirects copied"));
 
 	// Run Eleventy when these files change:
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
@@ -50,28 +49,40 @@ module.exports = function(eleventyConfig) {
 		throw new Error(`\x1b[31m${message}\x1b[0m`);
 	}
 
+	eleventyConfig.on('eleventy.before', async ({dir, results, runMode, outputMode}) => {
+		fs.readdir(dir.output, (err, files) => {
+			if (err) console.log(err);
+			files.forEach(file => {
+				const fileDir = path.join(dir.output, file);
+				if (file !== 'stampi') fs.rmSync(fileDir, {recursive: true, force: true,});
+			});
+		});
+		const cssDir = path.join(dir.output, 'css');
+		if (!fs.existsSync(cssDir)) fs.mkdirSync(cssDir);
+	});
+
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
 		let urlsInContent = [], imagesInContent = [];
 		results.forEach(i => {
 			urlsInContent = urlsInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
 			imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|jpeg|webp)/g));
-			if (i.content.match(/xxx/i)) handleError(`XXX detected in ${i.url} !!!`);
+			if (i.content.match(/xxx/i)) handleError(`XXX detected in ${ i.url } !!!`);
 		});
 
 		const uniqueUrlsArray = [...new Set(urlsInContent)].filter(n => n).sort();
 		uniqueUrlsArray.forEach(i => {
-			if (!i) { return; }
+			if (!i) {return;}
 			const fileLocation = decodeURIComponent(i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html"));
-			if (fileLocation.includes('localhost:')) handleError(`${fileLocation} points to localhost!`);
+			if (fileLocation.includes('localhost:')) handleError(`${ fileLocation } points to localhost!`);
 			if (!fs.existsSync(fileLocation)) handleError(`ERROR: ${ fileLocation } is linked but does not exist!`);
 		});
 
 		const uniqueImagesArray = [...new Set(imagesInContent)].filter(n => n).sort();
 		uniqueImagesArray.forEach(i => {
-			if (!i) { return; }
+			if (!i) {return;}
 			const saveToFileLocation = i.replace(/\/stampi/g, "./image-cache/");
-			if (fs.existsSync(saveToFileLocation)) { return; }
-			console.log(`Fetching ${i} ...`);
+			if (fs.existsSync(saveToFileLocation)) {return;}
+			console.log(`Fetching ${ i } ...`);
 			const imageUrl = i.replace(/\/stampi/g, "https://stampi.aphroconfuso.mt");
 			fetchImage(imageUrl, saveToFileLocation);
 			// fetch(imageUrl).then(res =>
@@ -80,21 +91,21 @@ module.exports = function(eleventyConfig) {
 		});
 
 		const webImagesFolder = "./aphroconfuso.mt/site/stampi";
-		if (!fs.existsSync(webImagesFolder)){
+		if (!fs.existsSync(webImagesFolder)) {
 			fs.mkdirSync(webImagesFolder);
 		}
 
-		await uniqueImagesArray.forEach(i => {
+		uniqueImagesArray.forEach(i => {
 			if (!i) {return;}
 			const image = i.replace(/\/stampi/g, "")
-			const cachedFileLocation = `./image-cache${image}`;
-			const webFileLocation = `${webImagesFolder}${image}`;
+			const cachedFileLocation = `./image-cache${ image }`;
+			const webFileLocation = `${ webImagesFolder }${ image }`;
 
 			if (fs.existsSync(webFileLocation)) {return;}
 			if (fs.existsSync(cachedFileLocation)) {
 				fs.copyFile(cachedFileLocation, webFileLocation, (err) => {
-				if (err) throw err;
-					console.log(`${i} copied to web folder`);
+					if (err) throw err;
+					console.log(`${ i } copied to web folder`);
 				});
 			}
 		});
@@ -103,6 +114,42 @@ module.exports = function(eleventyConfig) {
 				console.error("\x1b[33m%s\x1b[0m", `Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
 			}
 		});
+
+		const cssFile = fs.readdirSync('./aphroconfuso.mt/site/css/').filter(fn => fn.startsWith('style-'))[0];
+		const cssFileContents = fs.readFileSync('./aphroconfuso.mt/site/css/' + cssFile).toString();
+
+		const fileNames = cssFileContents.match(/frame-02-faint-hsl-[^\)]*?\.svg/g);
+		console.log(fileNames);
+		fileNames.forEach(fileName => {
+			const [fileString, h, s, l] = fileName.match(/hsl-(\d+)-(\d+)-(\d+).*?\./);
+			console.log(`Creating file for ${ fileString }..`);
+			const srcFile = './public/img/deco/frame-02-faint-TEMPLATE.svg';
+			const destFile = './aphroconfuso.mt/site/img/deco/' + 'frame-02-faint-' + fileString + 'svg';
+			fs.readFile(srcFile, 'utf8', (err, data) => {
+				if (err) return console.log(err);
+				var result = data.replace(/\#ff0000/g, `hsl(${h}, ${s}%, ${l}%)`);
+				fs.writeFile(destFile, result, 'utf8', (err) => {
+					if (err) return console.log(err);
+				});
+			});
+		});
+
+		const hexFileNames = cssFileContents.match(/frame-02-faint-(......)\.svg/g);
+		console.log(hexFileNames);
+		hexFileNames.forEach(fileName => {
+			const [fileString, hexColour] = fileName.match(/faint-(......)\./);
+			console.log(`Creating file for ${ fileString }..`);
+			const srcFile = './public/img/deco/frame-02-faint-TEMPLATE.svg';
+			const destFile = './aphroconfuso.mt/site/img/deco/' + 'frame-02-' + fileString + 'svg';
+			fs.readFile(srcFile, 'utf8', (err, data) => {
+				if (err) return console.log(err);
+				var result = data.replace(/\#ff0000/g, `#${hexColour}`);
+				fs.writeFile(destFile, result, 'utf8', (err) => {
+					if (err) return console.log(err);
+				});
+			});
+		});
+
 	});
 
 	// App plugins
@@ -219,7 +266,6 @@ module.exports = function(eleventyConfig) {
 
 	eleventyConfig.addFilter("anchorise", function anchorise(sentence, useVerb = 'ara') {
 		const [verb, destination] = sentence.split(' ');
-		console.log(verb, destination, verb.toLowerCase() !== useVerb);
 		if (verb.toLowerCase() !== useVerb) return sentence;
 		return `${ verb } <a href="#${destination}">${slugifyStringMaltese(destination)}</a>`;
 	});

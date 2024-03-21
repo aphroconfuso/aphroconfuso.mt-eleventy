@@ -152,7 +152,9 @@ async function getAllStories() {
 											attributes {
 												title
 												description
-												stories {
+												stories (
+				            				publicationState: ${ fetchStatus },
+													) {
 													data {
 														attributes {
 															dateTimePublication
@@ -168,7 +170,7 @@ async function getAllStories() {
 											}
 										}
 									}
-									collections(
+									collections (
 				            publicationState: ${ fetchStatus },
 									) {
 										data {
@@ -177,7 +179,9 @@ async function getAllStories() {
 												title
 												moreToCome
 												description
-												stories {
+												stories (
+				            				publicationState: ${ fetchStatus },
+													) {
 													data {
 														attributes {
 															dateTimePublication

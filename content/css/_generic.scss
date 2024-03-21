@@ -75,11 +75,13 @@
 		display: none;
 	}
 }
-.contributors-menu {
-	columns: 2;
+.generic-menu {
 	font-size: 1.1rem;
+	font-variant-numeric: tabular-nums;
 	margin-left: $body-margin-half * -1;
 	li {
+		letter-spacing: -0.5px;
+		white-space: nowrap;
 		&::before {
 			color: $deco-brown;
 			content: "§";
@@ -103,6 +105,12 @@
 		li a {
 			@include animated-underline($lighter-brown);
 		}
+	}
+}
+.contributors-menu {
+	columns: 2;
+	li {
+		letter-spacing: 0;
 	}
 }
 #optInOutWrapper {
