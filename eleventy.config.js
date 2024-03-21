@@ -21,6 +21,7 @@ const slugifyStringMaltese = require("./src/slugifyMaltese.js");
 const QRCode = require('qrcode');
 
 module.exports = function(eleventyConfig) {
+	const cssDir = path.join('./aphroconfuso.mt/site/css/');
 	if (!fs.existsSync(cssDir)) {
 		fs.mkdirSync('./aphroconfuso.mt/site/')
 		fs.mkdirSync('./aphroconfuso.mt/site/css/')
