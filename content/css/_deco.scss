@@ -19,9 +19,26 @@ $slugifiedColour: slugifyColour($this-month);
     display: block !important;
     // border: 10px double red;
     padding: 2.2rem $body-margin;
+    .fx-1 {
+      font-family: "Alegreya Sans SC Regular";
+      text-transform: lowercase;
+    }
   }
   .end-dot {
     border-radius: 0;
+  }
+}
+
+@media all and (min-width: $laptop-breakpoint) {
+  .container-generic {
+    .editorial {
+      margin-left: -4rem;
+      max-width: 47rem;
+      width: 47rem;
+      .text-container {
+        padding: $body-margin $body-margin-double;
+      }
+    }
   }
 }
 
