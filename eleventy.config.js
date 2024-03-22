@@ -56,8 +56,7 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.on('eleventy.before', async ({dir, results, runMode, outputMode}) => {
 		const cssDir = path.join('./aphroconfuso.mt/site/css/');
 		if (!fs.existsSync(cssDir)) {
-			fs.mkdirSync('./aphroconfuso.mt/site/')
-			fs.mkdirSync('./aphroconfuso.mt/site/css/')
+			fs.mkdir(cssDir, {recursive: true}, err => console.log(err));
 		} else {
 			fs.readdir(cssDir, (err, files) => {
 				if (err) console.log(err);
