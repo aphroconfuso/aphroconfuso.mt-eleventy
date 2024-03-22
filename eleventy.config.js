@@ -21,10 +21,10 @@ const slugifyStringMaltese = require("./src/slugifyMaltese.js");
 const QRCode = require('qrcode');
 
 module.exports = function(eleventyConfig) {
-	const cssDir = path.join('aphroconfuso.mt', 'site', 'css');
-	if (!fs.existsSync(cssDir)) {
-		fs.mkdir(cssDir, {recursive: true}, err => console.log(err));
-	}
+	// const cssDir = path.join('aphroconfuso.mt', 'site', 'css');
+	// if (!fs.existsSync(cssDir)) {
+	// 	fs.mkdir(cssDir, {recursive: true}, err => console.log(err));
+	// }
 	// Copy the contents of the `public` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig.addPassthroughCopy({
