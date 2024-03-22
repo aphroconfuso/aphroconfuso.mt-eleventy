@@ -81,7 +81,7 @@
       border-bottom: none;
     }
     display: grid;
-    gap: $body-margin $body-margin;
+    gap: ($body-margin * 1.5) $body-margin;
     grid-template-rows: auto auto auto auto auto auto auto auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-auto-columns: 1fr;
@@ -96,6 +96,13 @@
       "ga9 ga9 ga10 ga10 ga11 ga11"
       "ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2";
     .ga-1 {
+      background-color: hsl(29, 100%, 94%);
+      border: 1px solid #e2e0df;
+      box-sizing: content-box;
+      margin-left: -1.8rem;
+      margin-right: -1.8rem;
+      padding-bottom: calc(1.8rem - 1px);
+      padding: 1.8rem;
       p {
         @include clamp(999);
         columns: 3;

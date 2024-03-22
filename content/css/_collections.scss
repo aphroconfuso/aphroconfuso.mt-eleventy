@@ -5,152 +5,156 @@
 @use "mixins-home-grids" as *;
 
 @mixin collection-colour($hue: 0, $saturation: 35%) {
-	$collection-ink: hsl($hue, $saturation, 30%);
-	$collection-paper: hsl($hue, $saturation, 80%);
-	background-color: $collection-paper;
-	h3,
-	.pilcrow {
-		color: $collection-ink;
-	}
-	p,
-	a {
-		color: hsl($hue, $saturation, 20%);
-	}
-	.end-dot {
-		background-color: hsl($hue, $saturation, 40%);
-		color: hsl($hue, $saturation, 40%);
-	}
-	&.header-label {
-		background-color: unset;
-		a {
-			padding: 0 2px;
-			&:hover {
-				@include ease-in(0.35s);
-				background-color: $collection-paper;
-				color: $collection-ink !important;
-			}
-		}
-	}
-	&.promo-collections {
-		background: transparent;
-		border-bottom: 2px solid $collection-paper;
-		a {
-			background-color: $collection-paper;
-		}
-		&:hover {
-			@include ease-in(0.35s);
-			border-bottom: 2px solid $collection-ink;
-			a {
-				@include ease-in(0.35s);
-				background-color: $collection-ink;
-				color: $collection-paper;
-			}
-		}
-	}
-	&.promo {
-		background-color: transparent;
-		// 	border-bottom: 1px solid $collection-paper;
-		// 	padding-bottom: $body-margin-half;
-	}
-	@media all and (min-width: $laptop-breakpoint) {
-		&.collection-sidebar {
-			a:hover {
-				h3,
-				p,
-				a {
-					color: $collection-ink;
-				}
-			}
-		}
-	}
+  $collection-ink: hsl($hue, $saturation, 30%);
+  $collection-paper: hsl($hue, $saturation, 80%);
+  background-color: $collection-paper;
+  h3,
+  .pilcrow {
+    color: $collection-ink;
+  }
+  p,
+  a {
+    color: hsl($hue, $saturation, 20%);
+  }
+  .end-dot {
+    background-color: hsl($hue, $saturation, 40%);
+    color: hsl($hue, $saturation, 40%);
+  }
+  &.header-label {
+    background-color: unset;
+    a {
+      padding: 0 2px;
+      &:hover {
+        @include ease-in(0.35s);
+        background-color: $collection-paper;
+        color: $collection-ink !important;
+      }
+    }
+  }
+  &.promo-collections {
+    background: transparent;
+    border-top: 2px solid $collection-paper;
+    a {
+      background-color: $collection-paper;
+    }
+  }
+  &.promo {
+    background-color: transparent;
+    // 	border-bottom: 1px solid $collection-paper;
+    // 	padding-bottom: $body-margin-half;
+  }
+  @media all and (min-width: $laptop-breakpoint) {
+    &.promo-collections {
+      &:hover {
+        @include ease-in(0.35s);
+        border-top: 2px solid $collection-ink;
+        a {
+          @include ease-in(0.35s);
+          background-color: $collection-ink;
+          color: $collection-paper;
+        }
+      }
+    }
+    &.collection-sidebar {
+      a:hover {
+        h3,
+        p,
+        a {
+          color: $collection-ink;
+        }
+      }
+    }
+  }
 }
 
 div.container-collection {
-	.promo {
-		header {
-			li.collection-slug {
-				display: none;
-			}
-		}
-	}
+  .promo {
+    header {
+      li.collection-slug {
+        display: none;
+      }
+    }
+  }
 }
 
 .collection-sidebar {
-	padding: $body-margin-half;
-	h3 {
-		font-style: normal;
-	}
-	p {
-		@include clamp(7);
-	}
+  padding: $body-margin-half;
+  h3 {
+    font-style: normal;
+  }
+  p {
+    @include clamp(7);
+  }
 }
 
 .collection.introduction {
-	padding: $body-margin-half;
-	.fx1 {
-		font-family: "Alegreya Sans SC Regular";
-		text-transform: lowercase;
-		font-size: $body-font-size-slightly-larger;
-	}
-	.end-dot {
-		border-radius: 0;
-	}
+  padding: $body-margin-half;
+  .fx1 {
+    font-family: "Alegreya Sans SC Regular";
+    text-transform: lowercase;
+    font-size: $body-font-size-slightly-larger;
+  }
+  .end-dot {
+    border-radius: 0;
+  }
 }
 
 .pilcrow {
-	font-family: $decorative, cursive;
-	padding: 0 $body-margin-quarter * 0.5;
+  font-family: $decorative, cursive;
+  padding: 0 $body-margin-quarter * 0.5;
 }
 
 .collection-2 {
-	@include collection-colour(177);
+  @include collection-colour(177);
 }
 
 .collection-3 {
-	@include collection-colour(280);
+  @include collection-colour(280);
 }
 
 .promo-collections {
-	font-family: "Alegreya Sans SC Regular";
-	font-size: $font-size-furniture;
-	top: $body-margin-quarter * -1;
-	position: absolute;
-	text-transform: lowercase;
-	width: 100%;
-	a {
-		display: inline-block;
-		padding: 0 $body-margin-double 0 ($body-margin-quarter * 0.5);
-	}
+  display: flex;
+  flex-direction: row-reverse;
+  font-family: "Alegreya Sans SC Regular";
+  font-size: $font-size-furniture;
+  position: absolute;
+  text-transform: lowercase;
+  top: $body-margin-quarter * -1;
+  width: 100%;
+  a {
+    display: inline-block;
+    padding: 0 $body-margin-half;
+  }
 }
 
 @media all and (min-width: $mobile-breakpoint-plusone) {
-	.container-collection {
-		max-width: $max-width;
-		display: grid;
-		grid-template-columns: 1fr ($max-content-width * 0.5) (
-				$max-content-width * 0.5
-			) 1fr;
-		grid-template-rows: auto;
-		grid-auto-flow: row;
-		grid-template-areas: "grid-max-body grid-max-body grid-max-panel-right-top grid-max-panel-right-top";
-		column-gap: $body-margin;
+  .container-collection {
+    max-width: $max-width;
+    display: grid;
+    grid-template-columns: 1fr ($max-content-width * 0.5) (
+        $max-content-width * 0.5
+      ) 1fr;
+    grid-template-rows: auto;
+    grid-auto-flow: row;
+    grid-template-areas: "grid-max-body grid-max-body grid-max-panel-right-top grid-max-panel-right-top";
+    column-gap: $body-margin;
 
-		#grid-body {
-			max-width: 100%;
-			width: 100%;
-			.introduction {
-				padding: $body-margin-half;
-				p {
-					columns: 2;
-				}
-			}
-		}
-		#grid-max-panel-right-top {
-			max-width: 100%;
-			padding-right: $body-margin-double;
-		}
-		#form {
-			width: 75%;
-		}
-	}
+    #grid-body {
+      max-width: 100%;
+      width: 100%;
+      .introduction {
+        padding: $body-margin-half;
+        p {
+          columns: 2;
+        }
+      }
+    }
+    #grid-max-panel-right-top {
+      max-width: 100%;
+      padding-right: $body-margin-double;
+    }
+    #form {
+      width: 75%;
+    }
+  }
 }
