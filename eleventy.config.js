@@ -23,8 +23,7 @@ const QRCode = require('qrcode');
 module.exports = function(eleventyConfig) {
 	const cssDir = path.join('./aphroconfuso.mt/site/css/');
 	if (!fs.existsSync(cssDir)) {
-		fs.mkdirSync('./aphroconfuso.mt/site/')
-		fs.mkdirSync('./aphroconfuso.mt/site/css/')
+		fs.mkdir(cssDir, {recursive: true}, err => console.log(err));
 	}
 	// Copy the contents of the `public` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
