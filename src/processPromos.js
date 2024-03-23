@@ -13,10 +13,16 @@ const fixReportingTitle = (processedPromo) => {
 	return title;
 }
 
-module.exports = (promos) => {
+module.exports = (promos, storyAtts) => {
 	if (!promos) return null;
 	return promos.map((promo) => {
-		const promoAtts = promo.story && promo.story.data && promo.story.data.attributes || promo.attributes;
+		// const promoAtts = promo.story && promo.story.data && promo.story.data.attributes || promo.attributes;
+		// if (!promoAtts) {
+		// 	return null;
+		// }
+
+		// If this is ad hoc audio, we use the containing story for meta data
+		var promoAtts = promo.story && promo.story.data && promo.story.data.attributes || storyAtts;
 		if (!promoAtts) {
 			return null;
 		}
@@ -35,6 +41,8 @@ module.exports = (promos) => {
 		const processedPromo = {
 			audioNote: promo.note,
 			audioHighlight: promo.highlight,
+			audioLengthMinutes: promo.audioLengthMinutes,
+			audioUrl: promo.audioUrl,
 			authorsType,
 			author,
 			authors,
@@ -52,6 +60,7 @@ module.exports = (promos) => {
 			podcastLengthMinutes: promoAtts.podcastLengthMinutes,
 			podcastNote: promoAtts.podcastNote,
 			podcastUrl: promoAtts.podcastUrl,
+			putAfterThisText: promo.putAfterThisText,
 			reads: reads(authorPronoun),
 			sequenceEpisodeNumber: promoAtts.sequenceEpisodeNumber,
 			sequenceEpisodeTitle: sequenceEpisodeTitle,

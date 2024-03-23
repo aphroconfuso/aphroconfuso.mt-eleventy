@@ -136,8 +136,12 @@ async function getAllStories() {
 										}
 									}
 									audio {
+										id
 										highlight
 										note
+										audioUrl
+										audioLengthMinutes
+										putAfterThisText
 										story {
 											${linkedStoryData}
 										}
@@ -298,7 +302,7 @@ async function getAllStories() {
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 		const sequenceData = atts.sequence.data;
 		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
-		const audioPromosFormatted = atts.audio.length && processPromos(atts.audio);
+		const audioPromosFormatted = atts.audio.length && processPromos(atts.audio, atts);
 		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		// REFACTOR use titleArray to derive slug and title
 
@@ -471,6 +475,7 @@ async function getAllStories() {
 		processedStory.reportingTitle = fixReportingTitle(processedStory);
 		const audioUrls = [];
 		const audioPlayers = [];
+		// This story's own audio (normally a plain reading)
 		if (atts.podcastUrl) {
 			audioUrls.push({
 				author: processedStory.authorsString,
@@ -500,9 +505,20 @@ async function getAllStories() {
 				useDefaultPodcastMessage: !!processedStory.useDefaultPodcastMessage,
 			});
 		}
+		// Extra players or FX
+		console.log(audioPromosFormatted);
 		if (audioPromosFormatted.length) {
 			audioPromosFormatted.forEach(promo => {
-				if (promo.url === audioUrls[0].url) return;
+				if (audioUrls && audioUrls.length && promo.url === audioUrls[0].url) return;
+				// // If audio is ad hoc (e.g. sound effects for this story)
+				// if (promo.audioUrl) {
+				// 	audioPlayers.push({
+				// 		podcastLengthMinutes: promo.audioLengthMinutes,
+				// 		podcastNote: promo.note,
+				// 		url: promo.audioUrl,
+				// 	});
+				// 	return;
+				// }
 				audioUrls.push({
 					// add description
 					authorName: promo.authorsString,
@@ -514,19 +530,20 @@ async function getAllStories() {
 					storyId: promo.id,
 					title: promo.title,
 					type: promo.type,
-					url: promo.podcastUrl,
+					url: promo.audioUrl || promo.podcastUrl,
 				});
 				audioPlayers.push({
 					authorName: promo.translatorForename || promo.authorForename,
 					highlight: promo.audioHighlight,
-					podcastLengthMinutes: promo.podcastLengthMinutes,
-					podcastNote: (promo.note || promo.podcastNote),
+					podcastLengthMinutes: promo.audioLengthMinutes || promo.podcastLengthMinutes,
+					podcastNote: promo.note || promo.podcastNote,
 					monthYear: promo.monthYear,
+					putAfterThisText: promo.putAfterThisText,
 					reads: reads(promo.authorPronoun),
 					reportingTitle: promo.reportingTitle,
 					title: promo.title,
 					type: promo.type,
-					url: promo.podcastUrl,
+					url: promo.audioUrl || promo.podcastUrl,
 					useDefaultPodcastMessage: !!promo.useDefaultPodcastMessage,
 				});
 			});

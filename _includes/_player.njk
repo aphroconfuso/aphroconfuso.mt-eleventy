@@ -1,4 +1,4 @@
-<figure class="audio{% if player.highlight %} highlighted{% endif %} {{ player.monthYear | slugify }} {{ player.type | slugify }}">
+<figure class="audio{% if player.highlight %} highlighted{% endif %} {{ player.monthYear | slugify }} {{ player.type | slugify }}"{% if player.putAfterThisText %} data-put-after="{{ player.putAfterThisText }}"{% endif %}>
 	<div class="player" id="player-{{ playerIndex }}">
 		<audio id="audio-{{ playerIndex }}">
 			<source src="{{ player.url }}" type="audio/mpeg">

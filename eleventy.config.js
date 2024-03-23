@@ -224,6 +224,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("escapeQuote", function escapeQuote(text) {
+		if (!text) return "XXXXXXescapeQuoteXXX";
 		return (text || []).replace(/'/g, "\\'");
 	});
 
@@ -240,10 +241,12 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text, punctuation = String.fromCharCode(8201)) {
+		if (!text) return "XXXXXXprettifyNumbersXXX";
 		return (text.toString() || []).replace(/\d{1,3}(?=(\d{3})+(?!\d))/g, `$&${ punctuation }`);
 	});
 
 	eleventyConfig.addFilter("semiDeSlugify", function semiDeSlugify(text) {
+		if (!text) return "XXXXXXsemiDeSlugifyXXX";
 		return (text || []).replace(/\//g,'');
 	});
 
