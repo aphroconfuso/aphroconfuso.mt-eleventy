@@ -16,13 +16,8 @@ const fixReportingTitle = (processedPromo) => {
 module.exports = (promos, storyAtts) => {
 	if (!promos) return null;
 	return promos.map((promo) => {
-		// const promoAtts = promo.story && promo.story.data && promo.story.data.attributes || promo.attributes;
-		// if (!promoAtts) {
-		// 	return null;
-		// }
-
 		// If this is ad hoc audio, we use the containing story for meta data
-		var promoAtts = promo.story && promo.story.data && promo.story.data.attributes || storyAtts;
+		var promoAtts = storyAtts || promo.story && promo.story.data && promo.story.data.attributes || promo.attributes;
 		if (!promoAtts) {
 			return null;
 		}
