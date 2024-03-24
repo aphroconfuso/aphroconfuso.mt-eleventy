@@ -4,7 +4,7 @@ module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subj
 	if (type === 'Terminu') return `Il-Kliem Fit-Teorija · ${title}`;
 	return [
 		subjectDate ? type : '',
-		sequenceTitle,
+		type === 'Esej' && sequenceTitle,
 		subjectDate && fixSubjectDate(subjectDate) || sequenceNumber && (`#${ sequenceNumber }`),
 		sequenceEpisodeTitle || title,
 		"ta’",
