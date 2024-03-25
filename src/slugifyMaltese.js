@@ -1,6 +1,7 @@
 module.exports = (text) => {
 	if (!text) {
 		console.log(`slugifyMaltese got null!`);
+		return;
 	}
 	return (text || []).trim().replace(/  +/gm, " ")
 		.replace(/\s+/gm, "-")

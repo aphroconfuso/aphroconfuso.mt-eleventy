@@ -224,15 +224,28 @@ async function getAllStories() {
     }
   }
 
-	const splitText = (text) => {
-		const cleanedText = stripTags(text).toLowerCase().replace(/\b\d+\b/g, " ").replace(/f\’/g, "f’ ").replace(/b\’/g, "b’ ").replace(/[\—]/g, " ").replace(/[.,\/#!$%\^&\*;:{}=_`“”~()]/g, "").replace(/\s+/g, " ");
+	// Also used externally
+	const splitText = (text, aggressively = false) => {
+		let cleanedText = stripTags(text).toLowerCase()
+			.replace(/\b\d+\b/g, " ")
+			.replace(/b\’/g, "b’ ")
+			.replace(/[\—]/g, " ")
+			.replace(/[\.,\/#!\$\€%\^&\*;:{}=_‘`“”~()]/g, "")
+			.replace(/\s+/g, " ");
+		if (aggressively) {
+			cleanedText = cleanedText.replace(/\b(b|f)(\’|\')/gi, "")
+				.replace(/\bi?(.)-/gi, "")
+				.replace(/\b(bi?|bħa|fi?|ġo|għa|mi|sa|ta)l?.?-?(.)-/gi, "")
+				.replace(/\b\’/gi, "")
+		}
+		// .replace(/f\’/g, "f’ ")
 		// .replace(/[\-]/g, "- ")
 		// FIXME: avoid doing this twice, maybe concatenate arrays and split at the end
 		return cleanedText.split(/\s+/);
 	}
 
 	const getWordFrequency = (text) => {
-		const wordsArray = splitText(text);
+		const wordsArray = splitText(text, true);
 		wordcount = wordsArray.length;
 		cumulativeWordcount += wordcount;
 		const wordFrequency = {};
@@ -281,7 +294,8 @@ async function getAllStories() {
 		console.log(atts.title);
 
 		// Add anchors
-		const anchoredBody = atts.body.replace(/(<h[56])>(.*?)(<\/h[56]>)/gmi, (full, openingTag, headline, closingTag) => `<hr>${ openingTag } id="${ slugifyStringMaltese(headline) }">${ headline }${ closingTag }`)
+		const dataRemovedBody = atts.body.replace(/td data-.*?=".*?"/gmi, "td");
+		const anchoredBody = dataRemovedBody.replace(/(<h[56])>(.*?)(<\/h[56]>)/gmi, (full, openingTag, headline, closingTag) => `<hr>${ openingTag } id="${ slugifyStringMaltese(headline) }">${ headline }${ closingTag }`)
 
 		// Check anchors
 		const anchors = anchoredBody.match(/(?<=href="#).*?(?=">)/gm);
