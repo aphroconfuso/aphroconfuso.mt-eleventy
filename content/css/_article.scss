@@ -14,18 +14,14 @@ article {
 			h1,
 			h2,
 			h3 {
-				margin-bottom: $body-margin-half;
+				margin-bottom: $body-margin-quarter;
 			}
-			h1 + h2,
-			h2 + h3 {
-				margin-bottom: $body-margin;
+			header {
+				padding-bottom: $body-margin-double;
 			}
 			@media all and (min-width: $laptop-breakpoint) {
-				h2 + h3 {
-					margin-top: $body-margin * 3;
-				}
-				h1 + h3 {
-					margin-top: $body-margin * 3;
+				header {
+					padding-bottom: $body-margin-double;
 				}
 			}
 		}

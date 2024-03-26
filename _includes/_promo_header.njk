@@ -44,7 +44,7 @@
 	{% endif %}
 	{% include '_authors.njk' %}
 	{% if promo.type === 'Djarju' or (showEpisodeTitle and promo.sequenceEpisodeTitle) %}
-		<h3 {% if promo.image %} class="hide-mobile"{% endif %}>
+		<h3>
 			{% if promoFrom === 'Werrej' and promo.sequenceEpisodes.length > 1 %}
 				<span class="episode-number">{{ promo.sequenceEpisodeNumber }}. </span>
 			{% endif %}

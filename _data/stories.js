@@ -520,7 +520,6 @@ async function getAllStories() {
 			});
 		}
 		// Extra players or FX
-		console.log(audioPromosFormatted);
 		if (audioPromosFormatted.length) {
 			audioPromosFormatted.forEach(promo => {
 				if (audioUrls && audioUrls.length && promo.url === audioUrls[0].url) return;

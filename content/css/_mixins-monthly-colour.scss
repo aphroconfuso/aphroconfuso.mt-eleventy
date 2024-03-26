@@ -107,12 +107,12 @@
 				color: $colour;
 				@include ease-out($fade-in-long);
 			}
-			.header-label,
-			h3 {
+			.header-label {
 				color: $colour;
 				@include ease-out($fade-in-long);
 			}
 			// h2,
+			// h3,
 			// p {
 			//   color: $colour;
 			//   @include ease-out(10s);

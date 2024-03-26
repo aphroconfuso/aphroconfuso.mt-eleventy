@@ -194,7 +194,7 @@ module.exports = function(eleventyConfig) {
 			.replace(/ ?— ?| - | -- /gm, String.fromCharCode(8202, 8212, 8202))
 			.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
 			.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
-			.replace(/([ \'\"\,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)( |-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
+			.replace(/([ \'\"\,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
 			.replace(/\'/gm, "’")
 			.replace(/ \"/gm, " “")
 			.replace(/\"/gm, "”")

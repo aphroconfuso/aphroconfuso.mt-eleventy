@@ -80,10 +80,10 @@ permalink: /{{ story.slug }}/index.html
 					{% endif %}
 				</h1>
 			{% endif %}
-			{% include "_authors.njk" %}
 			{% if story.isSequenceEpisode %}
 				<h3>{{ story.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
 			{% endif %}
+			{% include "_authors.njk" %}
 			{% for epigraph in story.epigraphs %}
 				{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
 					<figure class="epigraph">

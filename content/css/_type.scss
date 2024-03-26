@@ -45,7 +45,7 @@ header {
 
 	h3 {
 		font-family: $serif, serif;
-		font-size: $font-size-story-episode-header-mobile;
+		font-size: $font-size-story-header-mobile;
 		font-style: italic;
 		font-weight: 600;
 		line-height: $header-line-height;
@@ -204,6 +204,19 @@ p.continuity {
 				padding: 0;
 			}
 		}
+		&.audio {
+			margin: $body-margin !important;
+			figcaption {
+				&:before {
+					display: none;
+				}
+				p {
+					color: $lighter-brown;
+					font-family: $sans, sans-serif;
+					font-size: $font-size-blockquote;
+				}
+			}
+		}
 	}
 	blockquote {
 		font-size: $font-size-blockquote;
@@ -293,18 +306,17 @@ aside,
 }
 
 @media all and (min-width: $laptop-breakpoint) {
-	h1,
-	h2 {
-		font-size: $font-size-story-header;
-	}
-	// Only bigger in main title
-	// .container {
-	// 	h3 {
-	// 		font-size: $font-size-story-episode-header;
-	// 	}
-	// }
-	h2 a {
-		@include animated-underline($lighter-brown);
+	header {
+		h1,
+		h2 {
+			font-size: $font-size-story-header;
+		}
+		h2 a {
+			@include animated-underline($lighter-brown);
+		}
+		h3 {
+			font-size: $font-size-story-header;
+		}
 	}
 	#grid-body {
 		a:hover {
@@ -324,7 +336,6 @@ aside,
 		}
 	}
 }
-
 article.generic[lang="ar"] {
 	p,
 	h1 {

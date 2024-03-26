@@ -11,11 +11,10 @@
 		}
 		h1,
 		h2 {
-			font-size: 2rem;
+			font-size: $font-size-largest;
 		}
 		h3 {
-			margin-bottom: 0;
-			padding-bottom: 0;
+			font-size: $body-font-size-slightly-larger;
 			padding-top: $body-margin-half;
 		}
 	}
@@ -23,20 +22,19 @@
 		color: $lighter-ink;
 		@include clamp(7);
 	}
-}
-
-@media all and (min-width: $mobile-breakpoint-plusone) {
-	.appointments .promo p {
-		@include clamp(5);
+	@media all and (min-width: $mobile-breakpoint-plusone) {
+		.appointments .promo p {
+			@include clamp(5);
+		}
 	}
 }
-
 .home {
 	.promo {
 		header {
 			h1,
-			h2 {
-				font-size: 2rem;
+			h2,
+			h3 {
+				font-size: $font-size-largest-home;
 			}
 			li.header-label {
 				display: none;
@@ -49,6 +47,9 @@
 				color: $lighter-brown;
 				text-decoration: none;
 			}
+			h3 {
+				font-size: $body-font-size-slightly-larger;
+			}
 			li.header-label {
 				display: block;
 				.subject-date {
@@ -57,33 +58,7 @@
 			}
 		}
 	}
-
-	// &.mejju-2023 .mejju-2023,
-	// &.gunju-2023 .gunju-2023,
-	// &.lulju-2023 .lulju-2023,
-	// &.awwissu-2023 .awwissu-2023,
-	// &.settembru-2023 .settembru-2023,
-	// &.ottubru-2023 .ottubru-2023,
-	// &.novembru-2023 .novembru-2023,
-	// &.dicembru-2023 .dicembru-2023,
-	// &.jannar-2024 .jannar-2024,
-	// &.frar-2024 .frar-2024,
-	// &.marzu-2024 .marzu-2024,
-	// &.april-2024 .april-2024,
-	// &.mejju-2024 .mejju-2024,
-	// &.gunju-2024 .gunju-2024,
-	// &.lulju-2024 .lulju-2024,
-	// &.awwissu-2024 .awwissu-2024,
-	// &.settembru-2024 .settembru-2024,
-	// &.ottubru-2024 .ottubru-2024,
-	// &.novembru-2024 .novembru-2024,
-	// &.dicembru-2024 .dicembru-2024 {
-	// 	.header-label {
-	// 		display: none;
-	// 	}
-	// }
 }
-
 .image-16-by-9 {
 	@include image-fit();
 }
