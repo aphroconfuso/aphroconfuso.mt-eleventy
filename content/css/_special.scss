@@ -98,6 +98,27 @@ article.story {
 			}
 		}
 	}
+	&.story-48 {
+		// Splużjonijiet
+		p.fx1 {
+			margin-bottom: $body-margin-quarter;
+			margin-left: $body-margin;
+			text-indent: $body-margin * -1;
+			i.fx1 {
+				margin-right: $body-margin-quarter;
+				&:after {
+					color: $lightest-brown;
+					content: ":";
+				}
+				display: inline-block;
+				text-align: right;
+				width: $body-margin-half + $body-margin-quarter;
+			}
+			&:last-of-type {
+				margin-bottom: $body-margin-half;
+			}
+		}
+	}
 }
 
 @media all and (max-width: $laptop-breakpoint) {
@@ -162,27 +183,6 @@ article.story {
 			// Reset Joey Tilbes (Diċembru 2023)
 			h1 {
 				letter-spacing: 0;
-			}
-		}
-		&.story-48 {
-			// Splużjonijiet
-			p.fx1 {
-				margin-bottom: $body-margin-quarter;
-				margin-left: $body-margin;
-				text-indent: $body-margin * -1;
-				i.fx1 {
-					margin-right: $body-margin-quarter;
-					&:after {
-						color: $lightest-brown;
-						content: ":";
-					}
-					display: inline-block;
-					text-align: right;
-					width: $body-margin-half + $body-margin-quarter;
-				}
-				&:last-of-type {
-					margin-bottom: $body-margin-half;
-				}
 			}
 		}
 	}
