@@ -206,6 +206,9 @@ p.continuity {
 		}
 		&.audio {
 			margin: $body-margin 0 !important;
+			@media all and (min-width: $laptop-breakpoint) {
+				margin: $body-margin $body-margin-double $body-margin $body-margin !important;
+			}
 			figcaption {
 				&:before {
 					display: none;
