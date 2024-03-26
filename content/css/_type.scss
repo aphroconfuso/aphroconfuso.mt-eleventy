@@ -205,7 +205,7 @@ p.continuity {
 			}
 		}
 		&.audio {
-			margin: $body-margin !important;
+			margin: $body-margin 0 !important;
 			figcaption {
 				&:before {
 					display: none;
@@ -221,6 +221,29 @@ p.continuity {
 	blockquote {
 		font-size: $font-size-blockquote;
 		padding: 0 $body-margin $body-margin-half;
+	}
+	table {
+		margin-top: $body-margin-half;
+		max-width: 100%;
+		tr {
+			border-bottom: 1px solid $faint-brown;
+			&:hover {
+				background-color: $faint-brown;
+			}
+			td:first-of-type {
+				font-variant-numeric: tabular-nums;
+			}
+			td {
+				font-size: $body-font-size;
+				padding-right: $body-margin-half;
+			}
+			&:last-of-type {
+				border-bottom: none;
+			}
+		}
+		& + p {
+			margin-top: $body-margin-half;
+		}
 	}
 }
 
@@ -267,21 +290,6 @@ p.continuity {
 	text-shadow: -1px -1px 0 $paper, 0 -1px 0 $paper, 1px -1px 0 $paper,
 		1px 0 0 $paper, 1px 1px 0 $paper, 0 1px 0 $paper, -1px 1px 0 $paper,
 		-1px 0 0 $paper;
-}
-
-// main {
-// 	li {
-// 		a {
-// 			text-decoration: underline;
-// 			text-decoration-color: $paper;
-// 			text-decoration-thickness: 1px;
-// 			text-underline-offset: 2px;
-// 		}
-// 	}
-// }
-
-table {
-	font-size: $body-font-size;
 }
 
 .body-text,

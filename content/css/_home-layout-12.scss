@@ -84,6 +84,10 @@
 			height: auto;
 			margin: 1rem 0;
 		}
+		.ga-image-1 {
+			@include image-left-top;
+			@include border-bottom();
+		}
 		.ga-poem-1 {
 			p {
 				@include clamp(15);
@@ -92,10 +96,8 @@
 		.ga-1,
 		.ga-2,
 		.ga-3,
-		.ga-4,
-		.ga-image-1 {
+		.ga-4 {
 			@include image-left;
-			@include border-bottom();
 		}
 	}
 }

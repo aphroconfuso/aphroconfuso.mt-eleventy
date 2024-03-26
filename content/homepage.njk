@@ -75,11 +75,6 @@ permalink: /index.html
 							{% include "_image.njk" %}
 						{% endif %}
 						<div class="{{ promo.cssClass }}">
-							{% if promo.type === 'Djarju' or (showEpisodeTitle and promo.sequenceEpisodeTitle) %}
-								<header class="hide-laptop">
-									<h3>{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
-								</header>
-							{% endif %}
 							<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
 						</div>
 					</a>

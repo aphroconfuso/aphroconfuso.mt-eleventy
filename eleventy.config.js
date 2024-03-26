@@ -187,6 +187,7 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addFilter("prettifyMaltese", function prettifyMaltese(text) {
 		if (!text) return "XXXXXXprettifyMalteseXXX";
 		return (text || []).replace(/<p>\s*<\/p>/gm, "")
+			.replace(/td data-.*?=".*?"/gmi, "td")
 			.replace(/-</gm, "- <")
 			.replace(/  +/gm, " ")
 			.replace(/<p> */gm, "<p>")
@@ -362,7 +363,8 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addFilter("endDotify", function endDotify(text) {
 		let fixedText = (text || []).replace(/([^ ]+)([\.\?\!]|<span class="pull">.<\/span>)\s*<\/(p|blockquote)>\s*$/, '<l-m>$1 <span class="end-dot">.</span></l-m></$3>');
 		if (!fixedText.match(/class=\"end\-dot\"/m)) {
-			fixedText = text.replace(/<\/(p|blockquote)>\s*$/, '&nbsp;<span class="end-dot">.</span></$1>').replace(/<\/td><\/tr><\/table>\s*$/, '<span class="end-dot">.</span></td></tr></table>');
+			fixedText = text.replace(/<\/(p|blockquote)>\s*$/, '&nbsp;<span class="end-dot">.</span></$1>')
+				.replace(/\s*<\/td>\s*<\/tr>\s*<\/tbody>\s*<\/table>\s*$/, '<span class="end-dot">.</span></td></tr></tbody></table>');
 		}
 		return fixedText;
 	});
