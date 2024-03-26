@@ -294,8 +294,8 @@ async function getAllStories() {
 		console.log(atts.title);
 
 		// Add anchors
-		const dataRemovedBody = atts.body.replace(/td data-.*?=".*?"/gmi, "td");
-		const anchoredBody = dataRemovedBody.replace(/(<h[56])>(.*?)(<\/h[56]>)/gmi, (full, openingTag, headline, closingTag) => `<hr>${ openingTag } id="${ slugifyStringMaltese(headline) }">${ headline }${ closingTag }`)
+		const cleanedBody = atts.body.replace(/ data-.*?=".*?"/gmi, "").replace(/fx-(\d)/gmi, "fx$1");
+		const anchoredBody = cleanedBody.replace(/(<h[56])>(.*?)(<\/h[56]>)/gmi, (full, openingTag, headline, closingTag) => `<hr>${ openingTag } id="${ slugifyStringMaltese(headline) }">${ headline }${ closingTag }`)
 
 		// Check anchors
 		const anchors = anchoredBody.match(/(?<=href="#).*?(?=">)/gm);

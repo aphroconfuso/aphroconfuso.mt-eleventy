@@ -39,7 +39,7 @@ article.story {
 				line-height: 1;
 				position: relative;
 				text-transform: lowercase;
-				.fx-1 {
+				.fx1 {
 					font-family: "Alegreya Regular";
 					font-variant: normal;
 					font-weight: 400;
@@ -62,10 +62,10 @@ article.story {
 				a[href^="#"] {
 					font-weight: 600;
 					position: relative;
-					&:has(.fx-1) {
+					&:has(.fx1) {
 						padding-left: 5px;
 					}
-					.fx-1 {
+					.fx1 {
 						font-variant: normal;
 						position: absolute;
 						text-align: right;
@@ -137,7 +137,7 @@ article.story {
 			h1 {
 				width: 100%;
 			}
-			.fx-1 {
+			.fx1 {
 				transform: scale(-1, 1);
 				color: hsl(0, 0%, 39%);
 			}
@@ -154,7 +154,7 @@ article.story {
 		// 	}
 		// }
 		&.story-27 {
-			.fx-1 {
+			.fx1 {
 				white-space: nowrap;
 			}
 		}
@@ -162,6 +162,23 @@ article.story {
 			// Reset Joey Tilbes (Diċembru 2023)
 			h1 {
 				letter-spacing: 0;
+			}
+		}
+		&.story-48 {
+			// Splużjonijiet
+			p.fx1 {
+				margin-left: $body-margin;
+				text-indent: $body-margin * -1;
+				i.fx1 {
+					margin-right: $body-margin-quarter;
+					&:after {
+						color: $lightest-brown;
+						content: ":";
+					}
+					display: inline-block;
+					text-align: right;
+					width: $body-margin-half + $body-margin-quarter;
+				}
 			}
 		}
 	}
