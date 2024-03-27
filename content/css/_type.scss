@@ -295,8 +295,8 @@ p.continuity {
 		-1px 0 0 $paper;
 }
 
-.body-text,
 .generic-body-text,
+.body-text,
 aside,
 #endnote {
 	p,
@@ -313,6 +313,12 @@ aside,
 		&:last-of-type {
 			margin-bottom: 0;
 		}
+	}
+}
+.generic-body-text {
+	h5,
+	h6 {
+		margin-bottom: 0;
 	}
 }
 
