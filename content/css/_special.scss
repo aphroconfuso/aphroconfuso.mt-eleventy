@@ -187,21 +187,20 @@ article.story {
 		}
 	}
 
-	.promos-container {
-		// REFACTOR ... this is not a special
-		a:not(.promo-djarju).is-episode,
+	// REFACTOR ... this is not a special
+	a:not(.promo-djarju).is-episode,
 		// Il-Lanza... (Lulju 2023)
 		.story-16,
-		.story-39 {
-			header {
-				margin-bottom: $body-margin-quarter;
-				h3 {
-					padding-top: $body-margin-quarter;
-				}
+		.story-39,
+		.story-55 {
+		header {
+			margin-bottom: $body-margin-quarter;
+			h3 {
+				padding-top: $body-margin-quarter;
 			}
-			p {
-				@include clamp(6);
-			}
+		}
+		p {
+			@include clamp(6);
 		}
 	}
 }
