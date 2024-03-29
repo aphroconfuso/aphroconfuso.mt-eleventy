@@ -165,7 +165,7 @@ const deleteBookmark = (type = 'text', id = storyId) => {
 	const bookmark = bookmarksArray.find(i => i.id);
 	bookmarksArray = bookmarksArray.filter(i => i.id !== id);
 	updateBookmarksMenu(bookmarksArray);
-	const removeBookmark = document.getElementById(`bookmark-${ id }`);
+	const removeBookmark = document.getElementById(`link-${ id }`);
 	removeBookmark.style.opacity = '0';
 	setTimeout(() => removeBookmark.remove(), 1000);
 	window._paq.push(['trackEvent', 'Bookmarks', 'armi', bookmark.title, bookmark.percentage]);
