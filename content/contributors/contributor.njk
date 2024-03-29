@@ -39,7 +39,7 @@ permalink: /{{ contributor.slug }}/index.html
 					{% include '_promo_list.njk' %}
 				{% endif %}
 				{% if contributor.podcastEpisodes.length %}
-					<p class="continuity">Podcasts ma’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
+					<p class="continuity">Poddati ma’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
 					{% set promos = contributor.podcastEpisodes %}
 					{% include '_promo_list.njk' %}
 				{% endif %}
