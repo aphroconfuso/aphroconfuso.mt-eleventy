@@ -4,359 +4,360 @@
 @use "mixins-etc" as *;
 
 body {
-	font-size: $font-size-compact;
+  font-size: $font-size-compact;
 }
 
 header {
-	h1 {
-		font-family: $serif, serif;
-		font-size: $font-size-story-header-mobile;
-		font-weight: 600;
-		line-height: $header-line-height;
-		.episode-number,
-		.subject-date {
-			color: $lightest-brown;
-		}
-		.diary-title,
-		.podcast-title {
-			color: $brown;
-		}
-		.subtitle {
-			font-style: italic;
-			text-transform: lowercase;
-		}
-	}
+  h1 {
+    font-family: $serif, serif;
+    font-size: $font-size-story-header-mobile;
+    font-weight: 600;
+    line-height: $header-line-height;
+    .episode-number,
+    .subject-date {
+      color: $lightest-brown;
+    }
+    .diary-title,
+    .podcast-title {
+      color: $brown;
+    }
+    .subtitle {
+      font-style: italic;
+      text-transform: lowercase;
+    }
+  }
 
-	h2 {
-		font-family: $serif, serif;
-		font-size: $font-size-story-header-mobile;
-		font-weight: 500;
-		line-height: $header-line-height;
-		a,
-		.author {
-			font-weight: 500;
-			white-space: nowrap;
-		}
-		.translator {
-			display: inline-block;
-			white-space: nowrap;
-		}
-	}
+  h2 {
+    font-family: $serif, serif;
+    font-size: $font-size-story-header-mobile;
+    font-weight: 500;
+    line-height: $header-line-height;
+    a,
+    .author {
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .translator {
+      display: inline-block;
+      white-space: nowrap;
+    }
+  }
 
-	h3 {
-		font-family: $serif, serif;
-		font-size: $font-size-story-header-mobile;
-		font-style: italic;
-		font-weight: 600;
-		line-height: $header-line-height;
-		margin-bottom: 0;
-	}
+  h3 {
+    font-family: $serif, serif;
+    font-size: $font-size-story-header-mobile;
+    font-style: italic;
+    font-weight: 600;
+    line-height: $header-line-height;
+    margin-bottom: 0;
+  }
 
-	& > ul {
-		display: flex;
-		font-family: "Alegreya Sans SC Regular";
-		line-height: $header-line-height;
-		font-size: 1.1rem;
-		text-transform: lowercase;
-		li:not(:first-of-type)::before {
-			content: "•";
-			padding: 0 2px 0 4px;
-		}
-	}
+  & > ul {
+    display: flex;
+    font-family: "Alegreya Sans SC Regular";
+    line-height: $header-line-height;
+    font-size: 1.1rem;
+    text-transform: lowercase;
+    li:not(:first-of-type)::before {
+      content: "•";
+      padding: 0 2px 0 4px;
+    }
+  }
 }
 
 // FIXME: h4 is skipped!
 
 h5 {
-	font-size: $body-font-size-slightly-larger;
-	font-style: italic;
-	font-weight: 600;
-	margin-top: $body-margin-half;
+  font-size: $body-font-size-slightly-larger;
+  font-style: italic;
+  font-weight: 600;
+  margin-top: $body-margin-half;
 }
 
 h6 {
-	font-size: $body-font-size;
-	font-weight: 700;
+  font-size: $body-font-size;
+  font-weight: 700;
 }
 
 l-m {
-	white-space: nowrap;
+  white-space: nowrap;
 }
 
 em {
-	font-style: italic;
+  font-style: italic;
 }
 
 strong {
-	font-weight: 600;
+  font-weight: 600;
 }
 
 .pull {
-	margin-left: -0.35rem;
-	margin-right: 0.15rem;
+  margin-left: -0.35rem;
+  margin-right: 0.15rem;
 }
 
 .pullsemi {
-	margin-left: -0.25rem;
+  margin-left: -0.25rem;
 }
 
 .work-title {
-	font-style: italic;
+  font-style: italic;
 }
 
 .details {
-	color: #757575;
-	font-family: $sans, sans-serif;
+  color: #757575;
+  font-family: $sans, sans-serif;
 }
 
 p.continuity {
-	font-family: $sans, sans-serif;
-	font-size: $font-size-furniture;
-	font-style: italic;
-	text-transform: lowercase;
-	.contributor {
-		text-transform: capitalize;
-	}
+  font-family: $sans, sans-serif;
+  font-size: $font-size-furniture;
+  font-style: italic;
+  text-transform: lowercase;
+  .contributor {
+    text-transform: capitalize;
+  }
 }
 
 .generic-body-text,
 .body-text {
-	color: $ink;
-	font-family: $serif, serif;
-	h5,
-	h6,
-	p {
-		&.break {
-			margin-top: $body-margin-double;
-		}
-	}
-	h5 {
-		&:has(+ p.break) {
-			margin-bottom: $body-margin-quarter;
-			margin-left: $body-margin-half * -0.5;
-			margin-top: $body-margin;
-		}
-		& + p.break {
-			margin-top: 0;
-		}
-	}
-	// If no drop-cap follows gallery we'll have a superfluous indent
-	& h5:first-child {
-		margin-bottom: $body-margin-quarter;
-		margin-left: $body-margin-half * -0.5;
-		margin-top: 0;
-	}
-	&.separated {
-		h5,
-		h6,
-		p {
-			&.break {
-				margin-top: $body-margin * 1;
-				padding-top: $body-margin-double;
-				background-image: url(/img/deco-100.svg);
-				background-position: center top;
-				background-size: 75%;
-				background-repeat: no-repeat;
-			}
-		}
-	}
-	p {
-		font-size: $body-font-size;
-		margin-bottom: $body-margin-half;
-		&:last-of-type,
-		&.enjambed {
-			margin-bottom: 0;
-		}
-		&.centred {
-			text-align: center;
-		}
-		&.right-aligned {
-			text-align: right;
-		}
-		&.justified {
-			text-align: justify;
-		}
-	}
-	p:last-of-type + blockquote {
-		margin-top: $body-margin-half !important;
-		padding-bottom: 0;
-	}
-	figure {
-		padding-right: $body-margin;
-		margin-bottom: $body-margin;
-		p,
-		figcaption {
-			font-size: $font-size-blockquote;
-		}
-		figcaption {
-			margin-top: $body-margin-half;
-			&:before {
-				content: "\2014";
-				padding-right: 3px;
-			}
-		}
-		&.epigraph {
-			color: $lighter-brown;
-			font-size: $font-size-blockquote;
-			margin: ($body-margin-double) 0 $body-margin;
-			figcaption {
-				margin-top: $body-margin-quarter;
-				padding: 0;
-			}
-		}
-		&.audio {
-			margin: $body-margin 0 !important;
-			@media all and (min-width: $laptop-breakpoint) {
-				margin: $body-margin $body-margin-double $body-margin $body-margin !important;
-			}
-			figcaption {
-				&:before {
-					display: none;
-				}
-				p {
-					color: $lighter-brown;
-					font-family: $sans, sans-serif;
-					font-size: $font-size-blockquote;
-				}
-			}
-		}
-	}
-	blockquote {
-		font-size: $font-size-blockquote;
-		padding: 0 $body-margin $body-margin-half;
-	}
-	table {
-		margin-top: $body-margin-half;
-		max-width: 100%;
-		tr {
-			border-bottom: 1px solid $faint-brown;
-			&:hover {
-				background-color: $faint-brown;
-			}
-			td:first-of-type {
-				font-variant-numeric: tabular-nums;
-			}
-			td {
-				font-size: $body-font-size;
-				padding-right: $body-margin-half;
-			}
-			&:last-of-type {
-				border-bottom: none;
-			}
-		}
-		& + p {
-			margin-top: $body-margin-half;
-		}
-	}
+  color: $ink;
+  font-family: $serif, serif;
+  h5,
+  h6,
+  p {
+    &.break {
+      margin-top: $body-margin-double;
+    }
+  }
+  h5 {
+    &:has(+ p.break) {
+      margin-bottom: $body-margin-quarter;
+      margin-left: $body-margin-half * -0.5;
+      margin-top: $body-margin;
+    }
+    & + p.break {
+      margin-top: 0;
+    }
+  }
+  // If no drop-cap follows gallery we'll have a superfluous indent
+  & h5:first-child {
+    margin-bottom: $body-margin-quarter;
+    margin-left: $body-margin-half * -0.5;
+    margin-top: 0;
+  }
+  &.separated {
+    h5,
+    h6,
+    p {
+      &.break {
+        margin-top: $body-margin * 1;
+        padding-top: $body-margin-double;
+        background-image: url(/img/deco-100.svg);
+        background-position: center top;
+        background-size: 75%;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+  p {
+    font-size: $body-font-size;
+    margin-bottom: $body-margin-half;
+    &:last-of-type,
+    &.enjambed {
+      margin-bottom: 0;
+    }
+    &.centred {
+      text-align: center;
+    }
+    &.right-aligned {
+      text-align: right;
+    }
+    &.justified {
+      text-align: justify;
+    }
+  }
+  p:last-of-type + blockquote {
+    margin-top: $body-margin-half !important;
+    padding-bottom: 0;
+  }
+  figure {
+    padding-right: $body-margin;
+    margin-bottom: $body-margin;
+    p,
+    figcaption {
+      font-size: $font-size-blockquote;
+    }
+    figcaption {
+      margin-top: $body-margin-half;
+      &:before {
+        content: "\2014";
+        padding-right: 3px;
+      }
+    }
+    &.epigraph {
+      color: $lighter-brown;
+      font-size: $font-size-blockquote;
+      margin: ($body-margin-double) 0 $body-margin;
+      figcaption {
+        margin-top: $body-margin-quarter;
+        padding: 0;
+      }
+    }
+    &.audio {
+      margin: $body-margin 0 !important;
+      @media all and (min-width: $laptop-breakpoint) {
+        margin: $body-margin $body-margin-double $body-margin $body-margin !important;
+      }
+      figcaption {
+        &:before {
+          display: none;
+        }
+        p {
+          color: $lighter-brown;
+          font-family: $sans, sans-serif;
+          font-size: $font-size-blockquote;
+        }
+      }
+    }
+  }
+  blockquote {
+    font-size: $font-size-blockquote;
+    padding: 0 $body-margin $body-margin-half;
+  }
+  table {
+    margin-top: $body-margin-half;
+    max-width: 100%;
+    tr {
+      border-bottom: 1px solid $faint-brown;
+      &:hover {
+        background-color: $faint-brown;
+      }
+      td:first-of-type {
+        font-variant-numeric: tabular-nums;
+      }
+      td {
+        font-size: $body-font-size;
+        padding-right: $body-margin-half;
+      }
+      &:last-of-type {
+        border-bottom: none;
+      }
+    }
+    & + p {
+      margin-top: $body-margin-half;
+    }
+  }
 }
 
 .body-text-part-two {
-	& > p:nth-child(1).break {
-		margin-top: $body-margin-half;
-	}
-	& > h5:nth-child(1) {
-		margin-top: $body-margin-half;
-	}
+  & > p:nth-child(1).break {
+    margin-top: $body-margin-half;
+  }
+  & > h5:nth-child(1) {
+    margin-top: $body-margin-half;
+  }
 }
 
 .generic-body-text {
-	color: $text-brown;
-	font-family: $sans, sans-serif;
+  color: $text-brown;
+  font-family: $sans, sans-serif;
 }
 
 .end-dot {
-	border-radius: 50%;
-	display: inline-block;
-	font-family: $decorative;
-	font-size: 0.8rem;
-	font-weight: 700;
-	height: 0.8rem;
-	margin-left: 0.25rem;
-	text-align: center;
-	width: 0.8rem;
+  border-radius: 50%;
+  display: inline-block;
+  font-family: $decorative;
+  font-size: 0.8rem;
+  font-weight: 700;
+  height: 0.8rem;
+  margin-left: 0.25rem;
+  text-align: center;
+  width: 0.8rem;
 }
 
 .section {
-	margin-top: $body-margin;
+  margin-top: $body-margin;
 }
 
 .initial {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 #endnote {
-	font-style: italic;
-	margin-top: $body-margin;
+  font-style: italic;
+  margin-top: $body-margin;
 }
 
 .outlined {
-	text-shadow: -1px -1px 0 $paper, 0 -1px 0 $paper, 1px -1px 0 $paper,
-		1px 0 0 $paper, 1px 1px 0 $paper, 0 1px 0 $paper, -1px 1px 0 $paper,
-		-1px 0 0 $paper;
+  text-shadow: -1px -1px 0 $paper, 0 -1px 0 $paper, 1px -1px 0 $paper,
+    1px 0 0 $paper, 1px 1px 0 $paper, 0 1px 0 $paper, -1px 1px 0 $paper,
+    -1px 0 0 $paper;
 }
 
 .generic-body-text,
 .body-text,
 aside,
 #endnote {
-	p,
-	h5,
-	h6 {
-		a {
-			text-decoration: underline;
-			text-decoration-color: $lightester-brown;
-			text-decoration-thickness: 1px;
-			text-underline-offset: 2px;
-			text-decoration-skip-ink: auto;
-		}
-		margin-bottom: $body-margin-half;
-		&:last-of-type {
-			margin-bottom: 0;
-		}
-	}
+  p,
+  h5,
+  h6 {
+    a {
+      text-decoration: underline;
+      text-decoration-color: $lightester-brown;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+      text-decoration-skip-ink: auto;
+    }
+    margin-bottom: $body-margin-half;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
 }
+.body-text,
 .generic-body-text {
-	h5,
-	h6 {
-		margin-bottom: 0;
-	}
+  h5,
+  h6 {
+    margin-bottom: 0;
+  }
 }
 
 @media all and (min-width: $laptop-breakpoint) {
-	header {
-		h1,
-		h2 {
-			font-size: $font-size-story-header;
-		}
-		h2 a {
-			@include animated-underline($lighter-brown);
-		}
-		h3 {
-			font-size: $font-size-story-header;
-		}
-	}
-	#grid-body {
-		a:hover {
-			@include ease-in(0.25s);
-			text-decoration-color: $brown;
-		}
-	}
-	.body-text.separated {
-		h5,
-		h6,
-		p {
-			&.break {
-				margin-top: $body-margin-double;
-				padding-top: $body-margin * 3;
-				background-size: 50%;
-			}
-		}
-	}
+  header {
+    h1,
+    h2 {
+      font-size: $font-size-story-header;
+    }
+    h2 a {
+      @include animated-underline($lighter-brown);
+    }
+    h3 {
+      font-size: $font-size-story-header;
+    }
+  }
+  #grid-body {
+    a:hover {
+      @include ease-in(0.25s);
+      text-decoration-color: $brown;
+    }
+  }
+  .body-text.separated {
+    h5,
+    h6,
+    p {
+      &.break {
+        margin-top: $body-margin-double;
+        padding-top: $body-margin * 3;
+        background-size: 50%;
+      }
+    }
+  }
 }
 article.generic[lang="ar"] {
-	p,
-	h1 {
-		font-family: "Noto Sans Arabic", "Alegreya Sans Arabic Fallback", sans-serif,
-			sans-serif;
-	}
+  p,
+  h1 {
+    font-family: "Noto Sans Arabic", "Alegreya Sans Arabic Fallback", sans-serif,
+      sans-serif;
+  }
 }
