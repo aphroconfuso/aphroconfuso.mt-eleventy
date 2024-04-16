@@ -207,7 +207,7 @@ const showBookmarksInPromos = (bookmarksArray) => {
 			bookmarkLink.innerHTML = `<span class="bookmark-percentage">${roundedPercentage}%</span>`;
 			bookmarkLink.classList.add("bookmark");
 			bookmarkLink.href = `/${ urlSlug }/#b-${ percentage }`;
-			bookmarkLink.addEventListener("click", () => {analytics(['trackEvent', 'Promo', `minn: ${ reportingTitle } (bookmark)`, `għal: ${ destinationTitle }`, roundedPercentage])});
+			bookmarkLink.addEventListener("click", () => {analytics(['trackEvent', 'Promo', `minn: ${ reportingTitle }`, `għal: ${ destinationTitle } (bookmark)`, roundedPercentage])});
 			element.appendChild(bookmarkLink);
 		});
 		document.querySelectorAll(`article.story-${ storyId } > header`).forEach((element) => {
