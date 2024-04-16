@@ -151,7 +151,8 @@ const initialiseBookmarksList = () => {
 }
 
 const addBookmark = (type = 'text', thisStoryId = storyId, bookmark) => {
-	// console.log('ADDING BOOKMARK', type, thisStoryId, urlSlug, bookmark.urlSlug, bookmark.author, bookmark.title, bookmark);
+	const { author, sequenceEpisodeNumber, storyType, title } = bookmark;
+	const reportingTitle = fixReportingTitle(percentage, storyType, sequenceEpisodeNumber, author, title);
 	bookmarksList[`${ type }-${ thisStoryId }`] = {
 		dateTime: new Date(),
 		type,
@@ -160,7 +161,7 @@ const addBookmark = (type = 'text', thisStoryId = storyId, bookmark) => {
 	saveBookmarksList();
 	if (type === 'audio') return;
 	updateBookmarksMenu(bookmarksArray);
-	analytics(['trackEvent', 'Bookmarks', 'żid', bookmark.title, bookmark.percentage]);
+	analytics(['trackEvent', 'Bookmarks', 'żid', reportingTitle, percentage]);
 }
 
 const deleteBookmark = (type = 'text', id = storyId) => {
@@ -168,12 +169,14 @@ const deleteBookmark = (type = 'text', id = storyId) => {
 	saveBookmarksList();
 	if (type === 'audio') return;
 	const bookmark = bookmarksArray.find(i => i.id);
+	const { author, sequenceEpisodeNumber, storyType, title } = bookmark;
+	const reportingTitle = fixReportingTitle(percentage, storyType, sequenceEpisodeNumber, author, title);
 	bookmarksArray = bookmarksArray.filter(i => i.id !== id);
 	updateBookmarksMenu(bookmarksArray);
 	const removeBookmark = document.getElementById(`bookmark-${ id }`);
 	removeBookmark.style.opacity = '0';
 	setTimeout(() => removeBookmark.remove(), 1000);
-	analytics(['trackEvent', 'Bookmarks', 'armi', bookmark.title, bookmark.percentage]);
+	analytics(['trackEvent', 'Bookmarks', 'armi', reportingTitle, percentage]);
 }
 
 // FIXME: recalibrate
