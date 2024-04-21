@@ -119,6 +119,14 @@ article.story {
 			}
 		}
 	}
+	&.story-56 {
+		// Persjani
+		// Genericize these
+		.fx1 {
+			display: inline-block;
+			margin-bottom: $body-margin-half;
+		}
+	}
 }
 
 @media all and (max-width: $laptop-breakpoint) {
