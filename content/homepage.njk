@@ -16,12 +16,12 @@ permalink: /index.html
 {% endblock %}
 
 {% block content %}
-	<article class="home {{ homepage.monthYear | slugify }}">
+	<article class="home {{ homepage.issueMonth | slugify }}">
 		<div class="{{ homepage.layout | slugify }}">
-			<a class="ga-editorial editorial" href="/{{ homepage.monthYear | fixMonthMaltese | slugifyMaltese }}/">
+			<a class="ga-editorial editorial" href="/{{ homepage.issueMonth | fixMonthMaltese | slugifyMaltese }}/">
 				<section class="generic-body-text">
 					<div class="text-container">
-						<p class="editorial-month-year">{{ homepage.monthYear }}</p>
+						<p class="editorial-month">{{ homepage.issueMonth }}</p>
 						{{ homepage.editorial | prettifyMaltese | safe }}
 					</div>
 				</section>
@@ -60,7 +60,7 @@ permalink: /index.html
 							<a href="/{{ collection.title | slugifyMaltese }}/">{{ collection.title | prettifyMaltese | safe }}</a>
 						</div>
 					{% endif %}
-					<a class="{{ promo.monthYear | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+					<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% include "_promo_header.njk" %}
 						<div class="{{ promo.cssClass }}">
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
@@ -73,7 +73,7 @@ permalink: /index.html
 			{% for promo in homepage.imagePromos %}
 				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 				<div class="ga-image-{{ loop.index }}">
-					<a class="{{ promo.monthYear | slugify }} promo promo-picture-1 story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+					<a class="{{ promo.issueMonth | slugify }} promo promo-picture-1 story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% set showEpisodeTitle = true %}
 						{% include "_promo_header.njk" %}
 						{% set imageMode = 'promo' %}
@@ -91,7 +91,7 @@ permalink: /index.html
 			{% endfor %}
 			{% for promo in homepage.poetryPromos %}
 				<div class="ga-poem-{{ loop.index }}">
-					<a class="{{ promo.monthYear | slugify }} promo promo-poetry story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+					<a class="{{ promo.issueMonth | slugify }} promo promo-poetry story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% include "_promo_header.njk" %}
 						{% if promo.text %}
 							<div class="{{ promo.cssClass }}">
@@ -109,7 +109,7 @@ permalink: /index.html
 				<ul>
 				{% for promo in homepage.diaryEntries %}
 					<li>
-						<a class="{{ promo.monthYear | slugify }} promo promo-diary story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+						<a class="{{ promo.issueMonth | slugify }} promo promo-diary story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 							{% include "_promo_header.njk" %}
 							<div class="{{ promo.cssClass }}">
 								<p>{{ promo.description | prettifyMaltese | safe }}</p>

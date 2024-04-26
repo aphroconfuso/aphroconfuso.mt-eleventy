@@ -335,7 +335,7 @@ module.exports = function(eleventyConfig) {
 		if (!number) return "null";
 		const digits = parseInt(number.toString().slice(-2));
 		if (digits >= 2 && digits <= 10) return `${ number } ${ words[1] }`;
-		if (digits >= 11 && digits <= 20) return `${ number }-il ${ words[0]}`;
+		if (digits >= 11 && digits <= 19) return `${ number }-il ${ words[0]}`;
 		return `${ number } ${ words[0] }`;
 	});
 

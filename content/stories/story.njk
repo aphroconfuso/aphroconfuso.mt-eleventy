@@ -36,7 +36,7 @@ permalink: /{{ story.slug }}/index.html
 {% endblock %}
 
 {% block content %}
-	<article class="content {{ story.monthYear | slugify }} {{ story.type | slugify }} story story-{{ story.id }}">
+	<article class="content {{ story.issueMonth | slugify }} {{ story.type | slugify }} story story-{{ story.id }}">
 		<header>
 			<ul>
 				<li class="header-label">
@@ -56,7 +56,7 @@ permalink: /{{ story.slug }}/index.html
 							<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 						{% endif %}
 					{% else %}
-						<a href="/{{ story.monthYear | slugifyMaltese }}/">{{ story.monthYear | fixMonthMaltese }}</a>
+						<a href="/{{ story.issueMonth | slugifyMaltese }}/">{{ story.issueMonth | fixMonthMaltese }}</a>
 					{% endif %}
 				</li>
 				{% for storycollection in story.storycollections %}
@@ -280,7 +280,7 @@ permalink: /{{ story.slug }}/index.html
 		audioUrls = { "songs": {{ story.audioUrlsString | safe }} };
 		author = "{{ story.authorsString | safe }}" || null;
 		collections = "{{ story.storycollectionsString }}" || null;
-		monthYear = "{{ story.monthYear | slugify }}" || null;
+		issueMonth = "{{ story.issueMonth | slugify }}" || null;
 		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
 		reportingTitle = "{{ story.reportingTitle | safe}}" || null;
 		sequenceEpisodeNumber = {{ story.sequenceEpisodeNumber | wrapInQuotes | safe}};

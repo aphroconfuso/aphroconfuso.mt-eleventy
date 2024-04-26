@@ -37,7 +37,7 @@
   .editorial {
     background-color: lighten($colour, 50%);
     border-image-source: url(/img/deco/frame-02-faint-#{$slugifiedColour}.svg);
-    .editorial-month-year {
+    .editorial-month {
       display: inline;
       font-size: 1.6rem;
       font-weight: 600;

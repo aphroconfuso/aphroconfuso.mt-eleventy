@@ -1,7 +1,7 @@
 const stripTags = require("striptags");
 const unique = require('unique-words');
 const fetch = require("node-fetch");
-const getMonthYear = require("../src/getMonthYear.js");
+const getIssueMonth = require("../src/getIssueMonth.js");
 const makePageTitle = require("../src/makePageTitle.js");
 const makeSortableTitle = require("../src/makeSortableTitle.js");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
@@ -387,7 +387,7 @@ async function getAllStories() {
 			atts.type
 		);
 
-		const monthYear = getMonthYear(atts.dateTimePublication)
+		const issueMonth = getIssueMonth(atts.dateTimePublication)
 
 		let sequencePreviousPromo, sequenceNextPromo;
 		let sequenceEpisodes = sequenceData
@@ -430,19 +430,19 @@ async function getAllStories() {
 
 		if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju') {
 			const abecedaireMatches = atts.body.replace(/\n+/, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.{0,1500})/g);
-			// console.log(JSON.stringify(Array.from(abecedaireMatches)));
+			// console.log('Abeċedarju', JSON.stringify(Array.from(abecedaireMatches)));
 			abecedaireMatches && shuffleArray(Array.from(abecedaireMatches)).forEach(match => {
 				let snippet = match[2] + match[3];
 				if ((snippet.match(/<em>/g) || []).length > (snippet.match(/<\/em>/g) || []).length) snippet += '</em>';
 				abecedaireArray.push({
 					authorsString,
 					letter: makeSortableTitle(match[2]).toLowerCase(),
-					monthYear,
+					issueMonth,
 					slug: pageSlug,
 					snippet,
 					title,
 				});
-			console.log(makeSortableTitle(match[2]));
+			// console.log('Abeċedarju', makeSortableTitle(match[2]));
 			});
 		}
 
@@ -477,7 +477,7 @@ async function getAllStories() {
 			listablePodcast: atts.type === 'Poddata',
 			mainTitle,
 			metaTitle: displayTitle,
-			monthYear,
+			issueMonth,
 			moreToCome: atts.moreToCome || storycollections.length, // FIXME
 			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
 			podcastLengthMinutes: atts.podcastLengthMinutes,
@@ -526,7 +526,7 @@ async function getAllStories() {
 			audioUrls.push({
 				author: processedStory.authorsString,
 				storyId: story.id,
-				monthYear: processedStory.monthYear,
+				issueMonth: processedStory.issueMonth,
 				pageSlug,
 				podcastLengthMinutes: processedStory.podcastLengthMinutes,
 				podcastNote: processedStory.podcastNote,
@@ -540,7 +540,7 @@ async function getAllStories() {
 			});
 			audioPlayers.push({
 				authorName: processedStory.translatorForename || processedStory.authorForename,
-				monthYear: processedStory.monthYear,
+				issueMonth: processedStory.issueMonth,
 				podcastLengthMinutes: processedStory.podcastLengthMinutes,
 				podcastNote: processedStory.type !== "Poddata" && processedStory.podcastNote,
 				reads: reads(processedStory.authorPronoun),
@@ -567,7 +567,7 @@ async function getAllStories() {
 				audioUrls.push({
 					// add description
 					authorName: promo.authorsString,
-					monthYear: promo.monthYear,
+					issueMonth: promo.issueMonth,
 					pageSlug: promo.slug,
 					reportingTitle: promo.reportingTitle,
 					sequenceEpisodeNumber: promo.sequenceEpisodeNumber,
@@ -582,7 +582,7 @@ async function getAllStories() {
 					highlight: promo.audioHighlight,
 					podcastLengthMinutes: promo.audioLengthMinutes || promo.podcastLengthMinutes,
 					podcastNote: promo.note || promo.podcastNote,
-					monthYear: promo.monthYear,
+					issueMonth: promo.issueMonth,
 					putAfterThisText: promo.putAfterThisText,
 					reads: reads(promo.authorPronoun),
 					reportingTitle: promo.reportingTitle,
@@ -607,7 +607,7 @@ async function getAllStories() {
 	storiesFormatted[0].cumulativeWordcount = splitText(cumulativeBody).length;
 
 	// shuffleArray(abecedaireArray).forEach(match => {
-	// 	abecedaireString += `<p class="${ match.monthYear }">${ match.snippet }<br/>—<a href="/${ match.slug }/">${ match.title } ta’ ${ match.authorsString }</a></p><p>#</p>`;
+	// 	abecedaireString += `<p class="${ match.issueMonth }">${ match.snippet }<br/>—<a href="/${ match.slug }/">${ match.title } ta’ ${ match.authorsString }</a></p><p>#</p>`;
 	// });
 
 	storiesFormatted[0].abecedaire = [...new Map(shuffleArray(abecedaireArray).map(item => [item.letter, item])).values()].sort((a, b) => (a.letter > b.letter) ? 1 : ((b.letter > a.letter) ? -1 : 0));

@@ -4,87 +4,87 @@
 @use "mixins-monthly-colour" as *;
 
 h1 {
-	color: $h1-color;
+  color: $h1-color;
 }
 h2 {
-	color: $h2-color;
-	.author {
-		color: $h2-a-color;
-	}
+  color: $h2-color;
+  .author {
+    color: $h2-a-color;
+  }
 }
 h3 {
-	color: $h3-color;
+  color: $h3-color;
 }
 .header-label {
-	color: $header-label-color;
+  color: $header-label-color;
 }
 h5 {
-	color: $h5-color;
+  color: $h5-color;
 }
 
 // Make it this month
 // .editorial,
 // .promo-2 {
-//   // @include zigzag($mejju-2023);
-//   @include vertical-stripes($ġunju-2023);
-//   // background-color: lighten($mejju-2023, $lightest);
+//   // @include zigzag($mejju);
+//   @include vertical-stripes($ġunju);
+//   // background-color: lighten($mejju, $lightest);
 // }
 
 // FIXME
 * {
-	-webkit-tap-highlight-color: rgba($color: $this-month, $alpha: 0.2);
+  -webkit-tap-highlight-color: rgba($color: $this-month, $alpha: 0.2);
 }
 
-.mejju-2023 {
-	@include monthly-colour($mejju-2023);
+.mejju {
+  @include monthly-colour($mejju);
 }
 
-.gunju-2023 {
-	@include monthly-colour($ġunju-2023);
+.gunju {
+  @include monthly-colour($ġunju);
 }
 
-.lulju-2023 {
-	@include monthly-colour($lulju-2023);
+.lulju {
+  @include monthly-colour($lulju);
 }
 
-.awwissu-2023 {
-	@include monthly-colour($awwissu-2023);
+.awwissu {
+  @include monthly-colour($awwissu);
 }
 
-.settembru-2023 {
-	@include monthly-colour($settembru-2023);
+.settembru {
+  @include monthly-colour($settembru);
 }
 
-.ottubru-2023 {
-	@include monthly-colour($ottubru-2023);
+.ottubru {
+  @include monthly-colour($ottubru);
 }
 
-.novembru-2023 {
-	@include monthly-colour($novembru-2023);
+.novembru {
+  @include monthly-colour($novembru);
 }
 
-.dicembru-2023 {
-	@include monthly-colour($diċembru-2023);
+.dicembru {
+  @include monthly-colour($diċembru);
 }
 
-.jannar-2024 {
-	@include monthly-colour($jannar-2024);
+.jannar {
+  @include monthly-colour($jannar);
 }
 
-.frar-2024 {
-	@include monthly-colour($frar-2024);
+.frar {
+  @include monthly-colour($frar);
 }
 
-.marzu-2024 {
-	@include monthly-colour($marzu-2024);
+.marzu {
+  @include monthly-colour($marzu);
 }
 
-.april-2024 {
-	@include monthly-colour($april-2024);
+.april {
+  @include monthly-colour($april);
 }
 
 figure.poddata,
 .story.poddata,
 .promo.promo-poddata {
-	@include monthly-colour($podcast-beige);
+  @include monthly-colour($podcast-beige);
 }

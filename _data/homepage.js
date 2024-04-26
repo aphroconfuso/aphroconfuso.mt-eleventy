@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 const smartTruncate = require("smart-truncate");
-const getMonthYear = require("../src/getMonthYear.js");
+const getIssueMonth = require("../src/getIssueMonth.js");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
 const parseAuthors = require("../src/parseAuthors.js");
 
@@ -199,7 +199,6 @@ async function getHomepage() {
 				if (!!sequenceEpisodeNumber) return `${ title } #${ sequenceEpisodeNumber }`;
 				return title;
 			}
-
 			let formattedPromo = {
 				authorsType,
 				authorsString,
@@ -212,7 +211,7 @@ async function getHomepage() {
 				isSequenceEpisode: !!promoSequenceData,
 				mainTitle,
 				mobilePriority: promo.mobilePriority || 9,
-				monthYear: getMonthYear(storyAtts.dateTimePublication),
+				issueMonth: getIssueMonth(storyAtts.dateTimePublication),
 				sequenceEpisodeNumber: storyAtts.sequenceEpisodeNumber,
 				sequenceEpisodeTitle: !!promoSequenceData && storyAtts.title,
 				slug: storyAtts.pageUrl || makeTitleSlug(
@@ -251,7 +250,7 @@ async function getHomepage() {
 		editorial: atts.appointment.data.attributes.editorial,
 		imagePromos: promosFormatted(atts.imagePromos, true, layoutConfig['image']),
 		layout: 'Layout_200', //atts.layout,
-		monthYear: getMonthYear(atts.appointment.data.attributes.dateTimePublication),
+		issueMonth: getIssueMonth(atts.appointment.data.attributes.dateTimePublication),
 		poetryPromos: promosFormatted(atts.poetryPromos, false, layoutConfig.poem),
 		promos: promosFormatted(atts.promos, false, layoutConfig.text, layoutConfig.lengths),
 		diaryEntries: promosFormatted(diaryPromos.data, false, layoutConfig.diary),

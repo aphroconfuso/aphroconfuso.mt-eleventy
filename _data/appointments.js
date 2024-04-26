@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const getMonthYear = require("../src/getMonthYear.js");
+const getIssueMonth = require("../src/getIssueMonth.js");
 const processPromos = require("../src/processPromos.js");
 
 const {linkedStoryData} = require("./_fragments.js");
@@ -58,7 +58,7 @@ async function getAllAppointments() {
 			title: appointment.attributes.title || null,
 			editorial: appointment.attributes.editorial,
 			moreToCome: appointment.attributes.moreToCome,
-			monthYear: getMonthYear(appointment.attributes.dateTimePublication),
+			issueMonth: getIssueMonth(appointment.attributes.dateTimePublication),
 			stories: storiesFormatted
 		}
 	});
