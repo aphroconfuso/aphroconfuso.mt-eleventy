@@ -29,7 +29,6 @@ h5 {
 //   @include vertical-stripes($ġunju);
 //   // background-color: lighten($mejju, $lightest);
 // }
-
 .jannar {
   @include monthly-colour($jannar);
 }
@@ -94,50 +93,52 @@ figure.poddata,
   border-image-width: 40px;
 }
 
-body.jannar {
-  @include this-month-colour($jannar);
-}
+body {
+  &.jannar {
+    @include this-month-colour($jannar);
+  }
 
-body.frar {
-  @include this-month-colour($frar);
-}
+  &.frar {
+    @include this-month-colour($frar);
+  }
 
-body.marzu {
-  @include this-month-colour($marzu);
-}
+  &.marzu {
+    @include this-month-colour($marzu);
+  }
 
-body.april {
-  @include this-month-colour($april);
-}
+  &.april {
+    @include this-month-colour($april);
+  }
 
-body.mejju {
-  @include this-month-colour($mejju);
-}
+  &.mejju {
+    @include this-month-colour($mejju);
+  }
 
-body.gunju {
-  @include this-month-colour($ġunju);
-}
+  &.gunju {
+    @include this-month-colour($ġunju);
+  }
 
-body.lulju {
-  @include this-month-colour($lulju);
-}
+  &.lulju {
+    @include this-month-colour($lulju);
+  }
 
-body.awwissu {
-  @include this-month-colour($awwissu);
-}
+  &.awwissu {
+    @include this-month-colour($awwissu);
+  }
 
-body.settembru {
-  @include this-month-colour($settembru);
-}
+  &.settembru {
+    @include this-month-colour($settembru);
+  }
 
-body.ottubru {
-  @include this-month-colour($ottubru);
-}
+  &.ottubru {
+    @include this-month-colour($ottubru);
+  }
 
-body.novembru {
-  @include this-month-colour($novembru);
-}
+  &.novembru {
+    @include this-month-colour($novembru);
+  }
 
-body.dicembru {
-  @include this-month-colour($diċembru);
+  &.dicembru {
+    @include this-month-colour($diċembru);
+  }
 }

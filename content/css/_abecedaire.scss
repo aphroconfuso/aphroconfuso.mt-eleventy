@@ -4,12 +4,21 @@
 @use "mixins-etc" as *;
 
 .abecedaire {
-  a p.blurb {
-    @include clamp(9);
-    display: block;
-    height: $body-margin * 10;
-    padding: ($body-margin * 1.5) 0 ($body-margin * 2) ($body-margin * 1.5);
-    position: relative;
+  li {
+    height: $body-margin * 12;
+    overflow: hidden;
+    a {
+      margin-left: $body-margin * -1;
+      &.blurb p {
+        @include clamp(9);
+        height: $body-margin * 10;
+        padding: ($body-margin * 1.5) 0 ($body-margin * 2) ($body-margin * 1.5);
+        position: relative;
+      }
+      &.credit p {
+        margin-left: $body-margin * 1.5;
+      }
+    }
   }
   @media all and (min-width: $laptop-breakpoint) {
     #grid-body {
@@ -18,7 +27,7 @@
     }
     li {
       float: left;
-      width: 30%;
+      width: 33%;
     }
   }
 }

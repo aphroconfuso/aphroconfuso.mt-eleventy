@@ -25,8 +25,8 @@ permalink: /abeċedarju/index.html
 					<ul>
 						{% for snippet in stories[0].abecedaire %}
 							<li>
-								<a class="break promo {{ snippet.issueMonth | slugify }}" href="/{{ snippet.slug }}/" onclick="analytics('xyz');">
-									<p class="blurb">{{ snippet.snippet | prettifyMaltese | simpleDropCapsify | safe }}</p>
+								<a class="blurb promo {{ snippet.issueMonth | slugify }}" href="/{{ snippet.slug }}/" onclick="analytics('xyz');">
+									<p>{{ snippet.snippet | prettifyMaltese | simpleDropCapsify | safe }}</p>
 								</a>
 								<a class="credit promo" href="/{{ snippet.slug }}/" onclick="analytics('xyz');">
 									<p>—&hairsp;“{{ snippet.title }}” ta’ {{ snippet.authorsString }}</p>

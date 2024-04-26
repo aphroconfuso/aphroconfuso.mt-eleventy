@@ -429,10 +429,11 @@ async function getAllStories() {
 		cumulativeBody += " " + atts.body;
 
 		if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju') {
-			const abecedaireMatches = atts.body.replace(/\n+/, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.{0,1500})/g);
+			const abecedaireMatches = atts.body.replace(/\n+/g, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.{0,1500})/g);
 			// console.log('Abeċedarju', JSON.stringify(Array.from(abecedaireMatches)));
 			abecedaireMatches && shuffleArray(Array.from(abecedaireMatches)).forEach(match => {
 				let snippet = match[2] + match[3];
+				snippet = snippet.replace(/<\/p>\s*<p>/g, " ");
 				if ((snippet.match(/<em>/g) || []).length > (snippet.match(/<\/em>/g) || []).length) snippet += '</em>';
 				abecedaireArray.push({
 					authorsString,
