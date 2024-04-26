@@ -30,9 +30,20 @@ h5 {
 //   // background-color: lighten($mejju, $lightest);
 // }
 
-// FIXME
-* {
-  -webkit-tap-highlight-color: rgba($color: $this-month, $alpha: 0.2);
+.jannar {
+  @include monthly-colour($jannar);
+}
+
+.frar {
+  @include monthly-colour($frar);
+}
+
+.marzu {
+  @include monthly-colour($marzu);
+}
+
+.april {
+  @include monthly-colour($april);
 }
 
 .mejju {
@@ -67,24 +78,66 @@ h5 {
   @include monthly-colour($diċembru);
 }
 
-.jannar {
-  @include monthly-colour($jannar);
-}
-
-.frar {
-  @include monthly-colour($frar);
-}
-
-.marzu {
-  @include monthly-colour($marzu);
-}
-
-.april {
-  @include monthly-colour($april);
-}
-
 figure.poddata,
 .story.poddata,
 .promo.promo-poddata {
   @include monthly-colour($podcast-beige);
+}
+
+// This month
+
+.ga-newsletter {
+  padding: 32px;
+  border-image-outset: 10px;
+  border-image-repeat: repeat;
+  border-image-slice: 80;
+  border-image-width: 40px;
+}
+
+body.jannar {
+  @include this-month-colour($jannar);
+}
+
+body.frar {
+  @include this-month-colour($frar);
+}
+
+body.marzu {
+  @include this-month-colour($marzu);
+}
+
+body.april {
+  @include this-month-colour($april);
+}
+
+body.mejju {
+  @include this-month-colour($mejju);
+}
+
+body.gunju {
+  @include this-month-colour($ġunju);
+}
+
+body.lulju {
+  @include this-month-colour($lulju);
+}
+
+body.awwissu {
+  @include this-month-colour($awwissu);
+}
+
+body.settembru {
+  @include this-month-colour($settembru);
+}
+
+body.ottubru {
+  @include this-month-colour($ottubru);
+}
+
+body.novembru {
+  @include this-month-colour($novembru);
+}
+
+body.dicembru {
+  @include this-month-colour($diċembru);
 }

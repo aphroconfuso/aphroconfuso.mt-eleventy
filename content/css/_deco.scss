@@ -3,8 +3,6 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-$slugifiedColour: slugifyColour($this-month);
-
 .editorial {
   padding: $body-margin 0;
   border-image-outset: 40px;
@@ -40,14 +38,4 @@ $slugifiedColour: slugifyColour($this-month);
       }
     }
   }
-}
-
-.ga-newsletter {
-  padding: 32px;
-  border-image-outset: 10px;
-  border-image-repeat: repeat;
-  border-image-slice: 80;
-  border-image-source: url(/img/deco/frame-02-faint-#{$slugifiedColour}.svg);
-  border-image-width: 40px;
-  background-color: complement($this-month);
 }

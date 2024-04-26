@@ -16,7 +16,8 @@ const smartTruncate = require('smart-truncate');
 const stripTags = require("striptags");
 
 const fixSubjectDate = require('./src/fixSubjectDate.js');
-const slugifyStringMaltese = require("./src/slugifyMaltese.js");
+const slugifyStringMaltese = require('./src/slugifyMaltese.js');
+const getCurrentIssueMonth = require('./src/getCurrentIssueMonth.js');
 
 const QRCode = require('qrcode');
 
@@ -137,9 +138,10 @@ module.exports = function(eleventyConfig) {
 		console.log(fileNames);
 		fileNames.forEach(fileName => {
 			const [fileString, h, s, l] = fileName.match(/hsl-(\d+)-(\d+)-(\d+).*?\./);
-			console.log(`Creating file for ${ fileString }..`);
 			const srcFile = './public/img/deco/frame-02-faint-TEMPLATE.svg';
 			const destFile = './aphroconfuso.mt/site/img/deco/' + 'frame-02-faint-' + fileString + 'svg';
+			if (fs.existsSync(destFile)) { return; }
+			console.log(`Creating file for ${ fileString }..`);
 			fs.readFile(srcFile, 'utf8', (err, data) => {
 				if (err) return console.log(err);
 				var result = data.replace(/\#ff0000/g, `hsl(${h}, ${s}%, ${l}%)`);
@@ -300,6 +302,11 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addFilter("slugifyMaltese", function slugifyMaltese(text) {
 		if (!text) return "XXXXXXslugifyMalteseXXX";
 		return slugifyStringMaltese(text);
+	});
+
+	eleventyConfig.addFilter("addIssueMonth", function addIssueMonth(text) {
+		// if (!text) return "XXXXXXaddIssueMonthXXX";
+		return `${ text } ${ getCurrentIssueMonth(text) }`;
 	});
 
 	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text, punctuation = String.fromCharCode(8201)) {

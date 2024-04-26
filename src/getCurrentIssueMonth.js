@@ -1,3 +1,5 @@
+const monthNames = require("./getMonthsInMaltese.js")();
+
 function getFirstMondayOfMonth(year, month) {
     // Create a new Date object for the first day of the month
     const firstDayOfMonth = new Date(year, month - 1, 1); // Month is 0-indexed, so subtract 1 from the month
@@ -13,12 +15,6 @@ function getFirstMondayOfMonth(year, month) {
 
     return firstMonday;
 }
-
-// Example usage:
-const year = 2024;
-const month = 4; // May (1-indexed)
-const firstMonday = getFirstMondayOfMonth(year, month);
-console.log("The first Monday of May 2024 is on:", firstMonday.toDateString());
 
 function getCurrentOrPreviousMonth() {
     // Get the current date
@@ -42,7 +38,4 @@ function getCurrentOrPreviousMonth() {
     }
 }
 
-// Example usage:
-const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-const currentOrPreviousMonth = getCurrentOrPreviousMonth();
-console.log("Current or previous month:", currentOrPreviousMonth);
+module.exports = getCurrentOrPreviousMonth;

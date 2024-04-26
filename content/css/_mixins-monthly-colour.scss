@@ -131,3 +131,14 @@
     }
   }
 }
+
+@mixin this-month-colour($this-month) {
+  $slugifiedColour: slugifyColour($this-month);
+  * {
+    -webkit-tap-highlight-color: rgba($color: $this-month, $alpha: 0.2);
+  }
+  .ga-newsletter {
+    border-image-source: url(/img/deco/frame-02-faint-#{$slugifiedColour}.svg);
+    background-color: complement($this-month);
+  }
+}
