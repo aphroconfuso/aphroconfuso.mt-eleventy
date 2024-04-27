@@ -5,14 +5,13 @@
 
 .abecedaire {
   li {
-    height: $body-margin * 12;
     overflow: hidden;
     a {
       margin-left: $body-margin * -1;
       &.blurb p {
         @include clamp(9);
         height: $body-margin * 10;
-        padding: ($body-margin * 1.5) 0 ($body-margin * 2) ($body-margin * 1.5);
+        padding: ($body-margin * 1) 0 ($body-margin * 2) ($body-margin * 1.5);
         position: relative;
       }
       &.credit p {
