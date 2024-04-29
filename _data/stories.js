@@ -518,7 +518,7 @@ async function getAllStories() {
 					issueMonth,
 					slug: pageSlug,
 					snippet,
-					title: smartTruncate(processedStory.reportingTitle, 30),
+					title: smartTruncate(processedStory.reportingTitle, 26),
 				});
 			});
 		}
