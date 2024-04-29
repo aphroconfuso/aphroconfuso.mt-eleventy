@@ -333,7 +333,7 @@ async function getAllStories() {
 		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		// REFACTOR use titleArray to derive slug and title
 
-		if (!atts.promoImage) console.log("Image missing! An image was probably deleted from the media library after it had been added as the social image.");
+		if (!atts.promoImage || !atts.promoImage.data) console.log("Image missing! An image was probably deleted from the media library after it had been added as the social image.");
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
 
 		// find total times a story is endPromoted
