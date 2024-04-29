@@ -94,51 +94,51 @@ figure.poddata,
 }
 
 body {
-  &.jannar {
-    @include this-month-colour($jannar);
+  &.this-month-jannar {
+    @include this-issue-month-colour($jannar);
   }
 
-  &.frar {
-    @include this-month-colour($frar);
+  &.this-month-frar {
+    @include this-issue-month-colour($frar);
   }
 
-  &.marzu {
-    @include this-month-colour($marzu);
+  &.this-month-marzu {
+    @include this-issue-month-colour($marzu);
   }
 
-  &.april {
-    @include this-month-colour($april);
+  &.this-month-april {
+    @include this-issue-month-colour($april);
   }
 
-  &.mejju {
-    @include this-month-colour($mejju);
+  &.this-month-mejju {
+    @include this-issue-month-colour($mejju);
   }
 
-  &.gunju {
-    @include this-month-colour($ġunju);
+  &.this-month-gunju {
+    @include this-issue-month-colour($ġunju);
   }
 
-  &.lulju {
-    @include this-month-colour($lulju);
+  &.this-month-lulju {
+    @include this-issue-month-colour($lulju);
   }
 
-  &.awwissu {
-    @include this-month-colour($awwissu);
+  &.this-month-awwissu {
+    @include this-issue-month-colour($awwissu);
   }
 
-  &.settembru {
-    @include this-month-colour($settembru);
+  &.this-month-settembru {
+    @include this-issue-month-colour($settembru);
   }
 
-  &.ottubru {
-    @include this-month-colour($ottubru);
+  &.this-month-ottubru {
+    @include this-issue-month-colour($ottubru);
   }
 
-  &.novembru {
-    @include this-month-colour($novembru);
+  &.this-month-novembru {
+    @include this-issue-month-colour($novembru);
   }
 
-  &.dicembru {
-    @include this-month-colour($diċembru);
+  &.this-month-dicembru {
+    @include this-issue-month-colour($diċembru);
   }
 }

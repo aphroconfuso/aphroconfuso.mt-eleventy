@@ -1,6 +1,8 @@
 const stripTags = require("striptags");
 const unique = require('unique-words');
 const fetch = require("node-fetch");
+const smartTruncate = require('smart-truncate');
+
 const getIssueMonth = require("../src/getIssueMonth.js");
 const makePageTitle = require("../src/makePageTitle.js");
 const makeSortableTitle = require("../src/makeSortableTitle.js");
@@ -14,7 +16,15 @@ const slugifyStringMaltese = require("../src/slugifyMaltese.js");
 const { imageData, linkedStoryData, personData } = require("./_fragments.js");
 
 let abecedaireArray = [];
-let abecedaireString, cumulativeBody, cumulativeWordcount;
+let cumulativeBody, cumulativeWordcount;
+
+const shuffleArray = (array) => {
+	for (let i = array.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[array[i], array[j]] = [array[j], array[i]];
+	}
+	return array;
+}
 
 // const fs = require('fs');
 // var Spellchecker = require("hunspell-spellchecker");
@@ -249,14 +259,6 @@ async function getAllStories() {
 		return cleanedText.split(/\s+/);
 	}
 
-	const shuffleArray = (array) => {
-		for (let i = array.length - 1; i > 0; i--) {
-				const j = Math.floor(Math.random() * (i + 1));
-				[array[i], array[j]] = [array[j], array[i]];
-		}
-		return array;
-	}
-
 	const getWordFrequency = (text) => {
 		const wordsArray = splitText(text, true);
 		wordcount = wordsArray.length;
@@ -373,7 +375,7 @@ async function getAllStories() {
 			const {type, sequenceEpisodeNumber, authorsString, title} = processedStory;
 			if (type === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ authorsString }`;
 			if (!!sequenceEpisodeNumber) return `${ title } #${ sequenceEpisodeNumber }`;
-			return title;
+			return title.replace(/:.*$/, "");
 		}
 
 		const pageSlug = atts.pageUrl || makeTitleSlug(
@@ -427,25 +429,6 @@ async function getAllStories() {
 
 		const storycollections = atts.collections && processCollections(atts.collections.data);
 		cumulativeBody += " " + atts.body;
-
-		if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
-			const bodyText = atts.body.replace(/blockquote>/g, "p>").replace(/<h\d>.*?<\/h\d>/g, "").replace(/strong>/g, "span>");
-			const abecedaireMatches = bodyText.replace(/\n+/g, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.)(.{0,600})/g);
-			abecedaireMatches && shuffleArray(Array.from(abecedaireMatches)).forEach(match => {
-				let snippet = match[2] + match[3] + match[4];
-				let digraph = (match[2] + match[3]).toLowerCase();
-				snippet = snippet.replace(/<\/p>\s*<p>/g, " ").replace(/<\/?\w*$/, "");
-				if ((snippet.match(/<em>/g) || []).length > (snippet.match(/<\/em>/g) || []).length) snippet += '</em>';
-				abecedaireArray.push({
-					authorsString,
-					letter: makeSortableTitle(digraph === 'ie' || digraph === 'għ' ? digraph : match[2]).toLowerCase(),
-					issueMonth,
-					slug: pageSlug,
-					snippet,
-					title: mainTitle,
-				});
-			});
-		}
 
 		const processedStory = {
 			appointment: atts.appointment,
@@ -519,6 +502,27 @@ async function getAllStories() {
 		};
 
 		processedStory.reportingTitle = fixReportingTitle(processedStory);
+
+		// ABECEDAIRE *************************************************************************************************************************
+		if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
+			const bodyText = atts.body.replace(/blockquote>/g, "p>").replace(/<h\d>.*?<\/h\d>/g, "").replace(/strong>/g, "span>");
+			const abecedaireMatches = bodyText.replace(/\n+/g, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.)(.{0,600})/g);
+			abecedaireMatches && shuffleArray(Array.from(abecedaireMatches)).forEach(match => {
+				let snippet = match[2] + match[3] + match[4];
+				let digraph = (match[2] + match[3]).toLowerCase();
+				snippet = snippet.replace(/<\/p>\s*<p>/g, " ").replace(/<\/?\w*$/, "");
+				if ((snippet.match(/<em>/g) || []).length > (snippet.match(/<\/em>/g) || []).length) snippet += '</em>';
+				abecedaireArray.push({
+					authorsString,
+					letter: makeSortableTitle(digraph === 'ie' || digraph === 'għ' ? digraph : match[2]).toLowerCase(),
+					issueMonth,
+					slug: pageSlug,
+					snippet,
+					title: smartTruncate(processedStory.reportingTitle, 30),
+				});
+			});
+		}
+
 		const audioUrls = [];
 		const audioPlayers = [];
 		// This story's own audio (normally a plain reading)
@@ -606,14 +610,25 @@ async function getAllStories() {
 	storiesFormatted[0].vocabulary = vocabulary;
 	storiesFormatted[0].cumulativeWordcount = splitText(cumulativeBody).length;
 
-	// shuffleArray(abecedaireArray).forEach(match => {
-	// 	abecedaireString += `<p class="${ match.issueMonth }">${ match.snippet }<br/>—<a href="/${ match.slug }/">${ match.title } ta’ ${ match.authorsString }</a></p><p>#</p>`;
-	// });
-
+	// ABECEDAIRE ********************************************************************************
 	const sortAlphaThenNumbers = (a, b) => isFinite(a.letter) - isFinite(b.letter)
 		|| a.letter.localeCompare(b.letter, undefined, {numeric: true, sensitivity: 'base'});
 
-	storiesFormatted[0].abecedaire = [...new Map(shuffleArray(abecedaireArray).map(item => [item.letter, item])).values()].sort(sortAlphaThenNumbers);
+	const shuffledAbecedaireArray = shuffleArray(abecedaireArray);
+
+	// This makes it too predictable
+	// const storyCounts = {};
+	// // Count the number of stories for each author
+	// shuffledAbecedaireArray.forEach(story => {
+	// 	const { authorsString } = story;
+	// 	storyCounts[authorsString] = (storyCounts[authorsString] || 0) + 1;
+	// });
+	// // Sort the stories array based on the count of stories for each authorsString (in descending order)
+	// // This way we privilege authors with fewer occurences
+	// shuffledAbecedaireArray.sort((a, b) => storyCounts[b.authorsString] - storyCounts[a.authorsString]);
+
+	storiesFormatted[0].abecedaire = [...new Map(shuffledAbecedaireArray.map(item => [item.letter, item])).values()].sort(sortAlphaThenNumbers);
+	// ***********************************************************************************************
 
 	return storiesFormatted;
 }

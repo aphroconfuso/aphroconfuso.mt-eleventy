@@ -4,29 +4,28 @@
 @use "mixins-etc" as *;
 
 .abecedaire {
-  li {
-    overflow: hidden;
-    a {
-      &.blurb p {
-        @include clamp(9);
-        height: $body-margin * 9.75;
-        margin-bottom: $body-margin-quarter;
-        padding: ($body-margin * 1.25) 0 ($body-margin * 2) ($body-margin * 1.5);
-        position: relative;
-      }
-      &.credit p {
-        height: $body-margin;
-        margin-left: $body-margin * 1.5;
-        padding-left: 1rem;
-        position: relative;
-        display: inline-block;
-        &::before {
-          @include animated-underline-pre($dark-brown);
+  ol {
+    margin-left: $body-margin * -1.5;
+    li {
+      overflow: hidden;
+      a {
+        p.blurb {
+          @include clamp(9);
+          height: $body-margin * 9.75;
+          margin-bottom: $body-margin-quarter;
+          padding: ($body-margin * 1.25) 0 ($body-margin * 2)
+            ($body-margin * 1.5);
+          position: relative;
         }
-        &::after {
-          content: "—";
-          position: absolute;
-          right: 100%;
+        p.credit {
+          height: $body-margin;
+          margin-left: $body-margin * 1.5;
+          position: relative;
+          display: inline-block;
+          &::before {
+            @include animated-underline-pre($dark-brown);
+            margin-left: 1em;
+          }
         }
       }
     }
@@ -36,12 +35,15 @@
       max-width: 100%;
       width: 100%;
     }
-    li {
-      float: left;
-      width: 33%;
-      &:hover {
-        a.credit p::before {
-          @include animated-underline-post();
+    ol {
+      margin-left: 0;
+      li {
+        float: left;
+        width: 33%;
+        a:hover {
+          p.credit::before {
+            @include animated-underline-post();
+          }
         }
       }
     }

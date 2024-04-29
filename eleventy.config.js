@@ -17,7 +17,7 @@ const stripTags = require("striptags");
 
 const fixSubjectDate = require('./src/fixSubjectDate.js');
 const slugifyStringMaltese = require('./src/slugifyMaltese.js');
-const getCurrentIssueMonth = require('./src/getCurrentIssueMonth.js');
+const getIssueMonth = require('./src/getIssueMonth.js');
 
 const QRCode = require('qrcode');
 
@@ -304,9 +304,9 @@ module.exports = function(eleventyConfig) {
 		return slugifyStringMaltese(text);
 	});
 
-	eleventyConfig.addFilter("addIssueMonth", function addIssueMonth(text) {
-		// if (!text) return "XXXXXXaddIssueMonthXXX";
-		return `${ text } ${ getCurrentIssueMonth(text) }`;
+	eleventyConfig.addFilter("addThisIssueMonth", function addThisIssueMonth(text) {
+		// if (!text) return "XXXXXXaddThisIssueMonthXXX";
+		return `${ text } this-month-${ getIssueMonth(text) }`;
 	});
 
 	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text, punctuation = String.fromCharCode(8201)) {
@@ -383,7 +383,7 @@ module.exports = function(eleventyConfig) {
 		eleventyConfig.addFilter("simpleDropCapsify", function simpleDropCapsify(text) {
 			return (text || []).replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
 				.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
-				.replace(/^(.)([\w\-]+)/, '<span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>')
+				.replace(/^(.)([\w\-\’]+)/, '<span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>')
 				.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
 				.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
 				.replace('drop-I">I</span>e', 'drop-Ie">IE</span>')
