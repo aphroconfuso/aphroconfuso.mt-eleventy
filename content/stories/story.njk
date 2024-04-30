@@ -281,6 +281,7 @@ permalink: /{{ story.slug }}/index.html
 		author = "{{ story.authorsString | safe }}" || null;
 		collections = "{{ story.storycollectionsString }}" || null;
 		issueMonth = "{{ story.issueMonth | slugify }}" || null;
+		issueMonthYear = "{{ story.issueMonthYear | slugify }}" || null;
 		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
 		reportingTitle = "{{ story.reportingTitle | safe}}" || null;
 		sequenceEpisodeNumber = {{ story.sequenceEpisodeNumber | wrapInQuotes | safe}};

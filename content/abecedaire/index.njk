@@ -25,7 +25,7 @@ permalink: /abeċedarju/index.html
 					<ol>
 						{% for snippet in stories[0].abecedaire %}
 							<li>
-								<a class="promo promo-abecedaire {{ snippet.issueMonth | slugifyMaltese }}" href="/{{ snippet.slug }}/" onclick="analytics('xyz');">
+								<a class="promo promo-abecedaire {{ snippet.issueMonth | slugify }}" href="/{{ snippet.slug }}/" onclick="analytics('xyz');">
 									<p class="blurb">{{ snippet.snippet | prettifyMaltese | simpleDropCapsify | safe }}</p>
 									<p class="credit">— “{{ snippet.title }}” ta’ {{ snippet.authorsString }}</p>
 								</a>
