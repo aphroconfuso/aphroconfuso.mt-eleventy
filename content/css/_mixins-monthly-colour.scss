@@ -129,15 +129,14 @@
       border: 12px solid $colour !important;
       border-bottom: 12px solid transparent;
     }
-  }
-
-  &:hover {
-    &.promo-abecedaire {
-      .dropcap {
-        &::before,
-        &::after {
-          @include ease-out($fade-in-long);
-          color: $colour;
+    &:hover {
+      &.promo-abecedaire {
+        .dropcap {
+          &::before,
+          &::after {
+            @include ease-out($fade-in-long);
+            color: $colour;
+          }
         }
       }
     }

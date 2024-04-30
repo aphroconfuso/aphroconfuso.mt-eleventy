@@ -280,7 +280,9 @@
         font-size: $font-size-compact;
         letter-spacing: 0.05rem;
         padding-left: $body-margin-half;
-        vertical-align: 0;
+        &::before {
+          vertical-align: 0;
+        }
       }
     }
   }
