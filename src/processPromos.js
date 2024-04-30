@@ -1,5 +1,5 @@
 const fixAuthorsType = require("./fixAuthorsType.js");
-const getIssueMonth = require("./getIssueMonth.js");
+const getIssueMonthYear = require("./getIssueMonthYear.js");
 const makeTitleSlug = require("./makeTitleSlug.js");
 const parseAuthors = require("./parseAuthors.js");
 const processCollections = require("./processCollections.js");
@@ -50,7 +50,8 @@ module.exports = (promos, storyAtts) => {
 			id: promo.id || (promo.story && promo.story.data.id),
 			isSequenceEpisode: !!sequence,
 			mainTitle,
-			issueMonth: getIssueMonth(promoAtts.dateTimePublication),
+			issueMonth: getIssueMonthYear(promoAtts.dateTimePublication).month,
+			issueMonthYear: getIssueMonthYear(promoAtts.dateTimePublication).monthYear,
 			note: promo.note,
 			podcastLengthMinutes: promoAtts.podcastLengthMinutes,
 			podcastNote: promoAtts.podcastNote,

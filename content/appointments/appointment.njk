@@ -4,12 +4,12 @@ pagination:
   alias: appointment
   data: appointments
   size: 1
-permalink: /{{ appointment.issueMonth | slugifyMaltese }}/index.html
+permalink: /{{ appointment.issueMonthYear | slugifyMaltese }}/index.html
 ---
 {% extends 'layouts/base.njk' %}
 
 {% block head %}
-	<title>{{ appointment.issueMonth }} · Aphroconfuso</title>
+	<title>{{ appointment.issueMonthYear }} · Aphroconfuso</title>
 	<meta content="{{ appointment.editorial | getDescription }}" name="description">
 	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 {% endblock %}
@@ -18,7 +18,7 @@ permalink: /{{ appointment.issueMonth | slugifyMaltese }}/index.html
 <article class="generic {{ appointment.issueMonth | slugify }}">
 	<header>
 		<ul><li class="header-label"><a href="/appuntamenti/">Appuntamenti</a></li></ul>
-		<h1>{{ appointment.issueMonth | prettifyMaltese | safe }}</h1>
+		<h1>{{ appointment.issueMonthYear | prettifyMaltese | safe }}</h1>
 		<h2></h2>
 	</header>
 	<div class="container-generic">
@@ -29,7 +29,7 @@ permalink: /{{ appointment.issueMonth | slugifyMaltese }}/index.html
 				</div>
 			</div>
 			<p class="continuity">Din hija l-kitba ppubblikata dax-xahar:</p>
-			{% set promoFrom = appointment.issueMonth %}
+			{% set promoFrom = appointment.issueMonthYear %}
 			{% set promos = appointment.stories %}
 			{% set showEpisodeTitle = true %}
 			{% include '_promo_list.njk' %}
@@ -47,6 +47,6 @@ permalink: /{{ appointment.issueMonth | slugifyMaltese }}/index.html
 	</div>
 </article>
 <script>
-	reportingTitle = "{{ appointment.issueMonth }}";
+	reportingTitle = "{{ appointment.issueMonthYear }}";
 </script>
 {% endblock %}

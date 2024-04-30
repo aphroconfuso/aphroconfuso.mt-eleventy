@@ -16,12 +16,12 @@ permalink: /index.html
 {% endblock %}
 
 {% block content %}
-	<article class="home {{ homepage.issueMonth | slugify }}">
+	<article class="home {{ homepage.issueMonthYear | slug }}">
 		<div class="{{ homepage.layout | slugify }}">
-			<a class="ga-editorial editorial" href="/{{ homepage.issueMonth | fixMonthMaltese | slugifyMaltese }}/">
+			<a class="ga-editorial editorial" href="/{{ homepage.issueMonthYear | fixMonthMaltese | slugifyMaltese }}/">
 				<section class="generic-body-text">
 					<div class="text-container">
-						<p class="editorial-month">{{ homepage.issueMonth }}</p>
+						<p class="editorial-month">{{ homepage.issueMonthYear }}</p>
 						{{ homepage.editorial | prettifyMaltese | safe }}
 					</div>
 				</section>

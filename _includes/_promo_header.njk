@@ -21,7 +21,7 @@
 			{% endif %}
 		</li>
 	{% else %}
-		<li class="header-label">{{ promo.issueMonth }}</li>
+		<li class="header-label">{{ promo.issueMonthYear }}</li>
 	{% endif %}
 	{% for storycollection in promo.storycollections %}
 		<li class="header-label collection-slug collection-{{ storycollection.id }}">

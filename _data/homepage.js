@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 const smartTruncate = require("smart-truncate");
-const getIssueMonth = require("../src/getIssueMonth.js");
+const getIssueMonthYear = require("../src/getIssueMonthYear.js");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
 const parseAuthors = require("../src/parseAuthors.js");
 
@@ -211,7 +211,8 @@ async function getHomepage() {
 				isSequenceEpisode: !!promoSequenceData,
 				mainTitle,
 				mobilePriority: promo.mobilePriority || 9,
-				issueMonth: getIssueMonth(storyAtts.dateTimePublication),
+				issueMonth: getIssueMonthYear(storyAtts.dateTimePublication).month,
+				issueMonthYear: getIssueMonthYear(storyAtts.dateTimePublication).monthYear,
 				sequenceEpisodeNumber: storyAtts.sequenceEpisodeNumber,
 				sequenceEpisodeTitle: !!promoSequenceData && storyAtts.title,
 				slug: storyAtts.pageUrl || makeTitleSlug(
@@ -250,7 +251,8 @@ async function getHomepage() {
 		editorial: atts.appointment.data.attributes.editorial,
 		imagePromos: promosFormatted(atts.imagePromos, true, layoutConfig['image']),
 		layout: 'Layout_200', //atts.layout,
-		issueMonth: getIssueMonth(atts.appointment.data.attributes.dateTimePublication),
+		issueMonth: getIssueMonthYear(atts.appointment.data.attributes.dateTimePublication).month,
+		issueMonthYear: getIssueMonthYear(atts.appointment.data.attributes.dateTimePublication).monthYear,
 		poetryPromos: promosFormatted(atts.poetryPromos, false, layoutConfig.poem),
 		promos: promosFormatted(atts.promos, false, layoutConfig.text, layoutConfig.lengths),
 		diaryEntries: promosFormatted(diaryPromos.data, false, layoutConfig.diary),

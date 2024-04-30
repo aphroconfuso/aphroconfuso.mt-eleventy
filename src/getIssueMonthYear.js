@@ -18,8 +18,8 @@ function getFirstMondayOfMonth(year, month) {
 
 function getCurrentOrPreviousMonth(date) {
 
-    // Get the current date
-    const issueDate = date ? new Date(date) : new Date(date);
+    // Get the current date or today
+    const issueDate = !!date ? new Date(date) : new Date();
 
     // Get the current month and year
     const issueMonth = issueDate.getMonth(); // 0-indexed (0: January, 1: February, ..., 11: December)
@@ -31,11 +31,12 @@ function getCurrentOrPreviousMonth(date) {
     // Check if the current date is after the first Monday of the month
     if (issueDate >= firstMonday) {
         // Return the name of the current month
-        return monthNames[issueMonth];
+			return { month: monthNames[issueMonth], year: issueYear, monthYear: `${ monthNames[issueMonth] } ${ issueYear }`  };
     } else {
         // If the current date is before the first Monday of the month, return the name of the previous month
         const previousMonth = issueMonth === 0 ? 11 : issueMonth - 1; // If current month is January (0), previous month is December (11)
-        return monthNames[previousMonth];
+        const previousMonthYear = issueMonth === 0 ? issueYear - 1 : issueYear; // If current month is January (0), previous year is -1
+        return { month: monthNames[previousMonth], year: previousMonthYear, monthYear: `${ monthNames[previousMonth] } ${ previousMonthYear }` }
     }
 }
 

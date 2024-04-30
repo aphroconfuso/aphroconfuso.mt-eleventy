@@ -56,7 +56,7 @@ permalink: /{{ story.slug }}/index.html
 							<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 						{% endif %}
 					{% else %}
-						<a href="/{{ story.issueMonth | slugifyMaltese }}/">{{ story.issueMonth | fixMonthMaltese }}</a>
+						<a href="/{{ story.issueMonthYear | slugifyMaltese }}/">{{ story.issueMonthYear | fixMonthMaltese }}</a>
 					{% endif %}
 				</li>
 				{% for storycollection in story.storycollections %}

@@ -3,7 +3,7 @@ const unique = require('unique-words');
 const fetch = require("node-fetch");
 const smartTruncate = require('smart-truncate');
 
-const getIssueMonth = require("../src/getIssueMonth.js");
+const getIssueMonthYear = require("../src/getIssueMonthYear.js");
 const makePageTitle = require("../src/makePageTitle.js");
 const makeSortableTitle = require("../src/makeSortableTitle.js");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
@@ -389,7 +389,8 @@ async function getAllStories() {
 			atts.type
 		);
 
-		const issueMonth = getIssueMonth(atts.dateTimePublication)
+		const issueMonth = getIssueMonthYear(atts.dateTimePublication).month;
+		const issueMonthYear = getIssueMonthYear(atts.dateTimePublication).monthYear;
 
 		let sequencePreviousPromo, sequenceNextPromo;
 		let sequenceEpisodes = sequenceData
@@ -461,6 +462,7 @@ async function getAllStories() {
 			mainTitle,
 			metaTitle: displayTitle,
 			issueMonth,
+			issueMonthYear,
 			moreToCome: atts.moreToCome || storycollections.length, // FIXME
 			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
 			podcastLengthMinutes: atts.podcastLengthMinutes,

@@ -17,7 +17,7 @@ const stripTags = require("striptags");
 
 const fixSubjectDate = require('./src/fixSubjectDate.js');
 const slugifyStringMaltese = require('./src/slugifyMaltese.js');
-const getIssueMonth = require('./src/getIssueMonth.js');
+const getIssueMonthYear = require('./src/getIssueMonthYear.js');
 
 const QRCode = require('qrcode');
 
@@ -305,7 +305,7 @@ module.exports = function(eleventyConfig) {
 
 	eleventyConfig.addFilter("addThisIssueMonth", function addThisIssueMonth(text) {
 		// if (!text) return "XXXXXXaddThisIssueMonthXXX";
-		return `${ text } this-month-${ getIssueMonth(text) }`;
+		return `${ text } this-month-${ getIssueMonthYear().month }`;
 	});
 
 	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text, punctuation = String.fromCharCode(8201)) {
