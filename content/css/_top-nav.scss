@@ -200,6 +200,27 @@
   }
 }
 
+#top-nav {
+  menu {
+    li.main-menu-collection {
+      border-color: $lightest-brown;
+      a span {
+        background-color: transparent !important;
+        font-size: 1rem;
+        text-transform: none;
+        &::before {
+          content: " ";
+          display: inline-block;
+          height: 0.5rem;
+          margin-right: 0.5rem;
+          vertical-align: 0.1rem;
+          width: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
 @media all and (min-width: $mobile-breakpoint-plusone) {
   body {
     padding-top: 0;
@@ -219,7 +240,6 @@
         font-size: $font-size-compact;
         position: relative;
         a {
-          @include animated-underline($lighter-brown);
           padding: 0.5rem 0;
         }
         &:nth-child(4) {
@@ -227,16 +247,48 @@
         }
       }
     }
-  }
-  #menu-toggle,
-  .menu-button-container {
-    display: none;
+    #menu-main > li a {
+      @include animated-underline($lighter-brown);
+    }
+    #menu-toggle,
+    .menu-button-container {
+      display: none;
+    }
+    #logo-container-wrapper {
+      position: relative;
+      border-bottom: 1px solid $lighter-brown;
+    }
+    #menu-carousels,
+    #menu-collections {
+      bottom: 5px;
+      position: absolute;
+      li a {
+        font-size: $font-size-compact;
+        letter-spacing: 0.05rem;
+        text-transform: none;
+        text-decoration: none;
+        &:hover {
+          color: $brown;
+        }
+      }
+    }
+    // #menu-carousels {
+    // }
+    #menu-collections {
+      right: 0;
+      li.main-menu-collection a span {
+        font-size: $font-size-compact;
+        letter-spacing: 0.05rem;
+        padding-left: $body-margin-half;
+        vertical-align: 0;
+      }
+    }
   }
   #logo-container {
-    border-bottom: 1px solid $lighter-brown;
     display: flex;
+    justify-content: center;
     max-width: $max-width;
-    padding: 1rem;
+    padding: $body-margin-half $body-margin-half 0 $body-margin-half;
     width: 100%;
     #logo {
       margin: 0 auto;

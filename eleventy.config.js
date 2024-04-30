@@ -135,13 +135,12 @@ module.exports = function(eleventyConfig) {
 		const cssFileContents = fs.readFileSync('./aphroconfuso.mt/site/css/' + cssFile).toString();
 
 		const fileNames = cssFileContents.match(/frame-02-faint-hsl-[^\)]*?\.svg/g);
-		console.log(fileNames);
 		fileNames.forEach(fileName => {
 			const [fileString, h, s, l] = fileName.match(/hsl-(\d+)-(\d+)-(\d+).*?\./);
 			const srcFile = './public/img/deco/frame-02-faint-TEMPLATE.svg';
 			const destFile = './aphroconfuso.mt/site/img/deco/' + 'frame-02-faint-' + fileString + 'svg';
-			if (fs.existsSync(destFile)) { return; }
-			console.log(`Creating file for ${ fileString }..`);
+			if (fs.existsSync(destFile)) return;
+			console.log(`Creating file for ${ fileString } ...`);
 			fs.readFile(srcFile, 'utf8', (err, data) => {
 				if (err) return console.log(err);
 				var result = data.replace(/\#ff0000/g, `hsl(${h}, ${s}%, ${l}%)`);
@@ -152,12 +151,12 @@ module.exports = function(eleventyConfig) {
 		});
 
 		const hexFileNames = cssFileContents.match(/frame-02-faint-(......)\.svg/g);
-		console.log(hexFileNames);
 		hexFileNames.forEach(fileName => {
 			const [fileString, hexColour] = fileName.match(/faint-(......)\./);
-			console.log(`Creating file for ${ fileString }..`);
 			const srcFile = './public/img/deco/frame-02-faint-TEMPLATE.svg';
 			const destFile = './aphroconfuso.mt/site/img/deco/' + 'frame-02-' + fileString + 'svg';
+			if (fs.existsSync(destFile)) return;
+			console.log(`Creating file for ${ fileString }..`);
 			fs.readFile(srcFile, 'utf8', (err, data) => {
 				if (err) return console.log(err);
 				var result = data.replace(/\#ff0000/g, `#${hexColour}`);
