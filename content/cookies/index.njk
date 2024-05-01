@@ -36,7 +36,7 @@ permalink: /cookies/index.html
 					<script>
 						document.addEventListener("DOMContentLoaded", function (event) {
 							function setOptOutText(element) {
-								window._paq.push([function () {
+								window.analytics([function () {
 									element.checked = !this.isUserOptedOut();
 								}]);
 								if (element.checked) {
@@ -46,7 +46,7 @@ permalink: /cookies/index.html
 								}
 							}
 							function setOptOutText(element) {
-								window._paq.push([function () {
+								window.analytics([function () {
 									element.checked = !this.isUserOptedOut();
 									document.querySelector('label[for=optInOut]').innerHTML = this.isUserOptedOut()
 										? "<p>Bħalissa qed twaqqafna milli niġbru statistika dwar <l-m>iż-żjarat</l-m> tiegħek. <span style=\"text-decoration:underline;cursor:pointer;\">Agħfas hawn</span> jekk trid tħallina niġbru din <l-m>l-informazzjoni</l-m>.</p>"
@@ -56,11 +56,11 @@ permalink: /cookies/index.html
 							var optOut = document.getElementById("optInOut");
 							optOut.addEventListener("click", function () {
 								if (this.checked) {
-									_paq.push(['trackEvent', 'Tracking', 'Buttuna', 'Mitfi']);
-									window._paq.push(['forgetUserOptOut']);
+									analytics(['trackEvent', 'Tracking', 'Buttuna', 'Mitfi']);
+									window.analytics(['forgetUserOptOut']);
 								} else {
-									_paq.push(['trackEvent', 'Tracking', 'Buttuna', 'Mixgħul']);
-									window._paq.push(['optUserOut']);
+									analytics(['trackEvent', 'Tracking', 'Buttuna', 'Mixgħul']);
+									window.analytics(['optUserOut']);
 								}
 								setOptOutText(optOut);
 							});

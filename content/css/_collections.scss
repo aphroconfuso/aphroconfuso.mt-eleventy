@@ -48,14 +48,11 @@
   }
   @media all and (min-width: $laptop-breakpoint) {
     &.promo-collections {
+      color: $collection-ink;
       &:hover {
         @include ease-in(0.35s);
-        border-top: 2px solid $collection-ink;
-        a {
-          @include ease-in(0.35s);
-          background-color: $collection-ink;
-          color: $collection-paper;
-        }
+        background-color: $collection-ink;
+        color: $collection-paper;
       }
     }
     &.collection-sidebar {
@@ -74,13 +71,16 @@
   }
 }
 
-div.container-collection {
+.container-collection {
   .promo {
     header {
       li.collection-slug {
         display: none;
       }
     }
+  }
+  .continuity {
+    margin-top: $body-margin;
   }
 }
 
@@ -111,12 +111,15 @@ div.container-collection {
   padding: 0 $body-margin-quarter * 0.5;
 }
 
+$collection-hue-terms: 280;
+$collection-colour-terms: hsl($collection-hue-terms, 30%, 35%);
+
 .collection-2 {
   @include collection-colour(177);
 }
 
 .collection-3 {
-  @include collection-colour(280);
+  @include collection-colour($collection-hue-terms);
 }
 
 .promo-collections {
@@ -131,6 +134,14 @@ div.container-collection {
   a {
     display: inline-block;
     padding: 0 $body-margin-half;
+  }
+}
+
+.generic.il-kliem-fit-teorija {
+  .promo {
+    h1 {
+      margin: 0;
+    }
   }
 }
 
@@ -161,6 +172,9 @@ div.container-collection {
     }
     #form {
       width: 75%;
+    }
+    .continuity {
+      margin-top: 0;
     }
   }
 }

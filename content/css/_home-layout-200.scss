@@ -12,12 +12,12 @@
 .layout-200 {
   grid-template-areas:
     "ga1"
+    "ga-image-1"
     "ga-editorial"
     "ga2"
     "ga-poem-1"
     "ga-diary"
     "ga-newsletter"
-    "ga-image-1"
     "ga3"
     "ga4"
     "ga-podcast"
@@ -26,21 +26,17 @@
     "ga-image-2"
     "ga7"
     "ga8"
-    "ga9"
-    "ga10"
-    "ga11";
+    "ga-terms";
   .ga-image-1 {
-    margin-bottom: $body-margin-half;
+    margin-bottom: $body-margin;
   }
+  .ga-1,
   .ga-3,
   .ga-5,
+  .ga-6,
   .ga-7,
-  .ga-image-1,
   .ga-image-2 {
     @include border-bottom();
-  }
-  .ga-image-2 {
-    @include border-top();
   }
   .ga-1 {
     p {
@@ -52,13 +48,38 @@
       @include clamp(16);
     }
   }
-
-  .ga-2,
-  .ga-3,
-  .ga-4 {
-    padding-top: $body-margin;
+  .ga-diary,
+  .ga-terms {
+    .promo {
+      display: block;
+    }
   }
-
+  .ga-diary > ul > li:nth-of-type(1) {
+    padding-bottom: $body-margin;
+  }
+  .ga-terms {
+    border: 1px solid hsl(280, 30%, 35%);
+    padding: $body-margin;
+    padding-bottom: calc($body-margin - 1px);
+    position: relative;
+    a.promo:nth-of-type(2),
+    a.promo:nth-of-type(3) {
+      padding-bottom: $body-margin;
+    }
+    h1 {
+      margin: 0;
+    }
+    .label {
+      background-color: hsl(280, 30%, 80%);
+      color: hsl(280, 30%, 35%);
+      display: inline-block;
+      position: absolute;
+      right: 1px;
+      text-align: right;
+      top: 1px;
+      padding: $body-margin-quarter * 0.5;
+    }
+  }
   @media all and (min-width: $laptop-breakpoint) {
     .ga-newsletter,
     .ga-podcast {
@@ -77,47 +98,50 @@
     .ga-9,
     .ga-10,
     .ga-11 {
-      padding-bottom: 0;
-      border-bottom: none;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+    .ga-diary,
+    .ga-terms {
+      .promo {
+        padding: 0;
+      }
     }
     display: grid;
     gap: ($body-margin * 1.5) $body-margin;
-    grid-template-rows: auto auto auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-auto-columns: 1fr;
     grid-auto-flow: row;
     grid-template-areas:
       "ga1 ga1 ga1 ga1 ga1 ga1"
-      "ga2 ga2 ga3 ga3 ga4 ga4"
-      "ga-diary ga-diary ga-diary ga-diary ga-editorial ga-editorial"
-      "ga-poem-1 ga-poem-1 ga5 ga5 ga5 ga5"
       "ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
+      "ga-diary ga-diary ga-diary ga-diary ga-editorial ga-editorial"
+      "ga-poem-1 ga-poem-1 ga2 ga2 ga2 ga2"
+      "ga3 ga3 ga4 ga4 ga5 ga5"
       "ga6 ga6 ga7 ga7 ga8 ga8"
-      "ga9 ga9 ga10 ga10 ga11 ga11"
+      "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms"
       "ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2";
+    // "ga9 ga9 ga10 ga10 ga11 ga11"
     .ga-1 {
-      background-color: $deco-brown;
-      border: 1px solid $faint-brown;
-      box-sizing: content-box;
-      margin-left: -1.8rem;
-      margin-right: -1.8rem;
-      padding-bottom: calc(1.8rem - 1px);
-      padding: 1.8rem;
+      padding-bottom: calc($body-margin - 1px);
       p {
         @include clamp(999);
         columns: 3;
       }
     }
-    .ga-5 {
+    .ga-2 {
       p {
         @include clamp(999);
         columns: 2;
       }
     }
     .ga-1,
-    .ga-6,
-    .ga-7,
-    .ga-8 {
+    .ga-2,
+    .ga-3,
+    .ga-4,
+    .ga-5 {
       @include border-bottom();
     }
     .ga-editorial {
@@ -132,16 +156,26 @@
     }
     .ga-image-1 {
       @include image-left;
-      @include border-top();
-      @include border-bottom();
     }
     .ga-image-2 {
-      @include border-top();
       @include image-right;
     }
     .ga-diary {
       ul {
         columns: 2;
+      }
+    }
+    .ga-terms {
+      columns: 3;
+      a.promo {
+        padding-bottom: 0;
+      }
+      .label {
+        &:hover {
+          @include ease-in(0.35s);
+          color: hsl(280, 30%, 80%);
+          background-color: hsl(280, 30%, 35%);
+        }
       }
     }
   }

@@ -211,6 +211,7 @@ async function getHomepage() {
 				isSequenceEpisode: !!promoSequenceData,
 				mainTitle,
 				mobilePriority: promo.mobilePriority || 9,
+				isTypeTerm: storyAtts.type === 'Terminu',
 				issueMonth: getIssueMonthYear(storyAtts.dateTimePublication).month,
 				issueMonthYear: getIssueMonthYear(storyAtts.dateTimePublication).monthYear,
 				sequenceEpisodeNumber: storyAtts.sequenceEpisodeNumber,

@@ -9,6 +9,7 @@ aside#audio {
 
 figure.audio {
   margin-bottom: $body-margin;
+  min-height: 54px;
   opacity: 0;
   &.initialised {
     @include ease-in(0.5s);

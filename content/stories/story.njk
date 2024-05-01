@@ -296,7 +296,7 @@ permalink: /{{ story.slug }}/index.html
 		{% set imageMode = 'lightbox' %}
 		<aside id="lightbox"{% if story.singleImage %} class="single-image"{% endif %}>
 			<div id="lightbox-container">
-				<button id="lightbox-close" type="button" onclick="_paq.push(['trackEvent', 'Stampi', 'lightbox [×]', '{{ story.reportingTitle }}']);">×</button>
+				<button id="lightbox-close" type="button" onclick="analytics(['trackEvent', 'Stampi', 'lightbox [×]', '{{ story.reportingTitle }}']);">×</button>
 					{% include "_slideshow.njk" %}
 			</div>
 		</aside>

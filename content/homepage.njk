@@ -16,9 +16,9 @@ permalink: /index.html
 {% endblock %}
 
 {% block content %}
-	<article class="home {{ homepage.issueMonthYear | slug }}">
+	<article class="home {{ homepage.issueMonth | slug }}">
 		<div class="{{ homepage.layout | slugify }}">
-			<a class="ga-editorial editorial" href="/{{ homepage.issueMonthYear | fixMonthMaltese | slugifyMaltese }}/">
+			<a class="ga-editorial editorial {{ homepage.issueMonth | slugify }}" href="/{{ homepage.issueMonthYear | fixMonthMaltese | slugifyMaltese }}/">
 				<section class="generic-body-text">
 					<div class="text-container">
 						<p class="editorial-month">{{ homepage.issueMonthYear }}</p>
@@ -49,27 +49,28 @@ permalink: /index.html
 					</picture>
 				</figure>
 			</a>
-			{% for promo in homepage.promos %}
+			{% for promo in homepage.promos | rejectattr("isTypeTerm") %}
 				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 				<div class="ga-{{ loop.index }}">
-					{# REVIEW: Not sure we will ever use multiple collections #}
-					{% if promo.collections.length %}
-						{% set collection = promo.collections[0] %}
-						{% set collectionId = 'collection-' + collection.id %}
-						<div class="promo-collections {{ collectionId }}">
-							<a href="/{{ collection.title | slugifyMaltese }}/">{{ collection.title | prettifyMaltese | safe }}</a>
-						</div>
-					{% endif %}
 					<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% include "_promo_header.njk" %}
 						<div class="{{ promo.cssClass }}">
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
 						</div>
 					</a>
-					{# reset #}
-					{% set collectionId = '' %}
 				</div>
 			{% endfor %}
+			<div class="ga-terms">
+				<a class="label" href="/il-kliem-fit-teorija/">Il-Kliem fit-Teorija</a>
+				{% for promo in homepage.promos | selectattr("isTypeTerm") %}
+					<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+						{% include "_promo_header.njk" %}
+						<div class="{{ promo.cssClass }}">
+							<p>{{ promo.description | prettifyMaltese | safe }}</p>
+						</div>
+					</a>
+				{% endfor %}
+			</div>
 			{% for promo in homepage.imagePromos %}
 				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 				<div class="ga-image-{{ loop.index }}">

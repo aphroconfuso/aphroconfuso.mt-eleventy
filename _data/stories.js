@@ -503,7 +503,8 @@ async function getAllStories() {
 			wordcount: splitText(atts.body).length,
 		};
 
-		processedStory.reportingTitle = fixReportingTitle(processedStory);
+		const reportingTitle = fixReportingTitle(processedStory)
+		processedStory.reportingTitle = reportingTitle;
 
 		// ABECEDAIRE *************************************************************************************************************************
 		if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
@@ -519,6 +520,7 @@ async function getAllStories() {
 					letter: makeSortableTitle(digraph === 'ie' || digraph === 'għ' ? digraph : match[2]).toLowerCase(),
 					issueMonth,
 					slug: pageSlug,
+					reportingTitle,
 					snippet,
 					title: smartTruncate(processedStory.reportingTitle, 26),
 				});

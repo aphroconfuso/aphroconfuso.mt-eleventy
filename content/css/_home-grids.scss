@@ -4,36 +4,36 @@
 @use "mixins-etc" as *;
 
 .ga-podcast {
-	background-color: #ac9393;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  background-color: #ac9393;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .ga-diary {
-	border: 1px dashed $lightester-brown;
-	padding: $body-margin;
-	h1 .diary-title {
-		font-size: 1.4rem;
-		text-transform: uppercase;
-	}
-	p {
-		@include clamp(13);
-	}
-	a {
-		margin-bottom: 1rem;
-		&:last-of-type {
-			margin-bottom: 0;
-		}
-	}
+  border: 1px dashed $lightester-brown;
+  padding: $body-margin;
+  h1 .diary-title {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+  p {
+    @include clamp(13);
+  }
+  a {
+    margin-bottom: 1rem;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
 }
 a.promo-poetry {
-	&:after {
-		content: ". . .";
-		position: absolute;
-		bottom: $body-margin-half;
-		right: $body-margin-half;
-	}
+  &:after {
+    content: ". . .";
+    position: absolute;
+    bottom: $body-margin-half;
+    right: $body-margin-half;
+  }
 }
 
 .ga-1,
@@ -58,133 +58,136 @@ a.promo-poetry {
 .ga-editorial,
 .ga-newsletter,
 .ga-podcast {
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	// *:last-of-type {
-	// 	margin-bottom: 0;
-	// }
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  // *:last-of-type {
+  // 	margin-bottom: 0;
+  // }
 }
 .ga-1 {
-	grid-area: ga1;
+  grid-area: ga1;
 }
 .ga-2 {
-	grid-area: ga2;
+  grid-area: ga2;
 }
 .ga-3 {
-	grid-area: ga3;
+  grid-area: ga3;
 }
 .ga-4 {
-	grid-area: ga4;
+  grid-area: ga4;
 }
 .ga-5 {
-	grid-area: ga5;
+  grid-area: ga5;
 }
 .ga-6 {
-	grid-area: ga6;
+  grid-area: ga6;
 }
 .ga-7 {
-	grid-area: ga7;
+  grid-area: ga7;
 }
 .ga-8 {
-	grid-area: ga8;
+  grid-area: ga8;
 }
 .ga-9 {
-	grid-area: ga9;
+  grid-area: ga9;
 }
 .ga-10 {
-	grid-area: ga10;
+  grid-area: ga10;
 }
 .ga-11 {
-	grid-area: ga11;
+  grid-area: ga11;
 }
 .ga-12 {
-	grid-area: ga12;
+  grid-area: ga12;
 }
 .ga-image-1 {
-	grid-area: ga-image-1;
+  grid-area: ga-image-1;
 }
 .ga-image-2 {
-	grid-area: ga-image-2;
+  grid-area: ga-image-2;
 }
 .ga-image-3 {
-	grid-area: ga-image-3;
+  grid-area: ga-image-3;
 }
 .ga-poem-1 {
-	grid-area: ga-poem-1;
+  grid-area: ga-poem-1;
 }
 .ga-poem-2 {
-	grid-area: ga-poem-2;
+  grid-area: ga-poem-2;
 }
 .ga-poem-3 {
-	grid-area: ga-poem-3;
+  grid-area: ga-poem-3;
 }
 .ga-diary {
-	flex-direction: column;
-	grid-area: ga-diary;
-	p {
-		@include clamp(12);
-	}
+  flex-direction: column;
+  grid-area: ga-diary;
+  p {
+    @include clamp(12);
+  }
 }
 .ga-editorial {
-	grid-area: ga-editorial;
-	&.editorial {
-		margin-bottom: $body-margin-half;
-	}
-	p {
-		@include clamp(16);
-	}
+  grid-area: ga-editorial;
+  &.editorial {
+    margin-bottom: $body-margin-half;
+  }
+  p {
+    @include clamp(16);
+  }
 }
 .ga-newsletter {
-	grid-area: ga-newsletter;
+  grid-area: ga-newsletter;
 }
 .ga-podcast {
-	grid-area: ga-podcast;
+  grid-area: ga-podcast;
+}
+.ga-terms {
+  grid-area: ga-terms;
 }
 
 @media all and (max-width: ($laptop-breakpoint - 1)) {
-	.layout-1,
-	.layout-2,
-	.layout-3,
-	.layout-4,
-	.layout-5,
-	.layout-6,
-	.layout-7,
-	.layout-8,
-	.layout-9,
-	.layout-10,
-	.layout-11,
-	.layout-12,
-	.layout-13,
-	.layout-14,
-	.layout-15,
-	.layout-200 {
-		display: grid;
-		grid-template-columns: auto;
-		grid-template-rows: auto auto auto auto auto auto auto auto auto;
-		gap: $body-margin $body-margin;
-	}
+  .layout-1,
+  .layout-2,
+  .layout-3,
+  .layout-4,
+  .layout-5,
+  .layout-6,
+  .layout-7,
+  .layout-8,
+  .layout-9,
+  .layout-10,
+  .layout-11,
+  .layout-12,
+  .layout-13,
+  .layout-14,
+  .layout-15,
+  .layout-200 {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto;
+    gap: $body-margin $body-margin;
+  }
 }
 
 @media all and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
-	article.home {
-		margin: 0 15%;
-	}
+  article.home {
+    margin: 0 15%;
+  }
 }
 
 @media all and (min-width: $laptop-breakpoint) {
-	.ga-editorial {
-		&.editorial {
-			height: 100%;
-			.text-container {
-				height: 100%;
-			}
-			margin-bottom: 0;
-		}
-	}
-	.home .ga-diary {
-		h3 {
-			letter-spacing: -0.5px;
-		}
-	}
+  .ga-editorial {
+    &.editorial {
+      height: 100%;
+      .text-container {
+        height: 100%;
+      }
+      margin-bottom: 0;
+    }
+  }
+  .home .ga-diary {
+    h3 {
+      letter-spacing: -0.5px;
+    }
+  }
 }

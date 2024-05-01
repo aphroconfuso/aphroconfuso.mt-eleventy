@@ -1,7 +1,7 @@
 {% set promoTo = promoTo or promo.reportingTitle or promo.title %}
 {% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 <li {% if promo.sequenceEpisodes.length > 1 %} class="multiple-episodes"{% endif %}>
-	<a class="promo {{ collectionId }} {{ promo.issueMonth | slugify }} promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug }}/" onclick="_paq.push(['trackEvent', 'Promo', 'minn: {{ promoFrom | escapeQuote }}', 'għal: {{ promoTo | escapeQuote }}', {{ loop.index }}]);">
+	<a class="promo {{ collectionId }} {{ promo.issueMonth | slugify }} promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: {{ promoFrom | escapeQuote }}', 'għal: {{ promoTo | escapeQuote }}', {{ loop.index }}]);">
 		{% include '_promo_header.njk' %}
 		<div class="{{ promo.cssClass }}">
 			{% if promo.type === 'Poezija' %}
