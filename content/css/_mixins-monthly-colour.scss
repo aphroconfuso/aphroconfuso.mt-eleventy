@@ -35,20 +35,16 @@
     }
   }
   .editorial {
-    // background-color: lighten($colour, 50%);
     background-color: $deco-brown;
     border-image-source: url(/img/deco/frame-02-faint-#{$slugifiedColour}.svg);
     .editorial-month {
-      display: inline;
+      // display: inline;
       font-size: 1.6rem;
       font-weight: 600;
       margin-right: $body-margin-quarter;
       text-transform: uppercase;
       color: $colour;
     }
-    // .text-container {
-    // 	border-color: $colour;
-    // }
   }
   &.audio > div.player .slider {
     .gap-progress {

@@ -48,6 +48,7 @@
 				lastScrollPosition,
 				message,
 				issueMonth,
+				issueMonthYear,
 				newScrollPosition,
 				pageHeight,
 				percentageProgress,
@@ -131,7 +132,7 @@
 				g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
 			})();
 		</script>
-		<script defer src="{{ '/script/script-228.js' | rev }}"></script>
+		<script defer src="{{ '/script/script-229.js' | rev }}"></script>
 	</head>
 	<body class="show-nav {{ '' | addThisIssueMonth | slugify }}">
 		<script>initialiseAfterBody();</script>

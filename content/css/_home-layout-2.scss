@@ -5,95 +5,127 @@
 @use "mixins-home-grids" as *;
 
 // *************************************************************************
-// LAYOUT 2 ****************************************************************
-// Large text story on top
+// LAYOUT 1 ****************************************************************
+// Large image story on top
 // Then Story and editorial
 
-.layout-2 {
+.layout-1 {
   grid-template-areas:
+    "ga-image-1"
     "ga1"
     "ga-editorial"
-    "ga-diary"
-    "ga-image-1"
     "ga2"
+    "ga-poem-1"
+    "ga-diary"
     "ga-newsletter"
     "ga3"
-    "ga-poem-1"
     "ga4"
     "ga-podcast"
     "ga5"
-    "ga-image-2";
-  .mga1 {
-    .promo .body-text p {
-      @include clamp(12);
-    }
-  }
-  .ga-image-1 {
+    "ga6"
+    "ga-image-2"
+    "ga7"
+    "ga8"
+    "ga-terms";
+  .ga-3,
+  .ga-5,
+  .ga-6,
+  .ga-7,
+  .ga-image-1,
+  .ga-image-2 {
     @include border-bottom();
-    margin-bottom: $body-margin-half;
   }
   .ga-1 {
     p {
       @include clamp(12);
     }
-    margin-bottom: $body-margin-half;
   }
-  .ga-5 {
-    @include border-bottom();
+  .ga-poem-1 {
+    p {
+      @include clamp(16);
+    }
   }
-
+  .ga-diary > ul > li:nth-of-type(1) {
+    padding-bottom: $body-margin;
+  }
   @media all and (min-width: $laptop-breakpoint) {
+    .ga-newsletter,
+    .ga-podcast {
+      display: none;
+    }
+    .ga-image-1,
+    .ga-image-2,
     .ga-1,
     .ga-2,
     .ga-3,
-    .ga-image-1,
+    .ga-4,
     .ga-5,
     .ga-6,
-    .ga-image-2,
     .ga-7,
     .ga-8,
-    .ga-9 {
+    .ga-9,
+    .ga-10,
+    .ga-11 {
+      margin: 0;
+      padding: 0;
       border: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
     }
     display: grid;
-    gap: ($body-margin * 1.25) $body-margin;
-    grid-template-rows: auto 15rem auto auto auto auto auto;
+    gap: $body-margin;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-auto-columns: 1fr;
     grid-auto-flow: row;
     grid-template-areas:
-      "ga1 ga1 ga1 ga1 ga1 ga1"
-      "ga-diary ga-diary ga-newsletter ga-newsletter ga-editorial ga-editorial"
-      "ga-diary ga-diary ga-podcast ga-podcast ga-editorial ga-editorial"
       "ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
-      "ga-poem-1 ga-poem-1 ga2 ga2 ga3 ga3"
-      "ga-poem-1 ga-poem-1 ga4 ga4 ga5 ga5"
-      "ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2";
+      "ga1 ga1 ga1 ga1 ga1 ga1"
+      "ga-diary ga-diary ga-diary ga-diary ga-editorial ga-editorial"
+      "ga-poem-1 ga-poem-1 ga2 ga2 ga2 ga2"
+      "ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
+      "ga3 ga3 ga4 ga4 ga5 ga5"
+      "ga6 ga6 ga7 ga7 ga8 ga8"
+      "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms";
+    // "ga9 ga9 ga10 ga10 ga11 ga11"
     .ga-1 {
       p {
-        columns: 3;
         @include clamp(999);
+        columns: 3;
       }
     }
-    .ga-1,
-    .ga-2,
-    .ga-3 {
+    .ga-2 {
+      p {
+        @include clamp(999);
+        columns: 2;
+      }
+    }
+    .ga-image-1,
+    .ga-image-2,
+    .ga-3,
+    .ga-4,
+    .ga-5 {
       @include border-bottom();
+    }
+    .ga-editorial {
+      p:nth-of-type(2) {
+        @include clamp(13);
+      }
     }
     .ga-poem-1 {
       p {
-        @include clamp(18);
+        @include clamp(9);
       }
     }
     .ga-image-1 {
-      @include border-top();
-      @include image-right;
-      margin-bottom: 0;
+      @include image-left;
     }
     .ga-image-2 {
-      @include image-left;
+      @include border-top();
+      @include image-right;
+    }
+    .ga-diary {
+      ul {
+        columns: 2;
+      }
     }
   }
 }

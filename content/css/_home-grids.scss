@@ -128,6 +128,7 @@ a.promo-poetry {
 }
 .ga-editorial {
   grid-area: ga-editorial;
+  margin-top: $body-margin;
   &.editorial {
     margin-bottom: $body-margin-half;
   }
@@ -144,6 +145,35 @@ a.promo-poetry {
 .ga-terms {
   grid-area: ga-terms;
 }
+.ga-terms {
+  border: 1px solid hsl(280, 30%, 35%);
+  padding: $body-margin;
+  padding-bottom: calc($body-margin - 1px);
+  position: relative;
+  a.promo:nth-of-type(2),
+  a.promo:nth-of-type(3) {
+    padding-bottom: $body-margin;
+  }
+  h1 {
+    margin: 0;
+  }
+  .label {
+    background-color: hsl(280, 30%, 80%);
+    color: hsl(280, 30%, 35%);
+    display: inline-block;
+    position: absolute;
+    right: 1px;
+    text-align: right;
+    top: 1px;
+    padding: $body-margin-quarter * 0.5;
+  }
+}
+.ga-diary,
+.ga-terms {
+  .promo {
+    display: block;
+  }
+}
 
 @media all and (max-width: ($laptop-breakpoint - 1)) {
   .layout-1,
@@ -154,14 +184,7 @@ a.promo-poetry {
   .layout-6,
   .layout-7,
   .layout-8,
-  .layout-9,
-  .layout-10,
-  .layout-11,
-  .layout-12,
-  .layout-13,
-  .layout-14,
-  .layout-15,
-  .layout-200 {
+  .layout-9 {
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto auto auto auto auto auto auto auto auto;
@@ -177,6 +200,7 @@ a.promo-poetry {
 
 @media all and (min-width: $laptop-breakpoint) {
   .ga-editorial {
+    margin-top: 0;
     &.editorial {
       height: 100%;
       .text-container {
@@ -188,6 +212,25 @@ a.promo-poetry {
   .home .ga-diary {
     h3 {
       letter-spacing: -0.5px;
+    }
+  }
+  .ga-terms {
+    columns: 3;
+    a.promo {
+      padding-bottom: 0;
+    }
+    .label {
+      &:hover {
+        @include ease-in(0.35s);
+        color: hsl(280, 30%, 80%);
+        background-color: hsl(280, 30%, 35%);
+      }
+    }
+  }
+  .ga-diary,
+  .ga-terms {
+    .promo {
+      padding: 0;
     }
   }
 }

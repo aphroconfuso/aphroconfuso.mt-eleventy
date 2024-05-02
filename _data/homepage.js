@@ -89,95 +89,22 @@ async function getHomepage() {
 
 	const layouts = {
 		Layout_1: {
-			diary: 1,
-			image: 2,
-			poem: 1,
-			text: 4,
-		},
-		Layout_2: {
-			diary: 1,
-			image: 2,
-			poem: 1,
-			text: 5,
-		},
-		Layout_3: {
-			diary: 1,
-			image: 2,
-			poem: 1,
-			text: 6,
-			lengths: [1740],
-		},
-		Layout_4: {
-			diary: 1,
-			image: 2,
-			poem: 1,
-			text: 5,
-		},
-		Layout_5: {
-			diary: 1,
-			image: 2,
-			poem: 2,
-			text: 5,
-			lengths: [1740],
-		},
-		Layout_6: {
-			diary: 1,
-			image: 2,
-			poem: 1,
-			text: 9,
-			lengths: [1640],
-		},
-		Layout_7: {
-			diary: 1,
-			image: 2,
-			poem: 1,
-			text: 10,
-			lengths: [2430, 1331],
-		},
-		Layout_8: {
-			diary: 1,
-			image: 2,
-			poem: 1,
-			text: 5,
-		},
-		Layout_9: {
-			diary: 1,
-			image: 2,
-			poem: 1,
-			text: 8,
-			lengths: [2150, 1300],
-		},
-		Layout_10: {
-			diary: 1,
-			image: 2,
-			poem: 1,
-			text: 5,
-			lengths: [2150],
-		},
-		Layout_11: {
-			diary: 2,
-			image: 1,
-			poem: 1,
-			text: 6,
-			lengths: [2150],
-		},
-		Layout_12: {
-			diary: 2,
-			image: 2,
-			poem: 1,
-			text: 4,
-			lengths: [2150],
-		},
-		Layout_200: {
 			diary: 2,
 			image: 2,
 			poem: 1,
 			text: 11,
-			lengths: [2150],
+			lengths: [2150, 1200],
+		},
+		Layout_2: {
+			diary: 2,
+			image: 2,
+			poem: 1,
+			text: 11,
+			lengths: [2150, 1200],
 		},
 	}
 
-	const layoutConfig = layouts['Layout_200']; // layouts[atts.layout];
+	const layoutConfig = layouts[atts.layout];
 
 	// REFACTOR ... use processPromos?S
 	const promosFormatted = (promos, includesImages, number, lengths) => {
@@ -251,7 +178,7 @@ async function getHomepage() {
 	const homepageFormatted = {
 		editorial: atts.appointment.data.attributes.editorial,
 		imagePromos: promosFormatted(atts.imagePromos, true, layoutConfig['image']),
-		layout: 'Layout_200', //atts.layout,
+		layout: atts.layout,
 		issueMonth: getIssueMonthYear(atts.appointment.data.attributes.dateTimePublication).month,
 		issueMonthYear: getIssueMonthYear(atts.appointment.data.attributes.dateTimePublication).monthYear,
 		poetryPromos: promosFormatted(atts.poetryPromos, false, layoutConfig.poem),
