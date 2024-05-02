@@ -35,13 +35,13 @@
       "promo-image promo-image promo-body";
     .body-text {
       p {
-        @include clamp(12);
+        @include clamp(16);
       }
     }
     &.is-episode {
       .body-text {
         p {
-          @include clamp(13);
+          @include clamp(14);
         }
       }
     }

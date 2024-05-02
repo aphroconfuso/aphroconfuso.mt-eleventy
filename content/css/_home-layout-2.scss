@@ -116,11 +116,11 @@
       }
     }
     .ga-image-1 {
-      @include image-left;
+      @include image-left-top();
     }
     .ga-image-2 {
       @include border-top();
-      @include image-right;
+      @include image-right();
     }
     .ga-diary {
       ul {
