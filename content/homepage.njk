@@ -16,9 +16,9 @@ permalink: /index.html
 {% endblock %}
 
 {% block content %}
-	<article class="home {{ homepage.issueMonth | slug }}">
+	<article class="home {{ homepage.issueMonth | slugify }}">
 		<div class="{{ homepage.layout | slugify }}">
-			<a class="ga-editorial editorial {{ homepage.issueMonth | slugify }}" href="/{{ homepage.issueMonthYear | fixMonthMaltese | slugifyMaltese }}/">
+			<a class="ga-editorial editorial" href="/{{ homepage.issueMonthYear | fixMonthMaltese | slugifyMaltese }}/">
 				<section class="generic-body-text">
 					<div class="text-container">
 						<p class="editorial-month">{{ homepage.issueMonthYear }}</p>
@@ -26,9 +26,9 @@ permalink: /index.html
 					</div>
 				</section>
 			</a>
-			<div class="ga-newsletter newsletter-container">
+			<div class="ga-newsletter {{ homepage.issueMonth | slugify }} newsletter-container">
 				<section id="form" data-track-content data-content-name="Homepage" data-content-piece="formola">
-					<iframe src="https://newsletter.aphroconfuso.mt/subscription/form#339977|#f6f6f0|0|442093344ewr" scrolling="no" title="Abbona fin-newsletter"></iframe>
+					<iframe src="https://newsletter.aphroconfuso.mt/subscription/form{{ homepage.complementaryMonthColour }}|#f6f6f0|0|442093344ewr" scrolling="no" title="Abbona fin-newsletter"></iframe>
 				</section>
 			</div>
 			<a href="/podcast/" class="ga-podcast" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: Podcast']);">

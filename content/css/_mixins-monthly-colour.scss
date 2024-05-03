@@ -6,6 +6,11 @@
 
 @mixin monthly-colour($colour) {
   $slugifiedColour: slugifyColour(lighten($colour, 0.01%));
+  $detailColour: slugifyColour(lighten(complement($colour), 10%));
+  &.ga-newsletter {
+    border-image-source: url(/img/deco/frame-02-faint-#{$detailColour}.svg);
+    background-color: complement($colour);
+  }
   &.content {
     border-bottom-color: $colour;
   }
@@ -141,12 +146,7 @@
 }
 
 @mixin this-issue-month-colour($this-month) {
-  $detailColour: slugifyColour(lighten(complement($this-month), 10%));
   * {
     -webkit-tap-highlight-color: rgba($color: $this-month, $alpha: 0.2);
-  }
-  .ga-newsletter {
-    border-image-source: url(/img/deco/frame-02-faint-#{$detailColour}.svg);
-    background-color: complement($this-month);
   }
 }

@@ -32,27 +32,16 @@ article {
     font-size: $font-size-aside;
     margin-bottom: $body-margin-half;
   }
-  &.end-of-series #grid-body section:not(#epigraphs-bottom).body-text {
+  &.end-of-series
+    #grid-body
+    // section:not(#epigraphs-bottom):not(#endnote).body-text {
+    section.body-text-part-two {
     p:last-of-type {
-      margin-bottom: $body-margin * 1;
-      padding-bottom: $body-margin * 3;
+      padding-bottom: $body-margin-double;
       background-image: url(/img/deco-100.svg);
       background-position: center bottom;
-      background-size: 75%;
+      background-size: 100%;
       background-repeat: no-repeat;
-      &::after {
-        color: $deco-brown;
-        display: block;
-        left: 0;
-        content: "TMIEM";
-        padding: $body-margin-quarter 0;
-        position: absolute;
-        font-family: $decorative;
-        font-size: 3rem;
-        font-weight: 700;
-        text-align: center;
-        width: 100%;
-      }
     }
   }
 }
@@ -153,35 +142,6 @@ article {
   height: 7rem;
 }
 
-table.sequence-menu {
-  font-family: $serif;
-  font-size: $body-font-size - 0.1;
-  font-style: italic;
-  letter-spacing: -0.2px;
-  @media all and (max-width: ($laptop-breakpoint - 1)) {
-    tr.actual {
-      display: none;
-    }
-    margin: $body-margin 0;
-  }
-  tr {
-    display: flex;
-    &.actual td {
-      color: $lightest-brown;
-    }
-    td.order {
-      padding-right: $body-margin-quarter * 0.25;
-    }
-    td {
-      @media all and (min-width: $laptop-breakpoint) {
-        a {
-          @include animated-underline($light-brown);
-        }
-      }
-    }
-  }
-}
-
 #epigraphs-bottom {
   figure.epigraph {
     margin: $body-margin 0 0;
@@ -190,7 +150,7 @@ table.sequence-menu {
 
 article {
   @media all and (max-width: ($laptop-breakpoint - 1)) {
-    table.sequence-menu {
+    .sequence-menu {
       display: none;
     }
   }

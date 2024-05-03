@@ -6,6 +6,21 @@ const parseAuthors = require("../src/parseAuthors.js");
 
 const { imageData, linkedStoryData, linkedStoryDataWithImage } = require("./_fragments.js");
 
+const complementaryColours = {
+	jannar: "#994d33",
+	frar: "#99337a",
+	marzu: "#779933",
+	april: "#339977",
+	mejju: "#993338",
+	gunju: "#336b99",
+	lulju: "#529933",
+	awwissu: "#998d33",
+	settembru: "#339999",
+	ottubru: "#743399",
+	novembru: "#339955",
+	dicembru: "#334499"
+};
+
 async function getHomepage() {
 	let homepage, diaryEntries;
 	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
@@ -175,15 +190,18 @@ async function getHomepage() {
 		return result;
 	}
 
+	const issueMonth = getIssueMonthYear(atts.appointment.data.attributes.dateTimePublication).month;
+
 	const homepageFormatted = {
+		complementaryMonthColour: complementaryColours[issueMonth.toLowerCase()],
+		diaryEntries: promosFormatted(diaryPromos.data, false, layoutConfig.diary),
 		editorial: atts.appointment.data.attributes.editorial,
 		imagePromos: promosFormatted(atts.imagePromos, true, layoutConfig['image']),
-		layout: atts.layout,
-		issueMonth: getIssueMonthYear(atts.appointment.data.attributes.dateTimePublication).month,
+		issueMonth,
 		issueMonthYear: getIssueMonthYear(atts.appointment.data.attributes.dateTimePublication).monthYear,
+		layout: atts.layout,
 		poetryPromos: promosFormatted(atts.poetryPromos, false, layoutConfig.poem),
 		promos: promosFormatted(atts.promos, false, layoutConfig.text, layoutConfig.lengths),
-		diaryEntries: promosFormatted(diaryPromos.data, false, layoutConfig.diary),
 	};
 
 	return homepageFormatted;

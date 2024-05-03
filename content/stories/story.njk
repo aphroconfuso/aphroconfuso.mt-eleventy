@@ -206,11 +206,6 @@ permalink: /{{ story.slug }}/index.html
 						</section>
 					{% endif %}
 				{% endif %}
-				{% if story.endnote %}
-					<section id="endnote" class="body-text">
-						{{ story.endnote | restrictHtml | prettifyMaltese | safe }}
-					</section>
-				{% endif %}
 				{% for epigraph in story.epigraphs | rejectattr("top") %}
 					{% if loop.first %}<section id="epigraphs-bottom" class="body-text">{% endif %}
 						<figure class="epigraph">
@@ -219,6 +214,11 @@ permalink: /{{ story.slug }}/index.html
 						</figure>
 					{% if loop.last %}</section>{% endif %}
 				{% endfor %}
+				{% if story.endnote %}
+					<section id="endnote" class="body-text">
+						{{ story.endnote | restrictHtml | prettifyMaltese | safe }}
+					</section>
+				{% endif %}
 			</section>
 			<section id="grid-max-panel-left-bottom">
 				{% if story.coda %}
