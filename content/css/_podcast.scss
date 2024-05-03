@@ -4,33 +4,33 @@
 @use "mixins-etc" as *;
 
 article.poddata {
-	.container {
-		.end-dot {
-			border-radius: 0;
-		}
-	}
-	&.content {
-		h1 {
-			color: $podcast-beige;
-		}
-		h2 {
-			padding-left: $body-margin-double;
-			position: relative;
-			.with {
-				font-style: italic;
-				left: 0;
-				position: absolute;
-			}
-		}
-		border-bottom-color: $lighter-brown;
-		h5,
-		h6,
-		p {
-			&.break {
-				margin-top: $body-margin * 1.5;
-			}
-		}
-	}
+  .container {
+    .end-dot {
+      border-radius: 0;
+    }
+  }
+  &.content {
+    h1 {
+      color: $podcast-beige;
+    }
+    h2 {
+      padding-left: $body-margin-double;
+      position: relative;
+      .with {
+        font-style: italic;
+        left: 0;
+        position: absolute;
+      }
+    }
+    border-bottom-color: $lighter-brown;
+    h5,
+    h6,
+    p {
+      &.break {
+        margin-top: $body-margin * 1.5;
+      }
+    }
+  }
 }
 // #audio > figure:first-of-type.audio > div.player .slider {
 // 	.gap-progress {
@@ -38,71 +38,71 @@ article.poddata {
 // 	}
 // }
 #audio {
-	.audio:not(:first-of-type) {
-		background-color: $deco-brown;
-		border: 1px solid $lightester-brown;
-		border-bottom-width: 0;
-		border-top-width: 0;
-		margin-bottom: 0;
-		padding: $body-margin;
-		padding-bottom: 0;
-	}
-	.audio:nth-of-type(2) {
-		border-top-width: 1px;
-	}
-	.audio:last-of-type {
-		border-bottom-width: 1px;
-		margin-bottom: $body-margin;
-		padding-bottom: $body-margin;
-	}
+  .audio:not(:first-of-type) {
+    background-color: $deco-brown;
+    border: 1px solid $lightester-brown;
+    border-bottom-width: 0;
+    border-top-width: 0;
+    margin-bottom: 0;
+    padding: $body-margin;
+    padding-bottom: 0;
+  }
+  .audio:nth-of-type(2) {
+    border-top-width: 1px;
+  }
+  .audio:last-of-type {
+    border-bottom-width: 1px;
+    margin-bottom: $body-margin;
+    padding-bottom: $body-margin;
+  }
 }
 #grid-body {
-	.audio {
-		background-color: $deco-brown;
-		border: 1px solid $lightester-brown;
-		margin: $body-margin $body-margin $body-margin-half $body-margin-half;
-		padding: $body-margin;
-	}
+  .audio {
+    background-color: $deco-brown;
+    border: 1px solid $lightester-brown;
+    margin: $body-margin $body-margin $body-margin-half $body-margin-half;
+    padding: $body-margin;
+  }
 }
 
 .promo-poddata {
-	h1 {
-		color: $podcast-beige;
-	}
-	h2 {
-		padding-left: $body-margin-double;
-		position: relative;
-		a,
-		.author {
-			white-space: unset;
-		}
-		.with {
-			left: 0;
-			position: absolute;
-			font-style: italic;
-		}
-	}
-	p {
-		font-family: $sans, sans-serif;
-	}
+  h1 {
+    color: $podcast-beige;
+  }
+  h2 {
+    padding-left: 3.2rem;
+    position: relative;
+    a,
+    .author {
+      white-space: unset;
+    }
+    .with {
+      left: 0;
+      position: absolute;
+      font-style: italic;
+    }
+  }
+  p {
+    font-family: $sans, sans-serif;
+  }
 }
 
 @media all and (max-width: $laptop-breakpoint) {
-	// REVIEW: use grid put at bottom instead of hiding
-	#audio {
-		figure.audio {
-			figcaption {
-				display: none;
-			}
-		}
-		.audio:not(:first-of-type) {
-			display: none;
-		}
-	}
+  // REVIEW: use grid put at bottom instead of hiding
+  #audio {
+    figure.audio {
+      figcaption {
+        display: none;
+      }
+    }
+    .audio:not(:first-of-type) {
+      display: none;
+    }
+  }
 }
 
 @media all and (min-width: $laptop-breakpoint) {
-	#audio .audio:first-of-type {
-		margin-bottom: $body-margin * 1.5;
-	}
+  #audio .audio:first-of-type {
+    margin-bottom: $body-margin * 1.5;
+  }
 }

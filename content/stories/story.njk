@@ -36,7 +36,7 @@ permalink: /{{ story.slug }}/index.html
 {% endblock %}
 
 {% block content %}
-	<article class="content {{ story.issueMonth | slugify }} {{ story.type | slugify }} story story-{{ story.id }}">
+	<article class="content {{ story.issueMonth | slugify }} {{ story.type | slugify }} story story-{{ story.id }}{{ story.endOfSeriesClass }}">
 		<header>
 			<ul>
 				<li class="header-label">
@@ -84,7 +84,7 @@ permalink: /{{ story.slug }}/index.html
 				<h3>{{ story.sequenceEpisodeTitle | prettifyMaltese | safe }}</h3>
 			{% endif %}
 			{% include "_authors.njk" %}
-			{% for epigraph in story.epigraphs %}
+			{% for epigraph in story.epigraphs | selectattr("top") %}
 				{% if loop.first %}<section id="epigraphs" class="body-text">{% endif %}
 					<figure class="epigraph">
 						{{ epigraph.quotation | restrictHtml | prettifyMaltese | safe }}
@@ -211,6 +211,14 @@ permalink: /{{ story.slug }}/index.html
 						{{ story.endnote | restrictHtml | prettifyMaltese | safe }}
 					</section>
 				{% endif %}
+				{% for epigraph in story.epigraphs | rejectattr("top") %}
+					{% if loop.first %}<section id="epigraphs-bottom" class="body-text">{% endif %}
+						<figure class="epigraph">
+							{{ epigraph.quotation | restrictHtml | prettifyMaltese | safe }}
+							{% if epigraph.attribution %}<figcaption>{{ epigraph.attribution | restrictHtml | prettifyMaltese | safe }}</figcaption>{% endif %}
+						</figure>
+					{% if loop.last %}</section>{% endif %}
+				{% endfor %}
 			</section>
 			<section id="grid-max-panel-left-bottom">
 				{% if story.coda %}

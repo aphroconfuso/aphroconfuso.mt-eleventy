@@ -249,7 +249,9 @@ module.exports = function(eleventyConfig) {
 
 	eleventyConfig.addFilter("prettifyMaltese", function prettifyMaltese(text) {
 		if (!text) return "XXXXXXprettifyMalteseXXX";
-		return (text || []).replace(/<p>\s*<\/p>/gm, "")
+		return (text || []).replace(/ data-.*?=".*?"/gmi, "")
+			.replace(/fx-(\d)/gmi, "fx$1")
+			.replace(/<p>\s*<\/p>/gm, "")
 			.replace(/td data-.*?=".*?"/gmi, "td")
 			.replace(/-</gm, "- <")
 			.replace(/  +/gm, " ")
@@ -273,10 +275,10 @@ module.exports = function(eleventyConfig) {
 			.replace(/- </gm, "-<")
 			.replace(/(\d)\,(\d\d\d)/gm, `$1${ String.fromCharCode(8201) }$2`)
 			.replace(/&amp;shy;/gm, '<wbr>')
-			.replace(/<l-m>fx-1<\/l-m>/gm, "fx-1")
+			.replace(/<l-m>(fx-?\d)<\/l-m>/gm, "$1")
 			.replace(/<l-m>right-aligned<\/l-m>/gm, "right-aligned")
 			.replace(/(<h[56] id=".*?)(<l-m>)(.*?)(<\/l-m>)(.*?<\/h[56]>)/gm, "$1$3$5")
-			.replace(/(id=")<i-class=fx-\d+>(.)<-i>/gm, "$1$2")
+			.replace(/(id=")<i-class=fx-?\d+>(.)<-i>/gm, "$1$2")
 			.replace(/(=")<l-m>/gm, "$1");
 	});
 

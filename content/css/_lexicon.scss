@@ -10,81 +10,81 @@ $terminu-paper-darker: hsl(280, $saturation, 60%);
 
 .promo-terminu,
 .bookmark-promo.Terminu {
-	h1 {
-		color: $terminu-ink !important;
-		margin-bottom: 2.1rem;
-	}
-	h2 {
-		display: none;
-	}
+  h1 {
+    color: $terminu-ink !important;
+    // margin-bottom: 2.1rem;
+  }
+  h2 {
+    display: none;
+  }
 }
 
 article.terminu {
-	.container {
-		.end-dot {
-			animation: 1.25s blink ease infinite;
-			color: $terminu-paper;
-			background-color: $terminu-paper;
-		}
-	}
-	&.content {
-		border-bottom-color: $terminu-paper-darker;
-	}
+  .container {
+    .end-dot {
+      animation: 1.25s blink ease infinite;
+      color: $terminu-paper;
+      background-color: $terminu-paper;
+    }
+  }
+  &.content {
+    border-bottom-color: $terminu-paper-darker;
+  }
 
-	header {
-		h1 {
-			color: $terminu-ink;
-		}
-		h2 {
-			font-size: $body-font-size-slightly-larger;
-		}
-	}
-	.body-text {
-		@media all and (min-width: $laptop-breakpoint) {
-			&:first-child {
-				margin-top: $body-margin * -1.5;
-			}
-		}
-		h6[id^="ar"] {
-			color: $terminu-ink;
-		}
-		h5 {
-			display: inline-block;
-			font-size: $body-font-size;
-			font-style: normal;
-			margin: $body-margin-half 0 0;
-			& + p {
-				display: inline;
-			}
-		}
-		p + p {
-			&::before {
-				color: $terminu-paper-darker;
-				content: " ¶ ";
-				font-family: $decorative;
-			}
-			display: inline;
-		}
-		p {
-			margin-bottom: 0;
-			a[href^="http"]:hover {
-				color: blue;
-				text-decoration-color: blue;
-			}
-			.fx1 {
-				color: red;
-				font-weight: 500;
-			}
-		}
-	}
+  header {
+    h1 {
+      color: $terminu-ink;
+    }
+    h2 {
+      font-size: $body-font-size-slightly-larger;
+    }
+  }
+  .body-text {
+    @media all and (min-width: $laptop-breakpoint) {
+      &:first-child {
+        margin-top: $body-margin * -1.5;
+      }
+    }
+    h6[id^="ar"] {
+      color: $terminu-ink;
+    }
+    h5 {
+      display: inline-block;
+      font-size: $body-font-size;
+      font-style: normal;
+      margin: $body-margin-half 0 0;
+      & + p {
+        display: inline;
+      }
+    }
+    p + p {
+      &::before {
+        color: $terminu-paper-darker;
+        content: " ¶ ";
+        font-family: $decorative;
+      }
+      display: inline;
+    }
+    p {
+      margin-bottom: 0;
+      a[href^="http"]:hover {
+        color: blue;
+        text-decoration-color: blue;
+      }
+      .fx1 {
+        color: red;
+        font-weight: 500;
+      }
+    }
+  }
 }
 
 @keyframes blink {
-	from,
-	to {
-		opacity: 0;
-	}
-	50% {
-		opacity: 1;
-	}
+  from,
+  to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }

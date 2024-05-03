@@ -105,6 +105,7 @@ async function getAllStories() {
 									epigraphs {
 										attribution
 										quotation
+										top
 									}
 									authors (
 				            publicationState: ${ fetchStatus },
@@ -428,6 +429,7 @@ async function getAllStories() {
 			sequenceEpisodes.reverse();
 		}
 
+		const endOfSeries = (!!atts.sequenceEpisodeNumber && atts.sequenceEpisodeNumber === (sequenceEpisodes && sequenceEpisodes.length)) && !atts.moreToCome;
 		const storycollections = atts.collections && processCollections(atts.collections.data);
 		cumulativeBody += " " + atts.body;
 
@@ -446,6 +448,7 @@ async function getAllStories() {
 			description: atts.description || stripTags(atts.body.substring(0, 400)),
 			displayTitle: displayTitle,
 			dontUseDropCaps: atts.dontUseDropCaps,
+			endOfSeriesClass: endOfSeries ? ' end-of-series' : '',
 			endnote: atts.endnote,
 			endPromos: endPromosFormatted,
 			epigraphs: !!atts.epigraphs && atts.epigraphs,
@@ -463,7 +466,7 @@ async function getAllStories() {
 			metaTitle: displayTitle,
 			issueMonth,
 			issueMonthYear,
-			moreToCome: atts.moreToCome || storycollections.length, // FIXME
+			moreToCome: atts.moreToCome,
 			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
 			podcastLengthMinutes: atts.podcastLengthMinutes,
 			podcastNote: atts.podcastNote,

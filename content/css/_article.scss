@@ -4,176 +4,206 @@
 @use "mixins-etc" as *;
 
 article {
-	border-bottom: $body-margin-quarter solid $paper;
-	// margin: 0 auto $body-margin;
-	margin: 0 auto;
-	max-width: $max-width;
-	&.story {
-		header {
-			position: relative;
-			h1,
-			h2,
-			h3 {
-				margin-bottom: $body-margin-quarter;
-			}
-			header {
-				padding-bottom: $body-margin-double;
-			}
-			@media all and (min-width: $laptop-breakpoint) {
-				header {
-					padding-bottom: $body-margin-double;
-				}
-			}
-		}
-	}
-	aside {
-		color: $lighter-brown;
-		font-family: $sans;
-		font-size: $font-size-aside;
-		margin-bottom: $body-margin-half;
-	}
+  border-bottom: $body-margin-quarter solid $paper;
+  // margin: 0 auto $body-margin;
+  margin: 0 auto;
+  max-width: $max-width;
+  &.story {
+    header {
+      position: relative;
+      h1,
+      h2,
+      h3 {
+        margin-bottom: $body-margin-quarter;
+      }
+      header {
+        padding-bottom: $body-margin-double;
+      }
+      @media all and (min-width: $laptop-breakpoint) {
+        header {
+          padding-bottom: $body-margin-double;
+        }
+      }
+    }
+  }
+  aside {
+    color: $lighter-brown;
+    font-family: $sans;
+    font-size: $font-size-aside;
+    margin-bottom: $body-margin-half;
+  }
+  &.end-of-series #grid-body section:not(#epigraphs-bottom).body-text {
+    p:last-of-type {
+      margin-bottom: $body-margin * 1;
+      padding-bottom: $body-margin * 3;
+      background-image: url(/img/deco-100.svg);
+      background-position: center bottom;
+      background-size: 75%;
+      background-repeat: no-repeat;
+      &::after {
+        color: $deco-brown;
+        display: block;
+        left: 0;
+        content: "TMIEM";
+        padding: $body-margin-quarter 0;
+        position: absolute;
+        font-family: $decorative;
+        font-size: 3rem;
+        font-weight: 700;
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
 }
+
 #grid-max-panel-left-top,
 #grid-max-panel-right-top,
 #grid-max-panel-left-bottom,
 #grid-max-panel-right-bottom,
 #grid-body {
-	margin: 0 auto;
-	max-width: $max-content-width;
-	width: 100%;
+  margin: 0 auto;
+  max-width: $max-content-width;
+  width: 100%;
 }
 
 #grid-max-panel-left-bottom,
 #grid-max-panel-right-bottom {
-	margin: $body-margin-half auto 0 auto;
+  margin: $body-margin-half auto 0 auto;
 }
 
 @media all and (max-width: ($laptop-breakpoint - 1)) {
-	.djarju #grid-body {
-		margin-bottom: $body-margin;
-	}
+  .djarju #grid-body {
+    margin-bottom: $body-margin;
+  }
 }
 
 .reviewed {
-	border: 1px solid $faint-line;
-	font-size: 1rem;
-	margin-bottom: $body-margin;
-	padding: $body-margin-half;
-	.title {
-		font-size: 0.9rem;
-		letter-spacing: 0.25px;
-		text-transform: uppercase;
-	}
-	.author {
-		white-space: nowrap;
-	}
-	.publisher {
-		white-space: nowrap;
-	}
-	p {
-		margin-bottom: $body-margin-half;
-		&:last-of-type {
-			margin-bottom: 0;
-		}
-	}
+  border: 1px solid $faint-line;
+  font-size: 1rem;
+  margin-bottom: $body-margin;
+  padding: $body-margin-half;
+  .title {
+    font-size: 0.9rem;
+    letter-spacing: 0.25px;
+    text-transform: uppercase;
+  }
+  .author {
+    white-space: nowrap;
+  }
+  .publisher {
+    white-space: nowrap;
+  }
+  p {
+    margin-bottom: $body-margin-half;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
 
-	@media all and (min-width: $laptop-breakpoint) {
-		.title,
-		.author,
-		.publisher {
-			display: block;
-		}
-	}
+  @media all and (min-width: $laptop-breakpoint) {
+    .title,
+    .author,
+    .publisher {
+      display: block;
+    }
+  }
 }
 
 @keyframes closeTriggerWarning {
-	0% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-	}
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 #trigger-warning {
-	border: 1px solid $faint-line;
-	font-size: 1rem;
-	margin-bottom: $body-margin * 1.5;
-	padding: $body-margin-half;
-	position: relative;
-	display: block;
-	.close {
-		color: $lightest-brown;
-		cursor: pointer;
-		font-size: 1.75rem;
-		height: 1rem;
-		position: absolute;
-		right: 0;
-		top: -0.5rem;
-		width: 1rem;
-	}
+  border: 1px solid $faint-line;
+  font-size: 1rem;
+  margin-bottom: $body-margin * 1.5;
+  padding: $body-margin-half;
+  position: relative;
+  display: block;
+  .close {
+    color: $lightest-brown;
+    cursor: pointer;
+    font-size: 1.75rem;
+    height: 1rem;
+    position: absolute;
+    right: 0;
+    top: -0.5rem;
+    width: 1rem;
+  }
 }
 
 .trigger-warning-closed #trigger-warning {
-	animation: closeTriggerWarning 0.5s;
-	animation-fill-mode: backwards;
-	display: none;
+  animation: closeTriggerWarning 0.5s;
+  animation-fill-mode: backwards;
+  display: none;
 }
 
 .poetry-separator {
-	margin: $body-margin 0 0 5.2rem;
-	font-size: 2rem !important;
+  margin: $body-margin 0 0 5.2rem;
+  font-size: 2rem !important;
 }
 
 #grid-max-panel-right-bottom #form iframe {
-	height: 7rem;
-}
-
-@media all and (min-width: $laptop-breakpoint) {
-	article {
-		padding-bottom: 0;
-		aside {
-			margin-bottom: 0;
-		}
-		aside + aside {
-			margin-top: $body-margin;
-		}
-	}
+  height: 7rem;
 }
 
 table.sequence-menu {
-	font-family: $serif;
-	font-size: $body-font-size - 0.1;
-	font-style: italic;
-	letter-spacing: -0.2px;
-	@media all and (max-width: ($laptop-breakpoint - 1)) {
-		tr.actual {
-			display: none;
-		}
-		margin: $body-margin 0;
-	}
-	tr {
-		display: flex;
-		&.actual td {
-			color: $lightest-brown;
-		}
-		td.order {
-			padding-right: $body-margin-quarter * 0.25;
-		}
-		td {
-			@media all and (min-width: $laptop-breakpoint) {
-				a {
-					@include animated-underline($light-brown);
-				}
-			}
-		}
-	}
+  font-family: $serif;
+  font-size: $body-font-size - 0.1;
+  font-style: italic;
+  letter-spacing: -0.2px;
+  @media all and (max-width: ($laptop-breakpoint - 1)) {
+    tr.actual {
+      display: none;
+    }
+    margin: $body-margin 0;
+  }
+  tr {
+    display: flex;
+    &.actual td {
+      color: $lightest-brown;
+    }
+    td.order {
+      padding-right: $body-margin-quarter * 0.25;
+    }
+    td {
+      @media all and (min-width: $laptop-breakpoint) {
+        a {
+          @include animated-underline($light-brown);
+        }
+      }
+    }
+  }
+}
+
+#epigraphs-bottom {
+  figure.epigraph {
+    margin: $body-margin 0 0;
+  }
 }
 
 article {
-	@media all and (max-width: ($laptop-breakpoint - 1)) {
-		table.sequence-menu {
-			display: none;
-		}
-	}
+  @media all and (max-width: ($laptop-breakpoint - 1)) {
+    table.sequence-menu {
+      display: none;
+    }
+  }
+}
+
+@media all and (min-width: $laptop-breakpoint) {
+  article {
+    padding-bottom: 0;
+    aside {
+      margin-bottom: 0;
+    }
+    aside + aside {
+      margin-top: $body-margin;
+    }
+  }
 }
