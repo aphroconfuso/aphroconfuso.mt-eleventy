@@ -149,7 +149,7 @@ const initialiseBookmarksList = () => {
 		// console.log(bookmarksArray);
 
 		if (updateFormat || discardBookmark) {
-			console, log('Deleting', oldKey);
+			console.log('Deleting', oldKey);
 			delete bookmarksList[oldKey];
 		};
 	});
