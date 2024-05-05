@@ -87,6 +87,7 @@
       "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms";
     // "ga9 ga9 ga10 ga10 ga11 ga11"
     .ga-1 {
+      margin-bottom: $body-margin-half;
       p {
         @include clamp(999);
         columns: 3;
@@ -99,7 +100,6 @@
       }
     }
     .ga-image-2,
-    .ga-1,
     .ga-3,
     .ga-4,
     .ga-5 {
@@ -116,7 +116,9 @@
       }
     }
     .ga-image-1 {
+      @include border-bottom();
       @include image-left;
+      margin-top: $body-margin-half;
     }
     .ga-image-2 {
       @include border-top();
