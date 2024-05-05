@@ -5,15 +5,15 @@
 @use "mixins-home-grids" as *;
 
 // *************************************************************************
-// LAYOUT 1 ****************************************************************
+// LAYOUT 2 ****************************************************************
 // Large image story on top
 // Then Story and editorial
 
-.layout-1 {
+.layout-2 {
   grid-template-areas:
     "ga-image-1"
-    "ga1"
     "ga-editorial"
+    "ga1"
     "ga2"
     "ga-poem-1"
     "ga-diary"
@@ -27,11 +27,11 @@
     "ga7"
     "ga8"
     "ga-terms";
+  .ga-1,
   .ga-3,
   .ga-5,
   .ga-6,
   .ga-7,
-  .ga-image-1,
   .ga-image-2 {
     @include border-bottom();
   }
@@ -78,8 +78,8 @@
     grid-auto-flow: row;
     grid-template-areas:
       "ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
-      "ga1 ga1 ga1 ga1 ga1 ga1"
       "ga-diary ga-diary ga-diary ga-diary ga-editorial ga-editorial"
+      "ga1 ga1 ga1 ga1 ga1 ga1"
       "ga-poem-1 ga-poem-1 ga2 ga2 ga2 ga2"
       "ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
       "ga3 ga3 ga4 ga4 ga5 ga5"
@@ -98,8 +98,11 @@
         columns: 2;
       }
     }
-    .ga-image-1,
+    .ga-image-1 {
+      margin-bottom: $body-margin-half;
+    }
     .ga-image-2,
+    .ga-1,
     .ga-3,
     .ga-4,
     .ga-5 {

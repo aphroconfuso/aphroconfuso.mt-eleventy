@@ -5,15 +5,15 @@
 @use "mixins-home-grids" as *;
 
 // *************************************************************************
-// LAYOUT 1 ****************************************************************
+// LAYOUT 4 ****************************************************************
 // Large image story on top
 // Then Story and editorial
 
-.layout-1 {
+.layout-4 {
   grid-template-areas:
+    "ga-image-1"
     "ga1"
     "ga-editorial"
-    "ga-image-1"
     "ga2"
     "ga-poem-1"
     "ga-diary"
@@ -27,7 +27,6 @@
     "ga7"
     "ga8"
     "ga-terms";
-  .ga-1,
   .ga-3,
   .ga-5,
   .ga-6,
@@ -78,9 +77,9 @@
     grid-auto-columns: 1fr;
     grid-auto-flow: row;
     grid-template-areas:
+      "ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
       "ga1 ga1 ga1 ga1 ga1 ga1"
       "ga-diary ga-diary ga-diary ga-diary ga-editorial ga-editorial"
-      "ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
       "ga-poem-1 ga-poem-1 ga2 ga2 ga2 ga2"
       "ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
       "ga3 ga3 ga4 ga4 ga5 ga5"
@@ -99,8 +98,8 @@
         columns: 2;
       }
     }
+    .ga-image-1,
     .ga-image-2,
-    .ga-1,
     .ga-3,
     .ga-4,
     .ga-5 {
@@ -117,11 +116,11 @@
       }
     }
     .ga-image-1 {
-      @include image-left;
+      @include image-left-top();
     }
     .ga-image-2 {
       @include border-top();
-      @include image-right;
+      @include image-right();
     }
     .ga-diary {
       ul {
