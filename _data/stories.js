@@ -332,7 +332,9 @@ async function getAllStories() {
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 		const sequenceData = atts.sequence.data;
 		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
-		const audioPromosFormatted = atts.audio.length && processPromos(atts.audio, atts);
+		atts.audio && JSON.stringify(atts.audio);
+		const audioPromosFormatted = atts.audio.length && processPromos(atts.audio);
+		// const audioPromosFormatted = atts.audio.length && processPromos(atts.audio, atts);
 		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		// REFACTOR use titleArray to derive slug and title
 
@@ -565,6 +567,7 @@ async function getAllStories() {
 		// Extra players or FX
 		if (audioPromosFormatted.length) {
 			audioPromosFormatted.forEach(promo => {
+				if (!promo) return;
 				if (audioUrls && audioUrls.length && promo.url === audioUrls[0].url) return;
 				// // If audio is ad hoc (e.g. sound effects for this story)
 				// if (promo.audioUrl) {

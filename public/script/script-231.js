@@ -5,6 +5,8 @@ const maxWordsPerSecond = 5;
 const minWordsPerSecond = 1;
 const thresholdWords = 100;
 
+const pageReportingTitle = reportingTitle;
+
 const fixReportingTitle = (storyType, sequenceEpisodeNumber, author, pageTitle) => {
 	if (storyType === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ author }`;
 	if (!!sequenceEpisodeNumber) return `${ pageTitle } #${ sequenceEpisodeNumber }`;
@@ -44,6 +46,7 @@ const addBookmarkNow = () => {
 	if (!percentageProgress || (wordcount * (percentageProgress / 100)) < bookmarkThresholdWords || percentageProgress > 98) {
 		return;
 	}
+	// reportingTitle
 	addBookmark('text', storyId, {
 		author,
 		issueMonth,
@@ -54,6 +57,7 @@ const addBookmarkNow = () => {
 		sequenceEpisodeTitle,
 		storyId,
 		storyType,
+		reportingTitle,
 		title: pageTitle,
 		translator,
 		urlSlug,
@@ -174,10 +178,10 @@ const deleteBookmark = (type = 'text', id = storyId) => {
 	delete bookmarksList[`${ type }-${ id }`];
 	saveBookmarksList();
 	if (type === 'audio') return;
-	const bookmark = bookmarksArray.find(i => i.id);
+	const bookmark = bookmarksArray.find(i => i.storyId);
 	const { author, percentage, sequenceEpisodeNumber, storyType, title } = bookmark;
 	const reportingTitle = fixReportingTitle(storyType, sequenceEpisodeNumber, author, title);
-	bookmarksArray = bookmarksArray.filter(i => i.id !== id);
+	bookmarksArray = bookmarksArray.filter(i => i.storyId !== id);
 	updateBookmarksMenu(bookmarksArray);
 	const removeBookmark = document.getElementById(`bookmark-${ id }`);
 	removeBookmark.style.opacity = '0';
@@ -471,14 +475,14 @@ const initialiseAfterWindow = () => {
 
 		if (audioUrls && audioUrls.songs.length) {
 			audioUrls.songs.forEach((song, index) => {
-				const {storyId, reportingTitle: thisReportingTitle} = song;
+				const {storyId, reportingTitle: pageReportingTitle} = song;
 				GreenAudioPlayer.init({
 					selector: `#player-${ index }`,
 					stopOthersOnPlay: true,
 					startTime: getPreviousAudioTime(storyId)
 				});
 
-				const audioReportingTitle = thisReportingTitle !== reportingTitle ? `${ thisReportingTitle } (${ reportingTitle })` : thisReportingTitle;
+				const audioReportingTitle = pageReportingTitle !== reportingTitle ? `${ pageReportingTitle } (${ reportingTitle })` : pageReportingTitle;
 
 
 				// use player 1 player 2, etc
@@ -518,6 +522,7 @@ const initialiseAfterWindow = () => {
 						percentageAudio: audioPercentage,
 						placeText: getCurrentBlurb(audioPercentage),
 						playPosition: parseInt(audio.currentTime),
+						reportingTitle: song.reportingTitle,
 						sequenceEpisodeNumber: song.sequenceEpisodeNumber,
 						sequenceEpisodeTitle: song.sequenceEpisodeTitle,
 						storyId: song.storyId,
@@ -535,7 +540,6 @@ const initialiseAfterWindow = () => {
 
 					audio.addEventListener('play', () => {
 						analytics(['trackEvent', 'Smiegħ', 'play', audioReportingTitle]);
-						// console.log(`Player ${ index }`, 'play', audioReportingTitle);
 					});
 					audio.addEventListener('pause', () => {
 						const percentageAudio = getPercentageAudio(audio);
