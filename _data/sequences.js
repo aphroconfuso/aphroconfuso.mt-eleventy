@@ -67,6 +67,7 @@ async function getAllsequences() {
 			id: sequence.id,
 			description: atts.description,
 			moreToCome: atts.moreToCome,
+			slug: atts.title || null,
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			stories: storiesFormatted,
