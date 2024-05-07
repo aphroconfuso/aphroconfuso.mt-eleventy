@@ -150,7 +150,7 @@ article {
 @media all and (min-width: $laptop-breakpoint) {
   .home {
     .promo {
-      &.story-16,
+      // &.story-16,
       &.story-25 {
         h1 {
           letter-spacing: -1px;
@@ -211,6 +211,7 @@ article {
   }
 
   // REFACTOR ... this is not a special
+  .home,
   .end-promos {
     a {
       &:not(.promo-djarju).is-episode,
