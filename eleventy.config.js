@@ -305,11 +305,6 @@ module.exports = function(eleventyConfig) {
 		return slugifyStringMaltese(text);
 	});
 
-	eleventyConfig.addFilter("addThisIssueMonth", function addThisIssueMonth(text) {
-		// if (!text) return "XXXXXXaddThisIssueMonthXXX";
-		return `${ text } this-month-${ getIssueMonthYear().month }`;
-	});
-
 	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text, punctuation = String.fromCharCode(8201)) {
 		if (!text) return "XXXXXXprettifyNumbersXXX";
 		return (text.toString() || []).replace(/\d{1,3}(?=(\d{3})+(?!\d))/g, `$&${ punctuation }`);

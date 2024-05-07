@@ -16,204 +16,213 @@
 // }
 
 article.story {
-	&.story-33 {
-		// Joey Tilbes (Diċembru 2023)
-		h1 {
-			letter-spacing: -0.15px;
-		}
-	}
-	&.story-40 {
-		// Il-Mara tas-Suldat
-		#grid-body {
-			hr {
-				visibility: none;
-				margin-bottom: $body-margin-half + $body-margin-quarter;
-			}
-			h5,
-			h6 {
-				font-family: "Alegreya Sans SC Bold";
-				font-size: $font-size-smallcaps;
-				font-style: normal;
-				font-variant: small-caps;
-				font-weight: 700;
-				line-height: 1;
-				position: relative;
-				text-transform: lowercase;
-				.fx1 {
-					font-family: "Alegreya Regular";
-					font-variant: normal;
-					font-weight: 400;
-					position: absolute;
-					text-align: right;
-					width: 5px;
-					left: -5px;
-					text-transform: lowercase;
-					font-size: 0.8rem;
-					top: 5px;
-				}
-			}
-			h5 {
-				display: inline;
-				& + p {
-					display: inline;
-				}
-			}
-			p {
-				a[href^="#"] {
-					font-weight: 600;
-					position: relative;
-					&:has(.fx1) {
-						padding-left: 5px;
-					}
-					.fx1 {
-						font-variant: normal;
-						position: absolute;
-						text-align: right;
-						width: 5px;
-						left: 0px;
-						text-transform: lowercase;
-						font-size: 0.9rem;
-						font-weight: 600;
-						top: 1px;
-					}
-				}
-				& + p {
-					margin-bottom: 0;
-					margin-top: $body-margin-half;
-				}
-				&.enjambed + p {
-					margin-top: 0;
-				}
-				&.centred + p.centred {
-					margin-top: 0;
-				}
-			}
-		}
-		@media all and (min-width: $laptop-breakpoint) {
-			#grid-body {
-				.splide {
-					margin-left: 0;
-					width: 100%;
-				}
-			}
-		}
-	}
-	&.story-48 {
-		// Splużjonijiet
-		p.fx1 {
-			margin-bottom: $body-margin-quarter;
-			margin-left: $body-margin;
-			text-indent: $body-margin * -1;
-			i.fx1 {
-				margin-right: $body-margin-quarter;
-				&:after {
-					color: $lightest-brown;
-					content: ":";
-				}
-				display: inline-block;
-				text-align: right;
-				width: $body-margin-half + $body-margin-quarter;
-			}
-			&:last-of-type {
-				margin-bottom: $body-margin-half;
-			}
-		}
-	}
-	&.story-56 {
-		// Persjani
-		// Genericize these
-		.fx1 {
-			display: inline-block;
-			margin-bottom: $body-margin-half;
-		}
-	}
+  &.story-33 {
+    // Joey Tilbes (Diċembru 2023)
+    h1 {
+      letter-spacing: -0.15px;
+    }
+  }
+  &.story-40 {
+    // Il-Mara tas-Suldat
+    #grid-body {
+      hr {
+        visibility: none;
+        margin-bottom: $body-margin-half + $body-margin-quarter;
+      }
+      h5,
+      h6 {
+        font-family: "Alegreya Sans SC Bold";
+        font-size: $font-size-smallcaps;
+        font-style: normal;
+        font-variant: small-caps;
+        font-weight: 700;
+        line-height: 1;
+        position: relative;
+        text-transform: lowercase;
+        .fx1 {
+          font-family: "Alegreya Regular";
+          font-variant: normal;
+          font-weight: 400;
+          position: absolute;
+          text-align: right;
+          width: 5px;
+          left: -5px;
+          text-transform: lowercase;
+          font-size: 0.8rem;
+          top: 5px;
+        }
+      }
+      h5 {
+        display: inline;
+        & + p {
+          display: inline;
+        }
+      }
+      p {
+        a[href^="#"] {
+          font-weight: 600;
+          position: relative;
+          &:has(.fx1) {
+            padding-left: 5px;
+          }
+          .fx1 {
+            font-variant: normal;
+            position: absolute;
+            text-align: right;
+            width: 5px;
+            left: 0px;
+            text-transform: lowercase;
+            font-size: 0.9rem;
+            font-weight: 600;
+            top: 1px;
+          }
+        }
+        & + p {
+          margin-bottom: 0;
+          margin-top: $body-margin-half;
+        }
+        &.enjambed + p {
+          margin-top: 0;
+        }
+        &.centred + p.centred {
+          margin-top: 0;
+        }
+      }
+    }
+    @media all and (min-width: $laptop-breakpoint) {
+      #grid-body {
+        .splide {
+          margin-left: 0;
+          width: 100%;
+        }
+      }
+    }
+  }
+  &.story-48 {
+    // Splużjonijiet
+    p.fx1 {
+      margin-bottom: $body-margin-quarter;
+      margin-left: $body-margin;
+      text-indent: $body-margin * -1;
+      i.fx1 {
+        margin-right: $body-margin-quarter;
+        &:after {
+          color: $lightest-brown;
+          content: ":";
+        }
+        display: inline-block;
+        text-align: right;
+        width: $body-margin-half + $body-margin-quarter;
+      }
+      &:last-of-type {
+        margin-bottom: $body-margin-half;
+      }
+    }
+  }
+  &.story-56 {
+    // Persjani
+    // Genericize these
+    .fx1 {
+      display: inline-block;
+      margin-bottom: $body-margin-half;
+    }
+  }
+}
+
+article {
+  // fatima a.m.
+  &.contributor-35 {
+    .continuity .contributor {
+      text-transform: lowercase;
+    }
+  }
 }
 
 @media all and (max-width: $laptop-breakpoint) {
-	.story-34 {
-		// Manifest Kontra ż-Żmien
-		h1 {
-			letter-spacing: -1px;
-		}
-	}
+  .story-34 {
+    // Manifest Kontra ż-Żmien
+    h1 {
+      letter-spacing: -1px;
+    }
+  }
 }
 
 @media all and (min-width: $laptop-breakpoint) {
-	.promo {
-		&.story-16,
-		&.story-25 {
-			h1 {
-				letter-spacing: -1px;
-			}
-		}
-	}
-	article.story {
-		// Il-Lanza... (Lulju 2023)
-		&.story-16 {
-			h1 {
-				font-size: 2.9rem;
-				white-space: nowrap;
-				letter-spacing: -1px;
-			}
-		}
+  .promo {
+    &.story-16,
+    &.story-25 {
+      h1 {
+        letter-spacing: -1px;
+      }
+    }
+  }
+  article.story {
+    // Il-Lanza... (Lulju 2023)
+    &.story-16 {
+      h1 {
+        font-size: 2.9rem;
+        white-space: nowrap;
+        letter-spacing: -1px;
+      }
+    }
 
-		// mona | lisa (Awwissu 2023)
-		&.story-18 {
-			// h1 {
-			// 	width: 70%;
-			// }
-			.body-text {
-				padding: 0 8rem;
-				border: 1px solid $grid-lines;
-				border-width: 0 1px;
-			}
-			h1 {
-				width: 100%;
-			}
-			.fx1 {
-				transform: scale(-1, 1);
-				color: hsl(0, 0%, 39%);
-			}
-			p {
-				margin-bottom: $body-margin-half + $body-margin-quarter;
-				&.enjambed {
-					margin-bottom: $body-margin-quarter;
-				}
-			}
-		}
-		// &.story-25 {
-		// 	h1 {
-		// 		letter-spacing: -0.15px;
-		// 	}
-		// }
-		&.story-27 {
-			.fx1 {
-				white-space: nowrap;
-			}
-		}
-		&.story-33 {
-			// Reset Joey Tilbes (Diċembru 2023)
-			h1 {
-				letter-spacing: 0;
-			}
-		}
-	}
+    // mona | lisa (Awwissu 2023)
+    &.story-18 {
+      // h1 {
+      // 	width: 70%;
+      // }
+      .body-text {
+        padding: 0 8rem;
+        border: 1px solid $grid-lines;
+        border-width: 0 1px;
+      }
+      h1 {
+        width: 100%;
+      }
+      .fx1 {
+        transform: scale(-1, 1);
+        color: hsl(0, 0%, 39%);
+      }
+      p {
+        margin-bottom: $body-margin-half + $body-margin-quarter;
+        &.enjambed {
+          margin-bottom: $body-margin-quarter;
+        }
+      }
+    }
+    // &.story-25 {
+    // 	h1 {
+    // 		letter-spacing: -0.15px;
+    // 	}
+    // }
+    &.story-27 {
+      .fx1 {
+        white-space: nowrap;
+      }
+    }
+    &.story-33 {
+      // Reset Joey Tilbes (Diċembru 2023)
+      h1 {
+        letter-spacing: 0;
+      }
+    }
+  }
 
-	// REFACTOR ... this is not a special
-	a {
-		&:not(.promo-djarju).is-episode,
-		&.story-16,
-		&.story-39,
-		&.story-55 {
-			header {
-				margin-bottom: $body-margin-quarter;
-				h3 {
-					padding-top: $body-margin-quarter;
-				}
-			}
-			p {
-				@include clamp(6);
-			}
-		}
-	}
+  // REFACTOR ... this is not a special
+  a {
+    &:not(.promo-djarju).is-episode,
+    &.story-16,
+    &.story-39,
+    &.story-55 {
+      header {
+        margin-bottom: $body-margin-quarter;
+        h3 {
+          padding-top: $body-margin-quarter;
+        }
+      }
+      p {
+        @include clamp(6);
+      }
+    }
+  }
 }

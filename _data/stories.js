@@ -620,6 +620,23 @@ async function getAllStories() {
 	storiesFormatted[0].vocabulary = vocabulary;
 	storiesFormatted[0].cumulativeWordcount = splitText(cumulativeBody).length;
 
+	// QUOTAS ********************************************************************************
+
+	const pronounWordCounter = { hi: 0, hu: 0, hi_hu: 0, huma: 0, };
+	storiesFormatted.forEach(story => {
+		if (story.type !== 'Poddata' && story.authorsType === 'solo') {
+			pronounWordCounter[story.authorPronoun] += story.wordcount;
+		}
+	});
+
+	storiesFormatted[0].pronounWordsArrayString = JSON.stringify([
+		['kittieba', 'pronom'],
+		['hi', pronounWordCounter['hi']],
+		['hu', pronounWordCounter['hu']],
+		['hi/hu', pronounWordCounter['hi_hu']],
+		['huma', pronounWordCounter['huma']],
+	]);
+
 	// ABECEDAIRE ********************************************************************************
 	const sortAlphaThenNumbers = (a, b) => isFinite(a.letter) - isFinite(b.letter)
 		|| a.letter.localeCompare(b.letter, undefined, {numeric: true, sensitivity: 'base'});

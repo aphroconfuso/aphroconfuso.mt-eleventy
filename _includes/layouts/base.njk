@@ -134,7 +134,7 @@
 		</script>
 		<script defer src="{{ '/script/script-231.js' | rev }}"></script>
 	</head>
-	<body class="show-nav {{ '' | addThisIssueMonth | slugify }}">
+	<body class="show-nav this-month-{{ homepage.issueMonth | slugify }}">
 		<script>initialiseAfterBody();</script>
 		<div id="top-wrapper">
 			<a id="skip" href="#skipto">Mur għall-kontenut propju</a>
