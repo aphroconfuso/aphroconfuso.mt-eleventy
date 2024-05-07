@@ -214,7 +214,7 @@ article {
   .home,
   .end-promos {
     a {
-      &:not(.promo-djarju).is-episode,
+      &:not(.promo-djarju).promo-plain.is-episode,
       &.story-16,
       &.story-39,
       &.story-55 {
