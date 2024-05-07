@@ -148,23 +148,25 @@ article {
 }
 
 @media all and (min-width: $laptop-breakpoint) {
-  .promo {
-    &.story-16,
-    &.story-25 {
-      h1 {
-        letter-spacing: -1px;
+  .home {
+    .promo {
+      &.story-16,
+      &.story-25 {
+        h1 {
+          letter-spacing: -1px;
+        }
       }
     }
   }
   article.story {
     // Il-Lanza... (Lulju 2023)
-    &.story-16 {
-      h1 {
-        font-size: 2.9rem;
-        white-space: nowrap;
-        letter-spacing: -1px;
-      }
-    }
+    // &.story-16 {
+    //   h1 {
+    //     font-size: 2.9rem;
+    //     white-space: nowrap;
+    //     letter-spacing: -1px;
+    //   }
+    // }
 
     // mona | lisa (Awwissu 2023)
     &.story-18 {
@@ -209,19 +211,21 @@ article {
   }
 
   // REFACTOR ... this is not a special
-  a {
-    &:not(.promo-djarju).is-episode,
-    &.story-16,
-    &.story-39,
-    &.story-55 {
-      header {
-        margin-bottom: $body-margin-quarter;
-        h3 {
-          padding-top: $body-margin-quarter;
+  .end-promos {
+    a {
+      &:not(.promo-djarju).is-episode,
+      &.story-16,
+      &.story-39,
+      &.story-55 {
+        header {
+          margin-bottom: $body-margin-quarter;
+          h3 {
+            padding-top: $body-margin-quarter;
+          }
         }
-      }
-      p {
-        @include clamp(6);
+        p {
+          @include clamp(6);
+        }
       }
     }
   }
