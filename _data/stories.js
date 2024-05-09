@@ -20,8 +20,8 @@ let cumulativeBody, cumulativeWordcount;
 
 const shuffleArray = (array) => {
 	for (let i = array.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[array[i], array[j]] = [array[j], array[i]];
+		const j = Math.floor(Math.random() * (i + 1));
+		[array[i], array[j]] = [array[j], array[i]];
 	}
 	return array;
 }
@@ -333,8 +333,8 @@ async function getAllStories() {
 		const sequenceData = atts.sequence.data;
 		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
 		atts.audio && JSON.stringify(atts.audio);
-		const audioPromosFormatted = atts.audio.length && processPromos(atts.audio);
-		// const audioPromosFormatted = atts.audio.length && processPromos(atts.audio, atts);
+		// const audioPromosFormatted = atts.audio.length && processPromos(atts.audio);
+		const audioPromosFormatted = atts.audio.length && processPromos(atts.audio, atts);
 		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
 		// REFACTOR use titleArray to derive slug and title
 
@@ -625,6 +625,7 @@ async function getAllStories() {
 	const pronounWordCounter = { hi: 0, hu: 0, hi_hu: 0, huma: 0, };
 	storiesFormatted.forEach(story => {
 		if (story.type !== 'Poddata' && story.authorsType === 'solo') {
+			//  && story.authorsString !== 'Omar N’Shea'
 			pronounWordCounter[story.authorPronoun] += story.wordcount;
 		}
 	});

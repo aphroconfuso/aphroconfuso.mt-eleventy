@@ -267,6 +267,7 @@ const showFullBookmarkList = () => {
 		bookmarksContainer && bookmarksContainer.classList.add("bookmarks-multiple");
 		const bookmarksCount = bookmarksArray.length
 		let numberPhrase = bookmarksCount + ' bookmarks';
+		// use numberify
 		if (bookmarksCount >= 11) numberPhrase = bookmarksCount + '-il bookmark';
 		if (bookmarksCount >= 20) numberPhrase = bookmarksCount + ' bookmark';
 		document.getElementById("bookmarks-number-inline").textContent = numberPhrase;
@@ -294,7 +295,7 @@ const showFullBookmarkList = () => {
 			remaining = numberify(prettifyNumbers(remaining));
 			// wordcount = numberify(prettifyNumbers(wordcount));
 			// issueMonth still contains year
-			clone.querySelector("li:first-of-type.header-label").id = `bookmark-${ storyId }`;
+			clone.querySelector("li.bookmark-item").id = `bookmark-${ storyId }`;
 			clone.querySelector("a").href = `/${ urlSlug }/#b-${ percentage }`;
 			clone.querySelector("a").classList.add(`promo-${ issueMonth }`, issueMonth, `story-${ storyId }`, storyType);
 			clone.querySelector("a").id = `link-${ storyId }`;
@@ -307,7 +308,7 @@ const showFullBookmarkList = () => {
 			}
 			if (sequenceEpisodeTitle) clone.querySelector("h3").textContent = sequenceEpisodeTitle;
 			// TODO: Add collections
-			clone.querySelector("li:first-of-type.header-label").textContent = issueMonthYear && issueMonthYear.replace(/-/, ' ').replace(/gunju/, 'ġunju').replace(/dicembru/, 'diċembru');
+			clone.querySelector("li.header-label").textContent = issueMonthYear && issueMonthYear.replace(/-/, ' ').replace(/gunju/, 'ġunju').replace(/dicembru/, 'diċembru');
 			clone.querySelector("button").id = `delete-${ storyId }`;
 			clone.querySelector(".body-text p").textContent = placeText.replace(/.*?\w\b\s+/, "… ");
 			clone.querySelector("aside p").textContent = `Fadallek ${ remaining }, madwar ${ minutes } qari`;

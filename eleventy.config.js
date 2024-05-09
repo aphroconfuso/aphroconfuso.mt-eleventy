@@ -17,7 +17,6 @@ const stripTags = require("striptags");
 
 const fixSubjectDate = require('./src/fixSubjectDate.js');
 const slugifyStringMaltese = require('./src/slugifyMaltese.js');
-const getIssueMonthYear = require('./src/getIssueMonthYear.js');
 
 const QRCode = require('qrcode');
 
@@ -481,9 +480,10 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("qrCodePng", function qrCodePng(path) {
-		const imageLocation = `/img/qr/${ path.replace(/\//gm, '') }.png`;
+		const imageLocation = `public/img/qr/${ path.replace(/\//gm, '') }.png`;
 		if (fs.existsSync(imageLocation)) return imageLocation;
-		QRCode.toFile(`public${imageLocation}`, `https://aphroconfuso.mt${path}`, {
+		console.log('Creating QR png for', path);
+		QRCode.toFile(imageLocation, `https://aphroconfuso.mt${path}`, {
 			errorCorrectionLevel: 'H'
 		}, function(err) {
 			if (err) throw err;
@@ -497,7 +497,7 @@ module.exports = function(eleventyConfig) {
 	// to emulate the file copy on the dev server. Learn more:
 	// https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
 
-	// eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
+	eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
 
 	return {
 		// Control which files Eleventy will process
