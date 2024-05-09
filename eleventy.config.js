@@ -482,7 +482,7 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addFilter("qrCodePng", function qrCodePng(path) {
 		const imageUrlPath = `/img/qr/${ path.replace(/\//gm, '') }.png`;
 		const imageLocation = `public${ imageUrlPath }`;
-		if (fs.existsSync(imageLocation)) return imageLocation;
+		if (fs.existsSync(imageLocation)) return imageUrlPath;
 		console.log('Creating QR png for', path);
 		QRCode.toFile(imageLocation, `https://aphroconfuso.mt${ path }`, {
 			errorCorrectionLevel: 'H'
