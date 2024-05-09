@@ -37,7 +37,7 @@ module.exports = (promos, storyAtts) => {
 			audioNote: promo.note,
 			audioHighlight: promo.highlight,
 			audioLengthMinutes: promo.audioLengthMinutes,
-			audioUrl: promo.audioUrl,
+			audioUrl: promo.audioUrl || promo.story && promo.story.data && promo.story.data.attributes.podcastUrl,
 			authorsType,
 			author,
 			authors,
