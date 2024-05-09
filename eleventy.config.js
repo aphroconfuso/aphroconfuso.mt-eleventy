@@ -480,15 +480,16 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("qrCodePng", function qrCodePng(path) {
-		const imageLocation = `public/img/qr/${ path.replace(/\//gm, '') }.png`;
+		const imageUrlPath = `/img/qr/${ path.replace(/\//gm, '') }.png`;
+		const imageLocation = `public${ imageUrlPath }`;
 		if (fs.existsSync(imageLocation)) return imageLocation;
 		console.log('Creating QR png for', path);
-		QRCode.toFile(imageLocation, `https://aphroconfuso.mt${path}`, {
+		QRCode.toFile(imageLocation, `https://aphroconfuso.mt${ path }`, {
 			errorCorrectionLevel: 'H'
 		}, function(err) {
 			if (err) throw err;
 		});
-		return imageLocation;
+		return imageUrlPath;
 	});
 
 	// Features to make your build faster (when you need them)
