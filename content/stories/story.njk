@@ -186,7 +186,7 @@ permalink: /{{ story.slug }}/index.html
 					</section>
 				{% elif story.type === 'Poddata' %}
 					<section class="generic-body-text">
-						{{ story.body | diarySectionise(null, null, true) | prettifyMaltese | endDotify | safe }}
+						{{ story.body | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% else %}
 					{% if story.imagesPositionText %}
