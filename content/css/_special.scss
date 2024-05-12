@@ -211,10 +211,21 @@ article {
   }
 
   // REFACTOR ... this is not a special
-  .home a:not(.promo-djarju).promo-plain,
   .home a:not(.promo-djarju).promo-plain.is-episode,
+  .end-promos a:not(.promo-djarju).is-episode {
+    header {
+      margin-bottom: $body-margin-quarter;
+      h3 {
+        padding-top: $body-margin-quarter;
+      }
+    }
+    p {
+      @include clamp(6);
+    }
+  }
+
+  .home a,
   .end-promos a {
-    &:not(.promo-djarju).is-episode,
     &.story-16,
     &.story-39,
     &.story-55,
@@ -229,5 +240,10 @@ article {
         @include clamp(6);
       }
     }
+  }
+
+  // NOT SPECIAL
+  .end-promos .promo-terminu header {
+    min-height: $body-margin * 3;
   }
 }
