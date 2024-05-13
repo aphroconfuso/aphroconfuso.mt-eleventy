@@ -23,19 +23,20 @@ const scrolling = () => {
     document.querySelector('#menu-toggle').checked = false;
     document.body.classList.remove('show-nav');
 	}
-	if (!wordcount) return;
-  if (newScrollPosition !== lastScrollPosition) {
-    document.body.classList.add('scrolling');
-    clearTimeout(hideScrollTools);
-    hideScrollTools = setTimeout(() => {
-      document.body.classList.remove('scrolling')
-    }, 5000);
-		percentageProgress = (((newScrollPosition - bodyStart) * 100) / bodyHeight).toFixed(2);
-		if (percentageProgress >= 0) {
-			if (percentageProgress > 100) {
-				percentageProgress = 100;
+	if (newScrollPosition !== lastScrollPosition) {
+		document.body.classList.add('scrolling');
+		if (!!wordcount) {
+			clearTimeout(hideScrollTools);
+			hideScrollTools = setTimeout(() => {
+				document.body.classList.remove('scrolling')
+			}, 5000);
+			percentageProgress = (((newScrollPosition - bodyStart) * 100) / bodyHeight).toFixed(2);
+			if (percentageProgress >= 0) {
+				if (percentageProgress > 100) {
+					percentageProgress = 100;
+				}
+				progressElement.textContent = percentageProgress > 0 && percentageProgress < 100 ? `${ Math.round(percentageProgress) }%` : '';
 			}
-			progressElement.textContent = percentageProgress > 0 && percentageProgress < 100 ? `${ Math.round(percentageProgress) }%`: '';
 		}
 		lastScrollPosition = newScrollPosition;
   }
