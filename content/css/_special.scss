@@ -138,6 +138,15 @@ article {
   }
 }
 
+.home {
+  .story-61 {
+    p {
+      letter-spacing: -0.15px;
+      @include clamp(7);
+    }
+  }
+}
+
 @media all and (max-width: $laptop-breakpoint) {
   .story-34 {
     // Manifest Kontra ż-Żmien
