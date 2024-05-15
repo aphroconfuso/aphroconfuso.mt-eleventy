@@ -6,7 +6,7 @@ permalink: /admin/kliem-mhux-suppost/index.html
 {% block content %}
 	<main>
 		<section>
-			{# <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+			<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 			<style>
 					body {
 					--pagefind-ui-scale: 1;
@@ -21,20 +21,26 @@ permalink: /admin/kliem-mhux-suppost/index.html
 					--pagefind-ui-image-box-ratio: 3 / 2;
 					--pagefind-ui-font: "Alegreya Sans";
 				}
+				#search {
+					position: absolute;
+					width: 33%;
+					top: 4rem;
+					right: 1rem;
+				}
 			</style>
 			<div id="search" class="search"></div>
-			<script src="/pagefind/pagefind-ui.js" onload="new PagefindUI({ element: '#search', showImages: false, autofocus: true });"></script> #}
-			<ol>
-			{% for entry in styleguide.entries %}
-				{% for word in entry.notWords %}
-				<li>{{ word }} ({{ entry.attributes.term | prettifyMaltese | safe }})</li>
-				{# <li>
-					<h6 id="{{ entry.attributes.term | slugifyMaltese | safe }}">{{ entry.attributes.term | prettifyMaltese | safe }}</h6>
-					{{ entry.attributes.definition | prettifyMaltese | anchorise | safe }}
-				</li> #}
+			<script src="/pagefind/pagefind-ui.js" onload="new PagefindUI({ element: '#search', showImages: false, autofocus: true });"></script>
+			<ul>
+			{% for entry in styleguide.entries | selectattr("notWords") %}
+				{% for notWord in entry.notWords %}
+					{% for story in stories %}
+						{% if notWord and story.body.indexOf(notWord) > -1 %}
+							<li><strong>{{ notWord }}</strong> | <a href="https://aphroconfuso.mt/{{ story.slug }}#:~:text={{ notWord }}" target="_new">{{ story.title }}</a></li>
+						{% endif %}
+					{% endfor %}
 				{% endfor %}
 			{% endfor %}
-			</ol>
+			</ul>
 		</section>
 	</main>
 {% endblock %}

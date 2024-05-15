@@ -56,7 +56,7 @@ async function getStyleGuide() {
 		const preparedB = b.attributes.term.toLowerCase().replace(/^il-/g, '').replace(/ċ/, 'c').replace(/ġ/g, 'g').replace(/ħ/g, 'h');
 		return preparedA > preparedB ? 1 : ((preparedB > preparedA) ? -1 : 0);
 	});
- 	styleGuideEntries.forEach((entry) => entry.notWordsArray = entry.attributes.notWords && entry.attributes.notWords.split(/\s*\,\s*/));
+ 	styleGuideEntries.forEach((entry) => entry.notWords = entry.attributes.notWords && entry.attributes.notWords.split(/\s*\,\s*/));
 
 	return {
 		title: styleGuide.title,
