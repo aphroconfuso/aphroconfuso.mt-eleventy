@@ -40,7 +40,8 @@
 		"@11ty/eleventy-plugin-rss": "^1.2.0",
 		"@11ty/eleventy-plugin-syntaxhighlight": "^4.2.0",
 		"luxon": "^3.2.1",
-		"markdown-it-anchor": "^8.6.6"
+		"markdown-it-anchor": "^8.6.6",
+		"pagefind": "^1.1.0"
 	},
 	"dependencies": {
 		"eleventy-plugin-rev": "^1.1.1",

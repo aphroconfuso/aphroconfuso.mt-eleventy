@@ -4,15 +4,12 @@ pagination:
   size: 250
   alias: story
 eleventyExcludeFromCollections: true
-permalink: /admin/index.html
+permalink: /admin/promos/index.html
 ---
 {% extends 'layouts/admin.njk' %}
 
 {% block content %}
 	<main>
-		<header>
-			<h1>admin</h1>
-		</header>
 		<section>
 			<ul>
 				{% for story in stories %}

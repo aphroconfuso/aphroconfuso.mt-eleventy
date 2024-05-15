@@ -3,6 +3,7 @@ const markdownItAnchor = require("markdown-it-anchor");
 
 const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
 const eleventySass = require("eleventy-sass");
+const { execSync } = require('child_process');
 const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
@@ -77,6 +78,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
+		// Check urls ********************************************************************************************
 		let urlsInContent = [], imagesInContent = [];
 		results.forEach(i => {
 			urlsInContent = urlsInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
@@ -92,6 +94,7 @@ module.exports = function(eleventyConfig) {
 			if (!fs.existsSync(fileLocation)) handleError(`ERROR: ${ fileLocation } is linked but does not exist!`);
 		});
 
+		// Transfer images ****************************************************************************************
 		const uniqueImagesArray = [...new Set(imagesInContent)].filter(n => n).sort();
 		uniqueImagesArray.forEach(i => {
 			if (!i) {return;}
@@ -104,12 +107,10 @@ module.exports = function(eleventyConfig) {
 			// 	res.body.pipe(fs.createWriteStream(saveToFileLocation))
 			// )
 		});
-
 		const webImagesFolder = "./aphroconfuso.mt/site/stampi";
 		if (!fs.existsSync(webImagesFolder)) {
 			fs.mkdirSync(webImagesFolder);
 		}
-
 		uniqueImagesArray.forEach(i => {
 			if (!i) {return;}
 			const image = i.replace(/\/stampi/g, "")
@@ -129,10 +130,8 @@ module.exports = function(eleventyConfig) {
 				console.error("\x1b[33m%s\x1b[0m", `Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
 			}
 		});
-
 		const cssFile = fs.readdirSync('./aphroconfuso.mt/site/css/').filter(fn => fn.startsWith('style-'))[0];
 		const cssFileContents = fs.readFileSync('./aphroconfuso.mt/site/css/' + cssFile).toString();
-
 		const fileNames = cssFileContents.match(/frame-02-faint-hsl-[^\)]*?\.svg/g);
 		fileNames && fileNames.forEach(fileName => {
 			const [fileString, h, s, l] = fileName.match(/hsl-(\d+)-(\d+)-(\d+).*?\./);
@@ -148,7 +147,6 @@ module.exports = function(eleventyConfig) {
 				});
 			});
 		});
-
 		const hexFileNames = cssFileContents.match(/frame-02-faint-(......)\.svg/g);
 		hexFileNames && hexFileNames.forEach(fileName => {
 			const [fileString, hexColour] = fileName.match(/faint-(......)\./);
@@ -165,6 +163,8 @@ module.exports = function(eleventyConfig) {
 			});
 		});
 
+		// Index pages for search **************************************************************************************
+		execSync(`npx pagefind --site aphroconfuso.mt/site --glob \"**/*.html\"`, {encoding: 'utf-8'});
 	});
 
 	// App plugins

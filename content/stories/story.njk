@@ -171,7 +171,7 @@ permalink: /{{ story.slug }}/index.html
 				{% endif %}
 				<div class="promo bookmark-shortcut"><!-- --></div>
 			</section>
-			<section id="grid-body">
+			<section id="grid-body" data-pagefind-body>
 				{% if story.type === 'Poezija' and not story.useProseStyling %}
 					<section class="body-text">
 						{{ story.body | prettifyMaltese | versify | safe }}

@@ -4,7 +4,7 @@ pagination:
   size: 250
   alias: story
 eleventyExcludeFromCollections: true
-permalink: /admin/vocab/index.html
+permalink: /admin/vokabolarju/index.html
 ---
 {% extends 'layouts/admin.njk' %}
 
@@ -51,9 +51,6 @@ permalink: /admin/vocab/index.html
 		}
 	</style>
 	<main>
-		<header>
-			<h1>vokabularju</h1>
-		</header>
 		<p>B'kollox ippubblikajna kliem: {{ stories[0].cumulativeWordcount }}, xogħlijiet: {{ stories.length }}.
 		<br/>
 		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Fittex..." autocomplete="off">

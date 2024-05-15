@@ -1,0 +1,26 @@
+---
+eleventyExcludeFromCollections: true
+permalink: /admin/fittex/index.html
+---
+{% extends 'layouts/admin.njk' %}
+
+{% block content %}
+	<main>
+		<section>
+			{# <link href="/pagefind/pagefind-ui.css" rel="stylesheet"> #}
+			<style>
+				@media (prefers-color-scheme: dark) {
+					:root {
+						--pagefind-ui-primary: #212121;
+						--pagefind-ui-text: #212121;
+						--pagefind-ui-background: #fefef0;
+						--pagefind-ui-border: #152028;
+						--pagefind-ui-tag: #152028;
+					}
+				}
+			</style>
+			<div id="search" class="search"></div>
+			<script src="/pagefind/pagefind-ui.js" onload="new PagefindUI({ element: '#search', showImages: false });"></script>
+		</section>
+	</main>
+{% endblock %}
