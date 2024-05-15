@@ -186,9 +186,12 @@ span.rtl {
       text-align: justify;
     }
   }
+  blockquote.enjambed,
+  blockquote:last-child {
+    padding-bottom: 0;
+  }
   p:last-of-type + blockquote {
     margin-top: $body-margin-half !important;
-    padding-bottom: 0;
   }
   figure {
     padding-right: $body-margin;

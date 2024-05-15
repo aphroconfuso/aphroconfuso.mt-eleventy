@@ -283,7 +283,6 @@ module.exports = function(eleventyConfig) {
 			.replace(/(’)([,\.;:])/gm, "$1<span class=\"pullsemi\">$2</span>")
 			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
-			.replace(/<\/blockquote>\s*<blockquote>/gm, "<br>")
 			.replace(/- </gm, "-<")
 			.replace(/(\d)\,(\d\d\d)/gm, `$1${ String.fromCharCode(8201) }$2`)
 			.replace(/&amp;shy;/gm, '<wbr>')
@@ -424,8 +423,8 @@ module.exports = function(eleventyConfig) {
 		let decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '');
 		decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
 			.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
-			.replace(/<p(.*?)>(.)([\w\-]+)/, '<p$1><span class="initial">$2$3</span>')
-			.replace(/<p>\#<\/p>\s*<p>(.)([\w\-\’]+)/gm, '<p class="break"><span class="initial">$1$2</span>')
+			// .replace(/<p(^\>*?)>(.)([\w\-]+)/, '<p$1><span class="initial">$2$3</span>')
+			// .replace(/<p>\#<\/p>\s*<p>(.)([\w\-\’]+)/gm, '<p class="break"><span class="initial">$1$2</span>')
 			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
 			.replace('drop-I">I</span>e', 'drop-Ie">IE</span>')
