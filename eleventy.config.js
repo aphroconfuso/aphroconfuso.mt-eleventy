@@ -78,16 +78,22 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
-		// Check urls ********************************************************************************************
-		let urlsInContent = [], imagesInContent = [];
+		// Check links ********************************************************************************************
+		let linksInContent = [], imagesInContent = [];
 		results.forEach(i => {
-			urlsInContent = urlsInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
+			linksInContent = linksInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
 			imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|jpeg|webp)/g));
+			const anchorsInContent = i.content.match(/(?<=href="#).*?(?=">)/gm);
+			anchorsInContent && anchorsInContent.length && anchorsInContent.forEach(anchor => {
+				if (anchor && !i.content.match(`id=\"${ anchor }\"`)) {
+					handleError(`Link to "${ anchor }" but no anchor!`);
+				}
+			});
 			if (i.content.match(/xxx/i)) handleError(`XXX detected in ${ i.url } !!!`);
 		});
 
-		const uniqueUrlsArray = [...new Set(urlsInContent)].filter(n => n).sort();
-		uniqueUrlsArray.forEach(i => {
+		const uniqueLinksArray = [...new Set(linksInContent)].filter(n => n).sort();
+		uniqueLinksArray && uniqueLinksArray.forEach(i => {
 			if (!i) {return;}
 			const fileLocation = decodeURIComponent(i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html"));
 			if (fileLocation.includes('localhost:')) handleError(`${ fileLocation } points to localhost!`);
@@ -130,38 +136,45 @@ module.exports = function(eleventyConfig) {
 				console.error("\x1b[33m%s\x1b[0m", `Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
 			}
 		});
+
+		// Create deco image backgrounds
 		const cssFile = fs.readdirSync('./aphroconfuso.mt/site/css/').filter(fn => fn.startsWith('style-'))[0];
-		const cssFileContents = fs.readFileSync('./aphroconfuso.mt/site/css/' + cssFile).toString();
-		const fileNames = cssFileContents.match(/frame-02-faint-hsl-[^\)]*?\.svg/g);
-		fileNames && fileNames.forEach(fileName => {
-			const [fileString, h, s, l] = fileName.match(/hsl-(\d+)-(\d+)-(\d+).*?\./);
-			const srcFile = './public/img/deco/frame-02-faint-TEMPLATE.svg';
-			const destFile = './aphroconfuso.mt/site/img/deco/' + 'frame-02-faint-' + fileString + 'svg';
-			if (fs.existsSync(destFile)) return;
-			console.log(`Creating file for ${ fileString } ...`);
-			fs.readFile(srcFile, 'utf8', (err, data) => {
-				if (err) return console.log(err);
-				var result = data.replace(/\#ff0000/g, `hsl(${h}, ${s}%, ${l}%)`);
-				fs.writeFile(destFile, result, 'utf8', (err) => {
+		if (!cssFile) handleError("Can't find a css file...");
+		const srcFile = './public/img/deco/frame-02-faint-TEMPLATE.svg';
+		const destFolder = './aphroconfuso.mt/site/img/deco/';
+		if (!fs.existsSync(destFolder)) fs.mkdirSync(destFolder, { recursive: true });
+		if (cssFile) {
+			console.log(`Found ${ cssFile } ...`);
+			const cssFileContents = fs.readFileSync('./aphroconfuso.mt/site/css/' + cssFile).toString();
+			const fileNames = cssFileContents.match(/frame-02-faint-hsl-[^\)]*?\.svg/g);
+			fileNames && fileNames.forEach(fileName => {
+				const [fileString, h, s, l] = fileName.match(/hsl-(\d+)-(\d+)-(\d+).*?\./);
+				const destFile = destFolder + 'frame-02-faint-' + fileString + 'svg';
+				if (fs.existsSync(destFile)) return;
+				console.log(`Creating file for ${ fileString } ...`);
+				fs.readFile(srcFile, 'utf8', (err, data) => {
 					if (err) return console.log(err);
+					var result = data.replace(/\#ff0000/g, `hsl(${h}, ${s}%, ${l}%)`);
+					fs.writeFile(destFile, result, 'utf8', (err) => {
+						if (err) return console.log(err);
+					});
 				});
 			});
-		});
-		const hexFileNames = cssFileContents.match(/frame-02-faint-(......)\.svg/g);
-		hexFileNames && hexFileNames.forEach(fileName => {
-			const [fileString, hexColour] = fileName.match(/faint-(......)\./);
-			const srcFile = './public/img/deco/frame-02-faint-TEMPLATE.svg';
-			const destFile = './aphroconfuso.mt/site/img/deco/' + 'frame-02-' + fileString + 'svg';
-			if (fs.existsSync(destFile)) return;
-			console.log(`Creating file for ${ fileString }..`);
-			fs.readFile(srcFile, 'utf8', (err, data) => {
-				if (err) return console.log(err);
-				var result = data.replace(/\#ff0000/g, `#${hexColour}`);
-				fs.writeFile(destFile, result, 'utf8', (err) => {
+			const hexFileNames = cssFileContents.match(/frame-02-faint-(......)\.svg/g);
+			hexFileNames && hexFileNames.forEach(fileName => {
+				const [fileString, hexColour] = fileName.match(/faint-(......)\./);
+				const destFile = destFolder + 'frame-02-' + fileString + 'svg';
+				if (fs.existsSync(destFile)) return;
+				console.log(`Creating file for ${ fileString }..`);
+				fs.readFile(srcFile, 'utf8', (err, data) => {
 					if (err) return console.log(err);
+					var result = data.replace(/\#ff0000/g, `#${hexColour}`);
+					fs.writeFile(destFile, result, 'utf8', (err) => {
+						if (err) return console.log(err);
+					});
 				});
 			});
-		});
+		}
 
 		// Index pages for search **************************************************************************************
 		execSync(`npx pagefind --site aphroconfuso.mt/site --glob \"**/*.html\"`, {encoding: 'utf-8'});

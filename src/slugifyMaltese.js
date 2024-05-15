@@ -7,6 +7,6 @@ module.exports = (text) => {
 		.replace(/\s+/gm, "-")
 		.replace(/['‘’"“”]/gm, "")
 		.replace(/[ \-\/\,\;\:\@\~\#\!\?\·]/gm, "-")
-		.replace(/\-\-/gm, "-")
+		.replace(/-+/gm, "-")
 		.toLowerCase()
 }

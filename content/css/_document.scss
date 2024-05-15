@@ -4,106 +4,136 @@
 @use "mixins-etc" as *;
 
 ::selection {
-	background: $highlight;
-	text-shadow: none;
+  background: $highlight;
+  text-shadow: none;
+}
+
+:target {
+  -webkit-animation: target-fade 3s ease-in;
+  -moz-animation: target-fade 3s ease-in;
+  animation: target-fade 3s ease-in;
+}
+@-webkit-keyframes target-fade {
+  0% {
+    background-color: $target;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+@-moz-keyframes target-fade {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: $target;
+  }
+}
+@keyframes target-fade {
+  0% {
+    background-color: $target;
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 
 html {
-	-moz-text-size-adjust: none;
-	-webkit-text-size-adjust: none;
-	scroll-behavior: smooth;
-	scroll-padding-top: calc(80px + $body-margin);
-	overflow-y: scroll;
-	text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(80px + $body-margin);
+  overflow-y: scroll;
+  text-size-adjust: none;
 }
 
 body {
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-	-webkit-print-color-adjust: exact;
-	background-color: $paper;
-	color: $lighter-brown;
-	font-family: $sans, sans;
-	font-size: $font-size-furniture;
-	font-weight: 400;
-	line-height: 1.4;
-	print-color-adjust: exact;
-	min-height: 101%;
-	display: flex;
-	min-height: 100vh;
-	flex-direction: column;
-	justify-content: space-between;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-print-color-adjust: exact;
+  background-color: $paper;
+  color: $lighter-brown;
+  font-family: $sans, sans;
+  font-size: $font-size-furniture;
+  font-weight: 400;
+  line-height: 1.4;
+  print-color-adjust: exact;
+  min-height: 101%;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 main {
-	padding: 0 $main-side-padding;
+  padding: 0 $main-side-padding;
 }
 
 article > header {
-	max-width: $max-content-width;
-	margin: 0 auto $body-margin;
+  max-width: $max-content-width;
+  margin: 0 auto $body-margin;
 }
 
 #skip {
-	display: block;
-	height: 0;
-	visibility: hidden;
+  display: block;
+  height: 0;
+  visibility: hidden;
 }
 
 #bottom-wrapper {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 #deco {
-	margin: $body-margin auto 0;
-	max-width: 1000px;
-	width: 90%;
+  margin: $body-margin auto 0;
+  max-width: 1000px;
+  width: 90%;
 }
 
 #message {
-	@include ease-in(0.25s);
-	color: $green;
-	opacity: 0;
-	font-family: $sans, sans-serif;
-	font-size: $body-font-size;
-	padding: $body-margin 0;
-	margin-top: $body-margin auto 0;
-	text-align: center;
-	@media all and (max-width: $mobile-breakpoint) {
-		display: none;
-	}
-	&.active {
-		@include ease-in(0.25s);
-		display: block;
-		opacity: 1;
-	}
+  @include ease-in(0.25s);
+  color: $green;
+  opacity: 0;
+  font-family: $sans, sans-serif;
+  font-size: $body-font-size;
+  padding: $body-margin 0;
+  margin-top: $body-margin auto 0;
+  text-align: center;
+  @media all and (max-width: $mobile-breakpoint) {
+    display: none;
+  }
+  &.active {
+    @include ease-in(0.25s);
+    display: block;
+    opacity: 1;
+  }
 }
 
 @media all and (max-width: $mobile-breakpoint) {
-	.hide-mobile {
-		display: none !important;
-	}
+  .hide-mobile {
+    display: none !important;
+  }
 }
 @media all and (min-width: $mobile-breakpoint-plusone) {
-	article > header {
-		max-width: $max-content-width;
-		margin: ($body-margin-double) auto 0;
-		min-height: $body-margin * 6;
-	}
+  article > header {
+    max-width: $max-content-width;
+    margin: ($body-margin-double) auto 0;
+    min-height: $body-margin * 6;
+  }
 }
 
 @media all and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
-	html {
-		scroll-padding-top: $body-margin;
-	}
-	.hide-tablet {
-		display: none !important;
-	}
+  html {
+    scroll-padding-top: $body-margin;
+  }
+  .hide-tablet {
+    display: none !important;
+  }
 }
 
 @media all and (min-width: $mobile-breakpoint-plusone) {
-	.hide-laptop {
-		display: none !important;
-	}
+  .hide-laptop {
+    display: none !important;
+  }
 }

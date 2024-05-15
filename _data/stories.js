@@ -313,19 +313,6 @@ async function getAllStories() {
 		const cleanedBody = atts.body.replace(/ data-.*?=".*?"/gmi, "").replace(/fx-(\d)/gmi, "fx$1");
 		const anchoredBody = cleanedBody.replace(/(<h[56])>(.*?)(<\/h[56]>)/gmi, (full, openingTag, headline, closingTag) => `<hr>${ openingTag } id="${ slugifyStringMaltese(headline) }">${ headline }${ closingTag }`)
 
-		// Check anchors
-		const anchors = anchoredBody.match(/(?<=href="#).*?(?=">)/gm);
-		let anchorErrors = false;
-		anchors && anchors.forEach(anchor => {
-			if (!anchoredBody.includes(`id=\"${ anchor }\"`)) {
-				anchorErrors = true;
-				console.log(`Link to "${ anchor }" but no anchor!`);
-			}
-		});
-		if (anchorErrors) {
-			// throw new Error(`${ atts.title } has anchor errors!`)
-		}
-
 		const booksMentioned = !!atts.booksMentioned.data.length && processBooksMentioned(atts.booksMentioned.data, atts.prominentMentions);
 		const authorsType = atts.authorsType && atts.authorsType.replace(/\_.*/, '') || 'solo';
 		const {authors, authorForename, authorsString, authorPronoun} = parseAuthors(atts.authors.data, authorsType);

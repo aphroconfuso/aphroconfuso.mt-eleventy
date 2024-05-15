@@ -4,192 +4,195 @@
 @use "mixins-etc" as *;
 
 .generic {
-	// font-size: $font-size-furniture;
-	.promo-list {
-		margin-top: $body-margin;
-		& > li {
-			margin-bottom: calc($body-margin - 1px);
-			border-bottom: 1px solid $faint-line;
-			&:last-of-type {
-				margin-bottom: 0;
-				border-bottom: none;
-			}
-		}
-		.promo {
-			display: block;
-			margin-bottom: $body-margin-half;
-			header {
-				margin: 0 0 $body-margin-quarter !important;
-				.as-translator {
-					h1 {
-						display: inline;
-					}
-					span {
-						color: $lightest-brown;
-						font-family: $serif, serif;
-						font-size: 2rem;
-						font-weight: bold;
-					}
-				}
-			}
-			p {
-				margin-bottom: $body-margin-quarter;
-			}
-			aside {
-				p {
-					color: $lighter-brown;
-					font-family: $sans, sans-serif;
-					font-size: $font-size-furniture;
-					font-style: italic;
-					text-transform: lowercase;
-					text-align: right;
-					padding-right: $body-margin;
-				}
-			}
-		}
-	}
-	.more {
-		border-top: 1px solid $faint-line;
-		font-style: italic;
-		padding-top: $body-margin;
-	}
-	.definitions-list {
-		margin-top: $body-margin;
-		li {
-			margin-bottom: $body-margin;
-			&:last-of-type {
-				margin-bottom: 0;
-			}
-		}
-	}
-	iframe,
-	section {
-		width: 100%;
-	}
-	iframe {
-		border: none;
-	}
+  // font-size: $font-size-furniture;
+  .promo-list {
+    margin-top: $body-margin;
+    & > li {
+      margin-bottom: calc($body-margin - 1px);
+      border-bottom: 1px solid $faint-line;
+      &:last-of-type {
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+    }
+    .promo {
+      display: block;
+      margin-bottom: $body-margin-half;
+      header {
+        margin: 0 0 $body-margin-quarter !important;
+        .as-translator {
+          h1 {
+            display: inline;
+          }
+          span {
+            color: $lightest-brown;
+            font-family: $serif, serif;
+            font-size: 2rem;
+            font-weight: bold;
+          }
+        }
+      }
+      p {
+        margin-bottom: $body-margin-quarter;
+      }
+      aside {
+        p {
+          color: $lighter-brown;
+          font-family: $sans, sans-serif;
+          font-size: $font-size-furniture;
+          font-style: italic;
+          text-transform: lowercase;
+          text-align: right;
+          padding-right: $body-margin;
+        }
+      }
+    }
+  }
+  .more {
+    border-top: 1px solid $faint-line;
+    font-style: italic;
+    padding-top: $body-margin;
+  }
+  .definitions-list {
+    margin-top: $body-margin;
+    li {
+      margin-bottom: $body-margin;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+      h6 {
+        display: inline-block;
+      }
+    }
+  }
+  iframe,
+  section {
+    width: 100%;
+  }
+  iframe {
+    border: none;
+  }
 }
 .contributor {
-	h2:not(.translated) {
-		display: none;
-	}
+  h2:not(.translated) {
+    display: none;
+  }
 }
 .generic-menu {
-	font-size: 1.1rem;
-	font-variant-numeric: tabular-nums;
-	margin-left: $body-margin-half * -1;
-	li {
-		letter-spacing: -0.5px;
-		white-space: nowrap;
-		&::before {
-			color: $deco-brown;
-			content: "§";
-			display: inline-block;
-			font-family: $decorative;
-			width: $body-margin-half;
-		}
-		&:hover {
-			&::before {
-				color: $lightest-brown;
-			}
-		}
-		&.active {
-			&::before {
-				color: $lighter-brown;
-			}
-			color: $lighter-brown;
-		}
-	}
-	@media all and (min-width: $laptop-breakpoint) {
-		li a {
-			@include animated-underline($lighter-brown);
-		}
-	}
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+  margin-left: $body-margin-half * -1;
+  li {
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+    &::before {
+      color: $deco-brown;
+      content: "§";
+      display: inline-block;
+      font-family: $decorative;
+      width: $body-margin-half;
+    }
+    &:hover {
+      &::before {
+        color: $lightest-brown;
+      }
+    }
+    &.active {
+      &::before {
+        color: $lighter-brown;
+      }
+      color: $lighter-brown;
+    }
+  }
+  @media all and (min-width: $laptop-breakpoint) {
+    li a {
+      @include animated-underline($lighter-brown);
+    }
+  }
 }
 .contributors-menu {
-	columns: 2;
-	li {
-		letter-spacing: 0;
-	}
+  columns: 2;
+  li {
+    letter-spacing: 0;
+  }
 }
 #optInOutWrapper {
-	display: flex;
+  display: flex;
 }
 #podcast-url {
-	width: 100%;
-	border: 1px solid $faint-line;
-	padding: 5px;
+  width: 100%;
+  border: 1px solid $faint-line;
+  padding: 5px;
 }
 #podcast-logos {
-	display: flex;
-	flex-direction: column;
-	margin-top: $body-margin-double;
-	li a {
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
-		margin-bottom: $body-margin;
-		align-items: center;
-		img {
-			-webkit-filter: sepia(1) brightness(50%);
-			filter: sepia(1) brightness(50%);
-			margin: 0 $body-margin 0 0;
-		}
-		p {
-			position: relative;
-			&::after {
-				@include animated-underline-pre($dark-brown);
-			}
-		}
-	}
-	@media all and (min-width: $mobile-breakpoint-plusone) {
-		flex-direction: row;
-		justify-content: space-between;
-		li {
-			width: 20%;
-			a {
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				p {
-					margin-top: $body-margin-half;
-				}
-				img {
-					margin: 0;
-					height: 60px;
-					width: 60px;
-				}
-				&:hover {
-					img {
-						@include ease-out(0.25s);
-						-webkit-filter: sepia(0) brightness(100%);
-						filter: sepia(0) brightness(100%);
-					}
-					p {
-						&::after {
-							@include animated-underline-post();
-						}
-					}
-				}
-			}
-		}
-	}
+  display: flex;
+  flex-direction: column;
+  margin-top: $body-margin-double;
+  li a {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: $body-margin;
+    align-items: center;
+    img {
+      -webkit-filter: sepia(1) brightness(50%);
+      filter: sepia(1) brightness(50%);
+      margin: 0 $body-margin 0 0;
+    }
+    p {
+      position: relative;
+      &::after {
+        @include animated-underline-pre($dark-brown);
+      }
+    }
+  }
+  @media all and (min-width: $mobile-breakpoint-plusone) {
+    flex-direction: row;
+    justify-content: space-between;
+    li {
+      width: 20%;
+      a {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        p {
+          margin-top: $body-margin-half;
+        }
+        img {
+          margin: 0;
+          height: 60px;
+          width: 60px;
+        }
+        &:hover {
+          img {
+            @include ease-out(0.25s);
+            -webkit-filter: sepia(0) brightness(100%);
+            filter: sepia(0) brightness(100%);
+          }
+          p {
+            &::after {
+              @include animated-underline-post();
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .error {
-	img {
-		-webkit-filter: sepia(0.2) grayscale(1);
-		filter: sepia(0.2) grayscale(1);
-		padding-bottom: $body-margin;
-		@media all and (min-width: $mobile-breakpoint-plusone) {
-			&:hover {
-				@include ease-out(0.25s);
-				-webkit-filter: sepia(0) grayscale(0);
-				filter: sepia(0) grayscale(0);
-			}
-		}
-	}
+  img {
+    -webkit-filter: sepia(0.2) grayscale(1);
+    filter: sepia(0.2) grayscale(1);
+    padding-bottom: $body-margin;
+    @media all and (min-width: $mobile-breakpoint-plusone) {
+      &:hover {
+        @include ease-out(0.25s);
+        -webkit-filter: sepia(0) grayscale(0);
+        filter: sepia(0) grayscale(0);
+      }
+    }
+  }
 }
 
 // FIX ME
@@ -197,32 +200,32 @@
 // too much space in contributor
 // also needs to be fixed on
 .generic {
-	&.podcasts,
-	.container-collection {
-		.promo-list > li {
-			&:last-of-type {
-				margin-bottom: calc($body-margin - 1px);
-				border-bottom: 1px solid $faint-line;
-			}
-		}
-	}
-	.contributor,
-	.container-collection {
-		.promo-list > li {
-			a {
-				margin-bottom: $body-margin;
-			}
-		}
-	}
+  &.podcasts,
+  .container-collection {
+    .promo-list > li {
+      &:last-of-type {
+        margin-bottom: calc($body-margin - 1px);
+        border-bottom: 1px solid $faint-line;
+      }
+    }
+  }
+  .contributor,
+  .container-collection {
+    .promo-list > li {
+      a {
+        margin-bottom: $body-margin;
+      }
+    }
+  }
 }
 
 @media all and (min-width: $mobile-breakpoint-plusone) {
-	.contributors-menu {
-		padding-right: $body-margin;
-	}
-	#grid-body {
-		.contributors-menu {
-			columns: 3;
-		}
-	}
+  .contributors-menu {
+    padding-right: $body-margin;
+  }
+  #grid-body {
+    .contributors-menu {
+      columns: 3;
+    }
+  }
 }
