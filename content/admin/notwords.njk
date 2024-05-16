@@ -34,8 +34,8 @@ permalink: /admin/kliem-mhux-suppost/index.html
 			{% for entry in styleguide.entries | selectattr("notWords") %}
 				{% for notWord in entry.notWords %}
 					{% for story in stories %}
-						{% if notWord and story.body.indexOf(notWord) > -1 %}
-							<li><strong>{{ notWord }}</strong> | <a href="https://aphroconfuso.mt/{{ story.slug }}#:~:text={{ notWord }}" target="_new">{{ story.title }}</a></li>
+						{% if notWord and story.vocabulary.indexOf(notWord) > -1 %}
+							<li><strong>{{ notWord }}</strong> | <a href="https://aphroconfuso.mt/{{ story.slug }}#:~:text={{ notWord }}" target="_new">{{ story.reportingTitle }}</a></li>
 						{% endif %}
 					{% endfor %}
 				{% endfor %}

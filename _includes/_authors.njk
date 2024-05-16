@@ -1,5 +1,5 @@
 {% set item = promo or story %}
-<h2{% if item.type === 'Poddata' %} class="contains-with"{% endif %}>
+<h2{% if item.type === 'Poddata' %} class="contains-with"{% endif %} data-pagefind-meta="author">
 	{# REFACTOR - why author / authsString #}
 	{% if promo and item.translator %}
 		<span class="author">{{ item.authors[0] | prettifyMaltese | safe }}</span> <span class="translator">(tr {{ item.translator | prettifyMaltese | safe }})</span>

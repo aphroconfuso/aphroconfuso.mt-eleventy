@@ -22,7 +22,7 @@ permalink: /{{ appointment.issueMonthYear | slugifyMaltese }}/index.html
 		<h2></h2>
 	</header>
 	<div class="container-generic">
-		<section id="grid-body">
+		<section id="grid-body" data-pagefind-body data-pagefind-weight="5">
 			<div class="generic-body-text editorial">
 				<div class="text-container">
 					{{ appointment.editorial | prettifyMaltese | endDotify | safe }}

@@ -30,7 +30,7 @@ permalink: /admin/promos/index.html
 				{% endfor %}
 			</ul>
 			<p>wordcount: {{ stories[0].cumulativeWordcount | slugify }}</p>
-			<p>vocabulary: {{ stories[0].vocabulary.length | slugify }}</p>
+			<p>vocabulary: {{ stories[0].cumulativeVocabulary.length | slugify }}</p>
 		</section>
 	</main>
 {% endblock %}

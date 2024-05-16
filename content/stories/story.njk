@@ -66,11 +66,11 @@ permalink: /{{ story.slug }}/index.html
 				{% endfor %}
 			</ul>
 			{% if story.type === 'Poddata' %}
-				<h1>
+				<h1 data-pagefind-meta="title">
 					{{ story.mainTitle | fixPodcastTitle | prettifyMaltese | safe }}
 				</h1>
 			{% else %}
-				<h1>
+				<h1 data-pagefind-meta="title">
 					{{ story.mainTitle | prettifyMaltese | safe }}
 					{% if story.isSequenceEpisode %}
 						<span class="episode-number">#{{ story.sequenceEpisodeNumber }}</span>
@@ -171,7 +171,7 @@ permalink: /{{ story.slug }}/index.html
 				{% endif %}
 				<div class="promo bookmark-shortcut"><!-- --></div>
 			</section>
-			<section id="grid-body" data-pagefind-body>
+			<section id="grid-body" data-pagefind-body data-pagefind-weight="7">
 				{% if story.type === 'Poezija' and not story.useProseStyling %}
 					<section class="body-text">
 						{{ story.body | prettifyMaltese | versify | safe }}

@@ -66,10 +66,10 @@ permalink: /admin/ortografija/index.html
 		{# <input type="range" id="threshold" name="points" min="1" onchange="changeRange()" max="1000"> #}
 		{# <h5 id="showThreshold"></h5> #}
 		<section>
-			{# <p>{{ stories[0].vocabulary.length | slugify }}</p> #}
+			{# <p>{{ stories[0].cumulativeVocabulary.length | slugify }}</p> #}
 			<script>
 				const vocabulary = [
-					{% for word in stories[0].vocabulary %}"{{ word.word }}",{% endfor %}
+					{% for word in stories[0].cumulativeVocabulary %}"{{ word.word }}",{% endfor %}
 				];
 				document.write('>>>', vocabulary.length);
 			</script>

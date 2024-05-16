@@ -29,7 +29,7 @@ permalink: /{{ storycollection.title | slugifyMaltese }}/index.html
 			<h2></h2>
 		</header>
 		<div class="container-collection">
-			<section id="grid-body">
+			<section id="grid-body" data-pagefind-body data-pagefind-weight="5">
 				<div class="generic-body-text">
 					<div class="text-container introduction collection collection-{{ storycollection.id }}">
 						{{ storycollection.body | prettifyMaltese | endDotify | safe }}

@@ -57,9 +57,9 @@ permalink: /admin/vokabolarju/index.html
 		{# <input type="range" id="threshold" name="points" min="1" onchange="changeRange()" max="1000"> #}
 		{# <h5 id="showThreshold"></h5> #}
 		<section>
-			{# <p>{{ stories[0].vocabulary.length | slugify }}</p> #}
+			{# <p>{{ stories[0].cumulativeVocabulary.length | slugify }}</p> #}
 			<ul id="myUL" class="vocabulary">
-				{% for word in stories[0].vocabulary %}
+				{% for word in stories[0].cumulativeVocabulary %}
 					<li>{{ word.word }} <span class="frequency" style="color: #999">{{ word.frequency}}</span></li>
 				{% endfor %}
 			</ul>

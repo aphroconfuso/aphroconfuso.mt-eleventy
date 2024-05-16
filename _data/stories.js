@@ -279,11 +279,6 @@ async function getAllStories() {
 		return filteredResult;
 	};
 
-	// const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "czMXc").replace(/ġ/gm, "gzMXg").replace(/ħ/gm, "hzMXh").replace(/ż/gm, "zzMXz").replace(/à/gm, "azMXa"));
-	// const vocabulary = unique(body).sort().map((word) => {
-	// 	return word.replace(/czMXc/gm, "ċ").replace(/gzMXg/gm, "ġ").replace(/hzMXh/gm, "ħ").replace(/zzMXz/gm, "ż").replace(/azMXa/gm, "à");
-	// });
-
 	const processBooksMentioned = (booksData, prominentMentions) => {
 		return booksData.slice(0, prominentMentions).map((book) => {
 			const bookAtts = book.attributes;
@@ -333,7 +328,6 @@ async function getAllStories() {
 		// promo.story.data.attributes.title)
 
 		// const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "czMXc").replace(/ġ/gm, "gzMXg").replace(/ħ/gm, "hzMXh").replace(/ż/gm, "zzMXz").replace(/à/gm, "azMXa"));
-
 		// const vocabulary = unique(body).sort().map((word) => {
 		// 	return word.replace(/czMXc/gm, "ċ").replace(/gzMXg/gm, "ġ").replace(/hzMXh/gm, "ħ").replace(/zzMXz/gm, "ż").replace(/azMXa/gm, "à");
 		// });
@@ -422,6 +416,11 @@ async function getAllStories() {
 		const storycollections = atts.collections && processCollections(atts.collections.data);
 		cumulativeBody += " " + atts.body;
 
+		const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "czMXc").replace(/ġ/gm, "gzMXg").replace(/ħ/gm, "hzMXh").replace(/ż/gm, "zzMXz").replace(/à/gm, "azMXa"));
+		const vocabulary = unique(body).sort().map((word) => {
+			return word.replace(/czMXc/gm, "ċ").replace(/gzMXg/gm, "ġ").replace(/hzMXh/gm, "ħ").replace(/zzMXz/gm, "ż").replace(/azMXa/gm, "à");
+		});
+
 		const processedStory = {
 			appointment: atts.appointment,
 			authorForename,
@@ -492,6 +491,7 @@ async function getAllStories() {
 			useProseStyling: !!atts.useProseStyling,
 			useSeparators: !!atts.useSeparators,
 			useSquareOnMobile: !!atts.useSquareOnMobile,
+			vocabulary,
 			wordcount: splitText(atts.body).length,
 		};
 
@@ -603,8 +603,8 @@ async function getAllStories() {
 		return processedStory;
 	});
 
-	const vocabulary = getWordFrequency(cumulativeBody);
-	storiesFormatted[0].vocabulary = vocabulary;
+	const cumulativeVocabulary = getWordFrequency(cumulativeBody);
+	storiesFormatted[0].cumulativeVocabulary = cumulativeVocabulary;
 	storiesFormatted[0].cumulativeWordcount = splitText(cumulativeBody).length;
 
 	// QUOTAS ********************************************************************************
