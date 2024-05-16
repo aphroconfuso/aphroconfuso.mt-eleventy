@@ -2,11 +2,11 @@
 
 // contradiction here
 // hover doesn't come in but full nav already has
-$mobile-breakpoint: 480px;
+$mobile-breakpoint: 1200px; //480px;
 $mobile-breakpoint-plusone: ($mobile-breakpoint + 1px);
 $tablet-mini-breakpoint: 620px;
 
-$tablet-breakpoint: 1080px;
+$tablet-breakpoint: 1200px; // 1080px;
 $laptop-breakpoint: 1200px;
 
 $max-content-width: 39rem;
