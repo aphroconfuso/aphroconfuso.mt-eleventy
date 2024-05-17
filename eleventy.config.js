@@ -97,6 +97,8 @@ module.exports = function(eleventyConfig) {
 			if (!i) {return;}
 			const fileLocation = decodeURIComponent(i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html"));
 			if (fileLocation.includes('localhost:')) handleError(`${ fileLocation } points to localhost!`);
+			if (fileLocation.includes('provi.:')) handleError(`${ fileLocation } points to provi!`);
+			if (fileLocation.includes('kltyvehasfpmuxan')) handleError(`${ fileLocation } points to klty`);
 			if (!fs.existsSync(fileLocation)) handleError(`ERROR: ${ fileLocation } is linked but does not exist!`);
 		});
 
