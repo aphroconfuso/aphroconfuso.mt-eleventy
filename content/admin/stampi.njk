@@ -1,0 +1,23 @@
+---
+pagination:
+  data: stories
+  size: 250
+  alias: story
+permalink: /admin/stampi/index.html
+---
+{% extends 'layouts/admin.njk' %}
+
+{% block content %}
+	<ul>
+		{% for story in stories %}
+			<li>
+				<a href="/{{ story.slug }}/">
+					<img src="{{ metadata.settings.imagesUrl + story.socialImage }}">
+					<header>
+						<h1>{{ story.title }}</h1>
+					</header>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

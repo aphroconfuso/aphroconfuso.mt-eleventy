@@ -10,9 +10,9 @@
 				<p>{{ promo.description | prettifyMaltese | safe }}</p>
 			{% endif %}
 		</div>
-		{% if promoFrom === 'Podcast' and promo.audioPlayers[0] %}
+		{% if showDurations and promo.audioPlayers[0] %}
 			<aside><p>{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }}</p></aside>
-		{% elif promo.wordcount %}
+		{% elif showLengths and promo.wordcount %}
 			<aside><p>{{ promo.wordcount | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</p></aside>
 		{% endif %}
 	</a>

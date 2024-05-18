@@ -77,6 +77,7 @@ async function getAllStories() {
 									introduction
 									moreToCome
 									pageUrl
+									podcastDate
 									podcastLengthMinutes
 									podcastNote
 									podcastUrl
@@ -448,6 +449,7 @@ async function getAllStories() {
 			introduction: atts.introduction,
 			isSequenceEpisode: !!sequenceData,
 			listable: atts.type !== 'Djarju' && atts.type !== 'Poddata',
+			listableAudio: atts.type !== 'Djarju' && atts.type !== 'Poddata' && !!atts.podcastDate,
 			listableDiary: atts.type === 'Djarju',
 			listablePodcast: atts.type === 'Poddata',
 			mainTitle,
@@ -457,6 +459,7 @@ async function getAllStories() {
 			moreToCome: atts.moreToCome,
 			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
 			podcastLengthMinutes: atts.podcastLengthMinutes,
+			podcastDate: atts.podcastDate,
 			podcastNote: atts.podcastNote,
 			podcastUrl: atts.podcastUrl,
 			postscript: atts.postscript,
