@@ -30,19 +30,29 @@
       }
     }
   }
-  @media all and (min-width: $laptop-breakpoint) {
+  @media all and (min-width: $tablet-breakpoint) {
     #grid-body {
       max-width: 100%;
       width: 100%;
+      ol {
+        margin-left: 0;
+        li {
+          float: left;
+          width: 50%;
+        }
+      }
     }
-    ol {
-      margin-left: 0;
-      li {
-        float: left;
-        width: 33%;
-        a:hover {
-          p.credit::before {
-            @include animated-underline-post();
+  }
+  @media all and (min-width: $laptop-breakpoint) {
+    #grid-body {
+      ol {
+        li {
+          float: left;
+          width: 33%;
+          a:hover {
+            p.credit::before {
+              @include animated-underline-post();
+            }
           }
         }
       }
