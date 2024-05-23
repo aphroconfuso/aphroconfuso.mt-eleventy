@@ -3,75 +3,17 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-article {
-  border-bottom: $body-margin-quarter solid $paper;
-  // margin: 0 auto $body-margin;
-  margin: 0 auto;
-  max-width: $max-width;
-  &.story {
-    header {
-      position: relative;
-      h1,
-      h2,
-      h3 {
-        margin-bottom: $body-margin-quarter;
-      }
-      header {
-        padding-bottom: $body-margin-double;
-      }
-      @media all and (min-width: $laptop-breakpoint) {
-        header {
-          padding-bottom: $body-margin-double;
-        }
-      }
-    }
-  }
-  aside {
-    color: $lighter-brown;
-    font-family: $sans;
-    font-size: $font-size-aside;
-    margin-bottom: $body-margin-half;
-  }
-  &.end-of-series
-    #grid-body
-    // section:not(#epigraphs-bottom):not(#endnote).body-text {
-    section.body-text-part-two {
-    p:last-of-type {
-      padding-bottom: $body-margin-double;
-      background-image: url(/img/deco-100.svg);
-      background-position: center bottom;
-      background-size: 100%;
-      background-repeat: no-repeat;
-    }
-  }
-}
-
-#grid-max-panel-left-top,
-#grid-max-panel-right-top,
-#grid-max-panel-left-bottom,
-#grid-max-panel-right-bottom,
-#grid-body {
-  margin: 0 auto;
-  max-width: $max-content-width;
-  width: 100%;
-}
-
-#grid-max-panel-left-bottom,
-#grid-max-panel-right-bottom {
-  margin: $body-margin-half auto 0 auto;
-}
-
-@media all and (max-width: ($laptop-breakpoint - 1)) {
-  .djarju #grid-body {
-    margin-bottom: $body-margin;
-  }
-}
-
 .reviewed {
   border: 1px solid $faint-line;
   font-size: 1rem;
   margin-bottom: $body-margin;
   padding: $body-margin-half;
+  p {
+    margin-bottom: $body-margin-half;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
   .title {
     font-size: 0.9rem;
     letter-spacing: 0.25px;
@@ -83,13 +25,6 @@ article {
   .publisher {
     white-space: nowrap;
   }
-  p {
-    margin-bottom: $body-margin-half;
-    &:last-of-type {
-      margin-bottom: 0;
-    }
-  }
-
   @media all and (min-width: $laptop-breakpoint) {
     .title,
     .author,
@@ -148,16 +83,69 @@ article {
   }
 }
 
+#grid-max-panel-left-top,
+#grid-max-panel-right-top,
+#grid-max-panel-left-bottom,
+#grid-max-panel-right-bottom,
+#grid-body {
+  margin: 0 auto;
+  max-width: $max-content-width;
+  width: 100%;
+}
+
+#grid-max-panel-left-bottom,
+#grid-max-panel-right-bottom {
+  margin: $body-margin-half auto 0 auto;
+}
+
 article {
+  border-bottom: $body-margin-quarter solid $paper;
+  // margin: 0 auto $body-margin;
+  margin: 0 auto;
+  max-width: $max-width;
+  &.story {
+    header {
+      position: relative;
+      h1,
+      h2,
+      h3 {
+        margin-bottom: $body-margin-quarter;
+      }
+      header {
+        padding-bottom: $body-margin-double;
+      }
+      @media all and (min-width: $laptop-breakpoint) {
+        header {
+          padding-bottom: $body-margin-double;
+        }
+      }
+    }
+  }
+  aside {
+    color: $lighter-brown;
+    font-family: $sans;
+    font-size: $font-size-aside;
+    margin-bottom: $body-margin-half;
+  }
+  &.end-of-series
+    #grid-body
+    // section:not(#epigraphs-bottom):not(#endnote).body-text {
+    section.body-text-part-two {
+    p:last-of-type {
+      padding-bottom: $body-margin-double;
+      background-image: url(/img/deco-100.svg);
+      background-position: center bottom;
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+  }
   @media all and (max-width: ($laptop-breakpoint - 1)) {
     .sequence-menu {
       display: none;
     }
   }
-}
 
-@media all and (min-width: $laptop-breakpoint) {
-  article {
+  @media all and (min-width: $laptop-breakpoint) {
     padding-bottom: 0;
     aside {
       margin-bottom: 0;

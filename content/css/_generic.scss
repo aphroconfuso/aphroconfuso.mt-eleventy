@@ -87,7 +87,7 @@
     white-space: nowrap;
     &::before {
       color: $deco-brown;
-      content: "§";
+      content: "\9632";
       display: inline-block;
       font-family: $decorative;
       width: $body-margin-half;
