@@ -252,7 +252,8 @@ async function getAllStories() {
 		if (aggressively) {
 			cleanedText = cleanedText.replace(/\b(b|f)(\’|\')/gi, "")
 				.replace(/\bi?(.)-/gi, "")
-				.replace(/\b(bi?|bħa|fi?|ġo|għa|mi|sa|ta)l?.?-?(.)-/gi, "")
+				.replace(/\b(bi?|bħa|fi?|ġo|għa|ma|mi|sa|ta|di|da)l?.?-?/gi, "")
+				// .replace(/\b(bi?|bħa|fi?|ġo|għa|mi|sa|ta)l?.?-?(.)-/gi, "")
 				.replace(/\b\’/gi, "")
 		}
 		// .replace(/f\’/g, "f’ ")

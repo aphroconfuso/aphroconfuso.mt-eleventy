@@ -1,0 +1,47 @@
+---
+pagination:
+  data: stories
+  size: 250
+  alias: story
+permalink: /awdjo/index.html
+---
+{% extends 'layouts/base.njk' %}
+
+{% block head %}
+	<title>Awdjo · Aphroconfuso</title>
+{% endblock %}
+
+{% block content %}
+	<article class="generic contents">
+		<header>
+			<ul><li class="header-label">&nbsp;</li></ul>
+			<h1>Awdjo</h1>
+			<h2>&nbsp;</h2>
+		</header>
+		<div class="container-generic">
+			<section id="grid-max-panel-left-top">
+				<!-- -->
+			</section>
+			<section id="grid-max-panel-right-top">
+				<!-- X -->
+			</section>
+			<section id="grid-body" class="generic-body-text contents">
+				<aside><p>{{ metadata.texts.contents | prettifyMaltese | safe}}</p></aside>
+				{% set promoFrom = "Awdjo" %}
+				{% set promos = stories | selectattr("listableAudio") | sort(true, false, "podcastDate") %}
+				{% set showEpisodeTitle = true %}
+				{% set showDurations = true %}
+				{% include "_promo_list.njk" %}
+			</section>
+			<section id="grid-max-panel-left-bottom">
+				<!-- X -->
+			</section>
+			<section id="grid-max-panel-right-bottom">
+				<!-- X -->
+			</section>
+		</div>
+	</article>
+	<script>
+		reportingTitle = "Werrej";
+	</script>
+{% endblock %}
