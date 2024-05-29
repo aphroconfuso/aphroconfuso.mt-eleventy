@@ -76,7 +76,7 @@ async function getHomepage() {
 					diaryEntries: stories(
 						publicationState: ${ fetchStatus }
 						pagination: { page: 1, pageSize: 3 },
-						sort: ["diaryDate:desc"],
+						sort: ["dateTimePublication:desc"],
 						filters: {type: { eq: "Djarju"}}
 					) {
 						${linkedStoryData}

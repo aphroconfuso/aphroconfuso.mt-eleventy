@@ -41,7 +41,7 @@ async function getAllContributors() {
 									surname
 									storiesAuthored(
 				            publicationState: ${ fetchStatus },
-										sort: "dateTimePublication:desc",
+										sort: ["diaryDate:desc", "dateTimePublication:desc"],
 										filters: {type: { notIn: ["Djarju", "Poddata"]}}
 									) {
 										${ linkedStoryData }
