@@ -74,8 +74,24 @@
   }
 }
 .contributor {
-  h2:not(.translated) {
-    display: none;
+  .wrote {
+    .author {
+      display: none;
+    }
+  }
+  .wrote {
+    .continuity {
+      margin-top: $body-margin;
+    }
+  }
+  .promo-list {
+    margin-top: $body-margin-half;
+  }
+  .translated {
+    display: block;
+    .translator {
+      display: none;
+    }
   }
 }
 .generic-menu {
@@ -87,7 +103,7 @@
     white-space: nowrap;
     &::before {
       color: $deco-brown;
-      content: "\9632";
+      content: "■"; // "\9632";
       display: inline-block;
       font-family: $decorative;
       width: $body-margin-half;

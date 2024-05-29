@@ -72,7 +72,7 @@ permalink: /{{ story.slug }}/index.html
 			{% else %}
 				<h1 data-pagefind-meta="title">
 					{{ story.mainTitle | prettifyMaltese | safe }}
-					{% if story.isSequenceEpisode %}
+					{% if story.isSequenceEpisode and story.sequenceEpisodeNumber > 0 %}
 						<span class="episode-number">#{{ story.sequenceEpisodeNumber }}</span>
 					{% endif %}
 					{% if story.subtitle %}
@@ -114,7 +114,7 @@ permalink: /{{ story.slug }}/index.html
 					{% if loop.first %}<ul class="generic-menu sequence-menu">{% endif %}
 						<li{% if not episode.slug %} class="active"{% endif %}>
 							{% if episode.slug %}<a href="/{{ episode.slug }}/">{% endif %}
-								{% if episode.date %}{{ episode.date | subjectDateShort }}{% else %}{{ episode.number }}.{% endif %}&nbsp;
+								{% if episode.date %}{{ episode.date | subjectDateShort }}{% elif episode.number > 0 %}{{ episode.number }}.{% endif %}&nbsp;
 								{{ episode.title | prettifyMaltese | safe }}</a>
 							{% if episode.slug %}</a>{% endif %}
 						</li>

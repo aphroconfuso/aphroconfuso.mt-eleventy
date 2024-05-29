@@ -37,7 +37,7 @@
 	{% else %}
 		<h1>
 			{{ promo.mainTitle | prettifyMaltese | safe }}
-			{% if promo.isSequenceEpisode %}
+			{% if promo.isSequenceEpisode and promo.sequenceEpisodeNumber > 0 %}
 				<span class="episode-number">#{{ promo.sequenceEpisodeNumber }}</span>
 			{% endif %}
 		</h1>
@@ -45,7 +45,7 @@
 	{% include '_authors.njk' %}
 	{% if promo.type === 'Djarju' or (showEpisodeTitle and promo.sequenceEpisodeTitle) %}
 		<h3>
-			{% if promoFrom === 'Werrej' and promo.sequenceEpisodes.length > 1 %}
+			{% if promoFrom === 'Werrej' and promo.sequenceEpisodes.length > 1 and promo.sequenceEpisodeNumber > 0 %}
 				<span class="episode-number">{{ promo.sequenceEpisodeNumber }}. </span>
 			{% endif %}
 			{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}
