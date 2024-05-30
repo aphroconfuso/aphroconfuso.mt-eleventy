@@ -30,9 +30,10 @@ permalink: /{{ contributor.slug }}/index.html
 				{% if contributor.storiesAuthored.length or contributor.diaryEntries.length %}
 					<div class="wrote">
 						<p class="continuity">Kitba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> fil-ġurnal:</p>
-						{% set promoFrom = contributor.name %}
-						{% set promos = contributor.storiesAuthored %}
 						{% set showLengths = true %}
+						{% set showEpisodeTitle = true %}
+						{% set promos = contributor.storiesAuthored | rejectattr("collaboration") %}
+						{% set promoFrom = contributor.name %}
 						{% include '_promo_list.njk' %}
 						{% set promos = contributor.diaryEntries %}
 						{% include '_promo_list.njk' %}
@@ -49,8 +50,15 @@ permalink: /{{ contributor.slug }}/index.html
 					<div class="podcasts">
 						<p class="continuity">Poddati ma’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
 						{% set promos = contributor.podcastEpisodes %}
-						{% set showLengths = false %}
 						{% set showDurations = true %}
+						{% set showLengths = false %}
+						{% include '_promo_list.njk' %}
+					</div>
+				{% endif %}
+				{% if contributor.storiesAuthored.length or contributor.diaryEntries.length %}
+					<div class="collaborated">
+						<p class="continuity">Kollaborazzjonijiet:</p>
+						{% set promos = contributor.storiesAuthored | selectattr("collaboration") %}
 						{% include '_promo_list.njk' %}
 					</div>
 				{% endif %}
