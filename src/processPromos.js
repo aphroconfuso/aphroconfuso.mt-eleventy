@@ -44,6 +44,7 @@ module.exports = (promos, storyAtts) => {
 			authorForename,
 			authorPronoun,
 			authorsString,
+			collaboration: authors && authors.length > 1,
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			description: promo.text || promoAtts.description,
 			subjectDate: promoAtts.diaryDate,

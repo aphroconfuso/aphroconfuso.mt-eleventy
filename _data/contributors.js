@@ -102,6 +102,7 @@ async function getAllContributors() {
 		const diaryEntries = processPromos(item.attributes.diaryEntries.data);
 		const podcastEpisodes = processPromos(item.attributes.podcastEpisodes.data);
 		const displayContributorName = getPersonName(item.attributes);
+
 		return {
 			bioNote: item.attributes.bioNote,
 			forename: item.attributes.forename,

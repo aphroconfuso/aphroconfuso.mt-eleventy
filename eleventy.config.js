@@ -21,7 +21,7 @@ const slugifyStringMaltese = require('./src/slugifyMaltese.js');
 
 const QRCode = require('qrcode');
 
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
 	// const cssDir = path.join('aphroconfuso.mt', 'site', 'css');
 	// if (!fs.existsSync(cssDir)) {
 	// 	fs.mkdir(cssDir, {recursive: true}, err => console.log(err));
@@ -48,10 +48,10 @@ module.exports = function(eleventyConfig) {
 
 	const handleError = (message, fatal = true) => {
 		if (!fatal || process.env.NODE_ENV === 'development') {
-		console.error('\x1b[31m%s\x1b[0m', message);
+			console.error('\x1b[31m%s\x1b[0m', message);
 			return;
 		}
-		throw new Error(`\x1b[31m${message}\x1b[0m`);
+		throw new Error(`\x1b[31m${ message }\x1b[0m`);
 	}
 
 	eleventyConfig.on('eleventy.before', async ({dir, results, runMode, outputMode}) => {
@@ -78,108 +78,114 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
-		// Check links ********************************************************************************************
-		let linksInContent = [], imagesInContent = [];
-		results.forEach(i => {
-			linksInContent = linksInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
-			imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|jpeg|webp)/g));
-			const anchorsInContent = i.content.match(/(?<=href="#).*?(?=">)/gm);
-			anchorsInContent && anchorsInContent.length && anchorsInContent.forEach(anchor => {
-				if (anchor && !i.content.match(`id=\"${ anchor }\"`)) {
-					handleError(`Link to "${ anchor }" but no anchor!`);
+		// SKIP ALL THESE IF WE ARE IN QUICKBUILD MODE
+		if (process.env.BUILDADMIN === 'True') {
+			console.log('Postproduction...');
+			// Check links ********************************************************************************************
+			let linksInContent = [], imagesInContent = [];
+			results.forEach(i => {
+				linksInContent = linksInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
+				imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|jpeg|webp)/g));
+				const anchorsInContent = i.content.match(/(?<=href="#).*?(?=">)/gm);
+				anchorsInContent && anchorsInContent.length && anchorsInContent.forEach(anchor => {
+					if (anchor && !i.content.match(`id=\"${ anchor }\"`)) {
+						handleError(`Link to "${ anchor }" but no anchor!`);
+					}
+				});
+				if (i.content.match(/xxx/i)) handleError(`XXX detected in ${ i.url } !!!`);
+			});
+
+			const uniqueLinksArray = [...new Set(linksInContent)].filter(n => n).sort();
+			uniqueLinksArray && uniqueLinksArray.forEach(i => {
+				if (!i) {return;}
+				const fileLocation = decodeURIComponent(i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html"));
+				if (fileLocation.includes('localhost:')) handleError(`${ fileLocation } points to localhost!`);
+				if (fileLocation.includes('provi.:')) handleError(`${ fileLocation } points to provi!`);
+				if (fileLocation.includes('kltyvehasfpmuxan')) handleError(`${ fileLocation } points to klty`);
+				if (!fs.existsSync(fileLocation)) handleError(`ERROR: ${ fileLocation } is linked but does not exist!`);
+			});
+
+			// Transfer images ****************************************************************************************
+			const uniqueImagesArray = [...new Set(imagesInContent)].filter(n => n).sort();
+			uniqueImagesArray.forEach(i => {
+				if (!i) {return;}
+				const saveToFileLocation = i.replace(/\/stampi/g, "./image-cache/");
+				if (fs.existsSync(saveToFileLocation)) {return;}
+				console.log(`Fetching ${ i } ...`);
+				const imageUrl = i.replace(/\/stampi/g, "https://stampi.aphroconfuso.mt");
+				fetchImage(imageUrl, saveToFileLocation);
+				// fetch(imageUrl).then(res =>
+				// 	res.body.pipe(fs.createWriteStream(saveToFileLocation))
+				// )
+			});
+			const webImagesFolder = "./aphroconfuso.mt/site/stampi";
+			if (!fs.existsSync(webImagesFolder)) {
+				fs.mkdirSync(webImagesFolder);
+			}
+			uniqueImagesArray.forEach(i => {
+				if (!i) {return;}
+				const image = i.replace(/\/stampi/g, "")
+				const cachedFileLocation = `./image-cache${ image }`;
+				const webFileLocation = `${ webImagesFolder }${ image }`;
+
+				if (fs.existsSync(webFileLocation)) {return;}
+				if (fs.existsSync(cachedFileLocation)) {
+					fs.copyFile(cachedFileLocation, webFileLocation, (err) => {
+						if (err) throw err;
+						console.log(`${ i } copied to web folder`);
+					});
 				}
 			});
-			if (i.content.match(/xxx/i)) handleError(`XXX detected in ${ i.url } !!!`);
-		});
+			fs.readdir("./aphroconfuso.mt/site/stampi", (err, files) => {
+				if (files.length < uniqueImagesArray.length) {
+					console.error("\x1b[33m%s\x1b[0m", `Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
+				}
+			});
 
-		const uniqueLinksArray = [...new Set(linksInContent)].filter(n => n).sort();
-		uniqueLinksArray && uniqueLinksArray.forEach(i => {
-			if (!i) {return;}
-			const fileLocation = decodeURIComponent(i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html"));
-			if (fileLocation.includes('localhost:')) handleError(`${ fileLocation } points to localhost!`);
-			if (fileLocation.includes('provi.:')) handleError(`${ fileLocation } points to provi!`);
-			if (fileLocation.includes('kltyvehasfpmuxan')) handleError(`${ fileLocation } points to klty`);
-			if (!fs.existsSync(fileLocation)) handleError(`ERROR: ${ fileLocation } is linked but does not exist!`);
-		});
-
-		// Transfer images ****************************************************************************************
-		const uniqueImagesArray = [...new Set(imagesInContent)].filter(n => n).sort();
-		uniqueImagesArray.forEach(i => {
-			if (!i) {return;}
-			const saveToFileLocation = i.replace(/\/stampi/g, "./image-cache/");
-			if (fs.existsSync(saveToFileLocation)) {return;}
-			console.log(`Fetching ${ i } ...`);
-			const imageUrl = i.replace(/\/stampi/g, "https://stampi.aphroconfuso.mt");
-			fetchImage(imageUrl, saveToFileLocation);
-			// fetch(imageUrl).then(res =>
-			// 	res.body.pipe(fs.createWriteStream(saveToFileLocation))
-			// )
-		});
-		const webImagesFolder = "./aphroconfuso.mt/site/stampi";
-		if (!fs.existsSync(webImagesFolder)) {
-			fs.mkdirSync(webImagesFolder);
-		}
-		uniqueImagesArray.forEach(i => {
-			if (!i) {return;}
-			const image = i.replace(/\/stampi/g, "")
-			const cachedFileLocation = `./image-cache${ image }`;
-			const webFileLocation = `${ webImagesFolder }${ image }`;
-
-			if (fs.existsSync(webFileLocation)) {return;}
-			if (fs.existsSync(cachedFileLocation)) {
-				fs.copyFile(cachedFileLocation, webFileLocation, (err) => {
-					if (err) throw err;
-					console.log(`${ i } copied to web folder`);
-				});
-			}
-		});
-		fs.readdir("./aphroconfuso.mt/site/stampi", (err, files) => {
-			if (files.length < uniqueImagesArray.length) {
-				console.error("\x1b[33m%s\x1b[0m", `Image discrepancy in folder: ${ files.length - uniqueImagesArray.length }!`);
-			}
-		});
-
-		// Create deco image backgrounds
-		const cssFile = fs.readdirSync('./aphroconfuso.mt/site/css/').filter(fn => fn.startsWith('style-'))[0];
-		if (!cssFile) handleError("Can't find a css file...");
-		const srcFile = './public/img/deco/frame-02-faint-TEMPLATE.svg';
-		const destFolder = './aphroconfuso.mt/site/img/deco/';
-		if (!fs.existsSync(destFolder)) fs.mkdirSync(destFolder, { recursive: true });
-		if (cssFile) {
-			console.log(`Found ${ cssFile } ...`);
-			const cssFileContents = fs.readFileSync('./aphroconfuso.mt/site/css/' + cssFile).toString();
-			const fileNames = cssFileContents.match(/frame-02-faint-hsl-[^\)]*?\.svg/g);
-			fileNames && fileNames.forEach(fileName => {
-				const [fileString, h, s, l] = fileName.match(/hsl-(\d+)-(\d+)-(\d+).*?\./);
-				const destFile = destFolder + 'frame-02-faint-' + fileString + 'svg';
-				if (fs.existsSync(destFile)) return;
-				console.log(`Creating file for ${ fileString } ...`);
-				fs.readFile(srcFile, 'utf8', (err, data) => {
-					if (err) return console.log(err);
-					var result = data.replace(/\#ff0000/g, `hsl(${h}, ${s}%, ${l}%)`);
-					fs.writeFile(destFile, result, 'utf8', (err) => {
+			// Create deco image backgrounds
+			const cssFile = fs.readdirSync('./aphroconfuso.mt/site/css/').filter(fn => fn.startsWith('style-'))[0];
+			if (!cssFile) handleError("Can't find a css file...");
+			const srcFile = './public/img/deco/frame-02-faint-TEMPLATE.svg';
+			const destFolder = './aphroconfuso.mt/site/img/deco/';
+			if (!fs.existsSync(destFolder)) fs.mkdirSync(destFolder, {recursive: true});
+			if (cssFile) {
+				console.log(`Found ${ cssFile } ...`);
+				const cssFileContents = fs.readFileSync('./aphroconfuso.mt/site/css/' + cssFile).toString();
+				const fileNames = cssFileContents.match(/frame-02-faint-hsl-[^\)]*?\.svg/g);
+				fileNames && fileNames.forEach(fileName => {
+					const [fileString, h, s, l] = fileName.match(/hsl-(\d+)-(\d+)-(\d+).*?\./);
+					const destFile = destFolder + 'frame-02-faint-' + fileString + 'svg';
+					if (fs.existsSync(destFile)) return;
+					console.log(`Creating file for ${ fileString } ...`);
+					fs.readFile(srcFile, 'utf8', (err, data) => {
 						if (err) return console.log(err);
+						var result = data.replace(/\#ff0000/g, `hsl(${ h }, ${ s }%, ${ l }%)`);
+						fs.writeFile(destFile, result, 'utf8', (err) => {
+							if (err) return console.log(err);
+						});
 					});
 				});
-			});
-			const hexFileNames = cssFileContents.match(/frame-02-faint-(......)\.svg/g);
-			hexFileNames && hexFileNames.forEach(fileName => {
-				const [fileString, hexColour] = fileName.match(/faint-(......)\./);
-				const destFile = destFolder + 'frame-02-' + fileString + 'svg';
-				if (fs.existsSync(destFile)) return;
-				console.log(`Creating file for ${ fileString }..`);
-				fs.readFile(srcFile, 'utf8', (err, data) => {
-					if (err) return console.log(err);
-					var result = data.replace(/\#ff0000/g, `#${hexColour}`);
-					fs.writeFile(destFile, result, 'utf8', (err) => {
+				const hexFileNames = cssFileContents.match(/frame-02-faint-(......)\.svg/g);
+				hexFileNames && hexFileNames.forEach(fileName => {
+					const [fileString, hexColour] = fileName.match(/faint-(......)\./);
+					const destFile = destFolder + 'frame-02-' + fileString + 'svg';
+					if (fs.existsSync(destFile)) return;
+					console.log(`Creating file for ${ fileString }..`);
+					fs.readFile(srcFile, 'utf8', (err, data) => {
 						if (err) return console.log(err);
+						var result = data.replace(/\#ff0000/g, `#${ hexColour }`);
+						fs.writeFile(destFile, result, 'utf8', (err) => {
+							if (err) return console.log(err);
+						});
 					});
 				});
-			});
-		}
+			}
 
-		// Index pages for search **************************************************************************************
-		execSync(`npx pagefind --site aphroconfuso.mt/site --glob \"**/*.html\"`, {encoding: 'utf-8'});
+			// Index pages for search **************************************************************************************
+			execSync(`npx pagefind --site aphroconfuso.mt/site --glob \"**/*.html\"`, {encoding: 'utf-8'});
+
+			// END QUICKBUILD
+		}
 	});
 
 	// App plugins

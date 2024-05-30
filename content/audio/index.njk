@@ -29,8 +29,8 @@ permalink: /awdjo/index.html
 				<aside><p>{{ metadata.texts.contents | prettifyMaltese | safe}}</p></aside>
 				{% set promoFrom = "Awdjo" %}
 				{% set promos = stories | selectattr("listableAudio") | sort(true, false, "podcastDate") %}
-				{% set showEpisodeTitle = true %}
 				{% set showDurations = true %}
+				{% set showEpisodeTitle = true %}
 				{% include "_promo_list.njk" %}
 			</section>
 			<section id="grid-max-panel-left-bottom">
@@ -42,6 +42,6 @@ permalink: /awdjo/index.html
 		</div>
 	</article>
 	<script>
-		reportingTitle = "Werrej";
+		reportingTitle = "Awdjo";
 	</script>
 {% endblock %}
