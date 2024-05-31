@@ -5,6 +5,7 @@
 	"scripts": {
 		"build": "npx @11ty/eleventy",
 		"dev": "NODE_ENV=development DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet --incremental --ignore-initial",
+		"fast": "BUILDADMIN=False NODE_ENV=development DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet --incremental --ignore-initial",
 		"interface": "node server.js",
 		"start": "npx @11ty/eleventy --serve --quiet --incremental",
 		"debug": "DEBUG=Eleventy* npx @11ty/eleventy",
