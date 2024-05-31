@@ -12,6 +12,11 @@
   text-overflow: ellipsis;
 }
 
+@mixin unclamp {
+  -webkit-line-clamp: 999 !important;
+  line-clamp: 999 !important;
+}
+
 @mixin ease-in($interval: 1s, $property: all) {
   -moz-transition: $property $interval ease-in;
   -o-transition: $property $interval ease-in;

@@ -88,13 +88,13 @@
     // "ga9 ga9 ga10 ga10 ga11 ga11"
     .ga-1 {
       p {
-        @include clamp(999);
+        @include unclamp();
         columns: 3;
       }
     }
     .ga-2 {
       p {
-        @include clamp(999);
+        @include unclamp();
         columns: 2;
       }
     }
