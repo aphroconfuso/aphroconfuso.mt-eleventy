@@ -10,5 +10,5 @@ module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subj
 		"ta’",
 		author,
 		translator && `(tr ${translator})`
-	].filter(e => e).join(" ");
+	].filter(e => e).join(" ").replace(/:: /, ": ");
 }

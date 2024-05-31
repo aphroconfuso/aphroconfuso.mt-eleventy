@@ -5,7 +5,7 @@
 @use "mixins-home-grids" as *;
 
 @mixin collection-colour($hue: 0, $saturation: 35%) {
-  $collection-ink: hsl($hue, $saturation, 30%);
+  $collection-ink: hsl($hue, $saturation, 50%);
   $collection-paper: hsl($hue, $saturation, 80%);
   background-color: $collection-paper;
   h3,
@@ -25,7 +25,7 @@
     a {
       padding: 0 2px;
       &:hover {
-        @include ease-in(0.35s);
+        @include ease-in(0.2s);
         background-color: $collection-paper;
         color: $collection-ink !important;
       }

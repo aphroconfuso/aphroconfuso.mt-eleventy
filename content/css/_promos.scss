@@ -4,61 +4,62 @@
 @use "mixins-etc" as *;
 
 .promo {
-	header {
-		margin: 0 0 $body-margin-half;
-		.header-label {
-			display: block;
-		}
-		h1,
-		h2 {
-			font-size: $font-size-largest;
-		}
-		h3 {
-			font-size: $body-font-size-slightly-larger;
-			padding-top: $body-margin-half;
-		}
-	}
-	p {
-		color: $lighter-ink;
-		@include clamp(7);
-	}
-	@media all and (min-width: $mobile-breakpoint-plusone) {
-		.appointments .promo p {
-			@include clamp(5);
-		}
-	}
+  header {
+    margin: 0 0 $body-margin-half;
+    .header-label {
+      display: block;
+    }
+    h1,
+    h2 {
+      font-size: $font-size-largest;
+    }
+    h3 {
+      font-size: $body-font-size-slightly-larger;
+      padding-top: $body-margin-half;
+    }
+  }
+  p {
+    color: $lighter-ink;
+    @include clamp(7);
+  }
+  @media all and (min-width: $mobile-breakpoint-plusone) {
+    .appointments .promo p {
+      @include clamp(5);
+    }
+  }
 }
 .home {
-	.promo {
-		header {
-			h1,
-			h2,
-			h3 {
-				font-size: $font-size-largest-home;
-			}
-			li.header-label {
-				display: none;
-			}
-		}
-	}
-	.promo-diary {
-		header {
-			h1 {
-				color: $lighter-brown;
-				text-decoration: none;
-			}
-			h3 {
-				font-size: $body-font-size-slightly-larger;
-			}
-			li.header-label {
-				display: block;
-				.subject-date {
-					display: none;
-				}
-			}
-		}
-	}
+  .promo {
+    header {
+      h1,
+      h2,
+      h3 {
+        font-size: $font-size-largest-home;
+      }
+      li.header-label {
+        display: none;
+      }
+    }
+  }
+  .promo-diary {
+    header {
+      h1 {
+        display: none;
+        // color: $lighter-brown;
+        // text-decoration: none;
+      }
+      h3 {
+        font-size: $body-font-size-slightly-larger;
+      }
+      li.header-label {
+        display: block;
+        .subject-date {
+          display: none;
+        }
+      }
+    }
+  }
 }
 .image-16-by-9 {
-	@include image-fit();
+  @include image-fit();
 }

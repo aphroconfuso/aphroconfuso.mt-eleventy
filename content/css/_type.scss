@@ -45,7 +45,7 @@ header {
 
   h3 {
     font-family: $serif, serif;
-    font-size: $font-size-story-episode-header-mobile;
+    font-size: $font-size-story-header-mobile;
     font-style: italic;
     font-weight: 600;
     line-height: $header-line-height;
@@ -374,14 +374,16 @@ aside,
 
 @media all and (min-width: $laptop-breakpoint) {
   h1,
-  h2 {
+  h2,
+  h3 {
     font-size: $font-size-story-header;
   }
-  Only bigger in main title .container {
-    h3 {
-      font-size: $font-size-story-episode-header;
-    }
-  }
+  // // Only bigger in main title
+  // .container {
+  //   h3 {
+  //     font-size: $font-size-story-episode-header;
+  //   }
+  // }
   h2 a {
     @include animated-underline($lighter-brown);
   }

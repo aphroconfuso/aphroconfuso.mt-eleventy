@@ -4,231 +4,231 @@
 @use "mixins-etc" as *;
 
 footer {
-	background-color: $light-brown;
-	border-top: 1px solid $dark-brown;
-	font-family: $sans;
-	font-size: $body-font-size;
-	margin-top: $body-margin;
-	overflow: hidden;
-	padding: $body-margin;
-	.footer-content {
-		max-width: $max-width;
-		margin: 0 auto;
-		color: $paper;
-		position: relative;
-	}
-	li {
-		white-space: nowrap;
-	}
-	nav {
-		a {
-			display: inline-block;
-			text-decoration: underline;
-			text-decoration-color: $light-brown;
-			text-decoration-thickness: 1px;
-			text-underline-offset: 2px;
-			text-decoration-skip-ink: auto;
-			height: ($body-margin * 1.5);
-			padding: 0.25rem 0;
-		}
-	}
+  background-color: $brown;
+  border-top: 1px solid $dark-brown;
+  font-family: $sans;
+  font-size: $body-font-size;
+  margin-top: $body-margin;
+  overflow: hidden;
+  padding: $body-margin;
+  .footer-content {
+    max-width: $max-width;
+    margin: 0 auto;
+    color: $paper;
+    position: relative;
+  }
+  li {
+    white-space: nowrap;
+  }
+  nav {
+    a {
+      display: inline-block;
+      text-decoration: underline;
+      text-decoration-color: $brown;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+      text-decoration-skip-ink: auto;
+      height: ($body-margin * 1.5);
+      padding: 0.25rem 0;
+    }
+  }
 
-	.logotype {
-		width: 50%;
-	}
+  .logotype {
+    width: 50%;
+  }
 
-	.copyright,
-	.email {
-		color: $dark-brown;
-		white-space: nowrap;
-	}
+  .copyright,
+  .email {
+    color: $dark-brown;
+    white-space: nowrap;
+  }
 
-	.footer-content {
-		display: grid;
-		grid-template-columns: auto;
-		grid-template-rows: auto auto auto auto auto auto;
-		gap: $body-margin $body-margin;
-		grid-template-areas:
-			"housekeeping"
-			"media"
-			"socials"
-			"podcast"
-			"logotype-container"
-			"copyright"
-			"email";
-	}
+  .footer-content {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto auto auto;
+    gap: $body-margin $body-margin;
+    grid-template-areas:
+      "housekeeping"
+      "media"
+      "socials"
+      "podcast"
+      "logotype-container"
+      "copyright"
+      "email";
+  }
 
-	#housekeeping {
-		grid-area: housekeeping;
-		columns: 3;
-	}
+  #housekeeping {
+    grid-area: housekeeping;
+    columns: 3;
+  }
 
-	#media {
-		grid-area: media;
-		columns: 3;
-	}
+  #media {
+    grid-area: media;
+    columns: 3;
+  }
 
-	#socials {
-		grid-area: socials;
-		columns: 3;
-	}
+  #socials {
+    grid-area: socials;
+    columns: 3;
+  }
 
-	#podcast {
-		grid-area: podcast;
-		columns: 3;
-	}
+  #podcast {
+    grid-area: podcast;
+    columns: 3;
+  }
 
-	#logotype-container {
-		grid-area: logotype-container;
-	}
+  #logotype-container {
+    grid-area: logotype-container;
+  }
 
-	#email {
-		grid-area: email;
-	}
+  #email {
+    grid-area: email;
+  }
 
-	#copyright {
-		grid-area: copyright;
-		position: relative;
-		a {
-			position: absolute;
-		}
-	}
+  #copyright {
+    grid-area: copyright;
+    position: relative;
+    a {
+      position: absolute;
+    }
+  }
 
-	#url,
-	#qrcode {
-		display: none;
-	}
+  #url,
+  #qrcode {
+    display: none;
+  }
 
-	nav a {
-		height: unset;
-	}
+  nav a {
+    height: unset;
+  }
 
-	nav li.header {
-		column-span: all;
-		font-style: italic;
-		padding: 0.25rem 0;
-		text-transform: lowercase;
-	}
+  nav li.header {
+    column-span: all;
+    font-style: italic;
+    padding: 0.25rem 0;
+    text-transform: lowercase;
+  }
 
-	#logotype-container a {
-		height: auto;
-	}
+  #logotype-container a {
+    height: auto;
+  }
 
-	#logotype-container a,
-	#email,
-	#copyright {
-		display: flex;
-		justify-content: center;
-	}
+  #logotype-container a,
+  #email,
+  #copyright {
+    display: flex;
+    justify-content: center;
+  }
 
-	@media all and (min-width: $mobile-breakpoint-plusone) {
-		.footer-content {
-			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-			grid-template-rows: auto auto;
-			gap: $body-margin $body-margin;
-			grid-template-areas:
-				"housekeeping housekeeping media media socials logotype-container"
-				"email email email email copyright logotype-container";
-		}
+  @media all and (min-width: $mobile-breakpoint-plusone) {
+    .footer-content {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: $body-margin $body-margin;
+      grid-template-areas:
+        "housekeeping housekeeping media media socials logotype-container"
+        "email email email email copyright logotype-container";
+    }
 
-		#housekeeping {
-			columns: 2;
-		}
+    #housekeeping {
+      columns: 2;
+    }
 
-		#socials {
-			columns: 2;
-		}
+    #socials {
+      columns: 2;
+    }
 
-		#media {
-			columns: 2;
-		}
+    #media {
+      columns: 2;
+    }
 
-		.logotype {
-			margin-top: -10px;
-			width: 80%;
-		}
+    .logotype {
+      margin-top: -10px;
+      width: 80%;
+    }
 
-		#email,
-		#copyright {
-			display: block;
-		}
+    #email,
+    #copyright {
+      display: block;
+    }
 
-		#logotype-container a {
-			justify-content: flex-end;
-		}
+    #logotype-container a {
+      justify-content: flex-end;
+    }
 
-		nav a {
-			height: auto;
-			padding: 0;
-			&:hover {
-				@include ease-in(0.25s);
-				text-decoration-color: $dark-brown;
-			}
-		}
-		nav menu a:hover {
-			text-decoration-color: $paper;
-		}
-		nav li.header {
-			padding: 0;
-		}
-		#podcast {
-			display: none;
-		}
-	}
+    nav a {
+      height: auto;
+      padding: 0;
+      &:hover {
+        @include ease-in(0.25s);
+        text-decoration-color: $dark-brown;
+      }
+    }
+    nav menu a:hover {
+      text-decoration-color: $paper;
+    }
+    nav li.header {
+      padding: 0;
+    }
+    #podcast {
+      display: none;
+    }
+  }
 
-	@media all and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
-		.logotype {
-			margin-top: 1rem;
-			width: 120%;
-		}
-		#copyright {
-			display: inline-flex;
-		}
-	}
+  @media all and (min-width: $mobile-breakpoint-plusone) and (max-width: ($laptop-breakpoint - 1)) {
+    .logotype {
+      margin-top: 1rem;
+      width: 120%;
+    }
+    #copyright {
+      display: inline-flex;
+    }
+  }
 
-	@media all and (min-width: $laptop-breakpoint) {
-		#housekeeping {
-			columns: 3;
-		}
+  @media all and (min-width: $laptop-breakpoint) {
+    #housekeeping {
+      columns: 3;
+    }
 
-		#socials {
-			columns: 2;
-		}
+    #socials {
+      columns: 2;
+    }
 
-		#media {
-			columns: 3;
-		}
-	}
+    #media {
+      columns: 3;
+    }
+  }
 }
 
 body.scrolling {
-	#scroll-tools {
-		opacity: 1;
-	}
+  #scroll-tools {
+    opacity: 1;
+  }
 }
 
 #scroll-tools {
-	@include ease-in();
-	font-family: $serif;
-	font-size: $body-font-size;
-	opacity: 0;
-	right: 1rem;
-	position: fixed;
-	font-weight: 500;
-	bottom: 1rem;
+  @include ease-in();
+  font-family: $serif;
+  font-size: $body-font-size;
+  opacity: 0;
+  right: 1rem;
+  position: fixed;
+  font-weight: 500;
+  bottom: 1rem;
 }
 #progress {
-	text-shadow: -2px -2px 0 $paper, 0 -2px 0 $paper, 2px -2px 0 $paper,
-		2px 0 0 $paper, 2px 2px 0 $paper, 0 2px 0 $paper, -2px 2px 0 $paper,
-		-2px 0 0 $paper;
-	vertical-align: -0.5rem;
+  text-shadow: -2px -2px 0 $paper, 0 -2px 0 $paper, 2px -2px 0 $paper,
+    2px 0 0 $paper, 2px 2px 0 $paper, 0 2px 0 $paper, -2px 2px 0 $paper,
+    -2px 0 0 $paper;
+  vertical-align: -0.5rem;
 }
 #arrow-top {
-	padding: 1rem;
+  padding: 1rem;
 }
 
 @media all and (min-width: $laptop-breakpoint) {
-	#scroll-tools {
-		display: none !important;
-	}
+  #scroll-tools {
+    display: none !important;
+  }
 }
