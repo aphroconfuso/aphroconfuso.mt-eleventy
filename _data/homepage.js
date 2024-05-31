@@ -148,7 +148,7 @@ async function getHomepage() {
 			const title = !!promoSequenceData ? promoSequenceData.attributes.title : storyAtts.title
 
 			// REFACTOR: rationalise titles mainTitle, subtitle, metaTitle, displayTitle, reportingTitle, fixPodcastTitle
-			let [mainTitle, subtitle] = title.split(/\w: /);
+			let [mainTitle, subtitle] = title.split(/(?<!:):(?!:)/);
 			mainTitle = mainTitle.replace(/:: /, ": ");
 
 			// REFACTOR: Save externally

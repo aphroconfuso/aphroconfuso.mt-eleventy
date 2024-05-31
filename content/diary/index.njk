@@ -29,6 +29,7 @@ permalink: /djarju/index.html
 				<aside><p>{{ metadata.texts.diary | prettifyMaltese | safe}}</p></aside>
 				{% set promoFrom = "Djarju" %}
 				{% set promos = stories | selectattr("listableDiary") %}
+				{% set hideEpisodeNumber = true %}
 				{% set showEpisodeTitle = true %}
 				{% set showLengths = true %}
 				{% include "_promo_list.njk" %}

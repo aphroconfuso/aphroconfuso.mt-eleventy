@@ -3,21 +3,24 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-li.multiple-episodes {
-  h1 .episode-number {
-    display: none;
-  }
-  p {
-    @include clamp(3);
-  }
-  & + li.multiple-episodes {
-    h1,
-    h2 {
+.contents,
+.contributor {
+  li.multiple-episodes {
+    h1 .episode-number {
       display: none;
     }
-  }
-  h3 .episode-number {
-    display: inline;
-    color: $lighter-brown;
+    p {
+      @include clamp(3);
+    }
+    & + li.multiple-episodes {
+      h1,
+      h2 {
+        display: none;
+      }
+    }
+    h3 .episode-number {
+      display: inline;
+      color: $lighter-brown;
+    }
   }
 }

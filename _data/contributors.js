@@ -96,25 +96,29 @@ async function getAllContributors() {
 
 	const countPronoun = (pronoun) => contributors.filter(i => (i.attributes.affiliation !== i.attributes.forename) && i.attributes.pronoun === pronoun).length;
 
-	const contributorsFormatted = contributors.map((item) => {
-		const storiesAuthored = processPromos(item.attributes.storiesAuthored.data);
+	const contributorsFormatted = contributors.map(item => {
+		const allStoriesAuthored = processPromos(item.attributes.storiesAuthored.data);
 		const storiesTranslated = processPromos(item.attributes.storiesTranslated.data);
 		const diaryEntries = processPromos(item.attributes.diaryEntries.data);
 		const podcastEpisodes = processPromos(item.attributes.podcastEpisodes.data);
 		const displayContributorName = getPersonName(item.attributes);
 
+		const storiesAuthored = allStoriesAuthored.filter(item => !item.collaboration);
+		const collaborationsAuthored = allStoriesAuthored.filter(item => item.collaboration);
+
 		return {
 			bioNote: item.attributes.bioNote,
+			collaborationsAuthored,
+			diaryEntries: diaryEntries,
 			forename: item.attributes.forename,
 			id: item.id,
 			metaDescription: smartTruncate(stripTags(item.attributes.bioNote), 155),
 			metaTitle: `${ displayContributorName } · Aphroconfuso`,
-			slug: slugifyMaltese(displayContributorName),
-			storiesAuthored: storiesAuthored,
-			storiesTranslated: storiesTranslated,
-			diaryEntries: diaryEntries,
-			podcastEpisodes: podcastEpisodes,
 			name: displayContributorName,
+			podcastEpisodes: podcastEpisodes,
+			slug: slugifyMaltese(displayContributorName),
+			storiesAuthored,
+			storiesTranslated,
 		};
 	});
 

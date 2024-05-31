@@ -29,7 +29,10 @@ module.exports = (promos, storyAtts) => {
 		const sequenceTitle = sequence && sequence.title;
 		const title = sequenceTitle || promoAtts.title;
 		const sequenceEpisodeTitle = sequence && promoAtts.title;
-		const [mainTitle, subtitle] = title.split(": ");
+
+		// REFACTOR: rationalise titles mainTitle, subtitle, metaTitle, displayTitle, reportingTitle, fixPodcastTitle
+		let [mainTitle, subtitle] = title.split(/(?<!:):(?!:)/);
+		mainTitle = mainTitle.replace(/:: /, ": ");
 
 		const storycollections = promoAtts.collections && processCollections(promoAtts.collections.data);
 

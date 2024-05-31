@@ -286,7 +286,7 @@ permalink: /{{ story.slug }}/index.html
 	</aside>
 	<script>
 		audioUrls = { "songs": {{ story.audioUrlsString | safe }} };
-		author = "{{ story.authorsString | safe }}" || null;
+		author = "{{ story.authorsString }}" || null;
 		collections = "{{ story.storycollectionsString }}" || null;
 		issueMonth = "{{ story.issueMonth | slugify }}" || null;
 		issueMonthYear = "{{ story.issueMonthYear | slugify }}" || null;

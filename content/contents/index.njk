@@ -29,7 +29,6 @@ permalink: /werrej/index.html
 				<aside><p>{{ metadata.texts.contents | prettifyMaltese | safe}}</p></aside>
 				{% set promoFrom = "Werrej" %}
 				{% set promos = stories | selectattr("listable") | sort(false, false, "sortTitle") %}
-				{% set showEpisodeNumber = true %}
 				{% set showEpisodeTitle = true %}
 				{% set showLengths = true %}
 				{% include "_promo_list.njk" %}

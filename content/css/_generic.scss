@@ -72,16 +72,26 @@
   iframe {
     border: none;
   }
+  &.diaries {
+    header {
+      h1 {
+        display: none;
+      }
+    }
+  }
 }
 .contributor {
   .wrote {
     .author {
       display: none;
     }
-  }
-  .wrote {
     .continuity {
       margin-top: $body-margin;
+    }
+  }
+  .diarised {
+    h1 {
+      display: none;
     }
   }
   .promo-list {

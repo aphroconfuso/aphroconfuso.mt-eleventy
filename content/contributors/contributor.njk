@@ -27,22 +27,35 @@ permalink: /{{ contributor.slug }}/index.html
 				<div data-pagefind-body data-pagefind-weight="1">
 					{{ contributor.bioNote | prettifyMaltese | safe }}
 				</div>
-				{% if contributor.storiesAuthored.length or contributor.diaryEntries.length %}
+				{% if contributor.storiesAuthored.length %}
 					<div class="wrote">
 						<p class="continuity">Kitba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> fil-ġurnal:</p>
 						{% set showLengths = true %}
 						{% set showEpisodeTitle = true %}
-						{% set promos = contributor.storiesAuthored | rejectattr("collaboration") %}
+						{% set promos = contributor.storiesAuthored %}
 						{% set promoFrom = contributor.name %}
 						{% include '_promo_list.njk' %}
+					</div>
+				{% endif %}
+				{% if contributor.diaryEntries.length %}
+					<div class="diarised">
+						<p class="continuity">Entrati mid-djarju ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
+						{% set hideEpisodeNumber = true %}
 						{% set promos = contributor.diaryEntries %}
 						{% include '_promo_list.njk' %}
 					</div>
 				{% endif %}
 				{% if contributor.storiesTranslated.length %}
 					<div class="translated">
-						<p class="continuity">Traduzzjonijiet ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> fil-ġurnal:</p>
+						<p class="continuity">Traduzzjonijiet ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
 						{% set promos = contributor.storiesTranslated %}
+						{% include '_promo_list.njk' %}
+					</div>
+				{% endif %}
+				{% if contributor.collaborationsAuthored.length %}
+					<div class="collaborated">
+						<p class="continuity">Kollaborazzjonijiet:</p>
+						{% set promos = contributor.collaborationsAuthored %}
 						{% include '_promo_list.njk' %}
 					</div>
 				{% endif %}
@@ -52,13 +65,6 @@ permalink: /{{ contributor.slug }}/index.html
 						{% set promos = contributor.podcastEpisodes %}
 						{% set showDurations = true %}
 						{% set showLengths = false %}
-						{% include '_promo_list.njk' %}
-					</div>
-				{% endif %}
-				{% if contributor.storiesAuthored.length or contributor.diaryEntries.length %}
-					<div class="collaborated">
-						<p class="continuity">Kollaborazzjonijiet:</p>
-						{% set promos = contributor.storiesAuthored | selectattr("collaboration") %}
 						{% include '_promo_list.njk' %}
 					</div>
 				{% endif %}
