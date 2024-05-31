@@ -79,7 +79,7 @@ module.exports = function (eleventyConfig) {
 
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
 		// SKIP ALL THESE IF WE ARE IN QUICKBUILD MODE
-		if (process.env.BUILDADMIN === 'True') {
+		if (process.env.BUILDADMIN !== 'False') {
 			console.log('Postproduction...');
 			// Check links ********************************************************************************************
 			let linksInContent = [], imagesInContent = [];
