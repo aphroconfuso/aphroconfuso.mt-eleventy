@@ -343,7 +343,8 @@ async function getAllStories() {
 
 		// REFACTOR: rationalise titles mainTitle, subtitle, metaTitle, displayTitle, reportingTitle, fixPodcastTitle
 		const title = sequenceData && sequenceData.attributes.title || atts.title;
-		const [mainTitle, subtitle] = title.split(": ");
+		let [mainTitle, subtitle] = title.split(/\w: /);
+		mainTitle = mainTitle.replace(/:: /, ": ");
 
 		const displayTitle = makePageTitle(
 			atts.title,
