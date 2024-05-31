@@ -88,15 +88,17 @@
     // "ga9 ga9 ga10 ga10 ga11 ga11"
     .ga-1 {
       margin-bottom: $body-margin-half;
-      // specificity is required
-      a:not(.promo-djarju).promo-plain.is-episode p {
-        @include clamp(999);
+      header {
+        margin-bottom: $body-margin-half !important;
+      }
+      p {
+        @include unclamp();
         columns: 3;
       }
     }
     .ga-2 {
       p {
-        @include clamp(999);
+        @include unclamp();
         columns: 2;
       }
     }
