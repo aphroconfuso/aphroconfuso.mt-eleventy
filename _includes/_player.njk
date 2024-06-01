@@ -4,16 +4,18 @@
 			<source src="{{ player.url }}" type="audio/mpeg">
 		</audio>
 	</div>
-	<figcaption>
-		{% if player.podcastNote %}
-			{{ player.podcastNote | restrictHtml | prettifyMaltese | safe }}
-		{% elif player.type !== 'Poddata' and player.useDefaultPodcastMessage %}
-			<p>
-				{{ player.authorName | prettifyMaltese | safe }} {{ player.reads }} “{{ player.reportingTitle | prettifyMaltese | safe }}”.
-				{% if loop.last %}
-					<span class="hide-mobile">{{ metadata.texts.podcastMessage | safe }}</span>
-				{% endif %}
-			</p>
-		{% endif %}
-</figcaption>
+	{% if player.podcastNote and player.useDefaultPodcastMessage %}
+		<figcaption>
+			{% if player.podcastNote %}
+				{{ player.podcastNote | restrictHtml | prettifyMaltese | safe }}
+			{% elif player.type !== 'Poddata' and player.useDefaultPodcastMessage %}
+				<p>
+					{{ player.authorName | prettifyMaltese | safe }} {{ player.reads }} “{{ player.reportingTitle | prettifyMaltese | safe }}”.
+					{% if loop.last %}
+						<span class="hide-mobile">{{ metadata.texts.podcastMessage | safe }}</span>
+					{% endif %}
+				</p>
+			{% endif %}
+		</figcaption>
+	{% endif %}
 </figure>
