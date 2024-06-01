@@ -12,13 +12,13 @@ const complementaryColours = {
 	marzu: "#779933",
 	april: "#339977",
 	mejju: "#993338",
-	gunju: "#336b99",
+	"ġunju": "#336b99",
 	lulju: "#529933",
 	awwissu: "#998d33",
 	settembru: "#339999",
 	ottubru: "#743399",
 	novembru: "#339955",
-	dicembru: "#334499"
+	"diċembru": "#334499"
 };
 
 async function getHomepage() {
