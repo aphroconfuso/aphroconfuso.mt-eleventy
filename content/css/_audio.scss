@@ -9,7 +9,7 @@ aside#audio {
 
 figure.audio {
   margin-bottom: $body-margin;
-  min-height: 54px;
+  min-height: 24px;
   opacity: 0;
   &.initialised {
     @include ease-in(0.5s);
@@ -34,18 +34,6 @@ figure.audio {
 }
 
 // *****************************************************
-
-// colors
-$shadow-light: rgba(0, 0, 0, 0.07);
-$shadow-medium: rgba(0, 0, 0, 0.32);
-$shadow-dark: rgba(0, 0, 0, 0.62);
-$white: #fff;
-$primary: #44bfa3;
-$gray: #999;
-$light-gray: #b0b0b0;
-$lighter-gray: #d8d8d8;
-$text: #55606e;
-$transparent: rgba(0, 0, 0, 0);
 
 @keyframes spin {
   from {
@@ -81,7 +69,7 @@ $transparent: rgba(0, 0, 0, 0);
     .volume__controls,
     .download {
       &:hover {
-        outline: dotted 1px $gray;
+        outline: dotted 1px $lighterer-brown;
       }
     }
   }
@@ -101,8 +89,8 @@ $transparent: rgba(0, 0, 0, 0);
         bottom: 2px;
         width: 16px;
         height: 16px;
-        border: 2px solid $light-gray;
-        border-right-color: $transparent;
+        border: 2px solid $lighterer-brown;
+        border-right-color: transparent;
         border-radius: 50%;
         animation: spin 0.4s linear infinite;
       }
@@ -121,7 +109,7 @@ $transparent: rgba(0, 0, 0, 0);
 
   .slider {
     flex-grow: 1;
-    background-color: $lightest-brown;
+    background-color: $lighterer-brown;
     cursor: pointer;
     position: relative;
 
@@ -135,7 +123,7 @@ $transparent: rgba(0, 0, 0, 0);
         height: 16px;
         width: 16px;
         // border-radius: 8px;
-        background-color: $lightest-brown;
+        background-color: $lighterer-brown;
         position: absolute;
         pointer-events: all;
         // box-shadow: 0 1px 1px 0 $shadow-medium;
@@ -143,7 +131,7 @@ $transparent: rgba(0, 0, 0, 0);
         &::after {
           content: "";
           display: block;
-          background: $transparent;
+          background: transparent;
           width: 200%;
           height: 200%;
           margin-left: -50%;
@@ -207,7 +195,7 @@ $transparent: rgba(0, 0, 0, 0);
 
       &.open {
         path {
-          fill: $primary;
+          fill: $lighterer-brown;
         }
       }
     }
@@ -215,7 +203,7 @@ $transparent: rgba(0, 0, 0, 0);
     .volume__controls {
       width: 30px;
       height: 135px;
-      background-color: $shadow-dark;
+      background-color: $brown;
       border-radius: 7px;
       position: absolute;
       left: -3px;
@@ -258,8 +246,8 @@ $transparent: rgba(0, 0, 0, 0);
       }
 
       &.middle {
-        bottom: -54px;
-        left: 54px;
+        bottom: -24px;
+        left: 24px;
       }
 
       &.bottom {

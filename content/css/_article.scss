@@ -95,7 +95,8 @@
 
 #grid-max-panel-left-bottom,
 #grid-max-panel-right-bottom {
-  margin: $body-margin-half auto 0 auto;
+  // margin: $body-margin-half auto 0 auto;
+  margin: 0 auto;
 }
 
 article {

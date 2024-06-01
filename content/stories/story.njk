@@ -279,6 +279,7 @@ permalink: /{{ story.slug }}/index.html
 		{% endif %}
 	</article>
 	<aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
+		{% set hideEpisodeNumber = true %}
 		{% set promoFrom = story.reportingTitle %}
 		{% set promos = story.endPromos %}
 		{% set showEpisodeTitle = true %}

@@ -33,11 +33,10 @@
 		<h1>
 			{{ promo.title | fixPodcastTitle | prettifyMaltese | safe }}
 		</h1>
-	{# {% elif promo.type === 'Djarju' %} #}
-	{% else %}
+	{% elif promo.type !== 'Djarju' %}
 		<h1>
 			{{ promo.mainTitle | prettifyMaltese | safe }}
-			{% if promo.isSequenceEpisode and promo.sequenceEpisodeNumber > 0 and not hideEpisodeNumber %}
+			{% if promo.isSequenceEpisode and promo.sequenceEpisodeNumber > 0 %}
 				<span class="episode-number">#{{ promo.sequenceEpisodeNumber }}</span>
 			{% endif %}
 		</h1>
@@ -46,7 +45,7 @@
 	{% if promo.type === 'Djarju' or (showEpisodeTitle and promo.sequenceEpisodeTitle) %}
 		<h3>
 			{# {% if promo.sequenceEpisodes.length > 1 and promo.sequenceEpisodeNumber > 0 and not hideEpisodeNumber %} #}
-			{% if promo.sequenceEpisodeNumber > 0 and not hideEpisodeNumber %}
+			{% if promo.sequenceEpisodeNumber > 0 and hideEpisodeNumber !== true %}
 				<span class="episode-number">{{ promo.sequenceEpisodeNumber }}. </span>
 			{% endif %}
 			{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}

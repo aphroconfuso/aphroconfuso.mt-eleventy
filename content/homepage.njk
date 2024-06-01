@@ -53,6 +53,7 @@ permalink: /index.html
 				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 				<div class="ga-{{ loop.index }}">
 					<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+						{% set hideEpisodeNumber = true %}
 						{% include "_promo_header.njk" %}
 						<div class="{{ promo.cssClass }}">
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
@@ -64,6 +65,7 @@ permalink: /index.html
 				<a class="label" href="/il-kliem-fit-teorija/">Il-Kliem fit-Teorija</a>
 				{% for promo in homepage.promos | selectattr("isTypeTerm") %}
 					<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+						{% set hideEpisodeNumber = true %}
 						{% include "_promo_header.njk" %}
 						<div class="{{ promo.cssClass }}">
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
@@ -76,6 +78,7 @@ permalink: /index.html
 				<div class="ga-image-{{ loop.index }}">
 					<a class="{{ promo.issueMonth | slugify }} promo promo-picture-1 story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% set showEpisodeTitle = true %}
+						{% set hideEpisodeNumber = true %}
 						{% include "_promo_header.njk" %}
 						{% set imageMode = 'promo' %}
 						{% set imageCrop = promo.imageCrop or 'landscape' %}
@@ -111,6 +114,7 @@ permalink: /index.html
 				{% for promo in homepage.diaryEntries %}
 					<li>
 						<a class="{{ promo.issueMonth | slugify }} promo promo-diary story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+							{% set hideEpisodeNumber = true %}
 							{% include "_promo_header.njk" %}
 							<div class="{{ promo.cssClass }}">
 								<p>{{ promo.description | prettifyMaltese | safe }}</p>
