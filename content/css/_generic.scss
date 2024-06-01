@@ -112,8 +112,8 @@
     letter-spacing: -0.5px;
     white-space: nowrap;
     &::before {
-      color: $deco-brown;
-      content: "■"; // "\9632";
+      color: $paper;
+      content: "■";
       display: inline-block;
       font-family: $decorative;
       width: $body-margin-half;
