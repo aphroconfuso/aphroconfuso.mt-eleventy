@@ -4,7 +4,7 @@
 			<source src="{{ player.url }}" type="audio/mpeg">
 		</audio>
 	</div>
-	{% if player.podcastNote and player.useDefaultPodcastMessage %}
+	{% if player.podcastNote or player.useDefaultPodcastMessage %}
 		<figcaption>
 			{% if player.podcastNote %}
 				{{ player.podcastNote | restrictHtml | prettifyMaltese | safe }}
