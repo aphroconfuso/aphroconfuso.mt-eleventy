@@ -95,8 +95,7 @@
 
 #grid-max-panel-left-bottom,
 #grid-max-panel-right-bottom {
-  // margin: $body-margin-half auto 0 auto;
-  margin: 0 auto;
+  margin: $body-margin auto 0 auto;
 }
 
 article {
@@ -153,6 +152,10 @@ article {
     }
     aside + aside {
       margin-top: $body-margin;
+    }
+    #grid-max-panel-left-bottom,
+    #grid-max-panel-right-bottom {
+      margin: 0 auto;
     }
   }
 }

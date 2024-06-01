@@ -461,7 +461,7 @@ module.exports = function (eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("endDotify", function endDotify(text) {
-		let fixedText = (text || []).replace(/([^ ]+)([\.\?\!]|<span class="pull">.<\/span>)\s*<\/(p|blockquote)>\s*$/, '<l-m>$1 <span class="end-dot">.</span></l-m></$3>');
+		let fixedText = (text || []).replace(/([^ ]+)([\.]|<span class="pull">.<\/span>)\s*<\/(p|blockquote)>\s*$/, '<l-m>$1 <span class="end-dot">.</span></l-m></$3>');
 		if (!fixedText.match(/class=\"end\-dot\"/m)) {
 			fixedText = text.replace(/<\/(p|blockquote)>\s*$/, '&nbsp;<span class="end-dot">.</span></$1>')
 				.replace(/\s*<\/td>\s*<\/tr>\s*<\/tbody>\s*<\/table>\s*$/, '<span class="end-dot">.</span></td></tr></tbody></table>');
