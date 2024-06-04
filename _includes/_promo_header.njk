@@ -15,7 +15,7 @@
 		</li>
 	{% elif promo.type === 'Djarju' %}
 		<li class="header-label">
-			Djarju
+			<span class="header-djarju">Djarju</span>
 			{% if promo.subjectDate %}
 				<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
 			{% endif %}
@@ -29,23 +29,25 @@
 		</li>
 	{% endfor %}
 	</ul>
-	{% if promo.type === 'Poddata' %}
-		<h1>
-			{{ promo.title | fixPodcastTitle | prettifyMaltese | safe }}
-		</h1>
-	{% elif promo.type !== 'Djarju' %}
-		<h1>
-			{{ promo.mainTitle | prettifyMaltese | safe }}
-			{% if promo.isSequenceEpisode and promo.sequenceEpisodeNumber > 0 %}
-				<span class="episode-number">#{{ promo.sequenceEpisodeNumber }}</span>
-			{% endif %}
-		</h1>
+	{% if omitTitle !== true %}
+		{% if promo.type === 'Poddata' %}
+			<h1>
+				{{ promo.title | fixPodcastTitle | prettifyMaltese | safe }}
+			</h1>
+		{% elif promo.type !== 'Djarju' %}
+			<h1>
+				{{ promo.mainTitle | prettifyMaltese | safe }}
+				{% if promo.isSequenceEpisode and promo.sequenceEpisodeNumber > 0 %}
+					<span class="episode-number">#{{ promo.sequenceEpisodeNumber }}</span>
+				{% endif %}
+			</h1>
+		{% endif %}
 	{% endif %}
 	{% include '_authors.njk' %}
 	{% if promo.type === 'Djarju' or (showEpisodeTitle and promo.sequenceEpisodeTitle) %}
 		<h3>
-			{# {% if promo.sequenceEpisodes.length > 1 and promo.sequenceEpisodeNumber > 0 and not hideEpisodeNumber %} #}
-			{% if promo.sequenceEpisodeNumber > 0 and hideEpisodeNumber !== true %}
+			{# {% if promo.sequenceEpisodes.length > 1 and promo.sequenceEpisodeNumber > 0 and not omitEpisodeNumber %} #}
+			{% if promo.sequenceEpisodeNumber > 0 and omitEpisodeNumber !== true %}
 				<span class="episode-number">{{ promo.sequenceEpisodeNumber }}. </span>
 			{% endif %}
 			{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}

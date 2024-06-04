@@ -369,6 +369,18 @@ module.exports = function (eleventyConfig) {
 			.join('<p class="poetry-separator">*</p>');
 	});
 
+	// eleventyConfig.addFilter("versify", function versify(text1) {
+	// 	const text = text1.replace("&nbsp;", "")
+	// 		.replace(/<p>\s*<\/p>\s*/gm, '#')
+	// 		.replace(/#\s*#/gm, '#');
+	// 	return stripTags(text, ['i', 'em'])
+	// 		.split('#')
+	// 		.map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
+	// 		.join()
+	// 		.replace(/<br\/><br\/>/gm, '</p>\n<p>')
+	// 		.replace(/<p>*<\/p>/gm, '<p class="poetry-separator">*</p>');
+	// });
+
 	eleventyConfig.addFilter("versifyDescription", function versifyDescription(text) {
 		return stripTags(text || [], ['i', 'em']).replace(/\n/gm, '<br/>');
 	});
@@ -377,7 +389,7 @@ module.exports = function (eleventyConfig) {
 		let decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '');
 		decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
 			.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
-			.replace(/<p>\#<\/p>\s*(<hr>)?(<h[56])>(.*?<\/h[56]>)?\s*<p>/gm, '$1$2 class="break">$3<p>')
+			.replace(/<p>\#<\/p>\s*(<hr>)?(<h[56].*?<\/h[56]>)?\s*<p>([\w\-\’]+)/gm, '$1$2<p class="break"><span class="initial">$3</span>')
 			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
 			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
 			.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
@@ -430,22 +442,16 @@ module.exports = function (eleventyConfig) {
 	// .replace(/<p(^\>*?)>(.)([\w\-]+)/, '<p$1><span class="initial">$2$3</span>')
 	// .replace(/<p>\#<\/p>\s*<p>(.)([\w\-\’]+)/gm, '<p class="break"><span class="initial">$1$2</span>')
 
-	eleventyConfig.addFilter("diarySectionise", function diarySectionise(text, splitText, beforeOrAfter, dontUseDropcaps) {
-		let decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '');
-		decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
-			.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
-			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
-			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
-			.replace('drop-I">I</span>e', 'drop-Ie">IE</span>')
-			.replace('drop-G">G</span>ħ', 'drop-Għ">GĦ</span>')
-			.replace('drop-M">M</span>XC', 'drop-Ċ">Ċ</span>')
-			.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
-			.replace('drop-M">M</span>XH', 'drop-Ħ">Ħ</span>')
-			.replace('drop-M">M</span>XZ', 'drop-Ż">Ż</span>')
-			.replace('drop-1">1</span>6', 'drop-16">16</span>')
-			.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
-		return decoratedText;
-	});
+	// eleventyConfig.addFilter("diarySectionise", function diarySectionise(text, splitText, beforeOrAfter, dontUseDropcaps) {
+	// 	let decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '');
+	// 	decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
+	// 		.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
+	// 		.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
+	// 		.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+	// 		.replace(/<p>\#<\/p>\s*(<hr>)?(<h[56].*?<\/h[56]>)?\s*<p>(.)([\w\-\’]+)/gm, '$1$2<p class="break"><span class="initial"><span class="dropcap drop-$3">$3</span>$4</span>')
+	// 		.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
+	// 	return decoratedText;
+	// });
 
 	eleventyConfig.addFilter("stripDataAttributes", function stripDataAttributes(html) {
 		if (!html || !html.match(/data-/)) return html;

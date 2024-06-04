@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
-const stripTags = require("striptags");
 const processPromos = require("../src/processPromos.js");
+const makePageTitle = require("../src/makePageTitle.js");
+const makeTitleSlug = require("../src/makeTitleSlug.js");
 
 const { imageData, linkedStoryData } = require("./_fragments.js");
 
@@ -62,16 +63,50 @@ async function getAllsequences() {
 		const storiesFormatted = !!atts.stories.data.length && processPromos(atts.stories.data);
 		if (!atts.promoImage) console.log("Image missing! An image was probably deleted from the media library after it had been added as the social image.");
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
+		const sequenceTitle = atts.title || null;
+
+		// Get the author data from first story
+		// 	REVIEW: in the future it may be necessary to collate from all stories
+		const { authorsType, authors, authorForename, authorsString, authorPronoun, translator, type } = storiesFormatted.length && storiesFormatted[0];
+
+		const displayTitle = makePageTitle(
+			sequenceTitle,
+			authorsString,
+			translator,
+			null,
+			null,
+			null,
+			null,
+			type,
+		);
+
+		const pageSlug = makeTitleSlug(
+			sequenceTitle,
+			authorsString,
+			translator,
+			null,
+			null,
+			null,
+			null,
+			type,
+		);
 
 		return {
-			id: sequence.id,
+			authorForename,
+			authorPronoun,
+			authors,
+			authorsString,
+			authorsType,
 			description: atts.description,
+			displayTitle,
+			id: sequence.id,
 			moreToCome: atts.moreToCome,
-			slug: atts.title || null,
+			slug: pageSlug,
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			stories: storiesFormatted,
-			title: atts.title || null,
+			title: sequenceTitle,
+			translator,
 		}
 	});
   return sequences;

@@ -71,7 +71,11 @@ permalink: /{{ story.slug }}/index.html
 				</h1>
 			{% else %}
 				<h1 data-pagefind-meta="title">
-					{{ story.mainTitle | prettifyMaltese | safe }}
+					{% if story.isSequenceEpisode %}
+						<a href="/{{ story.sequenceSlug }}/">{{ story.title | prettifyMaltese | safe }}</a>
+					{% else %}
+						{{ story.title | prettifyMaltese | safe }}
+					{% endif %}
 					{% if story.isSequenceEpisode and story.sequenceEpisodeNumber > 0 %}
 						<span class="episode-number">#{{ story.sequenceEpisodeNumber }}</span>
 					{% endif %}
@@ -182,7 +186,7 @@ permalink: /{{ story.slug }}/index.html
 					</section>
 				{% elif story.type === 'Djarju' %}
 					<section class="body-text">
-						{{ story.body | diarySectionise(null, null, true) | prettifyMaltese | endDotify | safe }}
+						{{ story.body | sectionise | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% elif story.type === 'Poddata' %}
 					<section class="generic-body-text">
@@ -279,7 +283,7 @@ permalink: /{{ story.slug }}/index.html
 		{% endif %}
 	</article>
 	<aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
-		{% set hideEpisodeNumber = true %}
+		{% set omitEpisodeNumber = true %}
 		{% set promoFrom = story.reportingTitle %}
 		{% set promos = story.endPromos %}
 		{% set showEpisodeTitle = true %}

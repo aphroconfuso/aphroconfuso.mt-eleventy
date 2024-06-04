@@ -5,8 +5,10 @@
 
 .appointment,
 .contents,
-.contributor {
+.contributor,
+.sequence {
   li.multiple-episodes {
+    border-bottom-style: dashed;
     h1 .episode-number {
       display: none;
     }
@@ -23,5 +25,8 @@
       display: inline;
       color: $lighter-brown;
     }
+    // &:last-of-type {
+    //   border-bottom-style: solid;
+    // }
   }
 }

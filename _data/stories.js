@@ -376,6 +376,13 @@ async function getAllStories() {
 			atts.type
 		);
 
+		// Refactor externally
+		const sequenceSlug = !!sequenceData && makeTitleSlug(
+			(atts.type === 'Djarju' ? 'Djarju' : title),
+			authorsString,
+			translatorFullName,
+		);
+
 		const issueMonth = getIssueMonthYear(atts.dateTimePublication).month;
 		const issueMonthYear = getIssueMonthYear(atts.dateTimePublication).monthYear;
 
@@ -476,6 +483,7 @@ async function getAllStories() {
 			sequenceEpisodeTitle: sequenceData && atts.title,
 			sequencePreviousPromo,
 			sequenceNextPromo,
+			sequenceSlug,
 			showImagePromo: atts.showImagePromo,
 			singleImage: atts.images.data && atts.images.data.length === 1,
 			slideshow:  atts.images.data && atts.images.data.length > 1,
