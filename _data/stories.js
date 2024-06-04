@@ -312,7 +312,7 @@ async function getAllStories() {
 
 		const booksMentioned = !!atts.booksMentioned.data.length && processBooksMentioned(atts.booksMentioned.data, atts.prominentMentions);
 		const authorsType = atts.authorsType && atts.authorsType.replace(/\_.*/, '') || 'solo';
-		const {authors, authorForename, authorsString, authorPronoun} = parseAuthors(atts.authors.data, authorsType);
+		const { authors, authorForename, authorsString, authorPronoun } = parseAuthors(atts.authors.data, authorsType);
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 		const sequenceData = atts.sequence.data;
 		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
@@ -444,7 +444,7 @@ async function getAllStories() {
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,
 			description: atts.description || stripTags(atts.body.substring(0, 400)),
-			displayTitle: displayTitle,
+			displayTitle,
 			dontUseDropCaps: atts.dontUseDropCaps,
 			endOfSeriesClass: endOfSeries ? ' end-of-series' : '',
 			endnote: atts.endnote,
@@ -494,7 +494,7 @@ async function getAllStories() {
 			storycollections,
 			subjectDate: atts.diaryDate,
 			subtitle,
-			title,
+			title: mainTitle,
 			translator: translatorFullName,
 			translatorForename: (translator && translator.forename) || translatorFullName,
 			triggerWarning: atts.triggerWarning,
