@@ -1,0 +1,18 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+.generic.sequence {
+  h1 {
+    color: $brown;
+  }
+  .promo-list > li.multiple-episodes {
+    margin-bottom: $body-margin-half;
+    padding-bottom: $body-margin-half;
+  }
+  aside#form {
+    border-top: 1px solid $faint-line;
+    padding-top: $body-margin;
+  }
+}

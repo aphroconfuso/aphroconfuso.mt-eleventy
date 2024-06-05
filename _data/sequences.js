@@ -63,7 +63,10 @@ async function getAllsequences() {
 		const storiesFormatted = !!atts.stories.data.length && processPromos(atts.stories.data);
 		if (!atts.promoImage) console.log("Image missing! An image was probably deleted from the media library after it had been added as the social image.");
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
-		const sequenceTitle = atts.title || null;
+		let sequenceTitle = atts.title || null;
+
+		// REFACTOR with page titles
+		sequenceTitle = sequenceTitle.replace(/:: /, ": ")
 
 		// Get the author data from first story
 		// 	REVIEW: in the future it may be necessary to collate from all stories
