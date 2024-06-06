@@ -31,6 +31,7 @@ permalink: /{{ sequence.slug | slugifyMaltese }}/index.html
 		<div class="container-sequence">
 			<div class="generic-body-text" id="grid-max-panel-right-top">
 				<p class="continuity">{{ sequence.continuity }}</p>
+				{% set collated = true %}
 				{% set omitAuthor = true %}
 				{% set omitTitle = true %}
 				{% set promoFrom = sequence.title %}

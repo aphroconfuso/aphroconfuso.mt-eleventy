@@ -3,10 +3,7 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-.appointment,
-.contents,
-.contributor,
-.sequence {
+.collated {
   li.multiple-episodes {
     border-bottom-style: dashed;
     h1 .episode-number {
@@ -25,8 +22,8 @@
       display: inline;
       color: $lighter-brown;
     }
-    // &:last-of-type {
-    //   border-bottom-style: solid;
-    // }
+    &:has(+ li:not(.multiple-episodes)) {
+      border-bottom-style: solid;
+    }
   }
 }

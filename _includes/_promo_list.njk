@@ -1,4 +1,4 @@
-<ul class="promo-list">
+<ul class="promo-list{% if collated %} collated{% endif %}">
 	{% set promoFrom = promoFrom or page.url %}
 	{% for promo in promos %}
 		{% include '_promo.njk' %}
