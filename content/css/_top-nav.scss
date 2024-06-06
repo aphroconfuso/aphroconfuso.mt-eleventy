@@ -188,9 +188,17 @@
     border-bottom: 1px solid $lighter-brown;
     height: 4em;
     transition: height $fade-in-medium cubic-bezier(0.23, 1, 0.32, 1);
-    &:nth-child(9),
+    &:nth-child(10),
     &:last-child {
       border: none;
+    }
+    &.podcastaudio {
+      a {
+        width: auto;
+      }
+      .solidus {
+        padding: 1.5rem 0.5rem 0;
+      }
     }
   }
 

@@ -19,13 +19,16 @@ permalink: /awdjo/index.html
 			<h2>&nbsp;</h2>
 		</header>
 		<div class="container-generic">
-			<section id="grid-body" class="generic-body-text contents">
-				<aside><p>{{ metadata.texts.contents | prettifyMaltese | safe}}</p></aside>
+			<section id="grid-body" class="generic-body-text audio contents">
+				<aside><p>Nippubblikaw verżjoni awdjo ta’ ħafna mix-xogħol li jidher fil-ġurnal. Dawn jitilgħu ftit ġimgħat wara l-ewwel pubblikazzjoni tagħhom fuq is-sit. Tista’ tisma’ dawn il-verżjonijiet kemm mill-istess paġna tat-test kif ukoll billi tabbona għall-<a href="/taħditiet/">podcast fejn issib ukoll taħditiet</a> mall-kittieba tagħna.</p>
+				<p><em>dawn huma l-verżjonijiet awdjo li ppubblikajna:</em></p>
+				</aside>
 				{% set promoFrom = "Awdjo" %}
 				{% set promos = stories | selectattr("listableAudio") | sort(true, false, "podcastDate") %}
 				{% set showDurations = true %}
 				{% set showEpisodeTitle = true %}
 				{% include "_promo_list.njk" %}
+				{% include "_podcast_buttons.njk" %}
 			</section>
 		</div>
 	</article>

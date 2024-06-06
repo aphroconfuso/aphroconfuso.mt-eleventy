@@ -93,6 +93,7 @@ module.exports = function (eleventyConfig) {
 					}
 				});
 				if (i.content.match(/xxx/i)) handleError(`XXX detected in ${ i.url } !!!`);
+				// if (i.content.match(/00 /i)) handleError(`00 detected in ${ i.url } !!!`);
 			});
 
 			const uniqueLinksArray = [...new Set(linksInContent)].filter(n => n).sort();
