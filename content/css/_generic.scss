@@ -226,7 +226,7 @@
 // too much space in contributor
 // also needs to be fixed on
 .generic {
-  &.podcasts,
+  &.podcast,
   .container-collection {
     .promo-list > li {
       &:last-of-type {
@@ -245,7 +245,7 @@
   }
   .contributor {
     .collaborated,
-    .podcasts,
+    .podcast,
     .translated {
       padding-top: calc($body-margin - 1px);
       border-top: 1px solid $faint-line;
