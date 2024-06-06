@@ -73,9 +73,11 @@
     border: none;
   }
   &.diaries {
-    header {
-      h1 {
-        display: none;
+    .promo {
+      header {
+        h1 {
+          display: none;
+        }
       }
     }
   }
