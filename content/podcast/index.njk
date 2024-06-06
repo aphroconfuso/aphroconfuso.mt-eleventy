@@ -23,10 +23,7 @@ permalink: /podcast/index.html
 		<div class="container">
 			<section id="grid-body">
 				<div class="generic-body-text">
-					<aside>
-						{{ podcast.body | prettifyMaltese | safe }}
-					</aside>
-					{# <aside><p>{{ metadata.texts.podcastList | prettifyMaltese | safe}}</p></aside> #}
+					{{ podcast.body | prettifyMaltese | safe }}
 					{% set promoFrom = "Podcast" %}
 					{% set promos = stories | selectattr("listablePodcast") %}
 					{% set showEpisodeTitle = true %}
