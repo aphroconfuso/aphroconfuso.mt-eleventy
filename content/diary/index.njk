@@ -20,7 +20,7 @@ permalink: /djarju/index.html
 		</header>
 		<div class="container-generic">
 			<section id="grid-body" class="generic-body-text">
-				<aside><p>{{ metadata.texts.diary | prettifyMaltese | safe}}</p></aside>
+				<p>{{ metadata.texts.diary | prettifyMaltese | safe}}</p>
 				{% set promoFrom = "Djarju" %}
 				{% set promos = stories | selectattr("listableDiary") %}
 				{% set omitEpisodeNumber = true %}
