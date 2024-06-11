@@ -52,7 +52,7 @@ article.terminu {
       display: inline-block;
       font-size: $body-font-size;
       font-style: normal;
-      margin: $body-margin-half 0 0;
+      margin: $body-margin-half $body-margin-quarter 0 0;
       & + p {
         display: inline;
       }
@@ -71,14 +71,34 @@ article.terminu {
         color: blue;
         text-decoration-color: blue;
       }
-      .fx1 {
-        color: red;
-        font-weight: 500;
+      &.fx1 {
+        border-top: 1px dashed $lighter-brown;
+        display: block;
+        height: 1px;
+        margin-top: $body-margin-half;
+        position: relative;
+        &::before {
+          content: "";
+        }
+        span.fx1 {
+          background-color: $paper;
+          color: $lighter-brown;
+          padding-left: $body-margin-quarter;
+          position: absolute;
+          right: 0;
+          top: $body-margin-half * -1;
+        }
+        @media all and (min-width: $laptop-breakpoint) {
+          span.fx1 {
+            left: calc(100%);
+            padding-left: $body-margin-half;
+            right: unset;
+          }
+        }
       }
     }
   }
 }
-
 @keyframes blink {
   from,
   to {

@@ -149,26 +149,6 @@ article.story {
       }
     }
   }
-  &.terminu {
-    p.fx1 {
-      border-top: 1px dashed $lighter-brown;
-      display: block;
-      height: 1px;
-      margin-top: $body-margin-half;
-      position: relative;
-      &::before {
-        content: "";
-      }
-      span.fx1 {
-        background-color: $paper;
-        color: $lighter-brown;
-        padding-left: $body-margin-quarter;
-        position: absolute;
-        right: 0;
-        top: $body-margin-half * -1;
-      }
-    }
-  }
 }
 
 article {
@@ -253,15 +233,6 @@ article {
       // Reset Joey Tilbes (Diċembru 2023)
       h1 {
         letter-spacing: 0;
-      }
-    }
-    &.terminu {
-      p.fx1 {
-        span.fx1 {
-          left: calc(100%);
-          padding-left: $body-margin-half;
-          right: unset;
-        }
       }
     }
   }
