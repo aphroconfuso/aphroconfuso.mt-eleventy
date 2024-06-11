@@ -36,7 +36,7 @@ async function getAllcollections() {
 								}
 								stories(
 			            publicationState: ${ fetchStatus },
-									sort: "dateTimePublication:asc"
+									sort: "dateTimePublication:desc"
 									) {
 									${linkedStoryData}
 								}
