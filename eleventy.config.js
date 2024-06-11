@@ -389,7 +389,7 @@ module.exports = function (eleventyConfig) {
 			.replace(/\s*<p>#<\/p>\s*/gm, '#')
 			.replace(/<em>#<\/em>/gm, '#')
 			.replace(/<em>\*<\/em>/gm, '*')
-			.replace(/#\s*#/gm, '#');
+			.replace(/#\s*#/gm, '#')
 		return stripTags(text, ['span', 'em'])
 			.split('#')
 			.map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
@@ -397,6 +397,7 @@ module.exports = function (eleventyConfig) {
 			.replace(/<br\/><br\/>/gm, '</p>\n<p>')
 			.replace(/<p>\*<\/p>/gm, '<p class="poetry-separator">*</p>')
 			.replace(/<em>\s*\*\s*<\/em>/gm, '<p class="poetry-separator">*<\/p>')
+			.replace(/\*\s*<br\/>/gm, '</p><p class="poetry-separator">*</p><p>')
 			.replace(/<em>\s*<\/em>/gm, '');
 	});
 
