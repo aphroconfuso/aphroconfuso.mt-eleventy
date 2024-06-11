@@ -62,10 +62,10 @@ async function getAllsequences() {
 		const atts = sequence.attributes;
 		const storiesFormatted = !!atts.stories.data.length && processPromos(atts.stories.data);
 		if (!atts.promoImage) console.log("Image missing! An image was probably deleted from the media library after it had been added as the social image.");
-		const promoImageFormats = atts.promoImage.data.attributes.formats;
+		const promoImageFormats = !!atts.promoImage.data && atts.promoImage.data.attributes.formats;
 
 		// REFACTOR: rationalise titles mainTitle, subtitle, metaTitle, displayTitle, reportingTitle, fixPodcastTitle
-		let [mainTitle, subtitle] = title.split(/(?<!:):(?!:)/);
+		let [mainTitle, subtitle] = atts.title.split(/(?<!:):(?!:)/);
 		mainTitle = mainTitle.replace(/:: /, ": ");
 		let sequenceTitle = mainTitle;
 
@@ -74,7 +74,7 @@ async function getAllsequences() {
 
 		// Get the author data from first story
 		// 	REVIEW: in the future it may be necessary to collate from all stories
-		const { authorsType, authors, authorForename, authorsString, authorPronoun, translator, type } = storiesFormatted.length && storiesFormatted[0];
+		const { authorsType, authors, authorForename, authorsString, authorPronoun, translator, type } = (storiesFormatted.length && storiesFormatted[0]) || {};
 
 		const displayTitle = makePageTitle(
 			sequenceTitle,
