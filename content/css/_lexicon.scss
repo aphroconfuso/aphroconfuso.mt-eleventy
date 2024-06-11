@@ -108,3 +108,10 @@ article.terminu {
     opacity: 1;
   }
 }
+
+// PROMOs
+@media all and (min-width: $laptop-breakpoint) {
+  .end-promos .promo-terminu header {
+    min-height: $body-margin * 3;
+  }
+}
