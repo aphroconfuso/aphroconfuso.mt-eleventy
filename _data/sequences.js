@@ -63,7 +63,11 @@ async function getAllsequences() {
 		const storiesFormatted = !!atts.stories.data.length && processPromos(atts.stories.data);
 		if (!atts.promoImage) console.log("Image missing! An image was probably deleted from the media library after it had been added as the social image.");
 		const promoImageFormats = atts.promoImage.data.attributes.formats;
-		let sequenceTitle = atts.title || null;
+
+		// REFACTOR: rationalise titles mainTitle, subtitle, metaTitle, displayTitle, reportingTitle, fixPodcastTitle
+		let [mainTitle, subtitle] = title.split(/(?<!:):(?!:)/);
+		mainTitle = mainTitle.replace(/:: /, ": ");
+		let sequenceTitle = mainTitle;
 
 		// REFACTOR with page titles
 		sequenceTitle = sequenceTitle.replace(/:: /, ": ")
