@@ -39,7 +39,8 @@ permalink: /{{ storycollection.title | slugifyMaltese }}/index.html
 			<div class="generic-body-text" id="grid-max-panel-right-top">
 				<p class="continuity">{{ storycollection.continuity }}</p>
 				{% set promoFrom = storycollection.title %}
-				{% set promos = storycollection.stories %}
+				{% set promos = storycollection.stories | sort(false, false, "sortTitle") %}
+				{# {% set promos = storycollection.stories %} #}
 				{% set showEpisodeTitle = true %}
 				{% include '_promo_list.njk' %}
 				{% if storycollection.moreToCome %}

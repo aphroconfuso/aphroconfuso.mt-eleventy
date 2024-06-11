@@ -16,6 +16,19 @@
 // }
 
 article.story {
+  &.story-18 {
+    // Mona Lisa
+    .fx1 {
+      color: hsl(0, 0%, 39%);
+      margin-bottom: 0;
+      text-align: center;
+      transform: scale(-1, 1);
+    }
+    .fx2 {
+      margin-bottom: 0;
+      text-align: center;
+    }
+  }
   &.story-33 {
     // Joey Tilbes (Diċembru 2023)
     h1 {
@@ -54,6 +67,7 @@ article.story {
       }
       h5 {
         display: inline;
+        padding-right: 0.25rem;
         & + p {
           display: inline;
         }
@@ -104,7 +118,7 @@ article.story {
       margin-bottom: $body-margin-quarter;
       margin-left: $body-margin;
       text-indent: $body-margin * -1;
-      i.fx1 {
+      span.fx1 {
         margin-right: $body-margin-quarter;
         &:after {
           color: $lightest-brown;
@@ -122,9 +136,17 @@ article.story {
   &.story-56 {
     // Persjani
     // Genericize these
-    .fx1 {
-      display: inline-block;
-      margin-bottom: $body-margin-half;
+    span {
+      &.fx1 {
+        display: inline-block;
+        margin-bottom: $body-margin-half;
+      }
+      &.fx-2 {
+        padding-left: $body-margin-half;
+      }
+      &.fx-3 {
+        padding-left: $body-margin;
+      }
     }
   }
   &.terminu {
@@ -137,7 +159,7 @@ article.story {
       &::before {
         content: "";
       }
-      i.fx1 {
+      span.fx1 {
         background-color: $paper;
         color: $lighter-brown;
         padding-left: $body-margin-quarter;
@@ -210,10 +232,6 @@ article {
       h1 {
         width: 100%;
       }
-      .fx1 {
-        transform: scale(-1, 1);
-        color: hsl(0, 0%, 39%);
-      }
       p {
         margin-bottom: $body-margin-half + $body-margin-quarter;
         &.enjambed {
@@ -239,7 +257,7 @@ article {
     }
     &.terminu {
       p.fx1 {
-        i.fx1 {
+        span.fx1 {
           left: calc(100%);
           padding-left: $body-margin-half;
           right: unset;

@@ -113,20 +113,20 @@
   li {
     letter-spacing: -0.5px;
     white-space: nowrap;
-    &::before {
+    &::marker {
       color: $paper;
-      content: "■";
+      content: "■ ";
       display: inline-block;
       font-family: $decorative;
       width: $body-margin-half;
     }
     &:hover {
-      &::before {
+      &::marker {
         color: $lightest-brown;
       }
     }
     &.active {
-      &::before {
+      &::marker {
         color: $lighter-brown;
       }
       color: $lighter-brown;

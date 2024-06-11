@@ -84,7 +84,7 @@ module.exports = function (eleventyConfig) {
 			// Check links ********************************************************************************************
 			let linksInContent = [], imagesInContent = [];
 			results.forEach(i => {
-				linksInContent = linksInContent.concat(i.content.match(/href="\/(.*?)\/"/g));
+				linksInContent = linksInContent.concat(i.content.match(/href="\/^\#(.*?)\/"/g));
 				imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|jpeg|webp)/g));
 				const anchorsInContent = i.content.match(/(?<=href="#).*?(?=">)/gm);
 				anchorsInContent && anchorsInContent.length && anchorsInContent.forEach(anchor => {
@@ -93,6 +93,9 @@ module.exports = function (eleventyConfig) {
 					}
 				});
 				if (i.content.match(/xxx/i)) handleError(`XXX detected in ${ i.url } !!!`);
+				// if (i.content.match(/fx1/i)) handleError(`fx1 detected in ${ i.url } !!!!!!!`);
+				// if (i.content.match(/fx2/i)) handleError(`fx2 detected in ${ i.url } !!!!!!!`);
+				// if (i.content.match(/fx3/i)) handleError(`fx3 detected in ${ i.url } !!!!!!!`);
 				// if (i.content.match(/00 /i)) handleError(`00 detected in ${ i.url } !!!`);
 			});
 
@@ -271,7 +274,16 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addFilter("prettifyMaltese", function prettifyMaltese(text) {
 		if (!text) return "XXXXXXprettifyMalteseXXX";
 		return (text || []).replace(/ data-.*?=".*?"/gmi, "")
+			.replace(/<blockquote>\s*<blockquote/gm, "<blockquote")
+			.replace(/<blockquote class="enjambed">\s*<p>/gm, "<blockquote class=\"enjambed\">")
+			.replace(/<\/blockquote>\s*<\/blockquote>/gm, "</blockquote>")
+			.replace(/<\/p>\s*<\/blockquote>/gm, "</blockquote>")
 			.replace(/fx-(\d)/gmi, "fx$1")
+			.replace(/<mark/gm, "<span")
+			.replace(/<\/mark>/gm, "</span>")
+			.replace(/<i>/gm, "<em>")
+			.replace(/<\/i>/gm, "</em>")
+			.replace(/<p>&nbsp;<\/p>/gm, "")
 			.replace(/<p>\s*<\/p>/gm, "")
 			.replace(/td data-.*?=".*?"/gmi, "td")
 			.replace(/-</gm, "- <")
@@ -298,7 +310,7 @@ module.exports = function (eleventyConfig) {
 			.replace(/<l-m>(fx-?\d)<\/l-m>/gm, "$1")
 			.replace(/<l-m>right-aligned<\/l-m>/gm, "right-aligned")
 			.replace(/(<h[56] id=".*?)(<l-m>)(.*?)(<\/l-m>)(.*?<\/h[56]>)/gm, "$1$3$5")
-			.replace(/(id=")<i-class=fx-?\d+>(.)<-i>/gm, "$1$2")
+			.replace(/(id=")<span-class=fx-?\d+>(.)<-mark>/gm, "$1$2")
 			.replace(/(=")<l-m>/gm, "$1");
 	});
 
@@ -364,26 +376,32 @@ module.exports = function (eleventyConfig) {
 
 	// REMOVE NBSP;
 	// REDO THIS ALGORITHM
-	eleventyConfig.addFilter("versify", function versify(text1) {
-		const text = text1.replace("&nbsp;", "").replace(/<p>\s*<\/p>\s*/gm, '#').replace(/#\s*#/gm, '#');
-		return stripTags(text, ['i', 'em']).split('#').map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
-			.join('<p class="poetry-separator">*</p>');
-	});
-
 	// eleventyConfig.addFilter("versify", function versify(text1) {
-	// 	const text = text1.replace("&nbsp;", "")
-	// 		.replace(/<p>\s*<\/p>\s*/gm, '#')
-	// 		.replace(/#\s*#/gm, '#');
-	// 	return stripTags(text, ['i', 'em'])
-	// 		.split('#')
-	// 		.map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
-	// 		.join()
-	// 		.replace(/<br\/><br\/>/gm, '</p>\n<p>')
-	// 		.replace(/<p>*<\/p>/gm, '<p class="poetry-separator">*</p>');
+	// 	const text = text1.replace("&nbsp;", "").replace(/<p>\s*<\/p>\s*/gm, '#').replace(/#\s*#/gm, '#');
+	// 	return stripTags(text, ['i', 'em']).split('#').map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
+	// 		.join('<p class="poetry-separator">*</p>');
 	// });
 
+	eleventyConfig.addFilter("versify", function versify(text1) {
+		const text = text1.replace("&nbsp;", "")
+			.replace(/<\/p>/gm, '</p>\n')
+			.replace(/\n\n+/gm, '\n')
+			.replace(/\s*<p>#<\/p>\s*/gm, '#')
+			.replace(/<em>#<\/em>/gm, '#')
+			.replace(/<em>\*<\/em>/gm, '*')
+			.replace(/#\s*#/gm, '#');
+		return stripTags(text, ['span', 'em'])
+			.split('#')
+			.map(p => p && p.length && `<p>${ p.replace(/\n/gm, '<br/>') }</p>`)
+			.join(' ')
+			.replace(/<br\/><br\/>/gm, '</p>\n<p>')
+			.replace(/<p>\*<\/p>/gm, '<p class="poetry-separator">*</p>')
+			.replace(/<em>\s*\*\s*<\/em>/gm, '<p class="poetry-separator">*<\/p>')
+			.replace(/<em>\s*<\/em>/gm, '');
+	});
+
 	eleventyConfig.addFilter("versifyDescription", function versifyDescription(text) {
-		return stripTags(text || [], ['i', 'em']).replace(/\n/gm, '<br/>');
+		return stripTags(text || [], ['span', 'em']).replace(/\n/gm, '<br/>');
 	});
 
 	eleventyConfig.addFilter("sectionise", function sectionise(text) {
