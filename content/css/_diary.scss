@@ -33,6 +33,10 @@ article.djarju {
   #grid-bottom-full {
     margin: 0;
   }
+  #grid-max-panel-left-bottom {
+		margin-top: $body-margin;
+	}
+}
 
   .container {
     display: grid;
@@ -96,6 +100,9 @@ article.djarju {
     #grid-max-panel-right-bottom {
       padding-left: $body-margin-half;
     }
+		#grid-max-panel-left-bottom {
+			margin-top: $body-margin;
+		}
   }
 }
 a.promo-djarju {
