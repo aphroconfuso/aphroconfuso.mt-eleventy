@@ -54,6 +54,8 @@ module.exports = function (eleventyConfig) {
 		throw new Error(`\x1b[31m${ message }\x1b[0m`);
 	}
 
+	const handleWarning = (message) => {	console.warn('\x1b[33m%s\x1b[0m', message); }
+
 	eleventyConfig.on('eleventy.before', async ({dir, results, runMode, outputMode}) => {
 		const cssDir = path.join('./aphroconfuso.mt/site/css/');
 		if (!fs.existsSync(cssDir)) {
@@ -92,10 +94,12 @@ module.exports = function (eleventyConfig) {
 						handleError(`Link to "${ anchor }" but no anchor!`);
 					}
 				});
+				if (i.url.match(/\.html$/) && !i.content.match(/\<html/i)) handleError(`Missing <html> wrapper: ${ i.url } !!!`);
 				if (i.content.match(/xxx/i)) handleError(`XXX detected in ${ i.url } !!!`);
-				// if (i.content.match(/fx1/i)) handleError(`fx1 detected in ${ i.url } !!!!!!!`);
-				// if (i.content.match(/fx2/i)) handleError(`fx2 detected in ${ i.url } !!!!!!!`);
-				// if (i.content.match(/fx3/i)) handleError(`fx3 detected in ${ i.url } !!!!!!!`);
+
+				if (i.content.match(/style=\"text-align/i)) handleWarning(`Inline stle (text-align) detected in ${ i.url } !!!`);
+
+				// NOTWORDS
 				// if (i.content.match(/00 /i)) handleError(`00 detected in ${ i.url } !!!`);
 			});
 
