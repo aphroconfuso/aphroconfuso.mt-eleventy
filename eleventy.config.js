@@ -97,7 +97,7 @@ module.exports = function (eleventyConfig) {
 				if (i.url.match(/\.html$/) && !i.content.match(/\<html/i)) handleError(`Missing <html> wrapper: ${ i.url } !!!`);
 				if (i.content.match(/xxx/i)) handleError(`XXX detected in ${ i.url } !!!`);
 
-				if (i.content.match(/style=\"text-align/i)) handleWarning(`Inline stle (text-align) detected in ${ i.url } !!!`);
+				if (i.content.match(/style=\"text-align/i)) handleWarning(`Inline style (text-align) detected in ${ i.url } !!!`);
 
 				// NOTWORDS
 				// if (i.content.match(/00 /i)) handleError(`00 detected in ${ i.url } !!!`);
