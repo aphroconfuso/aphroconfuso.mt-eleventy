@@ -41,6 +41,7 @@ async function getAllContributors() {
 									surname
 									storiesAuthored(
 				            publicationState: ${ fetchStatus },
+										pagination: { page: 1, pageSize: 999 },
 										sort: ["diaryDate:desc", "dateTimePublication:desc"],
 										filters: {type: { notIn: ["Djarju", "Poddata"]}}
 									) {
@@ -48,6 +49,7 @@ async function getAllContributors() {
 									}
 									diaryEntries: storiesAuthored(
 				            publicationState: ${ fetchStatus },
+										pagination: { page: 1, pageSize: 999 },
 										sort: "dateTimePublication:desc",
 										filters: {type: { eq: "Djarju"}}
 									) {
@@ -55,6 +57,7 @@ async function getAllContributors() {
 									}
 									podcastEpisodes: storiesAuthored(
 				            publicationState: ${ fetchStatus },
+										pagination: { page: 1, pageSize: 999 },
 										sort: "dateTimePublication:desc",
 										filters: {type: { eq: "Poddata"}}
 									) {
@@ -62,6 +65,7 @@ async function getAllContributors() {
 									}
 									storiesTranslated(
 				            publicationState: ${ fetchStatus },
+										pagination: { page: 1, pageSize: 999 },
 										sort: "dateTimePublication:desc"
 									) {
 										${ linkedStoryData }
