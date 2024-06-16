@@ -21,7 +21,7 @@ permalink: /djarju/index.html
 			<section id="grid-body" class="generic-body-text">
 				<p>{{ metadata.texts.diary | prettifyMaltese | safe}}</p>
 				{% set promoFrom = "Djarju" %}
-				{% set promos = stories | selectattr("listableDiary") %}
+				{% set promos = stories | selectattr("listableDiary") | sort(true, false, "dateTimePublication") %}
 				{% set omitEpisodeNumber = true %}
 				{% set showEpisodeTitle = true %}
 				{% set showLengths = true %}
