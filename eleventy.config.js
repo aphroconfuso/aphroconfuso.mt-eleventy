@@ -295,8 +295,8 @@ module.exports = function (eleventyConfig) {
 			.replace(/<p> */gm, "<p>")
 			.replace(/ *<\/p>/gm, "</p>")
 			.replace(/ ?— ?| - | -- /gm, String.fromCharCode(8202, 8212, 8202))
-			.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
-			.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
+			.replace(/ċ/gm, "MMXXc").replace(/ġ/gm, "MMXXg").replace(/ħ/gm, "MMXXh").replace(/ż/gm, "MMXXz").replace(/à/gm, "MMXXa")
+			.replace(/Ċ/gm, "MMXXC").replace(/Ġ/gm, "MMXXG").replace(/Ħ/gm, "MMXXH").replace(/Ż/gm, "MMXXZ").replace(/À/gm, "MMXXA")
 			.replace(/([ \'\"\,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
 			.replace(/\'/gm, "’")
 			.replace(/ \"/gm, " “")
@@ -306,8 +306,8 @@ module.exports = function (eleventyConfig) {
 			.replace(/(”)([,\.;:])/gm, "$1<span class=\"pull\">$2</span>")
 			.replace(/([,\.])(”)/gm, "$1<span class=\"pullsemi\">$2</span>")
 			.replace(/(’)([,\.;:])/gm, "$1<span class=\"pullsemi\">$2</span>")
-			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
-			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+			.replace(/MMXXc/gm, "ċ").replace(/MMXXg/gm, "ġ").replace(/MMXXh/gm, "ħ").replace(/MMXXz/gm, "ż").replace(/MMXXa/gm, "à")
+			.replace(/MMXXC/gm, "Ċ").replace(/MMXXG/gm, "Ġ").replace(/MMXXH/gm, "Ħ").replace(/MMXXZ/gm, "Ż").replace(/MMXXA/gm, "À")
 			.replace(/- </gm, "-<")
 			.replace(/(\d)\,(\d\d\d)/gm, `$1${ String.fromCharCode(8201) }$2`)
 			.replace(/&amp;shy;/gm, '<wbr>')
@@ -411,21 +411,21 @@ module.exports = function (eleventyConfig) {
 
 	eleventyConfig.addFilter("sectionise", function sectionise(text) {
 		let decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '');
-		decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
-			.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
+		decoratedText = decoratedText.replace(/ċ/gm, "MMXXc").replace(/ġ/gm, "MMXXg").replace(/ħ/gm, "MMXXh").replace(/ż/gm, "MMXXz").replace(/à/gm, "MMXXa")
+			.replace(/Ċ/gm, "MMXXC").replace(/Ġ/gm, "MMXXG").replace(/Ħ/gm, "MMXXH").replace(/Ż/gm, "MMXXZ").replace(/À/gm, "MMXXA")
 			.replace(/<p>\#<\/p>\s*(<hr>)?(<h[56].*?<\/h[56]>)?\s*<p>([\w\-\’]+)/gm, '$1$2<p class="break"><span class="initial">$3</span>')
-			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
-			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+			.replace(/MMXXc/gm, "ċ").replace(/MMXXg/gm, "ġ").replace(/MMXXh/gm, "ħ").replace(/MMXXz/gm, "ż").replace(/MMXXa/gm, "à")
+			.replace(/MMXXC/gm, "Ċ").replace(/MMXXG/gm, "Ġ").replace(/MMXXH/gm, "Ħ").replace(/MMXXZ/gm, "Ż").replace(/MMXXA/gm, "À")
 			.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 		return decoratedText;
 	});
 
 	eleventyConfig.addFilter("simpleDropCapsify", function simpleDropCapsify(text) {
-		return (text || []).replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
-			.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
+		return (text || []).replace(/ċ/gm, "MMXXc").replace(/ġ/gm, "MMXXg").replace(/ħ/gm, "MMXXh").replace(/ż/gm, "MMXXz").replace(/à/gm, "MMXXa")
+			.replace(/Ċ/gm, "MMXXC").replace(/Ġ/gm, "MMXXG").replace(/Ħ/gm, "MMXXH").replace(/Ż/gm, "MMXXZ").replace(/À/gm, "MMXXA")
 			.replace(/^(.)([\w\-\’]+)/, '<span class="initial"><span class="dropcap drop-$1">$1</span>$2</span>')
-			.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
-			.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+			.replace(/MMXXc/gm, "ċ").replace(/MMXXg/gm, "ġ").replace(/MMXXh/gm, "ħ").replace(/MMXXz/gm, "ż").replace(/MMXXa/gm, "à")
+			.replace(/MMXXC/gm, "Ċ").replace(/MMXXG/gm, "Ġ").replace(/MMXXH/gm, "Ħ").replace(/MMXXZ/gm, "Ż").replace(/MMXXA/gm, "À")
 			.replace('drop-I">I</span>e', 'drop-Ie">IE</span>')
 			.replace('drop-G">G</span>ħ', 'drop-Għ">GĦ</span>')
 			.replace('drop-M">M</span>XC', 'drop-Ċ">Ċ</span>')
@@ -439,12 +439,12 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addFilter("dropCapsifyAndSectionise", function dropCapsifyAndSectionise(text, splitText = false, beforeOrAfter = 0, dontUseDropcaps = false) {
 		let decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '');
 		if (!dontUseDropcaps) {
-			decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
-				.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
+			decoratedText = decoratedText.replace(/ċ/gm, "MMXXc").replace(/ġ/gm, "MMXXg").replace(/ħ/gm, "MMXXh").replace(/ż/gm, "MMXXz").replace(/à/gm, "MMXXa")
+				.replace(/Ċ/gm, "MMXXC").replace(/Ġ/gm, "MMXXG").replace(/Ħ/gm, "MMXXH").replace(/Ż/gm, "MMXXZ").replace(/À/gm, "MMXXA")
 				.replace(/<p(.*?)>(.)([\w\-]+)/, '<p$1><span class="initial"><span class="dropcap drop-$2">$2</span>$3</span>')
 				.replace(/<p>\#<\/p>\s*(<hr>)?(<h[56].*?<\/h[56]>)?\s*<p>(.)([\w\-\’]+)/gm, '$1$2<p class="break"><span class="initial"><span class="dropcap drop-$3">$3</span>$4</span>')
-				.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
-				.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+				.replace(/MMXXc/gm, "ċ").replace(/MMXXg/gm, "ġ").replace(/MMXXh/gm, "ħ").replace(/MMXXz/gm, "ż").replace(/MMXXa/gm, "à")
+				.replace(/MMXXC/gm, "Ċ").replace(/MMXXG/gm, "Ġ").replace(/MMXXH/gm, "Ħ").replace(/MMXXZ/gm, "Ż").replace(/MMXXA/gm, "À")
 				.replace('drop-I">I</span>e', 'drop-Ie">IE</span>')
 				.replace('drop-G">G</span>ħ', 'drop-Għ">GĦ</span>')
 				.replace('drop-M">M</span>XC', 'drop-Ċ">Ċ</span>')
@@ -468,10 +468,10 @@ module.exports = function (eleventyConfig) {
 
 	// eleventyConfig.addFilter("diarySectionise", function diarySectionise(text, splitText, beforeOrAfter, dontUseDropcaps) {
 	// 	let decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '');
-	// 	decoratedText = decoratedText.replace(/ċ/gm, "MXc").replace(/ġ/gm, "MXg").replace(/ħ/gm, "MXh").replace(/ż/gm, "MXz").replace(/à/gm, "MXa")
-	// 		.replace(/Ċ/gm, "MXC").replace(/Ġ/gm, "MXG").replace(/Ħ/gm, "MXH").replace(/Ż/gm, "MXZ").replace(/À/gm, "MXA")
-	// 		.replace(/MXc/gm, "ċ").replace(/MXg/gm, "ġ").replace(/MXh/gm, "ħ").replace(/MXz/gm, "ż").replace(/MXa/gm, "à")
-	// 		.replace(/MXC/gm, "Ċ").replace(/MXG/gm, "Ġ").replace(/MXH/gm, "Ħ").replace(/MXZ/gm, "Ż").replace(/MXA/gm, "À")
+	// 	decoratedText = decoratedText.replace(/ċ/gm, "MMXXc").replace(/ġ/gm, "MMXXg").replace(/ħ/gm, "MMXXh").replace(/ż/gm, "MMXXz").replace(/à/gm, "MMXXa")
+	// 		.replace(/Ċ/gm, "MMXXC").replace(/Ġ/gm, "MMXXG").replace(/Ħ/gm, "MMXXH").replace(/Ż/gm, "MMXXZ").replace(/À/gm, "MMXXA")
+	// 		.replace(/MMXXc/gm, "ċ").replace(/MMXXg/gm, "ġ").replace(/MMXXh/gm, "ħ").replace(/MMXXz/gm, "ż").replace(/MMXXa/gm, "à")
+	// 		.replace(/MMXXC/gm, "Ċ").replace(/MMXXG/gm, "Ġ").replace(/MMXXH/gm, "Ħ").replace(/MMXXZ/gm, "Ż").replace(/MMXXA/gm, "À")
 	// 		.replace(/<p>\#<\/p>\s*(<hr>)?(<h[56].*?<\/h[56]>)?\s*<p>(.)([\w\-\’]+)/gm, '$1$2<p class="break"><span class="initial"><span class="dropcap drop-$3">$3</span>$4</span>')
 	// 		.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 	// 	return decoratedText;
