@@ -513,23 +513,13 @@ async function getAllStories() {
 
 		// ABECEDAIRE *************************************************************************************************************************
 		if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
-			const bodyText = atts.body.replace(/blockquote>/g, "p>").replace(/<h\d>.*?<\/h\d>/g, "").replace(/strong>/g, "span>");
+			const bodyText = atts.body.replace(/blockquote/g, "p").replace(/<h\d>.*?<\/h\d>/g, "").replace(/strong>/g, "span>");
 			const abecedaireMatches = bodyText.replace(/\n+/g, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.)(.{0,600})/g);
 			abecedaireMatches && shuffleArray(Array.from(abecedaireMatches)).forEach(match => {
 				let snippet = match[2] + match[3] + match[4];
 				let digraph = (match[2] + match[3]).toLowerCase();
 				snippet = snippet.replace(/<\/p>\s*<p>/g, " ").replace(/<\/?\w*$/, "");
-				// if ((snippet.match(/<em>/g) || []).length > (snippet.match(/<\/em>/g) || []).length) snippet += '</em>';
-
-				const opens = (snippet.match(/<em>/g) || []).length;
-				const closes = (snippet.match(/<\/em>/g) || []).length;
-				console.log(smartTruncate(processedStory.reportingTitle, 26), opens, closes);
-				if (opens > closes) {
-					console.log(snippet, opens, closes);
-					snippet += '</em>';
-				}
-
-
+				if ((snippet.match(/<i>/g) || []).length > (snippet.match(/<\/i>/g) || []).length) snippet += '</i>';
 				abecedaireArray.push({
 					authorsString,
 					letter: makeSortableTitle(digraph === 'ie' || digraph === 'għ' ? digraph : match[2]).toLowerCase(),
