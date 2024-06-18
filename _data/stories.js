@@ -519,7 +519,17 @@ async function getAllStories() {
 				let snippet = match[2] + match[3] + match[4];
 				let digraph = (match[2] + match[3]).toLowerCase();
 				snippet = snippet.replace(/<\/p>\s*<p>/g, " ").replace(/<\/?\w*$/, "");
-				if ((snippet.match(/<em>/g) || []).length > (snippet.match(/<\/em>/g) || []).length) snippet += '</em>';
+				// if ((snippet.match(/<em>/g) || []).length > (snippet.match(/<\/em>/g) || []).length) snippet += '</em>';
+
+				const opens = (snippet.match(/<em>/g) || []).length;
+				const closes = (snippet.match(/<\/em>/g) || []).length;
+				console.log(smartTruncate(processedStory.reportingTitle, 26), opens, closes);
+				if (opens > closes) {
+					console.log(snippet, opens, closes);
+					snippet += '</em>';
+				}
+
+
 				abecedaireArray.push({
 					authorsString,
 					letter: makeSortableTitle(digraph === 'ie' || digraph === 'għ' ? digraph : match[2]).toLowerCase(),
