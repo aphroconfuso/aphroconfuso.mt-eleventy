@@ -4,9 +4,16 @@ permalink: /admin/index.html
 ---
 {% extends 'layouts/admin.njk' %}
 
+{% block head %}
+    <script src="https://cdn.skypack.dev/@octokit/core"></script>
+{% endblock %}
+
 {% block content %}
-	<main>
-		<section>
-		</section>
-	</main>
+<main>
+    <section>
+        <button onclick="pushToProvi()">Push to Provi</button>
+    </section>
+
+
+</main>
 {% endblock %}

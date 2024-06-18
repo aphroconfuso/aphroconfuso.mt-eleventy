@@ -297,7 +297,7 @@ module.exports = function (eleventyConfig) {
 			.replace(/ ?— ?| - | -- /gm, String.fromCharCode(8202, 8212, 8202))
 			.replace(/ċ/gm, "MMXXc").replace(/ġ/gm, "MMXXg").replace(/ħ/gm, "MMXXh").replace(/ż/gm, "MMXXz").replace(/à/gm, "MMXXa")
 			.replace(/Ċ/gm, "MMXXC").replace(/Ġ/gm, "MMXXG").replace(/Ħ/gm, "MMXXH").replace(/Ż/gm, "MMXXZ").replace(/À/gm, "MMXXA")
-			.replace(/([ \'\"\,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MXc|MXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
+			.replace(/([ \'\"\,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MMXXc|MMXXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
 			.replace(/\'/gm, "’")
 			.replace(/ \"/gm, " “")
 			.replace(/\"/gm, "”")
@@ -428,10 +428,10 @@ module.exports = function (eleventyConfig) {
 			.replace(/MMXXC/gm, "Ċ").replace(/MMXXG/gm, "Ġ").replace(/MMXXH/gm, "Ħ").replace(/MMXXZ/gm, "Ż").replace(/MMXXA/gm, "À")
 			.replace('drop-I">I</span>e', 'drop-Ie">IE</span>')
 			.replace('drop-G">G</span>ħ', 'drop-Għ">GĦ</span>')
-			.replace('drop-M">M</span>XC', 'drop-Ċ">Ċ</span>')
-			.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
-			.replace('drop-M">M</span>XH', 'drop-Ħ">Ħ</span>')
-			.replace('drop-M">M</span>XZ', 'drop-Ż">Ż</span>')
+			.replace('drop-M">M</span>MXXC', 'drop-Ċ">Ċ</span>')
+			.replace('drop-M">M</span>MXXG', 'drop-Ġ">Ġ</span>')
+			.replace('drop-M">M</span>MXXH', 'drop-Ħ">Ħ</span>')
+			.replace('drop-M">M</span>MXXZ', 'drop-Ż">Ż</span>')
 			.replace('drop-1">1</span>6', 'drop-16">16</span>')
 			.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 	});
@@ -447,10 +447,10 @@ module.exports = function (eleventyConfig) {
 				.replace(/MMXXC/gm, "Ċ").replace(/MMXXG/gm, "Ġ").replace(/MMXXH/gm, "Ħ").replace(/MMXXZ/gm, "Ż").replace(/MMXXA/gm, "À")
 				.replace('drop-I">I</span>e', 'drop-Ie">IE</span>')
 				.replace('drop-G">G</span>ħ', 'drop-Għ">GĦ</span>')
-				.replace('drop-M">M</span>XC', 'drop-Ċ">Ċ</span>')
-				.replace('drop-M">M</span>XG', 'drop-Ġ">Ġ</span>')
-				.replace('drop-M">M</span>XH', 'drop-Ħ">Ħ</span>')
-				.replace('drop-M">M</span>XZ', 'drop-Ż">Ż</span>')
+				.replace('drop-M">M</span>MXXC', 'drop-Ċ">Ċ</span>')
+				.replace('drop-M">M</span>MXXG', 'drop-Ġ">Ġ</span>')
+				.replace('drop-M">M</span>MXXH', 'drop-Ħ">Ħ</span>')
+				.replace('drop-M">M</span>MXXZ', 'drop-Ż">Ż</span>')
 				.replace('drop-1">1</span>6', 'drop-16">16</span>')
 				.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 		}
