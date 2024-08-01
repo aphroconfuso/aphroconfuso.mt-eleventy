@@ -59,6 +59,11 @@ async function getAllcollections() {
 		throw new Error(error);
 	}
 
+	// REVIEW: make external (filter)
+	const flattenParas = (text, joinerClass = "pilcrow", joinerCharacter = "¶") => {
+		return stripTags(text, ['i', 'em', 'mark', 'p', 'span']).trim().replace(/<\/p>\s*<p>/g, `<span class=\"${ joinerClass }\">${ joinerCharacter }</span>`);
+	}
+
 	const collections = collectionsData.map((collection) => {
 		const atts = collection.attributes;
 		const storiesFormatted = !!atts.stories.data.length && processPromos(atts.stories.data);
@@ -67,7 +72,7 @@ async function getAllcollections() {
 
 		return {
 			id: collection.id,
-			body: `<p>${ stripTags(atts.body, ['i', 'em', 'span']).trim().replace(/\n+/g,"<span class=\"pilcrow\">¶</span>") }</p>`,
+			body: flattenParas(atts.body),
 			continuity: atts.continuity,
 			description: atts.description,
 			moreToCome: atts.moreToCome,

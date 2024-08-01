@@ -21,7 +21,7 @@ permalink: /{{ appointment.issueMonthYear | slugifyMaltese }}/index.html
 		<h1>{{ appointment.issueMonthYear | prettifyMaltese | safe }}</h1>
 		<h2></h2>
 	</header>
-	<div class="container-generic appointment">
+	<div class="container-generic generic-body-text appointment">
 		<section id="grid-body" data-pagefind-body data-pagefind-weight="5">
 			<div class="generic-body-text editorial">
 				<div class="text-container">
@@ -30,11 +30,12 @@ permalink: /{{ appointment.issueMonthYear | slugifyMaltese }}/index.html
 			</div>
 			<p class="continuity">Din hija l-kitba ppubblikata dax-xahar:</p>
 			{% set collated = false %}
+			{% set omitEpisodeNumber = true %}
 			{% set promoFrom = appointment.issueMonthYear %}
 			{% set promos = appointment.stories %}
 			{% set showEpisodeTitle = true %}
 			{% include '_promo_list.njk' %}
-			<div class="generic-body-text more">
+			<div class="more">
 				{% if appointment.moreToCome %}
 					{{ appointment.moreToCome | prettifyMaltese | safe }}
 				{% else %}
