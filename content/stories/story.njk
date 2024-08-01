@@ -76,7 +76,7 @@ permalink: /{{ story.slug }}/index.html
 					{% else %}
 						{{ story.title | prettifyMaltese | safe }}
 					{% endif %}
-					{% if story.isSequenceEpisode and story.sequenceEpisodeNumber > 0 %}
+					{% if story.isSequenceEpisode and story.sequenceEpisodeNumber > 0 and not story.type === 'Djarju' %}
 						<span class="episode-number">#{{ story.sequenceEpisodeNumber }}</span>
 					{% endif %}
 					{% if story.subtitle %}

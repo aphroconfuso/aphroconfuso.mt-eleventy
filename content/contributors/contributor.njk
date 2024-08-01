@@ -40,6 +40,8 @@ permalink: /{{ contributor.slug }}/index.html
 				{% if contributor.diaryEntries.length %}
 					<div class="diarised">
 						<p class="continuity">Entrati mid-djarju ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
+						{% set collated = true %}
+						{% set showLengths = true %}
 						{% set omitEpisodeNumber = true %}
 						{% set promos = contributor.diaryEntries %}
 						{% include '_promo_list.njk' %}
