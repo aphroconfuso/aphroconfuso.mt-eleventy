@@ -12,7 +12,7 @@
     p {
       @include clamp(3);
     }
-    & + li.multiple-episodes {
+    & + li.multiple-episodes:not(.episode-1) {
       h1,
       h2 {
         display: none;

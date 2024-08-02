@@ -54,6 +54,7 @@ permalink: /index.html
 				<div class="ga-{{ loop.index }}">
 					<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% set omitEpisodeNumber = true %}
+						{% if loop.first %}{% set showEpisodeTitle = true %}{% else %}{% set showEpisodeTitle = false %}{% endif %}
 						{% include "_promo_header.njk" %}
 						<div class="{{ promo.cssClass }}">
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
