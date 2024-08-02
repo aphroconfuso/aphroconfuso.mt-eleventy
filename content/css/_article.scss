@@ -130,14 +130,12 @@ article {
   &.end-of-series
     #grid-body
     // section:not(#epigraphs-bottom):not(#endnote).body-text {
-    section.body-text-part-two {
-    p:last-of-type {
-      padding-bottom: $body-margin-double;
-      background-image: url(/img/deco-100.svg);
-      background-position: center bottom;
-      background-size: 100%;
-      background-repeat: no-repeat;
-    }
+    section.body-text-part-two > p:last-of-type {
+    padding-bottom: $body-margin-double;
+    background-image: url(/img/deco-100.svg);
+    background-position: center bottom;
+    background-size: 100%;
+    background-repeat: no-repeat;
   }
   @media all and (max-width: ($laptop-breakpoint - 1)) {
     .sequence-menu {
