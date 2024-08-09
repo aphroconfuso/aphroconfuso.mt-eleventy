@@ -1,4 +1,5 @@
 _site/
+_visual-tests/*-snapshots/
 node_modules/
 aphroconfuso.mt/
 public/img/qr/
