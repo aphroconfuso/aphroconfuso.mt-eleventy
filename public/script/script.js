@@ -5,7 +5,9 @@ const maxWordsPerSecond = 5;
 const minWordsPerSecond = 1;
 const thresholdWords = 100;
 
-const pageReportingTitle = reportingTitle;
+// import {getReads as temp} from '../../src/getReads.js';
+// console.log(getReads('hu'));
+
 
 const fixReportingTitle = (storyType, sequenceEpisodeNumber, author, pageTitle) => {
 	if (storyType === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ author }`;

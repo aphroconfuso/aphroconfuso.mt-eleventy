@@ -18,6 +18,12 @@
         display: none;
       }
     }
+    &.episode-0 + li.multiple-episodes.episode-1 {
+      h1,
+      h2 {
+        display: none;
+      }
+    }
     h3 .episode-number {
       display: inline;
       color: $lighter-brown;

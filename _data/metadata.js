@@ -24,7 +24,7 @@ module.exports = {
 		"contributions": "Kitba ta' ${forename} fil-ġurnal:",
 		"diary": "Dawn huma l-entrati tad-djarji tal-kittieba tagħna li ppubblikajna fil-ġurnal s'issa.",
 		"newsletterMessage": "Abbona <l-m>fin-<a href=\"/newsletter/\">newsletter</a></l-m> biex dejjem issir taf meta nippubblikaw xi ħaġa ġdida.",
-		"podcastMessage": "Abbona <l-m>fil-<a href=\"/podcast/\">podcast</a></l-m> biex tisma’ kulma nippubblikaw.",
+		"podcastMessage": "Biex tisma’ kulma nippubblikaw, abbona <l-m>fil-podcast</l-m> fuq <a href=\"https://podcasts.apple.com/us/podcast/aphroconfuso/id1686567243\">Apple Podcasts</a>, <a href=\"https://pca.st/podcast/af8c44c0-c823-013b-f432-0acc26574db2\">Pocket Casts</a>, <a href=\"https://open.spotify.com/show/75Lt3UMvC1jE15SGrNFMww\">Spotify</a>, <a href=\"https://www.youtube.com/playlist?list=PLvRbv0Lp0vDvHim7kdh7Ac8l97ePgSmUI&playnext=1&index=1\">Youtube</a>, jew fittex “Aphroconfuso” jew uża <a href=\"https://feeds.acast.com/public/shows/aphroconfuso\">l-RSS</a> fuq <l-m>l-app</l-m> li tuża.",
 		"previous": "Aqra l-parti ta' qabel:",
 		"next": "Aqra l-parti li jmiss:",
 		"previousDiary": "Aqra l-entrata ta' qabel:",

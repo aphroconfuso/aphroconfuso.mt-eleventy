@@ -10,8 +10,9 @@ const makeTitleSlug = require("../src/makeTitleSlug.js");
 const parseAuthors = require("../src/parseAuthors.js");
 const processCollections = require("../src/processCollections.js");
 const processPromos = require("../src/processPromos.js");
-const reads = require("../src/getReads.js");
 const slugifyStringMaltese = require("../src/slugifyMaltese.js");
+
+const getReads = require('../src/getReads.js');
 
 const { imageData, linkedStoryData, personData } = require("./_fragments.js");
 
@@ -476,7 +477,7 @@ async function getAllStories() {
 			promoImage: atts.promoImage.data,
 			promoImageMobile: atts.promoImageMobile.data,
 			publicationHistory: atts.publicationHistory,
-			reads: reads(authorPronoun),
+			reads: getReads(authorPronoun),
 			sequence: sequenceData && sequenceData.attributes.title,
 			sequenceEpisodeNumber: atts.sequenceEpisodeNumber,
 			sequenceEpisodes: sequenceEpisodes,
@@ -556,7 +557,7 @@ async function getAllStories() {
 				issueMonth: processedStory.issueMonth,
 				podcastLengthMinutes: processedStory.podcastLengthMinutes,
 				podcastNote: processedStory.type !== "Poddata" && processedStory.podcastNote,
-				reads: reads(processedStory.authorPronoun),
+				reads: getReads(processedStory.authorPronoun),
 				reportingTitle: processedStory.reportingTitle,
 				title: processedStory.title,
 				type: processedStory.type,
@@ -598,7 +599,7 @@ async function getAllStories() {
 					podcastNote: promo.note || promo.podcastNote,
 					issueMonth: promo.issueMonth,
 					putAfterThisText: promo.putAfterThisText,
-					reads: reads(promo.authorPronoun),
+					reads: getReads(promo.authorPronoun),
 					reportingTitle: promo.reportingTitle,
 					title: promo.title,
 					type: promo.type,

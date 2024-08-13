@@ -51,13 +51,13 @@
 				issueMonthYear,
 				newScrollPosition,
 				pageHeight,
+				pageReportingTitle,
 				percentageProgress,
 				placeText,
 				podcastUrl,
 				previousTime,
 				progressElement,
 				readingSpeed,
-				reportingTitle,
 				screenHeight,
 				skippedTime,
 				storyCompleted,
@@ -132,7 +132,7 @@
 				g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
 			})();
 		</script>
-		<script defer src="{{ '/script/script-233.js' | rev }}"></script>
+		{% rollup "./public/script/script.js" | url %}
 	</head>
 	<body class="show-nav this-month-{{ homepage.issueMonth | slugify }}">
 		<script>initialiseAfterBody();</script>

@@ -3,7 +3,7 @@ const getIssueMonthYear = require("./getIssueMonthYear.js");
 const makeTitleSlug = require("./makeTitleSlug.js");
 const parseAuthors = require("./parseAuthors.js");
 const processCollections = require("./processCollections.js");
-const reads = require("./getReads.js");
+const getReads = require('./getReads.js');
 
 // REFACTOR: Save externally
 const fixReportingTitle = (processedPromo) => {
@@ -61,7 +61,7 @@ module.exports = (promos, storyAtts) => {
 			podcastNote: promoAtts.podcastNote,
 			podcastUrl: promoAtts.podcastUrl,
 			putAfterThisText: promo.putAfterThisText,
-			reads: reads(authorPronoun),
+			reads: getReads(authorPronoun),
 			sequenceEpisodeNumber: promoAtts.sequenceEpisodeNumber,
 			sequenceEpisodeTitle: sequenceEpisodeTitle,
 			slug: promoAtts.pageUrl || makeTitleSlug(

@@ -21,6 +21,8 @@ const slugifyStringMaltese = require('./src/slugifyMaltese.js');
 
 const QRCode = require('qrcode');
 
+const rollupPlugin = require('eleventy-plugin-rollup');
+
 module.exports = function (eleventyConfig) {
 	// const cssDir = path.join('aphroconfuso.mt', 'site', 'css');
 	// if (!fs.existsSync(cssDir)) {
@@ -222,6 +224,14 @@ module.exports = function (eleventyConfig) {
       sourceMap: false
     },
     rev: true
+  });
+  eleventyConfig.addPlugin(rollupPlugin, {
+    rollupOptions: {
+      output: {
+        format: 'es',
+        dir: 'aphroconfuso.mt/site/script',
+      },
+    },
   });
 
 	// Filters

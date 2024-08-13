@@ -295,8 +295,8 @@ permalink: /{{ story.slug }}/index.html
 		collections = "{{ story.storycollectionsString }}" || null;
 		issueMonth = "{{ story.issueMonth | slugify }}" || null;
 		issueMonthYear = "{{ story.issueMonthYear | slugify }}" || null;
+		pageReportingTitle = "{{ story.reportingTitle | safe}}" || null;
 		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
-		reportingTitle = "{{ story.reportingTitle | safe}}" || null;
 		sequenceEpisodeNumber = {{ story.sequenceEpisodeNumber | wrapInQuotes | safe}};
 		sequenceEpisodeTitle = {{ story.sequenceEpisodeTitle | wrapInQuotes | safe}};
 		storyId = "{{ story.id }}" || null;
