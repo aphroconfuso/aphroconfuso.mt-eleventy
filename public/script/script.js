@@ -1,13 +1,9 @@
 const audioBookmarkingInterval = 10;
 const audioReportingInterval = 30;
 const bookmarkThresholdWords = 250;
-const maxWordsPerSecond = 5;
-const minWordsPerSecond = 1;
+const maxPlausibleWordsPerSecond = 5;
+const minPlausibleWordsPerSecond = 1;
 const thresholdWords = 100;
-
-// import {getReads as temp} from '../../src/getReads.js';
-// console.log(getReads('hu'));
-
 
 const fixReportingTitle = (storyType, sequenceEpisodeNumber, author, pageTitle) => {
 	if (storyType === 'Djarju') return `Djarju #${ sequenceEpisodeNumber } ${ author }`;
@@ -49,7 +45,6 @@ const addBookmarkNow = () => {
 	if (!percentageProgress || (wordcount * (percentageProgress / 100)) < bookmarkThresholdWords || percentageProgress > 98) {
 		return;
 	}
-	// reportingTitle
 	addBookmark('text', storyId, {
 		author,
 		issueMonth,
@@ -81,7 +76,7 @@ const heartbeat = (wordsPerPixel, reportingTitle) => {
 		const wordsPerSecond = wordsRead / secondsElapsed;
 
 		// Is it a plausible speed?
-		if (wordsRead > thresholdWords && wordsPerSecond > minWordsPerSecond && wordsPerSecond < maxWordsPerSecond) {
+		if (wordsRead > thresholdWords && wordsPerSecond > minPlausibleWordsPerSecond && wordsPerSecond < maxPlausibleWordsPerSecond) {
 			analytics(['trackEvent', 'Qari', 'kliem', reportingTitle, parseInt(wordsRead)]);
 			analytics(['trackEvent', 'Qari', 'minuti', reportingTitle, (secondsElapsed / 60).toFixed(2)]);
 			analytics(['trackEvent', 'Qari', 'perċentwali', reportingTitle, parseInt(Math.round(percentageProgress))]);
