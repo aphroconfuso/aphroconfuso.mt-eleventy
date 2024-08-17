@@ -296,6 +296,7 @@ permalink: /{{ story.slug }}/index.html
 		issueMonth = "{{ story.issueMonth | slugify }}" || null;
 		issueMonthYear = "{{ story.issueMonthYear | slugify }}" || null;
 		pageReportingTitle = "{{ story.reportingTitle | safe}}" || null;
+		reportingTitle = pageReportingTitle;
 		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
 		sequenceEpisodeNumber = {{ story.sequenceEpisodeNumber | wrapInQuotes | safe}};
 		sequenceEpisodeTitle = {{ story.sequenceEpisodeTitle | wrapInQuotes | safe}};
