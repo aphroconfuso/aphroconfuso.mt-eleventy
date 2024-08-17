@@ -107,6 +107,7 @@ article.story {
     aside {
       p.fx2 {
         a {
+          display: inline-block;
           font-size: $font-size-compact;
           text-transform: uppercase;
         }
