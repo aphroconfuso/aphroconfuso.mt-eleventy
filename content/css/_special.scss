@@ -105,6 +105,12 @@ article.story {
       }
     }
     aside {
+      p.fx2 {
+        a {
+          font-size: $font-size-compact;
+          text-transform: uppercase;
+        }
+      }
       p.fx3 {
         border: 1px solid $lightester-brown;
         padding: $body-margin;
