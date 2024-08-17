@@ -38,6 +38,7 @@ article.story {
   &.story-40 {
     // Il-Mara tas-Suldat
     #grid-body {
+      margin-top: $body-margin-half * -1;
       hr {
         visibility: none;
         margin-bottom: $body-margin-half + $body-margin-quarter;
@@ -101,6 +102,12 @@ article.story {
         &.centred + p.centred {
           margin-top: 0;
         }
+      }
+    }
+    aside {
+      p.fx3 {
+        border: 1px solid $lightester-brown;
+        padding: $body-margin;
       }
     }
     @media all and (min-width: $laptop-breakpoint) {
