@@ -37,9 +37,9 @@ article.djarju {
     display: grid;
     gap: 0;
     grid-template-areas:
-      "grid-max-panel-left-top"
-      "grid-max-body"
       "grid-max-panel-right-top"
+      "grid-max-body"
+      "grid-max-panel-left-top"
       "grid-max-panel-left-bottom"
       "grid-max-panel-right-bottom"
       "grid-bottom-full";
