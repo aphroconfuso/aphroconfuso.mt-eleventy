@@ -4,24 +4,28 @@
 @use "mixins-etc" as *;
 
 @media all and (min-width: $mobile-breakpoint-plusone) {
-	a.promo.promo-djarju {
-		header {
-			margin-bottom: $body-margin-quarter;
-			h3 {
-				clear: both;
-				display: inline-block;
-				position: relative;
-				padding-top: $body-margin-half;
-			}
-			h3::after {
-				@include animated-underline-pre($lighter-brown);
-			}
-		}
-		&:hover,
-		&:focus {
-			h3::after {
-				@include animated-underline-post();
-			}
-		}
-	}
+  a.promo.promo-djarju {
+    header {
+      margin-bottom: $body-margin-quarter;
+      h3 {
+        clear: both;
+        display: inline-block;
+        position: relative;
+        padding-top: $body-margin-half;
+      }
+      h3::after {
+        @include animated-underline-pre($lighter-brown);
+      }
+    }
+    &:hover,
+    &:focus {
+      h3::after {
+        @include animated-underline-post();
+      }
+    }
+  }
+}
+
+.contributor .promo-djarju h2 {
+  display: none;
 }

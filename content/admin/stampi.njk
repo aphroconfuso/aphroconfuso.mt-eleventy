@@ -8,7 +8,12 @@ permalink: /admin/stampi/index.html
 {% extends 'layouts/admin.njk' %}
 
 {% block content %}
-	<ul>
+	<style>
+		ul li {
+			width: 30%;
+		}
+	</style>
+	<ul class="thumbnails">
 		{% for story in stories %}
 			<li>
 				<a href="/{{ story.slug }}/">

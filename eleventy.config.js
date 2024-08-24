@@ -1,27 +1,24 @@
 const { DateTime } = require("luxon");
-const markdownItAnchor = require("markdown-it-anchor");
-
-const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
-const eleventySass = require("eleventy-sass");
+const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 const { execSync } = require('child_process');
+const eleventySass = require("eleventy-sass");
 const fetch = require('node-fetch');
 const fs = require('fs');
+const markdownItAnchor = require("markdown-it-anchor");
 const path = require('path');
 const pluginBundle = require("@11ty/eleventy-plugin-bundle");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 const pluginRev = require("eleventy-plugin-rev");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-
+const QRCode = require('qrcode');
+const rollupPlugin = require('eleventy-plugin-rollup');
 const smartTruncate = require('smart-truncate');
 const stripTags = require("striptags");
 
 const fixSubjectDate = require('./src/fixSubjectDate.js');
+const prettifyMaltese  = require('./src/prettifyMaltese.js');
 const slugifyStringMaltese = require('./src/slugifyMaltese.js');
-
-const QRCode = require('qrcode');
-
-const rollupPlugin = require('eleventy-plugin-rollup');
 
 module.exports = function (eleventyConfig) {
 	// const cssDir = path.join('aphroconfuso.mt', 'site', 'css');
@@ -41,7 +38,7 @@ module.exports = function (eleventyConfig) {
 	// https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
 
 	// Watch content images for the image pipeline.
-	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
+	eleventyConfig.addWatchTarget("content/**/*.{jpg,svg,webp,png,jpeg}");
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
 
 	const fetchImage = async (imageUrl, saveToFileLocation) => await fetch(imageUrl).then(res =>
@@ -285,49 +282,6 @@ module.exports = function (eleventyConfig) {
 		return (tags || []).filter(tag => ["all", "nav", "post", "posts"].indexOf(tag) === -1);
 	});
 
-	eleventyConfig.addFilter("prettifyMaltese", function prettifyMaltese(text) {
-		if (!text) return "XXXXXXprettifyMalteseXXX";
-		return (text || []).replace(/ data-.*?=".*?"/gmi, "")
-			.replace(/<blockquote>\s*<blockquote/gm, "<blockquote")
-			.replace(/<blockquote class="enjambed">\s*<p>/gm, "<blockquote class=\"enjambed\">")
-			.replace(/<\/blockquote>\s*<\/blockquote>/gm, "</blockquote>")
-			.replace(/<\/p>\s*<\/blockquote>/gm, "</blockquote>")
-			.replace(/fx-(\d)/gmi, "fx$1")
-			.replace(/<mark/gm, "<span")
-			.replace(/<\/mark>/gm, "</span>")
-			.replace(/<i>/gm, "<em>")
-			.replace(/<\/i>/gm, "</em>")
-			.replace(/<p>&nbsp;<\/p>/gm, "")
-			.replace(/<p>\s*<\/p>/gm, "")
-			.replace(/td data-.*?=".*?"/gmi, "td")
-			.replace(/-</gm, "- <")
-			.replace(/  +/gm, " ")
-			.replace(/<p> */gm, "<p>")
-			.replace(/ *<\/p>/gm, "</p>")
-			.replace(/ ?— ?| - | -- /gm, String.fromCharCode(8202, 8212, 8202))
-			.replace(/ċ/gm, "MMXXc").replace(/ġ/gm, "MMXXg").replace(/ħ/gm, "MMXXh").replace(/ż/gm, "MMXXz").replace(/à/gm, "MMXXa")
-			.replace(/Ċ/gm, "MMXXC").replace(/Ġ/gm, "MMXXG").replace(/Ħ/gm, "MMXXH").replace(/Ż/gm, "MMXXZ").replace(/À/gm, "MMXXA")
-			.replace(/([ \'\"\,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MMXXc|MMXXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
-			.replace(/\'/gm, "’")
-			.replace(/ \"/gm, " “")
-			.replace(/\"/gm, "”")
-			.replace(/”>/gm, "\">")
-			.replace(/\=”/gm, "=\"")
-			.replace(/(”)([,\.;:])/gm, "$1<span class=\"pull\">$2</span>")
-			.replace(/([,\.])(”)/gm, "$1<span class=\"pullsemi\">$2</span>")
-			.replace(/(’)([,\.;:])/gm, "$1<span class=\"pullsemi\">$2</span>")
-			.replace(/MMXXc/gm, "ċ").replace(/MMXXg/gm, "ġ").replace(/MMXXh/gm, "ħ").replace(/MMXXz/gm, "ż").replace(/MMXXa/gm, "à")
-			.replace(/MMXXC/gm, "Ċ").replace(/MMXXG/gm, "Ġ").replace(/MMXXH/gm, "Ħ").replace(/MMXXZ/gm, "Ż").replace(/MMXXA/gm, "À")
-			.replace(/- </gm, "-<")
-			.replace(/(\d)\,(\d\d\d)/gm, `$1${ String.fromCharCode(8201) }$2`)
-			.replace(/&amp;shy;/gm, '<wbr>')
-			.replace(/<l-m>(fx-?\d)<\/l-m>/gm, "$1")
-			.replace(/<l-m>right-aligned<\/l-m>/gm, "right-aligned")
-			.replace(/(<h[56] id=".*?)(<l-m>)(.*?)(<\/l-m>)(.*?<\/h[56]>)/gm, "$1$3$5")
-			.replace(/(id=")<span-class=fx-?\d+>(.)<-mark>/gm, "$1$2")
-			.replace(/(=")<l-m>/gm, "$1");
-	});
-
 	// eleventyConfig.addFilter("anchorise", function anchorise(sentence, useVerb = 'ara') {
 	// 	const [verb, destination] = sentence.split(' ');
 	// 	if (verb.toLowerCase() !== useVerb) return sentence;
@@ -350,6 +304,8 @@ module.exports = function (eleventyConfig) {
 		if (!text) return "XXXXXXslugifyMalteseXXX";
 		return slugifyStringMaltese(text);
 	});
+
+	eleventyConfig.addFilter("prettifyMaltese", prettifyMaltese);
 
 	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text, punctuation = String.fromCharCode(8201)) {
 		if (!text) return "XXXXXXprettifyNumbersXXX";
