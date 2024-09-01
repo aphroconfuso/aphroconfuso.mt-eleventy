@@ -63,6 +63,28 @@ body {
   min-height: 100vh;
   flex-direction: column;
   justify-content: space-between;
+  &.localhost,
+  &.abbozzi,
+  &.provi {
+    &::after {
+      padding: 6px;
+      background-color: transparent;
+      bottom: 0;
+      content: " ";
+      display: block;
+      left: 0;
+      opacity: 0.75;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+  }
+  &.abbozzi::after {
+    background-color: darkorange;
+  }
+  &.provi::after {
+    background-color: green;
+  }
 }
 
 main {
