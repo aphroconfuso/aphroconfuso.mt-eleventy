@@ -13,7 +13,7 @@
           @include clamp(9);
           height: $body-margin * 9.75;
           margin-bottom: $body-margin-quarter;
-          padding: ($body-margin * 1.25) 0 ($body-margin * 2)
+          padding: ($body-margin * 1.5) 0 ($body-margin * 2)
             ($body-margin * 1.5);
           position: relative;
         }
