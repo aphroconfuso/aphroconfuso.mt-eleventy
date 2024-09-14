@@ -61,7 +61,7 @@ permalink: /index.html
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
 						</div>
 					</a>
-					{% include '_promo_aside.njk' %}
+					{# {% include '_promo_aside.njk' %} #}
 				</div>
 			{% endfor %}
 			<div class="ga-terms">
@@ -74,7 +74,7 @@ permalink: /index.html
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
 						</div>
 					</a>
-					{% include '_promo_aside.njk' %}
+					{# {% include '_promo_aside.njk' %} #}
 				{% endfor %}
 			</div>
 			{% for promo in homepage.imagePromos %}
@@ -95,7 +95,7 @@ permalink: /index.html
 							<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
 						</div>
 					</a>
-					{% include '_promo_aside.njk' %}
+					{# {% include '_promo_aside.njk' %} #}
 				</div>
 			{% endfor %}
 			{% for promo in homepage.poetryPromos %}
@@ -125,7 +125,7 @@ permalink: /index.html
 								<p>{{ promo.description | prettifyMaltese | safe }}</p>
 							</div>
 						</a>
-						{% include '_promo_aside.njk' %}
+						{# {% include '_promo_aside.njk' %} #}
 					</li>
 				{% endfor %}
 				</ul>
