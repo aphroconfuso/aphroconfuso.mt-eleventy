@@ -50,16 +50,18 @@ permalink: /index.html
 				</figure>
 			</a>
 			{% for promo in homepage.promos | rejectattr("isTypeTerm") %}
+				{% set showEpisodeTitle = true %}
 				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 				<div class="ga-{{ loop.index }}">
 					<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% set omitEpisodeNumber = true %}
-						{% if loop.first %}{% set showEpisodeTitle = true %}{% else %}{% set showEpisodeTitle = false %}{% endif %}
+						{# {% if loop.first %}{% set showEpisodeTitle = true %}{% else %}{% set showEpisodeTitle = false %}{% endif %} #}
 						{% include "_promo_header.njk" %}
 						<div class="{{ promo.cssClass }}">
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
 						</div>
 					</a>
+					{% include '_promo_aside.njk' %}
 				</div>
 			{% endfor %}
 			<div class="ga-terms">
@@ -72,6 +74,7 @@ permalink: /index.html
 							<p>{{ promo.description | prettifyMaltese | safe }}</p>
 						</div>
 					</a>
+					{% include '_promo_aside.njk' %}
 				{% endfor %}
 			</div>
 			{% for promo in homepage.imagePromos %}
@@ -92,6 +95,7 @@ permalink: /index.html
 							<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
 						</div>
 					</a>
+					{% include '_promo_aside.njk' %}
 				</div>
 			{% endfor %}
 			{% for promo in homepage.poetryPromos %}
@@ -121,6 +125,7 @@ permalink: /index.html
 								<p>{{ promo.description | prettifyMaltese | safe }}</p>
 							</div>
 						</a>
+						{% include '_promo_aside.njk' %}
 					</li>
 				{% endfor %}
 				</ul>
