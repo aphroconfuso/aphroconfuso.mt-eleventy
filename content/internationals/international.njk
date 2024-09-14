@@ -25,7 +25,7 @@ permalink: /{{ international.code }}/index.html
 		</header>
 		<div class="container">
 			<section id="grid-body">
-				<div class="generic-body-text separated">{{ international.body | prettifyMaltese | sectionise | safe }}</div>
+				<div class="generic-body-text separated">{{ international.body | prettifyMaltese | sectioniseOnly | safe }}</div>
 			</section>
 		</div>
 	</article>
