@@ -5,7 +5,7 @@ module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subj
 	return [
 		subjectDate && title !== 'Bil-Moħbi fil-Beraħ' ? type : '',
 		type === 'Esej' && sequenceTitle,
-		subjectDate && fixSubjectDate(subjectDate) && title !== 'Bil-Moħbi fil-Beraħ' || sequenceNumber && (`#${ sequenceNumber }`),
+		title !== 'Bil-Moħbi fil-Beraħ' && subjectDate && fixSubjectDate(subjectDate) || sequenceNumber && (`#${ sequenceNumber }`),
 		sequenceEpisodeTitle || title,
 		"ta’",
 		author,
