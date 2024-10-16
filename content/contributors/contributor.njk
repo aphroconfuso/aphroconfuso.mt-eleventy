@@ -28,7 +28,7 @@ permalink: /{{ contributor.slug }}/index.html
 				</div>
 				{% if contributor.booksAuthored.length %}
 					<div class="books">
-						<p class="continuity">Kotba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> ippubblikati minn Aphroconfuso:</p>
+						<p class="continuity">Kotba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> ippubblikati minn <span class="contributor">Aphroconfuso</span>:</p>
 						{% set promos = contributor.booksAuthored %}
 						{% set promoFrom = contributor.name %}
 						{% set omitEpisodeNumber = true %}
@@ -39,7 +39,7 @@ permalink: /{{ contributor.slug }}/index.html
 				{% endif %}
 				{% if contributor.anthologiesIncluded.length %}
 					<div class="anthologies">
-						<p class="continuity">Kotba ta’ Aphroconfuso bil-kitba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
+						<p class="continuity">Kotba ta’ <span class="contributor">Aphroconfuso</span> bil-kitba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
 						{% set promos = contributor.anthologiesIncluded %}
 						{% set promoFrom = contributor.name %}
 						{% set omitAuthor = true %}
