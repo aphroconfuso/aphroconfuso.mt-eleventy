@@ -12,6 +12,7 @@
 .layout-4 {
   grid-template-areas:
     "ga-image-1"
+		"ga-book-image-promo"
     "ga1"
     "ga-editorial"
     "ga2"
@@ -50,7 +51,8 @@
   }
   @media all and (min-width: $laptop-breakpoint) {
     .ga-newsletter,
-    .ga-podcast {
+    .ga-podcast,
+		.ga-book-image-promo {
       display: none;
     }
     .ga-image-1,

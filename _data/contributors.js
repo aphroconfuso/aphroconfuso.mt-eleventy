@@ -43,7 +43,7 @@ async function getAllContributors() {
 				            publicationState: ${ fetchStatus },
 										pagination: { page: 1, pageSize: 999 },
 										sort: ["diaryDate:desc", "dateTimePublication:desc"],
-										filters: {type: { notIn: ["Djarju", "Poddata"]}}
+										filters: {type: { notIn: ["Djarju", "Poddata", "Memoir", "Reċensjoni"]}}
 									) {
 										${ linkedStoryData }
 									}
@@ -60,6 +60,22 @@ async function getAllContributors() {
 										pagination: { page: 1, pageSize: 999 },
 										sort: "dateTimePublication:desc",
 										filters: {type: { eq: "Poddata"}}
+									) {
+										${ linkedStoryData }
+									}
+									booksIncluded: storiesAuthored(
+				            publicationState: ${ fetchStatus },
+										pagination: { page: 1, pageSize: 999 },
+										sort: "dateTimePublication:desc",
+										filters: {type: { eq: "Reċensjoni"}}
+									) {
+										${ linkedStoryData }
+									}
+									eventsIncluded: storiesAuthored(
+				            publicationState: ${ fetchStatus },
+										pagination: { page: 1, pageSize: 999 },
+										sort: "dateTimePublication:desc",
+										filters: {type: { eq: "Memoir"}}
 									) {
 										${ linkedStoryData }
 									}
@@ -104,16 +120,24 @@ async function getAllContributors() {
 		const allStoriesAuthored = processPromos(item.attributes.storiesAuthored.data);
 		const storiesTranslated = processPromos(item.attributes.storiesTranslated.data);
 		const diaryEntries = processPromos(item.attributes.diaryEntries.data);
+		const allBooksIncluded = processPromos(item.attributes.booksIncluded.data);
+		const eventsIncluded = processPromos(item.attributes.eventsIncluded.data);
 		const podcastEpisodes = processPromos(item.attributes.podcastEpisodes.data);
 		const displayContributorName = getPersonName(item.attributes);
 
 		const storiesAuthored = allStoriesAuthored.filter(item => !item.collaboration);
 		const collaborationsAuthored = allStoriesAuthored.filter(item => item.collaboration);
 
+		const booksAuthored = allBooksIncluded.filter(item => !item.collaboration);
+		const anthologiesIncluded = allBooksIncluded.filter(item => item.collaboration);
+
 		return {
+			anthologiesIncluded,
 			bioNote: item.attributes.bioNote,
+			booksAuthored,
 			collaborationsAuthored,
-			diaryEntries: diaryEntries,
+			diaryEntries,
+			eventsIncluded,
 			forename: item.attributes.forename,
 			id: item.id,
 			metaDescription: smartTruncate(stripTags(item.attributes.bioNote), 155),

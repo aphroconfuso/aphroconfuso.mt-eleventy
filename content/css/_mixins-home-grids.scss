@@ -9,8 +9,11 @@
 }
 
 @mixin border-bottom() {
-	padding-bottom: calc(#{$body-margin} - 1px);
+	// padding-bottom: calc(#{$body-margin} - 1px);
 	border-bottom: 1px solid $grid-lines;
+	p {
+		margin-bottom: $body-margin-quarter;
+	}
 }
 
 @mixin image-left() {

@@ -95,7 +95,7 @@ module.exports = function (eleventyConfig) {
 				});
 				if (i.url.match(/\.html$/) && !i.content.match(/\<html/i)) handleError(`Missing <html> wrapper: ${ i.url } !!!`);
 				if (i.content.match(/xxx/i)) handleError(`XXX detected in ${ i.url } !!!`);
-
+				// if (i.content.match(/(\d)(\d\d\d)/i)) handleWarning(`1,000 detected in ${ i.url } ${ i.content.match(/(\d)(\d\d\d)/i) } !!!`);
 				if (i.content.match(/style=\"text-align/i)) handleWarning(`Inline style (text-align) detected in ${ i.url } !!!`);
 
 				// NOTWORDS

@@ -10,14 +10,14 @@
     & > li {
       margin-bottom: calc($body-margin - 1px);
       border-bottom: 1px solid $faint-line;
-      &:last-of-type {
-        margin-bottom: 0;
-        border-bottom: none;
-      }
+      // &:last-of-type {
+      //   margin-bottom: 0;
+      //   border-bottom: none;
+      // }
     }
     .promo {
       display: block;
-      margin-bottom: $body-margin-half;
+      // margin-bottom: $body-margin-half;
       header {
         margin: 0 0 $body-margin-quarter !important;
         .as-translator {
@@ -72,15 +72,15 @@
   }
 }
 .contributor {
-  .wrote {
-    .author {
-      display: none;
-    }
-    .continuity {
-      margin-top: $body-margin;
-    }
-  }
-  .diarised {
+	.continuity {
+		margin-top: $body-margin;
+	}
+  .wrote, .books {
+		.author {
+				display: none;
+			}
+	}
+	.diarised {
     h1 {
       display: none;
     }
@@ -226,21 +226,31 @@
       }
     }
   }
-  .contributor,
-  .container-collection {
-    .promo-list > li {
-      a {
-        margin-bottom: $body-margin;
-      }
-    }
-  }
+  // .contributor,
+  // .container-collection {
+  //   .promo-list > li {
+  //     a {
+  //       margin-bottom: $body-margin;
+  //     }
+  //   }
+  // }
   .contributor {
-    .collaborated,
-    .podcasts,
-    .translated {
-      padding-top: calc($body-margin - 1px);
-      border-top: 1px solid $faint-line;
-    }
+		section div {
+			div:last-of-type ul li:last-of-type {
+				margin-bottom: 0;
+				border-bottom: none;
+			}
+		}
+		.books, .anthologies {
+			li {
+				border-bottom: none;
+			}
+		}
+    // .collaborated,
+    // .podcasts,
+    // .translated {
+    //   padding-top: calc($body-margin - 1px);
+    // }
   }
 }
 

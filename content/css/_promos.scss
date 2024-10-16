@@ -28,6 +28,37 @@
     }
   }
 }
+aside.promo-aside {
+	height: $body-margin;
+	ul {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		padding-bottom: $body-margin-half;
+		li {
+			color: $lighter-brown;
+			font-family: $sans, sans-serif;
+			font-size: $font-size-furniture;
+			// text-transform: lowercase;
+			text-align: right;
+			padding-right: $body-margin;
+			&.bookmark-compact {
+				a:hover {
+					@include ease-in(0.25s);
+					color: $brown;
+					text-decoration-color: $brown;
+					.bookmark-glyph {
+						@include ease-in(0.25s);
+						opacity: 1;
+					}
+				}
+			}
+			&.wordcount {
+				font-style: italic;
+			}
+		}
+	}
+}
 .home {
   .promo {
     header {

@@ -1,5 +1,7 @@
-{% if omitAuthor !== true %}
-	{% set item = promo or story or sequence %}
+{% set item = promo or story or sequence %}
+{% if item.authors.length > 6 %}
+	<h2><!-- --></h2>
+{% elif omitAuthor !== true %}
 	<h2{% if item.type === 'Poddata' %} class="contains-with"{% endif %}{% if not promo %} data-pagefind-meta="author"{% endif %}>
 		{# REFACTOR - why author / authsString #}
 		{% if promo and item.translator %}

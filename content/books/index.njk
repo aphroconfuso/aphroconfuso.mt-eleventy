@@ -1,0 +1,38 @@
+---
+pagination:
+  data: stories
+  size: 250
+  alias: story
+permalink: /kotba/index.html
+---
+{% extends 'layouts/base.njk' %}
+
+{% block head %}
+	<title>{{ metadata.texts.booksTitle }} · Aphroconfuso</title>
+	<meta content="{{ metadata.description }}" name="description">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
+{% endblock %}
+
+{% block content %}
+	<article class="generic contents books">
+		<header>
+			<ul><li class="header-label">&nbsp;</li></ul>
+			<h1>{{ metadata.texts.booksTitle }}</h1>
+			<h2>&nbsp;</h2>
+		</header>
+		<div class="container">
+			<section id="grid-body">
+				<div class="generic-body-text">
+					<p>{{ metadata.texts.booksDescription | prettifyMaltese | safe }}</p>
+					{% set promoFrom = "Ktieb" %}
+					{% set promos = stories | selectattr("listableBook") %}
+					{% set showEpisodeTitle = true %}
+					{% include "_promo_list.njk" %}
+				</div>
+			</section>
+		</div>
+	</article>
+	<script>
+		reportingTitle = "{{ metadata.booksTitle }}";
+	</script>
+{% endblock %}

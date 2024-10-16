@@ -359,7 +359,8 @@ aside,
 #endnote {
   p,
   h5,
-  h6 {
+  h6,
+  li aside {
     a {
       text-decoration: underline;
       text-decoration-color: $lightester-brown;
@@ -396,7 +397,8 @@ aside,
   h2 a {
     @include animated-underline($lighter-brown);
   }
-  #grid-body {
+  #grid-body,
+  aside {
     a:hover {
       @include ease-in(0.25s);
       text-decoration-color: $brown;

@@ -310,10 +310,13 @@ async function getAllStories() {
 		// Add anchors
 		const cleanedBody = atts.body.replace(/ data-.*?=".*?"/gmi, "").replace(/fx-(\d)/gmi, "fx$1");
 		const anchoredBody = cleanedBody.replace(/(<h[56])>(.*?)(<\/h[56]>)/gmi, (full, openingTag, headline, closingTag) => `<hr>${ openingTag } id="${ slugifyStringMaltese(headline) }">${ headline }${ closingTag }`)
-
 		const booksMentioned = !!atts.booksMentioned.data.length && processBooksMentioned(atts.booksMentioned.data, atts.prominentMentions);
 		const authorsType = atts.authorsType && atts.authorsType.replace(/\_.*/, '') || 'solo';
-		const { authors, authorForename, authorsString, authorPronoun } = parseAuthors(atts.authors.data, authorsType);
+		let {authors, authorForename, authorsString, authorPronoun} = parseAuthors(atts.authors.data, authorsType);
+
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		if (authors.length > 10) authorsString = "";
+
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 		const sequenceData = atts.sequence.data;
 		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
@@ -355,7 +358,7 @@ async function getAllStories() {
 			atts.sequenceEpisodeNumber,
 			atts.diaryDate,
 			!!sequenceData && atts.title,
-			atts.type,
+			atts.type
 		);
 
 		// REFACTOR: Save externally
@@ -458,9 +461,11 @@ async function getAllStories() {
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,
 			isSequenceEpisode: !!sequenceData,
-			listable: atts.type !== 'Djarju' && atts.type !== 'Poddata',
+			listable: atts.type !== 'Djarju' && atts.type !== 'Poddata' && atts.type !== 'Recensjoni' && atts.type !== 'Memoir',
 			listableAudio: atts.type !== 'Djarju' && atts.type !== 'Poddata' && !!atts.podcastDate,
+			listableBook: atts.type === 'Recensjoni',
 			listableDiary: atts.type === 'Djarju',
+			listableEvent: atts.type === 'Memoir',
 			listablePodcast: atts.type === 'Poddata',
 			mainTitle,
 			metaTitle: displayTitle,

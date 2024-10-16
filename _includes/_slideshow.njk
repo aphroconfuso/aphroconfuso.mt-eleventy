@@ -1,4 +1,4 @@
-<section class="splide{% if story.singleImage %} single-image{% endif %}" aria-label="Stampi għal {{ story.title }}">
+<section class="splide{% if story.singleImage %} single-image{% endif %}{% if story.singleImage %} single-image{% endif %}" aria-label="Stampi għal {{ story.title }}">
 	<div class="arrows splide__arrows">
 		{% if story.slideshow %}
 			<button class="arrow-previous splide__arrow--prev">

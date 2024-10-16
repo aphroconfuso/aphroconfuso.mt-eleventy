@@ -10,10 +10,6 @@
 				<p>{{ promo.description | prettifyMaltese | safe }}</p>
 			{% endif %}
 		</div>
-		{% if showDurations and promo.audioPlayers[0] %}
-			<aside><p>{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }}</p></aside>
-		{% elif showLengths and promo.wordcount %}
-			<aside><p>{{ promo.wordcount | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</p></aside>
-		{% endif %}
 	</a>
+	{% include '_promo_aside.njk' %}
 </li>

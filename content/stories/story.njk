@@ -40,12 +40,23 @@ permalink: /{{ story.slug }}/index.html
 		<header>
 			<ul>
 				<li class="header-label">
-					{% if story.type === 'Djarju' %}
+					{% if story.type === 'Avveniment' %}
+						<a href="/avvenimenti/" class="diary-title">Avvenimenti</a>
+							{% if story.subjectDate %}
+								<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
+							{% endif %}
+						</p>
+					{% elif story.type === 'Djarju' %}
 						<a href="/djarju/" class="diary-title">Djarju</a>
 							{% if story.subjectDate %}
 								<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 							{% endif %}
 						</p>
+					{% elif story.type === 'Ktieb' %}
+						<a href="/kotba/" class="podcast-title">Kotba</a>
+							{% if story.subjectDate %}
+								<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
+							{% endif %}
 					{% elif story.type === 'Poddata' %}
 						<a href="/podcast/" class="podcast-title">Poddata</a>
 							{% if story.subjectDate %}
@@ -109,7 +120,7 @@ permalink: /{{ story.slug }}/index.html
 					</p>
 					{% if loop.last %}</section>{% endif %}
 				{% endfor %}
-				{% if story.introduction %}
+				{% if story.introduction and story.type !== 'Recensjoni' %}
 					<aside id="introduction">
 						{{ story.introduction | restrictHtml | prettifyMaltese | safe }}
 					</aside>
@@ -192,6 +203,14 @@ permalink: /{{ story.slug }}/index.html
 					<section class="generic-body-text">
 						{{ story.body | prettifyMaltese | endDotify | safe }}
 					</section>
+				{% elif story.type === 'Recensjoni' %}
+					{% if story.slideshow or story.singleImage %}
+						{% include "_slideshow.njk" %}XXXXXXXXXXX
+					{% endif %}
+					<section class="generic-body-text">
+						{% include "_print_book_panel.njk" %}
+						{{ story.body | prettifyMaltese | endDotify | safe }}
+					</section>
 				{% else %}
 					{% if story.imagesPositionText %}
 						<section class="body-text{% if story.useSeparators %} separated{% endif %}">
@@ -202,6 +221,11 @@ permalink: /{{ story.slug }}/index.html
 							{% include "_slideshow.njk" %}
 						{% endif %}
 						<section class="body-text body-text-part-two{% if story.useSeparators %} separated{% endif %}">
+							{{ story.body | stripDataAttributes | dropCapsifyAndSectionise(story.imagesPositionText, 1, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
+						</section>
+					{% elif story.slideshow or story.singleImage %}
+						{% include "_slideshow.njk" %}
+						<section class="body-text {% if story.useSeparators %} separated{% endif %}">
 							{{ story.body | stripDataAttributes | dropCapsifyAndSectionise(story.imagesPositionText, 1, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
 						</section>
 					{% else %}
@@ -264,7 +288,7 @@ permalink: /{{ story.slug }}/index.html
 							<p>{{ story.sequenceNextPromo.description | prettifyMaltese | safe }}</p>
 						</a>
 					</div>
-				{% elif story.moreToCome != false %}
+				{% elif (story.sequenceEpisodes or story.type == 'Djarju') and story.moreToCome != false %}
 					<aside id="form" data-track-content data-content-name="Newsletter" data-content-piece="formola">
 						<iframe src="https://newsletter.aphroconfuso.mt/subscription/form#{{ story.newsletterStyle }}" scrolling="no" title="Abbona fin-newsletter"></iframe>
 					</aside>
@@ -283,6 +307,7 @@ permalink: /{{ story.slug }}/index.html
 		{% endif %}
 	</article>
 	<aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
+		{% include "_print_book_image_promo.njk" %}
 		{% set omitEpisodeNumber = true %}
 		{% set promoFrom = story.reportingTitle %}
 		{% set promos = story.endPromos %}

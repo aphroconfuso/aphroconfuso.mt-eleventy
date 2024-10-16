@@ -29,6 +29,7 @@
 		</li>
 	{% endfor %}
 	</ul>
+	{% if promo.headLetter %}<aside id="headletter-{{ promo.headLetter }}" class="headletter">{{ promo.headLetter }}</aside>{% endif %}
 	{% if omitTitle !== true %}
 		{% if promo.type === 'Poddata' %}
 			<h1>

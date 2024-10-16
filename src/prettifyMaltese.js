@@ -39,8 +39,12 @@ const prettifyMaltese = (text) => {
 		.replace(/<l-m>(fx-?\d)<\/l-m>/gm, "$1")
 		.replace(/<l-m>right-aligned<\/l-m>/gm, "right-aligned")
 		.replace(/(<h[56] id=".*?)(<l-m>)(.*?)(<\/l-m>)(.*?<\/h[56]>)/gm, "$1$3$5")
+		.replace(/([A-Z]{3,})/gm, "<span class=\"sc\">$1</span>")
 		.replace(/(id=")<span-class=fx-?\d+>(.)<-mark>/gm, "$1$2")
+		.replace(/https:\/\/aphroconfuso.mt\//gm, "/")
 		.replace(/(=")<l-m>/gm, "$1");
 }
 
 module.exports = prettifyMaltese;
+
+// .replace(/([A-Z]{3,})/gm, "<span class=\"sc\">$1</span>").replace(/([A-Z]+[\.-]?[0-9.-]+)/gm, "<span class=\"sc\">$1</span>").replace(/([0-9]+[\.-]?[A-Z]+)/gm, "<span class=\"sc\">$1</span>")

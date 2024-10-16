@@ -1,0 +1,12 @@
+{% if promo %}
+	<aside class="promo-aside story-aside-{{ promo.id }}">
+		<ul>
+			<li class="bookmark-compact"><!-- --></li>
+			{% if showDurations and promo.audioPlayers[0] %}
+				<li class="wordcount">{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }}</li>
+			{% elif showLengths and promo.wordcount %}
+				<li class="wordcount">{{ promo.wordcount | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</li>
+			{% endif %}
+		</ul>
+	</aside>
+{% endif %}

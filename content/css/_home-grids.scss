@@ -57,7 +57,8 @@ a.promo-poetry {
 .ga-diary,
 .ga-editorial,
 .ga-newsletter,
-.ga-podcast {
+.ga-podcast,
+.ga-book-image-promo {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -141,6 +142,9 @@ a.promo-poetry {
 }
 .ga-podcast {
   grid-area: ga-podcast;
+}
+.ga-book-image-promo {
+	grid-area: ga-book-image-promo;
 }
 .ga-terms {
   grid-area: ga-terms;
@@ -236,4 +240,9 @@ a.promo-poetry {
       padding: 0;
     }
   }
+}
+
+
+.ga-book-image-promo {
+
 }

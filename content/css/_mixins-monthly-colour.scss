@@ -75,6 +75,12 @@
         @include ease-out($fade-in-short);
       }
     }
+    .bookmark-compact .bookmark-glyph {
+      a:hover {
+        color: $colour !important;
+        @include ease-out($fade-in-short);
+      }
+    }
     // a:hover {
     // 	text-decoration-color: $colour;
     // 	@include ease-out($fade-in-short);
@@ -90,8 +96,8 @@
       }
     }
     header a.bookmark:hover,
-    &.bookmark-promo:hover:not(.Djarju) .bookmark,
-    &.promo > .bookmark:hover:not(.Djarju) {
+    &.bookmark-promo:hover:not(.Djarju):not(.Recensjoni) .bookmark,
+    &.promo > .bookmark:hover:not(.Djarju):not(.Recensjoni) {
       border-color: $colour;
       border-bottom-color: transparent;
       opacity: 1;
@@ -102,8 +108,8 @@
         color: $paper;
       }
     }
-    &.promo:hover:not(.promo-djarju),
-    &.promo:focus:not(.promo-djarju) {
+    &.promo:hover:not(.promo-djarju):not(.promo-recensjoni),
+    &.promo:focus:not(.promo-djarju):not(.promo-recensjoni) {
       h1::after {
         @include animated-underline-post();
       }
@@ -141,6 +147,14 @@
         }
       }
     }
+		&:hover li.bookmark-compact {
+			.bookmark-glyph {
+				border-color: $colour;
+				border-bottom-color: transparent;
+			}
+			color: $colour;
+			@include ease-out($fade-in-long);
+		}
   }
 }
 
