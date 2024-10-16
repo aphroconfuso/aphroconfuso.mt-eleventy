@@ -75,8 +75,8 @@
         @include ease-out($fade-in-short);
       }
     }
-    .bookmark-compact .bookmark-glyph {
-      a:hover {
+    .bookmark-compact {
+      a:hover .bookmark-glyph {
         color: $colour !important;
         @include ease-out($fade-in-short);
       }
