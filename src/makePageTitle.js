@@ -2,6 +2,7 @@ const fixSubjectDate = require("../src/fixSubjectDate.js");
 
 module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subjectDate, sequenceEpisodeTitle, type) => {
 	if (type === 'Terminu') return `Il-Kliem Fit-Teorija · ${title}`;
+	if (type === 'Recensjoni') return `Kotba · ${title}`;
 	return [
 		subjectDate && title !== 'Bil-Moħbi fil-Beraħ' ? type : '',
 		type === 'Esej' && sequenceTitle,
