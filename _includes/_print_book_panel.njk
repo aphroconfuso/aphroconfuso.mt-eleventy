@@ -3,7 +3,7 @@
 		{% if story.introduction %}
 			{{ story.introduction | prettifyMaltese | safe }}
 		{% endif %}
-		<a href="https://revolut.me/aphroconfuso" class="order-button">€20<img class="revolut-logo" src="/img/revolut.png" alt="Revolut"/></a>
+		<a href="https://revolut.me/aphroconfuso" class="order-button" onclick="analytics(['trackEvent', 'Ordni', '{{ story.title }}']);">€20<img class="revolut-logo" src="/img/revolut.png" alt="Revolut"/></a>
 	</div>
 	<img class="book-cover" src="{{ metadata.settings.imagesUrl + story.socialImage }}">
 </section>
