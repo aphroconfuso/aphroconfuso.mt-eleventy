@@ -41,7 +41,7 @@ aside.promo-aside {
 			font-size: $font-size-furniture;
 			// text-transform: lowercase;
 			text-align: right;
-			padding-right: $body-margin;
+			// padding-right: $body-margin;
 			&.bookmark-compact {
 				a:hover {
 					@include ease-in(0.25s);

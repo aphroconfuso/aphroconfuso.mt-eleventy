@@ -337,10 +337,31 @@ article {
       }
     }
   }
+
+  .home a:not(.promo-djarju).promo-plain.is-episode,
+  .end-promos a:not(.promo-djarju).is-episode {
+    &.story-85 {
+      &> header {
+        margin-bottom: $body-margin-quarter;
+        &> h3 {
+          padding-top: $body-margin-quarter;
+        }
+      }
+      &> div > p {
+        @include clamp(4);
+      }
+    }
+  }
 }
 
 .menu-antologija-1 {
   border: 1px solid $lightester-brown;
   padding: 0 0.25rem !important;
   vertical-align: -7px;
+}
+
+.story-89 {
+	#audio figure.audio figcaption {
+			display: block !important;
+	}
 }

@@ -32,5 +32,15 @@ module.exports = {
 		"previousDiary": "Aqra l-entrata ta' qabel:",
 		"nextDiary": "Aqra l-entrata li jmiss:",
 		"noBookmarks": "Bħalissa m'għandek ebda bookmark; Kompli aqra u jinġabru waħedhom"
-	}
+	},
+	"generic_menu": [
+		"Kolofon",
+		"Dwarna",
+		"Proċess editorjali",
+		"Gwida tal-istil",
+		"Drittijiet",
+		"Aċċessibbiltà",
+		"Cookies",
+		"Privatezza"
+	]
 }

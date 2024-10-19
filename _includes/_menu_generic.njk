@@ -1,0 +1,14 @@
+<section id="grid-max-panel-left-top" class="hide-mobile">
+	<section class="generic-menu">
+		{% for item in metadata.generic_menu %}
+			{% if loop.first %}<ul>{% endif %}
+				{% set itemSlug = item | slugifyMaltese%}
+				{% if '/' + itemSlug + '/' === page.url %}
+					<li class="active">{{ item }}</li>
+				{% else %}
+					<li><a href="/{{ itemSlug }}/">{{ item }}</a></li>
+				{% endif %}
+			{% if loop.last %}</ul>{% endif %}
+		{% endfor %}
+	</section>
+</section>
