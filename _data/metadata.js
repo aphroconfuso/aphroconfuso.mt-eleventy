@@ -36,6 +36,7 @@ module.exports = {
 	"generic_menu": [
 		"Kolofon",
 		"Dwarna",
+		"Kontinwità",
 		"Proċess editorjali",
 		"Gwida tal-istil",
 		"Drittijiet",
