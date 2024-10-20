@@ -134,6 +134,10 @@
       @include border-top();
       @include image-right;
     }
+    .ga-image-2 {
+      @include border-top();
+      @include image-left;
+    }
     .ga-diary {
       ul {
         columns: 3;
