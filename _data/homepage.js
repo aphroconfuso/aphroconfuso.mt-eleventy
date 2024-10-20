@@ -45,19 +45,19 @@ async function getHomepage() {
                     }
                   }
                 }
-								promos(pagination: { page: 1, pageSize: 250 }) {
+								promos(pagination: { page: 1, pageSize: 12 }) {
 									text
 									story {
 										${linkedStoryData}
 									}
 								}
-								poetryPromos(pagination: { page: 1, pageSize: 250 }) {
+								poetryPromos(pagination: { page: 1, pageSize: 3 }) {
 									text
 									story {
 										${linkedStoryData}
 									}
 								}
-								imagePromos(pagination: { page: 1, pageSize: 250 }) {
+								imagePromos(pagination: { page: 1, pageSize: 3 }) {
 									text
 									imageCrop
 									image {
@@ -131,7 +131,14 @@ async function getHomepage() {
 			text: 11,
 			lengths: [2150, 1200],
 		},
-	}
+		Layout_5: {
+			diary: 3,
+			image: 3,
+			poem: 1,
+			text: 11,
+			lengths: [2150, 1200],
+		},
+}
 
 	const layoutConfig = layouts[atts.layout];
 
