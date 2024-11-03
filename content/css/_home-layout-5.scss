@@ -26,7 +26,7 @@
     "ga6"
     "ga-image-3"
     "ga7"
-		"ga-book-image-promo"
+"ga-book-image-promo"
     "ga8"
     "ga-terms"
     "ga9"
@@ -36,8 +36,8 @@
   .ga-3,
   .ga-5,
   .ga-6,
-  .ga-7,
-  .ga-image-2 {
+  .ga-image-1,
+.ga-image-3 {
     @include border-bottom();
   }
   .ga-1 {
@@ -85,10 +85,10 @@
     grid-auto-flow: row;
     grid-template-areas:
       "ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
-			"ga-poem-1 ga-poem-1 ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
+	"ga-poem-1 ga-poem-1 ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
       "ga1 ga1 ga1 ga2 ga2 ga2"
       "ga-diary ga-diary ga-diary ga-diary ga-diary ga-diary"
-			"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
+	"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
       "ga3 ga3 ga4 ga4 ga5 ga5"
       "ga6 ga6 ga7 ga7 ga8 ga8"
       "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms"
@@ -111,7 +111,6 @@
       }
     }
     .ga-image-2,
-    .ga-1,
     .ga-3,
     .ga-4,
     .ga-5 {
@@ -131,11 +130,9 @@
       @include image-left;
     }
     .ga-image-2 {
-      @include border-top();
       @include image-right;
     }
-    .ga-image-2 {
-      @include border-top();
+    .ga-image-3 {
       @include image-left;
     }
     .ga-diary {
