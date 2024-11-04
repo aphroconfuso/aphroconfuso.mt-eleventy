@@ -204,12 +204,12 @@ permalink: /{{ story.slug }}/index.html
 						{{ story.body | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% elif story.type === 'Recensjoni' %}
+					<section class="generic-body-text">
+						{% include "_print_book_panel.njk" %}
 					{% if story.slideshow or story.singleImage %}
 						{% include "_slideshow.njk" %}
 					{% endif %}
-					<section class="generic-body-text">
-						{% include "_print_book_panel.njk" %}
-						{{ story.body | prettifyMaltese | endDotify | safe }}
+					{{ story.body | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% else %}
 					{% if story.imagesPositionText %}
