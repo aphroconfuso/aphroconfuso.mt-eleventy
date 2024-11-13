@@ -23,6 +23,9 @@ article.recensjoni {
       }
     }
   }
+	figcaption {
+		display: none;
+	}
 }
 
 #book-panel {
@@ -31,17 +34,31 @@ article.recensjoni {
 	flex-direction: column-reverse;
 	margin-bottom: $body-margin;
   padding: $body-margin-half;
-	div {
+	div.main {
 		padding: $body-margin-half 0 0 0;
 	}
   @media all and (min-width: $laptop-breakpoint) {
 		flex-direction: row;
-	div {
-		padding: 0 $body-margin-half 0 0;
-	}
-		img.book-cover {
-			height: $body-margin * 6;
-			width: $body-margin * 6;
+		div.main {
+			padding: 0 $body-margin-half 0 0;
+		}
+		div.book-images {
+			display: flex;
+			flex-direction: column;
+			& > img {
+				&.book-cover,
+				&.revolut-qr {
+					height: $body-margin * 6;
+					width: $body-margin * 6;
+					min-height: $body-margin * 6;
+					min-width: $body-margin * 6;
+				}
+				&.revolut-qr {
+					border: 5px solid #000;
+					border-radius: 10px;
+					margin-top: $body-margin-quarter;
+				}
+			}
 		}
 	}
   a.order-button {

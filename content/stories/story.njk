@@ -162,7 +162,7 @@ permalink: /{{ story.slug }}/index.html
 				{% endfor %}
 			</section>
 			<section id="grid-max-panel-right-top">
-				{% if story.podcastNote and not story.podcastUrl %}
+				{% if story.podcastNote and not story.podcastUrl and story.type !== 'Recensjoni' %}
 					<aside id="podcast-note">
 						{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
 					</aside>

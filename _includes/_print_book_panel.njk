@@ -1,9 +1,15 @@
 <section id="book-panel">
-	<div>
-		{% if story.introduction %}
+	{% if story.introduction %}
+		<div class="main hide-laptop">
 			{{ story.introduction | prettifyMaltese | safe }}
-		{% endif %}
-		<a href="https://revolut.me/aphroconfuso" class="order-button" onclick="analytics(['trackEvent', 'Ordni', '{{ story.title }}']);">€20<img class="revolut-logo" src="/img/revolut.png" alt="Revolut"/></a>
+			<a href="https://revolut.me/aphroconfuso" class="order-button" onclick="analytics(['trackEvent', 'Ordni', '{{ story.title }}']);">€20<img class="revolut-logo" src="/img/revolut.png" alt="Revolut"/></a>
+		</div>
+	{% endif %}
+	{% if story.podcastNote and not story.podcastUrl %}
+		<div class="main hide-mobile">{{ story.podcastNote | prettifyMaltese | safe }}</div>
+	{% endif %}
+	<div class="book-images">
+		<img class="book-cover" src="{{ metadata.settings.imagesUrl + story.socialImage }}">
+		<img class="revolut-qr hide-mobile" src="/img/revolut-qr.png" alt="Revolut"/>
 	</div>
-	<img class="book-cover" src="{{ metadata.settings.imagesUrl + story.socialImage }}">
 </section>
