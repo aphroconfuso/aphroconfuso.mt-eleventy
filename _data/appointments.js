@@ -28,7 +28,6 @@ async function getAllAppointments() {
 								dateTimePublication
 								stories(
 			            publicationState: ${ fetchStatus },
-									sort: "dateTimePublication:asc"
 									) {
 									${linkedStoryData}
 								}
