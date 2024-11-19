@@ -95,3 +95,7 @@ aside.promo-aside {
 .image-16-by-9 {
   @include image-fit();
 }
+
+.appointments .promo-list li a {
+	padding-bottom: $body-margin;
+}
