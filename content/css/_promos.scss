@@ -43,6 +43,7 @@ aside.promo-aside {
 			text-align: right;
 			// padding-right: $body-margin;
 			&.bookmark-compact {
+				// padding-top: $body-margin-half;
 				a:hover {
 					@include ease-in(0.25s);
 					color: $brown;

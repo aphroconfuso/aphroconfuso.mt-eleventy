@@ -12,7 +12,7 @@ article.recensjoni {
   }
   &.content {
     h1 {
-      color: $podcast-beige;
+      color: $light-brown;
     }
     border-bottom-color: $podcast-beige;
     h5,
@@ -83,12 +83,12 @@ article.recensjoni {
 
 .promo-list {
 	.promo-recensjoni {
-		background-image: url(/img/deco/inforra-6.png);
+		background-image: url(/img/deco/inforra-cara-2.png);
 		border: 1px solid $lightest-brown;
 		padding: $body-margin;
 		header {
 			h1 {
-				color: $brown;
+				color: $light-brown !important;
 			}
 			h2 {
 				display: none;

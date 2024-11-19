@@ -365,8 +365,11 @@ article {
 			display: block !important;
 	}
 }
-.promo.story-88 {
-  h1 {
-    color: $podcast-beige !important;
-  }
+// .promo.story-88 {
+//   h1 {
+//     color: $light-brown !important;
+//   }
+// }
+.ga-diary a.story-94 p {
+	@include clamp(11);
 }

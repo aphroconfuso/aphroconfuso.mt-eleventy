@@ -125,6 +125,7 @@
       }
     }
     .ga-poem-1 {
+			margin-top: $body-margin-half;
       p {
         @include clamp(13);
       }
