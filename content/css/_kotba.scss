@@ -118,7 +118,7 @@ article.recensjoni {
 .ga-book-image-promo {
 	a {
 		border: 1px solid $lightester-brown;
-		padding: $body-margin;
+		padding: $body-margin-half;
 	}
 	@media all and (min-width: $mobile-breakpoint-plusone) {
 		display: none !important;

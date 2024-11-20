@@ -217,6 +217,10 @@
 // too much space in contributor
 // also needs to be fixed on
 .generic {
+	&.contents .promo-list li:last-of-type {
+			border-bottom: none;
+			margin-bottom: none;
+	}
   &.podcast,
   .container-collection {
     .promo-list > li {
