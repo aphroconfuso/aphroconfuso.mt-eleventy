@@ -130,3 +130,15 @@ article.recensjoni {
 		margin-top: $body-margin;
 	}
 }
+
+
+.bookshops {
+	background-color: $brown;
+	border: 1px solid $lightest-brown;
+	color: $lightester-brown;
+	font-size: $body-font-size;
+	padding: $body-margin-half;
+	a {
+		text-decoration: underline;
+	}
+}
