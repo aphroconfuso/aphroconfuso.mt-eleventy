@@ -133,12 +133,16 @@ article.recensjoni {
 
 
 .bookshops {
-	background-color: $brown;
+	background-color: $light-brown;
 	border: 1px solid $lightest-brown;
 	color: $lightester-brown;
 	font-size: $body-font-size;
 	padding: $body-margin-half;
 	a {
-		text-decoration: underline;
+    text-decoration: underline;
+    text-decoration-color: $lighter-brown;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    text-decoration-skip-ink: auto;
 	}
 }
