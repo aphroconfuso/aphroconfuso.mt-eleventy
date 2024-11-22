@@ -150,12 +150,7 @@ a.promo-poetry {
   grid-area: ga-terms;
   border: 1px solid hsl(280, 30%, 35%);
   padding: $body-margin $body-margin 0;
-  padding-bottom: calc($body-margin - 1px);
   position: relative;
-  a.promo:nth-of-type(2),
-  a.promo:nth-of-type(3) {
-    padding-bottom: $body-margin;
-  }
   h1 {
     margin: 0;
   }
