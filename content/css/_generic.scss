@@ -217,9 +217,11 @@
 // too much space in contributor
 // also needs to be fixed on
 .generic {
-	&.contents .promo-list li:last-of-type {
-			border-bottom: none;
-			margin-bottom: none;
+	&.contents, &.diaries {
+		.promo-list li:last-of-type {
+				border-bottom: none;
+				margin-bottom: none;
+		}
 	}
   &.podcast,
   .container-collection {
@@ -230,31 +232,18 @@
       }
     }
   }
-  // .contributor,
-  // .container-collection {
-  //   .promo-list > li {
-  //     a {
-  //       margin-bottom: $body-margin;
-  //     }
-  //   }
-  // }
   .contributor {
 		section div {
 			div:last-of-type ul li:last-of-type {
-				margin-bottom: 0;
+				margin-bottom: none;
 				border-bottom: none;
 			}
 		}
-		.books, .anthologies {
+		.anthologies, .books {
 			li {
 				border-bottom: none;
 			}
 		}
-    // .collaborated,
-    // .podcasts,
-    // .translated {
-    //   padding-top: calc($body-margin - 1px);
-    // }
   }
 }
 

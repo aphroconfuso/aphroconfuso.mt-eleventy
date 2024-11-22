@@ -29,7 +29,7 @@
   }
 }
 aside.promo-aside {
-	height: $body-margin;
+	max-height: $body-margin;
 	ul {
 		display: flex;
 		align-items: baseline;

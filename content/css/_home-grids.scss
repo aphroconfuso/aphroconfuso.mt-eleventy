@@ -12,7 +12,7 @@
 
 .ga-diary {
   border: 1px dashed $lightester-brown;
-  padding: $body-margin;
+  padding: $body-margin $body-margin 0;
   h1 .diary-title {
     font-size: 1.4rem;
     text-transform: uppercase;
@@ -148,10 +148,8 @@ a.promo-poetry {
 }
 .ga-terms {
   grid-area: ga-terms;
-}
-.ga-terms {
   border: 1px solid hsl(280, 30%, 35%);
-  padding: $body-margin;
+  padding: $body-margin $body-margin 0;
   padding-bottom: calc($body-margin - 1px);
   position: relative;
   a.promo:nth-of-type(2),
