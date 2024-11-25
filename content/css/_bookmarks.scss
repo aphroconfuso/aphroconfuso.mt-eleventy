@@ -26,58 +26,19 @@
     }
   }
 }
-// .bookmark {
-//   animation: fadeIn 1s;
-//   animation-timing-function: ease-in;
-//   align-items: center;
-//   border: 15px solid $lighter-brown;
-//   border-top: 13px;
-//   border-bottom: 8px solid transparent;
-//   box-sizing: border-box;
-//   height: 47px;
-//   width: 0;
-//   opacity: 0.5;
-//   overflow: visible;
-//   position: absolute;
-//   right: 0;
-//   top: 0;
-//   & > span.bookmark-percentage {
-//     align-items: center;
-//     border: 14px solid $paper;
-//     border-top: 13px;
-//     border-bottom: 8px solid transparent;
-//     box-sizing: border-box;
-//     color: $light-brown;
-//     cursor: pointer;
-//     display: flex;
-//     font-size: 1rem;
-//     height: 44px;
-//     justify-content: center;
-//     width: 0;
-//     font-family: $sans;
-//     font-size: $font-size-tiny;
-//     opacity: 1;
-//     overflow: visible;
-//     position: absolute;
-//     right: -14px;
-//     top: 1px;
-//   }
-// }
 .bookmark-glyph {
-  align-items: center;
   animation-timing-function: ease-in;
   animation: fadeIn 1s;
   border: 4px solid #908984;
   border-bottom: 4px solid rgba(0, 0, 0, 0);
   border-top: 1;
   box-sizing: border-box;
-  height: 18px;
+	display:inline-block;
+	height: 18px;
   margin-right: 6px;
   opacity: 0.5;
   overflow: visible;
-  right: 0;
-  top: 0;
-  width: 0;
+	vertical-align: middle;
 }
 @keyframes fadeOut {
   0% {
