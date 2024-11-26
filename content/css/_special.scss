@@ -358,3 +358,12 @@ article {
 .ga-diary a.story-94 p {
 	@include clamp(11);
 }
+
+.promo.story-98 {
+	h2 {
+		letter-spacing: -1px;
+	}
+	p {
+		@include clamp(4);
+	}
+}
