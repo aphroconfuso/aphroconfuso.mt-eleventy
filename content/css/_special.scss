@@ -321,7 +321,15 @@ article {
         @include clamp(6);
       }
     }
-  }
+	.story-98 {
+		h2 {
+			letter-spacing: -1px;
+		}
+		p {
+			@include clamp(4);
+		}
+	}
+	}
 
   .home a:not(.promo-djarju).promo-plain.is-episode,
   .end-promos a:not(.promo-djarju).is-episode {
@@ -357,13 +365,4 @@ article {
 // }
 .ga-diary a.story-94 p {
 	@include clamp(11);
-}
-
-.promo.story-98 {
-	h2 {
-		letter-spacing: -1px;
-	}
-	p {
-		@include clamp(4);
-	}
 }
