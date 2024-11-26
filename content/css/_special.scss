@@ -321,14 +321,14 @@ article {
         @include clamp(6);
       }
     }
-	.story-98 {
-		h2 {
-			letter-spacing: -1px;
+		&.story-98 {
+			h2 {
+				letter-spacing: -1px;
+			}
+			p {
+				@include clamp(4);
+			}
 		}
-		p {
-			@include clamp(4);
-		}
-	}
 	}
 
   .home a:not(.promo-djarju).promo-plain.is-episode,
