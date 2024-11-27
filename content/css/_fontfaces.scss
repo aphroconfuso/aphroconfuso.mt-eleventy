@@ -130,3 +130,20 @@
 	font-weight: 700;
 	text-transform: lowercase;
 }
+
+@font-face {
+	font-family: "Alegreya SC Regular";
+	src: url("/fonts/AlegreyaSC-Regular.ttf") format("truetype");
+	font-style: normal;
+	font-variant: small-caps;
+	font-weight: 400;
+	text-transform: lowercase;
+}
+@font-face {
+	font-family: "Alegreya SC Regular";
+	src: url("/fonts/AlegreyaSC-Italic.ttf") format("truetype");
+	font-style: italic;
+	font-variant: small-caps;
+	font-weight: 400;
+	text-transform: lowercase;
+}

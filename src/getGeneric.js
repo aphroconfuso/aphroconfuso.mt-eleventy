@@ -1,6 +1,7 @@
 const fetch = require("node-fetch");
 
 async function getGeneric(page) {
+	console.log('Fetching:', page, '#########################################################');
 	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
 	let generic;
 	try {
