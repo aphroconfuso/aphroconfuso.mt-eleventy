@@ -453,7 +453,7 @@ module.exports = function (eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("sectioniseOnly", function sectioniseOnly(text) {
-		return (text || []).replace(/<p>\#\#\#<\/p>\s*$/, '').replace(/<p>\s*\#\s*<\/p>\s*<(p|h5|h6) /gm, '<$1 class="break"');
+		return (text || []).replace(/<p>\#\#\#<\/p>\s*$/, '').replace(/<p>\s*\#\s*<\/p>\s*<(p|h5|h6)/gm, '<$1 class="break"');
 	});
 
 	eleventyConfig.addFilter("endDotify", function endDotify(text) {
