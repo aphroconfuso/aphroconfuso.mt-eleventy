@@ -429,20 +429,6 @@ module.exports = function (eleventyConfig) {
 		return beforeOrAfter === 0 ? splitArray[0] + matchedText : splitArray[1];
 	});
 
-	// .replace(/<p(^\>*?)>(.)([\w\-]+)/, '<p$1><span class="initial">$2$3</span>')
-	// .replace(/<p>\#<\/p>\s*<p>(.)([\w\-\’]+)/gm, '<p class="break"><span class="initial">$1$2</span>')
-
-	// eleventyConfig.addFilter("diarySectionise", function diarySectionise(text, splitText, beforeOrAfter, dontUseDropcaps) {
-	// 	let decoratedText = (text || []).replace(/<p>\#\#\#<\/p>$/, '');
-	// 	decoratedText = decoratedText.replace(/ċ/gm, "MMXXc").replace(/ġ/gm, "MMXXg").replace(/ħ/gm, "MMXXh").replace(/ż/gm, "MMXXz").replace(/à/gm, "MMXXa")
-	// 		.replace(/Ċ/gm, "MMXXC").replace(/Ġ/gm, "MMXXG").replace(/Ħ/gm, "MMXXH").replace(/Ż/gm, "MMXXZ").replace(/À/gm, "MMXXA")
-	// 		.replace(/MMXXc/gm, "ċ").replace(/MMXXg/gm, "ġ").replace(/MMXXh/gm, "ħ").replace(/MMXXz/gm, "ż").replace(/MMXXa/gm, "à")
-	// 		.replace(/MMXXC/gm, "Ċ").replace(/MMXXG/gm, "Ġ").replace(/MMXXH/gm, "Ħ").replace(/MMXXZ/gm, "Ż").replace(/MMXXA/gm, "À")
-	// 		.replace(/<p>\#<\/p>\s*(<hr>)?(<h[56].*?<\/h[56]>)?\s*<p>(.)([\w\-\’]+)/gm, '$1$2<p class="break"><span class="initial"><span class="dropcap drop-$3">$3</span>$4</span>')
-	// 		.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
-	// 	return decoratedText;
-	// });
-
 	eleventyConfig.addFilter("stripDataAttributes", function stripDataAttributes(html) {
 		if (!html || !html.match(/data-/)) return html;
 		var tags = html.match(/(<\/?[\S][^>]*>)/gi);

@@ -54,7 +54,7 @@ header {
 
   & > ul {
     display: flex;
-    font-family: "Alegreya Sans SC Regular";
+    font-family: "Alegreya Sans SC";
     line-height: $header-line-height;
     font-size: 1.1rem;
     text-transform: lowercase;
@@ -114,7 +114,7 @@ strong {
 }
 
 .sc {
-  font-family: "Alegreya SC Regular";
+  font-family: "Alegreya SC";
   text-transform: lowercase;
 }
 
@@ -303,6 +303,10 @@ span.rtl {
 .generic-body-text {
   color: $text-brown;
   font-family: $sans, sans-serif;
+	.sc {
+		font-family: "Alegreya Sans SC";
+  	text-transform: lowercase;
+	}
 }
 
 .end-dot {

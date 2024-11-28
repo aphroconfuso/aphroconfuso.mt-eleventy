@@ -97,7 +97,7 @@
 .collection.introduction {
   padding: $body-margin-half;
   .fx1 {
-    font-family: "Alegreya Sans SC Regular";
+    font-family: "Alegreya Sans SC";
     text-transform: lowercase;
     font-size: $body-font-size-slightly-larger;
   }
@@ -125,7 +125,7 @@ $collection-colour-terms: hsl($collection-hue-terms, 30%, 35%);
 .promo-collections {
   display: flex;
   flex-direction: row-reverse;
-  font-family: "Alegreya Sans SC Regular";
+  font-family: "Alegreya Sans SC";
   font-size: $font-size-furniture;
   position: absolute;
   text-transform: lowercase;
