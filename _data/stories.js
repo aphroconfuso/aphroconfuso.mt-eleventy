@@ -519,12 +519,12 @@ async function getAllStories() {
 
 		// ABECEDAIRE *************************************************************************************************************************
 		if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
-			const bodyText = atts.body.replace(/blockquote/g, "p").replace(/<h\d>.*?<\/h\d>/g, "").replace(/strong>/g, "span>");
+			const bodyText = atts.body.replace(/blockquote/g, "p").replace(/<h\d>.*?<\/h\d>/g, "").replace(/strong>/g, "span>").replace(/ /gm, " ");
 			const abecedaireMatches = bodyText.replace(/\n+/g, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.)(.{0,600})/g);
 			abecedaireMatches && shuffleArray(Array.from(abecedaireMatches)).forEach(match => {
 				let snippet = match[2] + match[3] + match[4];
 				let digraph = (match[2] + match[3]).toLowerCase();
-				snippet = snippet.replace(/<em><\/em>/g, "").replace(/<\/p><p>/g, " ").replace(/<\/?\w*$/, "");
+				snippet = snippet.replace(/<em><\/em>/g, "").replace(/<\/p>\s*<p>/gm, " ").replace(/<\/?\w*$/, "");
 				if ((snippet.match(/<i>/g) || []).length > (snippet.match(/<\/i>/g) || []).length) snippet += '</i>';
 				abecedaireArray.push({
 					authorsString,

@@ -300,6 +300,8 @@ span.rtl {
   }
 }
 
+// Exception for appointments promos
+.appointments .promo-list .body-text p,
 .generic-body-text {
   color: $text-brown;
   font-family: $sans, sans-serif;
