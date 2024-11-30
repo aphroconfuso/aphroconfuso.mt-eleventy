@@ -83,6 +83,10 @@
   }
 }
 
+figure.epigraph + figure.epigraph {
+	margin-top: none;
+}
+
 #grid-max-panel-left-top,
 #grid-max-panel-right-top,
 #grid-max-panel-left-bottom,
