@@ -83,8 +83,10 @@
   }
 }
 
-figure.epigraph + figure.epigraph {
-	margin-top: none;
+#epigraphs {
+	figure.epigraph + figure.epigraph {
+		margin-top: 0;
+	}
 }
 
 #grid-max-panel-left-top,
