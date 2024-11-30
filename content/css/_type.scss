@@ -269,10 +269,6 @@ figure {
 	}
 	figcaption {
 		margin-top: $body-margin-half;
-		&:before {
-			content: "\2014";
-			padding-right: 3px;
-		}
 	}
 	&.epigraph {
 		color: $lighter-brown;
@@ -281,6 +277,10 @@ figure {
 		figcaption {
 			margin-top: $body-margin-quarter;
 			padding: 0;
+			&:before {
+				content: "\2014";
+				padding-right: 3px;
+			}
 		}
 	}
 	&.audio {
