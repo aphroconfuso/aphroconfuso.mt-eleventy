@@ -162,8 +162,10 @@
 	}
 	#grid-body {
 		.splide {
-			margin-left: -30%;
-			width: 160%;
+			&:not(.Wisgha_tat_test) {
+				margin-left: -30%;
+				width: 160%;
+			}
 			img {
 				border: 1px solid $lightest-brown;
 				width: 100%;

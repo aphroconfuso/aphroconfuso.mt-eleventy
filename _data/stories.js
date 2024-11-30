@@ -457,6 +457,7 @@ async function getAllStories() {
 			id: story.id,
 			imageBorderColour: atts.imageBorderColour,
 			imageCrop: imageTypes[atts.imagesType],
+			imagesType: atts.imagesType,
 			images: atts.images.data,
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,

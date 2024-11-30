@@ -202,45 +202,6 @@ span.rtl {
   p:last-of-type + blockquote {
     margin-top: $body-margin-half !important;
   }
-  figure {
-    margin-bottom: $body-margin;
-    p,
-    figcaption {
-      font-size: $font-size-blockquote;
-    }
-    figcaption {
-      margin-top: $body-margin-half;
-      &:before {
-        content: "\2014";
-        padding-right: 3px;
-      }
-    }
-    &.epigraph {
-      color: $lighter-brown;
-      font-size: $font-size-blockquote;
-      margin: ($body-margin-double) 0 $body-margin;
-      figcaption {
-        margin-top: $body-margin-quarter;
-        padding: 0;
-      }
-    }
-    &.audio {
-      margin: $body-margin 0 !important;
-      @media all and (min-width: $laptop-breakpoint) {
-        margin: $body-margin $body-margin-double $body-margin $body-margin !important;
-      }
-      figcaption {
-        &:before {
-          display: none;
-        }
-        p {
-          color: $lighter-brown;
-          font-family: $sans, sans-serif;
-          font-size: $font-size-blockquote;
-        }
-      }
-    }
-  }
   blockquote {
     font-size: $font-size-blockquote;
     padding: 0 $body-margin $body-margin-half;
@@ -298,6 +259,46 @@ span.rtl {
   & > h5:nth-child(1) {
     margin-top: $body-margin-half;
   }
+}
+
+figure {
+	margin-bottom: $body-margin;
+	p,
+	figcaption {
+		font-size: $font-size-blockquote;
+	}
+	figcaption {
+		margin-top: $body-margin-half;
+		&:before {
+			content: "\2014";
+			padding-right: 3px;
+		}
+	}
+	&.epigraph {
+		color: $lighter-brown;
+		font-size: $font-size-blockquote;
+		margin: ($body-margin-double) 0 $body-margin;
+		figcaption {
+			margin-top: $body-margin-quarter;
+			padding: 0;
+		}
+	}
+	&.audio {
+		margin: $body-margin 0 !important;
+		@media all and (min-width: $laptop-breakpoint) {
+			margin: $body-margin $body-margin-double $body-margin $body-margin !important;
+		}
+		figcaption {
+			&:before {
+				display: none;
+			}
+			p {
+				color: $lighter-brown;
+				font-family: $sans, sans-serif;
+				font-size: $font-size-blockquote;
+			}
+		}
+	}
 }
 
 // Exception for appointments promos
