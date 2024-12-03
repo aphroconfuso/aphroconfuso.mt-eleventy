@@ -305,6 +305,9 @@ permalink: /{{ story.slug }}/index.html
 					<!-- X -->
 				</section>
 		{% endif %}
+		<aside class="hide-laptop">
+			<a href="whatsapp://send?text={{ "https://aphroconfuso.mt" | urlencode }}/{{ story.slug | urlencode }}/" data-action="share/whatsapp/share" target="_blank">Aqsam dan ix-xogħol fuq Whatsapp</a>
+		</aside>
 	</article>
 	<aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
 		{% include "_print_book_image_promo.njk" %}
