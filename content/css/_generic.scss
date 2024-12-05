@@ -120,8 +120,12 @@
     }
   }
   @media all and (min-width: $laptop-breakpoint) {
-    li a {
-      @include animated-underline($lighter-brown);
+    li {
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			width: 340px;
+			@include animated-underline($lighter-brown);
     }
   }
 }
