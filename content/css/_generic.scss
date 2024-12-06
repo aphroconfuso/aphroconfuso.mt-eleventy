@@ -121,13 +121,16 @@
   }
   @media all and (min-width: $laptop-breakpoint) {
     li {
+			@include animated-underline($lighter-brown);
+			height: $body-margin;
+			max-height: $body-margin;
+			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
-			overflow: hidden;
 			width: 340px;
-			@include animated-underline($lighter-brown);
-    }
-  }
+			word-wrap: break-word;
+	  }
+	}
 }
 .contributors-menu {
   columns: 2;
