@@ -541,7 +541,21 @@ async function getAllStories() {
 
 		const audioUrls = [];
 		const audioPlayers = [];
-		// This story's own audio (normally a plain reading)
+		// TEMP FIX !!!!!!!!!!!!!!!!!!!!!!!!!!
+		// ***********************************
+		if (parseInt(story.id) === 61) {
+			console.log("SIBHNIHA!");
+			atts.podcastUrl = "https://s3.amazonaws.com/assets.pippa.io/shows/63ef6b4c3642ca00119bcf72/1733757948175-389ac9c8-9482-4a42-bc3f-a3fbdcdec7ac.mp3";
+			atts.podcastLengthMinutes = 2;
+			atts.listableAudio = true;
+			atts.podcastDate = "2024-12-9";
+			processedStory.podcastUrl = atts.podcastUrl;
+			processedStory.podcastLengthMinutes = atts.podcastLengthMinutes;
+			processedStory.listableAudio = atts.listableAudio;
+			processedStory.podcastDate = atts.podcastDate;
+		}
+
+		// ***********************************
 		if (atts.podcastUrl) {
 			audioUrls.push({
 				author: processedStory.authorsString,

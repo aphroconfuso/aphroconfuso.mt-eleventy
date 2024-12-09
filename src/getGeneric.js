@@ -25,7 +25,6 @@ async function getGeneric(page) {
 				}`,
 			}),
 		});
-		console.log(data);
 		const response = await data.json();
 
 		if (response.errors) {
