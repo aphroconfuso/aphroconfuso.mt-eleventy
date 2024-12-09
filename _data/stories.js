@@ -525,7 +525,7 @@ async function getAllStories() {
 			abecedaireMatches && shuffleArray(Array.from(abecedaireMatches)).forEach(match => {
 				let snippet = match[2] + match[3] + match[4];
 				let digraph = (match[2] + match[3]).toLowerCase();
-				snippet = snippet.replace(/<em><\/em>/g, "").replace(/<\/p>\s*<p>/gm, " ").replace(/<\/?\w*$/, "").replace(/<p>\s*<\/p>/gm, "");
+				snippet = snippet.replace(/<em><\/em>/g, "").replace(/<p>\s*<\/p>/g, "").replace(/<\/p><p>/gm, "").replace(/<\/?\w*$/, "");
 				if ((snippet.match(/<i>/g) || []).length > (snippet.match(/<\/i>/g) || []).length) snippet += '</i>';
 				abecedaireArray.push({
 					authorsString,
