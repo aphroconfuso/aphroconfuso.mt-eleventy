@@ -119,18 +119,19 @@
       color: $lighter-brown;
     }
   }
-  // @media all and (min-width: $laptop-breakpoint) {
-  //   li {
-	// 		@include animated-underline($lighter-brown);
-	// 		height: $body-margin;
-	// 		max-height: $body-margin;
-	// 		overflow: hidden;
-	// 		text-overflow: ellipsis;
-	// 		white-space: nowrap;
-	// 		width: 340px;
-	// 		word-wrap: break-word;
-	//   }
-	// }
+}
+@media all and (min-width: $laptop-breakpoint) {
+	.djarju .generic-menu {
+    li {
+			@include animated-underline($lighter-brown);
+			// FIXME: line height is too big
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			width: 340px;
+			word-wrap: break-word;
+	  }
+	}
 }
 .contributors-menu {
   columns: 2;
