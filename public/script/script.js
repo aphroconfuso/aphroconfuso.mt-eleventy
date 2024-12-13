@@ -23,7 +23,7 @@ const getSelectionText = () => {
 	if (selectedText === "") return;
 	var span = document.createElement("mark");
 	var credit = document.createElement("span");
-	credit.innerHTML = `${ pageTitle }<br><em>${ author }</em>`
+	credit.innerHTML = `<strong>${ pageTitle }</strong><br>${ author }`
 	span.appendChild(selectedText);
 	span.appendChild(credit);
 	selection.insertNode(span);
