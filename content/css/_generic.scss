@@ -98,7 +98,12 @@
   font-variant-numeric: tabular-nums;
   // margin-left: $body-margin-half * -1;
   li {
-    letter-spacing: -0.5px;
+		letter-spacing: -0.5px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 340px;
+		word-wrap: break-word;
     white-space: nowrap;
     &::marker {
       color: $paper;
@@ -119,19 +124,6 @@
       color: $lighter-brown;
     }
   }
-}
-@media all and (min-width: $laptop-breakpoint) {
-	.djarju .generic-menu {
-    li {
-			@include animated-underline($lighter-brown);
-			// FIXME: line height is too big
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			width: 340px;
-			word-wrap: break-word;
-	  }
-	}
 }
 .contributors-menu {
   columns: 2;

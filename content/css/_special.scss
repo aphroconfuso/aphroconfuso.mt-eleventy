@@ -15,61 +15,6 @@
 // 	}
 // }
 
-// .body-text mark {
-//   /* font-weight: bolder; */
-//   background: linear-gradient(
-//       104deg,
-//       rgba(130, 173, 255, 0) 0.9%,
-//       rgba(130, 173, 255, 0.25) 2.4%,
-//       rgba(130, 173, 255, 0.5) 5.8%,
-//       rgba(130, 173, 255, 0.1) 93%,
-//       rgba(130, 173, 255, 0.7) 96%,
-//       rgba(130, 173, 255, 0) 98%
-//     ),
-//     linear-gradient(
-//       184deg,
-//       rgba(130, 173, 255, 0) 0%,
-//       rgba(130, 173, 255, 0.3) 7.9%,
-//       rgba(130, 173, 255, 0) 15%
-//     );
-//   padding: 0.6em 13.7px;
-//   box-decoration-break: clone;
-//   -webkit-box-decoration-break: clone;
-//   margin: 0;
-//   border-radius: 7.5px;
-//   text-shadow: -12px 12px 9.8px rgba(130, 173, 255, 0.7),
-//     21px -18.1px 7.3px rgba(255, 255, 255, 1),
-//     -18.1px -27.3px 30px rgba(255, 255, 255, 1);
-// }
-
-// .body-text mark {
-//   background-color: rgba(130, 173, 255, 0.4);
-// }
-
-// yellow
-// rgb(235, 214, 97),
-// rgb(235, 214, 97) 90%
-
-// lightblue
-// rgb(173, 216, 230),
-// rgb(173, 216, 230) 90%
-// .body-text mark {
-//   color: $paper;
-//   background: linear-gradient(
-//     to bottom,
-//     transparent,
-//     transparent 10%,
-//     #399,
-//     #399 0%
-//   );
-//   background-size: 100% 26.88px;
-//   line-height: 26.88px;
-// }
-.body-text mark {
-  color: $paper;
-  background: #743399;
-}
-
 article.story {
   &.story-18 {
     // Mona Lisa
