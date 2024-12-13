@@ -97,13 +97,15 @@
   font-size: 1.1rem;
   font-variant-numeric: tabular-nums;
   li {
-		letter-spacing: -0.5px;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		width: 340px;
-		word-wrap: break-word;
-    white-space: nowrap;
+		@media all and (min-width: $mobile-breakpoint-plusone) {
+			letter-spacing: -0.5px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			width: 340px;
+			word-wrap: break-word;
+			white-space: nowrap;
+		}
     &::marker {
       color: $paper;
       content: "■ ";
