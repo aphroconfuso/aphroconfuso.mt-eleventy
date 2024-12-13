@@ -37,11 +37,10 @@
 		position: relative;
 		span {
 			background-color: $colour;
+			border: 1px solid lighten($colour, $lightest);
 			display: block;
-			left: 0;
 			margin-top: 5px;
 			position: absolute;
-			top: 100%;
 			white-space: nowrap;
 		}
 	}
