@@ -31,7 +31,6 @@
     background-color: $colour;
   }
 	.body-text mark {
-		color: $paper;
 		background: lighten(complement($colour), $lightest);
 		border: 1px solid lighten(complement($colour), $lighter);
 		position: relative;
