@@ -33,7 +33,7 @@
 	.body-text mark {
 		color: $paper;
 		background: complement($colour);
-		border: 1px solid lighten(complement($colour), $lightest);
+		border: 1px solid lighten(complement($colour), $lighter);
 		position: relative;
 		& > div {
 			display: block;
@@ -42,7 +42,7 @@
 			width: max-content;
 				span {
 				background-color: $colour;
-				border: 1px solid lighten($colour, $lightest);
+				border: 1px solid lighten($colour, $lighter);
 				strong {
 					font-weight: 600;
 				}
