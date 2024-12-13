@@ -16,16 +16,18 @@ const getScrollPosition = () => window.pageYOffset || document.documentElement.s
 
 const getSelectionText = () => {
   let text = "";
-	if (!!alreadyMarked || location.hostname === 'aphroconfuso.mt') return;
+	if (!!alreadyMarked) return;
 	alreadyMarked = true;
 	var selection = window.getSelection().getRangeAt(0);
 	var selectedText = selection.extractContents();
 	if (selectedText === "") return;
 	var span = document.createElement("mark");
-	var credit = document.createElement("span");
-	credit.innerHTML = `<strong>${ pageTitle }</strong><br>${ author }`
 	span.appendChild(selectedText);
-	span.appendChild(credit);
+	if (location.hostname !== 'abbozzi.aphroconfuso.mt') {
+		var credit = document.createElement("div");
+		credit.innerHTML = `<span><strong>${ pageTitle }</strong><br>${ author }</span>`
+		span.appendChild(credit);
+	}
 	selection.insertNode(span);
 }
 
@@ -628,10 +630,11 @@ const initialiseAfterWindow = () => {
 	};
 	initialiseMessage();
 
-
-	document.addEventListener('selectionchange', function (event) {
-		setTimeout(getSelectionText, 10000);
-	});
+	if (location.hostname !== 'aphroconfuso.mt') {
+		document.addEventListener('selectionchange', function (event) {
+			setTimeout(getSelectionText, 10000);
+		});
+	}
 }
 
 window.onload = initialiseAfterWindow;

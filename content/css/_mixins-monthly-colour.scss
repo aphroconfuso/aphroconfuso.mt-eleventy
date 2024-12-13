@@ -35,15 +35,17 @@
 		background: complement($colour);
 		border: 1px solid lighten(complement($colour), $lightest);
 		position: relative;
-		span {
-			background-color: $colour;
-			border: 1px solid lighten($colour, $lightest);
+		& > div {
 			display: block;
 			margin-top: 5px;
 			position: absolute;
-			white-space: nowrap;
-			strong {
-				font-weight: 500;
+			width: max-content;
+				span {
+				background-color: $colour;
+				border: 1px solid lighten($colour, $lightest);
+				strong {
+					font-weight: 600;
+				}
 			}
 		}
 	}
