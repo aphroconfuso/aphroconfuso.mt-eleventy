@@ -63,12 +63,12 @@ article.djarju {
       }
     }
   }
-  @media all and (max-width: ($laptop-breakpoint - 1)) {
-    .sequence-menu {
-      border: 1px dashed $light-brown;
-      margin: $body-margin 0;
-    }
-  }
+  // @media all and (max-width: ($laptop-breakpoint - 1)) {
+  //   .sequence-menu {
+  //     border: 1px dashed $light-brown;
+  //     margin: $body-margin 0;
+  //   }
+  // }
   @media all and (min-width: $laptop-breakpoint) {
     .container {
       gap: $body-margin $body-margin-half;

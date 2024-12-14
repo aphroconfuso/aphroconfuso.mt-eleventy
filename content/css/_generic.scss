@@ -96,16 +96,7 @@
 .generic-menu {
   font-size: 1.1rem;
   font-variant-numeric: tabular-nums;
-  li {
-		@media all and (min-width: $mobile-breakpoint-plusone) {
-			letter-spacing: -0.5px;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			width: 340px;
-			word-wrap: break-word;
-			white-space: nowrap;
-		}
+	li {
     &::marker {
       color: $paper;
       content: "■ ";
@@ -125,6 +116,19 @@
       color: $lighter-brown;
     }
   }
+	&.sequence-menu {
+		li {
+			@media all and (min-width: $mobile-breakpoint-plusone) {
+				letter-spacing: -0.5px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				width: 340px;
+				word-wrap: break-word;
+				white-space: nowrap;
+			}
+		}
+	}
 }
 .contributors-menu {
   columns: 2;

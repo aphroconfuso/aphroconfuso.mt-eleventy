@@ -26,7 +26,7 @@ const getSelectionText = () => {
 	if (location.hostname !== 'abbozzi.aphroconfuso.mt') {
 		span.classList.add('provi');
 		var credit = document.createElement("div");
-		credit.innerHTML = `<span><strong>${ pageTitle }</strong><br>${ author }</span>`
+		credit.innerHTML = `<span><strong>${ pageTitle }</strong><br>${ author }${ !!translator ? "<br>(tr " + translator + ")" : "" }</span>`
 		span.appendChild(credit);
 	}
 	selection.insertNode(span);
