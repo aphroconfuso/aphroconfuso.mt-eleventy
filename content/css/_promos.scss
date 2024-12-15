@@ -30,6 +30,7 @@
 }
 aside.promo-aside {
 	max-height: $body-margin;
+	height: $body-margin;
 	ul {
 		display: flex;
 		align-items: baseline;
@@ -39,6 +40,7 @@ aside.promo-aside {
 			color: $lighter-brown;
 			font-family: $sans, sans-serif;
 			font-size: $font-size-furniture;
+			line-height: $body-font-size * $body-line-height;
 			// text-transform: lowercase;
 			text-align: right;
 			// padding-right: $body-margin;
