@@ -16,3 +16,14 @@
     padding-top: $body-margin-half;
   }
 }
+
+.generic.sequence .promo-list {
+	margin-top: 0;
+	li:last-of-type {
+		border-bottom: none;
+	}
+}
+
+.generic.diaries ul.promo-list > li {
+	border-bottom-style: dashed;
+}

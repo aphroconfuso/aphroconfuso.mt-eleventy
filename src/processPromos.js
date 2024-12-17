@@ -22,7 +22,7 @@ module.exports = (promos, storyAtts) => {
 			return null;
 		}
 		const authorsType = fixAuthorsType(promoAtts.authorsType);
-		const { author, authors, authorsString, authorPronoun, authorForename } = promoAtts.authors.data.length && parseAuthors(promoAtts.authors.data, authorsType);
+		const { author, authors, authorsString, authorPronoun, authorForename, authorSurname } = promoAtts.authors.data.length && parseAuthors(promoAtts.authors.data, authorsType);
 		const translator = promoAtts.translators.data.length && promoAtts.translators.data[0].attributes;
 		const sequence = promoAtts.sequence.data && promoAtts.sequence.data.attributes;
 		const translatorFullName = !!translator && (translator.displayName || `${ translator.forename } ${ translator.surname }`);
@@ -45,6 +45,7 @@ module.exports = (promos, storyAtts) => {
 			author,
 			authors,
 			authorForename,
+			authorSurname,
 			authorPronoun,
 			authorsString,
 			collaboration: authors && authors.length > 1,

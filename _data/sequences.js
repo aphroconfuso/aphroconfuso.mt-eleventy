@@ -36,6 +36,7 @@ async function getAllsequences() {
 								stories(
 			            publicationState: ${ fetchStatus },
 									sort: "dateTimePublication:asc"
+									pagination: { page: 1, pageSize: 250 },
 									) {
 									${linkedStoryData}
 								}
@@ -74,7 +75,7 @@ async function getAllsequences() {
 
 		// Get the author data from first story
 		// 	REVIEW: in the future it may be necessary to collate from all stories
-		const { authorsType, authors, authorForename, authorsString, authorPronoun, translator, type } = (storiesFormatted.length && storiesFormatted[0]) || {};
+		const { authorsType, authors, authorForename, authorsString, authorPronoun, authorSurname, translator, type } = (storiesFormatted.length && storiesFormatted[0]) || {};
 
 		const displayTitle = makePageTitle(
 			sequenceTitle,
@@ -107,10 +108,12 @@ async function getAllsequences() {
 			description: atts.description,
 			displayTitle,
 			id: sequence.id,
+			isDiary: storiesFormatted.length && storiesFormatted[0].type === 'Djarju',
 			moreToCome: atts.moreToCome,
 			slug: pageSlug,
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
+			sortBy: authorSurname,
 			stories: storiesFormatted,
 			title: sequenceTitle,
 			translator,
