@@ -116,6 +116,14 @@ permalink: /index.html
 				</div>
 			{% endfor %}
 			<div class="ga-diary">
+				<nav>
+					<li class="header"><a href="/djarju/">djarju</a></li>
+					{% for item in sequences | selectattr('isDiary') | sort(false, false, 'sortBy') %}
+							<li><a href="/{{ item.slug }}/">{{ item.authorsString }}</a>
+						{% if not loop.last %}, {% endif %}</li>
+					{% endfor %}
+				</p>
+				</nav>
 				<ul>
 				{% for promo in homepage.diaryEntries %}
 					<li>

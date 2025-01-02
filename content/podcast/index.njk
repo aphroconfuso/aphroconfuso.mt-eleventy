@@ -27,7 +27,7 @@ permalink: /podcast/index.html
 					{% set promoFrom = "Podcast" %}
 					{% set promos = stories | selectattr("listablePodcast") %}
 					{% set showEpisodeTitle = true %}
-					{% set showLengths = true %}
+					{% set showDurations = true %}
 					{% include "_promo_list.njk" %}
 					{% set promos = stories | selectattr("podcastLength") | rejectattr("listablePodcast") %}
 					{% set showEpisodeTitle = true %}

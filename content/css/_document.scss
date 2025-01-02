@@ -56,8 +56,9 @@ body {
   font-family: $sans, sans;
   font-size: $font-size-furniture;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.5;
   print-color-adjust: exact;
+	margin-top: $grid-adjustment;
   min-height: 101%;
   display: flex;
   min-height: 100vh;

@@ -250,13 +250,15 @@ article {
     }
   }
 
+	// These should go in the story
   .home a,
   .end-promos a {
     &.story-16,
     &.story-39,
     &.story-55,
     &.story-61,
-		&.story-95 {
+		&.story-95,
+		&.story-100 {
       header {
         margin-bottom: $body-margin-quarter;
         h3 {
@@ -265,6 +267,11 @@ article {
       }
       p {
         @include clamp(6);
+      }
+    }
+		&.story-100 {
+      p {
+        @include clamp(4);
       }
     }
 		&.story-98 {
@@ -311,4 +318,14 @@ article {
 // }
 .ga-diary a.story-94 p {
 	@include clamp(11);
+}
+
+body.localhost {
+  background-image: linear-gradient(to top, #ccf 0, transparent 1px), linear-gradient(to top, #f33 0, transparent 1px);
+  background-repeat: repeat-y, repeat-y;
+  background-size: 100% $body-margin, 100% $body-margin;
+	background-position: 0 0, 0 $body-margin-half;
+	.promo.poetry, .editorial, .collection.introduction, .collection-sidebar, footer {
+		opacity: 0.7;
+	}
 }

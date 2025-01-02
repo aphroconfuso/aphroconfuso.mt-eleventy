@@ -1,5 +1,7 @@
 @use "sass:math";
 
+$grid-adjustment: 0.38rem;
+
 // contradiction here
 // hover doesn't come in but full nav already has
 $mobile-breakpoint: 480px;
