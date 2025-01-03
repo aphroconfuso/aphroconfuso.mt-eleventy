@@ -11,9 +11,29 @@
 }
 
 .ga-diary {
-  border: 1px dashed $lightester-brown;
+	border: 1px dashed $lightester-brown;
   padding: $body-margin $body-margin 0;
-  h1 .diary-title {
+	nav {
+		margin-bottom: $body-margin-half;
+		li {
+			display: inline-block;
+			font-size: $body-font-size;
+			&:first-of-type {
+				font-family: "Alegreya Sans SC";
+				letter-spacing: 1px;
+				margin-right: $body-margin-quarter;
+				text-transform: lowercase;
+			}
+			a{
+				white-space: nowrap;
+				@include animated-underline($lighter-brown);
+			}
+		}
+	}
+	.header-djarju {
+		display: none;
+	}
+	h1 .diary-title {
     font-size: 1.4rem;
     text-transform: uppercase;
   }
