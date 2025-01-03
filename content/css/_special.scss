@@ -320,7 +320,7 @@ article {
 	@include clamp(11);
 }
 
-body.localhost-xxx {
+body.localhost {
   background-image: linear-gradient(to top, #ccf 0, transparent 1px), linear-gradient(to top, #f33 0, transparent 1px);
   background-repeat: repeat-y, repeat-y;
   background-size: 100% $body-margin, 100% $body-margin;
