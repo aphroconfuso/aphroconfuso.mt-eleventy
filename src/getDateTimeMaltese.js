@@ -1,9 +1,14 @@
 const monthNames = require("./getMonthsInMaltese.js")();
 
+// FIXME - f’nofsinhar vs fit-12 ta' Frar
 const sunnyfier = (number) => {
 	let sunnified = '';
 	const lastDigit = number % 10;
 	switch (lastDigit) {
+		case 0:
+		case 4:
+			sunnified = `fl-${ number }`;
+			break;
 		case 1:
 		case 2:
 		case 6:
@@ -17,10 +22,6 @@ const sunnyfier = (number) => {
 		case 9:
 			sunnified = `fid-${ number }`;
 			break;
-		case 4:
-		case 10:
-			sunnified = `fl-${ number }`;
-			break;
 		case 12:
 			sunnified = `f’${ number }`;
 			break;
@@ -33,7 +34,7 @@ const sunnyfier = (number) => {
 const dateTimeMaltese = (date) => {
 
 	// Get the current date or today
-	const thisDate = !!date ? new Date(date) : new Date();
+	const thisDate = !!date ? Date.parse(new Date().toLocaleString({timeZone: 'Europe/Malta'})) : new Date();
 
 	// Get the current month and year
 	const nowHours = thisDate.getHours() % 12
