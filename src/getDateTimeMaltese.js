@@ -36,12 +36,14 @@ const dateTimeMaltese = (date) => {
 	const thisDate = !!date ? new Date(date) : new Date();
 
 	// Get the current month and year
-	const issueDate = thisDate.getDate();
-	const issueMonth = thisDate.getMonth(); // 0-indexed (0: January, 1: February, ..., 11: December)
-	const issueYear = thisDate.getFullYear();
+	const nowHours = thisDate.getHours() % 12
+	const nowAmPm = thisDate.getHours() >= 12 ? 'pm' : 'am';
+	const nowDate = thisDate.getDate();
+	const nowMonth = thisDate.getMonth(); // 0-indexed (0: January, 1: February, ..., 11: December)
+	const nowYear = thisDate.getFullYear();
 
 	return {
-		full: `${ sunnyfier(issueDate) } ta’ ${ monthNames[issueMonth] } ${ issueYear } ${ sunnyfier(thisDate.getHours()) }:${ thisDate.getMinutes() } `,
+		full: `${ sunnyfier(nowDate) } ta’ ${ monthNames[nowMonth] } ${ nowYear } ${ sunnyfier(nowHours) }:${ thisDate.getMinutes() } ${ nowAmPm }`,
 	};
 }
 

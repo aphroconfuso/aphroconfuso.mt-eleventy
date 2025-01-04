@@ -10,7 +10,6 @@ module.exports = {
 		"url": "https://aphroconfuso.mt"
 	},
 	"thisYear": new Date().getFullYear(),
-	"dateTimeNow": dateTimeMaltese(),
 	"settings": {
 		"imagesUrl": "/stampi/",
 		"socialImage": "social_aphroconfuso_logo_social_kbir_kwadrat_d073f4e24a.jpg",

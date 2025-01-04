@@ -1,4 +1,5 @@
 const fixBlockquotes = require("./fixBlockquotes.js");
+const dateTimeMaltese = require("./getDateTimeMaltese.js");
 
 const prettifyMaltese = (text) => {
 	if (!text) return "XXXXXXprettifyMalteseXXX";
@@ -41,6 +42,7 @@ const prettifyMaltese = (text) => {
 		.replace(/(<h[56] id=".*?)(<l-m>)(.*?)(<\/l-m>)(.*?<\/h[56]>)/gm, "$1$3$5")
 		.replace(/(id=")<span-class=fx-?\d+>(.)<-mark>/gm, "$1$2")
 		.replace(/https:\/\/aphroconfuso.mt\//gm, "/")
+		.replace(/XXXDATETIMEFULLXXX/gm, dateTimeMaltese().full)
 		.replace(/(=")<l-m>/gm, "$1");
 }
 

@@ -318,20 +318,20 @@ permalink: /{{ story.slug }}/index.html
 		{% include '_promo_list.njk' %}
 	</aside>
 	<script>
-		audioUrls = { "songs": {{ story.audioUrlsString | safe }} };
+		audioUrls = { "songs": {{ story.audioUrlsString | safe }} } || null;
 		author = "{{ story.authorsString }}" || null;
 		collections = "{{ story.storycollectionsString }}" || null;
 		issueMonth = "{{ story.issueMonth | slugify }}" || null;
 		issueMonthYear = "{{ story.issueMonthYear | slugify }}" || null;
 		pageReportingTitle = "{{ story.reportingTitle | safe}}" || null;
-		reportingTitle = pageReportingTitle;
-		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}};
-		sequenceEpisodeNumber = {{ story.sequenceEpisodeNumber | wrapInQuotes | safe}};
-		sequenceEpisodeTitle = {{ story.sequenceEpisodeTitle | wrapInQuotes | safe}};
+		reportingTitle = pageReportingTitle || null;
+		podcastUrl = {{ story.podcastUrl | wrapInQuotes | safe}} || null;
+		sequenceEpisodeNumber = {{ story.sequenceEpisodeNumber | wrapInQuotes | safe}} || null;
+		sequenceEpisodeTitle = {{ story.sequenceEpisodeTitle | wrapInQuotes | safe}} || null;
 		storyId = "{{ story.id }}" || null;
 		storyType = "{{ story.type }}" || null;
 		pageTitle = "{{ story.title | safe}}" || null;
-		translator = {{ story.translator | wrapInQuotes | safe}};
+		translator = {{ story.translator | wrapInQuotes | safe}} || null;
 		wordcount = {{ story.body | wordcount }} || null;
 	</script>
 	{% if story.slideshow or story.singleImage %}
