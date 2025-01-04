@@ -147,6 +147,9 @@
     }
     .ga-image-3 {
       @include image-left;
+      p {
+        @include clamp(15);
+      }
     }
     .ga-diary {
 			ul {

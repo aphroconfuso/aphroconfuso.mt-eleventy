@@ -143,7 +143,7 @@ async function getHomepage() {
 			image: 3,
 			poem: 1,
 			text: 11,
-			lengths: [1200, 1200],
+			lengths: [1230, 1200],
 		},
 	}
 
