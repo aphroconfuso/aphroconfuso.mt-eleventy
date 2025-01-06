@@ -1,25 +1,6 @@
 @use "constants" as *;
 @use "calculations" as *;
 
-// @media all and (prefers-color-scheme: dark) {
-// 	body {
-// 		background-color: $dark-brown !important;
-// 		color: $paper !important;
-// 	}
-// }
-
-.theme-dark {
-	background-color: #333 !important;
-}
-
-.theme-contrast {
-	background-color: #f00 !important;
-}
-
-.theme-system {
-	background-color: #00f !important;
-}
-
 nav#top-nav menu#menu-main {
 	li#choose-theme {
 		align-items: baseline;
@@ -36,6 +17,7 @@ nav#top-nav menu#menu-main {
 		}
 	}
 }
+
 body {
 	&.theme-regular {
 		a#theme-regular {

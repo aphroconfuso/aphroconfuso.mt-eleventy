@@ -19,7 +19,7 @@
     }
   }
   p {
-    color: $lighter-ink;
+    color: $ink;
     @include clamp(7);
   }
   @media all and (min-width: $mobile-breakpoint-plusone) {

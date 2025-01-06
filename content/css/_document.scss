@@ -5,12 +5,16 @@
 
 body {
 	&.theme-regular {
-		--paper: $paper;
-		--ink: $ink;
+		--paper: #{$paper};
+		--ink: #{$ink};
 	}
 	&.theme-dark {
-		--paper: $ink;
-		--ink: $paper;
+		--paper: #{$ink};
+		--ink: #{$paper};
+	}
+	&.theme-contrast {
+		--paper: black;
+		--ink: white;
 	}
 }
 
