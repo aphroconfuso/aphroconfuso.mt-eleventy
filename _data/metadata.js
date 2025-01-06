@@ -1,4 +1,3 @@
-const dateTimeMaltese = require("../src/getDateTimeMaltese.js");
 module.exports = {
 	"title": "Aphroconfuso",
 	"url": "https://aphroconfuso.mt",

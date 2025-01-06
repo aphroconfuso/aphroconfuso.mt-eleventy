@@ -139,6 +139,7 @@
 	font-weight: 400;
 	text-transform: lowercase;
 }
+
 @font-face {
 	font-family: "Alegreya SC";
 	src: url("/fonts/AlegreyaSC-Italic.ttf") format("truetype");
@@ -146,4 +147,17 @@
 	font-variant: small-caps;
 	font-weight: 400;
 	text-transform: lowercase;
+}
+
+@font-face {
+	font-family: "Fontastic icons";
+	src: url("/fonts/Fontastic-icons.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: lowercase;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

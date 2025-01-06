@@ -362,6 +362,13 @@ const initialiseFontSizeListeners = () => {
 	document.getElementById("font-size-4").addEventListener('click', () => addRemoveFontSizeClass(4));
 };
 
+const initialiseThemeSwitch = () => {
+	document.getElementById("theme-regular").addEventListener('click', () => addRemoveTheme('regular'));
+	document.getElementById("theme-dark").addEventListener('click', () => addRemoveTheme('dark'));
+	document.getElementById("theme-contrast").addEventListener('click', () => addRemoveTheme('contrast'));
+	document.getElementById("theme-system").addEventListener('click', () => addRemoveTheme('system'));
+};
+
 const initialiseReadingHeartbeat = () => {
 	lastReportedReadingTime = new Date() / 1000;
 	timeStarted = lastReportedReadingTime;
@@ -370,6 +377,7 @@ const initialiseReadingHeartbeat = () => {
 
 const initialiseAfterNav = () => {
 	initialiseFontSizeListeners();
+	initialiseThemeSwitch();
 }
 
 const initialiseScrollPosition = () => {
@@ -631,7 +639,7 @@ const initialiseAfterWindow = () => {
 	};
 	initialiseMessage();
 
-	if (location.hostname !== 'aphroconfuso.mt') {
+	if (location.hostname !== 'aphroconfuso.mt' && !!storyId) {
 		document.addEventListener('selectionchange', function (event) {
 			setTimeout(getSelectionText, 10000);
 		});
