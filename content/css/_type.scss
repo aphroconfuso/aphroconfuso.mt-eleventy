@@ -139,7 +139,7 @@ span.rtl {
 
 .generic-body-text,
 .body-text {
-  color: $ink;
+  color: var(--ink);
   font-family: $serif, serif;
   h5,
   h6,
@@ -338,16 +338,16 @@ figure {
 }
 
 .outlined {
-  text-shadow: -1px -1px 0 $paper, 0 -1px 0 $paper, 1px -1px 0 $paper,
-    1px 0 0 $paper, 1px 1px 0 $paper, 0 1px 0 $paper, -1px 1px 0 $paper,
-    -1px 0 0 $paper;
+  text-shadow: -1px -1px 0 var(--paper), 0 -1px 0 var(--paper), 1px -1px 0 var(--paper),
+    1px 0 0 var(--paper), 1px 1px 0 var(--paper), 0 1px 0 var(--paper), -1px 1px 0 var(--paper),
+    -1px 0 0 var(--paper);
 }
 
 // main {
 // 	li {
 // 		a {
 // 			text-decoration: underline;
-// 			text-decoration-color: $paper;
+// 			text-decoration-color: var(--paper);
 // 			text-decoration-thickness: 1px;
 // 			text-underline-offset: 2px;
 // 		}

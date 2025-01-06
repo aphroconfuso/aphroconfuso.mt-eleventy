@@ -12,7 +12,7 @@
   #bookmarks-number {
     align-content: space-between;
     align-items: center;
-    background-color: $paper;
+    background-color: var(--paper);
     border-radius: 8px;
     display: inline-flex;
     font-family: "Fira Sans";
@@ -39,7 +39,7 @@
     -o-transition: all 0.5s ease-out;
     -webkit-transition: all 0.5s ease-out;
     align-items: center;
-    background-color: $paper;
+    background-color: var(--paper);
     display: flex;
     flex-direction: row;
     height: 20vw;
@@ -62,7 +62,7 @@
     }
     menu {
       align-items: flex-start;
-      background-color: $paper;
+      background-color: var(--paper);
       border-bottom: 1px solid $lighter-brown;
       columns: 2;
       flex-direction: column;
@@ -103,7 +103,7 @@
   }
 
   #logo-container {
-    background-color: $paper;
+    background-color: var(--paper);
     padding: 0.33rem;
     z-index: 1;
   }
@@ -165,7 +165,7 @@
   }
 
   #menu-toggle:checked + .menu-button-container .menu-button {
-    background: $paper;
+    background: var(--paper);
   }
 
   #menu-toggle:checked + .menu-button-container .menu-button::after {
