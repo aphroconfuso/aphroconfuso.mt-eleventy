@@ -67,7 +67,14 @@
   animation-fill-mode: backwards;
   display: none;
 }
-
+.poezija {
+	#grid-body .splide {
+		padding-top: 0;
+	}
+	.promo-adjacent {
+		display: none;
+	}
+}
 .poetry-separator {
   margin: $body-margin 0 0 5.2rem;
   font-size: 2rem !important;
@@ -105,7 +112,7 @@
 }
 
 article {
-  border-bottom: $body-margin-quarter solid var(--paper);
+  border-bottom: $body-margin-quarter solid $paper;
   // margin: 0 auto $body-margin;
   margin: 0 auto;
   max-width: $max-width;

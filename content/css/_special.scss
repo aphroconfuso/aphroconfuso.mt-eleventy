@@ -331,14 +331,22 @@ article {
 	.promo-adjacent a p {
 		display: none;
 	}
+  // #grid-body section.body-text:not(#endnote) > p:last-of-type {
+  //   padding-bottom: $body-margin-double;
+  //   background-image: url(/img/deco-100.svg);
+  //   background-position: center bottom;
+  //   background-size: 100%;
+  //   background-repeat: no-repeat;
+  // }
 }
 
-body.localhost {
-  background-image: linear-gradient(to top, #ccf 0, transparent 1px), linear-gradient(to top, #f33 0, transparent 1px);
-  background-repeat: repeat-y, repeat-y;
-  background-size: 100% $body-margin, 100% $body-margin;
-	background-position: 0 0, 0 $body-margin-half;
-	.promo.poetry, .editorial, .collection.introduction, .collection-sidebar, figure.audio, footer {
-		opacity: 0.7;
-	}
-}
+
+// body.localhost {
+//   background-image: linear-gradient(to top, #ccf 0, transparent 1px), linear-gradient(to top, #f33 0, transparent 1px);
+//   background-repeat: repeat-y, repeat-y;
+//   background-size: 100% $body-margin, 100% $body-margin;
+// 	background-position: 0 0, 0 $body-margin-half;
+// 	.promo.poetry, .editorial, .collection.introduction, .collection-sidebar, figure.audio, footer {
+// 		opacity: 0.7;
+// 	}
+// }
