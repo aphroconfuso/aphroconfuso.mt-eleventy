@@ -3,18 +3,40 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
+
+@mixin theme-regular() {
+	--paper: #{$paper};
+	--ink: #{$ink};
+}
+
+@mixin theme-dark() {
+	--paper: #{$ink};
+	--ink: #{$paper};
+}
+
+@mixin theme-contrast() {
+	--paper: black;
+	--ink: white;
+}
+
 body {
-	&.theme-regular {
-		--paper: #{$paper};
-		--ink: #{$ink};
-	}
+	@include theme-regular;
 	&.theme-dark {
-		--paper: #{$ink};
-		--ink: #{$paper};
+		@include theme-dark;
 	}
 	&.theme-contrast {
-		--paper: black;
-		--ink: white;
+		@include theme-contrast;
+	}
+	&.theme-system {
+		@media screen and (prefers-color-scheme: light) {
+			@include theme-regular;
+		}
+		@media screen and (prefers-color-scheme: dark) {
+			@include theme-dark;
+		}
+		@media screen and (prefer-contrast: more) {
+			@include theme-contrast;
+		}
 	}
 }
 
