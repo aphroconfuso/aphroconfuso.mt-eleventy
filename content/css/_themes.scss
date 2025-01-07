@@ -45,8 +45,13 @@ body {
 }
 
 @mixin theme-dark-overrides() {
-	img[src*="svg"] {
-		filter: invert(1);
+	img {
+		&[src*="svg"] {
+			filter: invert(1);
+		}
+		&[src*="jpg"] {
+			filter: brightness(0.75);
+		}
 	}
 }
 
@@ -62,6 +67,7 @@ body {
 	}
 	img[src*="svg"] {
 		filter: invert(1);
+		filter: brightness(1.5);
 	}
 }
 
