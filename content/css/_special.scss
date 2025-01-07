@@ -320,6 +320,12 @@ article {
 	@include clamp(11);
 }
 
+.story-105 {
+	p.indented {
+		padding-left: $body-margin-double;
+	}
+}
+
 body.localhost {
   background-image: linear-gradient(to top, #ccf 0, transparent 1px), linear-gradient(to top, #f33 0, transparent 1px);
   background-repeat: repeat-y, repeat-y;
