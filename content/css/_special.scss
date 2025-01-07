@@ -322,22 +322,12 @@ article {
 
 .story-105,
 .story-106 {
-	p.indented {
+	p.fx-1 {
 		padding-left: $body-margin-double;
 	}
 	.episode-number {
 		display: none;
 	}
-	.promo-adjacent a p {
-		display: none;
-	}
-  // #grid-body section.body-text:not(#endnote) > p:last-of-type {
-  //   padding-bottom: $body-margin-double;
-  //   background-image: url(/img/deco-100.svg);
-  //   background-position: center bottom;
-  //   background-size: 100%;
-  //   background-repeat: no-repeat;
-  // }
 }
 
 
