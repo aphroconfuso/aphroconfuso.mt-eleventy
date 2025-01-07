@@ -41,9 +41,6 @@ body {
 	}
 }
 
-@mixin theme-regular-overrides() {
-}
-
 @mixin theme-dark-overrides() {
 	img {
 		&[src*="svg"] {
@@ -72,7 +69,6 @@ body {
 }
 
 body {
-	@include theme-regular-overrides;
 	&.theme-dark {
 		@include theme-dark-overrides;
 	}
@@ -80,9 +76,6 @@ body {
 		@include theme-contrast-overrides;
 	}
 	&.theme-system {
-		@media screen and (prefers-color-scheme: light) {
-			@include theme-regular-overrides;
-		}
 		@media screen and (prefers-color-scheme: dark) {
 			@include theme-dark-overrides;
 		}

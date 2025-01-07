@@ -189,10 +189,16 @@ permalink: /{{ story.slug }}/index.html
 			<section id="grid-body" data-pagefind-body data-pagefind-weight="7">
 				{% if story.type === 'Poezija' and not story.useProseStyling %}
 					<section class="body-text">
+						{% if story.slideshow or story.singleImage %}
+							{% include "_slideshow.njk" %}
+						{% endif %}
 						{{ story.body | prettifyMaltese | versify | safe }}
 					</section>
 				{% elif story.type === 'Poezija' and story.useProseStyling %}
 					<section class="body-text">
+						{% if story.slideshow or story.singleImage %}
+							{% include "_slideshow.njk" %}
+						{% endif %}
 						{{ story.body | prettifyMaltese | safe }}
 					</section>
 				{% elif story.type === 'Djarju' %}
@@ -205,11 +211,11 @@ permalink: /{{ story.slug }}/index.html
 					</section>
 				{% elif story.type === 'Recensjoni' %}
 					<section class="generic-body-text">
-						{% include "_print_book_panel.njk" %}
+					{% include "_print_book_panel.njk" %}
+					{{ story.body | prettifyMaltese | endDotify | safe }}
 					{% if story.slideshow or story.singleImage %}
 						{% include "_slideshow.njk" %}
 					{% endif %}
-					{{ story.body | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% else %}
 					{% if story.imagesPositionText %}

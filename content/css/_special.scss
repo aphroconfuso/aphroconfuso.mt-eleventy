@@ -320,11 +320,15 @@ article {
 	@include clamp(11);
 }
 
-.story-105 {
+.story-105,
+.story-106 {
 	p.indented {
 		padding-left: $body-margin-double;
 	}
 	.episode-number {
+		display: none;
+	}
+	.promo-adjacent a p {
 		display: none;
 	}
 }
