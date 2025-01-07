@@ -4,38 +4,38 @@
 @use "mixins-etc" as *;
 
 
-@mixin theme-regular() {
-	--paper: #{var(--paper)};
+@mixin theme-regular-colours() {
+	--paper: #{$paper};
 	--ink: #{$ink};
 }
 
-@mixin theme-dark() {
+@mixin theme-dark-colours() {
 	--paper: #{$ink};
-	--ink: #{var(--paper)};
+	--ink: #{$paper};
 }
 
-@mixin theme-contrast() {
+@mixin theme-contrast-colours() {
 	--paper: black;
 	--ink: white;
 }
 
 body {
-	@include theme-regular;
+	@include theme-regular-colours;
 	&.theme-dark {
-		@include theme-dark;
+		@include theme-dark-colours;
 	}
 	&.theme-contrast {
-		@include theme-contrast;
+		@include theme-contrast-colours;
 	}
 	&.theme-system {
 		@media screen and (prefers-color-scheme: light) {
-			@include theme-regular;
+			@include theme-regular-colours;
 		}
 		@media screen and (prefers-color-scheme: dark) {
-			@include theme-dark;
+			@include theme-dark-colours;
 		}
 		@media screen and (prefer-contrast: more) {
-			@include theme-contrast;
+			@include theme-contrast-colours;
 		}
 	}
 }

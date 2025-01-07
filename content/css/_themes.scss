@@ -1,0 +1,83 @@
+@use "constants" as *;
+@use "calculations" as *;
+
+nav#top-nav menu#menu-main {
+	li#choose-theme {
+		align-items: baseline;
+		justify-content: center;
+		line-height: 4rem;
+		a {
+			font-family: "Fontastic icons";
+			font-size: 1.1rem;
+			padding: 0;
+			text-align: center;
+			text-decoration-thickness: 2px;
+			text-transform: lowercase;
+			text-underline-offset: 6px;
+		}
+	}
+}
+
+body {
+	&.theme-regular {
+		a#theme-regular {
+			text-decoration: underline;
+		}
+	}
+	&.theme-dark {
+		a#theme-dark {
+			text-decoration: underline;
+		}
+	}
+	&.theme-contrast {
+		a#theme-contrast {
+			text-decoration: underline;
+		}
+	}
+	&.theme-system {
+		a#theme-system {
+			text-decoration: underline;
+		}
+	}
+}
+
+@mixin theme-regular-overrides() {
+}
+
+@mixin theme-dark-overrides() {
+}
+
+@mixin theme-contrast-overrides() {
+	.dropcap::before {
+		display: none;
+	}
+	body, h1, h2, h3, h4, h5, h6, p, li, a, aside, audio, figure, figcaption {
+		border-color: white !important;
+		color: white !important;
+		text-decoration-color: white !important;
+	}
+	body, div, span, aside, audio, menu, header, footer, nav, ul {
+		background-color: black !important;
+	}
+}
+
+body {
+	@include theme-regular-overrides;
+	&.theme-dark {
+		@include theme-dark-overrides;
+	}
+	&.theme-contrast {
+		@include theme-contrast-overrides;
+	}
+	&.theme-system {
+		@media screen and (prefers-color-scheme: light) {
+			@include theme-regular-overrides;
+		}
+		@media screen and (prefers-color-scheme: dark) {
+			@include theme-dark-overrides;
+		}
+		@media screen and (prefer-contrast: more) {
+			@include theme-contrast-overrides;
+		}
+	}
+}
