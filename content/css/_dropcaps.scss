@@ -3,7 +3,7 @@
 @use "settings" as *;
 
 .dropcap {
-	color: $ink;
+	color: var(--ink);
 	float: left;
 	font-size: 7rem;
 	font-weight: 400;

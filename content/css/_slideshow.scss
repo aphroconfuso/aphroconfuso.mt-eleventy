@@ -55,7 +55,7 @@
 			display: block;
 			width: 29px;
 			height: 16px;
-			border: 1px solid $lightester-brown;
+			border: 1px solid $lightest-brown;
 			&:hover {
 				background-color: $lighter-brown !important;
 				border-color: $light-brown;
@@ -73,7 +73,7 @@
 }
 .splide__pagination__page {
 	border-radius: 0;
-	background: $lightester-brown;
+	background: $lightest-brown;
 	&.is-active {
 		background: $lightest-brown;
 	}
@@ -133,7 +133,7 @@
 	body.scrolling,
 	.splide:hover {
 		.arrows button {
-			color: $lightester-brown;
+			color: $lightest-brown;
 			@include ease-in(1s);
 		}
 	}

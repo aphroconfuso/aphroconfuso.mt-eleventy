@@ -28,17 +28,13 @@ $decorative: "Cinzel Decorative";
 
 $dark-brown: hsl(26, 5%, 12%);
 $brown: hsl(26, 5%, 28%);
-$text-brown: $brown;
 $light-brown: hsl(26, 5%, 44%);
 $lighter-brown: hsl(26, 5%, 54%);
 $lighterer-brown: hsl(26, 5%, 64%);
 $lightest-brown: hsl(26, 5%, 82%);
-$lightester-brown: $lightest-brown;
-$faint-brown: $lightest-brown;
 $deco-brown: hsl(60, 19%, 93%);
-$greyer-brown: $light-brown;
 
-$paper: hsl(60, 33%, 96%);
+var(--paper): hsl(60, 33%, 96%);
 $ink: hsl(0, 0%, 13%);
 $highlight: hsl(60, 57%, 74%);
 $target: hsl(300, 57%, 74%);
@@ -51,7 +47,7 @@ $lightness: 40%;
 $lighter: 10;
 $lightest: 25;
 $faint: 40;
-$faint-line: $faint-brown;
+$faint-line: $lightest-brown;
 
 $body-font-size: 1.2rem;
 $body-font-size-slightly-larger: 1.4rem;

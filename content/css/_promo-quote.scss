@@ -10,7 +10,7 @@
 	position: relative;
 	&:before,
 	&:after {
-		color: $paper;
+		color: var(--paper);
 		font-family: $decorative;
 		font-size: 9rem;
 		font-style: normal;
@@ -37,7 +37,7 @@
 		}
 		&:before,
 		&:after {
-			color: $paper;
+			color: var(--paper);
 			bottom: unset;
 			font-size: 5rem;
 			top: 50%;

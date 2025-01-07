@@ -210,9 +210,9 @@ span.rtl {
     margin-top: $body-margin-half;
     max-width: 100%;
     tr {
-      border-bottom: 1px solid $faint-brown;
+      border-bottom: 1px solid $lightest-brown;
       &:hover {
-        background-color: $faint-brown;
+        background-color: $lightest-brown;
       }
       td:first-of-type {
         font-variant-numeric: tabular-nums;
@@ -234,7 +234,7 @@ span.rtl {
   //   max-width: 100%;
   //   tr {
   //     &:hover {
-  //       background-color: $faint-brown;
+  //       background-color: $lightest-brown;
   //     }
   //     td:first-of-type {
   //       font-variant-numeric: tabular-nums;
@@ -304,7 +304,7 @@ figure {
 // Exception for appointments promos
 .appointments .promo-list .body-text p,
 .generic-body-text {
-  color: $text-brown;
+  color: $brown;
   font-family: $sans, sans-serif;
 	.sc {
 		font-family: "Alegreya Sans SC";
@@ -369,7 +369,7 @@ aside,
   li aside {
     a {
       text-decoration: underline;
-      text-decoration-color: $lightester-brown;
+      text-decoration-color: $lightest-brown;
       text-decoration-thickness: 1px;
       text-underline-offset: 2px;
       text-decoration-skip-ink: auto;

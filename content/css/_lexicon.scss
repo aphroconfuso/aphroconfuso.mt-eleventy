@@ -81,7 +81,7 @@ article.terminu {
           content: "";
         }
         span.fx1 {
-          background-color: $paper;
+          background-color: var(--paper);
           color: $lighter-brown;
           padding-left: $body-margin-quarter;
           position: absolute;

@@ -37,7 +37,7 @@
   }
   input[type="submit"] {
     background-color: $light-brown;
-    color: $paper;
+    color: var(--paper);
     font-family: $sans;
     padding: 0.5rem 1rem;
     text-transform: uppercase;

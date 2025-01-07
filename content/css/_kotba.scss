@@ -29,7 +29,7 @@ article.recensjoni {
 }
 
 #book-panel {
-	border: 1px solid $lightester-brown;
+	border: 1px solid $lightest-brown;
 	display: flex;
 	flex-direction: column-reverse;
 	margin-bottom: $body-margin;
@@ -64,7 +64,7 @@ article.recensjoni {
   a.order-button {
 	  background-color: $brown;
 		border-radius: 0.25rem;
-    color: $paper;
+    color: var(--paper);
 		display: inline-block;
 		font-family: $sans;
 		font-size: 1.4rem;
@@ -117,7 +117,7 @@ article.recensjoni {
 
 .ga-book-image-promo {
 	a {
-		border: 1px solid $lightester-brown;
+		border: 1px solid $lightest-brown;
 		padding: $body-margin-half;
 	}
 	@media all and (min-width: $mobile-breakpoint-plusone) {
@@ -135,7 +135,7 @@ article.recensjoni {
 .bookshops {
 	background-color: $light-brown;
 	border: 1px solid $lightest-brown;
-	color: $lightester-brown;
+	color: $lightest-brown;
 	font-size: $body-font-size;
 	padding: $body-margin-half;
 	a {

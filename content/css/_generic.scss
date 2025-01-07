@@ -98,7 +98,7 @@
   font-variant-numeric: tabular-nums;
 	li {
     &::marker {
-      color: $paper;
+      color: var(--paper);
       content: "■ ";
       display: inline-block;
       font-family: $decorative;

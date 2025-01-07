@@ -123,7 +123,7 @@
   }
 
   #main-nav {
-    border-bottom: 1px solid $greyer-brown;
+    border-bottom: 1px solid $light-brown;
     padding-bottom: 1rem;
     margin: 1rem 1rem 2rem 1rem;
     display: flex;
@@ -141,7 +141,7 @@
   .menu-button::before,
   .menu-button::after {
     display: block;
-    background-color: $greyer-brown;
+    background-color: $light-brown;
     position: absolute;
     height: 3px;
     width: 30px;

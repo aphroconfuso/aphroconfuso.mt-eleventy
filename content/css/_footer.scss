@@ -14,7 +14,7 @@ footer {
   .footer-content {
     max-width: $max-width;
     margin: 0 auto;
-    color: $paper;
+    color: var(--paper);
     position: relative;
   }
   li {
@@ -166,7 +166,7 @@ footer {
       }
     }
     nav menu a:hover {
-      text-decoration-color: $paper;
+      text-decoration-color: var(--paper);
     }
     nav li.header {
       padding: 0;
@@ -218,9 +218,9 @@ body.scrolling {
   bottom: 1rem;
 }
 #progress {
-  text-shadow: -2px -2px 0 $paper, 0 -2px 0 $paper, 2px -2px 0 $paper,
-    2px 0 0 $paper, 2px 2px 0 $paper, 0 2px 0 $paper, -2px 2px 0 $paper,
-    -2px 0 0 $paper;
+  text-shadow: -2px -2px 0 var(--paper), 0 -2px 0 var(--paper), 2px -2px 0 var(--paper),
+    2px 0 0 var(--paper), 2px 2px 0 var(--paper), 0 2px 0 var(--paper), -2px 2px 0 var(--paper),
+    -2px 0 0 var(--paper);
   vertical-align: -0.5rem;
 }
 #arrow-top {

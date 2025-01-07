@@ -5,13 +5,13 @@
 
 
 @mixin theme-regular() {
-	--paper: #{$paper};
+	--paper: #{var(--paper)};
 	--ink: #{$ink};
 }
 
 @mixin theme-dark() {
 	--paper: #{$ink};
-	--ink: #{$paper};
+	--ink: #{var(--paper)};
 }
 
 @mixin theme-contrast() {
