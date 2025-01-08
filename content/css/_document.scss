@@ -10,8 +10,8 @@
 }
 
 @mixin theme-dark-colours() {
-	--paper: #{$ink};
-	--ink: #{$paper};
+	--paper: #{$dark-brown};
+	--ink: #{$lightest-brown};
 }
 
 @mixin theme-contrast-colours() {
