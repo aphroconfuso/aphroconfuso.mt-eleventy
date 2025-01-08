@@ -43,7 +43,7 @@ body {
 
 @mixin theme-dark-overrides() {
 	img {
-		&[src*="svg"] {
+		&[src*="logo-"] {
 			filter: invert(1);
 		}
 		&[src*="jpg"] {
