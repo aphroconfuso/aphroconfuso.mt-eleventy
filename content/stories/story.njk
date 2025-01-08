@@ -36,7 +36,7 @@ permalink: /{{ story.slug }}/index.html
 {% endblock %}
 
 {% block content %}
-	<article class="content {{ story.issueMonth | slugify }} {{ story.type | slugify }} story story-{{ story.id }}{{ story.endOfSeriesClass }}">
+	<article class="content {{ story.issueMonth | slugify }} {{ story.type | slugify }} story story-{{ story.id }} sequence-{{ story.sequenceId }}{{ story.endOfSeriesClass }}">
 		<header>
 			<ul>
 				<li class="header-label">
@@ -129,7 +129,7 @@ permalink: /{{ story.slug }}/index.html
 					{% if loop.first %}<ul class="generic-menu sequence-menu">{% endif %}
 						<li{% if not episode.slug %} class="active"{% endif %}>
 							{% if episode.slug %}<a href="/{{ episode.slug }}/">{% endif %}
-								{% if episode.date %}{{ episode.date | subjectDateShort }}{% elif episode.number > 0 %}{{ episode.number }}.{% endif %}&nbsp;
+								<span class="episode-number">{% if episode.date %}{{ episode.date | subjectDateShort }}{% elif episode.number > 0 %}{{ episode.number }}.{% endif %}&nbsp;</span>
 								{{ episode.title | prettifyMaltese | safe }}</a>
 							{% if episode.slug %}</a>{% endif %}
 						</li>
@@ -211,11 +211,13 @@ permalink: /{{ story.slug }}/index.html
 					</section>
 				{% elif story.type === 'Recensjoni' %}
 					<section class="generic-body-text">
-					{% include "_print_book_panel.njk" %}
-					{{ story.body | prettifyMaltese | endDotify | safe }}
 					{% if story.slideshow or story.singleImage %}
 						{% include "_slideshow.njk" %}
 					{% endif %}
+						<section class="text-wrapper">
+							{{ story.body | prettifyMaltese | safe }}
+						</section>
+					{% include "_print_book_panel.njk" %}
 					</section>
 				{% else %}
 					{% if story.imagesPositionText %}

@@ -162,6 +162,7 @@ async function getAllStories() {
 									}
 									sequence {
 										data {
+											id
 											attributes {
 												title
 												description
@@ -489,6 +490,7 @@ async function getAllStories() {
 			sequenceEpisodeNumber: atts.sequenceEpisodeNumber,
 			sequenceEpisodes: sequenceEpisodes,
 			sequenceEpisodeTitle: sequenceData && atts.title,
+			sequenceId: sequenceData && sequenceData.id,
 			sequencePreviousPromo,
 			sequenceNextPromo,
 			sequenceSlug,

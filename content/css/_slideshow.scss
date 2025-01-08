@@ -6,8 +6,11 @@
 #grid-body {
 	.splide {
 		padding: ($body-margin * 1.5) 0 0;
-		width: calc(100% + $body-margin);
-		margin-left: -$body-margin-half;
+		width: calc(100% + $body-margin-double);
+		margin-left: -$body-margin;
+	}
+	figcaption {
+		padding: 0 $body-margin;
 	}
 }
 #grid-body,

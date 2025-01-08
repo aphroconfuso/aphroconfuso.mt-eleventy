@@ -320,13 +320,12 @@ article {
 	@include clamp(11);
 }
 
-.story-105,
-.story-106 {
+.sequence-10 {
 	p.fx1 {
 		padding-left: $body-margin-double;
 	}
 	.episode-number {
-		display: none;
+		display: none !important;
 	}
 }
 

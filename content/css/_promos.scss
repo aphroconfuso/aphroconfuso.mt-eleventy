@@ -98,6 +98,11 @@ aside.promo-aside {
   @include image-fit();
 }
 
-.appointments .promo-list li a {
-	padding-bottom: $body-margin;
+.appointments .promo-list li {
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+	a {
+		padding-bottom: $body-margin;
+	}
 }

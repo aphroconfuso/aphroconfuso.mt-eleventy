@@ -26,6 +26,18 @@ article.recensjoni {
 	figcaption {
 		display: none;
 	}
+	.text-wrapper {
+		margin-bottom: $body-margin;
+	}
+	// #grid-body .body-text {
+  //   display: flex;
+  //   flex-direction: column-reverse;
+	// }
+	// @media all and (min-width: $mobile-breakpoint-plusone) {
+	// 	#grid-body .body-text {
+	// 		flex-direction: row;
+	// 	}
+	// }
 }
 
 #book-panel {
@@ -130,7 +142,6 @@ article.recensjoni {
 		margin-top: $body-margin;
 	}
 }
-
 
 .bookshops {
 	background-color: $light-brown;

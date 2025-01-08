@@ -22,7 +22,7 @@ permalink: /{{ sequence.slug | slugifyMaltese }}/index.html
 {% endblock %}
 
 {% block content %}
-	<article class="generic sequence">
+	<article class="generic sequence sequence-{{ sequence.id }}">
 		<header>
 			<ul><li class="header-label">&nbsp;</li></ul>
 			<h1>{{ sequence.title | prettifyMaltese | safe }}</h1>
