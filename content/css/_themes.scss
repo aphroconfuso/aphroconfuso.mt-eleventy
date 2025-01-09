@@ -73,9 +73,9 @@ body {
 	.dropcap {
 		color: white !important;
 		background-color: transparent !important;
-		z-index: 1;
-		&::before {
-			display: none;
+		z-index: 1 !important;
+		&::before, &::after {
+			display: none !important;
 		}
 	}
 	article.home, article.generic {
