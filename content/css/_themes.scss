@@ -82,8 +82,52 @@ body {
 	.collection.introduction {
 		border: 1px solid white !important;
 	}
-	.dropcap {
+	.dropcap::before, .dropcap::after {
 		color: white !important;
+	}
+	.green-audio-player {
+		&.player-accessible {
+			.play-pause-btn,
+			.controls,
+			.volume__button,
+			.volume__controls,
+			.download {
+				&:hover {
+					outline: dotted 1px white !important;
+				}
+			}
+		}
+		.holder {
+			.loading {
+				.loading__spinner {
+					border: 2px solid white !important;
+				}
+			}
+		}
+		.slider {
+			background-color: white !important;
+			.gap-progress {
+				.pin {
+					background-color: white !important;
+				}
+			}
+		}
+		.controls {
+			color: white !important;
+		}
+		.volume {
+			position: relative;
+			.volume__button {
+				&.open {
+					path {
+						fill: white !important;
+					}
+				}
+			}
+			.volume__controls {
+				background-color: white !important;
+			}
+		}
 	}
 }
 
