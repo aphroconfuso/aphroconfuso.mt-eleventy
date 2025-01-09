@@ -44,6 +44,7 @@ const linkedStoriesAttributes = `
 	}
 	sequence {
 		data {
+			id
 			attributes {
 				title
 				description

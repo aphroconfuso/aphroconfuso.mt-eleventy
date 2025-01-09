@@ -1,7 +1,7 @@
 {% set promoTo = promoTo or promo.reportingTitle or promo.title %}
 {% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 <li {% if promo.sequenceEpisodeTitle %} class="multiple-episodes episode-{{ promo.sequenceEpisodeNumber }}"{% endif %}>
-	<a class="promo {{ collectionId }} {{ promo.issueMonth | slugify }} promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: {{ promoFrom | escapeQuote }}', 'għal: {{ promoTo | escapeQuote }}', {{ loop.index }}]);">
+	<a class="promo {{ collectionId }} {{ promo.issueMonth | slugify }} promo-{{ promo.type | slugify }} sequence-{{ promo.sequenceId }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: {{ promoFrom | escapeQuote }}', 'għal: {{ promoTo | escapeQuote }}', {{ loop.index }}]);">
 		{% include '_promo_header.njk' %}
 		<div class="{{ promo.cssClass }}">
 			{% if promo.type === 'Poezija' %}

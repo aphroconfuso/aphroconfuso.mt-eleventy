@@ -70,8 +70,17 @@ body {
 		color: white !important;
 		text-decoration-color: white !important;
 	}
+	article.home, article.generic {
+		border-color: black !important;
+	}
 	img[src*="svg"] {
 		filter: invert(1);
+	}
+	.collection.introduction {
+		border: 1px solid white !important;
+	}
+	.dropcap {
+		color: white !important;
 	}
 }
 

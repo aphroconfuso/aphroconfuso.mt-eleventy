@@ -65,6 +65,7 @@ module.exports = (promos, storyAtts) => {
 			reads: getReads(authorPronoun),
 			sequenceEpisodeNumber: promoAtts.sequenceEpisodeNumber,
 			sequenceEpisodeTitle: sequenceEpisodeTitle,
+			sequenceId: promoAtts.sequence.data && promoAtts.sequence.data.id,
 			slug: promoAtts.pageUrl || makeTitleSlug(
 				promoAtts.title,
 				authorsString,

@@ -101,7 +101,7 @@ article.story.poezija {
 #grid-max-panel-left-bottom,
 #grid-max-panel-right-bottom,
 #grid-body {
-  margin: $body-margin auto;
+  margin: $body-margin auto 0;
   max-width: $max-content-width;
   width: 100%;
 }
