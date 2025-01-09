@@ -64,8 +64,12 @@ body {
 }
 
 @mixin theme-contrast-overrides() {
-	.dropcap::before {
-		display: none;
+	.dropcap {
+		color: white !important;
+		background-color: transparent !important;
+		&::before {
+			display: none;
+		}
 	}
 	body, main, article, section, div, span, aside, audio, menu, header, footer, nav, ul, h1, h2, h3, h4, h5, h6, p, li, a, aside, audio, figure, figcaption, span {
 		background-color: black !important;
@@ -81,9 +85,6 @@ body {
 	}
 	.collection.introduction {
 		border: 1px solid white !important;
-	}
-	.dropcap::before, .dropcap::after {
-		color: white !important;
 	}
 	.green-audio-player {
 		&.player-accessible {
