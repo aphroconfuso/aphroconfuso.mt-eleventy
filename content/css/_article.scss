@@ -69,7 +69,7 @@
 }
 article.story.poezija {
 	#grid-body .splide {
-		padding-top: 0;
+		padding: 0;
 	}
 	.promo-adjacent {
 		display: none;
@@ -101,14 +101,18 @@ article.story.poezija {
 #grid-max-panel-left-bottom,
 #grid-max-panel-right-bottom,
 #grid-body {
-  margin: 0 auto;
+  margin: $body-margin auto;
   max-width: $max-content-width;
   width: 100%;
 }
 
-#grid-max-panel-left-bottom,
-#grid-max-panel-right-bottom {
-  margin: $body-margin auto 0 auto;
+@media all and (min-width: $laptop-breakpoint) {
+	#grid-max-panel-left-top,
+	#grid-max-panel-right-top,
+	#grid-max-panel-left-bottom,
+	#grid-max-panel-right-bottom {
+		margin: $body-margin auto 0 auto;
+	}
 }
 
 article {
@@ -150,11 +154,11 @@ article {
     background-size: 100%;
     background-repeat: no-repeat;
   }
-  @media all and (max-width: ($laptop-breakpoint - 1)) {
-    .sequence-menu {
-      display: none;
-    }
-  }
+  // @media all and (max-width: ($laptop-breakpoint - 1)) {
+  //   .sequence-menu {
+  //     display: none;
+  //   }
+  // }
 
   @media all and (min-width: $laptop-breakpoint) {
     padding-bottom: 0;

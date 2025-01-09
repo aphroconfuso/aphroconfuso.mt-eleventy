@@ -328,7 +328,14 @@ article {
 		display: none !important;
 	}
 }
-
+.story-105.promo-picture-1 {
+	.episode-number, h3 {
+		display: none;
+	}
+	img {
+		border: 1px solid $lightest-brown;
+	}
+}
 
 // body.localhost {
 //   background-image: linear-gradient(to top, #ccf 0, transparent 1px), linear-gradient(to top, #f33 0, transparent 1px);

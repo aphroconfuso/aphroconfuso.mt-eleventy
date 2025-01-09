@@ -116,16 +116,18 @@
       color: $lighter-brown;
     }
   }
-	&.sequence-menu {
-		li {
-			@media all and (min-width: $mobile-breakpoint-plusone) {
+	@media all and (min-width: $mobile-breakpoint-plusone) {
+		&.sequence-menu {
+			li {
 				letter-spacing: -0.5px;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-				width: 340px;
-				word-wrap: break-word;
-				white-space: nowrap;
+				a {
+					display: block;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					width: 340px;
+					word-wrap: break-word;
+					white-space: nowrap;
+				}
 			}
 		}
 	}

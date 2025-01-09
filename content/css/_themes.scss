@@ -1,41 +1,49 @@
 @use "constants" as *;
 @use "calculations" as *;
 
+
+.choose-theme-footer a {
+  color: $dark-brown;
+	margin-right: $body-margin-half;
+}
+
+.choose-theme a {
+	font-family: "Fontastic icons";
+	font-size: 1.1rem;
+	padding: 0;
+	cursor: pointer;
+	text-align: center;
+	text-decoration-thickness: 2px;
+	text-transform: lowercase;
+	text-underline-offset: 6px;
+}
+
 nav#top-nav menu#menu-main {
-	li#choose-theme {
+	li.choose-theme {
 		align-items: baseline;
 		justify-content: center;
 		line-height: 4rem;
-		a {
-			font-family: "Fontastic icons";
-			font-size: 1.1rem;
-			padding: 0;
-			text-align: center;
-			text-decoration-thickness: 2px;
-			text-transform: lowercase;
-			text-underline-offset: 6px;
-		}
 	}
 }
 
 body {
 	&.theme-regular {
-		a#theme-regular {
+		a#theme-regular, a#theme-regular-footer {
 			text-decoration: underline;
 		}
 	}
 	&.theme-dark {
-		a#theme-dark {
+		a#theme-dark, a#theme-dark-footer {
 			text-decoration: underline;
 		}
 	}
 	&.theme-contrast {
-		a#theme-contrast {
+		a#theme-contrast, a#theme-contrast-footer {
 			text-decoration: underline;
 		}
 	}
 	&.theme-system {
-		a#theme-system {
+		a#theme-system, a#theme-system-footer {
 			text-decoration: underline;
 		}
 	}
@@ -56,7 +64,7 @@ body {
 	.dropcap::before {
 		display: none;
 	}
-	body, section, div, span, aside, audio, menu, header, footer, nav, ul, h1, h2, h3, h4, h5, h6, p, li, a, aside, audio, figure, figcaption, span {
+	body, main, article, section, div, span, aside, audio, menu, header, footer, nav, ul, h1, h2, h3, h4, h5, h6, p, li, a, aside, audio, figure, figcaption, span {
 		background-color: black !important;
 		border-color: white !important;
 		color: white !important;
@@ -64,7 +72,6 @@ body {
 	}
 	img[src*="svg"] {
 		filter: invert(1);
-		filter: brightness(1.5);
 	}
 }
 

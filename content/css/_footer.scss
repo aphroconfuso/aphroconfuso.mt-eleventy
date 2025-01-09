@@ -55,7 +55,8 @@ footer {
       "podcast"
       "logotype-container"
       "copyright"
-      "email";
+      "email"
+			"theme";
   }
 
   #housekeeping {
@@ -84,6 +85,10 @@ footer {
 
   #email {
     grid-area: email;
+  }
+
+  #theme {
+    grid-area: theme;
   }
 
   #copyright {
@@ -128,7 +133,7 @@ footer {
       gap: $body-margin $body-margin;
       grid-template-areas:
         "housekeeping housekeeping media media socials logotype-container"
-        "email email email email copyright logotype-container";
+        "email email theme theme copyright logotype-container";
     }
 
     #housekeeping {

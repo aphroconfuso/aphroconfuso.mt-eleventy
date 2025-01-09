@@ -15,9 +15,9 @@
   }
   figure {
     grid-area: promo-image;
-    margin-left: $body-margin-half * -1;
+    margin-left: $body-margin * -1;
     padding: $body-margin-half 0;
-    width: calc(100% + $body-margin);
+    width: calc(100% + $body-margin-double);
     img {
       width: calc(100% + $body-margin);
     }

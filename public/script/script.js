@@ -367,6 +367,10 @@ const initialiseThemeSwitch = () => {
 	document.getElementById("theme-dark").addEventListener('click', () => addRemoveTheme('dark'));
 	document.getElementById("theme-contrast").addEventListener('click', () => addRemoveTheme('contrast'));
 	document.getElementById("theme-system").addEventListener('click', () => addRemoveTheme('system'));
+	document.getElementById("theme-regular-footer").addEventListener('click', () => addRemoveTheme('regular'));
+	document.getElementById("theme-dark-footer").addEventListener('click', () => addRemoveTheme('dark'));
+	document.getElementById("theme-contrast-footer").addEventListener('click', () => addRemoveTheme('contrast'));
+	document.getElementById("theme-system-footer").addEventListener('click', () => addRemoveTheme('system'));
 };
 
 const initialiseReadingHeartbeat = () => {
