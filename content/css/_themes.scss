@@ -10,7 +10,7 @@
 .choose-theme a {
 	font-family: "Fontastic icons";
 	font-size: 1.1rem;
-	padding: 0;
+	padding: 0 !important;
 	cursor: pointer;
 	text-align: center;
 	text-decoration-thickness: 2px;
@@ -53,6 +53,9 @@ body {
 	img {
 		&[src*="logo-"] {
 			filter: invert(1);
+		}
+		&[src*="deco"] {
+			filter: invert(0.9);
 		}
 		&[src*="jpg"] {
 			filter: brightness(0.75);

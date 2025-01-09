@@ -30,7 +30,7 @@
 	font-size: 9rem;
 	button {
 		@include ease-in(1s);
-		color: $deco-brown;
+		color: var(--deco);
 		cursor: pointer;
 		position: absolute;
 		&:hover {
@@ -51,7 +51,7 @@
 			text-align: right;
 		}
 		&#lightbox-open {
-			background-color: $deco-brown;
+			background-color: var(--deco);
 			cursor: pointer;
 			top: $body-margin * 1.5;
 			left: calc(100% + $body-margin-half);

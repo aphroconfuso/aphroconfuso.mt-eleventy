@@ -116,7 +116,7 @@ article.story.poezija {
 }
 
 article {
-  border-bottom: $body-margin-quarter solid $paper;
+  border-bottom: $body-margin-quarter solid var(--paper);
   // margin: 0 auto $body-margin;
   margin: 0 auto;
   max-width: $max-width;

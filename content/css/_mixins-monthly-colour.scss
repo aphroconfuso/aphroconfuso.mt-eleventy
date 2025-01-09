@@ -69,7 +69,7 @@
     }
   }
   .editorial {
-    background-color: $deco-brown;
+    background-color: var(--deco);
     border-image-source: url(/img/deco/frame-02-faint-#{$slugifiedColour}.svg);
     .editorial-month {
       font-size: 1.6rem;
