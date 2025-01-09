@@ -64,18 +64,19 @@ body {
 }
 
 @mixin theme-contrast-overrides() {
-	.dropcap {
-		color: white !important;
-		background-color: transparent !important;
-		&::before {
-			display: none;
-		}
-	}
 	body, main, article, section, div, span, aside, audio, menu, header, footer, nav, ul, h1, h2, h3, h4, h5, h6, p, li, a, aside, audio, figure, figcaption, span {
 		background-color: black !important;
 		border-color: white !important;
 		color: white !important;
 		text-decoration-color: white !important;
+	}
+	.dropcap {
+		color: white !important;
+		background-color: transparent !important;
+		z-index: 1;
+		&::before {
+			display: none;
+		}
 	}
 	article.home, article.generic {
 		border-color: black !important;
