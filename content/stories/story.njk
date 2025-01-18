@@ -220,7 +220,7 @@ permalink: /{{ story.slug }}/index.html
 						{{ story.introduction | restrictHtml | prettifyMaltese | safe }}
 					</aside>
 				{% endif %}
-				{% for episode in story.sequenceEpisodes | sort(true, false, 'number') %}
+				{% for episode in story.sequenceEpisodes %}
 					{% if loop.first %}<ul class="generic-menu sequence-menu">{% endif %}
 						<li{% if not episode.slug %} class="active"{% endif %}>
 							{% if episode.slug %}<a href="/{{ episode.slug }}/">{% endif %}
