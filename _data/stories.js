@@ -168,7 +168,8 @@ async function getAllStories() {
 												description
 												stories (
 													publicationState: ${ fetchStatus },
-													pagination: { page: 1, pageSize: 250 }
+													pagination: { page: 1, pageSize: 250 },
+													sort: ["sequenceEpisodeNumber:asc"],
 												) {
 													data {
 														attributes {
