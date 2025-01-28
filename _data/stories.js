@@ -17,6 +17,7 @@ const getReads = require('../src/getReads.js');
 const { imageData, linkedStoryData, personData } = require("./_fragments.js");
 
 let abecedaireArray = [];
+let almanacArray = [];
 let cumulativeBody, cumulativeWordcount;
 
 const shuffleArray = (array) => {
@@ -522,10 +523,11 @@ async function getAllStories() {
 		const reportingTitle = fixReportingTitle(processedStory)
 		processedStory.reportingTitle = reportingTitle;
 
-		// ABECEDAIRE *************************************************************************************************************************
+		const normalisedBodyText = atts.body.replace(/blockquote/g, "p").replace(/<h\d>.*?<\/h\d>/g, "").replace(/strong>/g, "span>").replace(/ /gm, " ");
+
+		// ABECEDAIRE  ENTRIES FROM THIS STORY ***********************************************************************************************
 		if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
-			const bodyText = atts.body.replace(/blockquote/g, "p").replace(/<h\d>.*?<\/h\d>/g, "").replace(/strong>/g, "span>").replace(/ /gm, " ");
-			const abecedaireMatches = bodyText.replace(/\n+/g, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.)(.{0,600})/g);
+			const abecedaireMatches = normalisedBodyText.replace(/\n+/g, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.)(.{0,600})/g);
 			abecedaireMatches && shuffleArray(Array.from(abecedaireMatches)).forEach(match => {
 				let snippet = match[2] + match[3] + match[4];
 				let digraph = (match[2] + match[3]).toLowerCase();
@@ -542,6 +544,26 @@ async function getAllStories() {
 				});
 			});
 		}
+
+		// ALMANAC *************************************************************************************************************************
+		// if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
+			const almanacMatches = normalisedBodyText.replace(/\n+/g, '').matchAll(/([.]{0,200})(\d\d?)( ta’ )?(Jannar|Frar|Marzu|April|Mejju|.unju|Lulju|Awwissu|Settembru|Ottubru|Novembru|Di.embru) (tal\-)?(\d\d\d\d)?([.]{0,200})/g);
+		almanacMatches && shuffleArray(Array.from(almanacMatches)).forEach(match => {
+				let snippet = match[0];
+				almanacArray.push({
+					authorsString,
+					day: match[2],
+					month: match[4],
+					year: match[6],
+					issueMonth,
+					slug: pageSlug,
+					snippet,
+					reportingTitle,
+					title: smartTruncate(processedStory.reportingTitle, 26),
+				});
+				console.log('ALMANAC', match[0], match[2], match[4], match[6], '>>>', almanacArray.length);
+			});
+		//  }
 
 		const audioUrls = [];
 		const audioPlayers = [];
@@ -649,24 +671,77 @@ async function getAllStories() {
 	]);
 
 	// ABECEDAIRE ********************************************************************************
-	const sortAlphaThenNumbers = (a, b) => isFinite(a.letter) - isFinite(b.letter)
-		|| a.letter.localeCompare(b.letter, undefined, {numeric: true, sensitivity: 'base'});
+	// const sortAlphaThenNumbers = (a, b) => isFinite(a.letter) - isFinite(b.letter)
+	// 	|| a.letter.localeCompare(b.letter, undefined, {numeric: true, sensitivity: 'base'});
 
-	const shuffledAbecedaireArray = shuffleArray(abecedaireArray);
+	// const shuffledAbecedaireArray = shuffleArray(abecedaireArray);
 
-	// This makes it too predictable
-	// const storyCounts = {};
-	// // Count the number of stories for each author
-	// shuffledAbecedaireArray.forEach(story => {
-	// 	const { authorsString } = story;
-	// 	storyCounts[authorsString] = (storyCounts[authorsString] || 0) + 1;
-	// });
-	// // Sort the stories array based on the count of stories for each authorsString (in descending order)
-	// // This way we privilege authors with fewer occurences
-	// shuffledAbecedaireArray.sort((a, b) => storyCounts[b.authorsString] - storyCounts[a.authorsString]);
+	// console.log('>>>', shuffledAbecedaireArray.length);
 
-	storiesFormatted[0].abecedaire = [...new Map(shuffledAbecedaireArray.map(item => [item.letter, item])).values()].sort(sortAlphaThenNumbers);
+	// // This makes it too predictable
+	// // const storyCounts = {};
+	// // // Count the number of stories for each author
+	// // shuffledAbecedaireArray.forEach(story => {
+	// // 	const { authorsString } = story;
+	// // 	storyCounts[authorsString] = (storyCounts[authorsString] || 0) + 1;
+	// // });
+	// // // Sort the stories array based on the count of stories for each authorsString (in descending order)
+	// // // This way we privilege authors with fewer occurences
+	// // shuffledAbecedaireArray.sort((a, b) => storyCounts[b.authorsString] - storyCounts[a.authorsString]);
+
+	// storiesFormatted[0].abecedaire = [...new Map(shuffledAbecedaireArray.map(item => [item.letter, item])).values()].sort(sortAlphaThenNumbers);
+
+	const sortAlphaThenNumbers = (a, b) =>
+		isFinite(a.letter) - isFinite(b.letter) ||
+		a.letter.localeCompare(b.letter, undefined, { numeric: true, sensitivity: 'base' });
+
+	const evenlyDistributeAbecedaire = (abecedaireArray) => {
+		// Group stories by author
+		const storiesByAuthor = abecedaireArray.reduce((acc, story) => {
+			const { authorsString } = story;
+			if (!acc[authorsString]) acc[authorsString] = [];
+			acc[authorsString].push(story);
+			return acc;
+		}, {});
+
+		// Shuffle entries for randomness
+		Object.keys(storiesByAuthor).forEach((author) => {
+			storiesByAuthor[author] = shuffleArray(storiesByAuthor[author]);
+		});
+
+		const selectedStories = new Map();
+		const authors = Object.keys(storiesByAuthor);
+		let authorIndex = 0;
+
+		// Determine the unique letters present in the array
+		const uniqueLetters = [...new Set(abecedaireArray.map((story) => story.letter))];
+
+		// Cycle through authors and assign one story per letter
+		while (selectedStories.size < uniqueLetters.length) {
+			const currentAuthor = authors[authorIndex];
+			const authorStories = storiesByAuthor[currentAuthor];
+
+			// Find a story for an unused letter
+			const nextStory = authorStories.find((story) => !selectedStories.has(story.letter));
+			if (nextStory) {
+				selectedStories.set(nextStory.letter, nextStory);
+				// Remove the used story from the author's list
+				storiesByAuthor[currentAuthor] = authorStories.filter((story) => story !== nextStory);
+			}
+
+			// Move to the next author in a round-robin manner
+			authorIndex = (authorIndex + 1) % authors.length;
+		}
+
+		return [...selectedStories.values()].sort(sortAlphaThenNumbers);
+	};
+
+	storiesFormatted[0].abecedaire = evenlyDistributeAbecedaire(shuffleArray(abecedaireArray));
+
 	// ***********************************************************************************************
+
+	// ALMANAC ********************************************************************************
+	storiesFormatted[0].almanac = almanacArray;
 
 	return storiesFormatted;
 }

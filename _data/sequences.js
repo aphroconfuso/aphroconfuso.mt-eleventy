@@ -111,6 +111,7 @@ async function getAllsequences() {
 			isDiary: storiesFormatted.length && storiesFormatted[0].type === 'Djarju',
 			moreToCome: atts.moreToCome,
 			slug: pageSlug,
+			image: promoImageFormats,
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			sortBy: authorSurname,
