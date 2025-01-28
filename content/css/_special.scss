@@ -258,7 +258,8 @@ article {
     &.story-55,
     &.story-61,
 		&.story-95,
-		&.story-100 {
+		&.story-100,
+		&.story-113 {
       header {
         margin-bottom: $body-margin-quarter;
         h3 {
@@ -300,7 +301,7 @@ article {
   }
 }
 
-.menu-antologija-1 {
+.menu-kotba, .menu-antologija-1 {
   border: 1px solid $lightest-brown;
   padding: 0 0.25rem !important;
   vertical-align: -7px;
@@ -337,12 +338,12 @@ article {
 	}
 }
 
-// body.localhost {
-//   background-image: linear-gradient(to top, #ccf 0, transparent 1px), linear-gradient(to top, #f33 0, transparent 1px);
-//   background-repeat: repeat-y, repeat-y;
-//   background-size: 100% $body-margin, 100% $body-margin;
-// 	background-position: 0 0, 0 $body-margin-half;
-// 	.promo.poetry, .editorial, .collection.introduction, .collection-sidebar, figure.audio, footer {
-// 		opacity: 0.7;
-// 	}
-// }
+body.localhost {
+  background-image: linear-gradient(to top, #ccf 0, transparent 1px), linear-gradient(to top, #f33 0, transparent 1px);
+  background-repeat: repeat-y, repeat-y;
+  background-size: 100% $body-margin, 100% $body-margin;
+	background-position: 0 0, 0 $body-margin-half;
+	.promo.poetry, .editorial, .collection.introduction, .collection-sidebar, figure.audio, footer {
+		opacity: 0.7;
+	}
+}
