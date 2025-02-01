@@ -99,6 +99,8 @@ async function getAllsequences() {
 			type,
 		);
 
+		console.log('>>> ', storiesFormatted[storiesFormatted.length - 1].dateTimePublication);
+
 		return {
 			authorForename,
 			authorPronoun,
@@ -120,9 +122,10 @@ async function getAllsequences() {
 			totalMinutes: storiesFormatted.reduce((acc, story) => acc + story.podcastLengthMinutes, 0),
 			totalWords: storiesFormatted.reduce((acc, story) => acc + story.totalWords, 0),
 			translator,
+			latestEpisodeDate: storiesFormatted[storiesFormatted.length-1].dateTimePublication,
 		}
 	});
-  return sequences;
+  return sequences.sort((a, b) => new Date(b.latestEpisodeDate) - new Date(a.latestEpisodeDate));
 }
 
 module.exports = getAllsequences;

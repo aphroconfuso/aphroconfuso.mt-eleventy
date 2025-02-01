@@ -50,6 +50,7 @@ module.exports = (promos, storyAtts) => {
 			authorsString,
 			collaboration: authors && authors.length > 1,
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
+			dateTimePublication: promoAtts.dateTimePublication,
 			description: promo.text || promoAtts.description,
 			subjectDate: promoAtts.diaryDate,
 			id: promo.id || (promo.story && promo.story.data.id),
