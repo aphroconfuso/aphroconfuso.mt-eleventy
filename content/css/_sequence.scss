@@ -7,10 +7,10 @@
   h1 {
     color: $brown;
   }
-  .promo-list > li.multiple-episodes {
-    // margin-bottom: $body-margin-half;
-    padding-bottom: $body-margin-half;
-  }
+  // .promo-list > li.multiple-episodes {
+  //   // margin-bottom: $body-margin-half;
+  //   padding-bottom: $body-margin-half;
+  // }
   aside#form {
     border-top: 1px solid $faint-line;
     padding-top: $body-margin-half;
@@ -28,28 +28,40 @@
 	border-bottom-style: dashed;
 }
 
-.generic.sequences .promo-list {
-	li {
-		background-color: var(--deco);
-		border-radius: $body-margin-eighth;
-		border: 1px solid #d3d3d0;
-		padding: $body-margin;
-		p {
-			@include clamp(3);
-		}
+.promo-sequence {
+	background-color: var(--deco);
+	border: 1px solid #d3d3d0;
+	border-radius: $body-margin-eighth;
+	padding: calc($body-margin - 1px);
 	img {
 		aspect-ratio: 120/63;
-		border: 1px $light-brown solid;
-		object-fit: cover;}
+		border: 1px $lightest-brown solid;
+		object-fit: cover;
+		width: 100%;
 	}
-	@media all and (min-width: $laptop-breakpoint) {
+}
+
+.sequence .promo-sequence {
+	margin: 0 0 $body-margin;
+	padding: calc($body-margin - 1px);
+}
+
+@media all and (min-width: $laptop-breakpoint) {
+	.generic.sequences .promo-list {
 	  display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: $body-margin;
     li {
+			border-bottom: none;
       flex: 1 1 calc(50% - $body-margin);
       max-width: calc(50% - $body-margin);
-    }
+			p {
+				@include clamp(3);
+			}
+		}
+	}
+	.sequence .promo-sequence {
+		margin: 0 ($body-margin * -1) $body-margin;
 	}
 }

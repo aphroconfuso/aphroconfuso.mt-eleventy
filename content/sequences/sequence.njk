@@ -28,9 +28,9 @@ permalink: /{{ sequence.slug | slugifyMaltese }}/index.html
 			<h1>{{ sequence.title | prettifyMaltese | safe }}</h1>
 			{% include "_authors.njk" %}
 		</header>
-		<div class="container-generic">
+		<div class="container-generic sequence">
 			<div class="generic-body-text" id="grid-body">
-					<div>
+					<div class="promo-sequence">
 						{% set imageMode = 'promo' %}
 						{% set imageCrop = 'uncropped' %}
 						{% if sequence.socialImage %}
@@ -38,11 +38,10 @@ permalink: /{{ sequence.slug | slugifyMaltese }}/index.html
 							{% set slideMobile = sequence.image %}
 							{% include "_image.njk" %}
 						{% endif %}
-					<div class="body-text">
+					<div class="body-text	description">
 						<p>{{ sequence.description | prettifyMaltese | safe }}</p>
 					</div>
 				</div>
-
 				{% set collated = true %}
 				{% set omitAuthor = true %}
 				{% set omitTitle = true %}

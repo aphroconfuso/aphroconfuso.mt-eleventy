@@ -17,34 +17,32 @@ permalink: /sensiliet/index.html
 			<ul><li class="header-label">&nbsp;</li></ul>
 			<h1>Sensiliet</h1>
 		</header>
-		<div class="abecedaire">
-			<section id="grid-body">
-				<div class="body-text">
-					<ol class="promo-list">
-						{% set imagesUrl = metadata.settings.imagesUrl %}
-						{% for sequence in sequences | rejectattr('isDiary') %}
-						<li>
-							<a href="/{{ sequence.slug }}/" class="promo promo-sequence">
-							{% set imageMode = 'promo' %}
-							{% set imageCrop = 'landscape' %}
-							{% if sequence.socialImage %}
-								{% set slide = sequence.image %}
-								{% set slideMobile = sequence.image %}
-								{% include "_image.njk" %}
-							{% endif %}
-							<header>
-								<h1>{{ sequence.title }}</h1>
-								<h2>{{ sequence.authorsString }}</h2>
-							</header>
-							<div class="body-text">
-								<p>{{ sequence.description | prettifyMaltese | safe }}</p>
-							</div>
-							{# [{{ sequence.stories.length }} | {{ sequence.totalWords }} | kliem {{ sequence.totalMinutes }} minuti] #}
-						</a>
-					</li>
-				{% endfor %}
-			</ul>
-			</section>
-		</div>
+		<section class="body-text">
+				<ol class="promo-list">
+					{% set imagesUrl = metadata.settings.imagesUrl %}
+					{% for sequence in sequences | rejectattr('isDiary') %}
+					<li>
+						<a href="/{{ sequence.slug }}/" class="promo promo-sequence">
+						{% set imageMode = 'promo' %}
+						{% set imageCrop = 'landscape' %}
+						{% if sequence.socialImage %}
+							{% set slide = sequence.image %}
+							{% set slideMobile = sequence.image %}
+							{% include "_image.njk" %}
+						{% endif %}
+						<header>
+							<h1>{{ sequence.title }}</h1>
+							{% set promo = sequence %}
+							{% include "_authors.njk" %}
+						</header>
+						<div class="body-text">
+							<p>{{ sequence.description | prettifyMaltese | safe }}</p>
+						</div>
+						{# [{{ sequence.stories.length }} | {{ sequence.totalWords }} | kliem {{ sequence.totalMinutes }} minuti] #}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+		</section>
 	</article>
 {% endblock %}
