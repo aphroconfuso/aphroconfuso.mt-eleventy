@@ -3,7 +3,7 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-.abecedaire {
+.abecedaire, .almanac {
   ol {
     margin-left: $body-margin * -1.5;
     li {

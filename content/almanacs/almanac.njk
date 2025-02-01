@@ -1,0 +1,69 @@
+---
+pagination:
+  alias: almanac
+  size: 1
+  data: almanacs
+permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
+---
+{% extends 'layouts/base.njk' %}
+
+{% block head %}
+	<title>Almanakk · Aphroconfuso</title>
+  <style>
+		#month {
+			display: grid;
+			grid-template-columns: repeat(7, 1fr);
+			grid-gap: 0.5em;
+			margin: 0;
+			padding: 0;
+		}
+  </style>
+{% endblock %}
+
+{% block content %}
+	<article class="generic almanac">
+		<header>
+			<ul><li>&nbsp;</li></ul>
+			<h1>{{ almanac.month }}</h1>
+			<h2></h2>
+		</header>
+		<div class="almanac">
+			<section>
+				<div id="month-header">
+					<div class="day">It-Tnejn</div>
+					<div class="day">It-Tlieta</div>
+					<div class="day">L-Erbgħa</div>
+					<div class="day">Il-Ħamis</div>
+					<div class="day">Il-Ġimgħa</div>
+					<div class="day">Is-Sibt</div>
+					<div class="day">Il-Ħadd</div>
+				</div>
+			{% for week in almanac.weeks %}
+				<div id="month">
+					{% for day in week %}
+						<div id="day"><strong>{{ day if day else "&nbsp;" | safe }}</strong>
+							{% if day %}
+								<ul>
+									{% for story in stories[0].almanac %}
+										{% if story.day == day and story.month == almanac.month %}
+											<li>
+												<a class="promo promo-almanac {{ story.issueMonth | slugify }}" href="/{{ story.slug }}/" onclick="analytics(['divackEvent', 'Promo', 'minn: Almanakk', 'għal: {{ story.reportingTitle }}', {{ loop.index }}]);">
+													<header>
+														<h6><span style="font-family: mono">{{ story.year + ":" if story.year else "     "}}</span> {{ story.title }}</h6>
+														{# <p>{{ story.day }} ta’ {{ story.month }} {{ story.year }}</p> #}
+													</header>
+													{# <p class="blurb">{{ story.snippet | prettifyMaltese | safe }}</p> #}
+												</a>
+											</li>
+										{% endif %}
+									{% endfor %}
+								</ul>
+							{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</section>
+		</div>
+	</article>
+{% endblock %}

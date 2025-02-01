@@ -1,0 +1,209 @@
+---
+pagination:
+  data: stories
+  size: 250
+  alias: story
+eleventyExcludeFromCollections: false
+permalink: /atlas/index.html
+---
+{% extends 'layouts/base.njk' %}
+
+{% block head %}
+	<title>Atlas · Aphroconfuso</title>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+{% endblock %}
+
+{% block content %}
+	<article>
+		<header>
+			<ul><li>&nbsp;</li></ul>
+			<h1>Atlas</h1>
+			<h2></h2>
+		</header>
+		<div class="atlas" id="map"></div>
+	</article>
+	<script>
+const map = L.map('map').setView([35.9375, 14.3754], 13);
+	L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+{# var marker = L.marker([35.9375, 14.3754]).addTo(map);
+marker.bindPopup("<b>Hello world! <a href=\"/\">Link</a></b><br>I am a popup.").openPopup();
+
+var marker2 = L.marker([36.0250,14.2950]).addTo(map);
+marker2.bindPopup("<b>Hello world 2! <a href=\"/\">Link</a></b><br>I am a popup 2.").openPopup();
+
+var group = new L.featureGroup([marker1, marker2]);
+
+
+map.flyToBounds(group.getBounds()); #}
+
+{# let markers = [marker1, marker2, marker3]
+
+let latlngs = markers.map(marker => marker.getLatLng())
+
+let latlngBounds = L.latLngBounds(latlngs)
+
+map.fitBounds(latlngBounds) #}
+// OR with a smooth animation
+
+
+
+
+
+
+
+
+
+
+
+function addMarkers(map, points) {
+  const bounds = []; // Array to store all coordinates for bounds
+
+  points.forEach(({ longitude, latitude, name, text }) => {
+    const marker = L.marker([longitude, latitude]).addTo(map); // Add marker to map
+    marker.bindPopup(`<p>« ${text.replaceAll(name, '<strong>' + name + '</strong>')} »</p><br><a href="https://example.com" target="_blank">${name}</a>`); // Add popup
+    bounds.push([longitude, latitude]); // Add coordinates to bounds array
+  });
+
+  // Fit map to the bounds of all points
+  if (bounds.length > 0) {
+    map.fitBounds(bounds);
+  }
+}
+
+{# // Example usage:
+const map = L.map('map').setView([51.505, -0.09], 13); // Initialize map
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map); #}
+
+{# const points = [
+  [35.9375, 14.3754, 'Point 1', 'https://example.com/1'],
+  [36.0250,14.2950, 'Point 2', 'https://example.com/2'],
+]; #}
+
+
+// use deepseek not chatgpt
+
+const points = [
+		{
+        longitude: 35.8897,
+        latitude: 14.4021,
+        name: "Top of the World",
+        text: "Top of the World jagħmel parti mill-konfini ta’ Ħal Għargħur, periferija man-Naxxar."
+    },
+    {
+        longitude: 35.9240,
+        latitude: 14.4560,
+        name: "Ħal Għargħur",
+        text: "Ħal Għargħur, periferija man-Naxxar. Huwa medda ta’ art b’terren xagħri, aħrax, tħares fuq il-Madliena."
+    },
+    {
+        longitude: 35.9310,
+        latitude: 14.4440,
+        name: "Naxxar",
+        text: "Ħal Għargħur, periferija man-Naxxar. Aktarx li r-referenza Ingliża għal dan il-lok żviluppat minn barranin li jżuru l-inħawi."
+    },
+    {
+        longitude: 35.8887,
+        latitude: 14.3986,
+        name: "Madliena",
+        text: "Madliena, Baħar iċ-Ċagħaq, il-Magħtab u San Pawl il-Baħar."
+    },
+    {
+        longitude: 35.9261,
+        latitude: 14.4484,
+        name: "Baħar iċ-Ċagħaq",
+        text: "Baħar iċ-Ċagħaq, il-Magħtab u San Pawl il-Baħar."
+    },
+    {
+        longitude: 35.9181,
+        latitude: 14.4677,
+        name: "Magħtab",
+        text: "Baħar iċ-Ċagħaq, il-Magħtab u San Pawl il-Baħar."
+    },
+    {
+        longitude: 35.8924,
+        latitude: 14.4401,
+        name: "San Pawl il-Baħar",
+        text: "Baħar iċ-Ċagħaq, il-Magħtab u San Pawl il-Baħar."
+    },
+    {
+        longitude: 35.9128,
+        latitude: 14.4111,
+        name: "Wied il-Faħam",
+        text: "F’diversi mapep qodma, il-wied huwa mniżżel bħala Wied Faħam, mentri f’mapep u tabelli riċenti jidher bħala Wied il-Faħam."
+    },
+    {
+        longitude: 35.9073,
+        latitude: 14.3864,
+        name: "Wied il-Kbir",
+        text: "Baħar iċ-Ċagħaq jaqa’ taħt l-amministrazzjoni tal-Kunsill Lokali tan-Naxxar, iżda taħt id-distrett parrokkjali ta’ Ħal Għargħur. Ir-raħal jinsab f’ħalq Wied il-Kbir."
+    },
+    {
+        longitude: 35.9333,
+        latitude: 14.4319,
+        name: "Victoria Lines",
+        text: "Il-Victoria Lines huma sistema ta’ fortifikazzjonijiet mibnija fis-seklu dsatax biex jiddefendu l-gżira minn attakki mill-art."
+    },
+    {
+        longitude: 35.8767,
+        latitude: 14.3854,
+        name: "Għallis",
+        text: "Għallis. Hemm taħt jinsabu fdalijiet mirdumin ta’ tempju megalitiku Ta’ Ħammut."
+    },
+    {
+        longitude: 35.9053,
+        latitude: 14.4372,
+        name: "Ħal Qormi",
+        text: "Skont wieħed anzjan mill-Għargħur li kellimt, huwa possibbli li kien jissejjaħ Wied Faħam minħabba l-lewn skur tal-blat li jinsab fil-wied. Hawn wieħed jista’ faċilment jorbot mal-oriġini tal-isem ta’ Wied is-Sewda, fil-limiti ta’ Ħal Qormi."
+    },
+    {
+        longitude: 35.8615,
+        latitude: 14.4759,
+        name: "Delimara",
+        text: "Kieku qegħdin hawn illum, jgħarrxu bis-searchlight, jistgħu jaraw il-vilel ħolma fuq ix-xaqliba tal-Madliena, jissendikaw bit-trombi għal parties ħorox li jdumu sas-siegħa ta’ waranofsinhar."
+    }
+];
+
+
+addMarkers(map, points);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		reportingTitle = "Atlas";
+	</script>
+{% endblock %}

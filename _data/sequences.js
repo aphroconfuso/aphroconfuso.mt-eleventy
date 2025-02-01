@@ -117,6 +117,8 @@ async function getAllsequences() {
 			sortBy: authorSurname,
 			stories: storiesFormatted,
 			title: sequenceTitle,
+			totalMinutes: storiesFormatted.reduce((acc, story) => acc + story.podcastLengthMinutes, 0),
+			totalWords: storiesFormatted.reduce((acc, story) => acc + story.totalWords, 0),
 			translator,
 		}
 	});

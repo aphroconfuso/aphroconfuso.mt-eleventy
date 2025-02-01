@@ -27,3 +27,29 @@
 .generic.diaries ul.promo-list > li {
 	border-bottom-style: dashed;
 }
+
+.generic.sequences .promo-list {
+	li {
+		background-color: var(--deco);
+		border-radius: $body-margin-eighth;
+		border: 1px solid #d3d3d0;
+		padding: $body-margin;
+		p {
+			@include clamp(3);
+		}
+	img {
+		aspect-ratio: 120/63;
+		border: 1px $light-brown solid;
+		object-fit: cover;}
+	}
+	@media all and (min-width: $laptop-breakpoint) {
+	  display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: $body-margin;
+    li {
+      flex: 1 1 calc(50% - $body-margin);
+      max-width: calc(50% - $body-margin);
+    }
+	}
+}

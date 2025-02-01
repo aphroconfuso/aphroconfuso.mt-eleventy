@@ -192,14 +192,6 @@
     &:last-child {
       border: none;
     }
-    &.podcastaudio {
-      a {
-        width: auto;
-      }
-      .solidus {
-        padding: 1.5rem 0.5rem 0;
-      }
-    }
   }
 
   #menu-toggle:checked ~ menu {

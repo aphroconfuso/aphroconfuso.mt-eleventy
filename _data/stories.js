@@ -466,7 +466,7 @@ async function getAllStories() {
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,
 			isSequenceEpisode: !!sequenceData,
-			listable: atts.type !== 'Djarju' && atts.type !== 'Poddata' && atts.type !== 'Recensjoni' && atts.type !== 'Memoir',
+			listable: !['Djarju', 'Memoir', 'Poddata', 'Recensjoni', 'Terminu'].includes(atts.type),
 			listableAudio: atts.type !== 'Djarju' && atts.type !== 'Poddata' && !!atts.podcastDate,
 			listableBook: atts.type === 'Recensjoni',
 			listableDiary: atts.type === 'Djarju',
