@@ -41,6 +41,15 @@
 	}
 }
 
+.generic.sequences .promo-list {
+	li {
+		border-bottom: none;
+		p {
+			@include clamp(3);
+		}
+	}
+}
+
 .sequence .promo-sequence {
 	margin: 0 0 $body-margin;
 	padding: calc($body-margin - 1px);
@@ -53,7 +62,6 @@
     flex-wrap: wrap;
     gap: $body-margin;
     li {
-			border-bottom: none;
       flex: 1 1 calc(50% - $body-margin);
       max-width: calc(50% - $body-margin);
 			p {
