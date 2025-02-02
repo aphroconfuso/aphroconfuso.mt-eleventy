@@ -44,6 +44,7 @@
 .generic.sequences .promo-list {
 	li {
 		border-bottom: none;
+		margin-bottom: $body-margin;
 		p {
 			@include clamp(3);
 		}
@@ -62,8 +63,9 @@
     flex-wrap: wrap;
     gap: $body-margin;
     li {
-      flex: 1 1 calc(50% - $body-margin);
-      max-width: calc(50% - $body-margin);
+      flex: 1 1 calc(50% - $body-margin-half);
+      max-width: calc(50% - $body-margin-half);
+			margin-bottom: 0;
 			p {
 				@include clamp(3);
 			}
