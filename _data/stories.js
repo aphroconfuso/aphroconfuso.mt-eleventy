@@ -28,6 +28,19 @@ const shuffleArray = (array) => {
 	return array;
 }
 
+function findUniqueWords(text) {
+    // Normalize to lowercase for case-insensitive comparison
+    text = text.normalize('NFC').toLowerCase();
+
+    // Use regex to match words, including Unicode characters
+    const words = text.match(/\p{L}+/gu) || []; // \p{L}+ matches any letter character in any language
+
+    // Store unique words in a Set
+    const uniqueWords = new Set(words);
+
+    return Array.from(uniqueWords);
+}
+
 // const fs = require('fs');
 // var Spellchecker = require("hunspell-spellchecker");
 // var spellchecker = new Spellchecker();
@@ -434,10 +447,16 @@ async function getAllStories() {
 		const storycollections = atts.collections && processCollections(atts.collections.data);
 		cumulativeBody += " " + atts.body;
 
-		const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "czMXc").replace(/ġ/gm, "gzMXg").replace(/ħ/gm, "hzMXh").replace(/ż/gm, "zzMXz").replace(/à/gm, "azMXa"));
-		const vocabulary = unique(body).sort().map((word) => {
-			return word.replace(/czMXc/gm, "ċ").replace(/gzMXg/gm, "ġ").replace(/hzMXh/gm, "ħ").replace(/zzMXz/gm, "ż").replace(/azMXa/gm, "à");
-		});
+		// const body = unique(stripTags(atts.body).toLowerCase().replace(/ċ/gm, "czMXc").replace(/ġ/gm, "gzMXg").replace(/ħ/gm, "hzMXh").replace(/ż/gm, "zzMXz").replace(/à/gm, "azMXa"));
+		// const vocabulary = unique(body).sort().map((word) => {
+		// 	return word.replace(/czMXc/gm, "ċ").replace(/gzMXg/gm, "ġ").replace(/hzMXh/gm, "ħ").replace(/zzMXz/gm, "ż").replace(/azMXa/gm, "à");
+		// });
+
+
+// Example usage
+const vocabulary = findUniqueWords(atts.body);
+
+
 
 		const processedStory = {
 			appointment: atts.appointment,
@@ -502,6 +521,7 @@ async function getAllStories() {
 			slug: pageSlug,
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
+			socialImageFormats: promoImageFormats,
 			sortTitle: makeSortableTitle(title + atts.sequenceEpisodeNumber),
 			storycollections,
 			subjectDate: atts.diaryDate,
@@ -648,8 +668,9 @@ async function getAllStories() {
 		return processedStory;
 	});
 
-	const cumulativeVocabulary = getWordFrequency(cumulativeBody);
-	storiesFormatted[0].cumulativeVocabulary = cumulativeVocabulary;
+	// const cumulativeVocabulary = getWordFrequency(cumulativeBody);
+	// storiesFormatted[0].cumulativeVocabulary = cumulativeVocabulary;
+	storiesFormatted[0].cumulativeVocabulary = findUniqueWords(cumulativeBody);
 	storiesFormatted[0].cumulativeWordcount = splitText(cumulativeBody).length;
 
 	// QUOTAS ********************************************************************************
