@@ -2,7 +2,8 @@ const slugifyMaltese = require("./slugifyMaltese.js");
 
 module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subjectDate, sequenceEpisodeTitle, type) => {
 	if (type === 'Terminu') return slugifyMaltese(`il-kliem-fit-teorija-${title}`);
-	if (type === 'Recensjoni') return slugifyMaltese(`kotba-${ title }`);
+	if (type === 'Recensjoni' && title.startsWith('Antoloġija')) return slugifyMaltese(`kotba-${title}`);
+	if (type === 'Recensjoni') return slugifyMaltese(`kotba-${author}-${title}`);
 
 	// Add author
 	// if (type === 'Recensjoni') return slugifyMaltese(`kotba-${ author }-${ title }`);
