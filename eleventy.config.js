@@ -20,6 +20,17 @@ const fixSubjectDate = require('./src/fixSubjectDate.js');
 const prettifyMaltese  = require('./src/prettifyMaltese.js');
 const slugifyStringMaltese = require('./src/slugifyMaltese.js');
 
+function deleteFoldersWithIndexHtml(dir) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      fs.readdirSync(fullPath).includes('index.html')
+        ? fs.rmSync(fullPath, { recursive: true, force: true })
+        : deleteFoldersWithIndexHtml(fullPath);
+    }
+  }
+}
+
 module.exports = function (eleventyConfig) {
 	// const cssDir = path.join('aphroconfuso.mt', 'site', 'css');
 	// if (!fs.existsSync(cssDir)) {
@@ -56,6 +67,11 @@ module.exports = function (eleventyConfig) {
 	const handleWarning = (message) => {	console.warn('\x1b[33m%s\x1b[0m', message); }
 
 	eleventyConfig.on('eleventy.before', async ({dir, results, runMode, outputMode}) => {
+
+		// delete site first
+		const siteDir = path.join('./aphroconfuso.mt/site/');
+		deleteFoldersWithIndexHtml(siteDir);
+
 		const cssDir = path.join('./aphroconfuso.mt/site/css/');
 		if (!fs.existsSync(cssDir)) {
 			fs.mkdir(cssDir, {recursive: true}, err => console.log(err));
@@ -189,8 +205,10 @@ module.exports = function (eleventyConfig) {
 			}
 
 			// Index pages for search **************************************************************************************
-			execSync(`npx pagefind --site aphroconfuso.mt/site --glob \"**/*.html\"`, {encoding: 'utf-8'});
-
+			console.log('Indexing pages for search...');
+			execSync(`npx pagefind --site aphroconfuso.mt/site --glob \"**/*.html\" --force-language unknown`, {encoding: 'utf-8'});
+			//  --include_characters ċġħżàèù
+			console.log('Indexing pages for search... done');
 			// END QUICKBUILD
 		}
 	});

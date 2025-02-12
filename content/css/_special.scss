@@ -328,6 +328,14 @@ article {
 	.episode-number {
 		display: none !important;
 	}
+	.editorial-image {
+		margin-bottom: $body-margin;
+		@media all and (max-width: $laptop-breakpoint) {
+			figcaption {
+				letter-spacing: -0.4px;
+			}
+		}
+	}
 }
 .story-105.promo {
 	.episode-number, h3 {
@@ -361,6 +369,14 @@ article {
 	}
 }
 
+.story-119 {
+	#body-text {
+		p {
+			margin-bottom: $body-margin-half;
+		}
+	}
+}
+
 body.localhost {
   background-image: linear-gradient(to top, #ccf 0, transparent 1px), linear-gradient(to top, #f33 0, transparent 1px);
   background-repeat: repeat-y, repeat-y;
@@ -368,5 +384,35 @@ body.localhost {
 	background-position: 0 0, 0 $body-margin-half;
 	.promo.poetry, .editorial, .collection.introduction, .collection-sidebar, figure.audio, footer {
 		opacity: 0.7;
+	}
+}
+
+.sequence-12 {
+	.container {
+		position: relative;
+		.fx1 {
+			color: #cc0000;
+			@media all and (max-width: $mobile-breakpoint) {
+				&::before {
+					color: var(--ink);
+					content: "[";
+				}
+				&::after {
+					color: var(--ink);
+					content: "]";
+				}
+			}
+			@media all and (min-width: $mobile-breakpoint-plusone) {
+				&::before, &::after {
+					content: "";
+				}
+				font-size: $body-font-size * 0.8;
+				line-height: $body-margin * 0.66;
+				margin-top: $body-font-size * 0.2;
+				position: absolute;
+				width: $body-margin * 12.25;
+				right: 0;
+			}
+		}
 	}
 }

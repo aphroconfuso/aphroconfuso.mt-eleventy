@@ -99,8 +99,6 @@ async function getAllsequences() {
 			type,
 		);
 
-		console.log('>>> ', storiesFormatted[storiesFormatted.length - 1].dateTimePublication);
-
 		return {
 			authorForename,
 			authorPronoun,

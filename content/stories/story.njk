@@ -13,7 +13,7 @@ permalink: /{{ story.slug }}/index.html
 {% block head %}
 	<title>{{ story.metaTitle or metadata.title | safe }} · Aphroconfuso</title>
 	<meta content="{{ story.description }}" name="description">
-	<meta property="og:image" content="https://aphroconfuso.mt{{ metadata.settings.imagesUrl + story.socialImage }}">
+	<meta property="og:image" content="https://aphroconfuso.mt{{ metadata.settings.imagesUrl + story.socialImage }}" data-pagefind-meta="image[content]">
 	{% if story.translator %}
 		<meta name="author" content="{{ story.authorsString }} (tr {{ story.translator }})">
 	{% else %}
@@ -32,14 +32,14 @@ permalink: /{{ story.slug }}/index.html
 	<meta name="twitter:title" content="{{ story.metaTitle or metadata.title }}">
 	<meta name="twitter:description" content="{{ story.description }}">
 	<meta name="twitter:image" content="https://aphroconfuso.mt{{ metadata.settings.imagesUrl + story.socialImage }}">
-	<meta name="twitter:image:alt" content="{{ story.socialImageAlt }}">
+	<meta name="twitter:image:alt" content="{{ story.socialImageAlt }}" data-pagefind-meta="image_alt[alt]">
 {% endblock %}
 
 {% block content %}
-	<article class="content {{ story.issueMonth | slugify }} {{ story.type | slugify }} story story-{{ story.id }} sequence-{{ story.sequenceId }}{{ story.endOfSeriesClass }}">
+	<article class="content {{ story.issueMonth | slugify }} {{ story.type | slugify }} story story-{{ story.id }} sequence-{{ story.sequenceId }}{{ story.endOfSeriesClass }}" data-pagefind-meta="class[class]" data-pagefind-body>
 		<header>
 			<ul>
-				<li class="header-label">
+				<li class="header-label" data-pagefind-meta="header">
 					{% if story.type === 'Avveniment' %}
 						<a href="/avvenimenti/" class="diary-title">Avvenimenti</a>
 							{% if story.subjectDate %}
@@ -77,7 +77,7 @@ permalink: /{{ story.slug }}/index.html
 				{% endfor %}
 			</ul>
 			{% if story.type === 'Poddata' %}
-				<h1 data-pagefind-meta="title">
+				<h1 data-pagefind-meta="title" data-pagefind-weight="8">
 					{{ story.mainTitle | fixPodcastTitle | prettifyMaltese | safe }}
 				</h1>
 			{% else %}
@@ -134,7 +134,7 @@ permalink: /{{ story.slug }}/index.html
 				{% endif %}
 				<div class="promo bookmark-shortcut"><!-- --></div>
 			</section>
-			<section id="grid-body" data-pagefind-body data-pagefind-weight="7">
+			<section id="grid-body" data-pagefind-weight="7">
 				{% if story.type === 'Poezija' and not story.useProseStyling %}
 					<section class="body-text">
 						{% if story.slideshow or story.singleImage %}

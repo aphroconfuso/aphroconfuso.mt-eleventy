@@ -581,7 +581,6 @@ const vocabulary = findUniqueWords(atts.body);
 					reportingTitle,
 					title: smartTruncate(processedStory.reportingTitle, 26),
 				});
-				console.log('ALMANAC', match[0], match[2], match[4], match[6], '>>>', almanacArray.length);
 			});
 		//  }
 

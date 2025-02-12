@@ -7,12 +7,14 @@
 @mixin theme-regular-colours() {
 	--paper: #{$paper};
 	--ink: #{$ink};
+	--border: #{$lightest-brown};
 	--deco: #{$deco-brown};
 }
 
 @mixin theme-dark-colours() {
 	--paper: #{$dark-brown};
 	--ink: #{$lightest-brown};
+	--border: #{$lightest-brown};
 	--deco: #{$brown};
 }
 
@@ -20,6 +22,7 @@
 	--paper: black;
 	--ink: white;
 }
+
 
 .newsletter-iframe-regular,
 .newsletter-iframe-dark,

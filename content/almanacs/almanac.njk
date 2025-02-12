@@ -3,7 +3,7 @@ pagination:
   alias: almanac
   size: 1
   data: almanacs
-permalink: /almanakk-{{ almanac.month }}/index.html
+permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 ---
 {% extends 'layouts/base.njk' %}
 

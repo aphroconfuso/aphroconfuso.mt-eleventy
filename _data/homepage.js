@@ -208,7 +208,6 @@ async function getHomepage() {
 			formattedPromo.reportingTitle = fixReportingTitle(formattedPromo);
 
 			if (includesImages) {
-				console.log(promo && promo.image.data);
 				const promoImageData = promo && promo.image.data[0] || storyAtts.promoImage.data;
 				const promoImageMobileData = promo.imageMobile && promo.imageMobile.data[0] || storyAtts.promoImageMobile.data;
 				formattedPromo.image = storyAtts.showImagePromo && promoImageData && promoImageData.attributes.formats,
