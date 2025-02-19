@@ -27,7 +27,8 @@ permalink: /abeċedarju/index.html
 							<li>
 								<a class="promo promo-abecedaire {{ snippet.issueMonth | slugify }}" href="/{{ snippet.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Abeċedarju', 'għal: {{ snippet.reportingTitle }}', {{ loop.index }}]);">
 									<p class="blurb">{{ snippet.snippet | prettifyMaltese | simpleDropCapsify | safe }}</p>
-									<p class="credit">— “{{ snippet.title }}” ta’ {{ snippet.authorsString }}</p>
+									<p class="credit">— “{{ snippet.titleTruncated }}” ta’ {{ snippet.authorsString }}</p>
+									<p class="credit credit-full">— “{{ snippet.title }}”<br>ta’ {{ snippet.authorsString }}{{ ' (tr ' + snippet.translator + ')' if snippet.translator }}</p>
 								</a>
 							</li>
 						{% endfor %}
