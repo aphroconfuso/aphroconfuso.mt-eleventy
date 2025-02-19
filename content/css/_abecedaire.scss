@@ -70,13 +70,15 @@
 	display: none;
 }
 
-.localhost, .abbozzi {
-	.abecedaire ol li {
-		scale: 0.9;
-		a p.credit {
-			display: none;
-			&.credit-full {
-				display: block !important;
+@media all and (max-width: $laptop-breakpoint) {
+	.localhost, .abbozzi {
+		.abecedaire ol li {
+			scale: 0.9;
+			a p.credit {
+				display: none;
+				&.credit-full {
+					display: block !important;
+				}
 			}
 		}
 	}
