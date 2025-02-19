@@ -491,6 +491,7 @@ const vocabulary = findUniqueWords(atts.body);
 			listableDiary: atts.type === 'Djarju',
 			listableEvent: atts.type === 'Memoir',
 			listablePodcast: atts.type === 'Poddata',
+			listableTerm: atts.type === 'Terminu',
 			mainTitle,
 			metaTitle: displayTitle,
 			issueMonth,

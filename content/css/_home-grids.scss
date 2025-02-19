@@ -13,23 +13,6 @@
 .ga-diary {
 	border: 1px dashed $lightest-brown;
   padding: $body-margin $body-margin 0;
-	nav {
-		margin-bottom: $body-margin-half;
-		li {
-			display: inline-block;
-			font-size: $body-font-size;
-			&:first-of-type {
-				font-family: "Alegreya Sans SC";
-				letter-spacing: 1px;
-				margin-right: $body-margin-quarter;
-				text-transform: lowercase;
-			}
-			a{
-				white-space: nowrap;
-				@include animated-underline($lighter-brown);
-			}
-		}
-	}
 	.header-djarju {
 		display: none;
 	}
@@ -47,6 +30,27 @@
     }
   }
 }
+
+nav.category-menu {
+	display: flex;
+	margin-bottom: $body-margin-half;
+	li {
+		display: inline-block;
+		font-size: $body-font-size;
+		&.header {
+			font-family: "Alegreya Sans SC";
+			letter-spacing: 1px;
+			margin-right: $body-margin-quarter;
+			text-transform: lowercase;
+		}
+		a{
+			padding-left: 0.25rem;
+			white-space: nowrap;
+			@include animated-underline($lighter-brown);
+		}
+	}
+}
+
 a.promo-poetry {
   &:after {
     content: ". . .";
@@ -75,6 +79,7 @@ a.promo-poetry {
 .ga-poem-2,
 .ga-poem-3,
 .ga-diary,
+.ga-terms,
 .ga-editorial,
 .ga-newsletter,
 .ga-podcast,
@@ -234,7 +239,7 @@ a.promo-poetry {
       letter-spacing: -0.5px;
     }
   }
-  .ga-terms {
+  .ga-terms .term-promos {
     columns: 3;
     a.promo {
       padding-bottom: 0;

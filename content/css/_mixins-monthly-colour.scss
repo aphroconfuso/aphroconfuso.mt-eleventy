@@ -59,6 +59,28 @@
 			}
 		}
 	}
+	.body-text mark.abbozzi {
+    position: fixed;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: 110%;
+    background-color: var(--paper) !important;
+    z-index: 1000;
+    padding: $body-margin;
+    color: var(--ink) !important;
+    border: none;
+    scale: 90%;
+    font-size: 1rem;
+		span {
+			background-color: none;
+			border: none;
+			strong {
+				font-weight: 400;
+			}
+		}
+	}
 	.letters {
     border-color: lighten($colour, $lighter);
     &:before {

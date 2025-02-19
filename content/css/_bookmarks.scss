@@ -26,6 +26,10 @@
     }
   }
 }
+.bookmark-compact {
+  text-transform: lowercase;
+  font-style: italic;
+}
 .bookmark-glyph {
   animation-timing-function: ease-in;
   animation: fadeIn 1s;

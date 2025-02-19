@@ -64,20 +64,36 @@ permalink: /index.html
 					{% include '_promo_aside.njk' %}
 				</div>
 			{% endfor %}
+
 			<div class="ga-terms">
-				<a class="label" href="/il-kliem-fit-teorija/">Il-Kliem fit-Teorija</a>
-				{% for promo in homepage.promos | selectattr("isTypeTerm") %}
-					<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
-						{% set omitEpisodeNumber = true %}
-						{% include "_promo_header.njk" %}
-						<div class="{{ promo.cssClass }}">
-							<p>{{ promo.description | prettifyMaltese | safe }}</p>
-						</div>
-					</a>
-					{% include '_promo_aside.njk' %}
-				{% endfor %}
+				{# <li class="header"><a href="/djarju/">djarju</a></li> #}
+				<nav class="category-menu">
+					<li class="header"><a href="/il-kliem-fit-teorija/">Il-Kliem fit-Teorija</a></li>
+					<li>
+						<ol>
+							{% for item in stories | selectattr('listableTerm') | sort(false, false, 'sortTitle') %}
+									<li><a href="/{{ item.slug }}/">{{ item.title }}</a>{% if not loop.last %}, {% endif %}</li>
+							{% endfor %}
+						</ol>
+					</li>
+				</nav>
+
+				<div class="term-promos">
+					{% for promo in homepage.promos | selectattr("isTypeTerm") %}
+						<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+							{% set omitEpisodeNumber = true %}
+							{% include "_promo_header.njk" %}
+							<div class="{{ promo.cssClass }}">
+								<p>{{ promo.description | prettifyMaltese | safe }}</p>
+							</div>
+						</a>
+						{% include '_promo_aside.njk' %}
+					{% endfor %}
+				</div>
 			</div>
+
 			{% include "_print_book_image_promo.njk" %}
+#
 			{% for promo in homepage.imagePromos %}
 				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 				<div class="ga-image-{{ loop.index }}">
@@ -99,6 +115,7 @@ permalink: /index.html
 					{% include '_promo_aside.njk' %}
 				</div>
 			{% endfor %}
+
 			{% for promo in homepage.poetryPromos %}
 				<div class="ga-poem-{{ loop.index }}">
 					<a class="{{ promo.issueMonth | slugify }} promo promo-poetry story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
@@ -115,12 +132,17 @@ permalink: /index.html
 					</a>
 				</div>
 			{% endfor %}
+
 			<div class="ga-diary">
-				<nav>
+				<nav class="category-menu">
 					<li class="header"><a href="/djarju/">djarju</a></li>
-					{% for item in sequences | selectattr('isDiary') | sort(false, false, 'sortBy') %}
-							<li><a href="/{{ item.slug }}/">{{ item.authorsString }}</a>{% if not loop.last %}, {% endif %}</li>
-					{% endfor %}
+					<li>
+						<ol>
+							{% for item in sequences | selectattr('isDiary') | sort(false, false, 'sortBy') %}
+									<li><a href="/{{ item.slug }}/">{{ item.authorsString }}</a>{% if not loop.last %}, {% endif %}</li>
+							{% endfor %}
+						</ol>
+					</li>
 				</nav>
 				<ul>
 				{% for promo in homepage.diaryEntries %}
@@ -138,6 +160,7 @@ permalink: /index.html
 				</ul>
 			</div>
 		</div>
+
 	</article>
 	<script>
 		reportingTitle = "Homepage";

@@ -9,5 +9,5 @@ module.exports = (title) => {
 		.replace(/z/gi, 'zb')
 		.replace(/ż/gi, 'za')
 		.replace(/^\W/, '')
-		.replace(/^[Ii]?[lrstċdnxzż]\-/, '');
+		.replace(/^[Ii]?[lrstċdnxzż]\-/i, '');
 }
