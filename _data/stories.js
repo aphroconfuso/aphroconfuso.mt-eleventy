@@ -560,7 +560,9 @@ const vocabulary = findUniqueWords(atts.body);
 					slug: pageSlug,
 					reportingTitle,
 					snippet,
-					title: smartTruncate(processedStory.reportingTitle, 26),
+					title: reportingTitle,
+					titleTruncated: smartTruncate(processedStory.reportingTitle, 26),
+					translator: translatorFullName,
 				});
 			});
 		}
