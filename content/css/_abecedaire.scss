@@ -29,8 +29,11 @@
 					&.credit-full {
 						display: none;
 						padding-left: $body-margin * 0.75;
-	          height: $body-margin-double;
+	          height: $body-margin * 3;
 						text-indent: $body-margin * -0.75;
+						.translator {
+							white-space: nowrap;
+						}
 					}
         }
       }
@@ -64,10 +67,6 @@
       }
     }
   }
-}
-
-.abecedaire ol li a p.credit.credit-full {
-	display: none;
 }
 
 @media all and (max-width: $laptop-breakpoint) {
