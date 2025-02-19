@@ -66,30 +66,18 @@
   }
 }
 
-.abecedaire ol li a p.credit {
+.abecedaire ol li a p.credit.credit-full {
 	display: none;
 }
 
-.abecedaire ol li a p.credit.credit-full {
-	display: block !important;
-}
-
-.abbozzi .abecedaire ol li {
-	scale: 0.9;
-	a p.credit {
-		display: none;
-		&.credit-full {
-			display: block !important;
-		}
-	}
-}
-
-.localhost .abecedaire ol li {
-	scale: 0.9;
-	a p.credit {
-		display: none;
-		&.credit-full {
-			display: block !important;
+.localhost, .abbozzi {
+	.abecedaire ol li {
+		scale: 0.9;
+		a p.credit {
+			display: none;
+			&.credit-full {
+				display: block !important;
+			}
 		}
 	}
 }
