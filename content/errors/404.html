@@ -4,6 +4,21 @@ permalink: /404.html
 {% extends 'layouts/base.njk' %}
 
 {% block head %}
+<script>
+	const redirectMap = {
+		"bur-mgħeż": "/omar-nshea-bur-mgħeż/",
+		"es-sidr": "/omar-nshea-es-sidr/",
+		"kaos-u-poeżija": "/franco-bifo-berardi-karl-baldacchino-nifs-kaos-u-poezija/",
+		"splużjonijiet": "/jimmy-grima-splużjonijiet/",
+	};
+
+	const currentPath = decodeURIComponent(window.location.pathname.replace(/^\/|\/$/g, ''));
+
+	console.log('>>>', currentPath, redirectMap[currentPath]);
+	if (redirectMap[currentPath]) {
+		window.location.pathname = redirectMap[currentPath];
+	}
+</script>
 <title>Aphroconfuso</title>
 <meta content="{{ metadata.description }}" name="description">
 <meta property="og:image" content="" {{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
