@@ -97,11 +97,12 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.on('eleventy.after', async ({dir, results, runMode, outputMode}) => {
 		// SKIP ALL THESE IF WE ARE IN QUICKBUILD MODE
 		if (process.env.BUILDADMIN !== 'False') {
-			console.log('Postproduction...');
+			console.log('************************************************');
+			console.log('Post-production...');
 			// Check links ********************************************************************************************
 			let linksInContent = [], imagesInContent = [];
 			results.forEach(i => {
-				linksInContent = linksInContent.concat(i.content.match(/href="\/^\#(.*?)\/"/g));
+				linksInContent = linksInContent.concat(i.content.match(/href\=\"\/[^#]([^\/]*?)\/\"/g));
 				imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|jpeg|webp)/g));
 				const anchorsInContent = i.content.match(/(?<=href="#).*?(?=">)/gm);
 				anchorsInContent && anchorsInContent.length && anchorsInContent.forEach(anchor => {
@@ -119,10 +120,13 @@ module.exports = function (eleventyConfig) {
 			});
 
 			const uniqueLinksArray = [...new Set(linksInContent)].filter(n => n).sort();
+			console.log('Links in project: ', linksInContent.length);
+			console.log('Unique links in project: ', uniqueLinksArray.length);
 			uniqueLinksArray && uniqueLinksArray.forEach(i => {
 				if (!i) {return;}
 				const fileLocation = decodeURIComponent(i.replace(/href\=\"/, "./aphroconfuso.mt/site").replace(/\/\"/, "/index.html"));
 				if (fileLocation.includes('localhost:')) handleError(`${ fileLocation } points to localhost!`);
+				if (fileLocation.includes('abbozzi.:')) handleError(`${ fileLocation } points to abbozzi!`);
 				if (fileLocation.includes('provi.:')) handleError(`${ fileLocation } points to provi!`);
 				if (fileLocation.includes('kltyvehasfpmuxan')) handleError(`${ fileLocation } points to klty`);
 				if (!fs.existsSync(fileLocation)) handleError(`ERROR: ${ fileLocation } is linked but does not exist!`);
@@ -130,6 +134,7 @@ module.exports = function (eleventyConfig) {
 
 			// Transfer images ****************************************************************************************
 			const uniqueImagesArray = [...new Set(imagesInContent)].filter(n => n).sort();
+			console.log('Images in project: ', uniqueImagesArray.length);
 			uniqueImagesArray.forEach(i => {
 				if (!i) {return;}
 				const saveToFileLocation = i.replace(/\/stampi/g, "./image-cache/");
@@ -211,6 +216,7 @@ module.exports = function (eleventyConfig) {
 			console.log('Indexing pages for search... done');
 			// END QUICKBUILD
 		}
+		console.log('************************************************');
 	});
 
 	// App plugins
