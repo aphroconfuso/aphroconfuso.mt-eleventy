@@ -116,7 +116,7 @@ html {
 }
 
 body {
-  -moz-osx-font-smoothing: grayscale;
+	-moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-print-color-adjust: exact;
   background-color: var(--paper);
@@ -172,7 +172,8 @@ article > header {
 }
 
 #bottom-wrapper {
-  display: flex;
+	display: flex;
+	margin-top: auto;
   flex-direction: column;
 }
 
