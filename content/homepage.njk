@@ -93,7 +93,7 @@ permalink: /index.html
 			</div>
 
 			{% include "_print_book_image_promo.njk" %}
-#
+
 			{% for promo in homepage.imagePromos %}
 				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
 				<div class="ga-image-{{ loop.index }}">
