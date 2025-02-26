@@ -15,9 +15,9 @@ permalink: /{{ appointment.issueMonthYear | slugifyMaltese }}/index.html
 {% endblock %}
 
 {% block content %}
-<article class="generic {{ appointment.issueMonth | slugify }}">
+<article class="generic {{ appointment.issueMonth | slugify }}" data-pagefind-meta="class[class]">
 	<header>
-		<ul><li class="header-label"><a href="/appuntamenti/">Appuntamenti</a></li></ul>
+		<ul><li class="header-label"><a href="/appuntamenti/" data-pagefind-meta="header">Appuntamenti</a></li></ul>
 		<h1>{{ appointment.issueMonthYear | prettifyMaltese | safe }}</h1>
 		<h2></h2>
 	</header>
@@ -29,7 +29,8 @@ permalink: /{{ appointment.issueMonthYear | slugifyMaltese }}/index.html
 				</div>
 			</div>
 			<p class="continuity">Din hija l-kitba ppubblikata dax-xahar:</p>
-			{% set collated = true %}
+			{# FIX COLLATION - SEE Frar 2025 #}
+			{% set collated = false %}
 			{% set omitEpisodeNumber = true %}
 			{% set promoFrom = appointment.issueMonthYear %}
 			{% set promos = appointment.stories %}
