@@ -9,6 +9,9 @@
 			{% else %}
 				<p>{{ promo.description | prettifyMaltese | safe }}</p>
 			{% endif %}
+			{% if promo.type === 'Recensjoni' %}
+				<img src="{{ metadata.settings.imagesUrl + promo.socialImageFormats.square_avif_x2.hash }}.avif" alt="{{ promo.socialImageAlt }}">
+			{% endif %}
 		</div>
 	</a>
 	{% include '_promo_aside.njk' %}

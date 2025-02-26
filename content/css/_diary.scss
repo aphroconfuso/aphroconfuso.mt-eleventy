@@ -62,6 +62,9 @@ article.djarju {
         margin-top: $body-margin * 1.5;
       }
     }
+		h6 .time {
+			color: $lighter-brown;
+		}
   }
   // @media all and (max-width: ($laptop-breakpoint - 1)) {
   //   .sequence-menu {

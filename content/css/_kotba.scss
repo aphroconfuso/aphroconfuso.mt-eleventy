@@ -93,30 +93,55 @@ article.recensjoni {
 	}
 }
 
-.promo-list {
-	.promo-recensjoni {
-		background-image: url(/img/deco/inforra-cara-2.png);
-		border: 1px solid $lightest-brown;
-		padding: $body-margin;
-		header {
-			h1 {
-				color: $light-brown !important;
+.books ul.promo-list > li {
+	border-bottom: none;
+	margin-bottom: none;
+}
+
+.promo-recensjoni {
+	background-image: url(/img/deco/inforra-cara-1.png);
+	border: 1px solid $lightest-brown;
+	padding: $body-margin;
+	header {
+		h1 {
+			&::before {
+				@include animated-underline-pre($light-brown);
+				margin-left: 1em;
 			}
-			h2 {
-				display: none;
-				position: relative;
-				a,
-				.author {
-					white-space: unset;
-				}
+			color: $light-brown !important;
+		}
+		h2 {
+			position: relative;
+			.author {
+				white-space: unset;
 			}
 		}
-		div p {
+	}
+	div.body-text {
+		p {
 			@include clamp(3);
 			font-family: $sans, sans-serif;
 		}
+		img {
+			display: none;
+		}
+		@media all and (min-width: $laptop-breakpoint) {
+			display: flex;
+			p {
+				padding-right: $body-margin-half;
+				@include clamp(7);
+			}
+			img {
+				display: block;
+				height: $body-margin * 7;
+			}
+		}
+	}
+	&[href*=antolo] h2 {
+		display: none;
 	}
 }
+
 
 // FIXME
 .story-88 {

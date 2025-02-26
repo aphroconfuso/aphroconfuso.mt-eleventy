@@ -60,19 +60,19 @@
 		}
 	}
 	.body-text mark.abbozzi {
-    position: fixed;
-    display: block;
-    top: 0;
-    left: 0;
-    width: 110%;
-    height: 110%;
+		bottom: 0;
+		position: fixed;
     background-color: var(--paper) !important;
-    z-index: 1000;
-    padding: $body-margin;
-    color: var(--ink) !important;
     border: none;
-    scale: 90%;
+    color: var(--ink) !important;
+    display: block;
     font-size: 1rem;
+    height: 100%;
+    left: 0;
+    padding: $body-margin;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 		span {
 			background-color: none;
 			border: none;
