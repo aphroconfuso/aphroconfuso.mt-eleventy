@@ -384,12 +384,14 @@ article {
 			color: $brown;
 			@media all and (max-width: $mobile-breakpoint) {
 				&::before {
-					color: var(--ink);
-					content: " [";
+					color: $lighter-brown;
+					content: " [\2009";
+					font-style: normal;
 				}
 				&::after {
-					color: var(--ink);
-					content: "]";
+					color: $lighter-brown;
+					content: "\2009]";
+					font-style: normal;
 				}
 				font-style: italic;
 			}
@@ -398,7 +400,7 @@ article {
 					content: "";
 				}
 				font-size: $body-font-size * 0.8;
-				font-style: regular;
+				font-style: normal;
 				line-height: $body-margin * 0.66;
 				margin-top: $body-font-size * 0.2;
 				position: absolute;
