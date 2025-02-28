@@ -15,14 +15,14 @@ permalink: /{{ contributor.slug }}/index.html
 {% endblock %}
 
 {% block content %}
-<article class="generic contributor-{{ contributor.id }}">
+<article class="generic contributor-{{ contributor.id }}" data-pagefind-body>
 	<header>
 		<ul><li class="header-label"><a href="/kontributuri/">Kontributuri</a></li></ul>
-		<h1>{{ contributor.name | prettifyMaltese | safe }}</h1>
+		<h1 data-pagefind-weight="9">{{ contributor.name | prettifyMaltese | safe }}</h1>
 	</header>
 	<div class="container-generic contributor">
 		<section id="grid-body">
-			<div class="generic-body-text">
+			<div class="generic-body-text" data-pagefind-weight="3">
 				<div data-pagefind-body data-pagefind-weight="1">
 					{{ contributor.bioNote | prettifyMaltese | safe }}
 				</div>
@@ -81,6 +81,7 @@ permalink: /{{ contributor.slug }}/index.html
 					<div class="collaborated">
 						<p class="continuity">Kollaborazzjonijiet:</p>
 						{% set promos = contributor.collaborationsAuthored %}
+						{% set omitAuthor = false %}
 						{% include '_promo_list.njk' %}
 					</div>
 				{% endif %}
@@ -90,12 +91,13 @@ permalink: /{{ contributor.slug }}/index.html
 						{% set promos = contributor.podcastEpisodes %}
 						{% set showDurations = true %}
 						{% set showLengths = false %}
+						{% set omitAuthor = true %}
 						{% include '_promo_list.njk' %}
 					</div>
 				{% endif %}
 			</div>
 		</section>
-		<section id="grid-max-panel-left-top">
+		<section id="grid-max-panel-left-top" data-pagefind-ignore>
 			{% include "_menu_contributors.njk" %}
 		</section>
 	</div>

@@ -570,9 +570,9 @@ const vocabulary = findUniqueWords(atts.body);
 
 		// ALMANAC *************************************************************************************************************************
 		// if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
-			const almanacMatches = normalisedBodyText.replace(/\n+/g, '').matchAll(/([.]{0,200})(\d\d?)( ta’ )?(Jannar|Frar|Marzu|April|Mejju|.unju|Lulju|Awwissu|Settembru|Ottubru|Novembru|Di.embru) (tal\-)?(\d\d\d\d)?([.]{0,200})/g);
+			const almanacMatches = normalisedBodyText.replace(/\n+/g, '').matchAll(/(.{0,200})(\d\d?)( ta’ )?(Jannar|Frar|Marzu|April|Mejju|.unju|Lulju|Awwissu|Settembru|Ottubru|Novembru|Di.embru) (tal\-)?(\d\d\d\d)?(.{0,200})/g);
 		almanacMatches && shuffleArray(Array.from(almanacMatches)).forEach(match => {
-				let snippet = match[0];
+			let snippet = match[0].replace(/<[^\>]*?>/gi, "");
 				almanacArray.push({
 					authorsString,
 					day: match[2],

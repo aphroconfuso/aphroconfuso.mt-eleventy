@@ -17,9 +17,10 @@
 					{% if promo or item.translator %}
 						<span class="author">{{ author | prettifyMaltese | safe }}</span>
 					{%- else %}
-						<a href="/{{ author | slugifyMaltese }}/">{{ author | prettifyMaltese | safe }}</a>
+						<a class="author" href="/{{ author | slugifyMaltese }}/">{{ author | prettifyMaltese | safe }}</a>
+					{%- endif %}
 					{% if loop.index === 1 and item.authorsType === 'assistita' %} ma’ {%- endif %}
-					{%- endif %}{% if loop.index > 1 and loop.revindex === 2 %} & {% elif loop.revindex > 2 and item.authorsType !== 'kollettiva' %}, {% endif %}
+					{% if loop.index > 1 and loop.revindex === 2 %} & {% elif loop.revindex > 2 and item.authorsType !== 'kollettiva' %}, {% endif %}
 				{%- endif %}
 			{%- endfor %}
 		{%- endif %}
