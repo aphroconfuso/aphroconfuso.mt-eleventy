@@ -385,18 +385,20 @@ article {
 			@media all and (max-width: $mobile-breakpoint) {
 				&::before {
 					color: var(--ink);
-					content: "[";
+					content: " [";
 				}
 				&::after {
 					color: var(--ink);
 					content: "]";
 				}
+				font-style: italic;
 			}
 			@media all and (min-width: $mobile-breakpoint-plusone) {
 				&::before, &::after {
 					content: "";
 				}
 				font-size: $body-font-size * 0.8;
+				font-style: regular;
 				line-height: $body-margin * 0.66;
 				margin-top: $body-font-size * 0.2;
 				position: absolute;
