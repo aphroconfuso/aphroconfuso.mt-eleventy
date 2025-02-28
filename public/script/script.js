@@ -346,10 +346,10 @@ const getPreviousAudioTime = (id) => {
 }
 
 const preventNotesOverlap = () => {
-	const divs = Array.from(document.querySelectorAll('.sequence-12 .fx3'));
+	const divs = Array.from(document.querySelectorAll('#podcast-note')).concat(Array.from(document.querySelectorAll('.sequence-12 .fx3')));
 	const referenceWidth = document.getElementById('grid-max-panel-right-top').offsetWidth;
 	divs.forEach(div => {
-		div.style.width = `calc(${referenceWidth}px - 1.8rem)`;
+		div.style.width = `calc(${referenceWidth}px - 0.9rem)`;
 	});
 	for (let index = 1; index < divs.length; index++) {
 		let div = divs[index];
@@ -730,7 +730,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 	// Resize
 	window.addEventListener("resize", function () {
-		preventNotesOverlap()
+		preventNotesOverlap();
 	});
 
 });
