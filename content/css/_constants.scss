@@ -10,6 +10,7 @@ $tablet-mini-breakpoint: 620px;
 
 $tablet-breakpoint: 620px; // 1080px;
 $laptop-breakpoint: 1200px;
+$laptop-breakpoint-plusone: ($laptop-breakpoint + 1px);
 
 $max-content-width: 39rem;
 $max-logo-width: 820px;
