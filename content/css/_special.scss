@@ -381,21 +381,21 @@ article {
 	.container {
 		position: relative;
 		.fx3 {
-			@media all and (max-width: $mobile-breakpoint) {
+			@media all and (max-width: $laptop-breakpoint) {
 				&::before {
 					color: $lighter-brown;
-					content: " [\2009";
+					content: " [\202F";
 					font-style: normal;
 				}
 				&::after {
 					color: $lighter-brown;
-					content: "\2009]";
+					content: "\202F]";
 					font-style: normal;
 				}
-				color: $mejju;
+				color: $jannar;
 				font-style: italic;
 			}
-			@media all and (min-width: $mobile-breakpoint-plusone) {
+			@media all and (min-width: $laptop-breakpoint-plusone) {
 				&::before, &::after {
 					content: "";
 				}
