@@ -381,7 +381,6 @@ article {
 	.container {
 		position: relative;
 		.fx3 {
-			color: $mejju;
 			@media all and (max-width: $mobile-breakpoint) {
 				&::before {
 					color: $lighter-brown;
@@ -393,6 +392,7 @@ article {
 					content: "\2009]";
 					font-style: normal;
 				}
+				color: $mejju;
 				font-style: italic;
 			}
 			@media all and (min-width: $mobile-breakpoint-plusone) {
