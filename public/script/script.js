@@ -13,7 +13,7 @@ const fixReportingTitle = (storyType, sequenceEpisodeNumber, author, pageTitle) 
 	return pageTitle;
 }
 
-const getScrollPosition = () => window.pageYOffset || document.documentElement.scrollTop;
+const getScrollPosition = () => window.scrollY || document.documentElement.scrollTop;
 
 const getSelectionText = () => {
   let text = "";
@@ -360,7 +360,7 @@ const preventNotesOverlap = () => {
 		let rect2 = prevDiv.getBoundingClientRect();
 		if (rect1.top < rect2.bottom) {
 				let overlap = rect2.bottom - rect1.top;
-				let currentMarginTop = parseFloat(window.getComputedStyle(div).marginTop) || 0;
+				let currentMarginTop = window.scrollY + (parseFloat(window.getComputedStyle(div).marginTop) || 0);
 				let newMarginTop = currentMarginTop + overlap + 1; // Add 1px to ensure no overlap
 
 				console.log(`Div ${index} moved down by ${overlap}px to new margin-top: ${newMarginTop}px`);
