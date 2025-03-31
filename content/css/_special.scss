@@ -438,13 +438,18 @@ article {
 	}
 }
 // mid-release
-.story-115 .bookshops {
-  display: none;
-}
-
+// .story-115 .bookshops {
+//   display: none;
+// }
 
 .story-123 #proġetti-panloġiċi-moderni {
 	margin-bottom: $body-margin-half;
+}
+
+.contents .story-48 header {
+  h1, h2, h3 {
+    display: block;
+  }
 }
 
 // body.localhost {
