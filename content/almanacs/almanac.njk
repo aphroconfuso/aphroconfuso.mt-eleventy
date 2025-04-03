@@ -10,12 +10,29 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 {% block head %}
 	<title>Almanakk · Aphroconfuso</title>
   <style>
-		#month {
+		.week {
 			display: grid;
 			grid-template-columns: repeat(7, 1fr);
 			grid-gap: 0.5em;
 			margin: 0;
 			padding: 0;
+		}
+		.day {
+			border-left: 1px solid #ccc;
+			border-top: 1px solid #ccc;
+			height: calc(1.8rem * 5);
+			overflow: hidden;
+		}
+		.day-header {
+			background-color: #dedede;
+			display: block;
+		}
+		.month {
+			border-bottom: 1px solid #ccc;
+			border-right: 1px solid #ccc;
+		}
+		.blank {
+			background-color: #eee;
 		}
   </style>
 {% endblock %}
@@ -28,20 +45,20 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 			<h2></h2>
 		</header>
 		<div class="almanac">
-			<section>
-				<div id="month-header">
-					<div class="day">It-Tnejn</div>
-					<div class="day">It-Tlieta</div>
-					<div class="day">L-Erbgħa</div>
-					<div class="day">Il-Ħamis</div>
-					<div class="day">Il-Ġimgħa</div>
-					<div class="day">Is-Sibt</div>
-					<div class="day">Il-Ħadd</div>
+			<section class="month">
+				<div id="month-header" class="week">
+					<div>It-Tnejn</div>
+					<div>It-Tlieta</div>
+					<div>L-Erbgħa</div>
+					<div>Il-Ħamis</div>
+					<div>Il-Ġimgħa</div>
+					<div>Is-Sibt</div>
+					<div>Il-Ħadd</div>
 				</div>
 			{% for week in almanac.weeks %}
-				<div id="month">
+				<div class="week">
 					{% for day in week %}
-						<div id="day"><strong>{{ day if day else "&nbsp;" | safe }}</strong>
+						<div class="day{{ ' blank' if not day  }}"><strong class="day-header">{{ day if day else "" | safe }}</strong>
 							{% if day %}
 								<ul>
 									{% for story in stories[0].almanac %}
@@ -49,10 +66,10 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 											<li>
 												<a class="promo promo-almanac {{ story.issueMonth | slugify }}" href="/{{ story.slug }}/" onclick="analytics(['divackEvent', 'Promo', 'minn: Almanakk', 'għal: {{ story.reportingTitle }}', {{ loop.index }}]);">
 													<header>
-														<h6><span style="font-family: mono">{{ story.year + ":" if story.year else "     "}}</span> {{ story.title }}</h6>
+														<p><span style="font-family: mono">{{ story.year + ":" if story.year else ""}}</span> {{ story.title }}</p>
 														{# <p>{{ story.day }} ta’ {{ story.month }} {{ story.year }}</p> #}
 													</header>
-													{# <p class="blurb">{{ story.snippet | prettifyMaltese | safe }}</p> #}
+													<p class="blurb body-text">{{ story.snippet | prettifyMaltese | safe }}</p>
 												</a>
 											</li>
 										{% endif %}

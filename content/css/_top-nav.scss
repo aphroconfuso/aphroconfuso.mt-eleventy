@@ -85,6 +85,10 @@
           padding: 1.5rem 0 0;
           width: 100%;
         }
+				&.search-container {
+          column-span: all;
+          text-transform: unset;
+				}
         &.abecedaire {
           column-span: all;
           font-size: 1rem;
