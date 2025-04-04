@@ -132,6 +132,16 @@ permalink: /{{ story.slug }}/index.html
 						<p>Tista’ tabbona fil-podcast fuq <a href="https://podcasts.apple.com/us/podcast/aphroconfuso/id1686567243">Apple Podcasts</a>, <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5hY2FzdC5jb20vcHVibGljL3Nob3dzL2FwaHJvY29uZnVzbw">Google Podcasts</a>, <a href="https://pca.st/podcast/af8c44c0-c823-013b-f432-0acc26574db2">Pocket Casts</a>, <a href="https://open.spotify.com/show/75Lt3UMvC1jE15SGrNFMww">Spotify</a>, jew billi tfittex “Aphroconfuso” fuq l-app li tuża. Tista’ wkoll iżżid dan l-<a href="https://feeds.acast.com/public/shows/aphroconfuso">RSS feed</a> fl-app tiegħek.</p>
 					</aside>
 				{% endif %}
+				{# {% for storycollection in story.storycollections %}
+					<aside class="collection-sidebar collection-{{ storycollection.id }} generic-body-text hide-mobile">
+						<a href="/{{ storycollection.title | slugifyMaltese }}/">
+								<header>
+									<h3>{{ storycollection.title }}</h3>
+								</header>
+								<p>{{ storycollection.description | prettifyMaltese | safe }}</p>
+						</a>
+					</aside>
+				{% endfor %} #}
 				<div class="promo bookmark-shortcut"><!-- --></div>
 			</section>
 			<section id="grid-body" data-pagefind-weight="7">
@@ -245,16 +255,22 @@ permalink: /{{ story.slug }}/index.html
 						</a>
 					</aside>
 				{% endif %}
-				{% for storycollection in story.storycollections %}
-					<aside class="collection-sidebar collection-{{ storycollection.id }} generic-body-text hide-mobile">
-						<a href="/{{ storycollection.title | slugifyMaltese }}/">
-								<header>
-									<h3>{{ storycollection.title }}</h3>
-								</header>
-								<p>{{ storycollection.description | prettifyMaltese | safe }}</p>
-						</a>
-					</aside>
-				{% endfor %}
+				{% if story.type == 'Terminu' %}
+					{% for storycollection in story.storycollections %}
+						<nav class="generic-menu collection-menu">
+							<header class="collection-{{ storycollection.id }}">
+								<a href="/{{ storycollection.title | slugifyMaltese }}/">{{ storycollection.title }}</a>
+							</header>
+							{% for item in storycollection.stories | sort(false, false, 'sortTitle') %}
+								{% if '/' + item.slug + '/' === page.url %}
+									<li class="active">{{ item.title }}</li>
+								{% else %}
+									<li><a href="/{{ item.slug }}/">{{ item.title }}</a></li>
+								{% endif %}
+							{% endfor %}
+						</nav>
+					{% endfor %}
+				{% endif %}
 			</section>
 			<section id="grid-max-panel-left-bottom">
 				{% if story.coda %}
@@ -267,7 +283,7 @@ permalink: /{{ story.slug }}/index.html
 				</aside>
 			</section>
 			<section id="grid-max-panel-right-bottom">
-				{% for storycollection in story.storycollections %}
+				{# {% for storycollection in story.storycollections %}
 					<aside class="collection-sidebar collection-{{ storycollection.id }} generic-body-text hide-laptop">
 						<a href="/{{ storycollection.title | slugifyMaltese }}/">
 								<header>
@@ -276,7 +292,7 @@ permalink: /{{ story.slug }}/index.html
 								<p>{{ storycollection.description | prettifyMaltese | safe }}</p>
 						</a>
 					</aside>
-				{% endfor %}
+				{% endfor %} #}
 				{% if story.postscript %}
 					<aside id="postscript">
 						{{ story.postscript | restrictHtml | prettifyMaltese | safe }}

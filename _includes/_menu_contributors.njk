@@ -1,11 +1,11 @@
 <section class="generic-menu contributors-menu">
 	{% for item in contributors %}
-		{% if loop.first %}<ul>{% endif %}
+		{% if loop.first %}<nav>{% endif %}
 			{% if '/' + item.slug + '/' === page.url %}
 				<li class="active">{{ item.name }}</li>
 			{% else %}
 				<li><a href="/{{ item.slug }}/">{{ item.name }}</a></li>
 			{% endif %}
-		{% if loop.last %}</ul>{% endif %}
+		{% if loop.last %}</nav>{% endif %}
 	{% endfor %}
 </section>

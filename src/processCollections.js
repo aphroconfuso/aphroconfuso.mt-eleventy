@@ -1,13 +1,17 @@
-// TODO: Also get more stories from storycollection
+const makeSortableTitle = require('./makeSortableTitle');
+const slugifyMaltese = require('./slugifyMaltese.js');
 
-module.exports = (storycollections) => {
-	return storycollections.map((storycollection) => {
-		return {
-			id: storycollection.id,
-			title: storycollection.attributes.title,
-			description: storycollection.attributes.description,
-			moreToCome: storycollection.attributes.moreToCome,
-			// stories:
-		}
-	});
-}
+module.exports = (storyCollections) =>
+  storyCollections.map(({ id, attributes }) => ({
+    id,
+    title: attributes.title,
+    description: attributes.description,
+		moreToCome: attributes.moreToCome,
+    stories: attributes.stories
+      ? attributes.stories.data.map(({ attributes: storyAttributes }) => ({
+          slug: slugifyMaltese(`${attributes.title} ${storyAttributes.title}`),
+					sortTitle: makeSortableTitle(storyAttributes.title),
+          title: storyAttributes.title
+        }))
+      : [],
+  }));

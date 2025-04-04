@@ -66,16 +66,11 @@ permalink: /index.html
 			{% endfor %}
 
 			<div class="ga-terms">
-				{# <li class="header"><a href="/djarju/">djarju</a></li> #}
 				<nav class="category-menu">
 					<li class="header"><a href="/il-kliem-fit-teorija/">Il-Kliem fit-Teorija</a></li>
-					<li>
-						<ol>
-							{% for item in stories | selectattr('listableTerm') | sort(false, false, 'sortTitle') %}
-									<li><a href="/{{ item.slug }}/">{{ item.title }}</a>{% if not loop.last %}, {% endif %}</li>
-							{% endfor %}
-						</ol>
-					</li>
+					{% for item in stories | selectattr('listableTerm') | sort(false, false, 'sortTitle') %}
+							<li><a href="/{{ item.slug }}/">{{ item.title }}</a>{% if not loop.last %}, {% endif %}</li>
+					{% endfor %}
 				</nav>
 
 				<div class="term-promos">
@@ -136,13 +131,9 @@ permalink: /index.html
 			<div class="ga-diary">
 				<nav class="category-menu">
 					<li class="header"><a href="/djarju/">djarju</a></li>
-					<li>
-						<ol>
-							{% for item in sequences | selectattr('isDiary') | sort(false, false, 'sortBy') %}
-									<li><a href="/{{ item.slug }}/">{{ item.authorsString }}</a>{% if not loop.last %}, {% endif %}</li>
-							{% endfor %}
-						</ol>
-					</li>
+					{% for item in sequences | selectattr('isDiary') | sort(false, false, 'sortBy') %}
+							<li><a href="/{{ item.slug }}/">{{ item.authorsString }}</a>{% if not loop.last %}, {% endif %}</li>
+					{% endfor %}
 				</nav>
 				<ul>
 				{% for promo in homepage.diaryEntries %}

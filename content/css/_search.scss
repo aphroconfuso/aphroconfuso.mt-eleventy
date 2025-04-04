@@ -4,6 +4,7 @@
 @use "mixins-etc" as *;
 
 #search-input {
+	display: none;
 	background-image: url("/img/search.svg");
 	background-position: center right;
 	background-repeat: no-repeat;

@@ -32,11 +32,11 @@
 }
 
 nav.category-menu {
-	display: flex;
 	margin-bottom: $body-margin-half;
 	li {
 		display: inline-block;
 		font-size: $body-font-size;
+		white-space: nowrap;
 		&.header {
 			font-family: "Alegreya Sans SC";
 			letter-spacing: 1px;
@@ -45,7 +45,6 @@ nav.category-menu {
 		}
 		a{
 			padding-left: 0.25rem;
-			white-space: nowrap;
 			@include animated-underline($lighter-brown);
 		}
 	}

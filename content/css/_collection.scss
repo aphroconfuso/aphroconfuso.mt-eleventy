@@ -94,6 +94,14 @@
   }
 }
 
+.collection-menu {
+	header {
+		display: inline-block;
+	}
+	margin-bottom: $body-margin-half;
+	padding: $body-margin-half;
+}
+
 .collection.introduction {
   padding: $body-margin-half;
   .fx1 {
