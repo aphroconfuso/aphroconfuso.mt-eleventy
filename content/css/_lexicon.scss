@@ -68,8 +68,8 @@ article.terminu {
     p {
       margin-bottom: 0;
       a[href^="http"]:hover {
-        color: blue;
-        text-decoration-color: blue;
+        color: blue !important;
+        text-decoration-color: blue !important;
       }
       &.fx1 {
         border-top: 1px dashed $lighter-brown;
