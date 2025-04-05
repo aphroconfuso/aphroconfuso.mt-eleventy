@@ -1,0 +1,46 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+.almanac {
+  @media all and (min-width: $laptop-breakpoint) {
+		.week {
+			display: grid;
+			grid-template-columns: repeat(7, 1fr);
+			grid-gap: 0.5em;
+			margin: 0;
+			padding: 0;
+		}
+		.day {
+			border-left: 1px solid $lighter-brown;
+			border-top: 1px solid $lighter-brown;
+			height: calc(1.8rem * 5);
+			overflow: hidden;
+		}
+		.day-header {
+			background-color: $lightest-brown;
+			display: block;
+		}
+		.month {
+			border-bottom: 1px solid $lighter-brown;
+			border-right: 1px solid $lighter-brown;
+		}
+		.blank {
+			background-color: var(--paper);
+		}
+	}
+	.almanac-months {
+    background-color: $lightest-brown;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 1.8rem;
+    width: 100%;
+		li {
+			&::before {
+				content: '';
+			}
+		}
+	}
+}
