@@ -1,0 +1,48 @@
+---
+pagination:
+  alias: day
+  size: 1
+  data: days
+permalink: /almanakk-{{ day.date | slugifyMaltese }}/index.html
+---
+{% extends 'layouts/base.njk' %}
+
+{% block head %}
+	<title>Almanakk · Aphroconfuso</title>
+{% endblock %}
+
+{% block content %}
+	<article class="generic almanac">
+		<header>
+			<ul><li>Almanakk</li></ul>
+			<h1>{{ days.date }}</h1>
+			<h2></h2>
+		</header>
+
+		<ol class="generic-menu almanac-months">
+			{% for almanac in almanacs %}
+				<li><a href="/almanakk-{{ almanac.month | slugifyMaltese }}/">{{ almanac.month }}</a></li>
+			{% endfor %}
+		</ol>
+
+		<div class="almanac">
+			<section id="grid-body">
+				<div class="body-text">
+					<ol>
+						{# {% for snippet in stories[0].almanac %}
+							<li>
+								<a class="promo promo-almanac {{ snippet.issueMonth | slugify }}" href="/{{ snippet.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Almanakk', 'għal: {{ snippet.reportingTitle }}', {{ loop.index }}]);">
+									<header>
+										<h6>{{ snippet.day }} ta’ {{ snippet.month }} {{ snippet.year }}</h6>
+									</header>
+									<p class="blurb">{{ snippet.snippet | prettifyMaltese | safe }}</p>
+								</a>
+								<hr>
+							</li>
+						{% endfor %} #}
+				</ol>
+			</section>
+		</div>
+
+	</article>
+{% endblock %}

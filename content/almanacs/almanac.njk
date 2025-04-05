@@ -1,6 +1,6 @@
 ---
 pagination:
-  alias: almanac
+	alias: almanac
   size: 1
   data: almanacs
 permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
@@ -9,41 +9,23 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 
 {% block head %}
 	<title>Almanakk · Aphroconfuso</title>
-  <style>
-		.week {
-			display: grid;
-			grid-template-columns: repeat(7, 1fr);
-			grid-gap: 0.5em;
-			margin: 0;
-			padding: 0;
-		}
-		.day {
-			border-left: 1px solid #ccc;
-			border-top: 1px solid #ccc;
-			height: calc(1.8rem * 5);
-			overflow: hidden;
-		}
-		.day-header {
-			background-color: #dedede;
-			display: block;
-		}
-		.month {
-			border-bottom: 1px solid #ccc;
-			border-right: 1px solid #ccc;
-		}
-		.blank {
-			background-color: #eee;
-		}
-  </style>
 {% endblock %}
 
 {% block content %}
 	<article class="generic almanac">
 		<header>
-			<ul><li>&nbsp;</li></ul>
+			<ul><li>Almanakk</li></ul>
 			<h1>{{ almanac.month }}</h1>
 			<h2></h2>
 		</header>
+
+		<ol class="generic-menu almanac-months">
+			{% for almanac in almanacs %}
+				<li><a href="/almanakk-{{ almanac.month | slugifyMaltese }}/">{{ almanac.month }}</a></li>
+			{% endfor %}
+		</ol>
+
+
 		<div class="almanac">
 			<section class="month">
 				<div id="month-header" class="week">

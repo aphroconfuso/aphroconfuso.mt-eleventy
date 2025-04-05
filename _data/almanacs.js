@@ -1,3 +1,5 @@
+const slugifyMaltese = require("../src/slugifyMaltese.js");
+
 const monthNames = require("../src/getMonthsInMaltese.js")();
 
 function generateCalendar(month) {
@@ -19,7 +21,11 @@ function generateCalendar(month) {
     calendar.push(week);
 	}
 
-	return { month: monthNames[month], weeks: calendar };
+	const weeks = { month: monthNames[month], weeks: calendar };
+
+	if (month === 0) weeks.link = slugifyMaltese(`almanakk-${monthNames[new Date().getMonth()]}`)
+
+	return weeks;
 }
 
 const getCalendar = () => {

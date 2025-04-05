@@ -276,8 +276,11 @@
         }
       }
     }
-    // #menu-carousels {
-    // }
+    #menu-carousels {
+			li a {
+				padding-right: $body-margin-half;
+			}
+		}
     #menu-collections {
       right: 0;
       li.main-menu-collection a span {
