@@ -97,9 +97,9 @@
 .collection-menu {
 	header {
 		display: inline-block;
+		margin-bottom: $body-margin-half;
+		padding: 0 $body-margin-half;
 	}
-	margin-bottom: $body-margin-half;
-	padding: $body-margin-half;
 }
 
 .collection.introduction {
