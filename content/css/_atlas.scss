@@ -4,6 +4,8 @@
 @use "mixins-etc" as *;
 
 
+#map { height: 100%; width: 100%; }
+
 @media all and (min-width: $laptop-breakpoint) {
-#map { height: $body-margin * 25; }
+	#map { height: $body-margin * 25; }
 }
