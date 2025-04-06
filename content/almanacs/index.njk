@@ -10,31 +10,25 @@ permalink: /almanakk/index.html
 
 {% block head %}
 	<title>Almanakk · Aphroconfuso</title>
+	<script>
+		location.replace("/{{ almanacs[0].link }}/")
+	</script>
 {% endblock %}
 
 {% block content %}
 	<article>
 		<header>
-			<ul><li>&nbsp;</li></ul>
+			<ul>
+				<li>&nbsp;</li>
+			</ul>
 			<h1>Almanakk</h1>
 			<h2></h2>
 		</header>
 		<div class="almanac">
 			<section id="grid-body">
-				<div class="body-text">
-					<ol>
-						{% for snippet in stories[0].almanac %}
-							<li>
-								<a class="promo promo-almanac {{ snippet.issueMonth | slugify }}" href="/{{ snippet.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Almanakk', 'għal: {{ snippet.reportingTitle }}', {{ loop.index }}]);">
-									<header>
-										<h6>{{ snippet.day }} ta’ {{ snippet.month }} {{ snippet.year }}</h6>
-									</header>
-									<p class="blurb">{{ snippet.snippet | prettifyMaltese | safe }}</p>
-								</a>
-								<hr>
-							</li>
-						{% endfor %}
-				</ol>
+				<div class="generic-body-text">
+					<p>Jum wara jum fuq Aphroconfuso, matul is-snin.</p>
+				</div>
 			</section>
 		</div>
 	</article>

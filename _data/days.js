@@ -9,8 +9,7 @@ function days() {
   for (let m = 0; m < 12; m++) {
 		for (let d = 1; d <= daysInMonth[m]; d++) {
 			const thisDate = `${ d } ta' ${ monthNames[m] }`;
-			console.log(slugifyMaltese(thisDate));
-      days.push({ date: thisDate });
+      days.push({ date: thisDate, month: monthNames[m] });
     }
   }
 
