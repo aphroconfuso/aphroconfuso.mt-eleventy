@@ -8,14 +8,14 @@
 		.week {
 			display: grid;
 			grid-template-columns: repeat(7, 1fr);
-			grid-gap: 0.5em;
+			grid-gap: 0;
 			margin: 0;
 			padding: 0;
 		}
 		.day {
-			border-left: 1px solid $lighter-brown;
-			border-top: 1px solid $lighter-brown;
-			height: calc(1.8rem * 5);
+			border-left: 1px solid $lightest-brown;
+			border-top: 1px solid $lightest-brown;
+			height: calc($body-margin * 5);
 			overflow: hidden;
 		}
 		.day-header {
@@ -23,11 +23,12 @@
 			display: block;
 		}
 		.month {
-			border-bottom: 1px solid $lighter-brown;
-			border-right: 1px solid $lighter-brown;
+			border-bottom: 1px solid $lightest-brown;
+			border-right: 1px solid $lightest-brown;
 		}
 		.blank {
-			background-color: var(--paper);
+			background-color: $lightest-brown;
+			border: none;
 		}
 	}
 	.almanac-months {
@@ -35,7 +36,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    margin-bottom: 1.8rem;
+    margin-bottom: $body-margin;
     width: 100%;
 		li {
 			&::before {
