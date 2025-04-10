@@ -62,7 +62,7 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 															<header>
 																<p>
 																	<span style="font-family: mono">{{ story.year + ":" if story.year else ""}}</span>
-																	{{ story.title }}</p>
+																	{{ story.truncatedTitle }}</p>
 																{# <p>{{ story.day }} ta’ {{ story.month }} {{ story.year }}</p> #}
 															</header>
 															<p class="blurb body-text">{{ story.snippet | prettifyMaltese | safe }}</p>
