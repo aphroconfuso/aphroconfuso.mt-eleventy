@@ -558,10 +558,14 @@ const vocabulary = findUniqueWords(atts.body);
 					authorsString,
 					letter: makeSortableTitle(digraph === 'ie' || digraph === 'għ' ? digraph : match[2]).toLowerCase(),
 					issueMonth,
+					issueMonthYear,
 					slug: pageSlug,
 					reportingTitle,
 					snippet,
-					title: reportingTitle,
+					title: mainTitle,
+					sequenceEpisodeNumber: processedStory.sequenceEpisodeNumber,
+					sequenceEpisodeTitle: processedStory.sequenceEpisodeTitle,
+					subjectDate: atts.diaryDate,
 					titleTruncated: smartTruncate(processedStory.reportingTitle, 26),
 					translator: translatorFullName,
 				});
@@ -570,10 +574,11 @@ const vocabulary = findUniqueWords(atts.body);
 
 		// ALMANAC *************************************************************************************************************************
 		// if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
-			const almanacMatches = normalisedBodyText.replace(/\n+/g, '').matchAll(/\b.*?(.{0,200})(\d\d?)( ta’ )?(Jannar|Frar|Marzu|April|Mejju|.unju|Lulju|Awwissu|Settembru|Ottubru|Novembru|Di.embru)( tal\-)?(\d\d\d\d)?(.{0,200}).*?\b/g);
+		const almanacMatches = normalisedBodyText.replace(/\n+/g, '').matchAll(/(\b\w*?.{0,200})(\d\d?)( ta’ )?(Jannar|Frar|Marzu|April|Mejju|.unju|Lulju|Awwissu|Settembru|Ottubru|Novembru|Di.embru)( tal\-)?(\d\d\d\d)?(.{0,200})\w*?\b/g);
 		almanacMatches && shuffleArray(Array.from(almanacMatches)).forEach(match => {
 			let snippet = match[0].replace(/<[^\>]*?>/gi, "");
-				almanacArray.push({
+			almanacArray.push({
+					authors,
 					authorsString,
 					day: match[2],
 					month: match[4],
@@ -582,7 +587,8 @@ const vocabulary = findUniqueWords(atts.body);
 					slug: pageSlug,
 					snippet,
 					reportingTitle,
-					title: smartTruncate(processedStory.reportingTitle, 26),
+					title: reportingTitle,
+					truncatedTitle: smartTruncate(processedStory.reportingTitle, 26),
 				});
 			});
 		//  }
