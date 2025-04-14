@@ -454,7 +454,8 @@ async function getAllStories() {
 
 
 // Example usage
-const vocabulary = findUniqueWords(atts.body);
+		const vocabulary = findUniqueWords(atts.body);
+		const wordcount = splitText(atts.body).length
 
 
 
@@ -538,24 +539,23 @@ const vocabulary = findUniqueWords(atts.body);
 			useSeparators: !!atts.useSeparators,
 			useSquareOnMobile: !!atts.useSquareOnMobile,
 			vocabulary,
-			wordcount: splitText(atts.body).length,
+			wordcount,
 		};
 
 		const reportingTitle = fixReportingTitle(processedStory)
 		processedStory.reportingTitle = reportingTitle;
 
-		const normalisedBodyText = atts.body.replace(/blockquote/g, "p").replace(/<h\d>.*?<\/h\d>/g, "").replace(/strong>/g, "span>").replace(/ /gm, " ");
+		const normalisedBodyTextForAbecedaire = atts.body.replace(/blockquote/g, "p").replace(/<h\d>.*?<\/h\d>/g, "").replace(/strong>/g, "span>").replace(/ /gm, " ");
 
 		// ABECEDAIRE  ENTRIES FROM THIS STORY ***********************************************************************************************
 		if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
-			const abecedaireMatches = normalisedBodyText.replace(/\n+/g, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.)(.{0,600})/g);
+			const abecedaireMatches = normalisedBodyTextForAbecedaire.replace(/\n+/g, '').matchAll(/(^<p>\s*|<p>\#<\/p>\s*<p>)\s*(.)(.)(.{0,600})/g);
 			abecedaireMatches && shuffleArray(Array.from(abecedaireMatches)).forEach(match => {
 				let snippet = match[2] + match[3] + match[4];
 				let digraph = (match[2] + match[3]).toLowerCase();
 				snippet = snippet.replace(/<em><\/em>/g, "").replace(/<p>\s*<\/p>/g, "").replace(/<\/p>\s*<p>/gm, " ").replace(/<\/p>\s*<p class="\w*">/gm, " ").replace(/<\/p>/gm, " ").replace(/<p>/gm, " ").replace(/  /gm, " ").replace(/<\/?\w*$/, "");
 				if ((snippet.match(/<i>/g) || []).length > (snippet.match(/<\/i>/g) || []).length) snippet += '</i>';
 				abecedaireArray.push({
-					authorsString,
 					letter: makeSortableTitle(digraph === 'ie' || digraph === 'għ' ? digraph : match[2]).toLowerCase(),
 					issueMonth,
 					issueMonthYear,
@@ -572,23 +572,38 @@ const vocabulary = findUniqueWords(atts.body);
 			});
 		}
 
+		const normalisedBodyTextForAlmanac = atts.body.replace(/blockquote/g, "p").replace(/strong>|h\d>/g, "span>").replace(/ /gm, " ");
+
 		// ALMANAC *************************************************************************************************************************
 		// if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
-		const almanacMatches = normalisedBodyText.replace(/\n+/g, '').matchAll(/(\b\w*?.{0,200})(\d\d?)( ta’ )?(Jannar|Frar|Marzu|April|Mejju|.unju|Lulju|Awwissu|Settembru|Ottubru|Novembru|Di.embru)( tal\-)?(\d\d\d\d)?(.{0,200})\w*?\b/g);
-		almanacMatches && shuffleArray(Array.from(almanacMatches)).forEach(match => {
-			let snippet = match[0].replace(/<[^\>]*?>/gi, "");
+		let almanacMatches = normalisedBodyTextForAlmanac.replaceAll(/\n+/g, '').matchAll(/(\b\w*?.{0,100})(<h6.*?>)?(\d+)( ta’ | ta\' )?(Jannar|Frar|Marzu|April|Mejju|.unju|Lulju|Awwissu|Settembru|Ottubru|Novembru|Di.embru)( )?(tal\-)?(\d\d\d\d)?(<\/h6>)?(.{0,100})\w*?\b/gmi);
+		// add dates
+			almanacMatches && shuffleArray(Array.from(almanacMatches)).forEach(match => {
+			console.log('>>> ', atts.type, `${ match[3] } ta’ ${ match[5] }`);
+			const thisDate = `${ match[3] } ta’ ${ match[5] }`;
+				let snippet = '… ' + match[0].replace(/<[^\>]*?>/gi, "").replace(thisDate, `<mark class="date">${ thisDate }</mark>`).trim() + ' …';
+
+				//
+				// #:~:text={{ story.day + ' ta’ ' + story.month | urlencode }}
+				// Diary #21-ta-april-2024
+
 			almanacArray.push({
 					authors,
-					authorsString,
-					day: match[2],
-					month: match[4],
-					year: match[6],
+					authorsType,
+					day: match[3],
+					month: match[5],
+					year: match[8],
+					mainTitle,
 					issueMonth,
 					slug: pageSlug,
 					snippet,
 					reportingTitle,
-					title: reportingTitle,
+					sequenceEpisodeNumber: processedStory.sequenceEpisodeNumber,
+					sequenceEpisodeTitle: processedStory.sequenceEpisodeTitle,
+					title: processedStory.reportingTitle,
 					truncatedTitle: smartTruncate(processedStory.reportingTitle, 26),
+					type: atts.type,
+					wordcount,
 				});
 			});
 		//  }

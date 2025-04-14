@@ -24,28 +24,20 @@ permalink: /almanakk-{{ day.date | slugifyMaltese }}/index.html
 			<h1>{{ day.date | prettifyMaltese }}</h1>
 			<h2></h2>
 		</header>
-
-		<div class="almanac">
-			<section id="grid-body">
-				<div class="body-text">
-					<ul class="promo-list">
-						{% for story in stories[0].almanac %}
-							{% if story.day == day.dayOfMonth and story.month == day.month %}
-								<li>
-									<a class="promo promo-almanac {{ story.issueMonth | slugify }}" href="/{{ story.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Almanakk', 'għal: {{ story.reportingTitle }}', {{ loop.index }}]);">
-										{% set cullated = true %}
-										{% set promoFrom = "Almanakk {{ day.date | prettifyMaltese }}" %}
-										{% set showEpisodeTitle = true %}
-										{% set showLengths = true %}
-										{% include "_promo.njk" %}
-										<p class="blurb">{{ story.snippet | prettifyMaltese | safe }}</p>
-									</a>
-								</li>
-							{% endif %}
-						{% endfor %}
-					</ol>
-				</section>
-			</div>
-
-		</article>
-	{% endblock %}
+		<div class="container-generic">
+			<section id="grid-body" class="body-text">
+				<ul class="promo-list">
+					{% set collated = true %}
+					{% set promoFrom = "Almanakk {{ day.date | prettifyMaltese }}" %}
+					{% set showEpisodeTitle = true %}
+					{% set showLengths = true %}
+					{% for promo in stories[0].almanac %}
+						{% if promo.day == day.dayOfMonth and promo.month == day.month %}
+							{% include "_promo.njk" %}
+						{% endif %}
+					{% endfor %}
+				</ou>
+			</section>
+		</div>
+	</article>
+{% endblock %}
