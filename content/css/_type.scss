@@ -141,6 +141,7 @@ span.rtl {
 .body-text {
   color: var(--ink);
   font-family: $serif, serif;
+  font-size: $body-font-size;
   h5,
   h6,
   p {
@@ -179,7 +180,6 @@ span.rtl {
     }
   }
   p {
-    font-size: $body-font-size;
     margin-bottom: $body-margin-half;
     &:last-of-type,
     &.enjambed {
@@ -229,7 +229,21 @@ span.rtl {
       margin-top: $body-margin-half;
     }
   }
-  // table {
+	ul {
+		list-style: none;
+    margin-bottom: $body-margin-half;
+		padding-left: 0;
+		li {
+			position: relative;
+			padding-left: $body-margin; // narrow left margin
+			&::before {
+				content: "–";
+				position: absolute;
+				left: 0;
+			}
+		}
+	}
+	// table {
   //   margin-top: $body-margin-half;
   //   max-width: 100%;
   //   tr {
