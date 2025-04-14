@@ -1,13 +1,15 @@
 {% set promoTo = promoTo or promo.reportingTitle or promo.title %}
-{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}{% else %}{% set isEpisode = '' %}{% endif %}
+{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}
+{% else %}{% set isEpisode = '' %}
+{% endif %}
 <li {% if promo.sequenceEpisodeTitle %} class="multiple-episodes episode-{{ promo.sequenceEpisodeNumber }}"{% endif %}>
 	<a class="promo {{ collectionId }} {{ promo.issueMonth | slugify }} promo-{{ promo.type | slugify }} sequence-{{ promo.sequenceId }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: {{ promoFrom | escapeQuote }}', 'għal: {{ promoTo | escapeQuote }}', {{ loop.index }}]);">
 		{% include '_promo_header.njk' %}
 		<div class="{{ promo.cssClass }}">
 			{% if promo.type === 'Poezija' %}
-				<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
+				<p>{{ promo.description or promo.snippet | prettifyMaltese | versifyDescription | safe }}</p>
 			{% else %}
-				<p>{{ promo.description | prettifyMaltese | safe }}</p>
+				<p>{{ promo.description or promo.snippet | prettifyMaltese | safe }}</p>
 			{% endif %}
 			{% if promo.type === 'Recensjoni' %}
 				<img src="{{ metadata.settings.imagesUrl + promo.socialImageFormats.square_avif_x2.hash }}.avif" alt="{{ promo.socialImageAlt }}">

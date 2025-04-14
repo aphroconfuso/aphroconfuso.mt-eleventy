@@ -24,7 +24,7 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 			<h2></h2>
 		</header>
 
-		<ol class="generic-menu almanac-months">
+		<ol class="almanac-months">
 			{% for almanac in almanacs %}
 				<li>
 					<a href="/almanakk-{{ almanac.month | slugifyMaltese }}/">{{ almanac.month }}</a>
@@ -34,7 +34,7 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 
 		<div class="almanac">
 			<section class="month">
-				<div id="month-header" class="week">
+				{# <div id="month-header" class="week">
 					<div>It-Tnejn</div>
 					<div>It-Tlieta</div>
 					<div>L-Erbgħa</div>
@@ -42,14 +42,15 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 					<div>Il-Ġimgħa</div>
 					<div>Is-Sibt</div>
 					<div>Il-Ħadd</div>
-				</div>
+				</div> #}
 				{% for week in almanac.weeks %}
 					<div class="week">
 						{% for day in week %}
 							{% if day %}
-								<div class="day">
+								<div class="day" id="{{ day + '-ta-' + almanac.month | slugifyMaltese }}">
 									<a class="day-header" href="/{{ 'almanakk-' + day + '-ta-' + almanac.month | slugifyMaltese }}/">
-										<strong>{{ day }}</strong> ta’ {{ almanac.month }}</a>
+										<strong>{{ day }}</strong> ta’ {{ almanac.month }}
+									</a>
 								{% else %}
 									<div class="day blank">
 									{% endif %}
@@ -58,12 +59,16 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 											{% for story in stories[0].almanac %}
 												{% if story.day == day and story.month == almanac.month %}
 													<li>
-														<a class="promo promo-almanac {{ story.issueMonth | slugify }}" href="/{{ story.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Almanakk - {{ story.month }}', 'għal: {{ story.reportingTitle }}', {{ story.day }}]);">
+														{% for storycollection in story.storycollections %}
+															{% if storycollection.title == "Werrej" %}
+																{% set counter = counter + 1 %}
+															{% endif %}
+														{% endfor %}
+														<a class="promo-almanac {{ story.issueMonth | slugify }}" href="/{{ story.slug }}/#:~:text={{ story.day + ' ta’ ' + story.month | urlencode }}" onclick="analytics(['trackEvent', 'Promo', 'minn: Almanakk - {{ story.month }}', 'għal: {{ story.reportingTitle }}', {{ story.day }}]);">
 															<header>
 																<p>
 																	<span style="font-family: mono">{{ story.year + ":" if story.year else ""}}</span>
 																	{{ story.truncatedTitle }}</p>
-																{# <p>{{ story.day }} ta’ {{ story.month }} {{ story.year }}</p> #}
 															</header>
 															<p class="blurb body-text">{{ story.snippet | prettifyMaltese | safe }}</p>
 														</a>

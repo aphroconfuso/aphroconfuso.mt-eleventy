@@ -4,7 +4,40 @@
 @use "mixins-etc" as *;
 
 .almanac {
-  @media all and (min-width: $laptop-breakpoint) {
+	.week-header {
+		display: none
+	}
+	p .date {
+		color: $light-brown;
+	}
+	.day {
+		display: none;
+		&:has(li) {
+			display: block;
+		}
+			// ul {
+		// 	counter-increment: day;
+		// 	li {
+		// 		list-style: none;
+		// 		&::before {
+		// 			content: counter(day);
+		// 		}
+		// 	}
+		// }
+	}
+	.almanac-months {
+    background-color: $lightest-brown;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: $body-margin;
+    width: 100%;
+	}
+	@media all and (min-width: $laptop-breakpoint) {
+		.week-header {
+			display: block;
+			margin-bottom: $body-margin;
+		}
 		.week {
 			display: grid;
 			grid-template-columns: repeat(7, 1fr);
@@ -15,12 +48,31 @@
 		.day {
 			border-left: 1px solid $lightest-brown;
 			border-top: 1px solid $lightest-brown;
-			height: calc($body-margin * 5);
+			display: block;
+			height: calc($body-margin * 8);
 			overflow: hidden;
+			position: relative;
+			ul li {
+				padding: $body-margin-quarter $body-margin-quarter 0;
+			}
+			&.blank {
+				background-image: url(/img/deco/inforra-cara-1.png);
+			}
+			&.today {
+				background-image: url(/img/deco/inforra-cara-2.png);
+			}
 		}
 		.day-header {
 			background-color: $lightest-brown;
+			color: $lightest-brown;
 			display: block;
+			padding: 0 $body-margin-quarter;
+			&:hover {
+				color: $light-brown;
+			}
+			strong {
+				color: $light-brown;
+			}
 		}
 		.month {
 			border-bottom: 1px solid $lightest-brown;
@@ -29,19 +81,6 @@
 		.blank {
 			background-color: $lightest-brown;
 			border: none;
-		}
-	}
-	.almanac-months {
-    background-color: $lightest-brown;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin-bottom: $body-margin;
-    width: 100%;
-		li {
-			&::before {
-				content: '';
-			}
 		}
 	}
 }
