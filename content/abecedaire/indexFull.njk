@@ -3,8 +3,8 @@ pagination:
   data: stories
   size: 250
   alias: story
-eleventyExcludeFromCollections: false
-permalink: /abeċedarju/index.html
+eleventyExcludeFromCollections: true
+permalink: /admin/abeċedarju-sħiħ/index.html
 ---
 {% extends 'layouts/base.njk' %}
 
@@ -25,7 +25,7 @@ permalink: /abeċedarju/index.html
 			<section id="grid-body">
 				<div class="body-text">
 					<ol>
-						{% for snippet in stories[0].abecedaire %}
+						{% for snippet in stories[0].abecedaireFull %}
 							<li>
 								<a class="promo promo-abecedaire {{ snippet.issueMonth | slugify }}" href="/{{ snippet.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Abeċedarju', 'għal: {{ snippet.reportingTitle }}', {{ loop.index }}]);">
 									<p class="blurb">{{ snippet.snippet | prettifyMaltese | simpleDropCapsify | safe }}</p>
