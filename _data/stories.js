@@ -556,6 +556,7 @@ async function getAllStories() {
 				snippet = snippet.replace(/<em><\/em>/g, "").replace(/<p>\s*<\/p>/g, "").replace(/<\/p>\s*<p>/gm, " ").replace(/<\/p>\s*<p class="\w*">/gm, " ").replace(/<\/p>/gm, " ").replace(/<p>/gm, " ").replace(/  /gm, " ").replace(/<\/?\w*$/, "");
 				if ((snippet.match(/<i>/g) || []).length > (snippet.match(/<\/i>/g) || []).length) snippet += '</i>';
 				abecedaireArray.push({
+					authorsString,
 					letter: makeSortableTitle(digraph === 'ie' || digraph === 'għ' ? digraph : match[2]).toLowerCase(),
 					issueMonth,
 					issueMonthYear,
