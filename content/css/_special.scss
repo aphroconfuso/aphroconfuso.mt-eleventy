@@ -452,11 +452,13 @@ article {
   }
 }
 
-// Uncropped wisgħa tal-paġna
-.story-134 {
-	#grid-body .splide {
-			margin-left: -30% !important;
-			width: 160% !important;
+@media all and (min-width: $mobile-breakpoint) {
+	// Uncropped wisgħa tal-paġna
+	.story-134 {
+		#grid-body .splide {
+				margin-left: -30% !important;
+				width: 160% !important;
+		}
 	}
 }
 
