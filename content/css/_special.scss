@@ -452,6 +452,26 @@ article {
   }
 }
 
+// Uncropped wisgħa tal-paġna
+.story-134 {
+	#grid-body .splide {
+			margin-left: -30% !important;
+			width: 160% !important;
+	}
+}
+
+
+// FEATURE FLAGS
+.ff-1, .ff-2, .ff-3 {
+	display: none;
+}
+
+.localhost, .abbozzi {
+	.ff-1, .ff-2, .ff-3 {
+		display: unset;
+	}
+}
+
 // body.localhost {
 //   background-image: linear-gradient(to top, #ccf 0, transparent 1px), linear-gradient(to top, #f33 0, transparent 1px);
 //   background-repeat: repeat-y, repeat-y;
