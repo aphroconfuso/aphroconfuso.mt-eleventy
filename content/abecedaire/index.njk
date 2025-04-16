@@ -18,14 +18,15 @@ permalink: /abeċedarju/index.html
 			<ul>
 				<li>&nbsp;</li>
 			</ul>
-			<h1>Abeċedarju</h1>
+			<h1>Abeċedarju sħiħ</h1>
 			<h2></h2>
 		</header>
 		<div class="abecedaire">
 			<section id="grid-body">
 				<div class="body-text">
 					<ol>
-						{% for snippet in stories[0].abecedaire %}
+						{# termini biss #}
+						{% for snippet in stories[0].abecedaire | sort(false, false, 'sortTitle') %}
 							<li>
 								<a class="promo promo-abecedaire {{ snippet.issueMonth | slugify }}" href="/{{ snippet.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Abeċedarju', 'għal: {{ snippet.reportingTitle }}', {{ loop.index }}]);">
 									<p class="blurb">{{ snippet.snippet | prettifyMaltese | simpleDropCapsify | safe }}</p>
