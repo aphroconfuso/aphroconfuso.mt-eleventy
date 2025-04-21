@@ -20,6 +20,8 @@ const prettifyMaltese = (text) => {
 		.replace(/  +/gm, " ")
 		.replace(/<p> */gm, "<p>")
 		.replace(/ *<\/p>/gm, "</p>")
+		.replace(/« /gm, "«&nbsp;")
+		.replace(/ »/gm, "&nbsp;»")
 		.replace(/ ?— ?| - | -- /gm, String.fromCharCode(8202, 8212, 8202))
 		.replace(/ċ/gm, "MMXXc").replace(/ġ/gm, "MMXXg").replace(/ħ/gm, "MMXXh").replace(/ż/gm, "MMXXz").replace(/à/gm, "MMXXa")
 		.replace(/Ċ/gm, "MMXXC").replace(/Ġ/gm, "MMXXG").replace(/Ħ/gm, "MMXXH").replace(/Ż/gm, "MMXXZ").replace(/À/gm, "MMXXA")
