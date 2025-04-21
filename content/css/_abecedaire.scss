@@ -70,14 +70,12 @@
 }
 
 @media all and (max-width: $laptop-breakpoint) {
-	.localhost, .abbozzi {
-		.abecedaire ol li {
-			scale: 0.9;
-			a p.credit {
-				display: none;
-				&.credit-full {
-					display: block !important;
-				}
+	.abecedaire.abecedaire-full ol li {
+		scale: 0.9;
+		a p.credit {
+			display: none;
+			&.credit-full {
+				display: block !important;
 			}
 		}
 	}

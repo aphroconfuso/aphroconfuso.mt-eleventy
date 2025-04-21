@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 const stripTags = require("striptags");
+const makeSortableTitle = require("../src/makeSortableTitle.js");
 const processPromos = require("../src/processPromos.js");
 
 const { imageData, linkedStoryData } = require("./_fragments.js");
@@ -78,6 +79,7 @@ async function getAllcollections() {
 			moreToCome: atts.moreToCome,
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
+			sortTitle: makeSortableTitle(atts.title || ''),
 			stories: storiesFormatted,
 			title: atts.title || null,
 		}

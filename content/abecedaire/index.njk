@@ -25,8 +25,7 @@ permalink: /abeċedarju/index.html
 			<section id="grid-body">
 				<div class="body-text">
 					<ol>
-						{# termini biss #}
-						{% for snippet in stories[0].abecedaire | sort(false, false, 'sortTitle') %}
+						{% for snippet in stories[0].abecedaire %}
 							<li>
 								<a class="promo promo-abecedaire {{ snippet.issueMonth | slugify }}" href="/{{ snippet.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Abeċedarju', 'għal: {{ snippet.reportingTitle }}', {{ loop.index }}]);">
 									<p class="blurb">{{ snippet.snippet | prettifyMaltese | simpleDropCapsify | safe }}</p>

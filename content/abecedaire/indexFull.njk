@@ -21,13 +21,13 @@ permalink: /admin/abeċedarju-sħiħ/index.html
 			<h1>Abeċedarju</h1>
 			<h2></h2>
 		</header>
-		<div class="abecedaire">
+		<div class="abecedaire abecedaire-full">
 			<section id="grid-body">
 				<div class="body-text">
 					<ol>
 						{% for snippet in stories[0].abecedaireFull | sort(false, false, 'letter') %}
 							<li>
-								<a class="promo promo-abecedaire {{ snippet.issueMonth | slugify }}" href="/{{ snippet.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Abeċedarju', 'għal: {{ snippet.reportingTitle }}', {{ loop.index }}]);">
+								<a class="promo promo-abecedaire {{ snippet.issueMonth | slugify }}" href="http://aphroconfuso.mt/{{ snippet.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Abeċedarju', 'għal: {{ snippet.reportingTitle }}', {{ loop.index }}]);">
 									<p class="blurb">{{ snippet.snippet | prettifyMaltese | simpleDropCapsify | safe }}</p>
 									<p class="credit">— “{{ snippet.titleTruncated }}” ta’ {{ snippet.authorsString }}</p>
 									<p class="credit credit-full">
