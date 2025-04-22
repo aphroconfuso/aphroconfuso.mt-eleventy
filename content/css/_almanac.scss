@@ -4,6 +4,7 @@
 @use "mixins-etc" as *;
 
 .almanac {
+	position:relative;
 	.week-header {
 		display: none
 	}
@@ -26,12 +27,18 @@
 		// }
 	}
 	.almanac-months {
-    background-color: $lightest-brown;
+    // background-color: $lightest-brown;
     display: flex;
     flex-direction: row;
+		flex-wrap: wrap;
     justify-content: space-evenly;
     margin-bottom: $body-margin;
     width: 100%;
+		@media all and (min-width: 1600px) {
+			display: block;
+			position: absolute;
+			left: calc(100% + $body-margin);
+		}
 	}
 	@media all and (min-width: $laptop-breakpoint) {
 		.week-header {
@@ -56,7 +63,7 @@
 				padding: $body-margin-quarter $body-margin-quarter 0;
 			}
 			&.blank {
-				background-image: url(/img/deco/inforra-cara-1.png);
+				background-color: $lightest-brown;
 			}
 			&.today {
 				background-image: url(/img/deco/inforra-cara-2.png);
