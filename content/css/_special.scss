@@ -315,7 +315,8 @@ article {
 	@include clamp(11);
 }
 
-.sequence-10 {
+.sequence-10,
+.sequence-15 {
 	p.fx1 {
 		padding-left: $body-margin-double;
 	}
