@@ -1,23 +1,28 @@
 {% set item = promo or story or sequence %}
-{# {% if item.authors.length > 6 and item.authorsType !== 'kollettiva' %} #}
-	{# <h2><!-- --></h2> #}
-{# {% elif omitAuthor !== true %} #}
-{% if omitAuthor !== true %}
+{% if item.authors.length > 5 and item.type !== 'Terminu' and item.authorsType !== 'kollettiva' %}
+	<h2>
+		<!-- -->
+	</h2>
+{% elif omitAuthor !== true %}
+	{# {% if omitAuthor !== true %} #}
 	<h2{% if item.type === 'Poddata' %} class="contains-with"{% endif %}{% if not promo %} data-pagefind-meta="author"{% endif %}>
 		{# REFACTOR - why author / authsString #}
 		{% if promo and item.translator %}
-			<span class="author">{{ item.authors[0] | prettifyMaltese | safe }}</span> <span class="translator">(tr {{ item.translator | prettifyMaltese | safe }})</span>
+			<span class="author">{{ item.authors[0] | prettifyMaltese | safe }}</span>
+			<span class="translator">(tr {{ item.translator | prettifyMaltese | safe }})</span>
 		{% elif item.translator %}
-			<span class="author">{{ item.authors[0] | prettifyMaltese | safe }}</span> <span class="translator">(tr <a href="/{{ item.translator | slugifyMaltese }}/">{{ item.translator | prettifyMaltese | safe }}</a>)</span>
+			<span class="author">{{ item.authors[0] | prettifyMaltese | safe }}</span>
+			<span class="translator">(tr <a href="/{{ item.translator | slugifyMaltese }}/">{{ item.translator | prettifyMaltese | safe }}</a>)</span>
 		{%- else %}
 			{% if item.type === 'Poddata' %}
 				<span class="with">ma’</span>
 			{%- endif %}
-			{% for author in item.authors %}{% if loop.index === 1 or (item.authorsType !== 'solo' and item.authorsType !== 'kollettiva') %}{% if promo or item.translator %}<span class="author">{{ author | prettifyMaltese | safe }}</span>{%- else %}<a class="author" href="/{{ author | slugifyMaltese }}/">{{ author | prettifyMaltese | safe }}</a>{%- endif %}{% if loop.index === 1 and item.authorsType === 'assistita' %} ma’ {%- endif %}{% if loop.index > 1 and loop.revindex === 2 %} & {% elif loop.revindex > 2 and item.authorsType !== 'kollettiva' %}, {% endif %}{%- endif %}{%- endfor %}{%- endif %}
+			{% for author in item.authors %}{% if loop.index === 1 or(item.authorsType !== 'solo' and item.authorsType !== 'kollettiva') %}{% if promo or item.translator %}<span class="author">{{ author | prettifyMaltese | safe }}</span>{%- else %}<a class="author" href="/{{ author | slugifyMaltese }}/">{{ author | prettifyMaltese | safe }}</a>{%- endif %}{% if loop.index === 1 and item.authorsType === 'assistita' %} ma’ {%- endif %}{% if loop.index > 1 and loop.revindex === 2 %} & {% elif loop.revindex > 2 and item.authorsType !== 'kollettiva' %}, {% endif %}{%- endif %}{%- endfor %}
+		{%- endif %}
 	</h2>
 {% endif %}
 
- {# biex inneħħi l-ispazju qabel il-comma! #}
+{# biex inneħħi l-ispazju qabel il-comma! #}
 {# <h2{% if item.type === 'Poddata' %} class="contains-with"{% endif %}{% if not promo %} data-pagefind-meta="author"{% endif %}>
 	{% if promo and item.translator %}
 		<span class="author">{{ item.authors[0] | prettifyMaltese | safe }}</span> <span class="translator">(tr {{ item.translator | prettifyMaltese | safe }})</span>
@@ -40,3 +45,4 @@
 		{%- endfor %}
 	{%- endif %}
 </h2> #}
+
