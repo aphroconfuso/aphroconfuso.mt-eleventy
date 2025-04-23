@@ -51,7 +51,7 @@
 		margin-bottom: 0;
 	}
 }
-@media all and (min-width: $tablet-mini-breakpoint) {
+@media all and (min-width: $tablet-breakpoint) {
 	#grid-bottom-full {
 		.letter-content {
 			columns: 2;

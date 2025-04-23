@@ -6,9 +6,8 @@ $grid-adjustment: 0.38rem;
 // hover doesn't come in but full nav already has
 $mobile-breakpoint: 480px;
 $mobile-breakpoint-plusone: ($mobile-breakpoint + 1px);
-$tablet-mini-breakpoint: 620px;
-
 $tablet-breakpoint: 620px; // 1080px;
+$tablet-breakpoint-plusone: 621px; // 1080px;
 $laptop-breakpoint: 1200px;
 $laptop-breakpoint-plusone: ($laptop-breakpoint + 1px);
 

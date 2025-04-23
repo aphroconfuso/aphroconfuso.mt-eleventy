@@ -203,27 +203,27 @@
 			width: 100%;
 		}
 	}
-	@media all and (orientation: landscape) {
-		#lightbox {
-			animation: showLightbox 0.25s;
-			animation-fill-mode: forwards;
-			display: flex;
-			#lightbox-container {
-				img {
-					height: 80vh !important;
-				}
-				.splide__pagination {
-					top: -1.3rem !important;
-				}
-				#lightbox-close {
-					display: none;
-				}
-				.arrows {
-					display: block;
-				}
-			}
-		}
-	}
+	// @media all and (orientation: landscape) {
+	// 	#lightbox {
+	// 		animation: showLightbox 0.25s;
+	// 		animation-fill-mode: forwards;
+	// 		display: flex;
+	// 		#lightbox-container {
+	// 			img {
+	// 				height: 80vh !important;
+	// 			}
+	// 			.splide__pagination {
+	// 				top: -1.3rem !important;
+	// 			}
+	// 			#lightbox-close {
+	// 				display: none;
+	// 			}
+	// 			.arrows {
+	// 				display: block;
+	// 			}
+	// 		}
+	// 	}
+	// }
 }
 
 #lightbox-container {

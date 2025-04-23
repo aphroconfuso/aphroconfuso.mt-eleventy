@@ -27,8 +27,10 @@
 		border: none;
 	}
 
+	.splide,
+	.choose-theme,
 	aside {
-		display: none;
+		display: none !important;
 	}
 
 	footer {
