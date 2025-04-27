@@ -66,8 +66,8 @@
       flex: 1 1 calc(50% - $body-margin-half);
       max-width: calc(50% - $body-margin-half);
 			margin-bottom: 0;
-			p {
-				@include clamp(3);
+			.promo-sequence {
+				min-height: $body-margin * 3;
 			}
 		}
 	}
