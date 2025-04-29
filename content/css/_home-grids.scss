@@ -57,9 +57,6 @@ a.promo-poetry {
     bottom: $body-margin-half;
     right: $body-margin-half;
   }
-  p {
-    @include clamp(7);
-  }
 }
 
 .ga-1,
@@ -222,6 +219,7 @@ a.promo-poetry {
   }
 }
 
+
 @media all and (min-width: $laptop-breakpoint) {
   .ga-editorial {
     margin-top: 0;
@@ -260,14 +258,4 @@ a.promo-poetry {
       padding: 0;
     }
   }
-  a.promo-poetry {
-    p {
-      @include clamp(99);
-    }
-  }
-}
-
-
-.ga-book-image-promo {
-
 }

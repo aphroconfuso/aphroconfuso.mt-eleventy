@@ -41,11 +41,6 @@
       @include clamp(12);
     }
   }
-  .ga-poem-1 {
-    p {
-      @include clamp(16);
-    }
-  }
   .ga-diary > ul > li:nth-of-type(1) {
     padding-bottom: $body-margin;
   }
