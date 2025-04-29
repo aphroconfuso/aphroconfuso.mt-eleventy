@@ -57,6 +57,9 @@ a.promo-poetry {
     bottom: $body-margin-half;
     right: $body-margin-half;
   }
+  p {
+    @include clamp(7);
+  }
 }
 
 .ga-1,
@@ -255,6 +258,11 @@ a.promo-poetry {
   .ga-terms {
     .promo {
       padding: 0;
+    }
+  }
+  a.promo-poetry {
+    p {
+      @include clamp(99);
     }
   }
 }
