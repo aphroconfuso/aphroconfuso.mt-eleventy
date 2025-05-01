@@ -3,6 +3,7 @@ const smartTruncate = require("smart-truncate");
 const getIssueMonthYear = require("../src/getIssueMonthYear.js");
 const makeTitleSlug = require("../src/makeTitleSlug.js");
 const parseAuthors = require("../src/parseAuthors.js");
+const stripTags = require("striptags");
 
 const { imageData, linkedStoryData, linkedStoryDataWithImage } = require("./_fragments.js");
 
@@ -226,7 +227,7 @@ async function getHomepage() {
 	const homepageFormatted = {
 		complementaryMonthColour: complementaryColours[issueMonth.toLowerCase()],
 		diaryEntries: promosFormatted(diaryPromos.data, false, layoutConfig.diary),
-		editorial: atts.appointment.data.attributes.editorial,
+		editorial: stripTags(atts.appointment.data.attributes.editorial, ['p', 'mark', 'span']),
 		imagePromos: promosFormatted(atts.imagePromos, true, layoutConfig['image']),
 		issueMonth,
 		issueMonthYear: getIssueMonthYear(atts.appointment.data.attributes.dateTimePublication).monthYear,

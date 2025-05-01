@@ -3,6 +3,7 @@ const getIssueMonthYear = require("./getIssueMonthYear.js");
 const makeTitleSlug = require("./makeTitleSlug.js");
 const parseAuthors = require("./parseAuthors.js");
 const processCollections = require("./processCollections.js");
+const stripTags = require("striptags");
 const getReads = require('./getReads.js');
 
 // REFACTOR: Save externally
@@ -51,7 +52,7 @@ module.exports = (promos, storyAtts) => {
 			collaboration: authors && authors.length > 1,
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: promoAtts.dateTimePublication,
-			description: promo.text || promoAtts.description,
+			description: stripTags(promo.text || promoAtts.description),
 			subjectDate: promoAtts.diaryDate,
 			id: promo.id || (promo.story && promo.story.data.id),
 			isSequenceEpisode: !!sequence,
