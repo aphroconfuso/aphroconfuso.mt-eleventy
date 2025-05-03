@@ -49,13 +49,22 @@
     justify-content: space-evenly;
     margin-bottom: $body-margin;
     width: 100%;
-		@media all and (min-width: 1600px) {
-			display: block;
-			position: absolute;
-			left: calc(100% + $body-margin);
-		}
+	li {
+		font-size: $body-font-size;
+		width: 32%;
+	}
+		// @media all and (min-width: 1600px) {
+		// 	display: block;
+		// 	position: absolute;
+		// 	left: calc(100% + $body-margin);
+		// }
 	}
 	@media all and (min-width: $laptop-breakpoint) {
+		.almanac-months {
+			li {
+				width: auto;
+			}
+		}
 		.week-header {
 			display: block;
 			margin-bottom: $body-margin;
