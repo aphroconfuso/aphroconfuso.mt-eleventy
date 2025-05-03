@@ -14,9 +14,9 @@
 	}
 	.day {
 		display: none;
+		margin-bottom: $body-margin;
 		&:has(li) {
 			display: block;
-			margin-bottom: $body-margin;
 		}
 		.day-header {
 			background-color: $lightest-brown;
