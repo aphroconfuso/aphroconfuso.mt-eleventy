@@ -32,6 +32,10 @@
 		}
 	}
 	.month {
+		header p {
+			font-size: $body-font-size;
+			padding: 0 $body-margin-quarter;
+		}
 		p.blurb {
 			font-size: $body-font-size;
 			margin-bottom: $body-margin-half;
@@ -87,6 +91,10 @@
 		.month {
 			border-bottom: 1px solid $lightest-brown;
 			border-right: 1px solid $lightest-brown;
+			header p {
+				font-size: 1rem;
+				padding: 0;
+			}
 			p.blurb {
 				font-size: 1rem;
 				@include clamp(5);
