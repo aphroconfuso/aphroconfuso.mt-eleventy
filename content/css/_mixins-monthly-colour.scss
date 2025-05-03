@@ -192,6 +192,13 @@
 			@include ease-out($fade-in-long);
 		}
   }
+  .almanac .day.today .day-header {
+    background-color: $colour;
+    color: var(--paper);
+    strong {
+      color: var(--paper);
+    }
+  }
 }
 
 @mixin this-issue-month-colour($this-month) {

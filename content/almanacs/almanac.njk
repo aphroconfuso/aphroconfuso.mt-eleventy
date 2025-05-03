@@ -13,7 +13,7 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 {% endblock %}
 
 {% block content %}
-	<article class="generic almanac">
+	<article class="generic almanac {{ almanac.month | slugify }}">
 		<header>
 			<ul>
 				<li>
@@ -63,15 +63,10 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 											{% for story in stories[0].almanac %}
 												{% if story.day == day and story.month == almanac.month %}
 													<li>
-														{% for storycollection in story.storycollections %}
-															{% if storycollection.title == "Werrej" %}
-																{% set counter = counter + 1 %}
-															{% endif %}
-														{% endfor %}
 														<a class="promo-almanac {{ story.issueMonth | slugify }}" href="/{{ story.slug }}/#:~:text={{ story.day + ' ta’ ' + story.month | urlencode }}" onclick="analytics(['trackEvent', 'Promo', 'minn: Almanakk - {{ story.month }}', 'għal: {{ story.reportingTitle }}', {{ story.day }}]);">
 															<header>
 																<p>
-																	<span style="font-family: mono">{{ story.year + ":" if story.year else ""}}</span>
+																	<span class="year">{{ story.year + ":" if story.year else ""}}</span>
 																	{{ story.truncatedTitle }}</p>
 															</header>
 															<p class="blurb body-text">{{ story.snippet | prettifyMaltese | safe }}</p>

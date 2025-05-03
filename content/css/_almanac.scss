@@ -9,22 +9,33 @@
 		display: none
 	}
 	p .date {
-		color: $light-brown;
+		font-weight: bold;
+		// color: $light-brown;
 	}
 	.day {
 		display: none;
 		&:has(li) {
 			display: block;
+			margin-bottom: $body-margin;
 		}
-			// ul {
-		// 	counter-increment: day;
-		// 	li {
-		// 		list-style: none;
-		// 		&::before {
-		// 			content: counter(day);
-		// 		}
-		// 	}
-		// }
+		.day-header {
+			background-color: $lightest-brown;
+			color: $lightest-brown;
+			display: block;
+			padding: 0 $body-margin-quarter;
+			&:hover {
+				color: $light-brown;
+			}
+			strong {
+				color: $light-brown;
+			}
+		}
+	}
+	.month {
+		p.blurb {
+			font-size: $body-font-size;
+			margin-bottom: $body-margin-half;
+		}
 	}
 	.almanac-months {
     // background-color: $lightest-brown;
@@ -57,6 +68,7 @@
 			border-top: 1px solid $lightest-brown;
 			display: block;
 			height: calc($body-margin * 8);
+			margin-bottom: 0;
 			overflow: hidden;
 			position: relative;
 			ul li {
@@ -66,24 +78,20 @@
 				background-color: $lightest-brown;
 			}
 			&.today {
-				background-image: url(/img/deco/inforra-cara-2.png);
-			}
-		}
-		.day-header {
-			background-color: $lightest-brown;
-			color: $lightest-brown;
-			display: block;
-			padding: 0 $body-margin-quarter;
-			&:hover {
-				color: $light-brown;
-			}
-			strong {
-				color: $light-brown;
+				.day-header {
+					background-color: red;
+					color: var(--paper);
+				}
 			}
 		}
 		.month {
 			border-bottom: 1px solid $lightest-brown;
 			border-right: 1px solid $lightest-brown;
+			p.blurb {
+				font-size: 1rem;
+				@include clamp(5);
+				margin-bottom: 0;
+			}
 		}
 		.blank {
 			background-color: $lightest-brown;

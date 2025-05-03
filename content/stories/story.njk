@@ -12,7 +12,7 @@ permalink: /{{ story.slug }}/index.html
 
 {% block head %}
 	<title>{{ story.metaTitle or metadata.title | safe }} · Aphroconfuso</title>
-	<meta content="{{ story.description }}" name="description">
+	<meta content="{{ story.description | safe | striptags }}" name="description">
 	<meta property="og:image" content="https://aphroconfuso.mt{{ metadata.settings.imagesUrl + story.socialImage }}" data-pagefind-meta="image[content]">
 	{% if story.translator %}
 		<meta name="author" content="{{ story.authorsString }} (tr {{ story.translator }})">
@@ -30,7 +30,7 @@ permalink: /{{ story.slug }}/index.html
 	<meta name="twitter:site" content="@aphroconfuso">
 	<meta name="twitter:creator" content="@aphroconfuso">
 	<meta name="twitter:title" content="{{ story.metaTitle or metadata.title }}">
-	<meta name="twitter:description" content="{{ story.description }}">
+	<meta name="twitter:description" content="{{ story.description | safe | striptags }}">
 	<meta name="twitter:image" content="https://aphroconfuso.mt{{ metadata.settings.imagesUrl + story.socialImage }}">
 	<meta name="twitter:image:alt" content="{{ story.socialImageAlt }}" data-pagefind-meta="image_alt[alt]">
 {% endblock %}

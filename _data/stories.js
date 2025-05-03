@@ -542,9 +542,11 @@ async function getAllStories() {
 			wordcount,
 		};
 
-		const reportingTitle = fixReportingTitle(processedStory)
+		const reportingTitle = fixReportingTitle(processedStory);
 		processedStory.reportingTitle = reportingTitle;
 
+		// FIXME: This should be handled by Nunjuck's striptags, but it doesn't work
+		processedStory.descriptionStripped = stripTags(processedStory.description);
 		const normalisedBodyTextForAbecedaire = atts.body.replace(/blockquote/g, "p").replace(/<h\d>.*?<\/h\d>/g, "").replace(/strong>/g, "span>").replace(/ /gm, " ");
 
 		// ABECEDAIRE  ENTRIES FROM THIS STORY ***********************************************************************************************
@@ -573,7 +575,8 @@ async function getAllStories() {
 			});
 		}
 
-		const normalisedBodyTextForAlmanac = atts.body.replace(/blockquote/g, "p").replace(/strong>|h\d>/g, "span>").replace(/ /gm, " ");
+		// const normalisedBodyTextForAlmanac = atts.body.replace(/blockquote/g, "p").replace(/strong>|h\d>/g, "span>").replace(/ /gm, " ");
+		const normalisedBodyTextForAlmanac = stripTags(atts.body);
 
 		// ALMANAC *************************************************************************************************************************
 		// if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
@@ -603,7 +606,7 @@ async function getAllStories() {
 					sequenceEpisodeTitle: processedStory.sequenceEpisodeTitle,
 					title: processedStory.reportingTitle,
 					truncatedTitle: smartTruncate(processedStory.reportingTitle, 26),
-					type: atts.type,
+					type: processedStory.type,
 					wordcount,
 				});
 			});

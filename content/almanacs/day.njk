@@ -16,7 +16,9 @@ permalink: /almanakk-{{ day.date | slugifyMaltese }}/index.html
 	<article class="generic almanac">
 		<header>
 			<ul>
-				<li>Almanakk</li>
+				<li>
+					<a href="/{{ almanacs[0].link }}/">Almanakk</a>
+				</li>
 				<li>
 					<a href="/almanakk-{{ day.month | slugifyMaltese }}/">{{ day.month }}</a>
 				</li>
@@ -33,6 +35,9 @@ permalink: /almanakk-{{ day.date | slugifyMaltese }}/index.html
 					{% set showLengths = true %}
 					{% for promo in stories[0].almanac %}
 						{% if promo.day == day.dayOfMonth and promo.month == day.month %}
+
+						{% set omitEpisodeNumber = true %}
+
 							{% include "_promo.njk" %}
 						{% endif %}
 					{% endfor %}
