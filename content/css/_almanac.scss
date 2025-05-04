@@ -22,7 +22,7 @@
 			background-color: $lightest-brown;
 			color: $lightest-brown;
 			display: block;
-			padding: 0 $body-margin-quarter;
+			padding: $body-margin-quarter 0;
 			&:hover {
 				color: $light-brown;
 			}
