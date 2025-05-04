@@ -22,7 +22,8 @@
 			background-color: $lightest-brown;
 			color: $lightest-brown;
 			display: block;
-			padding: $body-margin-quarter 0;
+			margin-bottom: $body-margin-quarter;
+			padding: 0 $body-margin-quarter;
 			&:hover {
 				color: $light-brown;
 			}
@@ -34,7 +35,6 @@
 	.month {
 		header p {
 			font-size: $body-font-size;
-			padding: 0 $body-margin-quarter;
 		}
 		p.blurb {
 			@include clamp(5);
