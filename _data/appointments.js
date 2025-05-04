@@ -28,6 +28,7 @@ async function getAllAppointments() {
 								dateTimePublication
 								stories(
 			            publicationState: ${ fetchStatus },
+						pagination: { page: 1, pageSize: 250 },
 									) {
 									${linkedStoryData}
 								}
