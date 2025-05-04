@@ -37,6 +37,7 @@
 			padding: 0 $body-margin-quarter;
 		}
 		p.blurb {
+			@include clamp(5);
 			font-size: $body-font-size;
 			margin-bottom: $body-margin-half;
 		}
@@ -106,7 +107,6 @@
 			}
 			p.blurb {
 				font-size: 1rem;
-				@include clamp(5);
 				margin-bottom: 0;
 			}
 		}

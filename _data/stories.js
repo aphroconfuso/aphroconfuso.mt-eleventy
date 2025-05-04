@@ -583,9 +583,8 @@ async function getAllStories() {
 		let almanacMatches = normalisedBodyTextForAlmanac.replaceAll(/\n+/g, '').matchAll(/(\b\w*?.{0,100})(<h6.*?>)?(\d+)( ta’ | ta\' )?(Jannar|Frar|Marzu|April|Mejju|.unju|Lulju|Awwissu|Settembru|Ottubru|Novembru|Di.embru)( )?(tal\-)?(\d\d\d\d)?(<\/h6>)?(.{0,100})\w*?\b/gmi);
 		// add dates
 			almanacMatches && shuffleArray(Array.from(almanacMatches)).forEach(match => {
-			console.log('>>> ', atts.type, `${ match[3] } ta’ ${ match[5] }`);
 			const thisDate = `${ match[3] } ta’ ${ match[5] }`;
-				let snippet = '… ' + match[0].replace(/<[^\>]*?>/gi, "").replace(thisDate, `<mark class="date">${ thisDate }</mark>`).trim() + ' …';
+				let snippet = '… ' + match[0].replace(/<[^\>]*?>/gi, "").replace(thisDate, ` <mark class="date">${ thisDate }</mark>`).replace(/  /gm, " ").trim() + ' …';
 
 				//
 				// #:~:text={{ story.day + ' ta’ ' + story.month | urlencode }}
