@@ -188,7 +188,9 @@ permalink: /{{ story.slug }}/index.html
 				<section class="text-wrapper">
 					{{ story.body | prettifyMaltese | safe }}
 				</section>
-				{% include "_print_book_panel.njk" %}
+				{% if story.bookPublished %}
+					{% include "_print_book_panel.njk" %}
+				{% endif %}
 			</section>
 		{% else %}
 			{% if story.imagesPositionText %}
