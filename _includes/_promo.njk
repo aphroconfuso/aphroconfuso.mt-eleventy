@@ -12,7 +12,7 @@
 			{% else %}
 				<p>{{ description | prettifyMaltese | safe }}</p>
 			{% endif %}
-			{% if promo.type === 'Recensjoni' %}
+			{% if promo.type === 'Ktieb_stampat' %}
 				<img src="{{ metadata.settings.imagesUrl + promo.socialImageFormats.square_avif_x2.hash }}.avif" alt="{{ promo.socialImageAlt }}">
 			{% endif %}
 		</div>

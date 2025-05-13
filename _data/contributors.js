@@ -43,7 +43,7 @@ async function getAllContributors() {
 				            publicationState: ${ fetchStatus },
 										pagination: { page: 1, pageSize: 999 },
 										sort: ["diaryDate:desc", "dateTimePublication:desc"],
-										filters: {type: { notIn: ["Djarju", "Poddata", "Memoir", "Reċensjoni"]}}
+										filters: {type: { notIn: ["Djarju", "Poddata", "Memoir", "Ktieb stampat"]}}
 									) {
 										${ linkedStoryData }
 									}
@@ -67,7 +67,7 @@ async function getAllContributors() {
 				            publicationState: ${ fetchStatus },
 										pagination: { page: 1, pageSize: 999 },
 										sort: "dateTimePublication:desc",
-										filters: {type: { eq: "Reċensjoni"}}
+										filters: {type: { eq: "Ktieb stampat"}}
 									) {
 										${ linkedStoryData }
 									}

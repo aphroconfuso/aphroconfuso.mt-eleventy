@@ -80,6 +80,8 @@ async function getAllStories() {
 									appointment
 									authorsType
 									body
+									bookInShops,
+									publishedBook,
 									coda
 									dateTimePublication
 									description
@@ -468,6 +470,8 @@ async function getAllStories() {
 			authorsType,
 			body: anchoredBody,
 			booksMentioned,
+			bookInShops: atts.bookInShops,
+			bookPublished: atts.publishedBook,
 			coda: atts.coda,
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,
@@ -486,9 +490,9 @@ async function getAllStories() {
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,
 			isSequenceEpisode: !!sequenceData,
-			listable: !['Djarju', 'Memoir', 'Poddata', 'Recensjoni', 'Terminu'].includes(atts.type),
+			listable: !['Djarju', 'Memoir', 'Poddata', 'Ktieb_stampat', 'Terminu'].includes(atts.type),
 			listableAudio: atts.type !== 'Djarju' && atts.type !== 'Poddata' && !!atts.podcastDate,
-			listableBook: atts.type === 'Recensjoni',
+			listableBook: atts.type === 'Ktieb_stampat',
 			listableDiary: atts.type === 'Djarju',
 			listableEvent: atts.type === 'Memoir',
 			listablePodcast: atts.type === 'Poddata',
@@ -580,11 +584,11 @@ async function getAllStories() {
 
 		// ALMANAC *************************************************************************************************************************
 		// if (atts.type !== 'Poezija' && atts.type !== 'Poddata' && atts.type !== 'Djarju' && atts.type !== 'Terminu' && !atts.dontUseDropCaps) {
-		let almanacMatches = normalisedBodyTextForAlmanac.replaceAll(/\n+/g, '').matchAll(/(\b\w*?.{0,100})(<h6.*?>)?(\d+)( ta’ | ta\' )?(Jannar|Frar|Marzu|April|Mejju|.unju|Lulju|Awwissu|Settembru|Ottubru|Novembru|Di.embru)( )?(tal\-)?(\d\d\d\d)?(<\/h6>)?(.{0,100})\w*?\b/gmi);
+		let almanacMatches = normalisedBodyTextForAlmanac.replaceAll(/\n+/g, '').matchAll(/(\b[\wċħżġĊĦŻĠ]*?.{0,100})(<h6.*?>)?(\d+)( ta’ | ta\' )?(Jannar|Frar|Marzu|April|Mejju|.unju|Lulju|Awwissu|Settembru|Ottubru|Novembru|Di.embru)( )?(tal\-)?(\d\d\d\d)?(<\/h6>)?(.{0,100})[\wċħżġĊĦŻĠ]*?\b/gmi);
 		// add dates
 			almanacMatches && shuffleArray(Array.from(almanacMatches)).forEach(match => {
 			const thisDate = `${ match[3] } ta’ ${ match[5] }`;
-				let snippet = '… ' + match[0].replace(/<[^\>]*?>/gi, "").replace(thisDate, ` <mark class="date">${ thisDate }</mark>`).replace(/  /gm, " ").trim() + ' …';
+				let snippet = '… ' + match[0].replace(/<[^\>]*?>/gi, "").replace(thisDate, ` <mark class="date">${ thisDate }</mark> `).replace(/  /gm, " ").trim() + ' …';
 
 				//
 				// #:~:text={{ story.day + ' ta’ ' + story.month | urlencode }}

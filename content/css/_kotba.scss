@@ -3,7 +3,7 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-article.recensjoni {
+article.ktieb-stampat {
   .container {
     .end-dot {
 			background-color: $podcast-beige;
@@ -98,7 +98,7 @@ article.recensjoni {
 	margin-bottom: none;
 }
 
-.promo-recensjoni {
+.promo-ktieb-stampat {
 	background-image: url(/img/deco/inforra-cara-1.png);
 	border: 1px solid $lightest-brown;
 	padding: $body-margin;
