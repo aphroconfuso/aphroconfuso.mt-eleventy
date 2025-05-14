@@ -28,15 +28,17 @@ function getCurrentOrPreviousMonth(date) {
     // Find the first Monday of the current month
     const firstMonday = getFirstMondayOfMonth(issueYear, issueMonth + 1); // Add 1 to month since getFirstMondayOfMonth() expects 1-indexed month
 
+		const season = (issueDate.getMonth() >= 2 && issueDate.getMonth() <= 7) ? "Rebbiegħa" : "Ħarifa";
+
     // Check if the current date is after the first Monday of the month
     if (issueDate >= firstMonday) {
         // Return the name of the current month
-			return { month: monthNames[issueMonth], year: issueYear, monthYear: `${ monthNames[issueMonth] } ${ issueYear }`  };
+			return { month: monthNames[issueMonth], year: issueYear, monthYear: `${ monthNames[issueMonth] } ${ issueYear }`, season  };
     } else {
         // If the current date is before the first Monday of the month, return the name of the previous month
         const previousMonth = issueMonth === 0 ? 11 : issueMonth - 1; // If current month is January (0), previous month is December (11)
         const previousMonthYear = issueMonth === 0 ? issueYear - 1 : issueYear; // If current month is January (0), previous year is -1
-        return { month: monthNames[previousMonth], year: previousMonthYear, monthYear: `${ monthNames[previousMonth] } ${ previousMonthYear }` }
+        return { month: monthNames[previousMonth], year: previousMonthYear, monthYear: `${ monthNames[previousMonth] } ${ previousMonthYear }`, season }
     }
 }
 

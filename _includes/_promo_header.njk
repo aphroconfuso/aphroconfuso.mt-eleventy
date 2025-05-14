@@ -1,35 +1,41 @@
 <header>
 	<ul>
-	{% if promo.type === 'Terminu' %}
-		<li class="header-label">
-			{% if promo.subjectDate %}
-				<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
-			{% endif %}
-		</li>
-	{% elif promo.type === 'Poddata' %}
-		<li class="header-label">
+		{% if promo.type === 'Terminu' %}
+			<li class="header-label">
+				{% if promo.subjectDate %}
+					<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
+				{% endif %}
+			</li>
+		{% elif promo.type === 'Poddata' %}
+			<li class="header-label">
 			Poddata
 			{% if promo.subjectDate %}
-				<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
-			{% endif %}
-		</li>
-	{% elif promo.type === 'Djarju' %}
-		<li class="header-label">
-			<span class="header-djarju">Djarju</span>
-			{% if promo.subjectDate %}
-				<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
-			{% endif %}
-		</li>
-	{% else %}
-		<li class="header-label">{{ promo.issueMonthYear }}</li>
-	{% endif %}
-	{% for storycollection in promo.storycollections %}
-		<li class="header-label collection-slug collection-{{ storycollection.id }}">
-			{{ storycollection.title }}
-		</li>
-	{% endfor %}
+					<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
+				{% endif %}
+			</li>
+		{% elif promo.type === 'Djarju' %}
+			<li class="header-label">
+				<span class="header-djarju">Djarju</span>
+				{% if promo.subjectDate %}
+					<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
+				{% endif %}
+			</li>
+		{% elif promo.type === 'Ktieb_stampat' and promo.bookSeason %}
+			<li class="header-label">
+				<span class="subject-date">{{ promo.bookSeason }}</span>
+			</li>
+		{% else %}
+			<li class="header-label">{{ promo.issueMonthYear }}</li>
+		{% endif %}
+		{% for storycollection in promo.storycollections %}
+			<li class="header-label collection-slug collection-{{ storycollection.id }}">
+				{{ storycollection.title }}
+			</li>
+		{% endfor %}
 	</ul>
-	{% if promo.headLetter %}<aside id="headletter-{{ promo.headLetter }}" class="headletter">{{ promo.headLetter }}</aside>{% endif %}
+	{% if promo.headLetter %}
+		<aside id="headletter-{{ promo.headLetter }}" class="headletter">{{ promo.headLetter }}</aside>
+	{% endif %}
 	{% if omitTitle !== true %}
 		{% if promo.type === 'Poddata' %}
 			<h1>
@@ -45,7 +51,7 @@
 		{% endif %}
 	{% endif %}
 	{% include '_authors.njk' %}
-	{% if promo.type === 'Djarju' or (showEpisodeTitle and promo.sequenceEpisodeTitle) %}
+	{% if promo.type === 'Djarju' or(showEpisodeTitle and promo.sequenceEpisodeTitle) %}
 		<h3>
 			{# {% if promo.sequenceEpisodes.length > 1 and promo.sequenceEpisodeNumber > 0 and not omitEpisodeNumber %} #}
 			{% if promo.sequenceEpisodeNumber > 0 and omitEpisodeNumber !== true %}

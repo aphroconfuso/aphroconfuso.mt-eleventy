@@ -406,8 +406,7 @@ async function getAllStories() {
 			translatorFullName,
 		);
 
-		const issueMonth = getIssueMonthYear(atts.dateTimePublication).month;
-		const issueMonthYear = getIssueMonthYear(atts.dateTimePublication).monthYear;
+		const { month: issueMonth, year: issueYear, monthYear: issueMonthYear, season: issueSeason } = getIssueMonthYear(atts.dateTimePublication);
 
 		let sequencePreviousPromo, sequenceNextPromo;
 		let sequenceEpisodes = sequenceData
@@ -459,8 +458,6 @@ async function getAllStories() {
 		const vocabulary = findUniqueWords(atts.body);
 		const wordcount = splitText(atts.body).length
 
-
-
 		const processedStory = {
 			appointment: atts.appointment,
 			authorForename,
@@ -471,8 +468,9 @@ async function getAllStories() {
 			body: anchoredBody,
 			booksMentioned,
 			bookInShops: atts.bookInShops,
-			bookPublished: atts.publishedBook,
+			bookPublished: atts.type === 'Ktieb_stampat' && atts.publishedBook,
 			bookPreRelease: atts.type === 'Ktieb_stampat' && !atts.publishedBook,
+			bookSeason: atts.type === 'Ktieb_stampat' && !atts.publishedBook && `${issueSeason} ${issueYear}`,
 			coda: atts.coda,
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,
@@ -491,6 +489,8 @@ async function getAllStories() {
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,
 			isSequenceEpisode: !!sequenceData,
+			issueMonth,
+			issueMonthYear,
 			listable: !['Djarju', 'Memoir', 'Poddata', 'Ktieb_stampat', 'Terminu'].includes(atts.type),
 			listableAudio: atts.type !== 'Djarju' && atts.type !== 'Poddata' && !!atts.podcastDate,
 			listableBook: atts.type === 'Ktieb_stampat',
@@ -500,8 +500,6 @@ async function getAllStories() {
 			listableTerm: atts.type === 'Terminu',
 			mainTitle,
 			metaTitle: displayTitle,
-			issueMonth,
-			issueMonthYear,
 			moreToCome: atts.moreToCome,
 			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
 			podcastLengthMinutes: atts.podcastLengthMinutes,

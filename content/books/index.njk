@@ -34,7 +34,7 @@ permalink: /kotba/index.html
 				<div class="generic-body-text">
 					<p>{{ metadata.texts.booksDescription | prettifyMaltese | safe }}</p>
 					{% set promoFrom = "Ktieb" %}
-					{% set promos = stories | selectattr("bookPreRelease") %}
+					{% set promos = stories | selectattr("bookPreRelease") | sort(false, false, "dateTimePublication") %}
 					{% set showEpisodeTitle = true %}
 					{% include "_promo_list.njk" %}
 				</div>
