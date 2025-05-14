@@ -52,7 +52,7 @@ permalink: /{{ story.slug }}/index.html
 						{% endif %}
 					{% elif story.type === 'Ktieb_stampat' %}
 						<a href="/kotba/" class="podcast-title">Kotba</a>
-						{% if promo.bookSeason %} · <span class="subject-date">{{ promo.bookSeason }}</span>{% endif %}
+						{% if story.bookSeason %} · <span class="subject-date">{{ story.bookSeason }}</span>{% endif %}
 					{% elif story.type === 'Poddata' %}
 						<a href="/podcast/" class="podcast-title">Poddata</a>
 						{% if story.subjectDate %}
