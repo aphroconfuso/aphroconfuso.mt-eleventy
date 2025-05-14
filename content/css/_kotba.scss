@@ -29,21 +29,10 @@ article.ktieb-stampat {
 	.text-wrapper {
 		margin-bottom: $body-margin;
 	}
-	// #grid-body .body-text {
-  //   display: flex;
-  //   flex-direction: column-reverse;
-	// }
-	// @media all and (min-width: $mobile-breakpoint-plusone) {
-	// 	#grid-body .body-text {
-	// 		flex-direction: row;
-	// 	}
-	// }
-.splide__track {
-	overflow: unset;
-  position: relative;
-}
 	.splide__track {
 		box-shadow: 0 4px 8px 0 rgba(33, 90, 61, 0.5), 0 6px 20px 0 rgba(33, 90, 61, 0.5);
+		overflow: unset;
+		position: relative;
 	}
 
 .splide__track:before,
@@ -69,10 +58,35 @@ article.ktieb-stampat {
   width: 50%;
   z-index: -2;
 }
-
-
-
 }
+
+.pre-release #grid-body {
+	.bookshops, .book-images {
+		display: none;
+	}
+	.splide {
+		// border: 1px solid $lightest-brown;
+		margin-bottom: $body-margin;
+		margin-left: 0;
+		// padding: $body-margin-half;
+		width: 100%;
+		figure {
+			margin: 0;
+		}
+	}
+	@media all and (min-width: $mobile-breakpoint) {
+		// .splide {
+		// 	padding: $body-margin;
+		// }
+		.book-cover {
+			display: none;
+		}
+		.book-images {
+			display: block;
+		}
+	}
+}
+
 
 #book-panel {
 	border: 1px solid $lightest-brown;
