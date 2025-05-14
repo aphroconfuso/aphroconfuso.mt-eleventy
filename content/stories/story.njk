@@ -373,7 +373,9 @@ permalink: /{{ story.slug }}/index.html
 		</aside> #}
 </article>
 <aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
-	{% include "_print_book_image_promo.njk" %}
+	{% if story.type != "Ktieb_stampat" %}
+		{% include "_print_book_image_promo.njk" %}
+	{% endif %}
 	{% set omitEpisodeNumber = true %}
 	{% set promoFrom = story.reportingTitle %}
 	{% set promos = story.endPromos %}
