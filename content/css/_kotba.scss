@@ -38,6 +38,40 @@ article.ktieb-stampat {
 	// 		flex-direction: row;
 	// 	}
 	// }
+.splide__track {
+	overflow: unset;
+  position: relative;
+}
+	.splide__track {
+		box-shadow: 0 4px 8px 0 rgba(33, 90, 61, 0.5), 0 6px 20px 0 rgba(33, 90, 61, 0.5);
+	}
+
+.splide__track:before,
+.splide__track:after {
+  background: #777;
+  bottom: 80%;
+  box-shadow: 0 15px 10px 0 rgba(33, 90, 61, 0.5);
+  content: "";
+  left: auto;
+  max-width:300px;
+  position: absolute;
+  right: 5px;
+  top: 15px;
+  transform: rotate(-182deg);
+  width: 50%;
+  z-index: -1;
+}
+.splide__track:after {
+  bottom: 15px;
+	box-shadow: 0 15px 10px 0 rgba(33, 90, 61, 0.5);
+  top: 80%;
+  transform: rotate(3deg);
+  width: 50%;
+  z-index: -2;
+}
+
+
+
 }
 
 #book-panel {
