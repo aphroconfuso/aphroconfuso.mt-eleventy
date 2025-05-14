@@ -16,7 +16,9 @@ permalink: /kotba/index.html
 {% block content %}
 	<article class="generic contents books">
 		<header>
-			<ul><li class="header-label">&nbsp;</li></ul>
+			<ul>
+				<li class="header-label">&nbsp;</li>
+			</ul>
 			<h1>{{ metadata.texts.booksTitle }}</h1>
 			<h2>&nbsp;</h2>
 		</header>
@@ -25,7 +27,14 @@ permalink: /kotba/index.html
 				<div class="generic-body-text">
 					<p>{{ metadata.texts.booksDescription | prettifyMaltese | safe }}</p>
 					{% set promoFrom = "Ktieb" %}
-					{% set promos = stories | selectattr("listableBook") %}
+					{% set promos = stories | selectattr("bookPublished") %}
+					{% set showEpisodeTitle = true %}
+					{% include "_promo_list.njk" %}
+				</div>
+				<div class="generic-body-text">
+					<p>{{ metadata.texts.booksDescription | prettifyMaltese | safe }}</p>
+					{% set promoFrom = "Ktieb" %}
+					{% set promos = stories | selectattr("bookPreRelease") %}
 					{% set showEpisodeTitle = true %}
 					{% include "_promo_list.njk" %}
 				</div>

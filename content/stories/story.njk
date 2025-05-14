@@ -36,7 +36,7 @@ permalink: /{{ story.slug }}/index.html
 {% endblock %}
 
 {% block content %}
-	<article class="content {{ story.issueMonth | slugify }} {{ story.type | slugify }} story story-{{ story.id }} sequence-{{ story.sequenceId }}{{ story.endOfSeriesClass }}" data-pagefind-meta="class[class]" data-pagefind-body>
+	<article class="content {{ story.issueMonth | slugify }} {{ story.type | slugify }} story story-{{ story.id }} sequence-{{ story.sequenceId }}{{ story.endOfSeriesClass }} {{ 'pre-release' if story.bookPreRelease }}" data-pagefind-meta="class[class]" data-pagefind-body>
 		<header>
 			<ul>
 				<li class="header-label" data-pagefind-meta="header">

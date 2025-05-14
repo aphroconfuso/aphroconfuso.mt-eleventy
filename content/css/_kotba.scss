@@ -123,7 +123,7 @@ article.ktieb-stampat {
 			font-family: $sans, sans-serif;
 		}
 		img {
-			display: none;
+			height: $body-margin * 7;
 		}
 		@media all and (min-width: $laptop-breakpoint) {
 			display: flex;
@@ -132,23 +132,13 @@ article.ktieb-stampat {
 				@include clamp(7);
 			}
 			img {
-				display: block;
-				height: $body-margin * 7;
+				// display: block;
+				// height: $body-margin * 7;
 			}
 		}
 	}
 	&[href*=antolo] h2 {
 		display: none;
-	}
-}
-
-
-// FIXME
-.story-88 {
-	header {
-		h1 {
-			color: $light-brown !important;
-		}
 	}
 }
 

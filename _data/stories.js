@@ -472,6 +472,7 @@ async function getAllStories() {
 			booksMentioned,
 			bookInShops: atts.bookInShops,
 			bookPublished: atts.publishedBook,
+			bookPreRelease: atts.type === 'Ktieb_stampat' && !atts.publishedBook,
 			coda: atts.coda,
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,

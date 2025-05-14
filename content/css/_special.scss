@@ -406,23 +406,23 @@ article {
 	}
 }
 
-// PRE-RELEASE BOOKS
-// this could basically be a pre-release setting
-// .story-115 #grid-body {
 .pre-release #grid-body {
 	.bookshops, .book-images {
 		display: none;
 	}
 	.splide {
-		margin-left: 0 !important;
-		padding: 0 !important;
-		width: 100% !important;
+		border: 1px solid $lightest-brown;
+		margin-bottom: $body-margin;
+		margin-left: 0;
+		padding: $body-margin-half;
+		width: 100%;
+		figure {
+			margin: 0;
+		}
 	}
 	@media all and (min-width: $mobile-breakpoint) {
 		.splide {
-			border: 1px solid $lightest-brown;
-			margin-bottom: $body-margin;
-			padding: $body-margin !important;
+			padding: $body-margin;
 		}
 		.book-cover {
 			display: none;
@@ -432,10 +432,6 @@ article {
 		}
 	}
 }
-// mid-release
-// .story-115 .bookshops {
-//   display: none;
-// }
 
 .story-123 #proġetti-panloġiċi-moderni {
 	margin-bottom: $body-margin-half;
