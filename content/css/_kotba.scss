@@ -29,35 +29,64 @@ article.ktieb-stampat {
 	.text-wrapper {
 		margin-bottom: $body-margin;
 	}
-	.splide__track {
-		box-shadow: 0 4px 8px 0 rgba(33, 90, 61, 0.5), 0 6px 20px 0 rgba(33, 90, 61, 0.5);
+
+	.xxx.splide__track {
 		overflow: unset;
 		position: relative;
+		&:before,
+		&:after {
+			background: #777;
+			bottom: 80%;
+			content: "";
+			left: auto;
+			max-width:300px;
+			position: absolute;
+			right: 12px;
+			top: 15px;
+			transform: rotate(-182deg);
+			width: 50%;
+			z-index: -1;
+		}
+		&:after {
+			bottom: 15px;
+			top: 80%;
+			transform: rotate(5deg);
+			z-index: -2;
+		}
 	}
 
-.splide__track:before,
-.splide__track:after {
-  background: #777;
-  bottom: 80%;
-  box-shadow: 0 15px 10px 0 rgba(33, 90, 61, 0.5);
-  content: "";
-  left: auto;
-  max-width:300px;
-  position: absolute;
-  right: 5px;
-  top: 15px;
-  transform: rotate(-182deg);
-  width: 50%;
-  z-index: -1;
-}
-.splide__track:after {
-  bottom: 15px;
-	box-shadow: 0 15px 10px 0 rgba(33, 90, 61, 0.5);
-  top: 80%;
-  transform: rotate(3deg);
-  width: 50%;
-  z-index: -2;
-}
+	$antoloġija2: #72523d;
+	$burmgħez: #000000;
+	$essidr: #215a3d;
+	$shadow-lightness: 0;
+
+	&.story-141 {
+		.splide__track {
+			box-shadow: 0 -1px 10px 0 lighten($essidr, $shadow-lightness), 0 6px 20px 0 lighten($essidr, $shadow-lightness);
+			&:before,
+			&:after {
+				box-shadow: 0 15px 10px 0 lighten($essidr, $shadow-lightness);
+			}
+		}
+	}
+	&.story-143 {
+		.splide__track {
+			box-shadow: 0 4px 8px 0 lighten($burmgħez, $shadow-lightness), 0 6px 20px 0 lighten($burmgħez, $shadow-lightness);
+			&:before,
+			&:after {
+				box-shadow: 0 15px 10px 0 lighten($burmgħez, $shadow-lightness);
+			}
+		}
+	}
+	&.story-145 {
+		.splide__track {
+			box-shadow: 0 4px 8px 0 lighten($antoloġija2, $shadow-lightness), 0 6px 20px 0 lighten($antoloġija2, $shadow-lightness);
+			&:before,
+			&:after {
+				box-shadow: 0 15px 10px 0 lighten($antoloġija2, $shadow-lightness);
+			}
+		}
+	}
 }
 
 .pre-release #grid-body {
@@ -166,22 +195,20 @@ article.ktieb-stampat {
 		}
 	}
 	div.body-text {
+		display: flex;
+		flex-direction: column-reverse;
 		p {
 			@include clamp(3);
 			font-family: $sans, sans-serif;
 		}
-		img {
-			height: $body-margin * 7;
-		}
 		@media all and (min-width: $laptop-breakpoint) {
-			display: flex;
+			flex-direction: row;
 			p {
 				padding-right: $body-margin-half;
 				@include clamp(7);
 			}
 			img {
-				// display: block;
-				// height: $body-margin * 7;
+				height: $body-margin * 7;
 			}
 		}
 	}
