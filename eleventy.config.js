@@ -55,6 +55,12 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addWatchTarget("content/**/*.{jpg,svg,webp,png,jpeg}");
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
 
+	var slackError = slack.extend({
+		channel: '#events',
+		icon_emoji: ':face_screaming_in_fear:',
+		username: 'Aphroconfuso PROVI'
+	});
+
 	const fetchImage = async (imageUrl, saveToFileLocation) => await fetch(imageUrl).then(res =>
 		res.body.pipe(fs.createWriteStream(saveToFileLocation))
 	);
@@ -64,15 +70,7 @@ module.exports = function (eleventyConfig) {
 			console.error('\x1b[31m%s\x1b[0m', message);
 			return;
 		}
-		// slack.send(message);
-		slack.send({
-			attachments: [
-				{
-					fallback: message,
-					color: '#FF0000',
-				}
-			]
-		});
+		slackError({text: message, color: '#ff0000'});
 		throw new Error(`\x1b[31m${ message }\x1b[0m`);
 	}
 
