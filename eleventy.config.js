@@ -57,8 +57,13 @@ module.exports = function (eleventyConfig) {
 
 	var slackError = slack.extend({
 		channel: '#events',
-		color: '#ff0000',
 		icon_emoji: ':broken_heart:',
+		username: 'Aphroconfuso PROVI',
+	});
+
+	var slackOK = slack.extend({
+		channel: '#events',
+		icon_emoji: ':green_heart:',
 		username: 'Aphroconfuso PROVI',
 	});
 
@@ -227,6 +232,7 @@ module.exports = function (eleventyConfig) {
 			console.log('Indexing pages for search... done');
 			// END QUICKBUILD
 		}
+		slackOK({ text: 'Kollox sew!' });
 		console.log('************************************************');
 	});
 
