@@ -66,10 +66,9 @@ module.exports = function (eleventyConfig) {
 		}
 		// slack.send(message);
 		slack.send({
-			text: message,
 			attachments: [
 				{
-					fallback: 'Required Fallback String',
+					fallback: message,
 					color: '#FF0000',
 				}
 			]
