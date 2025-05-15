@@ -57,8 +57,9 @@ module.exports = function (eleventyConfig) {
 
 	var slackError = slack.extend({
 		channel: '#events',
-		icon_emoji: ':face_screaming_in_fear:',
-		username: 'Aphroconfuso PROVI'
+		color: '#ff0000',
+		icon_emoji: ':broken_heart:',
+		username: 'Aphroconfuso PROVI',
 	});
 
 	const fetchImage = async (imageUrl, saveToFileLocation) => await fetch(imageUrl).then(res =>
