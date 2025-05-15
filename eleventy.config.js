@@ -64,7 +64,16 @@ module.exports = function (eleventyConfig) {
 			console.error('\x1b[31m%s\x1b[0m', message);
 			return;
 		}
-		slack.send(message);
+		// slack.send(message);
+		slack.send({
+			text: message,
+			attachments: [
+				{
+					fallback: 'Required Fallback String',
+					color: '#FF0000',
+				}
+			]
+		});
 		throw new Error(`\x1b[31m${ message }\x1b[0m`);
 	}
 
