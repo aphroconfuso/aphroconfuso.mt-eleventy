@@ -15,10 +15,13 @@ const QRCode = require('qrcode');
 const rollupPlugin = require('eleventy-plugin-rollup');
 const smartTruncate = require('smart-truncate');
 const stripTags = require("striptags");
+const SlackNotify = require("slack-notify");
 
 const fixSubjectDate = require('./src/fixSubjectDate.js');
 const prettifyMaltese  = require('./src/prettifyMaltese.js');
 const slugifyStringMaltese = require('./src/slugifyMaltese.js');
+
+const slack = SlackNotify(process.env.SLACK_WEBHOOK_URL);
 
 function deleteFoldersWithIndexHtml(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -59,6 +62,7 @@ module.exports = function (eleventyConfig) {
 	const handleError = (message, fatal = true) => {
 		if (!fatal || process.env.NODE_ENV === 'development') {
 			console.error('\x1b[31m%s\x1b[0m', message);
+			slack.send(message);
 			return;
 		}
 		throw new Error(`\x1b[31m${ message }\x1b[0m`);
