@@ -232,7 +232,9 @@ module.exports = function (eleventyConfig) {
 			console.log('Indexing pages for search... done');
 			// END QUICKBUILD
 		}
-		slackOK({text: 'Kollox sew!'});
+		if (process.env.ENVIRONMENT === 'abbozzi' || process.env.ENVIRONMENT === 'provi') {
+			slackOK({text: 'Kollox sew!'});
+		}
 		console.log('************************************************');
 	});
 
