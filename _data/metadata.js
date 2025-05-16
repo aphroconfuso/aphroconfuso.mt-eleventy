@@ -20,7 +20,8 @@ module.exports = {
 	},
 	"texts": {
 		"booksTitle": "Kotba",
-		"booksDescription": "Kotba ppubblikati minn Aphroconfuso.",
+		"booksDescription": "Kotba ppubblikati minn Aphroconfuso:",
+		"booksForthcomingDescription": "Kotba ġejjin dalwaqt minn Aphroconfuso:",
 		"contents": "Dan huwa x-xogħol li ppubblikajna fil-ġurnal s'issa, f'ordni alfabetika skont it-titlu. Tista' wkoll tqalleb <a href=\"/appuntamenti/\">bix-xahar</a> jew skont <a href=\"/kontributuri/\">il-kontributur</a>.",
 		"error404": "Din il-paġna ma teżistix.",
 		"error404AltText": "Sinjal ta' ottagonali aħmar bi 'Stop' miktuba bl-aħmar. Taħta, sinjal ieħor li jgħid ' Stop Tfisser Ieqaf'.",

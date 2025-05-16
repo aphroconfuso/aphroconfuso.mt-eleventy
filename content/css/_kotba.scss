@@ -60,6 +60,9 @@ article.ktieb-stampat {
 	$antoloġija2: #72523d;
 	$burmgħez: #000000;
 	$essidr: #215a3d;
+	$martamarta: #7b7636;
+	$saffo: #a94b6f;
+
 	$shadow-lightness: 0;
 
 	&.story-141 {
@@ -71,12 +74,30 @@ article.ktieb-stampat {
 			}
 		}
 	}
+	&.story-142 {
+		.splide__track {
+			box-shadow: 0 4px 8px 0 lighten($martamarta, $shadow-lightness), 0 6px 20px 0 lighten($martamarta, $shadow-lightness);
+			&:before,
+			&:after {
+				box-shadow: 0 15px 10px 0 lighten($martamarta, $shadow-lightness);
+			}
+		}
+	}
 	&.story-143 {
 		.splide__track {
 			box-shadow: 0 4px 8px 0 lighten($burmgħez, $shadow-lightness), 0 6px 20px 0 lighten($burmgħez, $shadow-lightness);
 			&:before,
 			&:after {
 				box-shadow: 0 15px 10px 0 lighten($burmgħez, $shadow-lightness);
+			}
+		}
+	}
+	&.story-144 {
+		.splide__track {
+			box-shadow: 0 4px 8px 0 lighten($saffo, $shadow-lightness), 0 6px 20px 0 lighten($saffo, $shadow-lightness);
+			&:before,
+			&:after {
+				box-shadow: 0 15px 10px 0 lighten($saffo, $shadow-lightness);
 			}
 		}
 	}
