@@ -76,7 +76,7 @@ module.exports = function (eleventyConfig) {
 			console.error('\x1b[31m%s\x1b[0m', message);
 			return;
 		}
-		slackError({text: message, color: '#ff0000'});
+		slackError({ text: message });
 		throw new Error(`\x1b[31m${ message }\x1b[0m`);
 	}
 
@@ -232,9 +232,7 @@ module.exports = function (eleventyConfig) {
 			console.log('Indexing pages for search... done');
 			// END QUICKBUILD
 		}
-		if (process.env.NODE_ENV !== 'development') {
-			slackOK({text: 'Kollox sew!'});
-		}
+		slackOK({text: 'Kollox sew!'});
 		console.log('************************************************');
 	});
 
