@@ -55,6 +55,8 @@ article.ktieb-stampat {
 		}
 	}
 
+	// Use a mix-in here!
+
 	$antoloġija2: #72523d;
 	$burmgħez: #000000;
 	$essidr: #215a3d;
@@ -192,6 +194,12 @@ article.ktieb-stampat {
 			.author {
 				white-space: unset;
 			}
+		}
+	}
+	img {
+		margin: $body-margin-half 0 $body-margin;
+		@media all and (min-width: $laptop-breakpoint) {
+			margin: 0;
 		}
 	}
 	div.body-text {
