@@ -22,7 +22,6 @@ jobs:
           key: ${{ secrets.DEPLOYER_CI_PRIVATE_KEY }}
           passphrase: ${{ secrets.DEPLOYER_CI_PRIVATE_KEY_PASSWORD }}
           script: |
-            export NODE_ENV="production"
             export THIS_ENV="provi"
             export SLACK_WEBHOOK_URL="${{ secrets.SLACK_WEBHOOK_URL }}"
             export NVM_DIR="$HOME/.nvm"
