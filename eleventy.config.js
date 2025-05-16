@@ -58,13 +58,13 @@ module.exports = function (eleventyConfig) {
 	var slackError = slack.extend({
 		channel: '#events',
 		icon_emoji: ':broken_heart:',
-		username: `Aphroconfuso ${ process.env.NODE_ENV }`,
+		username: `Aphroconfuso ${ process.env.ENVIRONMENT || process.env.NODE_ENV }`,
 	});
 
 	var slackOK = slack.extend({
 		channel: '#events',
 		icon_emoji: ':green_heart:',
-		username: `Aphroconfuso ${ process.env.NODE_ENV }`,
+		username: `Aphroconfuso ${ process.env.ENVIRONMENT || process.env.NODE_ENV }`,
 	});
 
 	const fetchImage = async (imageUrl, saveToFileLocation) => await fetch(imageUrl).then(res =>
@@ -232,7 +232,9 @@ module.exports = function (eleventyConfig) {
 			console.log('Indexing pages for search... done');
 			// END QUICKBUILD
 		}
-		slackOK({ text: 'Kollox sew!' });
+		if (process.env.NODE_ENV !== 'development') {
+			slackOK({text: 'Kollox sew!'});
+		}
 		console.log('************************************************');
 	});
 
