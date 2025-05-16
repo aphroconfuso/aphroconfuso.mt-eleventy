@@ -34,7 +34,7 @@ permalink: /kotba/index.html
 				{% set promos = stories | selectattr("bookPreRelease") | sort(false, false, "dateTimePublication") %}
 				{% if promos.length %}
 					<div class="generic-body-text">
-						<p>{{ metadata.texts.booksDescription | prettifyMaltese | safe }}</p>
+						<p>{{ metadata.texts.booksForthcomingDescription | prettifyMaltese | safe }}</p>
 						{% set promoFrom = "Ktieb" %}
 						{% set showEpisodeTitle = true %}
 						{% include "_promo_list.njk" %}

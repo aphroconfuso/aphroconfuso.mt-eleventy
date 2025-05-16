@@ -58,13 +58,13 @@ module.exports = function (eleventyConfig) {
 	var slackError = slack.extend({
 		channel: '#events',
 		icon_emoji: ':broken_heart:',
-		username: 'Aphroconfuso PROVI',
+		username: `Aphroconfuso ${ process.env.NODE_ENV }`,
 	});
 
 	var slackOK = slack.extend({
 		channel: '#events',
 		icon_emoji: ':green_heart:',
-		username: 'Aphroconfuso PROVI',
+		username: `Aphroconfuso ${ process.env.NODE_ENV }`,
 	});
 
 	const fetchImage = async (imageUrl, saveToFileLocation) => await fetch(imageUrl).then(res =>
