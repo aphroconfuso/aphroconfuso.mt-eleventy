@@ -441,7 +441,7 @@ module.exports = function (eleventyConfig) {
 			.replace('drop-M">M</span>MXXG', 'drop-Ġ">Ġ</span>')
 			.replace('drop-M">M</span>MXXH', 'drop-Ħ">Ħ</span>')
 			.replace('drop-M">M</span>MXXZ', 'drop-Ż">Ż</span>')
-			.replace('drop-1">1</span>6', 'drop-16">16</span>')
+			.replace(/drop\-(\d)">(\d)<\/span>(\d)/, "drop-$1$3\">$1$3<\/span>")
 			.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 	});
 
@@ -460,7 +460,7 @@ module.exports = function (eleventyConfig) {
 				.replace('drop-M">M</span>MXXG', 'drop-Ġ">Ġ</span>')
 				.replace('drop-M">M</span>MXXH', 'drop-Ħ">Ħ</span>')
 				.replace('drop-M">M</span>MXXZ', 'drop-Ż">Ż</span>')
-				.replace('drop-1">1</span>6', 'drop-16">16</span>')
+				.replace(/drop\-(\d)">(\d)<\/span>(\d)/, "drop-$1$3\">$1$3<\/span>")
 				.replace(/\[\+\]/gm, `<p>${String.fromCharCode(160)}</p>`);
 		}
 		if (!splitText) {
