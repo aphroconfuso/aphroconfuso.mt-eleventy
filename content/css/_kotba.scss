@@ -58,6 +58,7 @@ article.ktieb-stampat {
 	// Use a mix-in here!
 
 	$antoloġija2: #72523d;
+	$antoloġija3: #603783;
 	$burmgħez: #000000;
 	$essidr: #215a3d;
 	$martamarta: #7b7636;
@@ -107,6 +108,15 @@ article.ktieb-stampat {
 			&:before,
 			&:after {
 				box-shadow: 0 15px 10px 0 lighten($antoloġija2, $shadow-lightness);
+			}
+		}
+	}
+	&.story-140 {
+		.splide__track {
+			box-shadow: 0 4px 8px 0 lighten($antoloġija3, $shadow-lightness), 0 6px 20px 0 lighten($antoloġija3, $shadow-lightness);
+			&:before,
+			&:after {
+				box-shadow: 0 15px 10px 0 lighten($antoloġija3, $shadow-lightness);
 			}
 		}
 	}
