@@ -23,7 +23,7 @@ permalink: /kotba/index.html
 			<h2>&nbsp;</h2>
 		</header>
 		<section id="grid-body">
-			{% set promosPublished = stories | selectattr("bookPublished") %}
+			{% set promosPublished = stories | selectattr("bookPublished") | sort(false, false, "dateTimePublication") %}
 			{% set promosPrePublished = stories | selectattr("bookPreRelease") | sort(false, false, "dateTimePublication") %}
 			{% set promos = promosPublished.concat(promosPrePublished) %}
 			{% if promos.length %}
