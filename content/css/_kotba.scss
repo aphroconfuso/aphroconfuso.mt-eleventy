@@ -34,8 +34,7 @@ article.ktieb-stampat {
 @mixin book-colour($colour: red, $shadow-lightness: 0) {
 	.book-wrapper img {
 		box-shadow: 0 -1px 3px 0 lighten($colour, $shadow-lightness),
-								0 2px 5px 0 lighten($colour, $shadow-lightness),
-								0 0 30px 1px lighten($colour, 50%);
+								0 2px 5px 0 lighten($colour, $shadow-lightness);
 		&:before,
 		&:after {
 			box-shadow: 0 5px 3px 0 lighten($colour, $shadow-lightness);
