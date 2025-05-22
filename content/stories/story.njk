@@ -178,12 +178,21 @@ permalink: /{{ story.slug }}/index.html
 					</section>
 				{% elif story.type === 'Ktieb_stampat' %}
 					<section class="generic-body-text">
-						{% if story.slideshow or story.singleImage %}
-							{% include "_slideshow.njk" %}
+						{% if story.promoImageMobile %}
+							{% set slide = story.promoImageMobile.attributes.formats %}
+							{% set slideMobile = slide %}
+							{% set imageCrop = 'uncropped' %}
+							<div class="book-wrapper">
+								{% include "_image.njk" %}
+							</div>
 						{% endif %}
 						<section class="text-wrapper">
 							{{ story.body | prettifyMaltese | safe }}
 						</section>
+						{% if story.slideshow or story.singleImage %}
+							{% set imageMode = 'regular' %}
+							{% include "_slideshow.njk" %}
+						{% endif %}
 						{% if story.bookPublished %}
 							{% include "_print_book_panel.njk" %}
 						{% endif %}

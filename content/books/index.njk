@@ -22,26 +22,18 @@ permalink: /kotba/index.html
 			<h1>{{ metadata.texts.booksTitle }}</h1>
 			<h2>&nbsp;</h2>
 		</header>
-		<div class="container">
-			<section id="grid-body">
+		<section id="grid-body">
+			{% set promosPublished = stories | selectattr("bookPublished") %}
+			{% set promosPrePublished = stories | selectattr("bookPreRelease") | sort(false, false, "dateTimePublication") %}
+			{% set promos = promosPublished.concat(promosPrePublished) %}
+			{% if promos.length %}
 				<div class="generic-body-text">
-					<p>{{ metadata.texts.booksDescription | prettifyMaltese | safe }}</p>
 					{% set promoFrom = "Ktieb" %}
-					{% set promos = stories | selectattr("bookPublished") %}
 					{% set showEpisodeTitle = true %}
 					{% include "_promo_list.njk" %}
 				</div>
-				{% set promos = stories | selectattr("bookPreRelease") | sort(false, false, "dateTimePublication") %}
-				{% if promos.length %}
-					<div class="generic-body-text">
-						<p>{{ metadata.texts.booksForthcomingDescription | prettifyMaltese | safe }}</p>
-						{% set promoFrom = "Ktieb" %}
-						{% set showEpisodeTitle = true %}
-						{% include "_promo_list.njk" %}
-					</div>
-				{% endif %}
-			</section>
-		</div>
+			{% endif %}
+		</section>
 	</article>
 	<script>
 		reportingTitle = "{{ metadata.booksTitle }}";

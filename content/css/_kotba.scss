@@ -14,7 +14,7 @@ article.ktieb-stampat {
     h1 {
       color: $light-brown;
     }
-    border-bottom-color: $podcast-beige;
+    // border-bottom-color: $podcast-beige;
     h5,
     h6,
     p {
@@ -29,97 +29,86 @@ article.ktieb-stampat {
 	.text-wrapper {
 		margin-bottom: $body-margin;
 	}
+}
 
-	&.pre-release .splide__track {
-		overflow: unset;
-		position: relative;
+@mixin book-colour($colour: red, $shadow-lightness: 0) {
+	.book-wrapper img {
+		box-shadow: 0 -1px 3px 0 lighten($colour, $shadow-lightness), 0 3px 10px 0 lighten($colour, $shadow-lightness);
 		&:before,
 		&:after {
-			background: #777;
-			bottom: 80%;
-			content: "";
-			left: auto;
-			max-width:300px;
-			position: absolute;
-			right: 12px;
-			top: 15px;
-			transform: rotate(-182deg);
-			width: 50%;
-			z-index: -1;
+			box-shadow: 0 5px 3px 0 lighten($colour, $shadow-lightness);
 		}
+	}
+}
+
+@mixin book-colour-full($colour: red, $shadow-lightness: 0) {
+	.book-wrapper img {
+		box-shadow: 0 -1px 10px 0 lighten($colour, $shadow-lightness), 0 6px 20px 0 lighten($colour, $shadow-lightness);
+		&:before,
 		&:after {
-			bottom: 15px;
-			top: 80%;
-			transform: rotate(5deg);
-			z-index: -2;
+			box-shadow: 0 15px 10px 0 lighten($colour, $shadow-lightness);
 		}
 	}
+}
 
-	// Use a mix-in here!
+.book-wrapper img {
+	overflow: unset;
+	position: relative;
+	width:100%;
+	&:before,
+	&:after {
+		background: #777;
+		bottom: 80%;
+		content: "";
+		left: auto;
+		max-width:300px;
+		position: absolute;
+		right: 12px;
+		top: 15px;
+		transform: rotate(-182deg);
+		width: 50%;
+		z-index: -1;
+	}
+	&:after {
+		bottom: 15px;
+		top: 80%;
+		transform: rotate(5deg);
+		z-index: -2;
+	}
+}
 
-	$antoloġija2: #72523d;
-	$antoloġija3: #603783;
-	$burmgħez: #000000;
-	$essidr: #215a3d;
-	$martamarta: #7b7636;
-	$saffo: #a94b6f;
+$antologija1: #327a7d;
+$antologija2: #72523d;
+$antologija3: #603783;
+$burmghez: #000000;
+$essidr: #215a3d;
+$martamarta: #7b7636;
+$qarn: #c72231;
+$saffo: #a94b6f;
 
-	$shadow-lightness: 0;
-
-	&.story-141 {
-		.splide__track {
-			box-shadow: 0 -1px 10px 0 lighten($essidr, $shadow-lightness), 0 6px 20px 0 lighten($essidr, $shadow-lightness);
-			&:before,
-			&:after {
-				box-shadow: 0 15px 10px 0 lighten($essidr, $shadow-lightness);
-			}
-		}
-	}
-	&.story-142 {
-		.splide__track {
-			box-shadow: 0 4px 8px 0 lighten($martamarta, $shadow-lightness), 0 6px 20px 0 lighten($martamarta, $shadow-lightness);
-			&:before,
-			&:after {
-				box-shadow: 0 15px 10px 0 lighten($martamarta, $shadow-lightness);
-			}
-		}
-	}
-	&.story-143 {
-		.splide__track {
-			box-shadow: 0 4px 8px 0 lighten($burmgħez, $shadow-lightness), 0 6px 20px 0 lighten($burmgħez, $shadow-lightness);
-			&:before,
-			&:after {
-				box-shadow: 0 15px 10px 0 lighten($burmgħez, $shadow-lightness);
-			}
-		}
-	}
-	&.story-144 {
-		.splide__track {
-			box-shadow: 0 4px 8px 0 lighten($saffo, $shadow-lightness), 0 6px 20px 0 lighten($saffo, $shadow-lightness);
-			&:before,
-			&:after {
-				box-shadow: 0 15px 10px 0 lighten($saffo, $shadow-lightness);
-			}
-		}
-	}
-	&.story-145 {
-		.splide__track {
-			box-shadow: 0 4px 8px 0 lighten($antoloġija2, $shadow-lightness), 0 6px 20px 0 lighten($antoloġija2, $shadow-lightness);
-			&:before,
-			&:after {
-				box-shadow: 0 15px 10px 0 lighten($antoloġija2, $shadow-lightness);
-			}
-		}
-	}
-	&.story-140 {
-		.splide__track {
-			box-shadow: 0 4px 8px 0 lighten($antoloġija3, $shadow-lightness), 0 6px 20px 0 lighten($antoloġija3, $shadow-lightness);
-			&:before,
-			&:after {
-				box-shadow: 0 15px 10px 0 lighten($antoloġija3, $shadow-lightness);
-			}
-		}
-	}
+.story-88 {
+	@include book-colour($antologija1);
+}
+.story-115 {
+	@include book-colour($qarn);
+}
+.story-141 {
+	@include book-colour($essidr);
+}
+.story-142 {
+	@include book-colour($martamarta);
+}
+.story-143 {
+	@include book-colour($burmghez);
+}
+.story-144 {
+	@include book-colour($saffo);
+}
+.story-145 {
+	@include book-colour($antologija2);
+}
+.story-140 {
+	@include book-colour($antologija3);
 }
 
 .pre-release #grid-body {
@@ -203,15 +192,27 @@ article.ktieb-stampat {
 	}
 }
 
-.books ul.promo-list > li {
-	border-bottom: none;
-	margin-bottom: none;
+.books {
+	@media all and (min-width: $tablet-breakpoint) {
+		#grid-body {
+			max-width: 100%;
+			width: 100%;
+			ul.promo-list {
+				&> li {
+					border-bottom: none;;
+					float: left;
+					width: 20.8%;
+					margin: $body-margin;
+				}
+			}
+		}
+	}
 }
 
 .promo-ktieb-stampat {
-	background-image: url(/img/deco/inforra-cara-1.png);
-	border: 1px solid $lightest-brown;
-	padding: $body-margin;
+	// background-image: url(/img/deco/inforra-cara-1.png);
+	// border: 1px solid $lightest-brown;
+	// padding: $body-margin;
 	header {
 		h1 {
 			&::before {
