@@ -33,7 +33,9 @@ article.ktieb-stampat {
 
 @mixin book-colour($colour: red, $shadow-lightness: 0) {
 	.book-wrapper img {
-		box-shadow: 0 -1px 3px 0 lighten($colour, $shadow-lightness), 0 3px 10px 0 lighten($colour, $shadow-lightness);
+		box-shadow: 0 -1px 3px 0 lighten($colour, $shadow-lightness),
+								0 2px 5px 0 lighten($colour, $shadow-lightness),
+								0 0 30px 1px lighten($colour, 50%);
 		&:before,
 		&:after {
 			box-shadow: 0 5px 3px 0 lighten($colour, $shadow-lightness);
@@ -43,7 +45,9 @@ article.ktieb-stampat {
 
 @mixin book-colour-full($colour: red, $shadow-lightness: 0) {
 	.book-wrapper img {
-		box-shadow: 0 -1px 10px 0 lighten($colour, $shadow-lightness), 0 6px 20px 0 lighten($colour, $shadow-lightness);
+		box-shadow: 0 -1px 10px 0 lighten($colour, $shadow-lightness),
+								0 6px 20px 0 lighten($colour, $shadow-lightness),
+								0 0 30px 1px lighten($colour, 50%);
 		&:before,
 		&:after {
 			box-shadow: 0 15px 10px 0 lighten($colour, $shadow-lightness);
@@ -109,6 +113,33 @@ $saffo: #a94b6f;
 }
 .story-140 {
 	@include book-colour($antologija3);
+}
+
+article {
+	&.story-88 {
+		@include book-colour-full($antologija1);
+	}
+	&.story-115 {
+		@include book-colour-full($qarn);
+	}
+	&.story-141 {
+		@include book-colour-full($essidr);
+	}
+	&.story-142 {
+		@include book-colour-full($martamarta);
+	}
+	&.story-143 {
+		@include book-colour-full($burmghez);
+	}
+	&.story-144 {
+		@include book-colour-full($saffo);
+	}
+	&.story-145 {
+		@include book-colour-full($antologija2);
+	}
+	&.story-140 {
+		@include book-colour-full($antologija3);
+	}
 }
 
 .pre-release #grid-body {
