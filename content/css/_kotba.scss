@@ -31,25 +31,35 @@ article.ktieb-stampat {
 	}
 }
 
-@mixin book-colour($colour: red, $shadow-lightness: 0) {
+@mixin book-colour($colour: red) {
 	.book-wrapper img {
-		box-shadow: 0 -1px 3px 0 lighten($colour, $shadow-lightness),
-								0 2px 5px 0 lighten($colour, $shadow-lightness);
-		&:before,
-		&:after {
-			box-shadow: 0 5px 3px 0 lighten($colour, $shadow-lightness);
-		}
+		// box-shadow: 0 -1px 3px 0 lighten($colour, $shadow-lightness),
+		// 						0 2px 5px 0 lighten($colour, $shadow-lightness);
+  box-shadow:
+    1px 0 2px #{$colour}1A,     /* left (small shadow) */
+    0 4px 4px #{$colour}33,     /* bottom */
+    4px 0 4px #{$colour}33,     /* right */
+    0 -4px 4px #{$colour}33;    /* top */
+		// &:before,
+		// &:after {
+		// 	box-shadow: 0 5px 3px 0 lighten($colour, $shadow-lightness);
+		// }
 	}
 }
 
 @mixin book-colour-full($colour: red, $shadow-lightness: 0) {
 	.book-wrapper img {
-		box-shadow: 0 -1px 10px 0 lighten($colour, $shadow-lightness),
-								0 6px 20px 0 lighten($colour, $shadow-lightness);
-		&:before,
-		&:after {
-			box-shadow: 0 15px 10px 0 lighten($colour, $shadow-lightness);
-		}
+		// box-shadow: 0 -1px 10px 0 lighten($colour, $shadow-lightness),
+		// 						0 6px 20px 0 lighten($colour, $shadow-lightness);
+		box-shadow:
+			1px 0 2px #{$colour}1A,     /* left (small shadow) */
+			0 6px 6px #{$colour}33,     /* bottom */
+			6px 0 6px #{$colour}33,     /* right */
+			0 -6px 6px #{$colour}33;    /* top */
+		// &:before,
+		// &:after {
+		// 	box-shadow: 0 15px 10px 0 lighten($colour, $shadow-lightness);
+		// }
 	}
 }
 
