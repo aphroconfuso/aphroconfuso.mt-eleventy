@@ -28,13 +28,18 @@ article.ktieb-stampat {
 			background-color: $colour;
     }
   }
-	.book-wrapper img {
-		box-shadow:
-			1px 0 2px #{$colour}33,     /* left (small shadow) */
-			0 4px 4px #{$colour}40,     /* bottom */
-			4px 0 4px #{$colour}40,     /* right */
-			0 -4px 4px #{$colour}40;    /* top */
+	.book-wrapper {
+		img {
+			box-shadow:
+				1px 0 2px #{$colour}33,     /* left (small shadow) */
+				0 4px 4px #{$colour}40,     /* bottom */
+				4px 0 4px #{$colour}40,     /* right */
+				0 -4px 4px #{$colour}40;    /* top */
 		}
+		// .book-season-wrapper .book-season {
+		// 	background-color: $colour;
+		// }
+	}
 }
 
 @mixin book-colour-full($colour: red, $shadow-lightness: 0) {
@@ -327,20 +332,41 @@ article {
 		right: 0;
 		top: 0;
 		.book-season {
-			background-color: $brown;
-			bottom: 0;
-			color: $paper;
+			// background-color: #666;
+			bottom: 2rem;
+			color: $brown;
 			font-family: "Alegreya Sans SC";
-			font-size: $body-font-size;
-			font-style: normal;
-			font-variant: small-caps;
 			left: 25%;
-			padding: $body-margin-half 0 $body-margin-half $body-margin * 1.5;
+			padding: 0 1.45rem 0 0;
 			position: absolute;
 			text-align: center;
-      text-transform: lowercase;
+			text-transform: lowercase;
 			transform: rotate(-33deg);
-			width: 100%;
+			right: -7rem;
+			font-size: 0.9rem;
+			font-weight: 400;
 		}
 	}
 }
+
+// .book-wrapper {
+// 	.book-season-wrapper {
+// 		left: 0;
+// 		position: absolute;
+// 		top: 0;
+// 		.book-season {
+// 			background-color: $brown;
+// 			color: $paper;
+// 			font-family: "Alegreya Sans SC";
+// 			right: $body-margin * -1;
+// 			padding: 0 $body-margin-quarter;
+// 			position: absolute;
+// 			text-align: center;
+//       text-transform: lowercase;
+// 			top: $body-margin;
+// 			white-space: nowrap;
+// 			box-shadow:
+// 				0 -15px 10px 0 #{$brown}33;
+// 		}
+// 	}
+// }

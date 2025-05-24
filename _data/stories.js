@@ -81,7 +81,7 @@ async function getAllStories() {
 									authorsType
 									body
 									bookInShops,
-									publishedBook,
+									bookPublished,
 									coda
 									dateTimePublication
 									description
@@ -468,9 +468,9 @@ async function getAllStories() {
 			body: anchoredBody,
 			booksMentioned,
 			bookInShops: atts.bookInShops,
-			bookPublished: atts.type === 'Ktieb_stampat' && atts.publishedBook,
-			bookPreRelease: atts.type === 'Ktieb_stampat' && !atts.publishedBook,
-			bookSeason: atts.type === 'Ktieb_stampat' && !atts.publishedBook && `${issueSeason} ${issueYear}`,
+			bookPublished: atts.type === 'Ktieb_stampat' && atts.bookPublished,
+			bookPreRelease: atts.type === 'Ktieb_stampat' && !atts.bookPublished,
+			bookSeason: atts.type === 'Ktieb_stampat' && !atts.bookPublished && `${issueSeason} ${issueYear}`,
 			coda: atts.coda,
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,
