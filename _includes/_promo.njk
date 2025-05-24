@@ -11,6 +11,11 @@
 				{% set imageCrop = 'uncropped' %}
 				<div class="book-wrapper">
 					{% include "_image.njk" %}
+					{% if promo.bookSeason %}
+						<div class="book-season-wrapper">
+							<div class="book-season">{{ promo.bookSeason }}</div>
+						</div>
+					{% endif %}
 				</div>
 			{% endif %}
 		{% else %}

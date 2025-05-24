@@ -4,17 +4,11 @@
 @use "mixins-etc" as *;
 
 article.ktieb-stampat {
-  .container {
-    .end-dot {
-			background-color: $podcast-beige;
-      border-radius: 0;
-    }
-  }
   &.content {
     h1 {
       color: $light-brown;
     }
-    // border-bottom-color: $podcast-beige;
+    border-bottom-color: $podcast-beige;
     h5,
     h6,
     p {
@@ -26,40 +20,36 @@ article.ktieb-stampat {
 	figcaption {
 		display: none;
 	}
-	.text-wrapper {
-		margin-bottom: $body-margin;
-	}
 }
 
 @mixin book-colour($colour: red) {
+  .container {
+    .end-dot {
+			background-color: $colour;
+    }
+  }
 	.book-wrapper img {
-		// box-shadow: 0 -1px 3px 0 lighten($colour, $shadow-lightness),
-		// 						0 2px 5px 0 lighten($colour, $shadow-lightness);
-  box-shadow:
-    1px 0 2px #{$colour}33,     /* left (small shadow) */
-    0 4px 4px #{$colour}40,     /* bottom */
-    4px 0 4px #{$colour}40,     /* right */
-    0 -4px 4px #{$colour}40;    /* top */
-		// &:before,
-		// &:after {
-		// 	box-shadow: 0 5px 3px 0 lighten($colour, $shadow-lightness);
-		// }
-	}
+		box-shadow:
+			1px 0 2px #{$colour}33,     /* left (small shadow) */
+			0 4px 4px #{$colour}40,     /* bottom */
+			4px 0 4px #{$colour}40,     /* right */
+			0 -4px 4px #{$colour}40;    /* top */
+		}
 }
 
 @mixin book-colour-full($colour: red, $shadow-lightness: 0) {
 	.book-wrapper img {
-		// box-shadow: 0 -1px 10px 0 lighten($colour, $shadow-lightness),
-		// 						0 6px 20px 0 lighten($colour, $shadow-lightness);
 		box-shadow:
-			1px 0 2px #{$colour}33,     /* left (small shadow) */
-			0 6px 6px #{$colour}54,     /* bottom */
-			6px 0 6px #{$colour}54,     /* right */
-			0 -6px 6px #{$colour}54;    /* top */
-		// &:before,
-		// &:after {
-		// 	box-shadow: 0 15px 10px 0 lighten($colour, $shadow-lightness);
-		// }
+			1px 0 2px #{$colour}33,
+			0 6px 6px #{$colour}54,
+			6px 0 6px #{$colour}54,
+			0 -6px 6px #{$colour}54;
+		&:before,
+		&:after {
+			box-shadow:
+				0 15px 10px 0 #{$colour}54,
+				0 -15px 10px 0 #{$colour}54;
+		}
 	}
 }
 
@@ -232,13 +222,16 @@ article {
 }
 
 .books {
-	@media all and (min-width: $tablet-breakpoint) {
-		#grid-body {
+	#grid-body {
+		ul.promo-list > li {
+				border-bottom: none;
+		}
+		@media all and (min-width: $tablet-breakpoint) {
 			max-width: 100%;
 			width: 100%;
 			ul.promo-list {
 				&> li {
-					border-bottom: none;;
+					border-bottom: none;
 					float: left;
 					width: 20.8%;
 					margin: $body-margin;
@@ -249,9 +242,6 @@ article {
 }
 
 .promo-ktieb-stampat {
-	// background-image: url(/img/deco/inforra-cara-1.png);
-	// border: 1px solid $lightest-brown;
-	// padding: $body-margin;
 	header {
 		h1 {
 			&::before {
@@ -324,5 +314,33 @@ article {
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
     text-decoration-skip-ink: auto;
+	}
+}
+
+
+.book-wrapper {
+	.book-season-wrapper {
+		bottom: 10px;
+		left: 0;
+		overflow: hidden;
+		position: absolute;
+		right: 0;
+		top: 0;
+		.book-season {
+			background-color: $brown;
+			bottom: 0;
+			color: $paper;
+			font-family: "Alegreya Sans SC";
+			font-size: $font-size-smallcaps;
+			font-style: normal;
+			font-variant: small-caps;
+			left: 25%;
+			padding: $body-margin-half 0 $body-margin-half $body-margin * 1.5;
+			position: absolute;
+			text-align: center;
+      text-transform: lowercase;
+			transform: rotate(-33deg);
+			width: 100%;
+		}
 	}
 }
