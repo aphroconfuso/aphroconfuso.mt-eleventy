@@ -181,15 +181,15 @@ permalink: /{{ story.slug }}/index.html
 					</section>
 				{% elif story.type === 'Ktieb_stampat' %}
 					<section class="generic-body-text">
-						{% if promo.promoImageMobile %}
-							{% set slide = promo.promoImageMobile.attributes.formats %}
+						{% if story.promoImageMobile %}
+							{% set slide = story.promoImageMobile.attributes.formats %}
 							{% set slideMobile = slide %}
 							{% set imageCrop = 'uncropped' %}
 							<div class="book-wrapper">
 								{% include "_image.njk" %}
-								{% if promo.bookSeason %}
+								{% if story.bookSeason %}
 									<div class="book-season-wrapper">
-										<div class="book-season">{{ promo.bookSeason }}</div>
+										<div class="book-season">{{ story.bookSeason }}</div>
 									</div>
 								{% endif %}
 							</div>

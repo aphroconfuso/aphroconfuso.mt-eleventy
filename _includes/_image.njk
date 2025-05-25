@@ -1,7 +1,7 @@
 <figure class="editorial-image">
 	{% set url = metadata.settings.imagesUrl %}
 	{% set crop = story.imageCrop or imageCrop or 'landscape' %}
-	{% set square = story.useSquareOnMobile or useSquareOnMobile or false %}
+	{% set square = story.useSquareOnMobile or useSquareOnMobile %}
 	<picture>
 		{% if imageMode === 'lightbox' %}
 			<source media="(min-height: 900px)" type="image/avif" srcset="{{ url }}{{ slide['large_' + crop + '_avif_x3'].hash }}{{ slide['large_' + crop + '_avif_x3'].ext }}">
@@ -56,5 +56,7 @@
 			{%endif %}
 		>
 	</picture>
-	{% if image.attributes.caption %}<figcaption>{{ image.attributes.caption | prettifyMaltese | safe }}</figcaption>{% endif %}
+	{% if image.attributes.caption %}
+		<figcaption>{{ image.attributes.caption | prettifyMaltese | safe }}</figcaption>
+	{% endif %}
 </figure>

@@ -324,13 +324,17 @@ article {
 
 
 .book-wrapper {
+	position: relative;
 	.book-season-wrapper {
-		bottom: 10px;
+		bottom: 38px;
 		left: 0;
 		overflow: hidden;
 		position: absolute;
 		right: 0;
 		top: 0;
+		@media all and (min-width: $tablet-breakpoint) {
+			bottom: 10px;
+		}
 		.book-season {
 			background-color: $brown;
 			bottom: 2rem;

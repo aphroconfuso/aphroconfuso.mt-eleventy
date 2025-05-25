@@ -174,7 +174,7 @@
 	}
 	#grid-body {
 		.splide {
-			&:not(.Wisgha_tat_test) {
+			&:not(.Wisgha_tat_test):not(.Wisgha_tat_test_16_9) {
 				margin-left: -30%;
 				width: 160%;
 			}
