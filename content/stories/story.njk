@@ -113,9 +113,9 @@ permalink: /{{ story.slug }}/index.html
 		</header>
 		<div class="container">
 			<section id="grid-max-panel-right-top">
-				{% if story.bookPublished %}
+				{# {% if story.bookPublished %}
 					{% include "_print_book_panel.njk" %}
-				{% endif %}
+				{% endif %} #}
 				{% if story.podcastNote and not story.podcastUrl and story.type !== 'Ktieb_stampat' %}
 					<aside id="podcast-note">
 						{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
@@ -181,12 +181,17 @@ permalink: /{{ story.slug }}/index.html
 					</section>
 				{% elif story.type === 'Ktieb_stampat' %}
 					<section class="generic-body-text">
-						{% if story.promoImageMobile %}
-							{% set slide = story.promoImageMobile.attributes.formats %}
+						{% if promo.promoImageMobile %}
+							{% set slide = promo.promoImageMobile.attributes.formats %}
 							{% set slideMobile = slide %}
 							{% set imageCrop = 'uncropped' %}
 							<div class="book-wrapper">
 								{% include "_image.njk" %}
+								{% if promo.bookSeason %}
+									<div class="book-season-wrapper">
+										<div class="book-season">{{ promo.bookSeason }}</div>
+									</div>
+								{% endif %}
 							</div>
 						{% endif %}
 						<section class="text-wrapper">
