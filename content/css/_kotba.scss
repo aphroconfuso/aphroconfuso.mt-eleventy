@@ -326,30 +326,31 @@ article {
 .book-wrapper {
 	position: relative;
 	.book-season-wrapper {
-		bottom: 38px;
-		left: 0;
-		overflow: hidden;
-		position: absolute;
-		right: 0;
-		top: 0;
-		@media all and (min-width: $tablet-breakpoint) {
-			bottom: 10px;
-		}
-		.book-season {
-			background-color: $brown;
-			bottom: 2rem;
-			color: $paper;
-			font-family: "Alegreya Sans SC";
-			left: 25%;
-			padding: 0 1.45rem 0 0;
-			position: absolute;
-			text-align: center;
-			text-transform: lowercase;
-			transform: rotate(-33deg);
-			right: -7rem;
-			font-size: 0.9rem;
-			font-weight: 400;
-		}
+		display: none;
+		// bottom: 38px;
+		// left: 0;
+		// overflow: hidden;
+		// position: absolute;
+		// right: 0;
+		// top: 0;
+		// @media all and (min-width: $tablet-breakpoint) {
+		// 	bottom: 10px;
+		// }
+		// .book-season {
+		// 	background-color: $brown;
+		// 	bottom: 2rem;
+		// 	color: $paper;
+		// 	font-family: "Alegreya Sans SC";
+		// 	left: 25%;
+		// 	padding: 0 1.45rem 0 0;
+		// 	position: absolute;
+		// 	text-align: center;
+		// 	text-transform: lowercase;
+		// 	transform: rotate(-33deg);
+		// 	right: -7rem;
+		// 	font-size: 0.9rem;
+		// 	font-weight: 400;
+		// }
 	}
 }
 
