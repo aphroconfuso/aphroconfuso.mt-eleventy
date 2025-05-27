@@ -18,6 +18,7 @@ const { imageData, linkedStoryData, personData } = require("./_fragments.js");
 
 let abecedaireArray = [];
 let almanacArray = [];
+let wordcountArray = [];
 let cumulativeBody, cumulativeWordcount;
 
 const shuffleArray = (array) => {
@@ -285,6 +286,7 @@ async function getAllStories() {
 	const getWordFrequency = (text) => {
 		const wordsArray = splitText(text, true);
 		wordcount = wordsArray.length;
+		wordcountArray.push({ "${id}": wordcount });
 		cumulativeWordcount += wordcount;
 		const wordFrequency = {};
 		wordsArray.forEach((word) => {

@@ -15,94 +15,91 @@ permalink: /{{ contributor.slug }}/index.html
 {% endblock %}
 
 {% block content %}
-<article class="generic contributor-{{ contributor.id }}" data-pagefind-body>
-	<header>
-		<ul><li class="header-label"><a href="/kontributuri/">Kontributuri</a></li></ul>
-		<h1 data-pagefind-weight="9">{{ contributor.name | prettifyMaltese | safe }}</h1>
-	</header>
-	<div class="container-generic contributor">
-		<section id="grid-body">
-			<div class="generic-body-text" data-pagefind-weight="3">
-				<div data-pagefind-body data-pagefind-weight="1">
-					{{ contributor.bioNote | prettifyMaltese | safe }}
+	<article class="generic contributor-{{ contributor.id }}" data-pagefind-body>
+		<header>
+			<ul>
+				<li class="header-label">
+					<a href="/kontributuri/">Kontributuri</a>
+				</li>
+			</ul>
+			<h1 data-pagefind-weight="9">{{ contributor.name | prettifyMaltese | safe }}</h1>
+		</header>
+		<div class="container-generic contributor">
+			<section id="grid-body">
+				<div class="generic-body-text" data-pagefind-weight="3">
+					<div data-pagefind-body data-pagefind-weight="1">
+						{{ contributor.bioNote | prettifyMaltese | safe }}
+					</div>
+					{% if contributor.booksAuthored.length %}
+						<div class="books">
+							<p class="continuity">Kotba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> ippubblikati minn <span class="contributor">Aphroconfuso</span>:</p>
+							{% set promos = contributor.booksAuthored %}
+							{% set promoFrom = contributor.name %}
+							{% include '_promo_list.njk' %}
+						</div>
+					{% endif %}
+					{% if contributor.anthologiesIncluded.length %}
+						<div class="anthologies books">
+							<p class="continuity">Kotba ta’ <span class="contributor">Aphroconfuso</span> bil-kitba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
+							{% set promos = contributor.anthologiesIncluded %}
+							{% set promoFrom = contributor.name %}
+							{% include '_promo_list.njk' %}
+						</div>
+					{% endif %}
+					{% if contributor.storiesAuthored.length %}
+						<div class="wrote">
+							<p class="continuity">Kitba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> fil-ġurnal:</p>
+							{% set promos = contributor.storiesAuthored %}
+							{% set promoFrom = contributor.name %}
+							{% set omitEpisodeNumber = true %}
+							{% set showLengths = true %}
+							{% set showEpisodeTitle = true %}
+							{% include '_promo_list.njk' %}
+						</div>
+					{% endif %}
+					{% if contributor.diaryEntries.length %}
+						<div class="diarised">
+							<p class="continuity">Entrati mid-djarju ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
+							{% set collated = true %}
+							{% set showLengths = true %}
+							{% set omitEpisodeNumber = true %}
+							{% set promos = contributor.diaryEntries %}
+							{% include '_promo_list.njk' %}
+						</div>
+					{% endif %}
+					{% if contributor.storiesTranslated.length %}
+						<div class="translated">
+							<p class="continuity">Traduzzjonijiet ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
+							{% set promos = contributor.storiesTranslated %}
+							{% include '_promo_list.njk' %}
+						</div>
+					{% endif %}
+					{% if contributor.collaborationsAuthored.length %}
+						<div class="collaborated">
+							<p class="continuity">Kollaborazzjonijiet:</p>
+							{% set promos = contributor.collaborationsAuthored %}
+							{% set omitAuthor = false %}
+							{% include '_promo_list.njk' %}
+						</div>
+					{% endif %}
+					{% if contributor.podcastEpisodes.length %}
+						<div class="podcasts">
+							<p class="continuity">Poddati ma’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
+							{% set promos = contributor.podcastEpisodes %}
+							{% set showDurations = true %}
+							{% set showLengths = false %}
+							{% set omitAuthor = true %}
+							{% include '_promo_list.njk' %}
+						</div>
+					{% endif %}
 				</div>
-				{% if contributor.booksAuthored.length %}
-					<div class="books">
-						<p class="continuity">Kotba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> ippubblikati minn <span class="contributor">Aphroconfuso</span>:</p>
-						{% set promos = contributor.booksAuthored %}
-						{% set promoFrom = contributor.name %}
-						{% set omitEpisodeNumber = true %}
-						{% set showLengths = true %}
-						{% set showEpisodeTitle = true %}
-						{% include '_promo_list.njk' %}
-					</div>
-				{% endif %}
-				{% if contributor.anthologiesIncluded.length %}
-					<div class="anthologies">
-						<p class="continuity">Kotba ta’ <span class="contributor">Aphroconfuso</span> bil-kitba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
-						{% set promos = contributor.anthologiesIncluded %}
-						{% set promoFrom = contributor.name %}
-						{% set omitAuthor = true %}
-						{% set omitEpisodeNumber = true %}
-						{% set showLengths = true %}
-						{% set showEpisodeTitle = true %}
-						{% include '_promo_list.njk' %}
-					</div>
-				{% endif %}
-				{% if contributor.storiesAuthored.length %}
-					<div class="wrote">
-						<p class="continuity">Kitba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> fil-ġurnal:</p>
-						{% set promos = contributor.storiesAuthored %}
-						{% set promoFrom = contributor.name %}
-						{% set omitEpisodeNumber = true %}
-						{% set showLengths = true %}
-						{% set showEpisodeTitle = true %}
-						{% include '_promo_list.njk' %}
-					</div>
-				{% endif %}
-				{% if contributor.diaryEntries.length %}
-					<div class="diarised">
-						<p class="continuity">Entrati mid-djarju ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
-						{% set collated = true %}
-						{% set showLengths = true %}
-						{% set omitEpisodeNumber = true %}
-						{% set promos = contributor.diaryEntries %}
-						{% include '_promo_list.njk' %}
-					</div>
-				{% endif %}
-				{% if contributor.storiesTranslated.length %}
-					<div class="translated">
-						<p class="continuity">Traduzzjonijiet ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
-						{% set promos = contributor.storiesTranslated %}
-						{% include '_promo_list.njk' %}
-					</div>
-				{% endif %}
-				{% if contributor.collaborationsAuthored.length %}
-					<div class="collaborated">
-						<p class="continuity">Kollaborazzjonijiet:</p>
-						{% set promos = contributor.collaborationsAuthored %}
-						{% set omitAuthor = false %}
-						{% include '_promo_list.njk' %}
-					</div>
-				{% endif %}
-				{% if contributor.podcastEpisodes.length %}
-					<div class="podcasts">
-						<p class="continuity">Poddati ma’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
-						{% set promos = contributor.podcastEpisodes %}
-						{% set showDurations = true %}
-						{% set showLengths = false %}
-						{% set omitAuthor = true %}
-						{% include '_promo_list.njk' %}
-					</div>
-				{% endif %}
-			</div>
-		</section>
-		<section id="grid-max-panel-left-top" data-pagefind-ignore>
-			{% include "_menu_contributors.njk" %}
-		</section>
-	</div>
-</article>
-<script>
-	reportingTitle = "{{ contributor.name }}";
-</script>
+			</section>
+			<section id="grid-max-panel-left-top" data-pagefind-ignore>
+				{% include "_menu_contributors.njk" %}
+			</section>
+		</div>
+	</article>
+	<script>
+		reportingTitle = "{{ contributor.name }}";
+	</script>
 {% endblock %}

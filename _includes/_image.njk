@@ -1,16 +1,39 @@
 <figure class="editorial-image">
 	{% set url = metadata.settings.imagesUrl %}
-	{% set crop = story.imageCrop or imageCrop or 'landscape' %}
-	{% set square = story.useSquareOnMobile or useSquareOnMobile %}
+	{% set crop = imageCrop or story.imageCrop or 'landscape' %}
+	{% set square = useSquare or useSquareOnMobile or story.useSquareOnMobile %}
 	<picture>
-		{% if imageMode === 'lightbox' %}
-			<source media="(min-height: 900px)" type="image/avif" srcset="{{ url }}{{ slide['large_' + crop + '_avif_x3'].hash }}{{ slide['large_' + crop + '_avif_x3'].ext }}">
-			<source media="(min-height: 600px)" type="image/avif" srcset="{{ url }}{{ slide['large_' + crop + '_avif_x2'].hash }}{{ slide['large_' + crop + '_avif_x2'].ext }}">
-			<source media="(min-height: 1px)" type="image/avif" srcset="{{ url }}{{ slide['large_' + crop + '_avif'].hash }}{{ slide['large_' + crop + '_avif'].ext }}">
-			<source media="(min-height: 900px)" type="image/jpeg" srcset="{{ url }}{{ slide['large_' + crop + '_jpeg_x3'].hash }}{{ slide['large_' + crop + '_jpeg_x3'].ext }}">
-			<source media="(min-height: 600px)" type="image/jpeg" srcset="{{ url }}{{ slide['large_' + crop + '_jpeg_x2'].hash }}{{ slide['large_' + crop + '_jpeg_x2'].ext }}">
-			<source media="(min-height: 1px)" type="image/jpeg" srcset="{{ url }}{{ slide['large_' + crop + '_jpeg'].hash }}{{ slide['large_' + crop + '_jpeg'].ext }}">
+		{% if square %}
+			<source media="(min-width: 1px)" type="image/avif" srcset="
+				{# {{ url }}{{ slide.square_avif.hash }}{{ slide.square_avif.ext }} 1x, #}
+				{{ url }}{{ slide.square_avif_x2.hash }}{{ slide.square_avif_x2.ext }} 2x,
+				{{ url }}{{ slide.square_avif_x3.hash }}{{ slide.square_avif_x3.ext }} 3x
+			">
+			<source media="(min-width: 1px)" type="image/jpeg" srcset="
+				{# {{ url }}{{ slide.square_jpeg.hash }}{{ slide.square_jpeg.ext }} 1x, #}
+				{{ url }}{{ slide.square_jpeg_x2.hash }}{{ slide.square_jpeg_x2.ext }} 2x,
+				{{ url }}{{ slide.square_jpeg_x3.hash }}{{ slide.square_jpeg_x3.ext }} 3x
+			">
 		{% else %}
+			{% if imageMode === 'lightbox' %}
+				<source media="(min-height: 900px)" type="image/avif" srcset="{{ url }}{{ slide['large_' + crop + '_avif_x3'].hash }}{{ slide['large_' + crop + '_avif_x3'].ext }}">
+				<source media="(min-height: 600px)" type="image/avif" srcset="{{ url }}{{ slide['large_' + crop + '_avif_x2'].hash }}{{ slide['large_' + crop + '_avif_x2'].ext }}">
+				<source media="(min-height: 1px)" type="image/avif" srcset="{{ url }}{{ slide['large_' + crop + '_avif'].hash }}{{ slide['large_' + crop + '_avif'].ext }}">
+				<source media="(min-height: 900px)" type="image/jpeg" srcset="{{ url }}{{ slide['large_' + crop + '_jpeg_x3'].hash }}{{ slide['large_' + crop + '_jpeg_x3'].ext }}">
+				<source media="(min-height: 600px)" type="image/jpeg" srcset="{{ url }}{{ slide['large_' + crop + '_jpeg_x2'].hash }}{{ slide['large_' + crop + '_jpeg_x2'].ext }}">
+				<source media="(min-height: 1px)" type="image/jpeg" srcset="{{ url }}{{ slide['large_' + crop + '_jpeg'].hash }}{{ slide['large_' + crop + '_jpeg'].ext }}">
+			{% elif imageMode === 'promo' and slideMobile %}
+				<source media="(max-width: {{ metadata.settings.breakpoints.mobile }})" type="image/avif" srcset="
+					{# {{ url }}{{ slideMobile.large_uncropped_avif.hash }}{{ slideMobile.large_uncropped_avif.ext }} 1x, #}
+					{{ url }}{{ slideMobile.large_uncropped_avif_x2.hash }}{{ slideMobile.large_uncropped_avif_x2.ext }} 2x,
+					{{ url }}{{ slideMobile.large_uncropped_avif_x3.hash }}{{ slideMobile.large_uncropped_avif_x3.ext }} 3x
+				">
+				<source media="(max-width: {{ metadata.settings.breakpoints.mobile }})" type="image/jpeg" srcset="
+					{# {{ url }}{{ slideMobile.large_uncropped_jpeg.hash }}{{ slideMobile.large_uncropped_jpeg.ext }} 1x, #}
+					{{ url }}{{ slideMobile.large_uncropped_jpeg_x2.hash }}{{ slideMobile.large_uncropped_jpeg_x2.ext }} 2x,
+					{{ url }}{{ slideMobile.large_uncropped_jpeg_x3.hash }}{{ slideMobile.large_uncropped_jpeg_x3.ext }} 3x
+				">
+			{% endif %}
 			<source media="(min-width: {{ metadata.settings.breakpoints.mobile }})" type="image/avif" srcset="
 				{# {{ url }}{{ slide['large_' + crop + '_avif'].hash }}{{ slide['large_' + crop + '_avif'].ext }} 1x, #}
 				{{ url }}{{ slide['large_' + crop + '_avif_x2'].hash }}{{ slide['large_' + crop + '_avif_x2'].ext }} 2x,
@@ -21,32 +44,8 @@
 				{{ url }}{{ slide['large_' + crop + '_jpeg_x2'].hash }}{{ slide['large_' + crop + '_jpeg_x2'].ext }} 2x,
 				{{ url }}{{ slide['large_' + crop + '_jpeg_x3'].hash }}{{ slide['large_' + crop + '_jpeg_x3'].ext }} 3x
 			">
-			{% if imageMode === 'promo' and slideMobile %}
-				<source media="(min-width: 1px)" type="image/avif" srcset="
-					{# {{ url }}{{ slideMobile.large_uncropped_avif.hash }}{{ slideMobile.large_uncropped_avif.ext }} 1x, #}
-					{{ url }}{{ slideMobile.large_uncropped_avif_x2.hash }}{{ slideMobile.large_uncropped_avif_x2.ext }} 2x,
-					{{ url }}{{ slideMobile.large_uncropped_avif_x3.hash }}{{ slideMobile.large_uncropped_avif_x3.ext }} 3x
-				">
-				<source media="(min-width: 1px)" type="image/jpeg" srcset="
-					{# {{ url }}{{ slideMobile.large_uncropped_jpeg.hash }}{{ slideMobile.large_uncropped_jpeg.ext }} 1x, #}
-					{{ url }}{{ slideMobile.large_uncropped_jpeg_x2.hash }}{{ slideMobile.large_uncropped_jpeg_x2.ext }} 2x,
-					{{ url }}{{ slideMobile.large_uncropped_jpeg_x3.hash }}{{ slideMobile.large_uncropped_jpeg_x3.ext }} 3x
-				">
-			{% elif square %}
-				<source media="(min-width: 1px)" type="image/avif" srcset="
-					{# {{ url }}{{ slide.square_avif.hash }}{{ slide.square_avif.ext }} 1x, #}
-					{{ url }}{{ slide.square_avif_x2.hash }}{{ slide.square_avif_x2.ext }} 2x,
-					{{ url }}{{ slide.square_avif_x3.hash }}{{ slide.square_avif_x3.ext }} 3x
-				">
-				<source media="(min-width: 1px)" type="image/jpeg" srcset="
-					{# {{ url }}{{ slide.square_jpeg.hash }}{{ slide.square_jpeg.ext }} 1x, #}
-					{{ url }}{{ slide.square_jpeg_x2.hash }}{{ slide.square_jpeg_x2.ext }} 2x,
-					{{ url }}{{ slide.square_jpeg_x3.hash }}{{ slide.square_jpeg_x3.ext }} 3x
-				">
-			{% else %}
-				<source media="(min-width: 1px)" type="image/avif" srcset="{{ url }}{{ slide['large_' + crop + '_avif'].hash }}{{ slide['large_' + crop + '_avif'].ext }}">
-				<source media="(min-width: 1px)" type="image/jpeg" srcset="{{ url }}{{ slide['large_' + crop + '_jpeg'].hash }}{{ slide['large_' + crop + '_jpeg'].ext }}">
-			{% endif %}
+			<source media="(min-width: 1px)" type="image/avif" srcset="{{ url }}{{ slide['large_' + crop + '_avif'].hash }}{{ slide['large_' + crop + '_avif'].ext }}">
+			<source media="(min-width: 1px)" type="image/jpeg" srcset="{{ url }}{{ slide['large_' + crop + '_jpeg'].hash }}{{ slide['large_' + crop + '_jpeg'].ext }}">
 		{% endif %}
 		<img
 			src="{{ url }}{{ slide.social.hash }}{{ slide.social.ext }}"

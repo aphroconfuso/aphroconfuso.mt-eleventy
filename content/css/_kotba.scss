@@ -3,25 +3,6 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
-article.ktieb-stampat {
-  &.content {
-    h1 {
-      color: $light-brown;
-    }
-    border-bottom-color: $podcast-beige;
-    h5,
-    h6,
-    p {
-      &.break {
-        margin-top: $body-margin * 1.5;
-      }
-    }
-  }
-	figcaption {
-		display: none;
-	}
-}
-
 @mixin book-colour($colour: red) {
   .container {
     .end-dot {
@@ -43,6 +24,7 @@ article.ktieb-stampat {
 }
 
 @mixin book-colour-full($colour: red, $shadow-lightness: 0) {
+	border-bottom-color: $colour;
 	.book-wrapper img {
 		box-shadow:
 			1px 0 2px #{$colour}33,
@@ -58,32 +40,6 @@ article.ktieb-stampat {
 	}
 }
 
-.book-wrapper img {
-	overflow: unset;
-	position: relative;
-	width:100%;
-	&:before,
-	&:after {
-		background: #777;
-		bottom: 80%;
-		content: "";
-		left: auto;
-		max-width:300px;
-		position: absolute;
-		right: 12px;
-		top: 15px;
-		transform: rotate(-182deg);
-		width: 50%;
-		z-index: -1;
-	}
-	&:after {
-		bottom: 15px;
-		top: 80%;
-		transform: rotate(5deg);
-		z-index: -2;
-	}
-}
-
 $antologija1: #327a7d;
 $antologija2: #72523d;
 $antologija3: #603783;
@@ -93,32 +49,23 @@ $martamarta: #7b7636;
 $qarn: #c72231;
 $saffo: #a94b6f;
 
-.story-88 {
-	@include book-colour($antologija1);
-}
-.story-115 {
-	@include book-colour($qarn);
-}
-.story-141 {
-	@include book-colour($essidr);
-}
-.story-142 {
-	@include book-colour($martamarta);
-}
-.story-143 {
-	@include book-colour($burmghez);
-}
-.story-144 {
-	@include book-colour($saffo);
-}
-.story-145 {
-	@include book-colour($antologija2);
-}
-.story-140 {
-	@include book-colour($antologija3);
-}
-
-article {
+article.ktieb-stampat {
+  &.content {
+    h1 {
+      color: $light-brown;
+    }
+    border-bottom-color: $podcast-beige;
+    h5,
+    h6,
+    p {
+      &.break {
+        margin-top: $body-margin * 1.5;
+      }
+    }
+  }
+	figcaption {
+		display: none;
+	}
 	&.story-88 {
 		@include book-colour-full($antologija1);
 	}
@@ -143,6 +90,65 @@ article {
 	&.story-140 {
 		@include book-colour-full($antologija3);
 	}
+	.splide {
+		padding: ($body-margin * 1.5) $body-margin $body-margin !important;
+		border: 1px solid $lightest-brown;
+		margin-top: $body-margin;
+		figure {
+			margin: 0;
+		}
+	}
+}
+
+.book-wrapper img {
+	overflow: unset;
+	position: relative;
+	// width:100%;
+	&:before,
+	&:after {
+		background: #777;
+		bottom: 80%;
+		content: "";
+		left: auto;
+		max-width:300px;
+		position: absolute;
+		right: 12px;
+		top: 15px;
+		transform: rotate(-182deg);
+		width: 50%;
+		z-index: -1;
+	}
+	&:after {
+		bottom: 15px;
+		top: 80%;
+		transform: rotate(5deg);
+		z-index: -2;
+	}
+}
+
+.story-88 {
+	@include book-colour($antologija1);
+}
+.story-115 {
+	@include book-colour($qarn);
+}
+.story-141 {
+	@include book-colour($essidr);
+}
+.story-142 {
+	@include book-colour($martamarta);
+}
+.story-143 {
+	@include book-colour($burmghez);
+}
+.story-144 {
+	@include book-colour($saffo);
+}
+.story-145 {
+	@include book-colour($antologija2);
+}
+.story-140 {
+	@include book-colour($antologija3);
 }
 
 .pre-release #grid-body {
@@ -183,7 +189,7 @@ article {
 		padding: $body-margin-half 0 0 0;
 	}
   @media all and (min-width: $laptop-breakpoint) {
-		flex-direction: row;
+		flex-direction: column;
 		div.main {
 			padding: 0 $body-margin-half 0 0;
 		}
@@ -226,23 +232,52 @@ article {
 	}
 }
 
-.books {
-	#grid-body {
-		ul.promo-list > li {
-				border-bottom: none;
-		}
-		@media all and (min-width: $tablet-breakpoint) {
-			max-width: 100%;
+@mixin book-list($items-per-row: 4, $limit: 4) {
+	display: grid;
+	grid-template-columns: repeat($items-per-row, 1fr);
+	gap: $body-margin-double;
+	width: 100%;
+	&> li {
+		border-bottom: none;
+		margin-bottom: 0;
+		img {
 			width: 100%;
-			ul.promo-list {
-				&> li {
-					border-bottom: none;
-					float: left;
-					width: 20.8%;
-					margin: $body-margin;
-				}
-			}
+			height: auto;
+			display: block;
 		}
+		aside {
+			display: none;
+		}
+	}
+  @media (max-width: $mobile-breakpoint) {
+    grid-template-columns: 1fr;
+		gap: $body-margin;
+    & > :nth-child(n + #{$limit}) {
+      display: none;
+    }
+  }
+}
+
+.books #grid-body {
+	max-width: 100%;
+}
+
+.books ul.promo-list {
+	@include book-list();
+}
+
+.contributor .books ul.promo-list {
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.home .ga-books {
+  @media (min-width: $laptop-breakpoint) {
+		nav {
+			margin-bottom: $body-margin;
+		}
+	}
+	ul.promo-list {
+		@include book-list(6);
 	}
 }
 
@@ -291,15 +326,15 @@ article {
 	}
 }
 
-.ga-book-image-promo {
-	a {
-		border: 1px solid $lightest-brown;
-		padding: $body-margin-half;
-	}
-	@media all and (min-width: $mobile-breakpoint-plusone) {
-		display: none !important;
-	}
-}
+// .ga-book-image-promo {
+// 	a {
+// 		border: 1px solid $lightest-brown;
+// 		padding: $body-margin-half;
+// 	}
+// 	@media all and (min-width: $mobile-breakpoint-plusone) {
+// 		display: none !important;
+// 	}
+// }
 
 .end-promos .ga-book-image-promo {
 	a {
@@ -322,56 +357,15 @@ article {
 	}
 }
 
-
 .book-wrapper {
 	position: relative;
 	.book-season-wrapper {
 		display: none;
-		// bottom: 38px;
-		// left: 0;
-		// overflow: hidden;
-		// position: absolute;
-		// right: 0;
-		// top: 0;
-		// @media all and (min-width: $tablet-breakpoint) {
-		// 	bottom: 10px;
-		// }
-		// .book-season {
-		// 	background-color: $brown;
-		// 	bottom: 2rem;
-		// 	color: $paper;
-		// 	font-family: "Alegreya Sans SC";
-		// 	left: 25%;
-		// 	padding: 0 1.45rem 0 0;
-		// 	position: absolute;
-		// 	text-align: center;
-		// 	text-transform: lowercase;
-		// 	transform: rotate(-33deg);
-		// 	right: -7rem;
-		// 	font-size: 0.9rem;
-		// 	font-weight: 400;
-		// }
 	}
 }
 
-// .book-wrapper {
-// 	.book-season-wrapper {
-// 		left: 0;
-// 		position: absolute;
-// 		top: 0;
-// 		.book-season {
-// 			background-color: $brown;
-// 			color: $paper;
-// 			font-family: "Alegreya Sans SC";
-// 			right: $body-margin * -1;
-// 			padding: 0 $body-margin-quarter;
-// 			position: absolute;
-// 			text-align: center;
-//       text-transform: lowercase;
-// 			top: $body-margin;
-// 			white-space: nowrap;
-// 			box-shadow:
-// 				0 -15px 10px 0 #{$brown}33;
-// 		}
-// 	}
-// }
+article.ktieb-stampat {
+	.book-wrapper {
+			margin-bottom: $body-margin;
+	}
+}

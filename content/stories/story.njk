@@ -113,9 +113,9 @@ permalink: /{{ story.slug }}/index.html
 		</header>
 		<div class="container">
 			<section id="grid-max-panel-right-top">
-				{# {% if story.bookPublished %}
+				{% if story.type === 'Ktieb_stampat' and story.bookPublished %}
 					{% include "_print_book_panel.njk" %}
-				{% endif %} #}
+				{% endif %}
 				{% if story.podcastNote and not story.podcastUrl and story.type !== 'Ktieb_stampat' %}
 					<aside id="podcast-note">
 						{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
@@ -199,10 +199,8 @@ permalink: /{{ story.slug }}/index.html
 						</section>
 						{% if story.slideshow or story.singleImage %}
 							{% set imageMode = 'regular' %}
+							{% set useSquare = true %}
 							{% include "_slideshow.njk" %}
-						{% endif %}
-						{% if story.bookPublished %}
-							{% include "_print_book_panel.njk" %}
 						{% endif %}
 					</section>
 				{% else %}

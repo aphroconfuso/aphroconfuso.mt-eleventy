@@ -26,13 +26,10 @@ permalink: /kotba/index.html
 			{% set promosPublished = stories | selectattr("bookPublished") | sort(false, false, "dateTimePublication") %}
 			{% set promosPrePublished = stories | selectattr("bookPreRelease") | sort(false, false, "dateTimePublication") %}
 			{% set promos = promosPublished.concat(promosPrePublished) %}
-			{% if promos.length %}
-				<div class="generic-body-text">
-					{% set promoFrom = "Ktieb" %}
-					{% set showEpisodeTitle = true %}
-					{% include "_promo_list.njk" %}
-				</div>
-			{% endif %}
+			<div class="generic-body-text">
+				{% set promoFrom = "Ktieb" %}
+				{% include "_promo_list.njk" %}
+			</div>
 		</section>
 	</article>
 	<script>

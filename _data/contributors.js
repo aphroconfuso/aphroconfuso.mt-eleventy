@@ -5,7 +5,7 @@ const getPersonName = require("../src/getPersonName.js");
 const smartTruncate = require("smart-truncate");
 const stripTags = require("striptags");
 
-const { linkedStoryData } = require("./_fragments.js");
+const { linkedStoryData, linkedStoryDataWithImage } = require("./_fragments.js");
 
 async function getAllContributors() {
 	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
@@ -69,7 +69,7 @@ async function getAllContributors() {
 										sort: "dateTimePublication:desc",
 										filters: {type: { eq: "Ktieb stampat"}}
 									) {
-										${ linkedStoryData }
+										${ linkedStoryDataWithImage }
 									}
 									eventsIncluded: storiesAuthored(
 				            publicationState: ${ fetchStatus },

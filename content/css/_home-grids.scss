@@ -82,7 +82,8 @@ a.promo-poetry {
 .ga-editorial,
 .ga-newsletter,
 .ga-podcast,
-.ga-book-image-promo {
+.ga-book-image-promo,
+.ga-books {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -148,8 +149,11 @@ a.promo-poetry {
   flex-direction: column;
   grid-area: ga-diary;
   p {
-    @include clamp(12);
+    @include clamp(10);
   }
+}
+.ga-books {
+	grid-area: ga-books;
 }
 .ga-editorial {
   grid-area: ga-editorial;
@@ -258,4 +262,24 @@ a.promo-poetry {
       padding: 0;
     }
   }
+}
+
+.ga-book-image-promo {
+	border: 1px solid $lightest-brown;
+	padding: $body-margin;
+	figure {
+		margin: 0
+	}
+	aside {
+		display: none
+	}
+	@media all and (min-width: $laptop-breakpoint) {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		margin-top: $body-margin-half;
+		img {
+			height: $body-margin * 16;
+		}
+	}
 }

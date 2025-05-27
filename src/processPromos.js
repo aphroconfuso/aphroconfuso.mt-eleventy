@@ -62,6 +62,7 @@ module.exports = (promos, storyAtts) => {
 			podcastLengthMinutes: promoAtts.podcastLengthMinutes,
 			podcastNote: promoAtts.podcastNote,
 			podcastUrl: promoAtts.podcastUrl,
+			promoImageMobile: promoAtts.promoImageMobile && promoAtts.promoImageMobile.data,
 			putAfterThisText: promo.putAfterThisText,
 			reads: getReads(authorPronoun),
 			sequenceEpisodeNumber: promoAtts.sequenceEpisodeNumber,

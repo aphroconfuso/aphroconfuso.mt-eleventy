@@ -17,7 +17,7 @@
 			{% if item.type === 'Poddata' %}
 				<span class="with">ma’</span>
 			{%- endif %}
-			{% for author in item.authors %}{% if loop.index === 1 or(item.authorsType !== 'solo' and item.authorsType !== 'kollettiva') %}{% if promo or item.translator %}<span class="author">{{ author | prettifyMaltese | safe }}</span>{%- else %}<a class="author" href="/{{ author | slugifyMaltese }}/">{{ author | prettifyMaltese | safe }}</a>{%- endif %}{% if loop.index === 1 and item.authorsType === 'assistita' %} ma’ {%- endif %}{% if loop.index > 1 and loop.revindex === 2 %} & {% elif loop.revindex > 2 and item.authorsType !== 'kollettiva' %}, {% endif %}{%- endif %}{%- endfor %}
+			{% for author in item.authors %}{% if loop.index === 1 or(item.authorsType !== 'solo' and item.authorsType !== 'kollettiva') %}{% if promo or item.translator %}<span class="author">{{ author | prettifyMaltese | safe }}</span>{%- else %}<a class="author" href="/{{ author | slugifyMaltese }}/">{{ author | prettifyMaltese | safe }}</a>{%- endif %}{% if loop.index === 1 and item.authorsType === 'assistita' %} ma’&nbsp;{%- endif %}{% if loop.index > 1 and loop.revindex === 2 %} & {% elif loop.revindex > 2 and item.authorsType !== 'kollettiva' %}, {% endif %}{%- endif %}{%- endfor %}
 		{%- endif %}
 	</h2>
 {% endif %}
@@ -45,4 +45,5 @@
 		{%- endfor %}
 	{%- endif %}
 </h2> #}
+
 

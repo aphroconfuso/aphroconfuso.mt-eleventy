@@ -31,11 +31,13 @@
     "ga-terms"
     "ga9"
     "ga10"
-    "ga11";
+    "ga11"
+		"ga-books";
   .ga-1,
   .ga-3,
   .ga-5,
   .ga-6,
+  .ga-11,
   .ga-image-1,
   .ga-image-2,
 	.ga-image-3 {
@@ -43,7 +45,7 @@
   }
   .ga-1 {
     p {
-      @include clamp(12);
+      @include clamp(10);
     }
   }
   .ga-poem-1 {
@@ -61,12 +63,12 @@
   .ga-diary > ul > li {
     break-inside: avoid;
   }
+	.ga-books {
+		@include border-top();
+	}
   @media all and (min-width: $laptop-breakpoint) {
     .ga-newsletter,
     .ga-podcast,
-		.ga-book-image-promo {
-      display: none;
-    }
     .ga-image-1,
     .ga-image-2,
     .ga-image-3,
@@ -85,16 +87,20 @@
       padding: 0;
       border: none;
     }
-    display: grid;
+    .ga-newsletter,
+    .ga-podcast {
+			display: none;
+		}
+		display: grid;
     gap: $body-margin;
-    grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-auto-columns: 1fr;
     grid-auto-flow: row;
     grid-template-areas:
       "ga1 ga1 ga1 ga1 ga1 ga1"
 		  "ga-diary ga-diary ga-diary ga-diary ga-diary ga-diary"
-			"ga-poem-1 ga-poem-1 ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
+			"ga-poem-1 ga-poem-1 ga-book-image-promo ga-book-image-promo ga-editorial ga-editorial"
       "ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
       "ga2 ga2 ga2 ga2 ga2 ga2"
 			"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
@@ -102,7 +108,8 @@
       "ga6 ga6 ga7 ga7 ga8 ga8"
       "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms"
       "ga9 ga9 ga10 ga10 ga11 ga11"
-      "ga-image-3 ga-image-3 ga-image-3 ga-image-3 ga-image-3 ga-image-3";
+      "ga-image-3 ga-image-3 ga-image-3 ga-image-3 ga-image-3 ga-image-3"
+			"ga-books ga-books ga-books ga-books ga-books ga-books";
     .ga-1 {
       margin-bottom: $body-margin-half;
       header {
