@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const cachedPostFetch = require('../src/cachedPostFetch');
 const processPromos = require("../src/processPromos.js");
 const slugifyMaltese = require("../src/slugifyMaltese.js");
 const getPersonName = require("../src/getPersonName.js");
@@ -15,7 +15,7 @@ async function getAllContributors() {
 	let contributors = [];
 	while (makeNewQuery) {
 		try {
-			const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
+			const data = await cachedPostFetch("https://cms.aphroconfuso.mt/graphql", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -93,7 +93,7 @@ async function getAllContributors() {
 				}),
 			});
 			// store the JSON response when promise resolves
-			const response = await data.json();
+			const response = await data;
 
 			// handle CMS errors
 			if (response.errors) {

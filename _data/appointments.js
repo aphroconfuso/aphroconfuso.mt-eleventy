@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const cachedPostFetch = require('../src/cachedPostFetch');
 const getIssueMonthYear = require("../src/getIssueMonthYear.js");
 const processPromos = require("../src/processPromos.js");
 
@@ -8,12 +8,7 @@ async function getAllAppointments() {
 	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
   let appointmentsData;
 	try {
-		const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-			},
+		const data = await cachedPostFetch("https://cms.aphroconfuso.mt/graphql", {
 			body: JSON.stringify({
 				query: `{
 					appointments(
@@ -38,7 +33,7 @@ async function getAllAppointments() {
 				}`,
 			}),
 		});
-		const response = await data.json();
+		const response = await data;
 		if (response.errors) {
 			let errors = response.errors;
 			errors.map((error) => {

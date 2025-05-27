@@ -7,3 +7,4 @@ public/img/qr/
 image-cache/*
 !image-cache/.gitkeep
 .env
+.cache/*

@@ -1,6 +1,6 @@
 const stripTags = require("striptags");
-const unique = require('unique-words');
-const fetch = require("node-fetch");
+// const unique = require('unique-words');
+const cachedPostFetch = require('../src/cachedPostFetch');
 const smartTruncate = require('smart-truncate');
 
 const getIssueMonthYear = require("../src/getIssueMonthYear.js");
@@ -62,12 +62,7 @@ async function getAllStories() {
   while (makeNewQuery) {
     try {
       // initialise fetch
-      const data = await fetch("https://cms.aphroconfuso.mt/graphql", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+      const data = await cachedPostFetch("https://cms.aphroconfuso.mt/graphql", {
         body: JSON.stringify({
           query: `{
 						stories(
@@ -236,7 +231,8 @@ async function getAllStories() {
 					}`,
         }),
       });
-      const response = await data.json();
+      // const response = await data;
+      const response = await data;
 
       if (response.errors) {
         let errors = response.errors;
