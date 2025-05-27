@@ -71,7 +71,7 @@ async function getHomepage() {
 					}
 					diaryEntries: stories(
 						publicationState: ${ fetchStatus }
-						pagination: { page: 1, pageSize: 3 },
+						pagination: { page: 1, pageSize: 6 },
 						sort: ["dateTimePublication:desc"],
 						filters: {type: { eq: "Djarju"}}
 					) {
@@ -152,7 +152,7 @@ async function getHomepage() {
 
 	const layoutConfig = layouts[atts.layout];
 
-	// REFACTOR ... use processPromos?S
+	// REFACTOR ... use processPromos?
 	const promosFormatted = (promos, includesImages, number, lengths) => {
 		const result = promos.length && promos.slice(0, number).map((promo, index) => {
 			const storyAtts = (promo.story && promo.story.data.attributes) || promo.attributes;
@@ -162,7 +162,7 @@ async function getHomepage() {
 			const translatorFullName = !!translator && (translator.displayName || `${ translator.forename }${ translator.initials ? ' ' + translator.initials + ' ' : ' ' }${ translator.surname }`);
 			const promoSequenceData = storyAtts.sequence && storyAtts.sequence.data;
 			const descriptionLength = lengths && lengths[index] || 9999;
-			const title = !!promoSequenceData ? promoSequenceData.attributes.title : storyAtts.title
+			const title = !!promoSequenceData ? promoSequenceData.attributes.title : storyAtts.title;
 
 			// REFACTOR: rationalise titles mainTitle, subtitle, metaTitle, displayTitle, reportingTitle, fixPodcastTitle
 			let [mainTitle, subtitle] = title.split(/(?<!:):(?!:)/);
@@ -226,9 +226,13 @@ async function getHomepage() {
 
 	const issueMonth = getIssueMonthYear(atts.appointment.data.attributes.dateTimePublication).month;
 
+	// To prevent more than one piece by teh same author - not the cleanest way but the most efficient in practice
+	const allDiaryEntries = promosFormatted(diaryPromos.data, false, layoutConfig.diary * 3);
+	const seen = new Set(), filteredDiaryEntries = allDiaryEntries.filter(x => !seen.has(x.authorsString) && seen.add(x.authorsString));
+
 	const homepageFormatted = {
 		complementaryMonthColour: complementaryColours[issueMonth.toLowerCase()],
-		diaryEntries: promosFormatted(diaryPromos.data, false, layoutConfig.diary),
+		diaryEntries: filteredDiaryEntries.slice(0, layoutConfig.diary),
 		editorial: stripTags(atts.appointment.data.attributes.editorial, ['p', 'mark', 'span']),
 		imagePromos: promosFormatted(atts.imagePromos, true, layoutConfig['image']),
 		issueMonth,
