@@ -14,7 +14,7 @@ const slugifyStringMaltese = require("../src/slugifyMaltese.js");
 
 const getReads = require('../src/getReads.js');
 
-const { imageData, linkedStoryData, personData } = require("./_fragments.js");
+const { imageData, linkedStoryData, linkedStoryDataWithImage, personData } = require("./_fragments.js");
 
 let abecedaireArray = [];
 let almanacArray = [];
@@ -76,8 +76,6 @@ async function getAllStories() {
 									appointment
 									authorsType
 									body
-									bookInShops,
-									bookPublished,
 									coda
 									dateTimePublication
 									description
@@ -172,6 +170,12 @@ async function getAllStories() {
 											${linkedStoryData}
 										}
 									}
+									bookPromos {
+										text
+										story {
+											${linkedStoryDataWithImage}
+										}
+									}
 									sequence {
 										data {
 											id
@@ -197,6 +201,14 @@ async function getAllStories() {
 												}
 											}
 										}
+									}
+									isBook {
+										inShops
+										isbn
+										orderable
+										pages
+										price
+										published
 									}
 									collections (
 				            publicationState: ${ fetchStatus },
@@ -337,6 +349,7 @@ async function getAllStories() {
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 		const sequenceData = atts.sequence.data;
 		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
+		const bookPromoFormatted = atts.bookPromos.length && processPromos(atts.bookPromos);
 		atts.audio && JSON.stringify(atts.audio);
 		// const audioPromosFormatted = atts.audio.length && processPromos(atts.audio);
 		const audioPromosFormatted = atts.audio.length && processPromos(atts.audio, atts);
@@ -455,6 +468,7 @@ async function getAllStories() {
 // Example usage
 		const vocabulary = findUniqueWords(atts.body);
 		const wordcount = splitText(atts.body).length
+		const isBook = atts.type === 'Ktieb_stampat';
 
 		const processedStory = {
 			appointment: atts.appointment,
@@ -465,10 +479,14 @@ async function getAllStories() {
 			authorsType,
 			body: anchoredBody,
 			booksMentioned,
-			bookInShops: atts.bookInShops,
-			bookPublished: atts.type === 'Ktieb_stampat' && atts.bookPublished,
-			bookPreRelease: atts.type === 'Ktieb_stampat' && !atts.bookPublished,
-			bookSeason: atts.type === 'Ktieb_stampat' && !atts.bookPublished && `${issueSeason} ${issueYear}`,
+			bookIsbn: isBook && atts.isBook?.isbn,
+			bookInShops: isBook && atts.isBook?.inShops,
+			bookOrderable: isBook && atts.isBook?.orderable,
+			bookPublished: isBook && atts.isBook?.published,
+			bookPreRelease: isBook && !atts.isBook?.published,
+			bookPrice: isBook && !atts.isBook?.price,
+			bookPromos: bookPromoFormatted,
+			bookSeason: isBook && !atts.isBook?.published && `${issueSeason} ${issueYear}`,
 			coda: atts.coda,
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,

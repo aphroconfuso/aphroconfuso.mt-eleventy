@@ -43,18 +43,21 @@ async function getHomepage() {
                 }
 								promos(pagination: { page: 1, pageSize: 12 }) {
 									text
+									blurbLines
 									story {
 										${linkedStoryData}
 									}
 								}
 								poetryPromos(pagination: { page: 1, pageSize: 3 }) {
 									text
+									blurbLines
 									story {
 										${linkedStoryData}
 									}
 								}
 								imagePromos(pagination: { page: 1, pageSize: 3 }) {
 									text
+									blurbLines
 									imageCrop
 									image {
 										${imageData}
@@ -179,6 +182,7 @@ async function getHomepage() {
 				authorsType,
 				authorsString,
 				authors,
+				blurbLines: promo.blurbLines,
 				collections: storyAtts.collections && storyAtts.collections.data.map(collection => { return { id: collection.id, title: collection.attributes.title }}),
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 				description: smartTruncate(promo.text || storyAtts.description, descriptionLength),

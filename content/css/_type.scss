@@ -423,7 +423,8 @@ aside,
   }
   #grid-body,
   aside {
-    a:hover {
+    a:hover
+		a .link:hover {
       @include ease-in(0.25s);
       text-decoration-color: $brown;
     }

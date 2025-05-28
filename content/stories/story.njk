@@ -194,15 +194,30 @@ permalink: /{{ story.slug }}/index.html
 								{% endif %}
 							</div>
 						{% endif %}
-						<section class="text-wrapper">
-							{{ story.body | prettifyMaltese | endDotify | safe }}
+					</section>
+					{% if story.imagesPositionText %}
+						<section class="generic-body-text{% if story.useSeparators %} separated{% endif %}">
+							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 0, story.dontUseDropCaps) | prettifyMaltese | safe }}
 						</section>
+						{% set imageMode = 'regular' %}
 						{% if story.slideshow or story.singleImage %}
-							{% set imageMode = 'regular' %}
 							{% set useSquare = true %}
 							{% include "_slideshow.njk" %}
 						{% endif %}
-					</section>
+						<section class="generic-body-text body-text-part-two{% if story.useSeparators %} separated{% endif %}">
+							{{ story.body | stripDataAttributes | dropCapsifyAndSectionise(story.imagesPositionText, 1, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
+						</section>
+					{% elif story.slideshow or story.singleImage %}
+						{% set useSquare = true %}
+						{% include "_slideshow.njk" %}
+						<section class="generic-body-text {% if story.useSeparators %} separated{% endif %}">
+							{{ story.body | stripDataAttributes | dropCapsifyAndSectionise(story.imagesPositionText, 1, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
+						</section>
+					{% else %}
+						<section class="generic-body-text">
+							{{ story.body | dropCapsifyAndSectionise(null, null, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
+						</section>
+					{% endif %}
 				{% else %}
 					{% if story.imagesPositionText %}
 						<section class="body-text{% if story.useSeparators %} separated{% endif %}">
@@ -345,6 +360,14 @@ permalink: /{{ story.slug }}/index.html
 						</a>
 					</aside>
 				{% endfor %} #}
+			{% if story.bookPromos %}
+				<aside class="book" data-track-content data-content-name="Ktieb" data-content-piece="{{ story.reportingTitle }}">
+					{% set promoFrom = story.reportingTitle %}
+					{% set promos = story.bookPromos %}
+					{% set omitAside = true %}
+					{% include '_promo_list.njk' %}
+				</aside>
+			{% endif %}
 			{% if story.postscript %}
 				<aside id="postscript">
 					{{ story.postscript | restrictHtml | prettifyMaltese | safe }}
@@ -388,9 +411,6 @@ permalink: /{{ story.slug }}/index.html
 		</aside> #}
 </article>
 <aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
-	{% if story.type != "Ktieb_stampat" %}
-		{% include "_print_book_image_promo.njk" %}
-	{% endif %}
 	{% set omitEpisodeNumber = true %}
 	{% set promoFrom = story.reportingTitle %}
 	{% set promos = story.endPromos %}

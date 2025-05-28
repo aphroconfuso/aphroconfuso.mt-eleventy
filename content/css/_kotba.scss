@@ -245,9 +245,6 @@ article.ktieb-stampat {
 			height: auto;
 			display: block;
 		}
-		aside {
-			display: none;
-		}
 	}
   @media (max-width: $mobile-breakpoint) {
     grid-template-columns: 1fr;
@@ -281,50 +278,50 @@ article.ktieb-stampat {
 	}
 }
 
-.promo-ktieb-stampat {
-	header {
-		h1 {
-			&::before {
-				@include animated-underline-pre($light-brown);
-				margin-left: 1em;
-			}
-			color: $light-brown !important;
-		}
-		h2 {
-			position: relative;
-			.author {
-				white-space: unset;
-			}
-		}
-	}
-	img {
-		margin: $body-margin-half 0 $body-margin;
-		@media all and (min-width: $laptop-breakpoint) {
-			margin: 0;
-		}
-	}
-	div.body-text {
-		display: flex;
-		flex-direction: column-reverse;
-		p {
-			@include clamp(3);
-			font-family: $sans, sans-serif;
-		}
-		@media all and (min-width: $laptop-breakpoint) {
-			flex-direction: row;
-			p {
-				padding-right: $body-margin-half;
-				@include clamp(7);
-			}
-			img {
-				height: $body-margin * 7;
-			}
-		}
-	}
-	&[href*=antolo] h2 {
-		display: none;
-	}
-}
+// .promo-ktieb-stampat {
+// 	header {
+// 		h1 {
+// 			&::before {
+// 				@include animated-underline-pre($light-brown);
+// 				margin-left: 1em;
+// 			}
+// 			color: $light-brown !important;
+// 		}
+// 		h2 {
+// 			position: relative;
+// 			.author {
+// 				white-space: unset;
+// 			}
+// 		}
+// 	}
+// 	img {
+// 		margin: $body-margin-half 0 $body-margin;
+// 		@media all and (min-width: $laptop-breakpoint) {
+// 			margin: 0;
+// 		}
+// 	}
+// 	div.body-text {
+// 		display: flex;
+// 		flex-direction: column-reverse;
+// 		p {
+// 			@include clamp(3);
+// 			font-family: $sans, sans-serif;
+// 		}
+// 		@media all and (min-width: $laptop-breakpoint) {
+// 			flex-direction: row;
+// 			p {
+// 				padding-right: $body-margin-half;
+// 				@include clamp(7);
+// 			}
+// 			img {
+// 				height: $body-margin * 7;
+// 			}
+// 		}
+// 	}
+// 	&[href*=antolo] h2 {
+// 		display: none;
+// 	}
+// }
 
 // .ga-book-image-promo {
 // 	a {
@@ -357,15 +354,23 @@ article.ktieb-stampat {
 	}
 }
 
-.book-wrapper {
-	position: relative;
-	.book-season-wrapper {
-		display: none;
+article.story {
+	.book-wrapper {
+		position: relative;
+		.book-season-wrapper {
+			display: none;
+		}
+		figure {
+			margin-bottom: $body-margin-quarter;
+		}
+		@media all and (min-width: $laptop-breakpoint) {
+			width: 70%;
+		}
 	}
 }
 
 article.ktieb-stampat {
 	.book-wrapper {
-			margin-bottom: $body-margin;
+		margin-bottom: $body-margin;
 	}
 }

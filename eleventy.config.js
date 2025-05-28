@@ -466,11 +466,22 @@ module.exports = function (eleventyConfig) {
 		if (!splitText) {
 			return decoratedText;
 		}
-		const regex = new RegExp(`${ splitText }</p>`);
+		const regex = new RegExp(`${splitText}</p>`);
 		const splitArray = decoratedText.split(regex);
-		const matchedText = decoratedText.match(regex)[0];
+		const match = decoratedText.match(regex);
+
+		if (!match && beforeOrAfter === 0) return decoratedText; // or handle fallback
+		if (!match && beforeOrAfter === 1) return ""; // or handle fallback
+
+		const matchedText = match[0];
 		return beforeOrAfter === 0 ? splitArray[0] + matchedText : splitArray[1];
 	});
+
+	const fromArrayById = (attribute, objects, id) => {
+		const object = objects.find(o => o.id === id);
+		return object ? object[attribute] || null : null;
+	}
+	eleventyConfig.addFilter("fromStoriesById", fromArrayById);
 
 	eleventyConfig.addFilter("stripDataAttributes", function stripDataAttributes(html) {
 		if (!html || !html.match(/data-/)) return html;

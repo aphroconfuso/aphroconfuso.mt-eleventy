@@ -11,16 +11,27 @@
 				{% set imageCrop = 'uncropped' %}
 				<div class="book-wrapper">
 					{% include "_image.njk" %}
-					{% if promo.bookSeason %}
+					{# {% if promo.bookSeason %}
 						<div class="book-season-wrapper">
 							<div class="book-season">{{ promo.bookSeason }}</div>
 						</div>
+					{% endif %} #}
+					{% if promo.text %}
+						<p>{{ promo.text | prettifyMaltese | safe }}</p>
+					{% else %}
+						{% if story.type %}
+							{% if "bookPublished" | fromStoriesById(stories, promo.id) %}
+								<p>Dan ix-xogħol jidher fil-ktieb <em class="link">{{ promo.title }}</em>.</p>
+							{% else %}
+								<p>Dan ix-xogħol se jidher fil-ktieb <em class="link">{{ promo.title }}</em> ({{ 'bookSeason' | fromStoriesById(stories, promo.id) }}).</p>
+							{% endif %}
+						{% endif %}
 					{% endif %}
 				</div>
 			{% endif %}
 		{% else %}
 			{% include '_promo_header.njk' %}
-			{% set description = promo.description or promo.snippet %}
+			{% set description = description or promo.description or promo.snippet %}
 			<div class="{{ promo.cssClass }}">
 				{% if promo.type === 'Poezija' %}
 					<p>{{ description | prettifyMaltese | versifyDescription | safe }}</p>

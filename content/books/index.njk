@@ -28,6 +28,7 @@ permalink: /kotba/index.html
 			{% set promos = promosPublished.concat(promosPrePublished) %}
 			<div class="generic-body-text">
 				{% set promoFrom = "Ktieb" %}
+				{% set omitAside = true %}
 				{% include "_promo_list.njk" %}
 			</div>
 		</section>

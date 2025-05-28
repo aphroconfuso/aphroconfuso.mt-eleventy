@@ -111,7 +111,7 @@ permalink: /index.html
 							{% include "_image.njk" %}
 						{% endif %}
 						<div class="{{ promo.cssClass }}">
-							<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
+							<p{% if promo.blurbLines %} class="clamp-{{ promo.blurbLines }}"{% endif %}>{{ promo.description | prettifyMaltese | safe }}</p>
 						</div>
 					</a>
 					{% include '_promo_aside.njk' %}
@@ -154,7 +154,7 @@ permalink: /index.html
 								{% set omitEpisodeNumber = true %}
 								{% include "_promo_header.njk" %}
 								<div class="{{ promo.cssClass }}">
-									<p>{{ promo.description | prettifyMaltese | safe }}</p>
+									<p{% if promo.blurbLines %} class="clamp-{{ promo.blurbLines }}"{% endif %}>{{ promo.description | prettifyMaltese | safe }}</p>
 								</div>
 							</a>
 							{% include '_promo_aside.njk' %}
@@ -166,6 +166,7 @@ permalink: /index.html
 			<div class="ga-book-image-promo">
 				{% set promosPublished = stories | selectattr("bookPublished") | sort(true, false, "dateTimePublication") %}
 				{% set promos = promosPublished.slice(0, 1) %}
+				{% set omitAside = true %}
 				{% include "_promo_list.njk" %}
 			</div>
 
@@ -180,6 +181,7 @@ permalink: /index.html
 				{% set promos = promosPublished
 					.concat(promosPrePublished)
 					.slice(0, 6) %}
+				{% set omitAside = true %}
 				{% include "_promo_list.njk" %}
 			</div>
 

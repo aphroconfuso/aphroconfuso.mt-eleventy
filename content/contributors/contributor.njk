@@ -35,6 +35,7 @@ permalink: /{{ contributor.slug }}/index.html
 							<p class="continuity">Kotba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> ippubblikati minn <span class="contributor">Aphroconfuso</span>:</p>
 							{% set promos = contributor.booksAuthored %}
 							{% set promoFrom = contributor.name %}
+							{% set omitAside = true %}
 							{% include '_promo_list.njk' %}
 						</div>
 					{% endif %}
@@ -49,6 +50,7 @@ permalink: /{{ contributor.slug }}/index.html
 					{% if contributor.storiesAuthored.length %}
 						<div class="wrote">
 							<p class="continuity">Kitba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> fil-ġurnal:</p>
+							{% set omitAside = false %}
 							{% set promos = contributor.storiesAuthored %}
 							{% set promoFrom = contributor.name %}
 							{% set omitEpisodeNumber = true %}
