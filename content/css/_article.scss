@@ -101,9 +101,18 @@ article.story.poezija {
 #grid-max-panel-left-bottom,
 #grid-max-panel-right-bottom,
 #grid-body {
-  margin: $body-margin auto 0;
+  margin: $body-margin-half auto 0;
   max-width: $max-content-width;
   width: 100%;
+}
+
+#grid-max-panel-left-top,
+#grid-max-panel-right-top,
+#grid-max-panel-left-bottom,
+#grid-max-panel-right-bottom {
+	&:not(:has(*)) {
+		display: none;
+	}
 }
 
 @media all and (min-width: $laptop-breakpoint) {
@@ -138,7 +147,7 @@ article {
       }
     }
   }
-  aside {
+  aside, aside .promo p {
     color: $lighter-brown;
     font-family: $sans;
     font-size: $font-size-aside;
@@ -166,7 +175,7 @@ article {
       margin-bottom: 0;
     }
     aside + aside {
-      margin-top: $body-margin;
+      margin-top: $body-margin-half;
     }
     #grid-max-panel-left-bottom,
     #grid-max-panel-right-bottom {

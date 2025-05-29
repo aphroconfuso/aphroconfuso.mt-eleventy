@@ -81,6 +81,7 @@ module.exports = (promos, storyAtts) => {
 			),
 			storycollections,
 			subtitle,
+			text: promo.text && stripTags(promo.text),
 			title,
 			translator: translatorFullName,
 			translatorForename: (translator && translator.forename) || translatorFullName,

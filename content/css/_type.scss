@@ -385,7 +385,7 @@ aside,
   h5,
   h6,
   li aside {
-    a {
+    a, .link {
       text-decoration: underline;
       text-decoration-color: $lightest-brown;
       text-decoration-thickness: 1px;
@@ -423,8 +423,8 @@ aside,
   }
   #grid-body,
   aside {
-    a:hover
-		a .link:hover {
+    a:hover,
+		a:hover .promo .link {
       @include ease-in(0.25s);
       text-decoration-color: $brown;
     }

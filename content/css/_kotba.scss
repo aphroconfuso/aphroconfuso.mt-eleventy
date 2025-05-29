@@ -3,374 +3,327 @@
 @use "settings" as *;
 @use "mixins-etc" as *;
 
+// Book colour mixins
 @mixin book-colour($colour: red) {
   .container {
     .end-dot {
-			background-color: $colour;
+      background-color: $colour;
     }
   }
-	.book-wrapper {
-		img {
-			box-shadow:
-				1px 0 2px #{$colour}33,     /* left (small shadow) */
-				0 4px 4px #{$colour}40,     /* bottom */
-				4px 0 4px #{$colour}40,     /* right */
-				0 -4px 4px #{$colour}40;    /* top */
-		}
-		// .book-season-wrapper .book-season {
-		// 	background-color: $colour;
-		// }
-	}
+
+  .book-wrapper {
+    img {
+      box-shadow:
+        1px 0 2px #{$colour}33,
+        0 4px 4px #{$colour}40,
+        4px 0 4px #{$colour}40,
+        0 -4px 4px #{$colour}40;
+    }
+  }
 }
 
 @mixin book-colour-full($colour: red, $shadow-lightness: 0) {
-	border-bottom-color: $colour;
-	.book-wrapper img {
-		box-shadow:
-			1px 0 2px #{$colour}33,
-			0 6px 6px #{$colour}54,
-			6px 0 6px #{$colour}54,
-			0 -6px 6px #{$colour}54;
-		&:before,
-		&:after {
-			box-shadow:
-				0 15px 10px 0 #{$colour}54,
-				0 -15px 10px 0 #{$colour}54;
+  border-bottom-color: $colour;
+
+  .book-wrapper img {
+    box-shadow:
+      1px 0 2px #{$colour}33,
+      0 6px 6px #{$colour}54,
+      6px 0 6px #{$colour}54,
+      0 -6px 6px #{$colour}54;
+
+    &:before,
+    &:after {
+      box-shadow:
+        0 15px 10px 0 #{$colour}54,
+        0 -15px 10px 0 #{$colour}54;
+    }
+  }
+}
+
+// Colour palette
+$antologija1: #327a7d;
+$antologija2: #72523d;
+$antologija3: #603783;
+$burmghez:    #000000;
+$essidr:      #215a3d;
+$martamarta:  #7b7636;
+$qarn:        #c72231;
+$saffo:       #a94b6f;
+
+#ga-grid-body-book-image {
+	grid-area: ga-grid-body-book-image;
+}
+
+article.ktieb-stampat {
+	@media all and (min-width: $laptop-breakpoint) {
+		.container {
+			max-width: $max-width;
+			display: grid;
+			grid-template-columns: 1fr $max-content-width 1fr;
+			grid-template-rows: auto auto auto auto;
+			grid-auto-flow: row;
+			grid-template-areas:
+				"grid-max-panel-left-top ga-grid-body-book-image ga-grid-body-book-image"
+				"grid-max-panel-left-top grid-max-body grid-max-panel-right-top"
+				"grid-max-panel-left-bottom grid-max-body grid-max-panel-right-bottom"
+				"grid-bottom-full grid-bottom-full grid-bottom-full";
+		}
+	}
+
+	#grid-body > .splide {
+		border: 1px solid $lightest-brown;
+		margin: $body-margin 0;
+		padding: ($body-margin * 1.5) $body-margin $body-margin !important;
+		width: 100%;
+		.arrows {
+			button.arrow-previous{
+				left: 0;
+			}
+			button.arrow-next {
+				left: unset;
+				right: 0;
+			}
+			button.arrow-previous,
+			button.arrow-next {
+				font-size: 3rem;
+			}
+			button#lightbox-open {
+				left: unset;
+				right: $body-margin;
+				top: $body-margin-half;
+			}
+		}
+		figure {
+			margin: 0;
 		}
 	}
 }
 
-$antologija1: #327a7d;
-$antologija2: #72523d;
-$antologija3: #603783;
-$burmghez: #000000;
-$essidr: #215a3d;
-$martamarta: #7b7636;
-$qarn: #c72231;
-$saffo: #a94b6f;
-
+// Article styles
 article.ktieb-stampat {
   &.content {
     h1 {
       color: $light-brown;
     }
+
     border-bottom-color: $podcast-beige;
+
     h5,
     h6,
-    p {
-      &.break {
-        margin-top: $body-margin * 1.5;
-      }
+    p.break {
+      margin-top: $body-margin * 1.5;
     }
   }
-	figcaption {
-		display: none;
-	}
-	&.story-88 {
-		@include book-colour-full($antologija1);
-	}
-	&.story-115 {
-		@include book-colour-full($qarn);
-	}
-	&.story-141 {
-		@include book-colour-full($essidr);
-	}
-	&.story-142 {
-		@include book-colour-full($martamarta);
-	}
-	&.story-143 {
-		@include book-colour-full($burmghez);
-	}
-	&.story-144 {
-		@include book-colour-full($saffo);
-	}
-	&.story-145 {
-		@include book-colour-full($antologija2);
-	}
-	&.story-140 {
-		@include book-colour-full($antologija3);
-	}
-	.splide {
-		padding: ($body-margin * 1.5) $body-margin $body-margin !important;
-		border: 1px solid $lightest-brown;
-		margin-top: $body-margin;
-		figure {
-			margin: 0;
-		}
-	}
+
+  figcaption {
+    display: none;
+  }
+
+  &.story-88  { @include book-colour-full($antologija1); }
+  &.story-115 { @include book-colour-full($qarn); }
+  &.story-141 { @include book-colour-full($essidr); }
+  &.story-142 { @include book-colour-full($martamarta); }
+  &.story-143 { @include book-colour-full($burmghez); }
+  &.story-144 { @include book-colour-full($saffo); }
+  &.story-145 { @include book-colour-full($antologija2); }
+  &.story-140 { @include book-colour-full($antologija3); }
+
+  .book-wrapper {
+    margin-bottom: $body-margin;
+  }
 }
 
+// Book image wrapper
 .book-wrapper img {
-	overflow: unset;
-	position: relative;
-	// width:100%;
-	&:before,
-	&:after {
-		background: #777;
-		bottom: 80%;
-		content: "";
-		left: auto;
-		max-width:300px;
-		position: absolute;
-		right: 12px;
-		top: 15px;
-		transform: rotate(-182deg);
-		width: 50%;
-		z-index: -1;
-	}
-	&:after {
-		bottom: 15px;
-		top: 80%;
-		transform: rotate(5deg);
-		z-index: -2;
-	}
+  overflow: unset;
+  position: relative;
+
+  &:before,
+  &:after {
+    background: #777;
+    content: "";
+    left: auto;
+    max-width: 300px;
+    position: absolute;
+    right: 12px;
+    width: 50%;
+    z-index: -1;
+  }
+
+  &:before {
+    bottom: 80%;
+    top: 15px;
+    transform: rotate(-182deg);
+  }
+
+  &:after {
+    bottom: 15px;
+    top: 80%;
+    transform: rotate(5deg);
+    z-index: -2;
+  }
 }
 
-.story-88 {
-	@include book-colour($antologija1);
-}
-.story-115 {
-	@include book-colour($qarn);
-}
-.story-141 {
-	@include book-colour($essidr);
-}
-.story-142 {
-	@include book-colour($martamarta);
-}
-.story-143 {
-	@include book-colour($burmghez);
-}
-.story-144 {
-	@include book-colour($saffo);
-}
-.story-145 {
-	@include book-colour($antologija2);
-}
-.story-140 {
-	@include book-colour($antologija3);
-}
+// Coloured book story wrappers
+.story-88  { @include book-colour($antologija1); }
+.story-115 { @include book-colour($qarn); }
+.story-141 { @include book-colour($essidr); }
+.story-142 { @include book-colour($martamarta); }
+.story-143 { @include book-colour($burmghez); }
+.story-144 { @include book-colour($saffo); }
+.story-145 { @include book-colour($antologija2); }
+.story-140 { @include book-colour($antologija3); }
 
+// Pre-release layout
 .pre-release #grid-body {
-	.bookshops, .book-images {
-		display: none;
-	}
-	.splide {
-		// border: 1px solid $lightest-brown;
-		margin-bottom: $body-margin;
-		margin-left: 0;
-		// padding: $body-margin-half;
-		width: 100%;
-		figure {
-			margin: 0;
-		}
-	}
-	@media all and (min-width: $mobile-breakpoint) {
-		// .splide {
-		// 	padding: $body-margin;
-		// }
-		.book-cover {
-			display: none;
-		}
-		.book-images {
-			display: block;
-		}
-	}
+  .bookshops, .book-images {
+    display: none;
+  }
+
+  @media all and (min-width: $mobile-breakpoint) {
+    .book-cover {
+      display: none;
+    }
+
+    .book-images {
+      display: block;
+    }
+  }
 }
 
-
+// Book panel
 #book-panel {
-	border: 1px solid $lightest-brown;
-	display: flex;
-	flex-direction: column-reverse;
-	margin-bottom: $body-margin;
+  border: 1px solid $lightest-brown;
+  display: flex;
+  flex-direction: column;
+  margin: $body-margin 0;
   padding: $body-margin-half;
-	div.main {
-		padding: $body-margin-half 0 0 0;
-	}
-  @media all and (min-width: $laptop-breakpoint) {
-		flex-direction: column;
-		div.main {
-			padding: 0 $body-margin-half 0 0;
-		}
-		div.book-images {
-			display: flex;
-			flex-direction: column;
-			& > img {
-				&.book-cover,
-				&.revolut-qr {
-					height: $body-margin * 6;
-					width: $body-margin * 6;
-					min-height: $body-margin * 6;
-					min-width: $body-margin * 6;
-				}
-				&.revolut-qr {
-					border: 5px solid #000;
-					border-radius: 10px;
-					margin-top: $body-margin-quarter;
-				}
-			}
-		}
-	}
+
   a.order-button {
-	  background-color: $brown;
-		border-radius: 0.25rem;
+    background-color: $brown;
+    border-radius: 0.25rem;
     color: var(--paper);
-		display: inline-block;
-		font-family: $sans;
-		font-size: 1.4rem;
-		margin-top: $body-margin-half;
+    display: inline-block;
+    font-family: $sans;
+    font-size: 1.4rem;
+    margin-top: $body-margin-half;
     padding: $body-margin-quarter $body-margin-half;
     text-transform: uppercase;
-		&:hover {
-	    background-color: $light-brown;
-		}
+
+    &:hover {
+      background-color: $light-brown;
+    }
   }
-	img.revolut-logo {
-		height: 0.7rem;
-		margin-left: $body-margin-quarter;
+  img.revolut-logo {
+    height: 0.7rem;
+    margin-left: $body-margin-quarter;
+  }
+	#revolut-qr-code {
+		display: flex;
+		justify-content: flex-end;
+		margin-top: $body-margin;
+		img {
+			border-radius: 10px;
+			border: 5px solid #000;
+			height: $body-margin * 4;
+			min-height: $body-margin * 4;
+			min-width: $body-margin * 4;
+			width: $body-margin * 4;
+		}
+	}
+	@media all and (min-width: $laptop-breakpoint) {
+		margin-top: 0;
 	}
 }
 
+// Book list
 @mixin book-list($items-per-row: 4, $limit: 4) {
-	display: grid;
-	grid-template-columns: repeat($items-per-row, 1fr);
-	gap: $body-margin-double;
-	width: 100%;
-	&> li {
-		border-bottom: none;
-		margin-bottom: 0;
-		img {
-			width: 100%;
-			height: auto;
-			display: block;
-		}
-	}
+  display: grid;
+  grid-template-columns: repeat($items-per-row, 1fr);
+  gap: $body-margin-double;
+  width: 100%;
+
+  > li {
+    border-bottom: none;
+    margin-bottom: 0;
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+
   @media (max-width: $mobile-breakpoint) {
     grid-template-columns: 1fr;
-		gap: $body-margin;
-    & > :nth-child(n + #{$limit}) {
+    gap: $body-margin;
+
+    > :nth-child(n + #{$limit}) {
       display: none;
     }
   }
 }
 
 .books #grid-body {
-	max-width: 100%;
+  max-width: 100%;
 }
 
 .books ul.promo-list {
-	@include book-list();
+  @include book-list();
 }
 
 .contributor .books ul.promo-list {
-	grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .home .ga-books {
-  @media (min-width: $laptop-breakpoint) {
-		nav {
-			margin-bottom: $body-margin;
-		}
-	}
 	ul.promo-list {
-		@include book-list(6);
-	}
+    @include book-list(6);
+  }
 }
 
-// .promo-ktieb-stampat {
-// 	header {
-// 		h1 {
-// 			&::before {
-// 				@include animated-underline-pre($light-brown);
-// 				margin-left: 1em;
-// 			}
-// 			color: $light-brown !important;
-// 		}
-// 		h2 {
-// 			position: relative;
-// 			.author {
-// 				white-space: unset;
-// 			}
-// 		}
-// 	}
-// 	img {
-// 		margin: $body-margin-half 0 $body-margin;
-// 		@media all and (min-width: $laptop-breakpoint) {
-// 			margin: 0;
-// 		}
-// 	}
-// 	div.body-text {
-// 		display: flex;
-// 		flex-direction: column-reverse;
-// 		p {
-// 			@include clamp(3);
-// 			font-family: $sans, sans-serif;
-// 		}
-// 		@media all and (min-width: $laptop-breakpoint) {
-// 			flex-direction: row;
-// 			p {
-// 				padding-right: $body-margin-half;
-// 				@include clamp(7);
-// 			}
-// 			img {
-// 				height: $body-margin * 7;
-// 			}
-// 		}
-// 	}
-// 	&[href*=antolo] h2 {
-// 		display: none;
-// 	}
-// }
-
-// .ga-book-image-promo {
-// 	a {
-// 		border: 1px solid $lightest-brown;
-// 		padding: $body-margin-half;
-// 	}
-// 	@media all and (min-width: $mobile-breakpoint-plusone) {
-// 		display: none !important;
-// 	}
-// }
-
+// End promos
 .end-promos .ga-book-image-promo {
-	a {
-		margin-top: $body-margin;
-	}
+  a {
+    margin-top: $body-margin;
+  }
 }
 
+// Bookshops info
 .bookshops {
-	background-color: $light-brown;
-	border: 1px solid $lightest-brown;
-	color: $lightest-brown;
-	font-size: $body-font-size;
-	padding: $body-margin-half;
-	a {
+  background-color: $light-brown;
+  border: 1px solid $lightest-brown;
+  color: $lightest-brown;
+  font-size: $body-font-size;
+  padding: $body-margin-half;
+
+  a {
     text-decoration: underline;
     text-decoration-color: $lighter-brown;
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
     text-decoration-skip-ink: auto;
-	}
+  }
 }
 
+// Article with story
 article.story {
-	.book-wrapper {
-		position: relative;
-		.book-season-wrapper {
-			display: none;
-		}
-		figure {
-			margin-bottom: $body-margin-quarter;
-		}
-		@media all and (min-width: $laptop-breakpoint) {
-			width: 70%;
-		}
-	}
-}
+  margin-top: $body-margin-quarter;
 
-article.ktieb-stampat {
-	.book-wrapper {
-		margin-bottom: $body-margin;
-	}
+  .book-wrapper {
+    position: relative;
+
+    .book-season-wrapper {
+      display: none;
+    }
+
+    figure {
+      margin-bottom: $body-margin-quarter;
+    }
+
+    @media all and (min-width: $laptop-breakpoint) {
+      width: 70%;
+    }
+  }
 }

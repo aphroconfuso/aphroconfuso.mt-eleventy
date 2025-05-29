@@ -205,6 +205,7 @@ async function getAllStories() {
 									isBook {
 										inShops
 										isbn
+										lokalUrl
 										orderable
 										pages
 										price
@@ -481,10 +482,12 @@ async function getAllStories() {
 			booksMentioned,
 			bookIsbn: isBook && atts.isBook?.isbn,
 			bookInShops: isBook && atts.isBook?.inShops,
+			bookLokalUrl: isBook && atts.isBook?.lokalUrl,
 			bookOrderable: isBook && atts.isBook?.orderable,
+			bookPages: isBook && atts.isBook?.pages,
 			bookPublished: isBook && atts.isBook?.published,
 			bookPreRelease: isBook && !atts.isBook?.published,
-			bookPrice: isBook && !atts.isBook?.price,
+			bookPrice: isBook && atts.isBook?.price,
 			bookPromos: bookPromoFormatted,
 			bookSeason: isBook && !atts.isBook?.published && `${issueSeason} ${issueYear}`,
 			coda: atts.coda,

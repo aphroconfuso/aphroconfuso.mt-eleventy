@@ -112,14 +112,31 @@ permalink: /{{ story.slug }}/index.html
 			{% endfor %}
 		</header>
 		<div class="container">
+			{% if story.type === 'Ktieb_stampat' %}
+				<section id="ga-grid-body-book-image" class="generic-body-text">
+					{% if story.promoImageMobile %}
+						{% set slide = story.promoImageMobile.attributes.formats %}
+						{% set slideMobile = slide %}
+						{% set imageCrop = 'uncropped' %}
+						<div class="book-wrapper">
+							{% include "_image.njk" %}
+						</div>
+					{% endif %}
+					{% if story.bookIsbn %}
+						<p>
+							<strong>
+								<span class="sc">isbn</span>
+								{{ story.bookIsbn }}</strong>{{ "," if story.bookPages }}
+							{{ story.bookPages | numberify(['paġna', 'paġni']) if story.bookPages }}.
+						</p>
+					{% endif %}
+				</section>
+			{% endif %}
 			<section id="grid-max-panel-right-top">
 				{% if story.type === 'Ktieb_stampat' and story.bookPublished %}
-					{% include "_print_book_panel.njk" %}
-				{% endif %}
-				{% if story.podcastNote and not story.podcastUrl and story.type !== 'Ktieb_stampat' %}
-					<aside id="podcast-note">
-						{{ story.podcastNote | restrictHtml | prettifyMaltese | safe }}
-					</aside>
+					<div class="hide-mobile">
+						{% include "_print_book_panel.njk" %}
+					</div>
 				{% endif %}
 				{% for player in story.audioPlayers %}
 					{% if loop.first %}
@@ -180,25 +197,13 @@ permalink: /{{ story.slug }}/index.html
 						{{ story.body | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% elif story.type === 'Ktieb_stampat' %}
-					<section class="generic-body-text">
-						{% if story.promoImageMobile %}
-							{% set slide = story.promoImageMobile.attributes.formats %}
-							{% set slideMobile = slide %}
-							{% set imageCrop = 'uncropped' %}
-							<div class="book-wrapper">
-								{% include "_image.njk" %}
-								{% if story.bookSeason %}
-									<div class="book-season-wrapper">
-										<div class="book-season">{{ story.bookSeason }}</div>
-									</div>
-								{% endif %}
-							</div>
-						{% endif %}
-					</section>
 					{% if story.imagesPositionText %}
 						<section class="generic-body-text{% if story.useSeparators %} separated{% endif %}">
 							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 0, story.dontUseDropCaps) | prettifyMaltese | safe }}
 						</section>
+						<div class="hide-laptop">
+							{% include "_print_book_panel.njk" %}
+						</div>
 						{% set imageMode = 'regular' %}
 						{% if story.slideshow or story.singleImage %}
 							{% set useSquare = true %}
@@ -210,6 +215,9 @@ permalink: /{{ story.slug }}/index.html
 					{% elif story.slideshow or story.singleImage %}
 						{% set useSquare = true %}
 						{% include "_slideshow.njk" %}
+						<div class="hide-laptop">
+							{% include "_print_book_panel.njk" %}
+						</div>
 						<section class="generic-body-text {% if story.useSeparators %} separated{% endif %}">
 							{{ story.body | stripDataAttributes | dropCapsifyAndSectionise(story.imagesPositionText, 1, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
 						</section>
@@ -217,6 +225,9 @@ permalink: /{{ story.slug }}/index.html
 						<section class="generic-body-text">
 							{{ story.body | dropCapsifyAndSectionise(null, null, story.dontUseDropCaps) | prettifyMaltese | endDotify | safe }}
 						</section>
+						<div class="hide-laptop">
+							{% include "_print_book_panel.njk" %}
+						</div>
 					{% endif %}
 				{% else %}
 					{% if story.imagesPositionText %}
@@ -280,11 +291,6 @@ permalink: /{{ story.slug }}/index.html
 						</section>
 					{% endif %}
 				{% endfor %}
-				{% if story.introduction and story.type !== 'Ktieb_stampat' %}
-					<aside id="introduction">
-						{{ story.introduction | restrictHtml | prettifyMaltese | safe }}
-					</aside>
-				{% endif %}
 				{% for episode in story.sequenceEpisodes %}
 					{% if loop.first %}
 						<ul class="generic-menu sequence-menu">
