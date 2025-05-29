@@ -1,4 +1,5 @@
 const cachedPostFetch = require('../src/cachedPostFetch');
+const { linkedStoryDataWithImage } = require("./_fragments.js");
 
 const codes = {
 	"alerbyt": "ar",
@@ -30,6 +31,14 @@ async function getInternationals() {
 								language
 								title
 								body
+								story {
+									title
+									body
+									download
+									story {
+										${linkedStoryDataWithImage}
+									}
+								}
 							}
 						}
 					}
@@ -49,6 +58,8 @@ async function getInternationals() {
 	} catch (error) {
 		throw new Error(error);
 	}
+
+	const bookPromoFormatted = atts.bookPromos.length && processPromos(atts.bookPromos);
 
 	const internationalsFormatted = internationals.data.map((international) => {
 		const atts = international.attributes;
