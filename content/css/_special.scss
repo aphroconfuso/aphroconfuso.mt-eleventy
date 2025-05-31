@@ -193,6 +193,16 @@ article {
 }
 
 @media all and (min-width: $laptop-breakpoint) {
+	.story-114 {
+    // Nivjaġġa bil-mod #1
+    h1 {
+      letter-spacing: -1px;
+    }
+  }
+}
+
+
+@media all and (min-width: $laptop-breakpoint) {
   .home {
     .promo {
 			&.story-20 {

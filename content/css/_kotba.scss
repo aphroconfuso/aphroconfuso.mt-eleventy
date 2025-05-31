@@ -122,7 +122,7 @@ article.ktieb-stampat {
 
   &.story-88  { @include book-colour-full($antologija1); }
   &.story-115 { @include book-colour-full($qarn); }
-  &.story-141 { @include book-colour-full($essidr); }
+  &.story-151 { @include book-colour-full($essidr); }
   &.story-142 { @include book-colour-full($martamarta); }
   &.story-143 { @include book-colour-full($burmghez); }
   &.story-144 { @include book-colour-full($saffo); }
@@ -168,7 +168,7 @@ article.ktieb-stampat {
 // Coloured book story wrappers
 .story-88  { @include book-colour($antologija1); }
 .story-115 { @include book-colour($qarn); }
-.story-141 { @include book-colour($essidr); }
+.story-151 { @include book-colour($essidr); }
 .story-142 { @include book-colour($martamarta); }
 .story-143 { @include book-colour($burmghez); }
 .story-144 { @include book-colour($saffo); }
