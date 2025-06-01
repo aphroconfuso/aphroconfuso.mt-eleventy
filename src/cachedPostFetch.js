@@ -10,7 +10,7 @@ module.exports = async function cachedPostFetch(url, bodyObj, cacheSuffix = '.js
   // const bodyString = JSON.stringify(bodyObj);
   const bodyString = bodyObj.body;
 
-  const isLocalhost = process.env.NODE_ENV === 'development' || process.env.HOST?.includes('localhost');
+	const isLocalhost = process.env.HOST?.includes('localhost');
 
   // Always bypass cache unless running on localhost
   if (!isLocalhost) {
