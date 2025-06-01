@@ -10,10 +10,10 @@ module.exports = async function cachedPostFetch(url, bodyObj, cacheSuffix = '.js
   // const bodyString = JSON.stringify(bodyObj);
   const bodyString = bodyObj.body;
 
-	const isLocalhost = process.env.HOST?.includes('localhost');
+	const cachedQuery = process.env.CACHED_QUERY === 'True' || false;
 
   // Always bypass cache unless running on localhost
-  if (!isLocalhost) {
+  if (!cachedQuery) {
     const res = await fetch(url, {
       method: 'POST',
       headers: {
@@ -23,7 +23,9 @@ module.exports = async function cachedPostFetch(url, bodyObj, cacheSuffix = '.js
       body: bodyString,
     });
     return res.json();
-  }
+	} else {
+		console.log(`Using cached query for ${url} !!!`);
+	}
 
   const hash = crypto
     .createHash('md5')
