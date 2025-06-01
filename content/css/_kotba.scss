@@ -311,19 +311,23 @@ article.ktieb-stampat {
 article.story {
   margin-top: $body-margin-quarter;
 
+	@media all and (min-width: $laptop-breakpoint) {
+		width: 70%;
+	}
   .book-wrapper {
+		border: 1px solid $lightest-brown;
+		padding: $body-margin;
     position: relative;
-
+		@media all and (min-width: $laptop-breakpoint) {
+			border: none;
+			padding: 0;
+			width: 70%;
+    }
     .book-season-wrapper {
       display: none;
     }
-
     figure {
       margin-bottom: $body-margin-quarter;
-    }
-
-    @media all and (min-width: $laptop-breakpoint) {
-      width: 70%;
     }
   }
 }
