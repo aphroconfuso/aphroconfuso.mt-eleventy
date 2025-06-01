@@ -15,7 +15,7 @@ permalink: /admin/vokabolarju/index.html
 		}
 
 		#myInput {
-			background-image: url('https://www.w3schools.com/css/searchicon.png');
+			background-image: url("https://www.w3schools.com/css/searchicon.png");
 			background-position: 10px 12px;
 			background-repeat: no-repeat;
 			width: 100%;
@@ -33,13 +33,14 @@ permalink: /admin/vokabolarju/index.html
 
 		#myUL li a {
 			border: 1px solid #ddd;
-			margin-top: -1px; /* Prevent double borders */
+			margin-top: -1px;
+			/* Prevent double borders */
 			background-color: #f6f6f6;
 			padding: 12px;
 			text-decoration: none;
 			font-size: 18px;
 			color: black;
-			display: block
+			display: block;
 		}
 
 		#myUL li a:hover:not(.header) {
@@ -53,53 +54,68 @@ permalink: /admin/vokabolarju/index.html
 	<main>
 		<p>B'kollox ippubblikajna kliem: {{ stories[0].cumulativeWordcount }}, xogħlijiet: {{ stories.length }}.
 		<br/>
-		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Fittex..." autocomplete="off">
-		{# <input type="range" id="threshold" name="points" min="1" onchange="changeRange()" max="1000"> #}
-		{# <h5 id="showThreshold"></h5> #}
-		<section>
-			{# <p>{{ stories[0].cumulativeVocabulary.length | slugify }}</p> #}
-			<ul id="myUL" class="vocabulary">
-				{% for word in stories[0].cumulativeVocabulary %}
-					<li>{{ word.word }} <span class="frequency" style="color: #999">{{ word.frequency}}</span></li>
-				{% endfor %}
-			</ul>
-		</section>
-	</main>
-	<script>
-	let threshold = 1000;
-	let filter;
+			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Fittex..." autocomplete="off">
+			{# <input type="range" id="threshold" name="points" min="1" onchange="changeRange()" max="1000"> #}
+			{# <h5 id="showThreshold"></h5> #}
+			<section>
+				{# <p>{{ stories[0].cumulativeVocabulary.length | slugify }}</p> #}
+				<ul id="myUL" class="vocabulary">
+					{% for word in stories[0].cumulativeVocabulary %}
+						<li>{{ word.word }}
+							<span class="frequency" style="color: #999">{{ word.frequency}}</span></li>
+					{% endfor %}
+				</ul>
+			</section>
+		</main>
+		<script>
+			let threshold = 1000;
+			let filter;
 
-	function hideShow() {
-		var input, ul, li, a, i, txtValue;
-		ul = document.getElementById("myUL");
-		li = ul.getElementsByTagName("li");
-		for (i = 0; i < li.length; i++) {
-			// a = li[i].getElementsByTagName("a")[0];
-			// txtValue = a.textContent || a.innerText;
-			txtValue = li[i].textContent || li[i].innerText;
-			if (txtValue.toUpperCase().indexOf(filter) > -1) {
-				li[i].style.display = "";
-			} else {
-				li[i].style.display = "none";
+			function hideShow() {
+				var input,
+					ul,
+					li,
+					a,
+					i,
+					txtValue;
+				ul = document.getElementById("myUL");
+				li = ul.getElementsByTagName("li");
+				for (i = 0; i < li.length; i++) {
+					// a = li[i].getElementsByTagName("a")[0];
+					// txtValue = a.textContent || a.innerText;
+					txtValue = li[i].textContent || li[i].innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						li[i].style.display = "";
+					} else {
+						li[i].style.display = "none";
+					}
+				}
 			}
-		}
-	}
 
-	function changeRange() {
-		var input, output;
-		input = document.getElementById("threshold");
-		output = document.getElementById("showThreshold");
-		threshold = input.value;
-		output.textContent = threshold;
-		hideShow();
-	}
+			function changeRange() {
+				var input,
+					output;
+				input = document.getElementById("threshold");
+				output = document.getElementById("showThreshold");
+				threshold = input.value;
+				output.textContent = threshold;
+				hideShow();
+			}
 
-	function myFunction() {
-		var input, ul, li, a, i, txtValue;
-		input = document.getElementById("myInput");
-		filter = input.value.toUpperCase();
-		if (filter === "") return;
-		hideShow();
-	}
-	</script>
-{% endblock %}
+			function myFunction() {
+				var input,
+					ul,
+					li,
+					a,
+					i,
+					txtValue;
+				input = document.getElementById("myInput");
+				filter = input
+					.value
+					.toUpperCase();
+				if (filter == "") 
+					return;
+				hideShow();
+			}
+		</script>
+	{% endblock %}

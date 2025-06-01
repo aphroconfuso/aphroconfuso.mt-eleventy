@@ -122,72 +122,72 @@ permalink: /index.html
 				<div class="ga-poem-{{ loop.index }}">
 					<a class="{{ promo.issueMonth | slugify }} promo promo-poetry story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% include "_promo_header.njk" %}
-						{% if promo.text %}
-							<div class="{{ promo.cssClass }}">
-								<p>{{ promo.text | prettifyMaltese | safe }}</p>
-							</div>
-						{% else %}
-							<div class="{{ promo.cssClass }}">
-								<p>{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
-							</div>
-						{% endif %}
-					</a>
-				</div>
-			{% endfor %}
+						<div class="{{ promo.cssClass }}">
+							<p{% if promo.blurbLines %} class="clamp-{{ promo.blurbLines }}"{% endif %}>
+								{% if promo.text %}
+									{{ promo.text | prettifyMaltese | safe }}
+								{% else %}
+									{{ promo.description | prettifyMaltese | versifyDescription | safe }}</p>
+							{% endif %}
+						</p>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
 
-			<div class="ga-diary">
-				<nav class="category-menu">
-					<li class="header">
-						<a href="/djarju/">djarju</a>
+		<div class="ga-diary">
+			<nav class="category-menu">
+				<li class="header">
+					<a href="/djarju/">djarju</a>
+				</li>
+				{% for item in sequences | selectattr('isDiary') | sort(false, false, 'sortBy') %}
+					<li>
+						<a href="/{{ item.slug }}/">{{ item.authorsString }}</a>
+						{% if not loop.last %}, {% endif %}
 					</li>
-					{% for item in sequences | selectattr('isDiary') | sort(false, false, 'sortBy') %}
-						<li>
-							<a href="/{{ item.slug }}/">{{ item.authorsString }}</a>
-							{% if not loop.last %}, {% endif %}
-						</li>
-					{% endfor %}
-				</nav>
-				<ul>
-					{% for promo in homepage.diaryEntries %}
-						<li>
-							<a class="{{ promo.issueMonth | slugify }} promo promo-diary story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
-								{% set omitEpisodeNumber = true %}
-								{% include "_promo_header.njk" %}
-								<div class="{{ promo.cssClass }}">
-									<p{% if promo.blurbLines %} class="clamp-{{ promo.blurbLines }}"{% endif %}>{{ promo.description | prettifyMaltese | safe }}</p>
-								</div>
-							</a>
-							{% include '_promo_aside.njk' %}
-						</li>
-					{% endfor %}
-				</ul>
-			</div>
-
-			<div class="ga-book-image-promo">
-				{% set promosPublished = stories | selectattr("bookPublished") | sort(true, false, "dateTimePublication") %}
-				{% set promos = promosPublished.slice(0, 1) %}
-				{% set omitAside = true %}
-				{% include "_promo_list.njk" %}
-			</div>
-
-			<div class="ga-books">
-				<nav class="category-menu">
-					<li class="header">
-						<a href="/kotba/">Il-Kotba ta’ Aphroconfuso</a>
+				{% endfor %}
+			</nav>
+			<ul>
+				{% for promo in homepage.diaryEntries %}
+					<li>
+						<a class="{{ promo.issueMonth | slugify }} promo promo-diary story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+							{% set omitEpisodeNumber = true %}
+							{% include "_promo_header.njk" %}
+							<div class="{{ promo.cssClass }}">
+								<p{% if promo.blurbLines %} class="clamp-{{ promo.blurbLines }}"{% endif %}>{{ promo.description | prettifyMaltese | safe }}</p>
+							</div>
+						</a>
+						{% include '_promo_aside.njk' %}
 					</li>
-				</nav>
-				{% set promosPublished = stories | selectattr("bookPublished") | sort(false, false, "dateTimePublication") %}
-				{% set promosPrePublished = stories | selectattr("bookPreRelease") | sort(false, false, "dateTimePublication") %}
-				{% set promos = promosPublished
-					.concat(promosPrePublished)
-					.slice(0, 6) %}
-				{% set omitAside = true %}
-				{% include "_promo_list.njk" %}
-			</div>
-
+				{% endfor %}
+			</ul>
 		</div>
-	</article>
-	<script>
-		reportingTitle = "Homepage";
-	</script>
+
+		<div class="ga-book-image-promo">
+			{% set promosPublished = stories | selectattr("bookPublished") | sort(true, false, "dateTimePublication") %}
+			{% set promos = promosPublished.slice(0, 1) %}
+			{% set omitAside = true %}
+			{% include "_promo_list.njk" %}
+		</div>
+
+		<div class="ga-books">
+			<nav class="category-menu">
+				<li class="header">
+					<a href="/kotba/">Il-Kotba ta’ Aphroconfuso</a>
+				</li>
+			</nav>
+			{% set promosPublished = stories | selectattr("bookPublished") | sort(false, false, "dateTimePublication") %}
+			{% set promosPrePublished = stories | selectattr("bookPreRelease") | sort(false, false, "dateTimePublication") %}
+			{% set promos = promosPublished
+				.concat(promosPrePublished)
+				.slice(0, 6) %}
+			{% set omitAside = true %}
+			{% include "_promo_list.njk" %}
+		</div>
+
+	</div>
+</article>
+<script>
+	reportingTitle = "Homepage";
+</script>
 {% endblock %}

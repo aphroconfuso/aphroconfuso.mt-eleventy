@@ -1,5 +1,5 @@
 {% set books = stories | selectattr("listableBook") %}
-{% if books[0].slug !== story.slug %}
+{% if books[0].slug != story.slug %}
 	<div class="ga-book-image-promo">
 		<a href="/{{ books[0].slug }}/">
 			<img src="{{ metadata.settings.imagesUrl + books[0].socialImageFormats.square_avif_x2.hash }}.avif" alt="{{ books[0].socialImageAlt }}">

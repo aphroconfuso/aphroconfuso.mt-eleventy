@@ -1,11 +1,17 @@
 <section class="generic-menu">
 	{% for item in sequences | selectattr('isDiary') | sort(false, false, 'sortBy') %}
-		{% if loop.first %}<ul>{% endif %}
-			{% if '/' + item.slug + '/' === page.url %}
+		{% if loop.first %}
+			<ul>
+			{% endif %}
+			{% if '/' + item.slug + '/' == page.url %}
 				<li class="active">{{ item.authorsString }}</li>
 			{% else %}
-				<li><a href="/{{ item.slug }}/">{{ item.authorsString }}</a></li>
+				<li>
+					<a href="/{{ item.slug }}/">{{ item.authorsString }}</a>
+				</li>
 			{% endif %}
-		{% if loop.last %}</ul>{% endif %}
+			{% if loop.last %}
+			</ul>
+		{% endif %}
 	{% endfor %}
 </section>

@@ -8,9 +8,10 @@
 		<figcaption>
 			{% if player.podcastNote %}
 				{{ player.podcastNote | restrictHtml | prettifyMaltese | safe }}
-			{% elif player.type !== 'Poddata' and player.useDefaultPodcastMessage %}
+			{% elif player.type != 'Poddata' and player.useDefaultPodcastMessage %}
 				<p>
-					{{ player.authorName | prettifyMaltese | safe }} {{ player.reads }} “{{ player.reportingTitle | prettifyMaltese | safe }}”.
+					{{ player.authorName | prettifyMaltese | safe }}
+					{{ player.reads }} “{{ player.reportingTitle | prettifyMaltese | safe }}”.
 					{% if loop.last %}
 						<span class="hide-mobile">{{ metadata.texts.podcastMessage | safe }}</span>
 					{% endif %}

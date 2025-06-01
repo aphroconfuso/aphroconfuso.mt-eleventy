@@ -40,25 +40,25 @@ permalink: /{{ story.slug }}/index.html
 		<header>
 			<ul>
 				<li class="header-label" data-pagefind-meta="header">
-					{% if story.type === 'Avveniment' %}
+					{% if story.type == 'Avveniment' %}
 						<a href="/avvenimenti/" class="diary-title">Avvenimenti</a>
 						{% if story.subjectDate %}
 							<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 						{% endif %}
-					{% elif story.type === 'Djarju' %}
+					{% elif story.type == 'Djarju' %}
 						<a href="/djarju/" class="diary-title">Djarju</a>
 						{% if story.subjectDate %}
 							<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 						{% endif %}
-					{% elif story.type === 'Ktieb_stampat' %}
+					{% elif story.type == 'Ktieb_stampat' %}
 						<a href="/kotba/" class="podcast-title">Kotba</a>
 						{% if story.bookSeason %} · <span class="subject-date">{{ story.bookSeason }}</span>{% endif %}
-					{% elif story.type === 'Poddata' %}
+					{% elif story.type == 'Poddata' %}
 						<a href="/podcast/" class="podcast-title">Poddata</a>
 						{% if story.subjectDate %}
 							<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 						{% endif %}
-					{% elif story.type === 'Terminu' %}
+					{% elif story.type == 'Terminu' %}
 						{% if story.subjectDate %}
 							<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 						{% endif %}
@@ -72,7 +72,7 @@ permalink: /{{ story.slug }}/index.html
 					</li>
 				{% endfor %}
 			</ul>
-			{% if story.type === 'Poddata' %}
+			{% if story.type == 'Poddata' %}
 				<h1 data-pagefind-meta="title" data-pagefind-weight="8">
 					{{ story.mainTitle | fixPodcastTitle | prettifyMaltese | safe }}
 				</h1>
@@ -112,7 +112,7 @@ permalink: /{{ story.slug }}/index.html
 			{% endfor %}
 		</header>
 		<div class="container">
-			{% if story.type === 'Ktieb_stampat' %}
+			{% if story.type == 'Ktieb_stampat' %}
 				<section id="ga-grid-body-book-image" class="generic-body-text">
 					{% if story.promoImageMobile %}
 						{% set slide = story.promoImageMobile.attributes.formats %}
@@ -133,7 +133,7 @@ permalink: /{{ story.slug }}/index.html
 				</section>
 			{% endif %}
 			<section id="grid-max-panel-right-top">
-				{% if story.type === 'Ktieb_stampat' and story.bookPublished %}
+				{% if story.type == 'Ktieb_stampat' and story.bookPublished %}
 					<div class="hide-mobile">
 						{% include "_print_book_panel.njk" %}
 					</div>
@@ -154,7 +154,7 @@ permalink: /{{ story.slug }}/index.html
 						{{ story.triggerWarning | prettifyMaltese | safe }}
 					</section>
 				{% endif %}
-				{% if story.type === 'Poddata' %}
+				{% if story.type == 'Poddata' %}
 					<aside class="hide-mobile">
 						<p>Tista’ tabbona fil-podcast fuq <a href="https://podcasts.apple.com/us/podcast/aphroconfuso/id1686567243">Apple Podcasts</a>, <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy5hY2FzdC5jb20vcHVibGljL3Nob3dzL2FwaHJvY29uZnVzbw">Google Podcasts</a>, <a href="https://pca.st/podcast/af8c44c0-c823-013b-f432-0acc26574db2">Pocket Casts</a>, <a href="https://open.spotify.com/show/75Lt3UMvC1jE15SGrNFMww">Spotify</a>, jew billi tfittex “Aphroconfuso” fuq l-app li tuża. Tista’ wkoll iżżid dan l-<a href="https://feeds.acast.com/public/shows/aphroconfuso">RSS feed</a> fl-app tiegħek.</p>
 					</aside>
@@ -174,29 +174,29 @@ permalink: /{{ story.slug }}/index.html
 				</div>
 			</section>
 			<section id="grid-body" data-pagefind-weight="7">
-				{% if story.type === 'Poezija' and not story.useProseStyling %}
+				{% if story.type == 'Poezija' and not story.useProseStyling %}
 					<section class="body-text">
 						{% if story.slideshow or story.singleImage %}
 							{% include "_slideshow.njk" %}
 						{% endif %}
 						{{ story.body | prettifyMaltese | versify | safe }}
 					</section>
-				{% elif story.type === 'Poezija' and story.useProseStyling %}
+				{% elif story.type == 'Poezija' and story.useProseStyling %}
 					{% if story.slideshow or story.singleImage %}
 						{% include "_slideshow.njk" %}
 					{% endif %}
 					<section class="body-text">
 						{{ story.body | prettifyMaltese | safe }}
 					</section>
-				{% elif story.type === 'Djarju' %}
+				{% elif story.type == 'Djarju' %}
 					<section class="body-text">
 						{{ story.body | sectionise | prettifyMaltese | endDotify | safe }}
 					</section>
-				{% elif story.type === 'Poddata' %}
+				{% elif story.type == 'Poddata' %}
 					<section class="generic-body-text">
 						{{ story.body | prettifyMaltese | endDotify | safe }}
 					</section>
-				{% elif story.type === 'Ktieb_stampat' %}
+				{% elif story.type == 'Ktieb_stampat' %}
 					{% if story.imagesPositionText %}
 						<section class="generic-body-text{% if story.useSeparators %} separated{% endif %}">
 							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 0, story.dontUseDropCaps) | prettifyMaltese | safe }}
@@ -333,7 +333,7 @@ permalink: /{{ story.slug }}/index.html
 							<a href="/{{ storycollection.title | slugifyMaltese }}/">{{ storycollection.title }}</a>
 						</header>
 						{% for item in storycollection.stories | sort(false, false, 'sortTitle') %}
-							{% if '/' + item.slug + '/' === page.url %}
+							{% if '/' + item.slug + '/' == page.url %}
 								<li class="active">{{ item.title }}</li>
 							{% else %}
 								<li>

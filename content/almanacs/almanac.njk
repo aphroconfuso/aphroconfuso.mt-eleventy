@@ -26,7 +26,7 @@ permalink: /almanakk-{{ almanac.month | slugifyMaltese }}/index.html
 
 		<ol class="almanac-months">
 			{% for menuMonth in almanacs %}
-				{% if menuMonth.month === almanac.month %}
+				{% if menuMonth.month == almanac.month %}
 					<li class="active">{{ menuMonth.month }}</li>
 				{% else %}
 					<li>

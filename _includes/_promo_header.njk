@@ -1,26 +1,26 @@
 <header>
 	<ul>
-		{% if promo.type === 'Terminu' %}
+		{% if promo.type == 'Terminu' %}
 			<li class="header-label">
 				{% if promo.subjectDate %}
 					<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
 				{% endif %}
 			</li>
-		{% elif promo.type === 'Poddata' %}
+		{% elif promo.type == 'Poddata' %}
 			<li class="header-label">
 			Poddata
 			{% if promo.subjectDate %}
 					<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
 				{% endif %}
 			</li>
-		{% elif promo.type === 'Djarju' %}
+		{% elif promo.type == 'Djarju' %}
 			<li class="header-label">
 				<span class="header-djarju">Djarju</span>
 				{% if promo.subjectDate %}
 					<span class="subject-date">{{ promo.subjectDate | subjectDate }}</span>
 				{% endif %}
 			</li>
-		{% elif promo.type === 'Ktieb_stampat' and promo.bookSeason %}
+		{% elif promo.type == 'Ktieb_stampat' and promo.bookSeason %}
 			<li class="header-label">
 				<span class="subject-date">{{ promo.bookSeason }}</span>
 			</li>
@@ -36,12 +36,12 @@
 	{% if promo.headLetter %}
 		<aside id="headletter-{{ promo.headLetter }}" class="headletter">{{ promo.headLetter }}</aside>
 	{% endif %}
-	{% if omitTitle !== true %}
-		{% if promo.type === 'Poddata' %}
+	{% if omitTitle != true %}
+		{% if promo.type == 'Poddata' %}
 			<h1>
 				{{ promo.title | fixPodcastTitle | prettifyMaltese | safe }}
 			</h1>
-		{% elif promo.type !== 'Djarju' %}
+		{% elif promo.type != 'Djarju' %}
 			<h1>
 				{{ promo.mainTitle | prettifyMaltese | safe }}
 				{% if promo.isSequenceEpisode and promo.sequenceEpisodeNumber > 0 %}
@@ -51,10 +51,10 @@
 		{% endif %}
 	{% endif %}
 	{% include '_authors.njk' %}
-	{% if promo.type === 'Djarju' or(showEpisodeTitle and promo.sequenceEpisodeTitle) %}
+	{% if promo.type == 'Djarju' or(showEpisodeTitle and promo.sequenceEpisodeTitle) %}
 		<h3>
 			{# {% if promo.sequenceEpisodes.length > 1 and promo.sequenceEpisodeNumber > 0 and not omitEpisodeNumber %} #}
-			{% if promo.sequenceEpisodeNumber > 0 and omitEpisodeNumber !== true %}
+			{% if promo.sequenceEpisodeNumber > 0 and omitEpisodeNumber != true %}
 				<span class="episode-number">{{ promo.sequenceEpisodeNumber }}. </span>
 			{% endif %}
 			{{ promo.sequenceEpisodeTitle | prettifyMaltese | safe }}

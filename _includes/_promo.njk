@@ -4,7 +4,7 @@
 {% endif %}
 <li {% if promo.sequenceEpisodeTitle %} class="multiple-episodes episode-{{ promo.sequenceEpisodeNumber }}"{% endif %}>
 	<a class="promo {{ collectionId }} {{ promo.issueMonth | slugify }} promo-{{ promo.type | slugify }} sequence-{{ promo.sequenceId }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: {{ promoFrom | escapeQuote }}', 'għal: {{ promoTo | escapeQuote }}', {{ loop.index }}]);">
-		{% if promo.type === 'Ktieb_stampat' && promo.id %}
+		{% if promo.type == 'Ktieb_stampat' %}
 			{% if promo.promoImageMobile %}
 				{% set slide = promo.promoImageMobile.attributes.formats %}
 				{% set slideMobile = slide %}
@@ -33,7 +33,7 @@
 			{% include '_promo_header.njk' %}
 			{% set description = description or promo.description or promo.snippet %}
 			<div class="{{ promo.cssClass }}">
-				{% if promo.type === 'Poezija' %}
+				{% if promo.type == 'Poezija' %}
 					<p>{{ description | prettifyMaltese | versifyDescription | safe }}</p>
 				{% else %}
 					<p>{{ description | prettifyMaltese | safe }}</p>
