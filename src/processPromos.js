@@ -58,7 +58,7 @@ module.exports = (promos, storyAtts) => {
 				return {
 					mime: downloadAtts.mime,
 					name: downloadAtts.name,
-					size: downloadAtts.size && parseInt(downloadAtts.size / 1024, 10),
+					size: downloadAtts.size && (downloadAtts.size / 1024, 10).toFixed(2),
 					url: downloadAtts.url,
 				};
 			}),
