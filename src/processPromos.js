@@ -53,16 +53,15 @@ module.exports = (promos, storyAtts) => {
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: promoAtts.dateTimePublication,
 			description: stripTags(promo.text || promoAtts.description),
-			downloads: promoAtts.summaries && promoAtts.summaries.map((summary) => {
-				const download = summary.download && summary.download.data && summary.download.data.attributes;
-				if (!download) return null;
+			downloads: promo.downloads && promo.downloads.data && promo.downloads.data.map((download) => {
+				const downloadAtts = download.attributes;
 				return {
-					name: download.name,
-					mime: download.mime,
-					size: download.size,
-					url: download.url,
+					mime: downloadAtts.mime,
+					name: downloadAtts.name,
+					size: downloadAtts.size && parseInt(downloadAtts.size / 1024, 10),
+					url: downloadAtts.url,
 				};
-			}).filter((d) => !!d),
+			}),
 			id: promo.id || (promo.story && promo.story.data.id),
 			isSequenceEpisode: !!sequence,
 			issueMonth: getIssueMonthYear(promoAtts.dateTimePublication).month,

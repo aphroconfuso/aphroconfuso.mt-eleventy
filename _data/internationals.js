@@ -41,13 +41,13 @@ async function getInternationals() {
 									story {
 										${ linkedStoryDataWithImage }
 									}
-									download {
+									downloads {
 										data {
 											attributes {
-												url
-												name
 												mime
+												name
 												size
+												url
 											}
 										}
 									}

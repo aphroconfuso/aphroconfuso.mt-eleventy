@@ -43,10 +43,14 @@ permalink: /{{ international.code }}/index.html
 								</div>
 							{% endif %}
 							{{ summary.rawText | prettifyMaltese | sectioniseOnly | safe }}
-							{{ summary.downloads | dump }}
-							{% for download in summary.downloads %}
-								{{ download.url }}
-							{% endfor %}
+							{% if summary.downloads %}
+								<ul>
+									{% for download in summary.downloads %}
+										<li>
+											<a href="{{ download.url}}">{{ download.name }}</a> ({{ download.size }}M)</li>
+									{% endfor %}
+								</ul>
+							{% endif %}
 						</div>
 					{% endfor %}
 				</div>
