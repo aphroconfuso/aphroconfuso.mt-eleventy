@@ -53,6 +53,16 @@ module.exports = (promos, storyAtts) => {
 			cssClass: promoAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: promoAtts.dateTimePublication,
 			description: stripTags(promo.text || promoAtts.description),
+			downloads: promoAtts.summaries && promoAtts.summaries.map((summary) => {
+				const download = summary.download && summary.download.data && summary.download.data.attributes;
+				if (!download) return null;
+				return {
+					name: download.name,
+					mime: download.mime,
+					size: download.size,
+					url: download.url,
+				};
+			}).filter((d) => !!d),
 			id: promo.id || (promo.story && promo.story.data.id),
 			isSequenceEpisode: !!sequence,
 			issueMonth: getIssueMonthYear(promoAtts.dateTimePublication).month,
@@ -64,6 +74,7 @@ module.exports = (promos, storyAtts) => {
 			podcastUrl: promoAtts.podcastUrl,
 			promoImageMobile: promoAtts.promoImageMobile && promoAtts.promoImageMobile.data,
 			putAfterThisText: promo.putAfterThisText,
+			rawText: promo.text,
 			reads: getReads(authorPronoun),
 			sequenceEpisodeNumber: promoAtts.sequenceEpisodeNumber,
 			sequenceEpisodeTitle: sequenceEpisodeTitle,

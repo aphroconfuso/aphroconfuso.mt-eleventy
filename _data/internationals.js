@@ -36,26 +36,26 @@ async function getInternationals() {
 								title
 								body
 								summaries {
-								download {
-									data {
-										attributes {
-											url
-											name
-											mime
-											size
+									text
+									title
+									story {
+										${ linkedStoryDataWithImage }
+									}
+									download {
+										data {
+											attributes {
+												url
+												name
+												mime
+												size
+											}
 										}
 									}
-								}
-								text
-								title
-								story {
-									${ linkedStoryDataWithImage }
 								}
 							}
 						}
 					}
-				}
-			}`,
+				}`,
 			}),
 		});
 		const response = await data;
@@ -79,6 +79,7 @@ async function getInternationals() {
 			code: codes[atts.language],
 			direction: (atts.language === 'alerbyt' ? 'rtl' : 'ltr'),
 			title: atts.title,
+			summaries: atts.summaries && processPromos(atts.summaries),
 		}
 	});
 
@@ -86,13 +87,3 @@ async function getInternationals() {
 }
 
 module.exports = getInternationals;
-
-
-// summaries: atts.summaries.map((summary) => {
-// 	return {
-// 		text: summary.text,
-// 		title: summary.title,
-// 		download: summary.download && summary.download.data,
-// 		story: summary.story && summary.story.data && processPromos(summary.story.data),
-// 	}
-// })

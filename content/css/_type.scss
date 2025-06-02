@@ -168,7 +168,8 @@ span.rtl {
   &.separated {
     h5,
     h6,
-    p {
+    p,
+		div {
       &.break {
         margin-top: $body-margin * 1;
         padding-top: $body-margin-double;
@@ -447,4 +448,18 @@ article.generic[lang="ar"] {
     font-family: "Noto Sans Arabic", "Alegreya Sans Arabic Fallback", sans-serif,
       sans-serif;
   }
+}
+
+.summary {
+	h2 {
+		color: $light-brown;
+		margin-bottom: $body-margin;
+	}
+	@media all and (min-width: $laptop-breakpoint) {
+		.book-wrapper {
+			width: 50%;
+			margin: 0 0 $body-margin-half $body-margin-half;
+			float:right;
+		}
+	}
 }

@@ -12,20 +12,44 @@ permalink: /{{ international.code }}/index.html
 	<meta content="{{ metadata.description }}" name="description">
 	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 	{% for page in internationals %}
-		<link rel="alternate" hreflang="{{ page.code }}" href="https://aphroconfuso.mt/{{ page.code }}/" />
+		<link rel="alternate" hreflang="{{ page.code }}" href="https://aphroconfuso.mt/{{ page.code }}/"/>
 	{% endfor %}
 {% endblock %}
 
 {% block content %}
 	<article class="generic" dir="{{ international.direction }}" lang="{{ international.code }}">
 		<header>
-			<ul><li class="header-label">&nbsp;</li></ul>
+			<ul>
+				<li class="header-label">&nbsp;</li>
+			</ul>
 			<h1>{{ international.title }}</h1>
 			<h2>&nbsp;</h2>
 		</header>
 		<div class="container">
 			<section id="grid-body">
-				<div class="generic-body-text separated">{{ international.body | prettifyMaltese | sectioniseOnly | safe }}</div>
+				<div class="generic-body-text separated">
+					{{ international.body | prettifyMaltese | sectioniseOnly | safe }}
+					{% for summary in international.summaries %}
+						<div class="summary break">
+							<h2>{{ summary.title }}</h2>
+							{% if summary.type == 'Ktieb_stampat' and summary.promoImageMobile %}
+								<div class="story-{{ summary.id }}">
+									<div class="book-wrapper">
+										{% set slide = summary.promoImageMobile.attributes.formats %}
+										{% set slideMobile = slide %}
+										{% set imageCrop = 'uncropped' %}
+										{% include "_image.njk" %}
+									</div>
+								</div>
+							{% endif %}
+							{{ summary.rawText | prettifyMaltese | sectioniseOnly | safe }}
+							{{ international.downloads | dump }}
+							{% for download in international.downloads %}
+								{{ download.url }}
+							{% endfor %}
+						</div>
+					{% endfor %}
+				</div>
 			</section>
 		</div>
 	</article>
