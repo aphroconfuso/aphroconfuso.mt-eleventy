@@ -310,10 +310,6 @@ article.ktieb-stampat {
 // Article with story
 article.story {
   margin-top: $body-margin-quarter;
-
-	@media all and (min-width: $laptop-breakpoint) {
-		width: 70%;
-	}
   .book-wrapper {
 		border: 1px solid $lightest-brown;
 		padding: $body-margin;
