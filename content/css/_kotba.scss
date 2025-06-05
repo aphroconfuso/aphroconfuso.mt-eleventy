@@ -238,7 +238,7 @@ article.ktieb-stampat {
 }
 
 // Book list
-@mixin book-list($items-per-row: 4, $limit: 4) {
+@mixin book-list($mobile-limit: 4, $items-per-row: 4) {
   display: grid;
   grid-template-columns: repeat($items-per-row, 1fr);
   gap: $body-margin-double;
@@ -259,7 +259,7 @@ article.ktieb-stampat {
     grid-template-columns: 1fr;
     gap: $body-margin;
 
-    > :nth-child(n + #{$limit}) {
+    > :nth-child(n + #{$mobile-limit}) {
       display: none;
     }
   }
@@ -270,7 +270,7 @@ article.ktieb-stampat {
 }
 
 .books ul.promo-list {
-  @include book-list();
+  @include book-list(99);
 }
 
 .contributor .books ul.promo-list {
