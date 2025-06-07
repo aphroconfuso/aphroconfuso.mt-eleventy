@@ -10,7 +10,7 @@ permalink: /avvenimenti/index.html
 {% set generic = generics['event'] %}
 
 {% block head %}
-	<title>{{ event.title }} · Aphroconfuso</title>
+	<title>{{ generic.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">
 	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
 {% endblock %}
@@ -28,8 +28,6 @@ permalink: /avvenimenti/index.html
 					{{ generic.body | prettifyMaltese | safe }}
 					{% set promoFrom = "Avveniment" %}
 					{% set promos = stories | selectattr("listableEvent") %}
-					{% set showEpisodeTitle = true %}
-					{% set showDurations = true %}
 					{% include "_promo_list.njk" %}
 				</div>
 			</section>
