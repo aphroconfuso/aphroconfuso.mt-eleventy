@@ -41,20 +41,20 @@ permalink: /{{ story.slug }}/index.html
 			<ul>
 				<li class="header-label" data-pagefind-meta="header">
 					{% if story.type == 'Avveniment' %}
-						<a href="/avvenimenti/" class="diary-title">Avvenimenti</a>
+						<a href="/avvenimenti/" class="generic-title">Avvenimenti</a>
 						{% if story.subjectDate %}
 							<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 						{% endif %}
 					{% elif story.type == 'Djarju' %}
-						<a href="/djarju/" class="diary-title">Djarju</a>
+						<a href="/djarju/" class="generic-title">Djarju</a>
 						{% if story.subjectDate %}
 							<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 						{% endif %}
 					{% elif story.type == 'Ktieb_stampat' %}
-						<a href="/kotba/" class="podcast-title">Kotba</a>
+						<a href="/kotba/" class="generic-title">Kotba</a>
 						{% if story.bookSeason %} · <span class="subject-date">{{ story.bookSeason }}</span>{% endif %}
 					{% elif story.type == 'Poddata' %}
-						<a href="/podcast/" class="podcast-title">Poddata</a>
+						<a href="/podcast/" class="generic-title">Poddata</a>
 						{% if story.subjectDate %}
 							<span class="subject-date">{{ story.subjectDate | subjectDate }}</span>
 						{% endif %}
@@ -191,6 +191,13 @@ permalink: /{{ story.slug }}/index.html
 				{% elif story.type == 'Djarju' %}
 					<section class="body-text">
 						{{ story.body | sectionise | prettifyMaltese | endDotify | safe }}
+					</section>
+				{% elif story.type == 'Avveniment' %}
+					{% if story.slideshow or story.singleImage %}
+						{% include "_slideshow.njk" %}
+					{% endif %}
+					<section class="generic-body-text">
+						{{ story.body | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% elif story.type == 'Poddata' %}
 					<section class="generic-body-text">

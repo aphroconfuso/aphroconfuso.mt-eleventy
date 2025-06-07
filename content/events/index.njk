@@ -7,6 +7,8 @@ permalink: /avvenimenti/index.html
 ---
 {% extends 'layouts/base.njk' %}
 
+{% set generic = generics['event'] %}
+
 {% block head %}
 	<title>{{ event.title }} · Aphroconfuso</title>
 	<meta content="{{ metadata.description }}" name="description">
@@ -14,16 +16,16 @@ permalink: /avvenimenti/index.html
 {% endblock %}
 
 {% block content %}
-	<article class="generic contents podcast">
+	<article class="generic contents event">
 		<header>
 			<ul><li class="header-label">&nbsp;</li></ul>
-			<h1>{{ event.title }}</h1>
+			<h1>{{ generic.title }}</h1>
 			<h2>&nbsp;</h2>
 		</header>
 		<div class="container">
 			<section id="grid-body">
 				<div class="generic-body-text">
-					{{ event.body | prettifyMaltese | safe }}
+					{{ generic.body | prettifyMaltese | safe }}
 					{% set promoFrom = "Avveniment" %}
 					{% set promos = stories | selectattr("listableEvent") %}
 					{% set showEpisodeTitle = true %}
