@@ -428,7 +428,9 @@ article {
 
 @media all and (min-width: $mobile-breakpoint) {
 	// Uncropped wisgħa tal-paġna
-	.story-134 {
+  // This needs to be a proper dropdown option
+	.story-134,
+  .story-154 {
 		#grid-body .splide {
 				margin-left: -30% !important;
 				width: 160% !important;
