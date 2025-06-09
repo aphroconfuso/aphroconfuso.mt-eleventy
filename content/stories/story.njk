@@ -197,7 +197,7 @@ permalink: /{{ story.slug }}/index.html
 						{% include "_slideshow.njk" %}
 					{% endif %}
 					<section class="generic-body-text">
-						{{ story.body | prettifyMaltese | endDotify | safe }}
+						{{ story.body | sectionise | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% elif story.type == 'Poddata' %}
 					<section class="generic-body-text">
