@@ -192,13 +192,13 @@ permalink: /{{ story.slug }}/index.html
 					<section class="body-text">
 						{{ story.body | sectionise | prettifyMaltese | endDotify | safe }}
 					</section>
-				{% elif story.type == 'Avveniment' %}
+				{# {% elif story.type == 'Avveniment' %}
 					{% if story.slideshow or story.singleImage %}
 						{% include "_slideshow.njk" %}
 					{% endif %}
 					<section class="generic-body-text">
 						{{ story.body | sectionise | prettifyMaltese | endDotify | safe }}
-					</section>
+					</section> #}
 				{% elif story.type == 'Poddata' %}
 					<section class="generic-body-text">
 						{{ story.body | prettifyMaltese | endDotify | safe }}
