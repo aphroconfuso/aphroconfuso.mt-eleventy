@@ -28,6 +28,7 @@ permalink: /avvenimenti/index.html
 					{{ generic.body | prettifyMaltese | safe }}
 					{% set promoFrom = "Avveniment" %}
 					{% set promos = stories | selectattr("listableEvent") %}
+					{% set useSquare = true %}
 					{% include "_promo_list.njk" %}
 				</div>
 			</section>
