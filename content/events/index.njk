@@ -1,4 +1,4 @@
----
+{# ---
 pagination:
   data: stories
   size: 250
@@ -9,32 +9,38 @@ permalink: /avvenimenti/index.html
 
 {% set generic = generics['event'] %}
 
-{% block head %}
-	<title>{{ generic.title }} · Aphroconfuso</title>
-	<meta content="{{ metadata.description }}" name="description">
-	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
-{% endblock %}
-
 {% block content %}
-	<article class="generic contents events">
+	<article class="generic eventts">
 		<header>
 			<ul><li class="header-label">&nbsp;</li></ul>
-			<h1>{{ generic.title }}</h1>
-			<h2>&nbsp;</h2>
+			<h1>Avvenimenti</h1>
 		</header>
-		<div class="container">
-			<section id="grid-body">
-				<div class="generic-body-text">
-					{{ generic.body | prettifyMaltese | safe }}
-					{% set promoFrom = "Avveniment" %}
-					{% set promos = stories | selectattr("listableEvent") %}
-					{% set useSquare = true %}
-					{% include "_promo_list.njk" %}
-				</div>
-			</section>
-		</div>
+		<section class="body-text">
+				<ol class="promo-list">
+					{% set imagesUrl = metadata.settings.imagesUrl %}
+					{% for event in stories | selectattr("listableEvent") %}
+					<li>
+						<a href="/{{ event.slug }}/" class="promo promo-event">
+						{% set imageMode = 'promo' %}
+						{% set imageCrop = 'square' %}
+						{% set useSquare = true %}
+						{% if event.promoImageMobile %}
+							{% set slide = event.promoImageMobile %}
+							{% set slideMobile = event.promoImageMobile %}
+							{% include "_image.njk" %}
+						{% endif %}
+						<header>
+							<h1>{{ event.title }}</h1>
+							{% set promo = event %}
+							{% include "_authors.njk" %}
+						</header>
+						<div class="body-text">
+							<p>{{ event.description | prettifyMaltese | safe }}</p>
+						</div>
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+		</section>
 	</article>
-	<script>
-		reportingTitle = "{{ event.title }}";
-	</script>
-{% endblock %}
+{% endblock %} #}

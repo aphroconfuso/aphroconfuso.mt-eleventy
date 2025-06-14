@@ -169,20 +169,7 @@ permalink: /index.html
 			{% set omitAside = true %}
 			{% include "_promo_list.njk" %}
 		</div>
-		<div class="ga-books books-list">
-			<nav class="category-menu">
-				<li class="header">
-					<a href="/kotba/">Il-Kotba ta’ Aphroconfuso</a>
-				</li>
-			</nav>
-			{% set promosPublished = stories | selectattr("bookPublished") | sort(false, false, "dateTimePublication") %}
-			{% set promosPrePublished = stories | selectattr("bookPreRelease") | sort(false, false, "dateTimePublication") %}
-			{% set promos = promosPublished
-				.concat(promosPrePublished)
-				.slice(0, 6) %}
-			{% set omitAside = true %}
-			{% include "_promo_list.njk" %}
-		</div>
+		{# {% include '_our_books_list.njk' %} #}
 	</div>
 </article>
 <script>
