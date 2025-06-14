@@ -41,21 +41,30 @@ async function getHomepage() {
                     }
                   }
                 }
-								promos(pagination: { page: 1, pageSize: 12 }) {
+								promos(
+			            publicationState: ${ fetchStatus },
+									pagination: { page: 1, pageSize: 12 }
+								) {
 									text
 									blurbLines
 									story {
 										${linkedStoryData}
 									}
 								}
-								poetryPromos(pagination: { page: 1, pageSize: 3 }) {
+								poetryPromos(
+			            publicationState: ${ fetchStatus },
+									pagination: { page: 1, pageSize: 3 }
+								) {
 									text
 									blurbLines
 									story {
 										${linkedStoryData}
 									}
 								}
-								imagePromos(pagination: { page: 1, pageSize: 3 }) {
+								imagePromos(
+			            publicationState: ${ fetchStatus },
+									pagination: { page: 1, pageSize: 3 }
+								) {
 									text
 									blurbLines
 									imageCrop
