@@ -4,13 +4,20 @@
 			<li class="bookmark-compact">
 				<!-- -->
 			</li>
-			{% if showDurations and promo.audioPlayers[0] %}
-				<li class="wordcount">{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }}</li>
-			{% elif showLengths and promo.wordcount %}
-				<li class="wordcount">{{ promo.wordcount | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</li>
-			{% elif showLengths %}
-				<li class="wordcount">{{ "wordcount" | fromStoriesById(stories, promo.id) | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</li>
-			{% endif %}
+			<li class="wordcount">
+				{% if promo.audioPlayers[0] %}
+					{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }} awdjo,
+				{% endif %}
+				{% if promo.type != 'Poezija' %}
+					{% if showLengths and promo.wordcount %}
+						{{ promo.wordcount | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</li>
+					{% elif showLengths %}
+						{{ "wordcount" | fromStoriesById(stories, promo.id) | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</li>
+					{% endif %}
+				{% endif %}
+			</li>
 		</ul>
 	</aside>
 {% endif %}
+
+{# showLengths can default to true #}
