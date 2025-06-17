@@ -277,11 +277,10 @@ article.ktieb-stampat {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.books-list {
-  ul.promo-list {
-    @include book-list(4, 6);
-  }
-}
+.books-list > ul.promo-list {
+   @include book-list(4, 6);
+ }
+
 
 // End promos
 .end-promos .ga-book-image-promo {
