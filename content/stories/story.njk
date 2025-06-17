@@ -425,10 +425,10 @@ permalink: /{{ story.slug }}/index.html
 		</aside> #}
 </article>
 
-{# {% if story.type == 'Ktieb_stampat' %}
+{% if story.type == 'Ktieb_stampat' %}
 	{% set useSquare = false %}
 	{% include '_our_books_list.njk' %}
-{% endif %} #}
+{% endif %}
 
 <aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
 	{% set omitEpisodeNumber = true %}

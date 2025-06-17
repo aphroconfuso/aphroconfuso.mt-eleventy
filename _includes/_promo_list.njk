@@ -1,6 +1,8 @@
 <ul class="promo-list{% if collated %} collated{% endif %}">
 	{% set promoFrom = promoFrom or page.url %}
 	{% for promo in promos %}
-		{% include '_promo.njk' %}
+		{% if promo.id != story.id %}
+			{% include '_promo.njk' %}
+		{% endif %}
 	{% endfor %}
 </ul>
