@@ -279,10 +279,8 @@ article.ktieb-stampat {
 
 .home,
 .story {
-  .ga-books {
-    ul.promo-list {
-      @include book-list(4, 6);
-    }
+  ul.promo-list {
+    @include book-list(4, 6);
   }
 }
 
