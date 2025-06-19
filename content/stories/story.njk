@@ -429,19 +429,18 @@ permalink: /{{ story.slug }}/index.html
 		</aside> #}
 </article>
 
-<div class="end-promos-container">
-	<aside class="ga-books books-list promos-container">
-		{% set useSquare = false %}
-		{% include '_our_books_list.njk' %}
-	</aside>
-	<aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
-		{% set omitEpisodeNumber = true %}
-		{% set promoFrom = story.reportingTitle %}
-		{% set promos = story.endPromos %}
-		{% set showEpisodeTitle = true %}
-		{% include '_promo_list.njk' %}
-	</aside>
-</div>
+<aside class="books-list promos-container">
+	{% set useSquare = false %}
+	{% include '_our_books_list.njk' %}
+</aside>
+
+<aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
+	{% set omitEpisodeNumber = true %}
+	{% set promoFrom = story.reportingTitle %}
+	{% set promos = story.endPromos %}
+	{% set showEpisodeTitle = true %}
+	{% include '_promo_list.njk' %}
+</aside>
 
 <script>
 	audioUrls = {
