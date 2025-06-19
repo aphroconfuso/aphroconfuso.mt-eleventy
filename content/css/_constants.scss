@@ -69,7 +69,7 @@ $font-size-largest-mobile: 2rem;
 $font-size-largest: 2rem;
 $font-size-largest-home: 2rem;
 
-$body-margin-bordered: calc(1px - $body-margin);
+$body-margin-bordered: calc($body-margin - 1px);
 
 $EXAMPLE: hsl(73, 45%, 50%);
 
