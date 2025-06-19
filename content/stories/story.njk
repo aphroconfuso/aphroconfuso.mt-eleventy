@@ -412,6 +412,10 @@ permalink: /{{ story.slug }}/index.html
 					<p>Iktbilna dwar dan ix-xogħol fuq <l-m>l-indirizz</l-m>
 						<a href="mailto:ittri@aphroconfuso.mt?subject={{ story.displayTitle }}" class="outline">ittri@aphroconfuso.mt</a>. Jekk jogħġbok inkludi ismek u fejn toqgħod. Kontribuzzjonijiet anonimi ma jiġux ikkunsidrati.</p>
 				</aside>
+			{% elif story.type == 'Ktieb_stampat' %}
+				<aside id="books-email-solicit">
+					<p>Għal kull mistoqsija dwar xiri ta’ kotba, ibgħat email fuq <a href="mailto:kotba@aphroconfuso.mt">kotba@aphroconfuso.mt</a>.</p>
+				</aside>
 			{% endif %}
 		</section>
 	</div>
@@ -425,20 +429,20 @@ permalink: /{{ story.slug }}/index.html
 		</aside> #}
 </article>
 
-{% if story.type == 'Ktieb_stampat' %}
-	{% set useSquare = false %}
+<div class="end-promos-container">
 	<aside class="ga-books books-list promos-container">
+		{% set useSquare = false %}
 		{% include '_our_books_list.njk' %}
 	</aside>
-{% endif %}
+	<aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
+		{% set omitEpisodeNumber = true %}
+		{% set promoFrom = story.reportingTitle %}
+		{% set promos = story.endPromos %}
+		{% set showEpisodeTitle = true %}
+		{% include '_promo_list.njk' %}
+	</aside>
+</div>
 
-<aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
-	{% set omitEpisodeNumber = true %}
-	{% set promoFrom = story.reportingTitle %}
-	{% set promos = story.endPromos %}
-	{% set showEpisodeTitle = true %}
-	{% include '_promo_list.njk' %}
-</aside>
 <script>
 	audioUrls = {
 		"songs": {{ story.audioUrlsString | safe }}
