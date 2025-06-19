@@ -284,6 +284,14 @@ article.ktieb-stampat {
   }
 }
 
+.end-promos.books-list {
+  columns: 1;
+  @media all and (min-width: $laptop-breakpoint) {
+    border-bottom: 1px solid $lightest-brown;
+  }
+}
+
+
 // End promos
 .end-promos .ga-book-image-promo {
   a {
