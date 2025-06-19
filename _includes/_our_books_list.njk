@@ -1,4 +1,4 @@
-<aside class="ga-books books-list end-promos">
+<aside class="ga-books books-list promos-container">
 	<nav class="category-menu">
 		<li class="header">
 			<a href="/kotba/">Il-Kotba ta’ Aphroconfuso</a>
@@ -8,7 +8,7 @@
 	{% set promosPrePublished = stories | selectattr("bookPreRelease") | sort(false, false, "dateTimePublication") %}
 	{% set promos = promosPublished
 		.concat(promosPrePublished)
-		.slice(0, 6) %}
+		.slice(0, 7) %}
 	{% set omitAside = true %}
 	{% include "_promo_list.njk" %}
 </aside>

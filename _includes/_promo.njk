@@ -19,7 +19,7 @@
 					{% if promo.text %}
 						<p>{{ promo.text | prettifyMaltese | safe }}</p>
 					{% else %}
-						{% if story.type == 'Ktieb_stampat' %}
+						{% if story.type != 'Ktieb_stampat' %}
 							{% if "bookPublished" | fromStoriesById(stories, promo.id) %}
 								<p>Dan ix-xogħol jidher fil-ktieb <em class="link">{{ promo.title }}</em>.</p>
 							{% else %}
