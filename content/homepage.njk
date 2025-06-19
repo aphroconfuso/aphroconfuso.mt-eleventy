@@ -166,6 +166,7 @@ permalink: /index.html
 		<div class="ga-book-image-promo">
 			{% set promosPublished = stories | selectattr("bookPublished") | sort(true, false, "dateTimePublication") %}
 			{% set promos = promosPublished.slice(0, 1) %}
+			{% set bookPromoId = promos[0].id %}
 			{% set omitAside = true %}
 			{% include "_promo_list.njk" %}
 		</div>
