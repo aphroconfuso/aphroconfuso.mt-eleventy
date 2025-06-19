@@ -380,6 +380,7 @@ permalink: /{{ story.slug }}/index.html
 					{% set promos = story.bookPromos %}
 					{% set omitAside = true %}
 					{% include '_promo_list.njk' %}
+					{% set bookPromoId = promos[0].id %}
 				</aside>
 			{% endif %}
 			{% if story.postscript %}
