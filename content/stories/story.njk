@@ -427,7 +427,9 @@ permalink: /{{ story.slug }}/index.html
 
 {% if story.type == 'Ktieb_stampat' %}
 	{% set useSquare = false %}
-	{% include '_our_books_list.njk' %}
+	<aside class="ga-books books-list promos-container">
+		{% include '_our_books_list.njk' %}
+	</aside>
 {% endif %}
 
 <aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
