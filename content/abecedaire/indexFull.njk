@@ -27,7 +27,7 @@ permalink: /admin/abeċedarju-sħiħ/index.html
 					<ol>
 						{% for snippet in stories[0].abecedaireFull | sort(false, false, 'letter') %}
 							<li>
-								<a class="promo promo-abecedaire {{ snippet.issueMonth | slugify }}" href="http://aphroconfuso.mt/{{ snippet.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Abeċedarju', 'għal: {{ snippet.reportingTitle }}', {{ loop.index }}]);">
+								<a class="promo promo-abecedaire {{ snippet.issueMonth | slugify }}" href="http://aphroconfuso.mt/{{ snippet.slug }}/?mtm_campaign=Dropcaps&mtm_kwd={{ snippet.letter | urlencode }}%20-%20{{ snippet.titleTruncated | urlencode }}">
 									<p class="blurb">{{ snippet.snippet | prettifyMaltese | simpleDropCapsify | safe }}</p>
 									<p class="credit">— “{{ snippet.titleTruncated }}” ta’ {{ snippet.authorsString }}</p>
 									<p class="credit credit-full">
