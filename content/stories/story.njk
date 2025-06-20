@@ -430,14 +430,14 @@ permalink: /{{ story.slug }}/index.html
 		</aside> #}
 </article>
 
-<aside class="books-list promos-container">
+{% set promoFrom = story.reportingTitle %}
+<aside class="books-list promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
+	{% set endBookPromos = true %}
 	{% set useSquare = false %}
 	{% include '_our_books_list.njk' %}
 </aside>
-
 <aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
 	{% set omitEpisodeNumber = true %}
-	{% set promoFrom = story.reportingTitle %}
 	{% set promos = story.endPromos %}
 	{% set showEpisodeTitle = true %}
 	{% include '_promo_list.njk' %}

@@ -168,12 +168,12 @@ article.ktieb-stampat {
 // Coloured book story wrappers
 .story-88  { @include book-colour($antologija1); }
 .story-115 { @include book-colour($qarn); }
-.story-151 { @include book-colour($essidr); }
+.story-140 { @include book-colour($antologija3); }
 .story-142 { @include book-colour($martamarta); }
 .story-143 { @include book-colour($burmghez); }
 .story-144 { @include book-colour($saffo); }
 .story-145 { @include book-colour($antologija2); }
-.story-140 { @include book-colour($antologija3); }
+.story-151 { @include book-colour($essidr); }
 
 // Pre-release layout
 .pre-release #grid-body {
@@ -238,7 +238,7 @@ article.ktieb-stampat {
 }
 
 // Book list
-@mixin book-list($mobile-limit: 4, $items-per-row: 4) {
+@mixin book-list($limit: 4, $items-per-row: 4) {
   display: grid;
   grid-template-columns: repeat($items-per-row, 1fr);
   gap: $body-margin-double;
@@ -259,7 +259,7 @@ article.ktieb-stampat {
     grid-template-columns: 1fr;
     gap: $body-margin;
 
-    > :nth-child(n + #{$mobile-limit}) {
+    > :nth-child(n + #{$limit}) {
       display: none;
     }
   }
@@ -289,6 +289,9 @@ article.ktieb-stampat {
   @media all and (min-width: $laptop-breakpoint) {
     border-bottom: 1px solid $lightest-brown;
     padding-bottom: $body-margin-bordered;
+    ul.promo-list {
+      @include book-list(6, 6);
+    }
   }
 }
 
