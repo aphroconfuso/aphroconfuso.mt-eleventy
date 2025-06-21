@@ -243,7 +243,6 @@ article.ktieb-stampat {
   grid-template-columns: repeat($items-per-row, 1fr);
   gap: $body-margin-double;
   width: 100%;
-
   > li {
     border-bottom: none;
     margin-bottom: 0;
@@ -253,7 +252,7 @@ article.ktieb-stampat {
     }
     @media all and (min-width: $laptop-breakpoint) {
       &:nth-child(n + #{$mobile-limit}) {
-        display: unset;
+        display: list-item;
       }
       &:nth-child(n + #{$limit}) {
         display: none;
@@ -275,6 +274,9 @@ article.ktieb-stampat {
 .home .books-list,
 .story + .books-list {
   columns: unset;
+  nav li {
+    padding: $body-margin-half 0;
+  }
   ul.promo-list {
     columns: unset;
     @include book-list(7, 4, 6);
