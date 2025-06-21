@@ -246,15 +246,14 @@ article.ktieb-stampat {
   > li {
     border-bottom: none;
     margin-bottom: 0;
-
+    &:nth-child(n + #{$limit}) {
+      display: none;
+    }
     img {
       width: 100%;
       height: auto;
       display: block;
     }
-  }
-  > :nth-child(n + #{$limit}) {
-    display: none;
   }
   @media (max-width: $mobile-breakpoint) {
     grid-template-columns: 1fr;
