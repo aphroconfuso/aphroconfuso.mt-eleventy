@@ -275,7 +275,10 @@ article.ktieb-stampat {
 .story + .books-list {
   columns: unset;
   nav li {
-    padding: 0  0 $body-margin-half;
+    padding: $body-margin-half 0;
+    @media all and (min-width: $laptop-breakpoint) {
+      padding: 0  0 $body-margin-half;
+    }
   }
   ul.promo-list {
     columns: unset;
