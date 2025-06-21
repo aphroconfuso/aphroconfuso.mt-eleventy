@@ -246,7 +246,7 @@ article.ktieb-stampat {
   > li {
     border-bottom: none;
     margin-bottom: 0;
-    &:nth-child(n + #{$limit} -1) {
+    &:nth-child(n + #{$limit}) {
       display: none;
     }
     img {
@@ -276,12 +276,12 @@ article.ktieb-stampat {
 .home .books-list,
 .story ~ .books-list {
   ul.promo-list {
-    @include book-list(6, 6);
+    @include book-list(5, 6);
     columns: 1;
     @media all and (min-width: $laptop-breakpoint) {
       border-bottom: 1px solid $lightest-brown;
       padding-bottom: $body-margin-bordered;
-      @include book-list(6, 6);
+      @include book-list(5, 6);
     }
   }
 }
