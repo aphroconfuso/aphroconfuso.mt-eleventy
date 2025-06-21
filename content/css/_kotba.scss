@@ -243,7 +243,6 @@ article.ktieb-stampat {
   grid-template-columns: repeat($items-per-row, 1fr);
   gap: $body-margin-double;
   width: 100%;
-
   > li {
     border-bottom: none;
     margin-bottom: 0;
@@ -254,14 +253,12 @@ article.ktieb-stampat {
       display: block;
     }
   }
-
+  > :nth-child(n + #{$limit}) {
+    display: none;
+  }
   @media (max-width: $mobile-breakpoint) {
     grid-template-columns: 1fr;
     gap: $body-margin;
-
-    > :nth-child(n + #{$limit} - 1) {
-      display: none;
-    }
   }
 }
 
