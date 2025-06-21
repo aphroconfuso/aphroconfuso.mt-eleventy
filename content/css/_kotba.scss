@@ -238,7 +238,7 @@ article.ktieb-stampat {
 }
 
 // Book list
-@mixin book-list($limit: 4, $items-per-row: 4) {
+@mixin book-list($limit: 6, $items-per-row: 4) {
   display: grid;
   grid-template-columns: repeat($items-per-row, 1fr);
   gap: $body-margin-double;
@@ -246,7 +246,7 @@ article.ktieb-stampat {
   > li {
     border-bottom: none;
     margin-bottom: 0;
-    &:nth-child(n + #{$limit}) {
+    &:nth-child(n + #{$limit} -1) {
       display: none;
     }
     img {
@@ -282,9 +282,7 @@ article.ktieb-stampat {
   @media all and (min-width: $laptop-breakpoint) {
     border-bottom: 1px solid $lightest-brown;
     padding-bottom: $body-margin-bordered;
-    ul.promo-list {
-      @include book-list(6, 6);
-    }
+    @include book-list(6, 6);
   }
 }
 
