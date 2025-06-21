@@ -125,7 +125,7 @@ article.ktieb-stampat {
   &.story-151 { @include book-colour-full($essidr); }
   &.story-142 { @include book-colour-full($martamarta); }
   &.story-143 { @include book-colour-full($burmghez); }
-  &.story-144 { @include book-colour-full($saffo); }
+  &.story-160 { @include book-colour-full($saffo); }
   &.story-145 { @include book-colour-full($antologija2); }
   &.story-140 { @include book-colour-full($antologija3); }
 
@@ -171,7 +171,7 @@ article.ktieb-stampat {
 .story-140 { @include book-colour($antologija3); }
 .story-142 { @include book-colour($martamarta); }
 .story-143 { @include book-colour($burmghez); }
-.story-144 { @include book-colour($saffo); }
+.story-160 { @include book-colour($saffo); }
 .story-145 { @include book-colour($antologija2); }
 .story-151 { @include book-colour($essidr); }
 
