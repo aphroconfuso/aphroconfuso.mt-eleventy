@@ -266,7 +266,7 @@ article.ktieb-stampat {
 }
 
 .home .books-list,
-.story ~ .books-list {
+.story + .books-list {
   ul.promo-list {
     @include book-list(7, 6);
     columns: unset;
