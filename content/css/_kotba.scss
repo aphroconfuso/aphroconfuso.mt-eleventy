@@ -280,6 +280,10 @@ article.ktieb-stampat {
   ul.promo-list {
     columns: unset;
     @include book-list(7, 4, 6);
+    li {
+      margin: 0;
+      padding: 0;
+    }
   }
 }
 
