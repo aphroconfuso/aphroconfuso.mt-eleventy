@@ -269,14 +269,15 @@ article.ktieb-stampat {
 .story + .books-list {
   columns: unset;
   ul.promo-list {
-    @include book-list(7, 6);
+    @include book-list(4, 6);
     columns: unset;
-
     @media all and (min-width: $laptop-breakpoint) {
-      // No need to re-include mixin unless values change
+      @include book-list(7, 6);
     }
   }
+}
 
+.story + .books-list {
   @media all and (min-width: $laptop-breakpoint) {
     border-bottom: 1px solid $lightest-brown;
     padding-bottom: $body-margin-bordered;
