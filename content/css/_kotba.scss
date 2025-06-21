@@ -243,23 +243,45 @@ article.ktieb-stampat {
   grid-template-columns: repeat($items-per-row, 1fr);
   gap: $body-margin-double;
   width: 100%;
+
   > li {
     border-bottom: none;
     margin-bottom: 0;
+
     &:nth-child(n + #{$limit}) {
       display: none;
     }
+
     img {
       width: 100%;
       height: auto;
       display: block;
     }
   }
+
   @media (max-width: $mobile-breakpoint) {
     grid-template-columns: 1fr;
     gap: $body-margin;
   }
 }
+
+.home .books-list,
+.story ~ .books-list {
+  ul.promo-list {
+    @include book-list(7, 6);
+    columns: unset;
+
+    @media all and (min-width: $laptop-breakpoint) {
+      // No need to re-include mixin unless values change
+    }
+  }
+
+  @media all and (min-width: $laptop-breakpoint) {
+    border-bottom: 1px solid $lightest-brown;
+    padding-bottom: $body-margin-bordered;
+  }
+}
+
 
 .books #grid-body {
   max-width: 100%;
@@ -273,25 +295,6 @@ article.ktieb-stampat {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.home .books-list,
-.story ~ .books-list {
-  columns: 1;
-  ul.promo-list {
-    @include book-list(4, 6);
-    columns: 1;
-    @media all and (min-width: $laptop-breakpoint) {
-      @include book-list(7, 6);
-    }
-  }
-}
-
-.story ~ .books-list {
-  @media all and (min-width: $laptop-breakpoint) {
-    border-bottom: 1px solid $lightest-brown;
-    padding-bottom: $body-margin-bordered;
-    @include book-list(7, 6);
-  }
-}
 
 
 // End promos
