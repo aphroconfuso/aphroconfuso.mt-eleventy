@@ -86,7 +86,8 @@ module.exports = function (eleventyConfig) {
 
 		// delete site first
 		const siteDir = path.join('./aphroconfuso.mt/site/');
-		if (fs.existsSync(siteDir)) deleteFoldersWithIndexHtml(siteDir);
+		// TEMP DISABLED
+		// if (fs.existsSync(siteDir)) deleteFoldersWithIndexHtml(siteDir);
 
 		const cssDir = path.join('./aphroconfuso.mt/site/css/');
 		if (!fs.existsSync(cssDir)) {
