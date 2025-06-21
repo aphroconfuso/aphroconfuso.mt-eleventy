@@ -275,6 +275,7 @@ article.ktieb-stampat {
 
 .home .books-list,
 .story ~ .books-list {
+  columns: 1;
   ul.promo-list {
     @include book-list(6, 6);
     columns: 1;
