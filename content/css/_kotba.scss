@@ -277,12 +277,12 @@ article.ktieb-stampat {
 .story ~ .books-list {
   ul.promo-list {
     @include book-list(4, 6);
-  }
-  columns: 1;
-  @media all and (min-width: $laptop-breakpoint) {
-    border-bottom: 1px solid $lightest-brown;
-    padding-bottom: $body-margin-bordered;
-    @include book-list(6, 6);
+    columns: 1;
+    @media all and (min-width: $laptop-breakpoint) {
+      border-bottom: 1px solid $lightest-brown;
+      padding-bottom: $body-margin-bordered;
+      @include book-list(6, 6);
+    }
   }
 }
 
