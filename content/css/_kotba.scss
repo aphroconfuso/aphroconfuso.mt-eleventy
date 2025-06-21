@@ -238,7 +238,7 @@ article.ktieb-stampat {
 }
 
 // Book list
-@mixin book-list($limit: 999, $items-per-row: 4) {
+@mixin book-list($limit: 999, $mobile-limit: 999, $items-per-row: 4) {
   display: grid;
   grid-template-columns: repeat($items-per-row, 1fr);
   gap: $body-margin-double;
@@ -248,10 +248,17 @@ article.ktieb-stampat {
     border-bottom: none;
     margin-bottom: 0;
 
-    &:nth-child(n + #{$limit}) {
+    &:nth-child(n + #{$mobile-limit}) {
       display: none;
     }
-
+    @media all and (min-width: $laptop-breakpoint) {
+      &:nth-child(n + #{$mobile-limit}) {
+        display: unset;
+      }
+      &:nth-child(n + #{$limit}) {
+        display: none;
+      }
+    }
     img {
       width: 100%;
       height: auto;
@@ -269,11 +276,8 @@ article.ktieb-stampat {
 .story + .books-list {
   columns: unset;
   ul.promo-list {
-    @include book-list(4, 6);
     columns: unset;
-    @media all and (min-width: $laptop-breakpoint) {
-      @include book-list(7, 6);
-    }
+    @include book-list(7, 4, 6);
   }
 }
 
@@ -296,8 +300,6 @@ article.ktieb-stampat {
 .contributor .books ul.promo-list {
   grid-template-columns: repeat(2, 1fr);
 }
-
-
 
 // End promos
 .end-promos .ga-book-image-promo {
