@@ -1,5 +1,6 @@
 {% set item = promo or story or sequence %}
-{% if item.authors.length > 5 and item.type != 'Terminu' and item.authorsType != 'kollettiva' %}
+{% set regExp = r/^Antolo.ija \d*/ %}
+{% if (regExp.test(item.title) and item.type == 'Ktieb_stampat') or (item.authors.length > 5 and item.type != 'Terminu' and item.authorsType != 'kollettiva') %}
 	<h2>
 		<!-- -->
 	</h2>
