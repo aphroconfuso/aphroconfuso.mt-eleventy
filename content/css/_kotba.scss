@@ -282,9 +282,6 @@ article.ktieb-stampat {
   ul.promo-list {
     @include book-list(4, 6);
   }
-}
-
-.promos-container.books-list {
   columns: 1;
   @media all and (min-width: $laptop-breakpoint) {
     border-bottom: 1px solid $lightest-brown;
@@ -294,6 +291,17 @@ article.ktieb-stampat {
     }
   }
 }
+
+// .promos-container.books-list {
+//   columns: 1;
+//   @media all and (min-width: $laptop-breakpoint) {
+//     border-bottom: 1px solid $lightest-brown;
+//     padding-bottom: $body-margin-bordered;
+//     ul.promo-list {
+//       @include book-list(6, 6);
+//     }
+//   }
+// }
 
 
 // End promos
