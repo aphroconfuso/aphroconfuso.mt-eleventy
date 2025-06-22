@@ -282,7 +282,7 @@ article.ktieb-stampat {
   }
   ul.promo-list {
     columns: unset;
-    @include book-list(7, 4, 6, 2);
+    @include book-list(7, 7, 6, 2);
     li {
       margin: 0;
       padding: 0;
