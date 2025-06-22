@@ -291,8 +291,8 @@ article.ktieb-stampat {
 }
 
 .story + .books-list {
+  border-bottom: 1px solid $lightest-brown;
   @media all and (min-width: $laptop-breakpoint) {
-    border-bottom: 1px solid $lightest-brown;
     padding-bottom: $body-margin-bordered;
   }
 }
