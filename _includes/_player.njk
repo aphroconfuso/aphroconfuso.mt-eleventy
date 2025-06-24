@@ -4,10 +4,11 @@
 			<source src="{{ player.url }}" type="audio/mpeg">
 		</audio>
 	</div>
-	{% if player.podcastNote or player.useDefaultPodcastMessage %}
+	{% set playerNote = player.podcastNote or player.note %}
+	{% if playerNote or player.useDefaultPodcastMessage %}
 		<figcaption>
-			{% if player.podcastNote %}
-				{{ player.podcastNote | restrictHtml | prettifyMaltese | safe }}
+			{% if playerNote %}
+				{{ playerNote | restrictHtml | prettifyMaltese | safe }}
 			{% elif player.type != 'Poddata' and player.useDefaultPodcastMessage %}
 				<p>
 					{{ player.authorName | prettifyMaltese | safe }}
