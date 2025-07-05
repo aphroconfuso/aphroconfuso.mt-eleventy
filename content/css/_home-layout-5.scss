@@ -82,7 +82,7 @@
     }
     display: grid;
     gap: $body-margin;
-    grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto auto auto auto auto;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-auto-columns: 1fr;
     grid-auto-flow: row;
@@ -96,7 +96,8 @@
       "ga6 ga6 ga7 ga7 ga8 ga8"
       "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms"
       "ga9 ga9 ga10 ga10 ga11 ga11"
-      "ga-image-3 ga-image-3 ga-image-3 ga-image-3 ga-image-3 ga-image-3";
+      "ga-image-3 ga-image-3 ga-image-3 ga-image-3 ga-image-3 ga-image-3"
+			"ga-books ga-books ga-books ga-books ga-books ga-books";
     .ga-1 {
       margin-bottom: $body-margin-half;
       header {
