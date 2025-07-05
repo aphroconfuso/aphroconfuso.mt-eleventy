@@ -325,7 +325,9 @@ article {
 	@include clamp(11);
 }
 
+// hide numbers in sequences
 .sequence-10,
+.sequence-14,
 .sequence-15 {
 	p.fx1 {
 		padding-left: $body-margin-double;
