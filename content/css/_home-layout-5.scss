@@ -31,7 +31,8 @@
     "ga-terms"
     "ga9"
     "ga10"
-    "ga11";
+    "ga11"
+ 		"ga-books";
   .ga-1,
   .ga-3,
   .ga-5,
@@ -58,8 +59,7 @@
   }
   @media all and (min-width: $laptop-breakpoint) {
     .ga-newsletter,
-    .ga-podcast,
-		.ga-book-image-promo {
+    .ga-podcast {
       display: none;
     }
     .ga-image-1,
@@ -88,7 +88,7 @@
     grid-auto-flow: row;
     grid-template-areas:
       "ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1 ga-image-1"
-	"ga-poem-1 ga-poem-1 ga-poem-1 ga-poem-1 ga-editorial ga-editorial"
+	"ga-poem-1 ga-poem-1 ga-book-image-promo ga-book-image-promo ga-editorial ga-editorial"
       "ga1 ga1 ga1 ga2 ga2 ga2"
       "ga-diary ga-diary ga-diary ga-diary ga-diary ga-diary"
 	"ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
