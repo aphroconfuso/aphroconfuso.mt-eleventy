@@ -47,7 +47,8 @@ permalink: /{{ international.code }}/index.html
 								<ul>
 									{% for download in summary.downloads %}
 										<li>
-											<a href="{{ download.url}}">{{ download.name }}</a> ({{ download.size }}M)</li>
+											<a href="{{ download.url}}">{{ download.name }}</a> ({{ download.size }}Mb)
+										</li>
 									{% endfor %}
 								</ul>
 							{% endif %}

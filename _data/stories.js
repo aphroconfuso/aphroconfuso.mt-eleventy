@@ -332,6 +332,8 @@ async function getAllStories() {
 		});
 	}
 
+	const promotableStories = stories.filter(({ attributes: { type } }) => ['Esej', 'Storja', 'Djarju', 'Terminu', 'Poezija'].includes(type));
+
   // format stories objects
 	const storiesFormatted = stories.map((story) => {
 		const atts = story.attributes;
@@ -349,7 +351,7 @@ async function getAllStories() {
 
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 		const sequenceData = atts.sequence.data;
-		const endPromosFormatted = atts.endPromos.length && processPromos(atts.endPromos);
+		const endPromosFormatted = (atts.endPromos.length && processPromos(atts.endPromos)) || processPromos([...promotableStories].sort(() => Math.random() - 0.5).slice(0, 3));
 		const bookPromoFormatted = atts.bookPromos.length && processPromos(atts.bookPromos);
 		atts.audio && JSON.stringify(atts.audio);
 		// const audioPromosFormatted = atts.audio.length && processPromos(atts.audio);
@@ -578,7 +580,9 @@ async function getAllStories() {
 				let snippet = match[2] + match[3] + match[4];
 				let digraph = (match[2] + match[3]).toLowerCase();
 				snippet = snippet.replace(/<em>\w*$/g, "").replace(/<em>\s*<\/em>/g, "").replace(/<p>\s*<\/p>/g, "").replace(/<\/p>\s*<p>/gm, " ").replace(/<\/p>\s*<p class="\w*">/gm, " ").replace(/<\/p>/gm, " ").replace(/<p>/gm, " ").replace(/  /gm, " ").replace(/<\/?\w*$/, "");
+				//FIXME: Regularise <em> and <i>
 				if ((snippet.match(/<i>/g) || []).length > (snippet.match(/<\/i>/g) || []).length) snippet += '</i>';
+				if ((snippet.match(/<em>/g) || []).length > (snippet.match(/<\/em>/g) || []).length) snippet += '</em>';
 				abecedaireArray.push({
 					authorsString,
 					letter: makeSortableTitle(digraph === 'ie' || digraph === 'għ' ? digraph : match[2]).toLowerCase(),

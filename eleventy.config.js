@@ -120,7 +120,7 @@ module.exports = function (eleventyConfig) {
 			let linksInContent = [], imagesInContent = [];
 			results.forEach(i => {
 				linksInContent = linksInContent.concat(i.content.match(/href\=\"\/[^#]([^\/]*?)\/\"/g));
-				imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|jpeg|webp)/g));
+				imagesInContent = imagesInContent.concat(i.content.match(/\/stampi\/(.*?)\.(avif|jpg|jpeg|webp|pdf)/g));
 				const anchorsInContent = i.content.match(/(?<=href="#).*?(?=">)/gm);
 				anchorsInContent && anchorsInContent.length && anchorsInContent.forEach(anchor => {
 					if (anchor && !i.content.match(`id=\"${ anchor }\"`)) {
