@@ -9,7 +9,7 @@
 					{% set podcastLengthMinutesFallback = fromStoriesById("podcastLengthMinutesFallback", stories, promo.id) %}
 					{% if promo.audioPlayers[0] %}
 						{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }} awdjo,
-					{% elif podcastLengthMinutesFallback %}
+					{% elif podcastLengthMinutesFallback > 1 %}
 						{{ podcastLengthMinutesFallback | prettifyNumbers | numberify(['minuta', 'minuti']) }} awdjo,
 					{% endif %}
 					{% if promo.type != 'Poezija' %}
