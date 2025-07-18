@@ -7,7 +7,7 @@
 			<li class="wordcount">
 				{% if showLengths %}
 					{% set podcastLengthMinutesFallback = fromStoriesById("podcastLengthMinutesFallback", stories, promo.id) %}
-					<h1>{{ podcastLengthMinutesFallback }}</h1>
+					<h1>| {{ podcastLengthMinutesFallback }} |</h1>
 					{% if promo.audioPlayers[0] %}
 						{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }} awdjo,
 					{% elif podcastLengthMinutesFallback %}
