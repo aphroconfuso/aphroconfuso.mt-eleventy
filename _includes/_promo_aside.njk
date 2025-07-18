@@ -5,10 +5,11 @@
 				<!-- -->
 			</li>
 			<li class="wordcount">
+				{% set podcastLengthMinutesFallback = fromStoriesById(stories, promo.id) %}
 				{% if showLengths and promo.audioPlayers[0] %}
 					{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }} awdjo,
-				{% elif showLengths %}
-					{{ "podcastLengthMinutes" | fromStoriesById(stories, promo.id) | prettifyNumbers | numberify(['minuta', 'minuti']) }} awdjo,
+				{% elif showLengths and podcastLengthMinutesFallback %}
+					{{ podcastLengthMinutesFallback | prettifyNumbers | numberify(['minuta', 'minuti']) }} awdjo,
 				{% endif %}
 				{% if promo.type != 'Poezija' %}
 					{% if showLengths and promo.wordcount %}
