@@ -5,17 +5,19 @@
 				<!-- -->
 			</li>
 			<li class="wordcount">
-				{% set podcastLengthMinutesFallback = fromStoriesById("podcastLengthMinutesFallback", stories, promo.id) %}
-				{% if showLengths and promo.audioPlayers[0] %}
-					{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }} awdjo,
-				{% elif showLengths and podcastLengthMinutesFallback %}
-					{{ podcastLengthMinutesFallback | prettifyNumbers | numberify(['minuta', 'minuti']) }} awdjo,
-				{% endif %}
-				{% if promo.type != 'Poezija' %}
-					{% if showLengths and promo.wordcount %}
-						{{ promo.wordcount | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</li>
-					{% elif showLengths %}
-						{{ "wordcount" | fromStoriesById(stories, promo.id) | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</li>
+				{% if showLengths %}
+					{% set podcastLengthMinutesFallback = fromStoriesById("podcastLengthMinutesFallback", stories, promo.id) %}
+					{% if promo.audioPlayers[0] %}
+						{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }} awdjo,
+					{% elif podcastLengthMinutesFallback %}
+						{{ podcastLengthMinutesFallback | prettifyNumbers | numberify(['minuta', 'minuti']) }} awdjo,
+					{% endif %}
+					{% if promo.type != 'Poezija' %}
+						{% if promo.wordcount %}
+							{{ promo.wordcount | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</li>
+						{% elif showLengths %}
+							{{ "wordcount" | fromStoriesById(stories, promo.id) | prettifyNumbers | numberify(['kelma', 'kelmiet']) }}</li>
+						{% endif %}
 					{% endif %}
 				{% endif %}
 			</li>
