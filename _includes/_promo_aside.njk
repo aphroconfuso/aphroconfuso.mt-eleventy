@@ -7,9 +7,10 @@
 			<li class="wordcount">
 				{% if showLengths %}
 					{% set podcastLengthMinutesFallback = fromStoriesById("podcastLengthMinutesFallback", stories, promo.id) %}
+					<h1>{{ podcastLengthMinutesFallback }}</h1>
 					{% if promo.audioPlayers[0] %}
 						{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }} awdjo,
-					{% elif podcastLengthMinutesFallback > 1 %}
+					{% elif podcastLengthMinutesFallback %}
 						{{ podcastLengthMinutesFallback | prettifyNumbers | numberify(['minuta', 'minuti']) }} awdjo,
 					{% endif %}
 					{% if promo.type != 'Poezija' %}
