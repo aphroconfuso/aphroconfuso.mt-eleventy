@@ -5,8 +5,10 @@
 				<!-- -->
 			</li>
 			<li class="wordcount">
-				{% if promo.audioPlayers[0] %}
+				{% if showLengths and promo.audioPlayers[0] %}
 					{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }} awdjo,
+				{% elif showLengths %}
+					{{ "podcastLength" | fromStoriesById(stories, promo.id) | prettifyNumbers | numberify(['minuta', 'minuti']) }}</li>
 				{% endif %}
 				{% if promo.type != 'Poezija' %}
 					{% if showLengths and promo.wordcount %}

@@ -332,7 +332,8 @@ async function getAllStories() {
 		});
 	}
 
-	const promotableStories = stories.filter(({ attributes: { type } }) => ['Esej', 'Storja', 'Djarju', 'Terminu', 'Poezija'].includes(type));
+	const promotableStories = stories.filter(({ attributes: { type } }) => ['Esej', 'Storja', 'Djarju', 'Terminu'].includes(type));
+	const promotablePoems = stories.filter(({ attributes: { type } }) => ['Poezija'].includes(type));
 
   // format stories objects
 	const storiesFormatted = stories.map((story) => {
@@ -351,7 +352,7 @@ async function getAllStories() {
 
 		const translator = !!atts.translators.data.length && atts.translators.data[0].attributes;
 		const sequenceData = atts.sequence.data;
-		const endPromosFormatted = (atts.endPromos.length && processPromos(atts.endPromos)) || processPromos([...promotableStories].sort(() => Math.random() - 0.5).slice(0, 3));
+		const endPromosFormatted = (atts.endPromos.length && processPromos(atts.endPromos)) || processPromos([...promotableStories].sort(() => Math.random() - 0.5).slice(0, 2)).concat(processPromos([...promotablePoems].sort(() => Math.random() - 0.5).slice(0, 2)));
 		const bookPromoFormatted = atts.bookPromos.length && processPromos(atts.bookPromos);
 		atts.audio && JSON.stringify(atts.audio);
 		// const audioPromosFormatted = atts.audio.length && processPromos(atts.audio);
