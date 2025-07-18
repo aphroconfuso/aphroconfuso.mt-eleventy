@@ -6,11 +6,10 @@
 			</li>
 			<li class="wordcount">
 				{% if showLengths %}
-					<h1>| {{ podcastLengthMinutesFallback }} |</h1>
 					{% if promo.audioPlayers[0] %}
 						{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }} awdjo,
-					{% elif podcastLengthMinutesFallback %}
-						{{ podcastLengthMinutesFallback | prettifyNumbers | numberify(['minuta', 'minuti']) }} awdjo,
+					{# {% elif podcastLengthMinutesFallback %}
+						{{ podcastLengthMinutesFallback | prettifyNumbers | numberify(['minuta', 'minuti']) }} awdjo, #}
 					{% endif %}
 					{% if promo.type != 'Poezija' %}
 						{% if promo.wordcount %}
