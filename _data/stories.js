@@ -826,7 +826,10 @@ async function getAllStories() {
 	storiesFormatted[0].almanac = almanacArray;
 
 	// HOME PROMOTIONS ********************************************************************************
-	storiesFormatted[0].promotableStoriesHome = processPromos([...promotableStoriesHome].sort(() => Math.random() - 0.5).slice(0, 6));
+	// FIXME Remove limit from Home stories
+	// Automate termini
+	// then make this .slice(0, 6);
+	storiesFormatted[0].promotableStoriesHome = processPromos([...promotableStoriesHome].sort(() => Math.random() - 0.5).slice(0, 5));
 
 	return storiesFormatted;
 }
