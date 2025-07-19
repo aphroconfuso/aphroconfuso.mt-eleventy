@@ -155,10 +155,10 @@ $collection-colour-terms: hsl($collection-hue-terms, 30%, 35%);
 
 @media all and (min-width: $mobile-breakpoint-plusone) {
   .container-collection {
-    max-width: $max-width;
+    max-width: var(--max-width);
     display: grid;
-    grid-template-columns: 1fr ($max-content-width * 0.5) (
-        $max-content-width * 0.5
+    grid-template-columns: 1fr (var(--max-content-width) * 0.5) (
+        var(--max-content-width) * 0.5
       ) 1fr;
     grid-template-rows: auto;
     grid-auto-flow: row;

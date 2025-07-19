@@ -8,12 +8,32 @@ $mobile-breakpoint: 480px;
 $mobile-breakpoint-plusone: ($mobile-breakpoint + 1px);
 $tablet-breakpoint: 620px; // 1080px;
 $tablet-breakpoint-plusone: 621px; // 1080px;
+
 $laptop-breakpoint: 1200px;
 $laptop-breakpoint-plusone: ($laptop-breakpoint + 1px);
 
-$max-content-width: 39rem;
-$max-logo-width: 820px;
-$max-width: 1400px;
+$laptop-large-breakpoint: 1400px;
+$laptop-large-breakpoint-plusone: ($laptop-large-breakpoint + 1px);
+
+// var(--max-logo-width): 820px;
+// $max-width-regular: 1180px;
+// $max-width-large: 1400px;
+
+@media screen and (min-width: $laptop-breakpoint) {
+	:root {
+		--max-width: 1180px;
+		--max-content-width: 33rem;
+		--max-logo-width: 691px;
+	}
+}
+
+@media screen and (min-width: $laptop-large-breakpoint) {
+	:root {
+		--max-width: 1400px;
+		--max-content-width: 39rem;
+		--max-logo-width: 820px;
+	}
+}
 
 // FIXME: smaller laptops 1250
 // make this a variable

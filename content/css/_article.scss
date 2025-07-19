@@ -102,7 +102,7 @@ article.story.poezija {
 #grid-max-panel-right-bottom,
 #grid-body {
   margin: $body-margin-half auto 0;
-  max-width: $max-content-width;
+  max-width: var(--max-content-width);
   width: 100%;
 }
 
@@ -128,7 +128,7 @@ article {
   border-bottom: $body-margin-quarter solid var(--paper);
   // margin: 0 auto $body-margin;
   margin: 0 auto;
-  max-width: $max-width;
+  max-width: var(--max-width);
   &.story {
     header {
       position: relative;

@@ -235,13 +235,13 @@
   }
   #top-nav {
     margin: 0 auto;
-    max-width: $max-width;
+    max-width: var(--max-width);
     width: calc(100% - 2rem);
     menu {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      max-width: ($max-logo-width + 60px);
+      max-width: (var(--max-logo-width) + 60px);
       margin: 0 auto;
       & > li {
         display: inline;
@@ -305,12 +305,12 @@
   #logo-container {
     display: flex;
     justify-content: center;
-    max-width: $max-width;
+    max-width: var(--max-width);
     padding: $body-margin-half $body-margin-half 0 $body-margin-half;
     width: 100%;
     #logo {
       margin: 0 auto;
-      max-width: $max-logo-width;
+      max-width: var(--max-logo-width);
       width: 100%;
     }
   }

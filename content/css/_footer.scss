@@ -12,7 +12,7 @@ footer {
   overflow: hidden;
   padding: $body-margin;
   .footer-content {
-    max-width: $max-width;
+    max-width: var(--max-width);
     margin: 0 auto;
     color: var(--paper);
     position: relative;

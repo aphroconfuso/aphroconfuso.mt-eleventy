@@ -20,10 +20,10 @@
 	.promos-container {
 		gap: $body-margin ($body-margin-double);
 		margin: $body-margin auto 0;
-		max-width: $max-content-width;
+		max-width: var(--max-content-width);
 	}
 	.promos-container {
-		max-width: $max-width;
+		max-width: var(--max-width);
 		columns: 3;
 		column-rule: 1px solid $grid-lines;
 		column-gap: $body-margin * 1.5;
@@ -63,9 +63,9 @@
 	}
 
 	// .container {
-	// 	max-width: $max-width;
+	// 	max-width: var(--max-width);
 	// 	display: grid;
-	// 	grid-template-columns: $max-content-width 1fr;
+	// 	grid-template-columns: var(--max-content-width) 1fr;
 	// 	grid-template-rows: auto auto auto auto auto;
 	// 	grid-auto-flow: row;
 	// 	grid-template-areas:
@@ -77,9 +77,9 @@
 	// }
 
 	// .container-generic {
-	// 	max-width: $max-width;
+	// 	max-width: var(--max-width);
 	// 	display: grid;
-	// 	grid-template-columns: $max-content-width 1fr;
+	// 	grid-template-columns: var(--max-content-width) 1fr;
 	// 	grid-template-rows: auto auto;
 	// 	grid-auto-flow: row;
 	// 	grid-template-areas: "grid-max-body grid-max-panel-left-top";
@@ -97,9 +97,9 @@
 
 @media all and (min-width: $laptop-breakpoint) {
 	.container {
-		max-width: $max-width;
+		max-width: var(--max-width);
 		display: grid;
-		grid-template-columns: 1fr $max-content-width 1fr;
+		grid-template-columns: 1fr var(--max-content-width) 1fr;
 		grid-template-rows: auto auto auto;
 		grid-auto-flow: row;
 		grid-template-areas:
@@ -109,9 +109,9 @@
 	}
 
 	.container-generic {
-		max-width: $max-width;
+		max-width: var(--max-width);
 		display: grid;
-		grid-template-columns: 1fr $max-content-width 1fr;
+		grid-template-columns: 1fr var(--max-content-width) 1fr;
 		grid-template-rows: auto;
 		grid-auto-flow: row;
 		grid-template-areas: "grid-max-panel-left-top grid-max-body grid-max-panel-right-top";

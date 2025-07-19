@@ -79,7 +79,7 @@ article.djarju {
         "grid-max-panel-left-top grid-max-body grid-max-panel-right-top"
         "grid-max-panel-left-bottom grid-max-body grid-max-panel-right-bottom"
         "grid-bottom-full grid-bottom-full grid-bottom-full";
-      grid-template-columns: 1fr $max-content-width 1fr;
+      grid-template-columns: 1fr var(--max-content-width) 1fr;
       grid-template-rows: auto auto auto;
     }
     #grid-body {
