@@ -335,6 +335,13 @@ async function getAllStories() {
 	const promotableStories = stories.filter(({ attributes: { type } }) => ['Esej', 'Storja', 'Djarju', 'Terminu'].includes(type));
 	const promotablePoems = stories.filter(({ attributes: { type } }) => ['Poezija'].includes(type));
 
+	const oneMonthAgo = new Date(); oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+	const promotableStoriesHome = stories.filter(
+		({ attributes }) =>
+			['Esej', 'Storja', 'Djarju'].includes(attributes?.type) &&
+			new Date(attributes?.dateTimePublication) < oneMonthAgo
+	);
+
   // format stories objects
 	const storiesFormatted = stories.map((story) => {
 		const atts = story.attributes;
@@ -817,6 +824,9 @@ async function getAllStories() {
 
 	// ALMANAC ********************************************************************************
 	storiesFormatted[0].almanac = almanacArray;
+
+	// HOME PROMOTIONS ********************************************************************************
+	storiesFormatted[0].promotableStoriesHome = processPromos([...promotableStoriesHome].sort(() => Math.random() - 0.5).slice(0, 12));
 
 	return storiesFormatted;
 }
