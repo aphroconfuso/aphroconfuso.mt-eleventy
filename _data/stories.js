@@ -338,7 +338,7 @@ async function getAllStories() {
 	const twoMonthsAgo = new Date(); twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 3);
 	const promotableStoriesHome = stories.filter(
 		({ attributes }) =>
-			['Esej', 'Storja', 'Djarju'].includes(attributes?.type) &&
+			['Esej', 'Storja', 'Poddata'].includes(attributes?.type) &&
 			new Date(attributes?.dateTimePublication) < twoMonthsAgo
 	);
 
