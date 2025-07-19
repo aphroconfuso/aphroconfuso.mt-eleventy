@@ -826,7 +826,7 @@ async function getAllStories() {
 	storiesFormatted[0].almanac = almanacArray;
 
 	// HOME PROMOTIONS ********************************************************************************
-	storiesFormatted[0].promotableStoriesHome = processPromos([...promotableStoriesHome].sort(() => Math.random() - 0.5).slice(0, 12));
+	storiesFormatted[0].promotableStoriesHome = processPromos([...promotableStoriesHome].sort(() => Math.random() - 0.5).slice(0, 6));
 
 	return storiesFormatted;
 }
