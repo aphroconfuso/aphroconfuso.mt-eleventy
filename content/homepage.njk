@@ -49,7 +49,7 @@ permalink: /index.html
 					</picture>
 				</figure>
 			</a>
-			{% for promo in homepage.promos.concat(stories.promotableStoriesHome) | rejectattr("isTypeTerm") %}
+			{% for promo in homepage.promos.concat(stories[0].promotableStoriesHome) | rejectattr("isTypeTerm") %}
 				{% set showEpisodeTitle = true %}
 				{% if promo.sequenceEpisodeTitle %}{% set isEpisode = ' is-episode' %}
 				{% else %}{% set isEpisode = '' %}
