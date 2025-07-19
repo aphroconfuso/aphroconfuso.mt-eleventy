@@ -335,11 +335,11 @@ async function getAllStories() {
 	const promotableStories = stories.filter(({ attributes: { type } }) => ['Esej', 'Storja', 'Djarju', 'Terminu'].includes(type));
 	const promotablePoems = stories.filter(({ attributes: { type } }) => ['Poezija'].includes(type));
 
-	const oneMonthAgo = new Date(); oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+	const twoMonthsAgo = new Date(); twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 3);
 	const promotableStoriesHome = stories.filter(
 		({ attributes }) =>
 			['Esej', 'Storja', 'Djarju'].includes(attributes?.type) &&
-			new Date(attributes?.dateTimePublication) < oneMonthAgo
+			new Date(attributes?.dateTimePublication) < twoMonthsAgo
 	);
 
   // format stories objects
