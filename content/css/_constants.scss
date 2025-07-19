@@ -4,15 +4,15 @@ $grid-adjustment: 0.38rem;
 
 // contradiction here
 // hover doesn't come in but full nav already has
-$mobile-breakpoint: 480px;
+$mobile-breakpoint: 479px;
 $mobile-breakpoint-plusone: ($mobile-breakpoint + 1px);
-$tablet-breakpoint: 620px; // 1080px;
+$tablet-breakpoint: 619px; // 1080px;
 $tablet-breakpoint-plusone: 621px; // 1080px;
 
-$laptop-breakpoint: 1200px;
+$laptop-breakpoint: 1199px;
 $laptop-breakpoint-plusone: ($laptop-breakpoint + 1px);
 
-$laptop-large-breakpoint: 1400px;
+$laptop-large-breakpoint: 1399px;
 $laptop-large-breakpoint-plusone: ($laptop-large-breakpoint + 1px);
 
 // var(--max-logo-width): 820px;
