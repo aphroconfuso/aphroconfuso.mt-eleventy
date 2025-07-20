@@ -157,8 +157,8 @@ $collection-colour-terms: hsl($collection-hue-terms, 30%, 35%);
   .container-collection {
     max-width: var(--max-width);
     display: grid;
-    grid-template-columns: 1fr (var(--max-content-width) * 0.5) (
-        var(--max-content-width) * 0.5
+    grid-template-columns: 1fr (calc(var(--max-content-width) * 0.5)) (
+        calc(var(--max-content-width) * 0.5)
       ) 1fr;
     grid-template-rows: auto;
     grid-auto-flow: row;
