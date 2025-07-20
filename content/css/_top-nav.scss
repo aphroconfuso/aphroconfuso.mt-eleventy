@@ -235,13 +235,13 @@
   }
   #top-nav {
     margin: 0 auto;
-    max-width: var(--max-width);
+    max-width: calc(var(--max-width) + 60px);
     width: calc(100% - 2rem);
     menu {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      max-width: (var(--max-logo-width) + 60px);
+      max-width: calc(var(--max-width) + 60px);
       margin: 0 auto;
       & > li {
         display: inline;
