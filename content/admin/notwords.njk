@@ -36,7 +36,7 @@ permalink: /admin/kliem-mhux-suppost/index.html
 				{% for notWord in entry.notWords %}
 					{% for story in stories %}
 						{% if notWord and story.vocabulary.indexOf(notWord) > -1 %}
-							<li><strong>{{ notWord }}</strong> | <a href="https://aphroconfuso.mt/{{ story.slug }}#:~:text={{ notWord }}" target="_new">{{ story.reportingTitle }}</a></li>
+							<li><strong>{{ notWord }}</strong> | <a href="https://aphroconfuso.mt/{{ story.slug }}#:~:text={{ notWord }}" target="_new">{{ story.reportingTitle }}</a> (trid tkun “{{ entry.term }}”)</li>
 						{% endif %}
 					{% endfor %}
 				{% endfor %}
