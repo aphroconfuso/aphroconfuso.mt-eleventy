@@ -462,3 +462,15 @@ article.generic[lang="ar"] {
 		}
 	}
 }
+
+.ar {
+	direction: rtl;
+}
+
+
+p, blockquote {
+	.ar {
+		direction: rtl;
+		text-align: right;
+	}
+}
