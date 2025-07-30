@@ -80,3 +80,7 @@
 		}
 	}
 }
+
+.snippets ol li p {
+	@include clamp(999);
+}
