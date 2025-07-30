@@ -82,5 +82,7 @@
 }
 
 .snippets ol li p.blurb {
-	@include clamp(999);
+	@include unclamp();
+	height: unset;
+	padding-bottom: 0;
 }
