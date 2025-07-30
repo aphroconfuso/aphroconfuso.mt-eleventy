@@ -22,8 +22,8 @@ async function getAllAppointments() {
 								editorial
 								dateTimePublication
 								stories(
-			            publicationState: ${ fetchStatus },
-						pagination: { page: 1, pageSize: 250 },
+			           	 	publicationState: ${ fetchStatus },
+										pagination: { page: 1, pageSize: 250 },
 									) {
 									${linkedStoryData}
 								}

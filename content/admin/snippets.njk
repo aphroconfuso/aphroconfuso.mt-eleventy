@@ -1,0 +1,55 @@
+---
+pagination:
+  data: stories
+  size: 250
+  alias: story
+eleventyExcludeFromCollections: true
+permalink: /admin/snippets/index.html
+---
+{% extends 'layouts/base.njk' %}
+
+{% block head %}
+	<title>Snippets · Aphroconfuso</title>
+{% endblock %}
+
+{% block content %}
+	<article>
+		<header>
+			<ul>
+				<li>&nbsp;</li>
+			</ul>
+			<h1>Snippets sħiħ</h1>
+			<h2></h2>
+		</header>
+		<div class="abecedaire abecedaire-full">
+			<section id="grid-body">
+				<div class="body-text">
+					<ol>
+						{% for story in stories %}
+							{% for snippet in story.snippets %}
+								<li>
+									<a class="promo promo-abecedaire" href="http://aphroconfuso.mt/{{ story.slug }}/?mtm_campaign=Snippets&mtm_kwd={{ snippet.letter | urlencode }}%20-%20{{ snippet.reportingTitle | urlencode }}">
+										<p class="blurb">{{ snippet.snippet | prettifyMaltese | simpleDropCapsify | safe }}</p>
+										<p class="credit">— “{{ story.titleTruncated }}” ta’ {{ story.authorsString }}</p>
+										<p class="credit credit-full">
+											— “{{ story.title }}”<br>ta’ {{ story.authorsString }}
+											{% if story.translator %}
+												<span class="translator"> (tr {{ story.translator | safe }}</span>)
+											{% endif %}
+										</p>
+									</a>
+								</li>
+							{% endfor %}
+						{% endfor %}
+					</ol>
+					<aside>
+						<h2>{{ stories[0].abecedaireFull.length  }} snippets</h2>
+					</aside>
+				</div>
+			</section>
+		</div>
+	</article>
+	<script>
+		reportingTitle = "Snippets";
+	</script>
+{% endblock %}

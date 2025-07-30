@@ -119,6 +119,11 @@ async function getAllStories() {
 										quotation
 										top
 									}
+									snippets {
+										beginning
+										end
+										full
+									}
 									authors (
 				            publicationState: ${ fetchStatus },
 									) {
@@ -428,6 +433,22 @@ async function getAllStories() {
 			translatorFullName,
 		);
 
+		const snippets = atts.snippets && atts.snippets.map((snippet) => {
+			if (!snippet.beginning || !body) return null;
+			if (!!snippet.full) return snippet.full;
+			const startIndex = body.indexOf(snippet.beginning);
+			if (startIndex === -1) return '';
+			if (snippet.end) {
+				const endIndex = body.indexOf(end, startIndex + snippet.beginning.length);
+				if (endIndex === -1) return '';
+				return anchoredBody.slice(startIndex, endIndex + snippet.end.length);
+			} else {
+				const afterStart = anchoredBody.slice(startIndex);
+				const words = afterStart.split(/\s+/).slice(0, 200).join(' ');
+				return words;
+			}
+		});
+
 		const { month: issueMonth, year: issueYear, monthYear: issueMonthYear, season: issueSeason } = getIssueMonthYear(atts.dateTimePublication);
 
 		let sequencePreviousPromo, sequenceNextPromo;
@@ -553,6 +574,7 @@ async function getAllStories() {
 			singleImage: atts.images.data && atts.images.data.length === 1,
 			slideshow:  atts.images.data && atts.images.data.length > 1,
 			slug: pageSlug,
+			snippets,
 			socialImage: promoImageFormats.social && `${ promoImageFormats.social.hash }${ promoImageFormats.social.ext }`,
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			socialImageFormats: promoImageFormats,
