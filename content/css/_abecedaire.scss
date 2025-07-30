@@ -81,8 +81,14 @@
 	}
 }
 
-.snippets ol li p.blurb {
-	@include unclamp();
-	height: unset;
-	padding-bottom: 0;
+@media all and (max-width: $laptop-breakpoint) {
+	.snippets ol li {
+		scale: 0.9;
+		a p.credit {
+			display: none;
+			&.credit-full {
+				display: block !important;
+			}
+		}
+	}
 }
