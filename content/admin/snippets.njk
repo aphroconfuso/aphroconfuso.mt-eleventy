@@ -32,7 +32,10 @@ permalink: /admin/snippets/index.html
 										<p class="blurb">{{ snippet | prettifyMaltese | safe }}</p>
 										<p class="credit">— “{{ story.mainTitle }}” ta’ {{ story.authorsString }}</p>
 										<p class="credit credit-full">
-											— “{{ story.mainTitle }}”<br>ta’ {{ story.authorsString }}
+											— “{{ story.mainTitle }}”
+											{% if story.sequenceEpisodeNumber %}
+											<br><em>{{ story.sequenceEpisodeNumber }}. {{ story.sequenceEpisodeTitle }}</em>
+											<br>ta’ {{ story.authorsString }}
 											{% if story.translator %}
 												<span class="translator"> (tr {{ story.translator | safe }}</span>)
 											{% endif %}
