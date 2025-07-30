@@ -434,12 +434,12 @@ async function getAllStories() {
 		);
 
 		const snippets = atts.snippets && atts.snippets.map((snippet) => {
-			if (!snippet.beginning || !body) return null;
+			if (!snippet.beginning || !atts.body) return null;
 			if (!!snippet.full) return snippet.full;
-			const startIndex = body.indexOf(snippet.beginning);
+			const startIndex = atts.body.indexOf(snippet.beginning);
 			if (startIndex === -1) return '';
 			if (snippet.end) {
-				const endIndex = body.indexOf(end, startIndex + snippet.beginning.length);
+				const endIndex = atts.body.indexOf(snippet.end, startIndex + snippet.beginning.length);
 				if (endIndex === -1) return '';
 				return anchoredBody.slice(startIndex, endIndex + snippet.end.length);
 			} else {
