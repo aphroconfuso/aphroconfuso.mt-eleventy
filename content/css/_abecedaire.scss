@@ -81,6 +81,6 @@
 	}
 }
 
-.snippets ol li p {
+.snippets ol li p.blurb {
 	@include clamp(999);
 }
