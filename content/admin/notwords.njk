@@ -31,29 +31,29 @@ permalink: /admin/kliem-mhux-suppost/index.html
 			</style>
 			<div id="search" class="search"></div>
 			<script src="/pagefind/pagefind-ui.js" onload="new PagefindUI({ element: '#search', showImages: false, autofocus: true });"></script>
-			<ul>
+			<table>
 			{% for entry in styleguide.entries | selectattr("notWords") %}
 				{% for notWord in entry.notWords %}
 					{% for story in stories %}
 						{% if notWord and story.vocabulary.indexOf(notWord) > -1 %}
-							<li><strong>{{ notWord }}</strong> | <a href="https://aphroconfuso.mt/{{ story.slug }}#:~:text={{ notWord }}" target="_new">{{ story.reportingTitle }}</a> (trid tkun “{{ entry.attributes.term }}”)</li>
+							<tr><td><strong>{{ notWord }}</strong></td><td><a href="https://aphroconfuso.mt/{{ story.slug }}#:~:text={{ notWord }}" target="_new">{{ story.reportingTitle }}</a></td><td>{{ entry.attributes.term }}”)</td></tr>
 						{% endif %}
 					{% endfor %}
 				{% endfor %}
 			{% endfor %}
-			</ul>
+			</table>
 			<hr>
-			<ul>
+			<table>
 			{% for story in stories | sort(false, false, 'sortTitle') %}
 				{% for entry in styleguide.entries | selectattr("notWords") %}
 					{% for notWord in entry.notWords %}
 						{% if notWord and story.vocabulary.indexOf(notWord) > -1 %}
-							<li><strong>{{ notWord }}</strong> | <a href="https://aphroconfuso.mt/{{ story.slug }}#:~:text={{ notWord }}" target="_new">{{ story.reportingTitle }}</a> (trid tkun “{{ entry.attributes.term }}”)</li>
+							<tr><td><strong>{{ notWord }}</strong></td><td><a href="https://aphroconfuso.mt/{{ story.slug }}#:~:text={{ notWord }}" target="_new">{{ story.reportingTitle }}</a></td><td>{{ entry.attributes.term }}”)</td></tr>
 						{% endif %}
 					{% endfor %}
 				{% endfor %}
 			{% endfor %}
-			</ul>
+			</table>
 		</section>
 	</main>
 {% endblock %}
