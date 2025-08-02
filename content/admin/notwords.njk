@@ -32,10 +32,14 @@ permalink: /admin/kliem-mhux-suppost/index.html
 					background-color: #dedede !important;
 					color: #666 !important;
 				}
+				.not-word {
+					color: #900;
+					text-decoration: line-through;
+				}
 			</style>
 			<div id="search" class="search"></div>
 			<script src="/pagefind/pagefind-ui.js" onload="new PagefindUI({ element: '#search', showImages: false, autofocus: true });"></script>
-			<table>
+			{# <table>
 			{% for entry in styleguide.entries | selectattr("notWords") %}
 				{% for notWord in entry.notWords %}
 					{% for story in stories %}
@@ -50,15 +54,31 @@ permalink: /admin/kliem-mhux-suppost/index.html
 				{% endfor %}
 			{% endfor %}
 			</table>
-			<hr>
+			<hr> #}
 			<table>
 			{% for story in stories | sort(false, false, 'sortTitle') %}
 				{% for entry in styleguide.entries | selectattr("notWords") %}
 					{% for notWord in entry.notWords %}
 						{% if notWord and story.vocabulary.indexOf(notWord) > -1 %}
 							<tr{% if entry.attributes.definition.indexOf("Nippreferu ") > -1 %} class="suggested-only"{% endif %}>
-								<td><strong>{{ notWord }}</strong></td>
+								<td class="not-word">{{ notWord }}</td>
 								<td><a href="https://aphroconfuso.mt/{{ story.slug }}#:~:text={{ notWord }}" target="_new">{{ story.reportingTitle }}</a></td>
+								<td>{{ entry.attributes.term }}</td>
+							</tr>
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			{% endfor %}
+			</table>
+			<hr>
+			<table>
+			{% for appointment in appointments %}
+				{% for entry in styleguide.entries | selectattr("notWords") %}
+					{% for notWord in entry.notWords %}
+						{% if notWord and appointment.editorial.indexOf(notWord) > -1 %}
+							<tr{% if entry.attributes.definition.indexOf("Nippreferu ") > -1 %} class="suggested-only"{% endif %}>
+								<td class="not-word">{{ notWord }}</td>
+								<td><a href="/{{ appointment.issueMonthYear | slugifyMaltese }}#:~:text={{ notWord }}" target="_new">{{ appointment.issueMonthYear }}</a></td>
 								<td>{{ entry.attributes.term }}</td>
 							</tr>
 						{% endif %}

@@ -347,6 +347,24 @@ async function getAllStories() {
 			new Date(attributes?.dateTimePublication) < twoMonthsAgo
 	);
 
+	// const cutoff = new Date();
+	// cutoff.setMonth(cutoff.getMonth() - 3);
+
+	// const promotableStoriesHome = (() => {
+	// 	const ids = new Set(), names = new Set();
+	// 	return stories
+	// 		.filter(({ attributes }) =>
+	// 			['Esej', 'Storja', 'Poddata'].includes(attributes?.type) &&
+	// 			new Date(attributes?.dateTimePublication) < cutoff
+	// 		)
+	// 		.sort(() => Math.random() - 0.5)
+	// 		.filter(({ attributes }) => {
+	// 			const id = attributes?.sequenceEpisodeTitle;
+	// 			const name = attributes?.authorFullName;
+	// 			return id && !ids.has(id) && !names.has(name) && ids.add(id) && names.add(name);
+	// 		});
+	// })();
+
   // format stories objects
 	const storiesFormatted = stories.map((story) => {
 		const atts = story.attributes;
