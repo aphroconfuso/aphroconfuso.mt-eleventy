@@ -22,7 +22,7 @@ permalink: /admin/kalendarju/index.html
 					<table>
 						{% for story in stories | sort(false, false, 'dateTimePublication') %}
 							<tr>
-								<td><span class="date">{{ story.dateTimePublication | dateToString }}</span></td>
+								<td><span class="date">{{ story.dateTimePublication }}</span></td>
 								<td>
 									<a href="http://aphroconfuso.mt/{{ story.slug }}/" title="{{ story.pubthcationHistory }}}">
 										<p class="credit">— “{{ story.mainTitle }}” ta’ {{ story.authorsString }}</p>
