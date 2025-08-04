@@ -1,0 +1,46 @@
+---
+pagination:
+  data: stories
+  size: 250
+  alias: story
+eleventyExcludeFromCollections: true
+permalink: /admin/kalendarju/index.html
+---
+{% extends 'layouts/base.njk' %}
+
+{% block head %}
+	<title>Snippets · Aphroconfuso</title>
+{% endblock %}
+
+{% block content %}
+	<article>
+		<header>
+			<ul>
+				<li>&nbsp;</li>
+			</ul>
+			<h1>Snippets</h1>
+			<h2></h2>
+		</header>
+		<div class="abecedaire abecedaire-full snippets">
+			<section id="grid-body">
+				<div class="body-text">
+					<table>
+						{% for story in stories | sort(false, false, 'dateTimePublication') %}
+							<tr>
+								<td><span class="date">{{ story.dateTimePublication | dateToString }}</span></td>
+								<td>
+									<a href="http://aphroconfuso.mt/{{ story.slug }}/" title="{{ story.pubthcationHistory }}}">
+										<p class="credit">— “{{ story.mainTitle }}” ta’ {{ story.authorsString }}</p>
+									</a>
+								</td>
+							</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</section>
+		</div>
+	</article>
+	<script>
+		reportingTitle = "Snippets";
+	</script>
+{% endblock %}
