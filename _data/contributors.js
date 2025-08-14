@@ -128,6 +128,7 @@ async function getAllContributors() {
 		const storiesAuthored = allStoriesAuthored.filter(item => !item.collaboration);
 		const collaborationsAuthored = allStoriesAuthored.filter(item => item.collaboration);
 
+		// only include books that have an isbn (are nearing publication)
 		const booksAuthored = allBooksIncluded.filter(item => !item.collaboration && !!item.isBook);
 		const anthologiesIncluded = allBooksIncluded.filter(item => item.collaboration && !!item.isBook);
 
