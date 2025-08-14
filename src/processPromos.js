@@ -63,6 +63,7 @@ module.exports = (promos, storyAtts) => {
 				};
 			}),
 			id: promo.id || (promo.story && promo.story.data.id),
+			isBook: promoAtts.isBook,
 			isSequenceEpisode: !!sequence,
 			issueMonth: getIssueMonthYear(promoAtts.dateTimePublication).month,
 			issueMonthYear: getIssueMonthYear(promoAtts.dateTimePublication).monthYear,

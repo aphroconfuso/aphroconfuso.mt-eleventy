@@ -61,6 +61,15 @@ const linkedStoriesAttributes = `
 			}
 		}
 	}
+	isBook {
+		inShops
+		isbn
+		lokalUrl
+		orderable
+		pages
+		price
+		published
+	}
 `;
 
 const linkedStoryData = `
