@@ -70,6 +70,7 @@ async function getAllContributors() {
 										filters: {type: { eq: "Ktieb stampat"}}
 									) {
 										${ linkedStoryDataWithImage }
+										isBook
 									}
 									eventsIncluded: storiesAuthored(
 				            publicationState: ${ fetchStatus },
@@ -128,8 +129,8 @@ async function getAllContributors() {
 		const storiesAuthored = allStoriesAuthored.filter(item => !item.collaboration);
 		const collaborationsAuthored = allStoriesAuthored.filter(item => item.collaboration);
 
-		const booksAuthored = allBooksIncluded.filter(item => !item.collaboration);
-		const anthologiesIncluded = allBooksIncluded.filter(item => item.collaboration);
+		const booksAuthored = allBooksIncluded.filter(item => !item.collaboration && !!item.attributes.isBook);
+		const anthologiesIncluded = allBooksIncluded.filter(item => item.collaboration && !!item.attributes.isBook);
 
 		return {
 			anthologiesIncluded,
