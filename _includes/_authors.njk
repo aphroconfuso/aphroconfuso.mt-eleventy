@@ -15,7 +15,7 @@
 			<span class="author">{{ item.authors[0] | prettifyMaltese | safe }}</span>
 			<span class="translator">(tr <a href="/{{ item.translator | slugifyMaltese }}/">{{ item.translator | prettifyMaltese | safe }}</a>)</span>
 		{%- else %}
-			{% if item.type == 'Poddata' %}
+			{% if item.type == 'Poddata' or item.type == 'Avveniment' %}
 				<span class="with">ma’</span>
 			{%- endif %}
 			{% for author in item.authors %}
@@ -40,7 +40,7 @@
 	{% elif item.translator %}
 		<span class="author">{{ item.authors[0] | prettifyMaltese | safe }}</span> <span class="translator">(tr <a href="/{{ item.translator | slugifyMaltese }}/">{{ item.translator | prettifyMaltese | safe }}</a>)</span>
 	{%- else %}
-		{% if item.type == 'Poddata' %}
+		{% if item.type == 'Poddata' or item.type == 'Avveniment' %}
 			<span class="with">ma’</span>
 		{%- endif %}
 		{% for author in item.authors %}

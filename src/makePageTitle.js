@@ -8,7 +8,7 @@ module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subj
 		(type === 'Esej' || type === 'Poezija') && sequenceTitle,
 		subjectDate && fixSubjectDate(subjectDate) || sequenceNumber && (`#${ sequenceNumber }`),
 		sequenceEpisodeTitle || title ? `“${ title }”` : '',
-		"ta’",
+		type === 'Avveniment' || type === 'Poddata' ? 'ma’' : 'ta’',
 		author,
 		translator && `(tr ${translator})`
 	].filter(e => e).join(" ").replace(/:: /, ": ");
