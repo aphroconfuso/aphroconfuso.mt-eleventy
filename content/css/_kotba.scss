@@ -200,6 +200,11 @@ article.ktieb-stampat {
   margin: $body-margin 0;
   padding: $body-margin-half;
 
+	.order-button-wrapper {
+		display: flex;
+		justify-content: space-around;
+	}
+
   a.order-button {
     background-color: $brown;
     border-radius: 0.25rem;
