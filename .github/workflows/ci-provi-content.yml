@@ -43,10 +43,10 @@ jobs:
             git commit -m "Avanti! (auto)"
             git push
 
-      - name: Notify slack
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        uses: pullreminders/slack-action@master
-        with:
-          args: >
-            {\"channel\":\"C08TQEMC3\",\"text\":\"aphroconfuso.mt-eleventy (=> provi) action status: ${{ job.status }}\"}
+      # - name: Notify slack
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      #   uses: pullreminders/slack-action@master
+      #   with:
+      #     args: >
+      #       {\"channel\":\"C08TQEMC3\",\"text\":\"aphroconfuso.mt-eleventy (=> provi) action status: ${{ job.status }}\"}
