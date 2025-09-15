@@ -5,7 +5,7 @@
 				<!-- -->
 			</li>
 			<li class="wordcount">
-				{% if showLengths %}
+				{% if showLengths or showDurations %}
 					{% if promo.audioPlayers[0] %}
 						{{ promo.audioPlayers[0].podcastLengthMinutes | numberify(['minuta', 'minuti']) }} awdjo,
 					{# {% elif podcastLengthMinutesFallback %}

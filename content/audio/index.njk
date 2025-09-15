@@ -23,10 +23,11 @@ permalink: /awdjo/index.html
 				<div class="generic-body-text">
 					<p>Nippubblikaw verżjoni awdjo ta’ ħafna mix-xogħol li jidher fil-ġurnal. Dawn jitilgħu ftit ġimgħat wara l-ewwel pubblikazzjoni tagħhom fuq is-sit. Tista’ tisma’ dawn il-verżjonijiet kemm mill-istess paġna tat-test kif ukoll billi tabbona għall-<a href="/podcast/">podcast fejn issib ukoll taħditiet</a> mall-kittieba tagħna.</p>
 					<p><em>dawn huma l-verżjonijiet awdjo li ppubblikajna:</em></p>
-					{% set collated = true %}
+					{% set collated = false %}
 					{% set promoFrom = "Awdjo" %}
 					{% set promos = stories | selectattr("listableAudio") | sort(true, false, "podcastDate") %}
 					{% set showDurations = true %}
+					{% set showLengths = true %}
 					{% set showEpisodeTitle = true %}
 					{% include "_promo_list.njk" %}
 					{% include "_podcast_buttons.njk" %}
