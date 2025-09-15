@@ -164,6 +164,7 @@ article.story {
     }
   }
 	&.story-177 p.fx1 {
+		// invokazzjonijiet 13
 		padding-left: $body-margin-double;
 	}
 }
@@ -247,6 +248,15 @@ article {
         letter-spacing: 0;
       }
     }
+		&.sequence-15 {
+			// invokazzjonijiet
+			ul.sequence-menu {
+				columns: 2;
+				li a {
+					width: unset;
+				}
+			}
+		}
   }
 
   // REFACTOR ... this is not a special
