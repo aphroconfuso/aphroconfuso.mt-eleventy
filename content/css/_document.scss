@@ -192,6 +192,7 @@ article > header {
   padding: $body-margin 0;
   margin-top: $body-margin auto 0;
   text-align: center;
+	text-wrap: balance;
   @media all and (max-width: $mobile-breakpoint) {
     display: none;
   }
