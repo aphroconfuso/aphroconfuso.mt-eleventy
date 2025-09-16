@@ -124,7 +124,10 @@
 					display: block;
 					overflow: hidden;
 					text-overflow: ellipsis;
-					width: 340px;
+					width: 280px;
+					@media all and (min-width: $laptop-large-breakpoint-plusone) {
+						width: 340px;
+					}
 					word-wrap: break-word;
 					white-space: nowrap;
 				}
