@@ -162,7 +162,7 @@ a.promo-poetry {
     margin-bottom: $body-margin-half;
   }
   p {
-    @include clamp(16);
+    @include clamp(15);
   }
 }
 .ga-newsletter {
