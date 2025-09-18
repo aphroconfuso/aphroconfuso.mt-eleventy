@@ -109,6 +109,7 @@
 	}
 
 	.container-generic {
+		margin-top: $body-margin;
 		max-width: var(--max-width);
 		display: grid;
 		grid-template-columns: 1fr var(--max-content-width) 1fr;
