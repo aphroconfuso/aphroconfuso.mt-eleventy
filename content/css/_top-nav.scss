@@ -253,6 +253,9 @@
         &:nth-child(4) {
           display: inline;
         }
+				&#podcast-audio a {
+					width: auto;
+				}
       }
     }
     #menu-main > li a {
