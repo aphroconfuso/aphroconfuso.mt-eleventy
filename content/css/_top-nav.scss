@@ -98,7 +98,10 @@
 						margin-right: $body-margin-half;
 					}
         }
-      }
+				&#podcast-audio a {
+					width: auto;
+				}
+			}
     }
   }
   .show-nav #top-nav,
@@ -253,9 +256,6 @@
         &:nth-child(4) {
           display: inline;
         }
-				&#podcast-audio a {
-					width: auto;
-				}
       }
     }
     #menu-main > li a {
