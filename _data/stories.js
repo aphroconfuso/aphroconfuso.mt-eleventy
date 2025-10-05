@@ -868,7 +868,7 @@ async function getAllStories() {
 	// FIXME Remove limit from Home stories
 	// Automate termini
 	// then make this .slice(0, 6);
-	storiesFormatted[0].promotableStoriesHome = processPromos([...promotableStoriesHome].sort(() => Math.random() - 0.5).slice(0, 5));
+	storiesFormatted[0].promotableStoriesHome = processPromos([...promotableStoriesHome].sort(() => Math.random() - 0.5).slice(0, 3));
 
 	return storiesFormatted;
 }
