@@ -10,13 +10,11 @@ const imageData = `data {
 
 const personData = `data {
 	attributes {
-		contributor
 		displayName
 		forename
 		initials
 		pronoun
 		surname
-		bioNote
 	}
 }`;
 

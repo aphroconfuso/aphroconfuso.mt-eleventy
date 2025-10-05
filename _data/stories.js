@@ -125,7 +125,7 @@ async function getAllStories() {
 										full
 									}
 									authors (
-							            publicationState: ${ fetchStatus },
+				            publicationState: ${ fetchStatus },
 									) {
 										${personData}
 									}
