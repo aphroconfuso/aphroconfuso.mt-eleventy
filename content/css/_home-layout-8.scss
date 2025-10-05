@@ -5,7 +5,7 @@
 @use "mixins-home-grids" as *;
 
 // *************************************************************************
-// LAYOUT 2 ****************************************************************
+// LAYOUT 8 ****************************************************************
 // Large image story on top
 // Then Story and editorial
 
@@ -36,11 +36,6 @@
   .ga-7,
   .ga-image-2 {
     @include border-bottom();
-  }
-  .ga-1 {
-    p {
-      @include clamp(10);
-    }
   }
   .ga-diary > ul > li:nth-of-type(1) {
     padding-bottom: $body-margin;
@@ -124,11 +119,6 @@
     .ga-image-2 {
       @include border-top();
       @include image-right();
-    }
-    .ga-diary {
-      ul {
-        columns: 2;
-      }
     }
   }
 }
