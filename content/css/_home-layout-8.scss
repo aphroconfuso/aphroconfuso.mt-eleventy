@@ -29,8 +29,6 @@
     "ga8"
     "ga-terms"
 	"ga-books";
-  .ga-1,
-  .ga-3,
   .ga-5,
   .ga-6,
   .ga-7,
@@ -51,9 +49,6 @@
 		.ga-book-image-promo {
       display: none;
     }
-	.ga-books {
-		@include border-top();
-	}
     .ga-image-1,
     .ga-image-2,
     .ga-1,
@@ -107,9 +102,8 @@
     .ga-image-1 {
       margin-bottom: $body-margin-half;
     }
+    .ga-image-1,
     .ga-image-2,
-    .ga-1,
-    .ga-3,
     .ga-4,
     .ga-5 {
       @include border-bottom();
