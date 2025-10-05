@@ -130,6 +130,10 @@ $collection-colour-terms: hsl($collection-hue-terms, 30%, 35%);
   @include collection-colour($collection-hue-terms);
 }
 
+.collection-4 {
+  @include collection-colour(195);
+}
+
 .promo-collections {
   display: flex;
   flex-direction: row-reverse;
