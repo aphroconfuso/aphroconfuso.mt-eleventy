@@ -83,29 +83,9 @@
       "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms"
 	  "ga-books ga-books ga-books ga-books ga-books ga-books";
       // "ga9 ga9 ga10 ga10 ga11 ga11"
-    .ga-1 {
-      margin-bottom: $body-margin-half;
-      header {
-        margin-bottom: $body-margin-half !important;
-      }
-      p {
-        @include unclamp();
-        columns: 3;
-      }
-    }
-    .ga-2 {
-      p {
-        @include unclamp();
-        columns: 2;
-      }
-    }
-    .ga-image-1 {
-      margin-bottom: $body-margin-half;
-    }
     .ga-image-1,
     .ga-image-2,
-    .ga-4,
-    .ga-5 {
+    .ga-4 {
       @include border-bottom();
     }
     .ga-editorial {
