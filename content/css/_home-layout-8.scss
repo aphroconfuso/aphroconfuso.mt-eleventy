@@ -12,14 +12,14 @@
 .layout-8 {
   grid-template-areas:
     "ga-image-1"
-		"ga-book-image-promo"
-    "ga-editorial"
     "ga1"
     "ga2"
+    "ga3"
+    "ga-editorial"
+	"ga-book-image-promo"
     "ga-poem-1"
     "ga-diary"
     "ga-newsletter"
-    "ga3"
     "ga4"
     "ga-podcast"
     "ga5"
@@ -29,6 +29,8 @@
     "ga8"
     "ga-terms"
 	"ga-books";
+  .ga-1,
+  .ga-2,
   .ga-5,
   .ga-6,
   .ga-7,
@@ -83,6 +85,25 @@
       "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms"
 	  "ga-books ga-books ga-books ga-books ga-books ga-books";
       // "ga9 ga9 ga10 ga10 ga11 ga11"
+    .ga-4 {
+      margin-bottom: $body-margin-half;
+      header {
+        margin-bottom: $body-margin-half !important;
+      }
+      p {
+        @include unclamp();
+        columns: 3;
+      }
+    }
+    .ga-5 {
+      p {
+        @include unclamp();
+        columns: 2;
+      }
+    }
+    .ga-image-1 {
+      margin-bottom: $body-margin-half;
+    }
     .ga-image-1,
     .ga-image-2,
     .ga-4 {
