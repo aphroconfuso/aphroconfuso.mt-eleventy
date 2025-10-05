@@ -128,8 +128,6 @@ async function getAllStories() {
 							            publicationState: ${ fetchStatus },
 									) {
 										${personData}
-										bioNote
-										contributor
 									}
 									translators (
 				            publicationState: ${ fetchStatus },

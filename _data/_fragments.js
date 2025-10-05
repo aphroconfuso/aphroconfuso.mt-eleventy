@@ -16,6 +16,7 @@ const personData = `data {
 		initials
 		pronoun
 		surname
+		bioNote
 	}
 }`;
 

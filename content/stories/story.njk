@@ -360,7 +360,9 @@ permalink: /{{ story.slug }}/index.html
 				</aside>
 			{% endif %}
 			{% for author in authors | rejectattr("contributor") %}
-				{{ author.bioNote }}
+			AAA
+			{{ author.firstName }}
+				{{ author.bioNote | prettifyMaltese | safe }}
 			{% endfor %}
 			<aside id="publication-history">
 				{{ story.publicationHistory | restrictHtml | prettifyMaltese | safe }}
