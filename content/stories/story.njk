@@ -150,7 +150,7 @@ permalink: /{{ story.slug }}/index.html
 					{% endif %}
 				{% endfor %}
 
-				{% if not story.audioPlayers %}
+				{% if !story.audioPlayers %}
 					{{ playerNote | restrictHtml | prettifyMaltese | safe }}
 				{% endif %}
 
