@@ -155,7 +155,7 @@ async function getHomepage() {
 			diary: 1,
 			image: 2,
 			poem: 1,
-			text: 11,
+			text: 8,
 			lengths: [2150, 1200],
 		},
 	}
