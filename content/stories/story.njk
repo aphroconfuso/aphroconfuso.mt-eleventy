@@ -359,11 +359,11 @@ permalink: /{{ story.slug }}/index.html
 					{{ story.coda | restrictHtml | prettifyMaltese | safe }}
 				</aside>
 			{% endif %}
-			{% for author in story.authors | rejectattr("contributor") %}
+			{# % for author in story.authors | rejectattr("contributor") %}
 			AAA
 			{{ author.attributes.firstName }}
 				{{ author.attributes.bioNote | prettifyMaltese | safe }}
-			{% endfor %}
+			{% endfor % #}
 			<aside id="publication-history">
 				{{ story.publicationHistory | restrictHtml | prettifyMaltese | safe }}
 			</aside>
