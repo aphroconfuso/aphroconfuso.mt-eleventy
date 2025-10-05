@@ -10,6 +10,9 @@
 // Then Story and editorial
 
 .layout-8 {
+  header h2 .translator {
+    display: none!;
+  }
   grid-template-areas:
     "ga-image-1"
     "ga1"
