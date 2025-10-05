@@ -167,7 +167,7 @@ permalink: /index.html
 			{% set promos = promosPublished.slice(0, 1) %}
 			{% set omitAside = true %}
 			{% include "_promo_list.njk" %}
-			{% set bookPromoId = promos[0].id %}
+			{# % set bookPromoId = promos[0].id % #}
 		</div>
 		<aside class="ga-books books-list">
 			{% include '_our_books_list.njk' %}
