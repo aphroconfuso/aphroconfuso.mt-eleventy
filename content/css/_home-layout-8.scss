@@ -27,7 +27,8 @@
     "ga-image-2"
     "ga7"
     "ga8"
-    "ga-terms";
+    "ga-terms"
+	"ga-books";
   .ga-1,
   .ga-3,
   .ga-5,
@@ -50,6 +51,9 @@
 		.ga-book-image-promo {
       display: none;
     }
+	.ga-books {
+		@include border-top();
+	}
     .ga-image-1,
     .ga-image-2,
     .ga-1,
@@ -81,8 +85,9 @@
       "ga-poem-1 ga-poem-1 ga2 ga2 ga2 ga2"
       "ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
       "ga6 ga6 ga7 ga7 ga8 ga8"
-      "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms";
-    // "ga9 ga9 ga10 ga10 ga11 ga11"
+      "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms"
+	  "ga-books ga-books ga-books ga-books ga-books ga-books";
+      // "ga9 ga9 ga10 ga10 ga11 ga11"
     .ga-1 {
       margin-bottom: $body-margin-half;
       header {
