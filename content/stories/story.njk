@@ -149,6 +149,11 @@ permalink: /{{ story.slug }}/index.html
 						</aside>
 					{% endif %}
 				{% endfor %}
+
+				{% if not story.audioPlayers %}
+					{{ playerNote | restrictHtml | prettifyMaltese | safe }}
+				{% endif %}
+
 				{% if story.triggerWarning %}
 					<section id="trigger-warning">
 						<button id="trigger-warning-close" class="close">×</button>
