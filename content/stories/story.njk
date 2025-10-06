@@ -150,8 +150,10 @@ permalink: /{{ story.slug }}/index.html
 					{% endif %}
 				{% endfor %}
 
-				{% if not story.audioPlayers.length or story.audioPlayers.length == 0 and story.podcastNote %}
-					<figure><figcaption>{{ story.podcastNote | prettifyMaltese | safe }}</figcaption></figure>
+				{% if not story.audioPlayers.length or story.audioPlayers.length == 0 %}
+					{% if story.podcastNote %}
+						<figure><figcaption>{{ story.podcastNote | prettifyMaltese | safe }}</figcaption></figure>
+					{% endif %}
 				{% endif %}
 
 				{% if story.triggerWarning %}
