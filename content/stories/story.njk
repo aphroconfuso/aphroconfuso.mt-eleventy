@@ -151,7 +151,7 @@ permalink: /{{ story.slug }}/index.html
 				{% endfor %}
 
 				{% if not story.audioPlayers.length or story.audioPlayers.length == 0 %}
-					<aside>{{ story.podcastNote | prettifyMaltese | safe }}</aside>
+					<figure><figcaption>{{ story.podcastNote | prettifyMaltese | safe }}</figcaption></figure>
 				{% endif %}
 
 				{% if story.triggerWarning %}
