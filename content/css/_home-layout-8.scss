@@ -123,5 +123,16 @@
       @include border-top();
       @include image-right();
     }
+    .ga-1,
+    .ga-2 {
+      p {
+        @include clamp(9);
+      }
+    }
+    .ga-3 {
+      p {
+        @include clamp(8);
+      }
+    }
   }
 }
