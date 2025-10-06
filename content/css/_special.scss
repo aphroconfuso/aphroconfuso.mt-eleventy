@@ -485,3 +485,9 @@ article {
 .promo.sequence-15 p {
   @include clamp(3);
 }
+
+.story-180 {
+  .body-text.promo-adjacent.promo-next {
+    display: none;
+  }
+}
