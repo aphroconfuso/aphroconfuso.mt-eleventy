@@ -34,7 +34,7 @@
 	border-radius: $body-margin-eighth;
 	padding: calc($body-margin - 1px);
 	img {
-		aspect-ratio: 120/63;
+		aspect-ratio: 1;
 		border: 1px $lightest-brown solid;
 		object-fit: cover;
 		width: 100%;
@@ -63,8 +63,8 @@
     flex-wrap: wrap;
     gap: $body-margin;
     li {
-      flex: 1 1 calc(33% - $body-margin-half);
-      max-width: calc(33% - $body-margin-half);
+      flex: 1 1 calc(32% - $body-margin-half);
+      max-width: calc(32% - $body-margin-half);
 			margin-bottom: 0;
 			.promo-event .body-text {
 				min-height: $body-margin * 3;
