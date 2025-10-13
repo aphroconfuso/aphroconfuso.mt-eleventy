@@ -24,10 +24,10 @@ permalink: /avvenimenti/index.html
 						{% set imageMode = 'promo' %}
 						{% set imageCrop = 'square' %}
 						{% set useSquare = true %}
-						{% set slide = event.promoImage %}
-						{% set slideMobile = event.promoImage %}
-						{% if event.promoImageMobile %}
-							{% set slideMobile = event.promoImageMobile %}
+						{% set slide = event.socialImage %}
+						{% set slideMobile = event.socialImage %}
+						{% if event.socialImageMobile %}
+							{% set slideMobile = event.socialImageMobile %}
 						{% endif %}
 						{% include "_image.njk" %}
 						<header>
