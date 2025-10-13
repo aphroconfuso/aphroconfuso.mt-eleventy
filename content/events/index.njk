@@ -10,7 +10,7 @@ permalink: /avvenimenti/index.html
 {% set generic = generics['event'] %}
 
 {% block content %}
-	<article class="generic eventts">
+	<article class="generic events">
 		<header>
 			<ul><li class="header-label">&nbsp;</li></ul>
 			<h1>Avvenimenti</h1>
@@ -25,8 +25,8 @@ permalink: /avvenimenti/index.html
 						{% set imageCrop = 'square' %}
 						{% set useSquare = true %}
 						{% set slide = event.promoImage %}
+						{% set slideMobile = event.promoImage %}
 						{% if event.promoImageMobile %}
-							{% set slide = event.promoImageMobile %}
 							{% set slideMobile = event.promoImageMobile %}
 						{% endif %}
 						{% include "_image.njk" %}

@@ -1,0 +1,77 @@
+@use "constants" as *;
+@use "calculations" as *;
+@use "settings" as *;
+@use "mixins-etc" as *;
+
+.generic.event {
+  h1 {
+    color: $brown;
+  }
+  // .promo-list > li.multiple-episodes {
+  //   // margin-bottom: $body-margin-half;
+  //   padding-bottom: $body-margin-half;
+  // }
+  aside#form {
+    border-top: 1px solid $faint-line;
+    padding-top: $body-margin-half;
+  }
+}
+
+.generic.event .promo-list {
+	margin-top: 0;
+	li:last-of-type {
+		border-bottom: none;
+	}
+}
+
+.generic.diaries ul.promo-list > li {
+	border-bottom-style: dashed;
+}
+
+.promo-event {
+	background-color: var(--deco);
+	border: 1px solid #d3d3d0;
+	border-radius: $body-margin-eighth;
+	padding: calc($body-margin - 1px);
+	img {
+		aspect-ratio: 120/63;
+		border: 1px $lightest-brown solid;
+		object-fit: cover;
+		width: 100%;
+	}
+}
+
+.generic.events .promo-list {
+	li {
+		border-bottom: none;
+		margin-bottom: $body-margin;
+		p {
+			@include clamp(3);
+		}
+	}
+}
+
+.event .promo-event {
+	margin: 0 0 $body-margin;
+	padding: calc($body-margin - 1px);
+}
+
+@media all and (min-width: $laptop-breakpoint) {
+	.generic.events .promo-list {
+	  display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: $body-margin;
+    li {
+      flex: 1 1 calc(50% - $body-margin-half);
+      max-width: calc(50% - $body-margin-half);
+			margin-bottom: 0;
+			.promo-event .body-text {
+				min-height: $body-margin * 3;
+			}
+		}
+	}
+	.event .promo-event {
+		margin: 0 ($body-margin * -1) $body-margin;
+	}
+}
