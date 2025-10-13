@@ -63,8 +63,8 @@
     flex-wrap: wrap;
     gap: $body-margin;
     li {
-      flex: 1 1 calc(50% - $body-margin-half);
-      max-width: calc(50% - $body-margin-half);
+      flex: 1 1 calc(33% - $body-margin-half);
+      max-width: calc(33% - $body-margin-half);
 			margin-bottom: 0;
 			.promo-event .body-text {
 				min-height: $body-margin * 3;
