@@ -37,9 +37,6 @@
   .ga-image-2 {
     @include border-bottom();
   }
- 	.ga-books {
-		@include border-top();
-	}
   .ga-1 {
     p {
       @include clamp(10);
