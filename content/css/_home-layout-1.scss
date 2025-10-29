@@ -27,7 +27,8 @@
     "ga-image-2"
     "ga7"
     "ga8"
-    "ga-terms";
+    "ga-terms"
+    "ga-books";
   .ga-3,
   .ga-5,
   .ga-6,
@@ -36,6 +37,9 @@
   .ga-image-2 {
     @include border-bottom();
   }
+ 	.ga-books {
+		@include border-top();
+	}
   .ga-1 {
     p {
       @include clamp(10);
@@ -86,7 +90,8 @@
       "ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2 ga-image-2"
       "ga3 ga3 ga4 ga4 ga5 ga5"
       "ga6 ga6 ga7 ga7 ga8 ga8"
-      "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms";
+      "ga-terms ga-terms ga-terms ga-terms ga-terms ga-terms"
+ 			"ga-books ga-books ga-books ga-books ga-books ga-books";
     // "ga9 ga9 ga10 ga10 ga11 ga11"
     .ga-1 {
       margin-bottom: $body-margin-half;
