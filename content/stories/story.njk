@@ -359,6 +359,9 @@ permalink: /{{ story.slug }}/index.html
 					</nav>
 				{% endfor %}
 			{% endif %}
+			{% if story.introduction %}
+				<aside>{{ stroy.introduction }}</aside>
+			{% endif %}
 		</section>
 		<section id="grid-max-panel-left-bottom">
 			{% if story.coda %}
@@ -367,7 +370,6 @@ permalink: /{{ story.slug }}/index.html
 				</aside>
 			{% endif %}
 			{# % for author in story.authors | rejectattr("contributor") %}
-			AAA
 			{{ author.attributes.firstName }}
 				{{ author.attributes.bioNote | prettifyMaltese | safe }}
 			{% endfor % #}
