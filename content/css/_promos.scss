@@ -108,6 +108,21 @@ aside.promo-aside {
 }
 
 a.promo > div.body-text > p {
+	&.clamp-20 {
+		@include clamp(20);
+	}
+	&.clamp-19 {
+		@include clamp(19);
+	}
+	&.clamp-18 {
+		@include clamp(18);
+	}
+	&.clamp-17 {
+		@include clamp(17);
+	}
+	&.clamp-16 {
+		@include clamp(16);
+	}
 	&.clamp-15 {
 		@include clamp(15);
 	}
