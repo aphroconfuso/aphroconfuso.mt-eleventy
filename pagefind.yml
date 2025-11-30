@@ -1,0 +1,4 @@
+force-language: mt
+glob: "**/*.html"
+include_characters: "ċĊġĠħĦżŻ"
+site: "aphroconfuso.mt/site"

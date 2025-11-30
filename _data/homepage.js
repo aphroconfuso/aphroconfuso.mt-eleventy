@@ -103,7 +103,7 @@ async function getHomepage() {
 
 	const layouts = {
 		Layout_1: {
-			diary: 2,
+			diary: 1,
 			image: 2,
 			poem: 1,
 			text: 11,

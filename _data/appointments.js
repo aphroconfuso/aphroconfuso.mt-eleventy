@@ -59,7 +59,9 @@ async function getAllAppointments() {
 		}
 	});
 
-  return appointments;
+	appointments[0].nextFirstMonday = getIssueMonthYear();
+
+	return appointments;
 }
 
 module.exports = getAllAppointments;

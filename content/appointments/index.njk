@@ -18,7 +18,10 @@ permalink: /appuntamenti/index.html
 	</header>
 	<div class="container-generic">
 		<section id="grid-body">
-				<div class="generic-body-text">{{ appointmentIndex.body | prettifyMaltese | safe }}</div>
+				<div class="generic-body-text">
+					{{ appointmentIndex.body | prettifyMaltese | safe }}
+					<p>{{ appointments[0].nextFirstMonday }}</p>
+				</div>
 				<ul class="promo-list">
 					{% for appointment in appointments %}
 						<li>

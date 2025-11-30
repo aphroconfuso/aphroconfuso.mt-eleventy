@@ -21,7 +21,7 @@ footer {
     white-space: nowrap;
   }
   nav {
-    a {
+    a, #organisation p {
       display: inline-block;
       text-decoration: underline;
       text-decoration-color: $brown;
@@ -37,7 +37,11 @@ footer {
     width: 50%;
   }
 
-  .copyright,
+	#organisation p {
+    color: $dark-brown;
+  }
+
+	.copyright,
   .email {
     color: $dark-brown;
     white-space: nowrap;
@@ -56,6 +60,7 @@ footer {
       "logotype-container"
       "copyright"
       "email"
+			"organisation"
 			"theme";
   }
 
@@ -72,6 +77,10 @@ footer {
   #socials {
     grid-area: socials;
     columns: 3;
+  }
+
+  #organisation {
+    grid-area: organisation;
   }
 
   #podcast {
@@ -129,11 +138,11 @@ footer {
   @media all and (min-width: $mobile-breakpoint-plusone) {
     .footer-content {
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-      grid-template-rows: auto auto;
+      grid-template-rows: auto auto auto;
       gap: $body-margin $body-margin;
       grid-template-areas:
         "housekeeping housekeeping media media socials logotype-container"
-        "email email theme theme copyright logotype-container";
+				"organisation organisation theme email copyright logotype-container";
     }
 
     #housekeeping {

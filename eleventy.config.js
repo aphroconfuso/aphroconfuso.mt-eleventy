@@ -228,7 +228,7 @@ module.exports = function (eleventyConfig) {
 
 			// Index pages for search **************************************************************************************
 			console.log('Indexing pages for search...');
-			execSync(`npx pagefind --site aphroconfuso.mt/site --glob \"**/*.html\" --force-language unknown`, {encoding: 'utf-8'});
+			execSync(`npx pagefind`, {encoding: 'utf-8'});
 			//  --include_characters ċġħżàèù
 			console.log('Indexing pages for search... done');
 			// END QUICKBUILD
