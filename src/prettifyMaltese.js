@@ -8,6 +8,7 @@ const prettifyMaltese = (text) => {
 	result = fixBlockquotes(result);
 
 	return (result || []).replace(/ data-.*?=".*?"/gmi, "")
+		.replace(/&nbsp;/gmi, " ")
 		.replace(/td data-.*?=".*?"/gmi, "td")
 		.replace(/fx-(\d)/gmi, "fx$1")
 		.replace(/<mark/gm, "<span")
