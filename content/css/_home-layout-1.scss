@@ -52,8 +52,7 @@
   }
   @media all and (min-width: $laptop-breakpoint) {
     .ga-newsletter,
-    .ga-podcast,
-		.ga-book-image-promo {
+    .ga-podcast {
       display: none;
     }
     .ga-image-1,

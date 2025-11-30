@@ -163,11 +163,16 @@ permalink: /index.html
 			</ul>
 		</div>
 		<div class="ga-book-image-promo">
-			{% set promosPublished = homepage.imagePromos | selectattr("bookOrderable") | sort(true, false, "dateTimePublication") %}
+			{# {% set promos = homepage.bookPromos %}
+			{% set omitAside = true %}
+			{% include "_promo_list.njk" %} #}
+			{# % set bookPromoId = promos[0].id #}
+
+			{% set promosPublished = stories | selectattr("bookPublished") | sort(true, false, "dateTimePublication") %}
 			{% set promos = promosPublished.slice(0, 1) %}
 			{% set omitAside = true %}
 			{% include "_promo_list.njk" %}
-			{# % set bookPromoId = promos[0].id % #}
+
 		</div>
 		<aside class="ga-books books-list">
 			{% include '_our_books_list.njk' %}

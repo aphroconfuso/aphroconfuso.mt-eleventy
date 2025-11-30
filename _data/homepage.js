@@ -101,6 +101,9 @@ async function getHomepage() {
 	const atts = homepage.data.attributes;
 	const diaryPromos = diaryEntries;
 
+
+	// +1 for book
+
 	const layouts = {
 		Layout_1: {
 			diary: 1,
@@ -189,6 +192,7 @@ async function getHomepage() {
 				authorsType,
 				authorsString,
 				authors,
+				bookOrderable: storyAtts.isBook?.bookOrderable,
 				blurbLines: promo.blurbLines,
 				collections: storyAtts.collections && storyAtts.collections.data.map(collection => { return { id: collection.id, title: collection.attributes.title }}),
 				cssClass: storyAtts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
@@ -242,16 +246,19 @@ async function getHomepage() {
 	const seen = new Set(), filteredDiaryEntries = allDiaryEntries.filter(x => !seen.has(x.authorsString) && seen.add(x.authorsString));
 
 	const homepageFormatted = {
+		bookPromos: promosFormatted(atts.imagePromos.filter(i => i.story.data.attributes.isBook?.orderable), false, 1, layoutConfig.lengths),
 		complementaryMonthColour: complementaryColours[issueMonth.toLowerCase()],
 		diaryEntries: filteredDiaryEntries.slice(0, layoutConfig.diary),
 		editorial: stripTags(atts.appointment.data.attributes.editorial, ['p', 'mark', 'span']),
-		imagePromos: promosFormatted(atts.imagePromos, true, layoutConfig['image']),
+		imagePromos: promosFormatted(atts.imagePromos.filter(i => !i.story.data.attributes.isBook?.orderable), true, layoutConfig['image']),
 		issueMonth,
 		issueMonthYear: getIssueMonthYear(atts.appointment.data.attributes.dateTimePublication).monthYear,
 		layout: atts.layout,
 		poetryPromos: promosFormatted(atts.poetryPromos, false, layoutConfig.poem),
 		promos: promosFormatted(atts.promos, false, layoutConfig.text, layoutConfig.lengths),
 	};
+
+	console.log(homepageFormatted.bookPromos);
 
 	return homepageFormatted;
 }

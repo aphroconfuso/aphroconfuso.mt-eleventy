@@ -10,14 +10,16 @@ permalink: /appuntamenti/index.html
 {% endblock %}
 
 {% block content %}
-<article class="generic appointments">
-	<header>
-		<ul><li class="header-label">&nbsp;</li></ul>
-		<h1>{{ appointmentIndex.title }}</h1>
-		<h2>&nbsp;</h2>
-	</header>
-	<div class="container-generic">
-		<section id="grid-body">
+	<article class="generic appointments">
+		<header>
+			<ul>
+				<li class="header-label">&nbsp;</li>
+			</ul>
+			<h1>{{ appointmentIndex.title }}</h1>
+			<h2>&nbsp;</h2>
+		</header>
+		<div class="container-generic">
+			<section id="grid-body">
 				<div class="generic-body-text">
 					{{ appointmentIndex.body | prettifyMaltese | safe }}
 					<p>{{ appointments[0].nextFirstMonday }}</p>
@@ -36,7 +38,7 @@ permalink: /appuntamenti/index.html
 						</li>
 					{% endfor %}
 				</ul>
-		</section>
-	</div>
-</article>
+			</section>
+		</div>
+	</article>
 {% endblock %}
