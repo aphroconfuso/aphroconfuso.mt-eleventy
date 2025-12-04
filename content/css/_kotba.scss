@@ -251,6 +251,7 @@ article.ktieb-stampat {
   display: grid;
   grid-template-columns: repeat($items-per-row, 1fr);
   gap: $body-margin-double;
+	margin-bottom: 0;
   width: 100%;
   > li {
     border-bottom: none;
