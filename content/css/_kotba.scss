@@ -291,6 +291,7 @@ article.ktieb-stampat {
   }
   ul.promo-list {
     columns: unset;
+		margin-bottom: $body-margin;
     @include book-list(7, 7, 6, 2);
     li {
       margin: 0;
@@ -301,9 +302,7 @@ article.ktieb-stampat {
 
 .story + .books-list {
   border-bottom: 1px solid $lightest-brown;
-  @media all and (min-width: $laptop-breakpoint) {
-    padding-bottom: $body-margin-bordered;
-  }
+	padding-bottom: $body-margin-bordered;
 }
 
 
