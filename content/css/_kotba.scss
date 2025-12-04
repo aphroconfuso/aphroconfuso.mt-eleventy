@@ -291,7 +291,6 @@ article.ktieb-stampat {
   }
   ul.promo-list {
     columns: unset;
-		margin-bottom: $body-margin;
     @include book-list(7, 7, 6, 2);
     li {
       margin: 0;
