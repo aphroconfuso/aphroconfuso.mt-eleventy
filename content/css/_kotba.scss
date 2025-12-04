@@ -212,7 +212,6 @@ article.ktieb-stampat {
     display: inline-block;
     font-family: $sans;
     font-size: 1.4rem;
-    margin-bottom: $body-margin;
     margin-top: $body-margin-half;
     padding: $body-margin-quarter $body-margin-half;
     text-transform: uppercase;
@@ -251,7 +250,6 @@ article.ktieb-stampat {
   display: grid;
   grid-template-columns: repeat($items-per-row, 1fr);
   gap: $body-margin-double;
-	margin-bottom: 0;
   width: 100%;
   > li {
     border-bottom: none;
@@ -285,7 +283,7 @@ article.ktieb-stampat {
 .story + .books-list {
   columns: unset;
   nav li {
-    padding: $body-margin-half 0;
+    padding: $body-margin-half 0 $body-margin;
     @media all and (min-width: $laptop-breakpoint) {
       padding: 0  0 $body-margin-half;
     }
@@ -302,7 +300,9 @@ article.ktieb-stampat {
 
 .story + .books-list {
   border-bottom: 1px solid $lightest-brown;
-	padding-bottom: $body-margin-bordered;
+  @media all and (min-width: $laptop-breakpoint) {
+    padding-bottom: $body-margin-bordered;
+  }
 }
 
 
