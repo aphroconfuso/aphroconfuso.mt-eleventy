@@ -49,14 +49,14 @@
 		<div id="email">
 			<a href="mailto:l-edituri@aphroconfuso.mt" class="email">l-edituri@aphroconfuso.mt</a>
 		</div>
-		<div class="hide-mobile choose-theme choose-theme-footer">
+		<div id="theme" class="hide-mobile choose-theme choose-theme-footer">
 			<a id="theme-regular-footer" role="button" tabindex="4">s</a>
 			<a id="theme-dark-footer" role="button" tabindex="5">m</a>
 			<a id="theme-contrast-footer" role="button" tabindex="6">c</a>
 			<a id="theme-system-footer" role="button" tabindex="7">p</a>
 		</div>
 		<div id="organisation"><p>{{ metadata.texts.organisation | safe }}</p></div>
-		<div id="copyright"><a href="/drittijiet/" class="copyright">&copy; 2023-{{ metadata.thisYear }} Aphroconfuso et al</a></div>
+		<div id="copyright"><p><a href="/drittijiet/" class="copyright">&copy; 2023-{{ metadata.thisYear }} Aphroconfuso et al</a></p></div>
 		<div id="qrcode"><img src="{{ page.url | qrCodePng }}" width="180" height="180" alt="QR code" /></div>
 		<div id="url">{{ metadata.url + page.url }}</div>
 	</nav>
