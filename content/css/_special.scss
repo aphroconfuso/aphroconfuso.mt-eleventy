@@ -163,8 +163,10 @@ article.story {
       }
     }
   }
-	&.story-177 p.fx1 {
-		// invokazzjonijiet 13
+	&.story-177 p.fx1,
+	&.story-204 p.fx1 {
+		// invokazzjonijiet 13, 23
+		// għamilhom għall-poeżija
 		padding-left: $body-margin-double;
 	}
 	&.sequence-15 {
