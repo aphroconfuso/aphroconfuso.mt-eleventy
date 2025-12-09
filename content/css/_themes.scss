@@ -27,6 +27,9 @@ nav#top-nav menu#menu-main {
 }
 
 body {
+	#theme > a {
+		text-decoration: none;
+	}
 	&.theme-regular {
 		a#theme-regular, a#theme-regular-footer {
 			text-decoration: underline;
