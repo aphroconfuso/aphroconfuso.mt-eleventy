@@ -340,6 +340,11 @@ article {
 	@include clamp(11);
 }
 
+.story-95 .body-text p {
+  margin-left: $body-margin;
+  text-indent: $body-margin * -1;
+}
+
 // hide numbers in sequences
 .sequence-10,
 .sequence-14,
