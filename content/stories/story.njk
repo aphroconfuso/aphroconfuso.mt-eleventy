@@ -300,7 +300,8 @@ permalink: /{{ story.slug }}/index.html
 								<span class="translator">
 									{{ book.translator }}, tr.</span>{% endif %}
 							<span class="publisher">({{ book.publisherName }}, {{ book.publisherCity }}
-								{{ book.publicationYear }})</span>
+								{{ book.publicationYear }}{% if book.subtitle %}–{{ book.subtitle }}{% endif %})</span>
+								{# FIX ME HERE extra date by book.subtitle above #}
 						</p>
 						{% if loop.last %}
 						</section>
