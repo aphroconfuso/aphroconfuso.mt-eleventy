@@ -140,6 +140,7 @@ async function getAllStories() {
 										data {
 											attributes {
 												title
+												subtitle
 												publicationDate
 												authors {
 													${personData}
@@ -332,6 +333,7 @@ async function getAllStories() {
 				publisherName: publisher.name,
 				publisherCity: publisher.city,
 				author: authorFullName,
+				subtitle: bookAtts.subtitle,
 				translator: translatorFullName
 			};
 		});
