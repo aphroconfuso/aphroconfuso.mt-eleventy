@@ -296,7 +296,7 @@ permalink: /{{ story.slug }}/index.html
 							<span class="title">{{ book.title }}</span>
 							{% if book.author %}
 								<span class="author"> ta’ {{ book.author }}</span>{% endif %}
-							{% if book.translator %}<span class="translator">, {{ book.translator }}, tr.</span>{% endif %}
+							{% if book.translator %}<span class="translator">, tr. {{ book.translator }}</span>{% endif %}
 							<span class="publisher">({{ book.publisherName }}, {{ book.publisherCity }}
 								{{ book.publicationYear }}{% if book.subtitle %}–{{ book.subtitle }}{% endif %})</span>
 								{# FIX ME HERE extra date by book.subtitle above #}
