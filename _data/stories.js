@@ -67,7 +67,7 @@ async function getAllStories() {
           query: `{
 						stories(
 	            publicationState: ${ fetchStatus },
-							pagination: { page: 1, pageSize: 250 },
+							pagination: { page: 1, pageSize: 999 },
 							sort: ["diaryDate:desc", "dateTimePublication:desc"],
 							) {
 							data {
@@ -771,20 +771,46 @@ async function getAllStories() {
 
 	// const cumulativeVocabulary = getWordFrequency(cumulativeBody);
 	// storiesFormatted[0].cumulativeVocabulary = cumulativeVocabulary;
-	storiesFormatted[0].cumulativeVocabulary = findUniqueWords(cumulativeBody);
-	storiesFormatted[0].cumulativeWordcount = splitText(cumulativeBody).length;
+	// storiesFormatted[0].cumulativeVocabulary = findUniqueWords(cumulativeBody);
+
+function hapaxPerItem(items) {
+  const counts = Object.create(null);
+
+  const tokenised = items.map(item =>
+		stripTags(item.body ?? "")
+			.toLowerCase()
+      .replace(/[^\p{L}\p{N}\s]/gu, " ")
+      .split(/\s+/)
+      .filter(Boolean)
+  );
+
+  // global word counts
+  tokenised.flat().forEach(word => {
+		counts[word] = (counts[word] || 0) + 1;
+  });
+
+  // hapax legomena per item
+  return items.map((item, i) => ({
+    ...item,
+    hapax: tokenised[i].filter(word => counts[word] === 1)
+  }));
+}
+
+ 	const spellcheckedStoriesFormatted = hapaxPerItem(storiesFormatted);
+
+	spellcheckedStoriesFormatted[0].cumulativeWordcount = splitText(cumulativeBody).length;
 
 	// QUOTAS ********************************************************************************
 
 	const pronounWordCounter = { hi: 0, hu: 0, hi_hu: 0, huma: 0, };
-	storiesFormatted.forEach(story => {
+	spellcheckedStoriesFormatted.forEach(story => {
 		if (story.type !== 'Poddata' && story.authorsType === 'solo') {
 			//  && story.authorsString !== 'Omar N’Shea'
 			pronounWordCounter[story.authorPronoun] += story.wordcount;
 		}
 	});
 
-	storiesFormatted[0].pronounWordsArrayString = JSON.stringify([
+	spellcheckedStoriesFormatted[0].pronounWordsArrayString = JSON.stringify([
 		['kittieba', 'pronom'],
 		['hi', pronounWordCounter['hi']],
 		['hu', pronounWordCounter['hu']],
@@ -811,7 +837,7 @@ async function getAllStories() {
 	// // // This way we privilege authors with fewer occurences
 	// // shuffledAbecedaireArray.sort((a, b) => storyCounts[b.authorsString] - storyCounts[a.authorsString]);
 
-	// storiesFormatted[0].abecedaire = [...new Map(shuffledAbecedaireArray.map(item => [item.letter, item])).values()].sort(sortAlphaThenNumbers);
+	// spellcheckedStoriesFormatted[0].abecedaire = [...new Map(shuffledAbecedaireArray.map(item => [item.letter, item])).values()].sort(sortAlphaThenNumbers);
 
 	const sortAlphaThenNumbers = (a, b) =>
 		isFinite(a.letter) - isFinite(b.letter) ||
@@ -858,21 +884,21 @@ async function getAllStories() {
 		return [...selectedStories.values()].sort(sortAlphaThenNumbers);
 	};
 
-	storiesFormatted[0].abecedaireFull = abecedaireArray.sort(sortAlphaThenNumbers);
-	storiesFormatted[0].abecedaire = evenlyDistributeAbecedaire(shuffleArray(abecedaireArray));
+	spellcheckedStoriesFormatted[0].abecedaireFull = abecedaireArray.sort(sortAlphaThenNumbers);
+	spellcheckedStoriesFormatted[0].abecedaire = evenlyDistributeAbecedaire(shuffleArray(abecedaireArray));
 
 	// ***********************************************************************************************
 
 	// ALMANAC ********************************************************************************
-	storiesFormatted[0].almanac = almanacArray;
+	spellcheckedStoriesFormatted[0].almanac = almanacArray;
 
 	// HOME PROMOTIONS ********************************************************************************
 	// FIXME Remove limit from Home stories
 	// Automate termini
 	// then make this .slice(0, 6);
-	storiesFormatted[0].promotableStoriesHome = processPromos([...promotableStoriesHome].sort(() => Math.random() - 0.5).slice(0, 3));
+	spellcheckedStoriesFormatted[0].promotableStoriesHome = processPromos([...promotableStoriesHome].sort(() => Math.random() - 0.5).slice(0, 3));
 
-	return storiesFormatted;
+	return spellcheckedStoriesFormatted;
 }
 
 // export for 11ty

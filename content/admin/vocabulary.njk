@@ -59,12 +59,24 @@ permalink: /admin/vokabolarju/index.html
 			{# <h5 id="showThreshold"></h5> #}
 			<section>
 				{# <p>{{ stories[0].cumulativeVocabulary.length | slugify }}</p> #}
-				<ul id="myUL" class="vocabulary">
+				{# <ul id="myUL" class="vocabulary">
 					{% for word in stories[0].cumulativeVocabulary %}
 						<li>{{ word.word }}
 							<span class="frequency" style="color: #999">{{ word.frequency}}</span></li>
 					{% endfor %}
-				</ul>
+				</ul> #}
+
+				<div>
+					{% for story in stories | sort("sortTitle") %}
+						{% if story.hapax.length %}
+							<h4>{{ story.title }} {{ story.sequenceEpisodeNumber if story.sequenceEpisodeNumber }} {{ story.sequenceEpisodeTitle if story.sequenceEpisodeTitle  }}</h4>
+								<p style="color: #600">{{ story.hapax.length }}</p>
+								<p style="color: #600">{{ story.hapax | sort | join(", ") }}</p>
+							<hr/>
+						{% endif %}
+					{% endfor %}
+				</div>
+
 			</section>
 		</main>
 		<script>
@@ -113,7 +125,7 @@ permalink: /admin/vokabolarju/index.html
 				filter = input
 					.value
 					.toUpperCase();
-				if (filter == "") 
+				if (filter == "")
 					return;
 				hideShow();
 			}

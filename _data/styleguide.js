@@ -18,7 +18,7 @@ async function getStyleGuide() {
 					styleGuideEntries(
             publicationState: ${ fetchStatus },
 						sort: "term:asc",
-						pagination: { page: 1, pageSize: 250 }
+						pagination: { page: 1, pageSize: 999 }
 						) {
 						data {
 							attributes {
