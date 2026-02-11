@@ -341,7 +341,7 @@ article {
 	@include clamp(11);
 }
 
-.story-95 .body-text p {
+.story-95 .body-text #grid-body p {
   margin-left: $body-margin;
   text-indent: $body-margin * -1;
 }
