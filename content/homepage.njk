@@ -168,7 +168,7 @@ permalink: /index.html
 			{% include "_promo_list.njk" %} #}
 			{# % set bookPromoId = promos[0].id #}
 
-			{% set promosPublished = stories | selectattr("bookPublished") | sort(true, false, "dateTimePublication") %}
+			{% set promosPublished = stories | selectattr("bookPrice") | sort(true, false, "dateTimePublication") %}
 			{% set promos = promosPublished.slice(0, 1) %}
 			{% set omitAside = true %}
 			{% include "_promo_list.njk" %}
