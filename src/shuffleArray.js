@@ -1,6 +1,5 @@
 const shuffleArray = (arr, limit = 6, maxNulls = 2) => {
 	if (!Array.isArray(arr)) return arr;
-	console.log('===>', arr.length);
 	const priced = arr.filter(item => item.bookPrice != null);
 	const unpriced = arr.filter(item => item.bookPrice == null);
 
@@ -32,12 +31,7 @@ const shuffleArray = (arr, limit = 6, maxNulls = 2) => {
 	const remaining = limit - pickedPriced.length;
 	const pickedUnpriced = sample(unpriced, remaining);
 
-	const retArr = [...pickedPriced, ...pickedUnpriced];
-
-	console.log('====>', retArr.length);
-
-	return retArr;
-
+	return [...pickedPriced, ...pickedUnpriced];
 };
 
 module.exports = shuffleArray;
