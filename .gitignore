@@ -8,3 +8,4 @@ image-cache/*
 !image-cache/.gitkeep
 .env
 .cache/*
+eleventy-debug.log
