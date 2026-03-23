@@ -19,6 +19,7 @@ const SlackNotify = require("slack-notify");
 
 const fixSubjectDate = require('./src/fixSubjectDate.js');
 const prettifyMaltese  = require('./src/prettifyMaltese.js');
+const shuffleArray  = require('./src/shuffleArray.js');
 const slugifyStringMaltese = require('./src/slugifyMaltese.js');
 
 const slack = SlackNotify(process.env.SLACK_WEBHOOK_URL);
@@ -387,6 +388,8 @@ module.exports = function (eleventyConfig) {
 		if (digits >= 11 && digits <= 19) return `${ number }-il ${ words[0]}`;
 		return `${ number } ${ words[0] }`;
 	});
+
+	eleventyConfig.addFilter("shuffleArray", shuffleArray);
 
 	// REMOVE NBSP;
 	// REDO THIS ALGORITHM

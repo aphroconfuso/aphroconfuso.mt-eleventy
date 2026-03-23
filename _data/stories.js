@@ -557,6 +557,7 @@ async function getAllStories() {
 			images: atts.images.data,
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,
+			isBook: !!isBook,
 			isSequenceEpisode: !!sequenceData,
 			issueMonth,
 			issueMonthYear,
