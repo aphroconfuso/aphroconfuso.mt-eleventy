@@ -26,7 +26,7 @@
 						<a class="author" href="/{{ author | slugifyMaltese }}/">{{ author | prettifyMaltese | safe }}</a>
 					{%- endif %}
 					{% if loop.index == 1 and item.authorsType == 'assistita' %} ma’&nbsp;{%- endif %}
-					{% if loop.index > 1 and loop.revindex == 2 %} & {% elif loop.revindex > 2 and item.authorsType != 'kollettiva' %}, {% endif %}
+					{% if loop.index == 1 and loop.revindex == 2 %} & {% elif loop.revindex > 2 and item.authorsType != 'kollettiva' %}, {% endif %}
 				{%- endif %}
 			{%- endfor %}
 		{%- endif %}
