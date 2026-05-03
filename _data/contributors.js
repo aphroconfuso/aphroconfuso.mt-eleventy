@@ -71,6 +71,14 @@ async function getAllContributors() {
 									) {
 										${ linkedStoryDataWithImage }
 									}
+									booksTranslated: storiesTranslated(
+				            publicationState: ${ fetchStatus },
+										pagination: { page: 1, pageSize: 999 },
+										sort: "dateTimePublication:desc",
+										filters: {type: { eq: "Ktieb stampat"}}
+									) {
+										${ linkedStoryDataWithImage }
+									}
 									eventsIncluded: storiesAuthored(
 				            publicationState: ${ fetchStatus },
 										pagination: { page: 1, pageSize: 999 },
@@ -82,8 +90,9 @@ async function getAllContributors() {
 									storiesTranslated(
 				            publicationState: ${ fetchStatus },
 										pagination: { page: 1, pageSize: 999 },
-										sort: "dateTimePublication:desc"
-									) {
+										sort: "dateTimePublication:desc",
+										filters: {type: { ne: "Ktieb stampat"}}
+										) {
 										${ linkedStoryData }
 									}
 								}
@@ -125,6 +134,8 @@ async function getAllContributors() {
 		const podcastEpisodes = processPromos(item.attributes.podcastEpisodes.data);
 		const displayContributorName = getPersonName(item.attributes);
 
+		const booksTranslated = processPromos(item.attributes.booksTranslated.data);
+
 		const storiesAuthored = allStoriesAuthored.filter(item => !item.collaboration);
 		const collaborationsAuthored = allStoriesAuthored.filter(item => item.collaboration);
 
@@ -148,6 +159,7 @@ async function getAllContributors() {
 			slug: slugifyMaltese(displayContributorName),
 			storiesAuthored,
 			storiesTranslated,
+			booksTranslated,
 		};
 	});
 

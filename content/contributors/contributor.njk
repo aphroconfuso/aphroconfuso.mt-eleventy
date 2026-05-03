@@ -39,6 +39,15 @@ permalink: /{{ contributor.slug }}/index.html
 							{% include '_promo_list.njk' %}
 						</div>
 					{% endif %}
+					{% if contributor.booksTranslated.length %}
+						<div class="books">
+							<p class="continuity">Kotba maqlubin għall-Malti minn <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span> ippubblikati minn <span class="contributor">Aphroconfuso</span>:</p>
+							{% set promos = contributor.booksTranslated %}
+							{% set promoFrom = contributor.name %}
+							{% set omitAside = true %}
+							{% include '_promo_list.njk' %}
+						</div>
+					{% endif %}
 					{% if contributor.anthologiesIncluded.length %}
 						<div class="anthologies books">
 							<p class="continuity">Kotba ta’ <span class="contributor">Aphroconfuso</span> bil-kitba ta’ <span class="contributor">{{ contributor.forename | prettifyMaltese | safe }}</span>:</p>
