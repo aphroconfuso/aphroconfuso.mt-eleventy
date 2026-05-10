@@ -163,22 +163,20 @@ article.story {
       }
     }
   }
-	&.story-177 p.fx1,
-	&.story-204 p.fx1,
-	&.story-212 p.fx1	{
-		// invokazzjonijiet 13, 23, 26
-		// għamilhom għall-poeżija
-		padding-left: $body-margin-double;
-	}
 	&.sequence-15 {
-		// invokazzjonijiet
-		ul.sequence-menu {
-			columns: 2;
-			li a {
-				width: unset;
-			}
-		}
-	}
+    p.fx1	{
+      // invokazzjonijiet 13, 23, 26
+      // għamilhom għall-poeżija
+      padding-left: $body-margin-double;
+    }
+    // invokazzjonijiet
+    ul.sequence-menu {
+      columns: 2;
+      li a {
+        width: unset;
+      }
+    }
+  }
 }
 
 article {
