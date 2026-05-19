@@ -1,0 +1,27 @@
+<section class="generic-menu">
+	<ul>
+		{% if '/manwal/' == page.url %}
+			<li class="active">Introduzzjoni</li>
+		{% else %}
+			<li>
+				<a href="/manwal/">Introduzzjoni</a>
+			</li>
+		{% endif %}
+		{% for item in manualpages %}
+			{% if '/' + item.slug + '/' == page.url %}
+				<li class="active">{{ item.title }}</li>
+			{% else %}
+				<li>
+					<a href="/{{ item.slug }}/">{{ item.title }}</a>
+				</li>
+			{% endif %}
+		{% endfor %}
+		{% if '/manwal-gwida-tal-istil/' == page.url %}
+			<li class="active">Gwida tal-istil</li>
+		{% else %}
+			<li>
+				<a href="/manwal-gwida-tal-istil/">Gwida tal-istil</a>
+			</li>
+		{% endif %}
+	</ul>
+</section>

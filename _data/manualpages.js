@@ -1,15 +1,15 @@
 const cachedPostFetch = require('../src/cachedPostFetch');
 const slugify = require('../src/slugifyMaltese.js');
 
-async function getGenerics() {
+async function getManualPages() {
 	const fetchStatus = process.env.NODE_ENV === 'development' ? 'PREVIEW' : 'LIVE';
 
 	try {
 		const data = await cachedPostFetch("https://cms.aphroconfuso.mt/graphql", {
 			body: JSON.stringify({
 				query: `{
-					generics(
-			            publicationState: ${fetchStatus},
+					manualPages(
+							publicationState: ${fetchStatus},
 						pagination: { page: 1, pageSize: 250 },
 					) {
 						data {
@@ -31,12 +31,15 @@ async function getGenerics() {
 			throw new Error("Houston... We have a CMS problem");
 		}
 
-		const items = response.data.generics.data.reduce((acc, item) => {
-			const attrs = item.attributes;
-			const key = attrs.key || slugify(attrs.title);
-			acc[key] = attrs;
-			return acc;
-		}, {});
+		const items = response.data.manualPages.data.map((page) => {
+			const atts = page.attributes;
+			return {
+				key: atts.key || slugify(atts.title),
+				slug: 'manwal-' + slugify(atts.title),
+				body: atts.body,
+				title: atts.title,
+			}
+		});
 
 		return items;
 
@@ -45,4 +48,4 @@ async function getGenerics() {
 	}
 }
 
-module.exports = getGenerics;
+module.exports = getManualPages;

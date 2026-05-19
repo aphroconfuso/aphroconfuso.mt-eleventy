@@ -1,0 +1,35 @@
+---
+pagination:
+  data: manualpages
+  size: 250
+permalink: /manwal/index.html
+---
+
+{% extends 'layouts/base.njk' %}
+
+{% block head %}
+	<title>Il-Manwal tal-Editorija u l-Produzzjoni · Aphroconfuso</title>
+	<meta content="{{ metadata.description }}" name="description">
+	<meta property="og:image" content="{{ metadata.settings.imagesUrl }}{{ metadata.settings.socialImage }}">
+{% endblock %}
+
+{% block content %}
+	<article class="generic">
+		<header>
+			<ul>
+				<li class="header-label">&nbsp;</li>
+			</ul>
+			<h1>Il-Manwal</h1>
+			<h2>tal-Editorija u l-Produzzjoni</h2>
+		</header>
+		<div class="container-generic">
+			<div id="grid-body">
+				<div class="generic-body-text">
+					{{ generics.manwal-index.body | prettifyMaltese | safe }}
+				</div>
+				<section id="grid-max-panel-left-top" data-pagefind-ignore>
+					{% include "_menu_manual.njk" %}
+				</section>
+			</div>
+		</article>
+	{% endblock %}

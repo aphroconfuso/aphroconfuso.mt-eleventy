@@ -1,5 +1,5 @@
 ---
-permalink: /gwida-tal-istil/index.html
+permalink: /manwal-gwida-tal-istil/index.html
 ---
 {% extends 'layouts/base.njk' %}
 
@@ -12,7 +12,11 @@ permalink: /gwida-tal-istil/index.html
 {% block content %}
 	<article class="generic">
 		<header>
-			<ul><li class="header-label">&nbsp;</li></ul>
+			<ul>
+				<li class="header-label">
+					<a href="/manwal/">Manwal</a>
+				</li>
+			</ul>
 			<h1>{{ styleguide.title }}</h1>
 			<h2>&nbsp;</h2>
 		</header>
@@ -28,8 +32,8 @@ permalink: /gwida-tal-istil/index.html
 				{% endfor %}
 				</ol>
 			</section>
-			<section id="grid-max-panel-left-top">
-				{% include "_menu_generic.njk" %}
+			<section id="grid-max-panel-left-top" data-pagefind-ignore>
+				{% include "_menu_manual.njk" %}
 			</section>
 		</div>
 	</article>

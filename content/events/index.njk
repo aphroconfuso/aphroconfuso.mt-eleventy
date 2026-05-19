@@ -18,6 +18,7 @@ permalink: /avvenimenti/index.html
 		<section class="body-text">
 				<ol class="promo-list">
 					{% set imagesUrl = metadata.settings.imagesUrl %}
+					{{ generics.avvenimenti.body | prettifyMaltese | safe }}
 					{% for event in stories | selectattr("listableEvent") %}
 					<li>
 						<a href="/{{ event.slug }}/" class="promo promo-event">
@@ -28,8 +29,17 @@ permalink: /avvenimenti/index.html
 						{% set slideMobile = event.socialImage %}
 						{% if event.socialImageMobile %}
 							{% set slideMobile = event.socialImageMobile %}
+							{% include "_image.njk" %}
 						{% endif %}
-						{% include "_image.njk" %}
+
+						{% set imageMode = 'promo' %}
+						{% set imageCrop = 'landscape' %}
+						{% if event.socialImage %}
+							{% set slide = event.socialImage %}
+							{# {% set slideMobile = event.socialImage %} #}
+							{% include "_image.njk" %}
+						{% endif %}
+
 						<header>
 							<h1>{{ event.title }}</h1>
 							{% set promo = event %}

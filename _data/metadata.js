@@ -40,12 +40,15 @@ module.exports = {
 	"generic_menu": [
 		"Kolofon",
 		"Dwarna",
-		"Kontinwità",
 		"Proċess editorjali",
 		"Gwida tal-istil",
 		"Drittijiet",
 		"Aċċessibbiltà",
 		"Cookies",
 		"Privatezza"
+	],
+	"manual_menu": [
+		"Proċess editorjali",
+		"Gwida tal-istil",
 	]
 }
