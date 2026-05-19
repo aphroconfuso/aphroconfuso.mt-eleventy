@@ -16,7 +16,7 @@ permalink: /avvenimenti/index.html
 			<h1>Avvenimenti</h1>
 		</header>
 		<section class="body-text">
-				<ol class="promo-list">
+				<ul class="promo-list">
 					{% set imagesUrl = metadata.settings.imagesUrl %}
 					{{ generics.avvenimenti.body | prettifyMaltese | safe }}
 					{% for event in stories | selectattr("listableEvent") %}

@@ -32,12 +32,13 @@ permalink: /manwal/index.html
 				{% include "_menu_manual.njk" %}
 			</section>
 			<section id="grid-max-panel-left-bottom" data-pagefind-ignore>
-				<aside class="sponsors">
-					<img src="/img/sponsors/acm-logo-col.png">
-					{{ generic['manwal-sponsor-acm'].body | prettifyMaltese | safe }}
-					<img src="/img/sponsors/aps-logo-col.png">
-					{{ generic['manwal-sponsor-aps'].body | prettifyMaltese | safe }}
-				</aside>
+				{% include "_manual_sponsors.njk" %}
+			</section>
+			<section id="grid-max-panel-right-top" data-pagefind-ignore>
+				<!-- -->
+			</section>
+			<section id="grid-max-panel-right-bottom" data-pagefind-ignore>
+				<!-- -->
 			</section>
 		</div>
 	</article>
