@@ -25,11 +25,11 @@ permalink: /manwal/index.html
 		<div class="container-generic">
 			<div id="grid-body">
 				<div class="generic-body-text">
-					{{ generics.manwal-index.body | prettifyMaltese | safe }}
+					{{ generics['manwal-index'].body | prettifyMaltese | safe }}
 				</div>
-				<section id="grid-max-panel-left-top" data-pagefind-ignore>
-					{% include "_menu_manual.njk" %}
-				</section>
 			</div>
+			<section id="grid-max-panel-left-top" data-pagefind-ignore>
+				{% include "_menu_manual.njk" %}
+			</section>
 		</article>
 	{% endblock %}
