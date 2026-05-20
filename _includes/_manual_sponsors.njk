@@ -1,6 +1,13 @@
 <aside class="sponsors">
-	<img src="/img/sponsors/acm-logo-col.png" width="120px">
-	{{ generics['manwal-sponsor-acm'].body | prettifyMaltese | safe }}
-	<img src="/img/sponsors/aps-logo-col.png" width="180px">
-	{{ generics['manwal-sponsor-aps'].body | prettifyMaltese | safe }}
+	<div class="acm-logo">
+		<a href="https://artscouncilmalta.gov.mt/funding-and-grants/investment-in-cultural-organisations-malta/">
+			<img src="/img/sponsors/acm-logo-col.png">
+		</a>
+	</div>
+	<div class="aps-logo">
+		<a href="https://www.apsbank.com.mt/community-engagement/">
+			<img src="/img/sponsors/aps-logo-col.png">
+		</a>
+	</div>
+	<div class="text">{{ generics['manwal-sponsors'].body | prettifyMaltese | safe }}</div>
 </aside>
