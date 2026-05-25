@@ -399,9 +399,11 @@ module.exports = function (eleventyConfig) {
 	// 		.join('<p class="poetry-separator">*</p>');
 	// });
 
+  // const text = text1.replace("&nbsp;", "")
+  // why was this there?
+
 	eleventyConfig.addFilter("versify", function versify(text1) {
-		const text = text1.replace("&nbsp;", "")
-			.replace(/<\/p>/gm, '</p>\n')
+		const text = text1.replace(/<\/p>/gm, '</p>\n')
 			.replace(/\n\n+/gm, '\n')
 			.replace(/\s*<p>#<\/p>\s*/gm, '#')
 			.replace(/<em>#<\/em>/gm, '#')
