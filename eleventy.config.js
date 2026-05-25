@@ -399,7 +399,7 @@ module.exports = function (eleventyConfig) {
 	// 		.join('<p class="poetry-separator">*</p>');
 	// });
 
-  // const text = text1.replace("&nbsp;", "")
+  // FIXME const text = text1.replace("&nbsp;", "")
   // why was this there?
 
 	eleventyConfig.addFilter("versify", function versify(text1) {
