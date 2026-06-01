@@ -461,11 +461,19 @@ const initialiseMessage = () => {
 	}
 }
 
-document.getElementById('closeNewsletterPopup').addEventListener("click", () => {
-	closeNewsletterPopup();
-	newsletterPopupShow = false;
-	setCookie('newsletter', 'popupHide', 0.25);
-});
+const initialiseNewsletterPopup = () => {
+	const params = new URLSearchParams(window.location.search);
+	if (params.has('mtm_kwd') || params.has('mtm_keyword')) {
+		setCookie('newsletter', 'abbonat*');
+		window.history.replaceState({}, '', window.location.pathname);
+	}
+
+	document.getElementById('closeNewsletterPopup').addEventListener("click", () => {
+		closeNewsletterPopup();
+		newsletterPopupShow = false;
+		setCookie('newsletter', 'popupHide', 0.25);
+	});
+}
 
 const closeNewsletterPopup = () => {
 	newsletterContainer.classList.remove('show', 'popup');
@@ -486,6 +494,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 	initialiseBookmarksList();
 	showFullBookmarkList();
 	initialiseAnchorEvents();
+	initialiseNewsletterPopup();
 	window.addEventListener('scroll', (event) => {
 		scrolling();
 	});
