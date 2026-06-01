@@ -67,6 +67,7 @@ const scrolling = () => {
 							newsletterContainer && newsletterContainer.classList.add('show');
 						});
 					});
+					analytics(['trackEvent', 'Newsletter', 'popup - infetaħ', reportingTitle, percentageProgress]);
 				}
 			}
 		}
@@ -462,13 +463,13 @@ const initialiseMessage = () => {
 }
 
 const initialiseNewsletterPopup = () => {
-	const params = new URLSearchParams(window.location.search);
-	if (params.has('mtm_kwd') || params.has('mtm_keyword')) {
+	const params = !!window.location.search && new URLSearchParams(window.location.search);
+	if (params && (params.has('mtm_kwd') || params.has('mtm_keyword'))) {
 		setCookie('newsletter', 'abbonat*');
 		window.history.replaceState({}, '', window.location.pathname);
 	}
-
-	document.getElementById('closeNewsletterPopup').addEventListener("click", () => {
+	const closeButton = document.getElementById('closeNewsletterPopup');
+	closeButton && closeButton.addEventListener("click", () => {
 		closeNewsletterPopup();
 		newsletterPopupShow = false;
 		setCookie('newsletter', 'popupHide', 0.25);
@@ -477,6 +478,7 @@ const initialiseNewsletterPopup = () => {
 
 const closeNewsletterPopup = () => {
 	newsletterContainer &&newsletterContainer.classList.remove('show', 'popup');
+	analytics(['trackEvent', 'Newsletter', 'popup - inħeba', reportingTitle, percentageProgress]);
 	// analytics(['trackEvent', 'Promo', `minn: ${ reportingTitle }`, `għal: ${ destinationTitle } (bookmark)`, roundedPercentage]);
 	// cookie
 }
