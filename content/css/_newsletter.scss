@@ -42,6 +42,10 @@
 		height: 140px;
 	}
 
+	button {
+		display: none;
+	}
+
 	@media all and (min-width: $mobile-breakpoint-plusone) {
 		#form iframe {
 			height: 140px;
@@ -54,6 +58,41 @@
 		}
 		&#newsletter-container-bottom {
 			display: none;
+		}
+	}
+
+	&.popup {
+		button {
+			color: #b0b0bb; // FIXME
+			cursor: pointer;
+			display: block;
+			font-size: 1rem;
+			position: absolute;
+			right: $body-margin-half;
+			top: $body-margin-half;
+		}
+		background-color: var(--paper);
+		border: 1px solid var(--ink);
+		bottom: $body-margin * -10;
+		display: block !important;
+		height: $body-margin * 8 !important;
+		margin: $body-margin-half !important;
+		overflow: hidden;
+		position: fixed;
+		width: calc(100% - $body-margin);
+		z-index: 100;
+		&.show {
+			bottom: 0;
+			transition-property: bottom;
+			transition-duration: 1s;
+		}
+		@media all and (min-width: $laptop-breakpoint) {
+			right: 0;
+			width: 400px;
+		}
+		#form {
+			display: block;
+			padding: $body-margin;
 		}
 	}
 }
