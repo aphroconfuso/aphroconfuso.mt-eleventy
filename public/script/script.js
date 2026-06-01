@@ -61,10 +61,10 @@ const scrolling = () => {
 				}
 				progressElement.textContent = percentageProgress > 0 && percentageProgress < 100 ? `${ Math.round(percentageProgress) }%` : '';
 				if (percentageProgress > 30 && newsletterPopupShow) {
-					newsletterContainer.classList.add('popup');
+					newsletterContainer && newsletterContainer.classList.add('popup');
 					requestAnimationFrame(() => {
 						requestAnimationFrame(() => {
-							newsletterContainer.classList.add('show');
+							newsletterContainer && newsletterContainer.classList.add('show');
 						});
 					});
 				}
@@ -494,13 +494,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 	initialiseBookmarksList();
 	showFullBookmarkList();
 	initialiseAnchorEvents();
-	initialiseNewsletterPopup();
 	window.addEventListener('scroll', (event) => {
 		scrolling();
 	});
 
 	if (window.matchMedia("(min-width: 481px)")) preventNotesOverlap();
 
+	// stories
 	if (!!wordcount) {
 		// TODO: Fix enjambed
 		bodyText = Array.from(document.getElementById("grid-body").getElementsByClassName("body-text"), e => e.innerText).join(' ').replace(/\s+/g, ' ');
@@ -523,6 +523,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 		lastReportedScrollPosition = lastScrollPosition;
 		pageHeight = document.body.scrollHeight;
 		initialiseReadingHeartbeat(wordcount);
+
+		initialiseNewsletterPopup();
 
 		const slideshows = document.getElementsByClassName('splide');
 		if (slideshows.length) {
