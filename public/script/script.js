@@ -476,7 +476,7 @@ const initialiseNewsletterPopup = () => {
 }
 
 const closeNewsletterPopup = () => {
-	newsletterContainer.classList.remove('show', 'popup');
+	newsletterContainer &&newsletterContainer.classList.remove('show', 'popup');
 	// analytics(['trackEvent', 'Promo', `minn: ${ reportingTitle }`, `għal: ${ destinationTitle } (bookmark)`, roundedPercentage]);
 	// cookie
 }
