@@ -1,10 +1,9 @@
 const fixBlockquotes = require("./fixBlockquotes.js");
 const dateTimeMaltese = require("./getDateTimeMaltese.js");
-const getFounders = require("./getFounders.js");
 const getNextAppointmentDate = require("./getNextAppointmentDate.js");
 
-const prettifyMaltese = (text) => {
-	if (!text) return "XXXXXXprettifyMalteseXXX";
+const prettifyMaltesePlain = (text) => {
+	if (!text) return "XXXXXXprettifyMaltesePlainXXX";
 
 	let result = text;
 	result = fixBlockquotes(result);
@@ -13,8 +12,6 @@ const prettifyMaltese = (text) => {
 		.replace(/&nbsp;/gmi, " ")
 		.replace(/td data-.*?=".*?"/gmi, "td")
 		.replace(/fx-(\d)/gmi, "fx$1")
-		.replace(/<mark/gm, "<span")
-		.replace(/<\/mark>/gm, "</span>")
 		.replace(/<i>/gm, "<em>")
 		.replace(/<\/i>/gm, "</em>")
 		.replace(/<p>&nbsp;<\/p>/gm, "")
@@ -35,27 +32,17 @@ const prettifyMaltese = (text) => {
 		.replace(/\"/gm, "”")
 		.replace(/”>/gm, "\">")
 		.replace(/\=”/gm, "=\"")
-		.replace(/(”)([,\.;:])/gm, "$1<span class=\"pull\">$2</span>")
-		.replace(/([,\.])(”)/gm, "$1<span class=\"pullsemi\">$2</span>")
-		.replace(/(’)([,\.;:])/gm, "$1<span class=\"pullsemi\">$2</span>")
 		.replace(/MMXXc/gm, "ċ").replace(/MMXXg/gm, "ġ").replace(/MMXXh/gm, "ħ").replace(/MMXXz/gm, "ż").replace(/MMXXa/gm, "à")
 		.replace(/MMXXC/gm, "Ċ").replace(/MMXXG/gm, "Ġ").replace(/MMXXH/gm, "Ħ").replace(/MMXXZ/gm, "Ż").replace(/MMXXA/gm, "À")
 		.replace(/- </gm, "-<")
 		.replace(/(\d)\,(\d\d\d)/gm, `$1${ String.fromCharCode(8201) }$2`)
 		.replace(/&amp;shy;/gm, '<wbr>')
-		.replace(/<l-m>(fx-?\d)<\/l-m>/gm, "$1")
-		.replace(/<l-m>right-aligned<\/l-m>/gm, "right-aligned")
-		.replace(/(<h[56] id=".*?)(<l-m>)(.*?)(<\/l-m>)(.*?<\/h[56]>)/gm, "$1$3$5")
-		.replace(/(id=")<span-class=fx-?\d+>(.)<-mark>/gm, "$1$2")
-		.replace(/https:\/\/aphroconfuso.mt\//gm, "/")
-		.replace(/https:\/\/search\.worldcat\.org\/\w\w\//gm, "https://search.worldcat.org/")
-		.replace(/XXXFUNDATURIXXX/gm, getFounders())
-		.replace(/XXXDATAKOLLHAXXX/gm, dateTimeMaltese().fullDate)
-		.replace(/XXXAPPUNTAMENTLIJMISSXXX/gm, getNextAppointmentDate())
+		.replace(/XXXDATETIMEFULLXXX/gm, dateTimeMaltese().full)
+		.replace(/XXXNEXTAPPOINTMENTDATEXXX/gm, getNextAppointmentDate())
 		.replace(/(=")<l-m>/gm, "$1");
 }
 
-module.exports = prettifyMaltese;
+module.exports = prettifyMaltesePlain;
 
 // .replace(/([A-Z]{3,})/gm, "<span class=\"sc\">$1</span>").replace(/([A-Z]+[\.-]?[0-9.-]+)/gm, "<span class=\"sc\">$1</span>").replace(/([0-9]+[\.-]?[A-Z]+)/gm, "<span class=\"sc\">$1</span>")
 

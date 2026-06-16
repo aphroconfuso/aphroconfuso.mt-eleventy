@@ -1,6 +1,7 @@
 const stripTags = require("striptags");
 // const unique = require('unique-words');
 const cachedPostFetch = require('../src/cachedPostFetch');
+const getDateTimeMaltese = require("../src/getDateTimeMaltese.js");
 const smartTruncate = require('smart-truncate');
 
 const getIssueMonthYear = require("../src/getIssueMonthYear.js");
@@ -580,7 +581,7 @@ async function getAllStories() {
 			prominentMentions: atts.prominentMentions,
 			promoImage: atts.promoImage.data,
 			promoImageMobile: atts.promoImageMobile.data,
-			publicationHistory: atts.publicationHistory,
+			publicationHistory: atts.publicationHistory || "Dan ix-xogħol ġie ppubblikat għall-ewwel darba " + getDateTimeMaltese(atts.dateTimePublication).dateFull + ", f’dan il-ġurnal.",
 			reads: getReads(authorPronoun),
 			sequence: sequenceData && sequenceData.attributes.title,
 			sequenceEpisodeNumber: atts.sequenceEpisodeNumber,

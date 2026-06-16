@@ -19,6 +19,8 @@ const SlackNotify = require("slack-notify");
 
 const fixSubjectDate = require('./src/fixSubjectDate.js');
 const prettifyMaltese  = require('./src/prettifyMaltese.js');
+const prettifyMaltesePlain  = require('./src/prettifyMaltesePlain.js');
+// const prettifyMaltese  = require('./src/prettifyMalteseDecorateNewsletterUrls.js');
 const shuffleArray  = require('./src/shuffleArray.js');
 const slugifyStringMaltese = require('./src/slugifyMaltese.js');
 
@@ -351,6 +353,8 @@ module.exports = function (eleventyConfig) {
 	});
 
 	eleventyConfig.addFilter("prettifyMaltese", prettifyMaltese);
+
+	eleventyConfig.addFilter("prettifyMaltesePlain", prettifyMaltesePlain);
 
 	eleventyConfig.addFilter("prettifyNumbers", function prettifyNumbers(text, punctuation = String.fromCharCode(8201)) {
 		if (!text) return "XXXXXXprettifyNumbersXXX";

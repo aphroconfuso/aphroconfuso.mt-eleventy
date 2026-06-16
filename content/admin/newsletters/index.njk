@@ -1,0 +1,22 @@
+---
+pagination:
+  data: newsletters
+  size: 250
+  alias: newsletter
+eleventyExcludeFromCollections: true
+permalink: /admin/newsletters/index.html
+---
+{% extends 'layouts/admin.njk' %}
+
+{% block content %}
+	<main>
+		<section>
+			<ul>
+				{% for newsletter in newsletters %}
+					<li>
+						<a href="/admin/newsletters-html-{{ newsletter.subject | slugifyMaltese  }}/">{{ newsletter.subject | prettifyMaltese }}</a>
+					{% endfor %}
+			</ul>
+		</section>
+	</main>
+{% endblock %}

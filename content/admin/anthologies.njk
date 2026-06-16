@@ -1,0 +1,29 @@
+---
+pagination:
+  data: stories
+  size: 250
+  alias: story
+eleventyExcludeFromCollections: true
+permalink: /admin/antoloġiji/index.html
+---
+
+{% extends 'layouts/admin.njk' %}
+{% block content %}
+  <main>
+    <section>
+      <ul>
+        {% for story in stories %}
+          <li>
+            <strong>{{ story.title | prettifyMaltese | safe }}</strong>
+            <span style="color:#999;font-family:monospace;font-size:14px">{{ story.body | wordcount }}</span>
+          </li>
+        </li>
+      {% endfor %}
+    </ul>
+    <p>
+      {% for story in stories %}"{{ story.title }}", "{{ story.authorsString }}", "{{ story.wordcount }}", "{{ story.dateTimePublication }}"<br>
+        {% endfor %}
+      </p>
+    </textarea>
+  </section>
+</main>{% endblock %}

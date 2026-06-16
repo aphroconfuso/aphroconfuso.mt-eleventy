@@ -1,0 +1,157 @@
+---
+pagination:
+  data: newsletters
+  size: 1
+  alias: newsletter
+  addAllPagesToCollections: false
+permalink: /admin/newsletters-html-{{ newsletter.subject | slugifyMaltese  }}/index.html
+---
+
+{% set htmlOutput %}
+<a href="{{ newsletter.imageLink }}">
+  {% set slide = newsletter.image %}
+  <img src="https://aphroconfuso.mt/stampi/{{ slide.hash }}{{ slide.ext }}" width="{{ slide.width }}" height="{{ slide.height }}" alt="{{ newsletter.subject }}"></a>
+  {% for promo in newsletter.promos %}
+    <h1 style="color: #121212;">
+      <br>
+        {{ promo.title | prettifyMaltesePlain }}</h1>
+      {% if promo.subtitle %}
+        <h2 style="color: #121212;">{{ promo.subtitle | prettifyMaltesePlain }}</h2>
+      {% endif %}
+      <p style="color: #121212;">{{ promo.linkText | prettifyMaltesePlain | safe }}</p>
+    {% endfor %}
+    {% endset %}
+    {% block content %}
+      <!doctype html>
+      <html>
+        <head>
+          <title>[[ .Campaign.Subject ]]</title>
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+          <base target="_blank">
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Alegreya:wght@400 &display=swap');
+            .wrap,
+            body {
+              color: #121212;
+              background-color: #f9f9f6;
+              font-family: 'Alegreya', 'Times New Roman', serif;
+              font-size: 16px;
+              line-height: 1.4;
+              margin: 0;
+            }
+            h1 {
+              font-family: 'Alegreya', 'Times New Roman', serif;
+              font-size: "18px";
+              font-weight: 400;
+              line-height: 1.1;
+              color: "#121212" !important;
+            }
+            h2 {
+              font-family: 'Alegreya', 'Times New Roman', serif;
+              font-size: "16px";
+              font-weight: 400;
+              line-height: 1.1;
+              color: "#121212" !important;
+            }
+            a {
+              text-decoration: underline;
+            }
+            pre {
+              background: #f4f4f4f4;
+              padding: 2px;
+            }
+            table {
+              width: 100%;
+              border: 1px solid #ddd;
+            }
+            table td {
+              border-color: #ddd;
+              padding: 5px;
+            }
+            .wrap {
+              background-color: #f9f9f0;
+              padding: 30px;
+              max-width: 525px;
+              margin: 0 auto;
+              border-radius: 5px;
+            }
+            .button {
+              background: #0055d4;
+              border-radius: 3px;
+              text-decoration: none !important;
+              color: #fff !important;
+              font-weight: bold;
+              padding: 10px 30px;
+              display: inline-block;
+            }
+            .button:hover {
+              background: #111;
+            }
+            .footer {
+              text-align: center;
+              font-size: 12px;
+              color: #888;
+            }
+            .footer a {
+              color: #888;
+              margin-right: 5px;
+            }
+            .gutter {
+              padding: 30px;
+            }
+            img {
+              max-width: 100%;
+              height: auto;
+            }
+            p {
+              color: #121212;
+            }
+            a {
+              color: #0055d4;
+            }
+            a:hover {
+              color: #111;
+            }
+            @media screen and(max-width: 600px) {
+              .wrap {
+                max-width: auto;
+              }
+              .gutter {
+                padding: 10px;
+              }
+            }
+          </style>
+        </head>
+        <body style="background-color: #f9f9f0;font-family: 'Alegreya Sans', 'Helvetica Neue', 'Segoe UI', Helvetica,
+            sans-serif;font-size: 15px;line-height: 26px;margin: 0;color: #444;">
+          <div class="wrap" style="background-color: #f9f9f0;padding: 30px;max-width: 660px;margin: 0 auto;border-radius: 3px;">
+            <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid #817a74">
+              <img style="width: 80%;" src="https://aphroconfuso.mt/img/aphroconfuso-logo-transparent.png">
+            </div>
+            {{ htmlOutput | safe }}
+            <div style="text-align: center; margin: 30px auto 0 auto;">
+              <img src="https://aphroconfuso.mt/img/newsletter-deco-transparent.png">{{ TrackView }}
+            </div>
+          </div>
+          <div class="footer" style="text-align: center;font-size: 12px;color: #888;">
+            <p>
+              <span style="color:#888;font-size:16px">Aphroconfuso huwa organizzazzjoni mhux għall-profitt irreġistrata bin-numru
+                VO/2619.</span><br/>
+              <a href="[[ MessageURL ]]" style="color: #888;">[[ L.T "email.viewInBrowser" ]]</a>
+              <a href="[[ UnsubscribeURL ]]" style="color: #888;">[[ L.T "email.unsub" ]]</a>
+            </p>
+          </div>
+          <textarea style="width:90%;height:600px;margin:100px" id="html-code">
+            {{ htmlOutput | safe }}
+          </textarea>
+          <button id="copy-btn" style="position: fixed;top:10px;right:10px">ikkopja l-HTML</button>
+          <script>
+            document.getElementById('copy-btn').addEventListener('click', async () => {
+              const html = document.getElementById('html-code').value;
+              await navigator.clipboard.writeText(html);
+            });
+          </script>
+        </body>
+      </html>
+    {% endblock %}

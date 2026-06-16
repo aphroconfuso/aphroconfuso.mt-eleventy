@@ -1,8 +1,8 @@
+{% set generic = generics['masthead-accessibility'] %}
 ---
-permalink: /{{ accessibility.title | slugifyMaltese }}/index.html
+permalink: /{{ generic.title | slugifyMaltese }}/index.html
 ---
 {% extends 'layouts/base.njk' %}
-{% set generic = accessibility %}
 
 {% block head %}
 	{% include "_generic_head.njk" %}

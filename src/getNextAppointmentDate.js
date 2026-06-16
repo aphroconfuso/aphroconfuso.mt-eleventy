@@ -1,4 +1,5 @@
 const monthNames = require("./getMonthsInMaltese.js")();
+const sunnify = require("./sunnify.js");
 
 const getNextFirstMonday = () => {
   const now = new Date();
@@ -26,7 +27,7 @@ const getNextAppointmentDate = () => {
 	const nextFirstMondayDate = nextFirstMonday.getDate();
 	const nextFirstMondayMonth = nextFirstMonday.getMonth();
 	const nextFirstMondayYear = nextFirstMonday.getFullYear();
-	return `${ nextFirstMondayDate } ta’ ${ monthNames[nextFirstMondayMonth] } ${ nextFirstMondayYear }`;
+	return `${ sunnify(nextFirstMondayDate) } ta’ ${ monthNames[nextFirstMondayMonth] } ${ nextFirstMondayYear }`;
 }
 
 module.exports = getNextAppointmentDate;

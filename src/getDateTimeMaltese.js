@@ -1,40 +1,12 @@
 const monthNames = require("./getMonthsInMaltese.js")();
-
-// FIXME - f’nofsinhar vs fit-12 ta' Frar
-const sunnyfier = (number) => {
-	let sunnified = '';
-	const lastDigit = number % 10;
-	switch (lastDigit) {
-		case 0:
-		case 4:
-			sunnified = `fl-${ number }`;
-			break;
-		case 1:
-		case 2:
-		case 6:
-		case 7:
-			sunnified = `fis-${ number }`;
-			break;
-		case 3:
-		case 8:
-			sunnified = `fit-${ number }`;
-			break;
-		case 9:
-			sunnified = `fid-${ number }`;
-			break;
-		case 12:
-			sunnified = `f’${ number }`;
-			break;
-		default:
-			sunnified = `fil-${ number }`;
-	}
-	return sunnified;
-};
+const sunnify = require("./sunnify.js");
 
 const dateTimeMaltese = (date) => {
 
 	// Get the current date or today
-	const thisDate = !!date ? Date.parse(new Date().toLocaleString({timeZone: 'Europe/Malta'})) : new Date();
+	// const thisDate = !!date ? Date.parse(new Date(date).toLocaleString({timeZone: 'Europe/Malta'})) : new Date();
+	const thisDate = !!date ? new Date(date) : new Date();
+
 
 	// Get the current month and year
 	const nowHours = thisDate.getHours() % 12
@@ -44,7 +16,8 @@ const dateTimeMaltese = (date) => {
 	const nowYear = thisDate.getFullYear();
 
 	return {
-		full: `${ sunnyfier(nowDate) } ta’ ${ monthNames[nowMonth] } ${ nowYear } ${ sunnyfier(nowHours) }:${ thisDate.getMinutes() } ${ nowAmPm }`,
+		fullDate: `${ sunnify(nowDate) } ta’ ${ monthNames[nowMonth] } ${ nowYear }`,
+		fullDateTime: `${ sunnify(nowDate) } ta’ ${ monthNames[nowMonth] } ${ nowYear } f${ sunnify(nowHours) }:${ thisDate.getMinutes() } ${ nowAmPm }`,
 	};
 }
 
