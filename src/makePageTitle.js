@@ -5,7 +5,7 @@ module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subj
 	if (type === 'Ktieb_stampat' && title.startsWith('Antoloġija')) return `Kotba · ${title}`;
 	if (type === 'Ktieb_stampat') return `Kotba · ${title} · ${author}`;
 	return [
-		(type === 'Esej' || type === 'Poezija') && sequenceTitle,
+		(type === 'Esej' || type === 'Poezija' || type === 'Storja') && sequenceTitle,
 		subjectDate && fixSubjectDate(subjectDate) || sequenceNumber && (`#${ sequenceNumber }`),
 		sequenceEpisodeTitle || title ? `“${ title }”` : '',
 		type === 'Avveniment' || type === 'Poddata' ? 'ma’' : 'ta’',
@@ -16,3 +16,4 @@ module.exports = (title, author, translator, sequenceTitle, sequenceNumber, subj
 
 // When it's posssible to null diaryDate (subjectDate)
 //		subjectDate ? type : '',
+// line 8 could be type !== 'Djarju'
