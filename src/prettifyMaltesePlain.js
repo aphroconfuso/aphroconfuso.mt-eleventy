@@ -25,7 +25,6 @@ const prettifyMaltesePlain = (text) => {
 		.replace(/ ?— ?| - | -- /gm, String.fromCharCode(8202, 8212, 8202))
 		.replace(/ċ/gm, "MMXXc").replace(/ġ/gm, "MMXXg").replace(/ħ/gm, "MMXXh").replace(/ż/gm, "MMXXz").replace(/à/gm, "MMXXa")
 		.replace(/Ċ/gm, "MMXXC").replace(/Ġ/gm, "MMXXG").replace(/Ħ/gm, "MMXXH").replace(/Ż/gm, "MMXXZ").replace(/À/gm, "MMXXA")
-		.replace(/([ \'\"\,\.\?\!\’\“\”\—\>])([\w]{0,6}[lrstdnxz]|MMXXc|MMXXz)(-|’)(<em>)?(.+?)([ \,\.\?\!\’\“\”\—\<]|$)/gmi, "$1<l-m>$2$3$4$5</l-m>$6")
 		.replace(/( [\'\’])(i?l) /gmi, "$1$2&nbsp;")
 		.replace(/\'/gm, "’")
 		.replace(/ \"/gm, " “")
@@ -39,7 +38,6 @@ const prettifyMaltesePlain = (text) => {
 		.replace(/&amp;shy;/gm, '<wbr>')
 		.replace(/XXXDATETIMEFULLXXX/gm, dateTimeMaltese().full)
 		.replace(/XXXNEXTAPPOINTMENTDATEXXX/gm, getNextAppointmentDate())
-		.replace(/(=")<l-m>/gm, "$1");
 }
 
 module.exports = prettifyMaltesePlain;

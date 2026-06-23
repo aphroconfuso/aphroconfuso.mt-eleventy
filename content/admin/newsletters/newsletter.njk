@@ -6,6 +6,7 @@ pagination:
   addAllPagesToCollections: false
 permalink: /admin/newsletters-html-{{ newsletter.subject | slugifyMaltese  }}/index.html
 ---
+{% set key = newsletter.key %}
 
 {% set htmlOutput %}
 <a href="{{ newsletter.imageLink }}">
@@ -14,11 +15,11 @@ permalink: /admin/newsletters-html-{{ newsletter.subject | slugifyMaltese  }}/in
   {% for promo in newsletter.promos %}
     <h1 style="color: #121212;">
       <br>
-        {{ promo.title | prettifyMaltesePlain }}</h1>
+        {{ promo.title }}</h1>
       {% if promo.subtitle %}
-        <h2 style="color: #121212;">{{ promo.subtitle | prettifyMaltesePlain }}</h2>
+        <h2 style="color: #121212;">{{ promo.subtitle }}</h2>
       {% endif %}
-      <p style="color: #121212;">{{ promo.linkText | prettifyMaltesePlain | safe }}</p>
+      <p style="color: #121212;">{{ promo.linkText | safe }}</p>
     {% endfor %}
     {% endset %}
     {% block content %}
@@ -129,7 +130,7 @@ permalink: /admin/newsletters-html-{{ newsletter.subject | slugifyMaltese  }}/in
             <div style="text-align: center; margin-bottom: 30px; border-bottom: 1px solid #817a74">
               <img style="width: 80%;" src="https://aphroconfuso.mt/img/aphroconfuso-logo-transparent.png">
             </div>
-            {{ htmlOutput | safe }}
+            {{ htmlOutput | utmise(key) | safe }}
             <div style="text-align: center; margin: 30px auto 0 auto;">
               <img src="https://aphroconfuso.mt/img/newsletter-deco-transparent.png">{{ TrackView }}
             </div>
@@ -143,7 +144,7 @@ permalink: /admin/newsletters-html-{{ newsletter.subject | slugifyMaltese  }}/in
             </p>
           </div>
           <textarea style="width:90%;height:600px;margin:100px" id="html-code">
-            {{ htmlOutput | safe }}
+            {{ htmlOutput | utmise(key) | safe }}
           </textarea>
           <button id="copy-btn" style="position: fixed;top:10px;right:10px">ikkopja l-HTML</button>
           <script>

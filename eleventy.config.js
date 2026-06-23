@@ -23,8 +23,8 @@ const prettifyMaltesePlain  = require('./src/prettifyMaltesePlain.js');
 // const prettifyMaltese  = require('./src/prettifyMalteseDecorateNewsletterUrls.js');
 const shuffleArray  = require('./src/shuffleArray.js');
 const slugifyStringMaltese = require('./src/slugifyMaltese.js');
-
 const slack = SlackNotify(process.env.SLACK_WEBHOOK_URL);
+const utmise = require('./src/utmise.js');
 
 function deleteFoldersWithIndexHtml(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -527,6 +527,8 @@ module.exports = function (eleventyConfig) {
 	eleventyConfig.addFilter("wordcount", function wordcount(text) {
 		return stripTags(text || []).trim().split(/\s+/).length;
 	});
+
+	eleventyConfig.addFilter("utmise", utmise);
 
 	// Customize Markdown library settings:
 	eleventyConfig.amendLibrary("md", mdLib => {
