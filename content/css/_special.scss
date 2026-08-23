@@ -463,6 +463,20 @@ article {
 	}
 }
 
+@media all and (max-width: $laptop-breakpoint) {
+	// Ayrton Awwissu
+  .story-268 {
+		#grid-body p {
+        text-indent: -10px;
+				.fx1 {
+          display: inline-block;
+          width: 10px;
+          text-align: right;
+        }
+		}
+	}
+}
+
 .story-152 p.fx1 {
 	font-variant: lining-nums;
 }
@@ -529,6 +543,15 @@ article {
 	}
 	.text {
 		grid-column: span 2 / span 2;
+		margin-top: $body-margin-half;
+	}
+}
+
+.sponsors-ant {
+	border: 1px solid $lightest-brown;
+	display: flex;
+	padding: $body-margin-half;
+	.text {
 		margin-top: $body-margin-half;
 	}
 }
