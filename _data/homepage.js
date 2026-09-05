@@ -161,6 +161,13 @@ async function getHomepage() {
 			text: 11,
 			lengths: [2150, 1200],
 		},
+		Layout_9: {
+			diary: 3,
+			image: 3,
+			poem: 1,
+			text: 11,
+			lengths: [2150, 2150],
+		},
 	}
 
 	const layoutConfig = layouts[atts.layout];
