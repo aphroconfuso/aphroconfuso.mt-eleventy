@@ -52,7 +52,7 @@ $nifs:				#2e6fb2;
 $qarn:        #c72231;
 $saffo:       #a94b6f;
 $travi: 			#61752e;
-
+$ittri:					#5e2f3a;
 
 #ga-grid-body-book-image {
 	grid-area: ga-grid-body-book-image;
@@ -133,6 +133,7 @@ article.ktieb-stampat {
   &.story-151 { @include book-colour-full($essidr); }
   &.story-209 { @include book-colour-full($travi); }
   &.story-216 { @include book-colour-full($nifs); }
+  &.story-270 { @include book-colour-full($ittri); }
 
   .book-wrapper {
     margin-bottom: $body-margin;
