@@ -380,9 +380,9 @@ permalink: /{{ story.slug }}/index.html
 			{% endfor % #}
 
 			{# FIXME #}
-			{% if story.dateTimePublication >= "2025-05-01T00:00:00.000Z" and story.dateTimePublication < "2028-05-01T00:00:00.000Z"  %}
+			{# {% if story.dateTimePublication >= "2025-05-01T00:00:00.000Z" and story.dateTimePublication < "2028-05-01T00:00:00.000Z"  %}
 				{% include "_icom_sponsorship.njk" %}
-			{% endif %}
+			{% endif %} #}
 
 			<aside id="publication-history">
 				{{ story.publicationHistory | restrictHtml | prettifyMaltese | safe }}
