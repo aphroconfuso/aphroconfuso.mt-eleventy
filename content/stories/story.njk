@@ -185,10 +185,12 @@ permalink: /{{ story.slug }}/index.html
 			</section>
 			<section id="grid-body" data-pagefind-weight="7">
 				{% if story.type == 'Poezija' and not story.useProseStyling %}
+					{% if story.slideshow or story.singleImage %}
+						{% include "_slideshow.njk" %}
+						<p><br/></p>
+						{# FIXME #}
+					{% endif %}
 					<section class="body-text">
-						{% if story.slideshow or story.singleImage %}
-							{% include "_slideshow.njk" %}
-						{% endif %}
 						{{ story.body | prettifyMaltese | versify | safe }}
 					</section>
 				{% elif story.type == 'Poezija' and story.useProseStyling %}
@@ -206,7 +208,7 @@ permalink: /{{ story.slug }}/index.html
 					{% if story.slideshow or story.singleImage %}
 						{% include "_slideshow.njk" %}
 					{% endif %}
-					<section class="generic-body-text">
+					<section class="generic-body-text{% if story.useSeparators %} separated{% endif %}">
 						{{ story.body | sectionise | prettifyMaltese | endDotify | safe }}
 					</section>
 				{% elif story.type == 'Poddata' %}
@@ -376,6 +378,12 @@ permalink: /{{ story.slug }}/index.html
 			{{ author.attributes.firstName }}
 				{{ author.attributes.bioNote | prettifyMaltese | safe }}
 			{% endfor % #}
+
+			{# FIXME #}
+			{% if story.dateTimePublication >= "2025-05-01T00:00:00.000Z" and story.dateTimePublication < "2028-05-01T00:00:00.000Z"  %}
+				{% include "_icom_sponsorship.njk" %}
+			{% endif %}
+
 			<aside id="publication-history">
 				{{ story.publicationHistory | restrictHtml | prettifyMaltese | safe }}
 			</aside>
