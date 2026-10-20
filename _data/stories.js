@@ -19,6 +19,7 @@ const { imageData, linkedStoryData, linkedStoryDataWithImage, personData } = req
 
 let abecedaireArray = [];
 let almanacArray = [];
+// let podcastsArray = [];
 let wordcountArray = [];
 let cumulativeBody, cumulativeWordcount;
 
@@ -652,6 +653,10 @@ async function getAllStories() {
 			});
 		}
 
+		// if (atts.podcastUrl) {
+		// 	podcastsArray.push([reportingTitle, atts.podcastUrl]);
+		// }
+
 		// const normalisedBodyTextForAlmanac = atts.body.replace(/blockquote/g, "p").replace(/strong>|h\d>/g, "span>").replace(/ /gm, " ");
 		const normalisedBodyTextForAlmanac = stripTags(atts.body);
 
@@ -899,6 +904,9 @@ function hapaxPerItem(items) {
 	// Automate termini
 	// then make this .slice(0, 6);
 	spellcheckedStoriesFormatted[0].promotableStoriesHome = processPromos([...promotableStoriesHome].sort(() => Math.random() - 0.5).slice(0, 3));
+
+// console.log(podcastsArray, podcastsArray.length);
+
 
 	return spellcheckedStoriesFormatted;
 }

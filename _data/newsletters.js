@@ -62,7 +62,7 @@ async function getNewsletters() {
 				return {title, subtitle, linkText};
 			}
 			const storyAtts = promo.story && promo.story.data.attributes;
-			console.log('000', JSON.stringify(promo.story.data));
+			// console.log('000', JSON.stringify(promo.story.data));
 			const authorsType = storyAtts.authorsType && storyAtts.authorsType.replace(/\_.*/, '') || 'solo';
 			const { authors, authorsString } = storyAtts.authors.data.length && parseAuthors(storyAtts.authors.data, authorsType);
 			const translator = storyAtts.translators.data.length && storyAtts.translators.data[0].attributes;

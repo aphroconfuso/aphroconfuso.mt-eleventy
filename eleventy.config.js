@@ -21,7 +21,7 @@ const fixSubjectDate = require('./src/fixSubjectDate.js');
 const prettifyMaltese  = require('./src/prettifyMaltese.js');
 const prettifyMaltesePlain  = require('./src/prettifyMaltesePlain.js');
 // const prettifyMaltese  = require('./src/prettifyMalteseDecorateNewsletterUrls.js');
-const shuffleArray  = require('./src/shuffleArray.js');
+const shuffleBooksArray  = require('./src/shuffleBooksArray.js');
 const slugifyStringMaltese = require('./src/slugifyMaltese.js');
 const slack = SlackNotify(process.env.SLACK_WEBHOOK_URL);
 const utmise = require('./src/utmise.js');
@@ -57,6 +57,7 @@ module.exports = function (eleventyConfig) {
 	// Watch content images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{jpg,svg,webp,png,jpeg}");
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
+	eleventyConfig.watchIgnores.add("public/splide-4.1.3/**");
 
 	var slackError = slack.extend({
 		channel: '#events',
@@ -393,7 +394,7 @@ module.exports = function (eleventyConfig) {
 		return `${ number } ${ words[0] }`;
 	});
 
-	eleventyConfig.addFilter("shuffleArray", shuffleArray);
+	eleventyConfig.addFilter("shuffleBooksArray", shuffleBooksArray);
 
 	// REMOVE NBSP;
 	// REDO THIS ALGORITHM
