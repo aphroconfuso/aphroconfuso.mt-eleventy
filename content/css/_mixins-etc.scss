@@ -12,6 +12,15 @@
   text-overflow: ellipsis;
 }
 
+@mixin clamp-override($lines: 9) {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines !important;
+  display: -webkit-box;
+  line-clamp: $lines !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @mixin unclamp {
   -webkit-line-clamp: 999 !important;
   line-clamp: 999 !important;

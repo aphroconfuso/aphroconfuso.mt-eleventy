@@ -110,55 +110,55 @@ aside.promo-aside {
 @media all and (min-width: $laptop-breakpoint) {
 	a.promo > div.body-text > p {
 		&.clamp-20 {
-			@include clamp(20);
+			@include clamp-override(20);
 		}
 		&.clamp-19 {
-			@include clamp(19);
+			@include clamp-override(19);
 		}
 		&.clamp-18 {
-			@include clamp(18);
+			@include clamp-override(18);
 		}
 		&.clamp-17 {
-			@include clamp(17);
+			@include clamp-override(17);
 		}
 		&.clamp-16 {
-			@include clamp(16);
+			@include clamp-override(16);
 		}
 		&.clamp-15 {
-			@include clamp(15);
+			@include clamp-override(15);
 		}
 		&.clamp-14 {
-			@include clamp(14);
+			@include clamp-override(14);
 		}
 		&.clamp-13 {
-			@include clamp(13);
+			@include clamp-override(13);
 		}
 		&.clamp-12 {
-			@include clamp(12);
+			@include clamp-override(12);
 		}
 		&.clamp-11 {
-			@include clamp(11);
+			@include clamp-override(11);
 		}
 		&.clamp-10 {
-			@include clamp(10);
+			@include clamp-override(10);
 		}
 		&.clamp-9 {
-			@include clamp(9);
+			@include clamp-override(9);
 		}
 		&.clamp-8 {
-			@include clamp(8);
+			@include clamp-override(8);
 		}
 		&.clamp-7 {
-			@include clamp(7);
+			@include clamp-override(7);
 		}
 		&.clamp-6 {
-			@include clamp(6);
+			@include clamp-override(6);
 		}
 		&.clamp-5 {
-			@include clamp(5);
+			@include clamp-override(5);
 		}
 		&.clamp-4 {
-			@include clamp(4);
+			@include clamp-override(4);
 		}
 	}
 }
