@@ -1,4 +1,4 @@
-const toRoman = (num, uppercase = true) => {
+const toRoman = (num, uppercase = false) => {
     const numerals = [
         [1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'],
         [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'],

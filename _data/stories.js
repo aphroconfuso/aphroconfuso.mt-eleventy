@@ -219,6 +219,10 @@ async function getAllStories() {
 										pages
 										price
 										published
+										nationalBookPrizeCategory
+										nationalBookPrizePosition
+										nationalBookPrizeYear
+										ownShopUrl
 									}
 									collections (
 				            publicationState: ${ fetchStatus },
@@ -518,8 +522,6 @@ async function getAllStories() {
 		// 	return word.replace(/czMXc/gm, "ċ").replace(/gzMXg/gm, "ġ").replace(/hzMXh/gm, "ħ").replace(/zzMXz/gm, "ż").replace(/azMXa/gm, "à");
 		// });
 
-
-
 		const vocabulary = findUniqueWords(atts.body);
 		const wordcount = splitText(atts.body).length
 		const isBook = atts.type === 'Ktieb_stampat';
@@ -527,7 +529,6 @@ async function getAllStories() {
 		const bookSequence = isBook && atts.sequenceEpisodeNumber;
 		const isNotebook = isBook && atts.sequenceEpisodeNumber > 1000;
 		const notebookSequence = isNotebook && romanNumerals(bookSequence - 1000);
-
 
 		const processedStory = {
 			appointment: atts.appointment,
@@ -549,6 +550,11 @@ async function getAllStories() {
 			bookPromos: bookPromoFormatted,
 			bookSeason: isBook && !atts.isBook?.published && `${issueSeason} ${issueYear}`,
 			bookSequence,
+			bookNationalBookPrizeCategory: isBook && atts.isBook?.nationalBookPrizeCategory?.replace("_", " "),
+			bookNationalBookPrizePosition: isBook && atts.isBook?.nationalBookPrizePosition?.replace("Rebbieh", "Rebbieħ"),
+			bookNationalBookPrizeYear: isBook && atts.isBook?.nationalBookPrizeYear,
+			bookOwnShopUrl: isBook && atts.isBook?.ownShopUrl,
+			bookNationalBookPrizeSticker: isBook && atts.isBook?.nationalBookPrizePosition && "/img/premju-" + atts.isBook?.nationalBookPrizePosition.toLowerCase() + ".png",
 			coda: atts.coda,
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,
@@ -567,7 +573,7 @@ async function getAllStories() {
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,
 			isBook: !!isBook,
-			isNotebook,
+			isNotebook: !!isNotebook,
 			isSequenceEpisode: !!sequenceData,
 			issueMonth,
 			issueMonthYear,

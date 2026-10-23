@@ -113,24 +113,6 @@ permalink: /{{ story.slug }}/index.html
 			{% endfor %}
 		</header>
 		<div class="container">
-			{% if story.type == 'Ktieb_stampat' %}
-				<section id="ga-grid-body-book-image" class="generic-body-text">
-					{% if story.promoImageMobile %}
-						{% set slide = story.promoImageMobile.attributes.formats %}
-						{% set slideMobile = slide %}
-						{% set imageCrop = 'uncropped' %}
-						<div class="book-wrapper">
-							{% include "_image.njk" %}
-						</div>
-					{% endif %}
-					{% if story.bookIsbn and story.bookPages %}
-						<p>Aphroconfuso {{ story.bookSequence }}<br>
-						<span class="sc">isbn</span> {{ story.bookIsbn }}<br>
-						{{ story.bookPages | numberify(['paġna', 'paġni']) }}</p>
-					{% endif %}
-				</section>
-			{% endif %}
-
 			{% set imageBorderColour = story.imageBorderColour %}
 			<section id="grid-max-panel-right-top">
 				{% if story.type == 'Ktieb_stampat' %}
@@ -181,6 +163,33 @@ permalink: /{{ story.slug }}/index.html
 				</div>
 			</section>
 			<section id="grid-body" data-pagefind-weight="7">
+				{% if story.type == 'Ktieb_stampat' %}
+					<section id="ga-grid-body-book-image" class="generic-body-text">
+						{% if story.promoImageMobile %}
+							{% set slide = story.promoImageMobile.attributes.formats %}
+							{% set slideMobile = slide %}
+							{% set imageCrop = 'uncropped' %}
+							<div class="book-wrapper">
+								{% if story.bookNationalBookPrizePosition %}
+									<img src="{{ story.bookNationalBookPrizeSticker }}" class="prize">
+								{% endif %}
+								{% include "_image.njk" %}
+							</div>
+						{% endif %}
+						{% if story.bookIsbn and story.bookPages %}
+							<p>Aphroconfuso {{ story.bookSequence }}<br>
+							<span class="sc">isbn</span> {{ story.bookIsbn }}<br>
+							{{ story.bookPages | numberify(['paġna', 'paġni']) }}</p>
+						{% endif %}
+						{% if story.bookNationalBookPrizePosition %}
+							<p><em>{{ story.title }}</em> huwa {{ story.bookNationalBookPrizePosition }} fil-kategorija {{ story.bookNationalBookPrizeCategory }} tal-Premju Nazzjonali tal-Ktieb {{ story.bookNationalBookPrizeYear }}.</p>
+						{% endif %}
+						{% if story.isNotebook %}
+							<p>Aphroconfuso <em>{{ story.notebookSequence }}</em>.<br>
+							notebook, {{ story.bookPages | numberify(['paġna mhux irrigata', 'paġni mhux irrigati']) }}</p>
+						{% endif %}
+					</section>
+				{% endif %}
 				{% if story.type == 'Poezija' and not story.useProseStyling %}
 					{% if story.slideshow or story.singleImage %}
 						{% include "_slideshow.njk" %}
@@ -289,7 +298,6 @@ permalink: /{{ story.slug }}/index.html
 				{% endif %}
 			</section>
 			{% set imageBorderColour = null %}
-
 			<section id="grid-max-panel-left-top">
 				{% for book in story.booksMentioned %}
 					{% if loop.first %}
@@ -380,10 +388,9 @@ permalink: /{{ story.slug }}/index.html
 				{{ story.publicationHistory | restrictHtml | prettifyMaltese | safe }}
 			</aside>
 
-			{# FIXME #}
-			{# {% if story.dateTimePublication >= "2025-05-01T00:00:00.000Z" and story.dateTimePublication < "2028-05-01T00:00:00.000Z"  %}
+			{% if story.dateTimePublication >= "2025-05-01T00:00:00.000Z" and story.dateTimePublication < "2028-05-01T00:00:00.000Z"  %}
 				{% include "_icom_sponsorship.njk" %}
-			{% endif %} #}
+			{% endif %}
 		</section>
 		<section id="grid-max-panel-right-bottom">
 			{# {% for storycollection in story.storycollections %}

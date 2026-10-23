@@ -10,15 +10,12 @@
       background-color: $colour;
     }
   }
-
-  .book-wrapper {
-    img {
-      box-shadow:
-        1px 0 2px #{$colour}33,
-        0 4px 4px #{$colour}40,
-        4px 0 4px #{$colour}40,
-        0 -4px 4px #{$colour}40;
-    }
+  .book-wrapper img {
+		box-shadow:
+			1px 0 2px #{$colour}33,
+			0 4px 4px #{$colour}40,
+			4px 0 4px #{$colour}40,
+			0 -4px 4px #{$colour}40;
   }
 }
 
@@ -110,17 +107,18 @@ article.ktieb-stampat {
 // Article styles
 article.ktieb-stampat {
   &.content {
+    border-bottom-color: $podcast-beige;
     h1 {
       color: $light-brown;
     }
-
-    border-bottom-color: $podcast-beige;
-
     h5,
     h6,
     p.break {
       margin-top: $body-margin * 1.5;
     }
+		.end-dot {
+	    border-bottom-color: $podcast-beige;
+		}
   }
 
   figcaption {
@@ -408,4 +406,30 @@ article.story {
     top: 5rem;
     position: absolute;
 	}
+}
+
+.notebook {
+	aspect-ratio: 13/20;
+	border: 1px solid $lightest-brown;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	.book-wrapper {
+		margin: $body-margin;
+	}
+}
+
+.book-wrapper img.prize {
+	bottom: 17%;
+	box-shadow: none !important;
+	filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+	position: absolute;
+	right: -25px;
+	transform: rotate(5deg);
+	width: 150px;
+	z-index: 1;
+}
+
+#ga-grid-body-book-image {
+	margin-bottom: $body-margin;
 }
