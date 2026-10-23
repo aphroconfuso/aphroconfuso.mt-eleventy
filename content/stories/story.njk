@@ -170,9 +170,7 @@ permalink: /{{ story.slug }}/index.html
 							{% set slideMobile = slide %}
 							{% set imageCrop = 'uncropped' %}
 							<div class="book-wrapper">
-								{% if story.bookNationalBookPrizePosition %}
-									<img src="{{ story.bookNationalBookPrizeSticker }}" class="prize">
-								{% endif %}
+								{% include "_book_prize.njk" %}
 								{% include "_image.njk" %}
 							</div>
 						{% endif %}

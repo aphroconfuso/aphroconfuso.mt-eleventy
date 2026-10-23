@@ -424,7 +424,7 @@ article.story {
 	box-shadow: none !important;
 	filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
 	position: absolute;
-	right: -25px;
+	left: 65%;
 	transform: rotate(5deg);
 	width: 150px;
 	z-index: 1;
@@ -432,4 +432,12 @@ article.story {
 
 #ga-grid-body-book-image {
 	margin-bottom: $body-margin;
+}
+
+.books-list img.prize {
+	width: 50% !important;
+}
+
+article.books img.prize {
+	width: 40% !important;
 }
