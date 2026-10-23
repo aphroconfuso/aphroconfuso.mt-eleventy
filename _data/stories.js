@@ -11,6 +11,7 @@ const makeTitleSlug = require("../src/makeTitleSlug.js");
 const parseAuthors = require("../src/parseAuthors.js");
 const processCollections = require("../src/processCollections.js");
 const processPromos = require("../src/processPromos.js");
+const romanNumerals = require("../src/romanNumerals.js");
 const slugifyStringMaltese = require("../src/slugifyMaltese.js");
 
 const getReads = require('../src/getReads.js');
@@ -518,10 +519,15 @@ async function getAllStories() {
 		// });
 
 
-// Example usage
+
 		const vocabulary = findUniqueWords(atts.body);
 		const wordcount = splitText(atts.body).length
 		const isBook = atts.type === 'Ktieb_stampat';
+
+		const bookSequence = isBook && atts.sequenceEpisodeNumber;
+		const isNotebook = isBook && atts.sequenceEpisodeNumber > 1000;
+		const notebookSequence = isNotebook && romanNumerals(bookSequence - 1000);
+
 
 		const processedStory = {
 			appointment: atts.appointment,
@@ -542,6 +548,7 @@ async function getAllStories() {
 			bookPrice: isBook && atts.isBook?.price,
 			bookPromos: bookPromoFormatted,
 			bookSeason: isBook && !atts.isBook?.published && `${issueSeason} ${issueYear}`,
+			bookSequence,
 			coda: atts.coda,
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
 			dateTimePublication: atts.dateTimePublication,
@@ -560,6 +567,7 @@ async function getAllStories() {
 			imagesPositionText: atts.imagesPositionText,
 			introduction: atts.introduction,
 			isBook: !!isBook,
+			isNotebook,
 			isSequenceEpisode: !!sequenceData,
 			issueMonth,
 			issueMonthYear,
@@ -574,6 +582,7 @@ async function getAllStories() {
 			metaTitle: displayTitle,
 			moreToCome: atts.moreToCome,
 			newsletterStyle: atts.type === 'Djarju' ? 'sidebar-entry' : 'sidebar-part',
+			notebookSequence,
 			podcastLengthMinutes: atts.podcastLengthMinutes,
 			podcastDate: atts.podcastDate,
 			podcastNote: atts.podcastNote,

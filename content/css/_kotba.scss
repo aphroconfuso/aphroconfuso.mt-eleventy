@@ -52,7 +52,11 @@ $nifs:				#2e6fb2;
 $qarn:        #c72231;
 $saffo:       #a94b6f;
 $travi: 			#61752e;
-$ittri:					#5e2f3a;
+$ittri:				#5e2f3a;
+
+$noti-i: 			#3c454c;
+$noti-ii:			#c14629;
+
 
 #ga-grid-body-book-image {
 	grid-area: ga-grid-body-book-image;
@@ -135,6 +139,9 @@ article.ktieb-stampat {
   &.story-216 { @include book-colour-full($nifs); }
   &.story-270 { @include book-colour-full($ittri); }
 
+	&.story-286 { @include book-colour($noti-i); }
+	&.story-287 { @include book-colour($noti-ii); }
+
   .book-wrapper {
     margin-bottom: $body-margin;
   }
@@ -183,6 +190,10 @@ article.ktieb-stampat {
 .story-209 { @include book-colour($travi); }
 .story-216 { @include book-colour($nifs); }
 .story-270 { @include book-colour($ittri); }
+
+.story-286 { @include book-colour($noti-i); }
+.story-287 { @include book-colour($noti-ii); }
+
 
 // Pre-release layout
 .pre-release #grid-body {
@@ -370,4 +381,31 @@ article.story {
       margin-bottom: $body-margin-quarter;
     }
   }
+}
+
+.notebook-2d {
+	border: 1px solid $lightest-brown;
+	padding: 1.9rem;
+	overflow: hidden;
+	height: 97.5%;
+	.book-wrapper {
+			transform: rotate(20deg);
+			top: 5rem;
+			position: absolute;
+			left: 1rem;
+		}
+}
+
+.notebook-3d {
+	border: 1px solid $lightest-brown;
+	padding: 1.9rem;
+	overflow: hidden;
+	height: 97.5%;
+	perspective: 800px;
+	.book-wrapper {
+    transform: rotateX(35.5deg) rotateY(3deg);
+    transform-origin: top left;
+    top: 5rem;
+    position: absolute;
+	}
 }

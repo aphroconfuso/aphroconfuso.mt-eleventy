@@ -53,7 +53,6 @@ permalink: /{{ story.slug }}/index.html
 						{% endif %}
 					{% elif story.type == 'Ktieb_stampat' %}
 						<a href="/kotba/" class="generic-title">Kotba</a>
-						{% if story.bookSeason %} · <span class="subject-date">{{ story.bookSeason }}</span>{% endif %}
 					{% elif story.type == 'Poddata' %}
 						<a href="/podcast/" class="generic-title">Poddata</a>
 						{% if story.subjectDate %}
@@ -67,6 +66,7 @@ permalink: /{{ story.slug }}/index.html
 						<a href="/{{ story.issueMonthYear | slugifyMaltese }}/">{{ story.issueMonthYear | fixMonthMaltese }}</a>
 					{% endif %}
 				</li>
+				{% if story.type == 'Ktieb_stampat' and story.bookSeason %} · <span class="subject-date">{{ story.bookSeason }}</span>{% endif %}
 				{% for storycollection in story.storycollections %}
 					<li class="header-label collection-slug collection-{{ storycollection.id }}">
 						<a href="/{{ storycollection.title | slugifyMaltese }}/">{{ storycollection.title }}</a>
@@ -84,7 +84,7 @@ permalink: /{{ story.slug }}/index.html
 					{% else %}
 						{{ story.title | prettifyMaltese | safe }}
 					{% endif %}
-					{% if story.sequenceEpisodeNumber %}
+					{% if story.sequenceEpisodeNumber and isBook == false %}
 						<span class="episode-number">#{{ story.sequenceEpisodeNumber }}</span>
 					{% endif %}
 					{% if story.subtitle %}
@@ -123,13 +123,10 @@ permalink: /{{ story.slug }}/index.html
 							{% include "_image.njk" %}
 						</div>
 					{% endif %}
-					{% if story.bookIsbn %}
-						<p>
-							<strong>
-								<span class="sc">isbn</span>
-								{{ story.bookIsbn }}</strong>{{ "," if story.bookPages }}
-							{{ story.bookPages | numberify(['paġna', 'paġni']) if story.bookPages }}.
-						</p>
+					{% if story.bookIsbn and story.bookPages %}
+						<p>Aphroconfuso {{ story.bookSequence }}<br>
+						<span class="sc">isbn</span> {{ story.bookIsbn }}<br>
+						{{ story.bookPages | numberify(['paġna', 'paġni']) }}</p>
 					{% endif %}
 				</section>
 			{% endif %}
@@ -379,14 +376,14 @@ permalink: /{{ story.slug }}/index.html
 				{{ author.attributes.bioNote | prettifyMaltese | safe }}
 			{% endfor % #}
 
+			<aside id="publication-history">
+				{{ story.publicationHistory | restrictHtml | prettifyMaltese | safe }}
+			</aside>
+
 			{# FIXME #}
 			{# {% if story.dateTimePublication >= "2025-05-01T00:00:00.000Z" and story.dateTimePublication < "2028-05-01T00:00:00.000Z"  %}
 				{% include "_icom_sponsorship.njk" %}
 			{% endif %} #}
-
-			<aside id="publication-history">
-				{{ story.publicationHistory | restrictHtml | prettifyMaltese | safe }}
-			</aside>
 		</section>
 		<section id="grid-max-panel-right-bottom">
 			{# {% for storycollection in story.storycollections %}

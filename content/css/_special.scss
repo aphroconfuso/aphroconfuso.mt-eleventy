@@ -548,10 +548,16 @@ article {
 }
 
 .sponsors-ant {
-	border: 1px solid $lightest-brown;
+	background-color: $lighter-brown;
 	display: flex;
-	padding: $body-margin-half;
+	flex-direction: column;
+	padding: $body-margin;
+	img {
+		width:160px;
+	}
 	.text {
+		color: var(--paper);
+		font-size: $font-size-furniture;
 		margin-top: $body-margin-half;
 	}
 }
