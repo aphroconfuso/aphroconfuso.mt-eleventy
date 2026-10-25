@@ -1,4 +1,4 @@
 {% set book = promo or story %}
-{% if book.bookNationalBookPrizePosition %}
+{% if showBookPrize and book.bookNationalBookPrizePosition %}
   <img src="{{ book.bookNationalBookPrizeSticker }}" class="prize">
-  {% endif %}
+{% endif %}

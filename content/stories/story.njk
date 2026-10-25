@@ -386,9 +386,7 @@ permalink: /{{ story.slug }}/index.html
 				{{ story.publicationHistory | restrictHtml | prettifyMaltese | safe }}
 			</aside>
 
-			{% if story.dateTimePublication >= "2025-05-01T00:00:00.000Z" and story.dateTimePublication < "2028-05-01T00:00:00.000Z"  %}
-				{% include "_icom_sponsorship.njk" %}
-			{% endif %}
+			{% include "_sponsorships.njk" %}
 		</section>
 		<section id="grid-max-panel-right-bottom">
 			{# {% for storycollection in story.storycollections %}
@@ -461,6 +459,7 @@ permalink: /{{ story.slug }}/index.html
 <aside class="books-list promos-container" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">
 	{% set endBookPromos = true %}
 	{% set useSquare = false %}
+	{% set showBookPrize = false %}
 	{% include '_our_books_list.njk' %}
 </aside>
 <aside class="promos-container end-promos" data-track-content data-content-name="Promos tal-qiegħ" data-content-piece="{{ story.reportingTitle }}">

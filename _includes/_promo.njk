@@ -3,7 +3,7 @@
 {% else %}{% set isEpisode = '' %}
 {% endif %}
 <li {% if promo.sequenceEpisodeTitle %} class="multiple-episodes episode-{{ promo.sequenceEpisodeNumber }}"{% endif %}>
-	<a class="promo {{ collectionId }} {{ promo.issueMonth | slugify }} promo-{{ promo.type | slugify }} sequence-{{ promo.sequenceId }} story-{{ promo.id }}{{ isEpisode }}{% if promo.isNotebook %} notebook{% endif %}" href="/{{ promo.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: {{ promoFrom | escapeQuote }}', 'għal: {{ promoTo | escapeQuote }}', {{ loop.index }}]);">
+	<a class="promo {{ collectionId }} {{ promo.issueMonth | slugify }} promo-{{ promo.type | slugify }} sequence-{{ promo.sequenceId }} story-{{ promo.id }}{{ isEpisode }}{% if promo.isNotebook %} notebook{% endif %}{% if promo.podcastUrl %} audio-promo{% endif %}" href="/{{ promo.slug }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: {{ promoFrom | escapeQuote }}', 'għal: {{ promoTo | escapeQuote }}', {{ loop.index }}]);">
 		{% if promo.type == 'Ktieb_stampat' %}
 			{% if promo.promoImageMobile %}
 				{% set slide = promo.promoImageMobile.attributes.formats %}

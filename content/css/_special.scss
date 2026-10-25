@@ -512,6 +512,14 @@ article {
   }
 }
 
+.story-288 {
+	#body-text {
+		p {
+			padding-left: $body-margin;
+		}
+	}
+}
+
 // .sponsors {
 // 	img {
 // 		// -webkit-filter: contrast(0) hue-rotate(190deg);
@@ -520,37 +528,38 @@ article {
 // 	}
 // }
 
-.sponsors {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-	margin-right: $body-margin;
-	.acm-logo, .aps-logo {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.acm-logo {
-		img {
-			width: 70px;
-		}
-	}
-	.aps-logo {
-		img {
-			width: 150px;
-		}
-		padding-right: $body-margin-double;
-	}
-	.text {
-		grid-column: span 2 / span 2;
-		margin-top: $body-margin-half;
-	}
-}
+// .sponsors {
+// 	display: grid;
+// 	grid-template-columns: repeat(2, 1fr);
+// 	grid-template-rows: repeat(2, 1fr);
+// 	margin-right: $body-margin;
+// 	.acm-logo, .aps-logo {
+// 		display: flex;
+// 		align-items: center;
+// 		justify-content: center;
+// 	}
+// 	.acm-logo {
+// 		img {
+// 			width: 70px;
+// 		}
+// 	}
+// 	.aps-logo {
+// 		img {
+// 			width: 150px;
+// 		}
+// 		padding-right: $body-margin-double;
+// 	}
+// 	.text {
+// 		grid-column: span 2 / span 2;
+// 		margin-top: $body-margin-half;
+// 	}
+// }
 
-.sponsors-ant {
+#sponsors {
 	background-color: $lighter-brown;
 	display: flex;
 	flex-direction: column;
+	margin-top: $body-margin-half;
 	padding: $body-margin;
 	img {
 		width:160px;

@@ -3,6 +3,6 @@
 		<a href="/kotba/">Il-Kotba ta’ Aphroconfuso</a>
 	</li>
 </nav>
-{% set promos = stories | selectattr("isBook") | shuffleBooksArray(7, 2) %}
+{% set promos = stories | selectattr("isBook") | rejectattr("isNotebook") | shuffleBooksArray(7, 2) %}
 {% set omitAside = true %}
 {% include "_promo_list.njk" %}

@@ -127,6 +127,19 @@ async function getAllStories() {
 										end
 										full
 									}
+									sponsorhips (
+				            publicationState: ${ fetchStatus },
+									) {
+										data {
+											attributes {
+												title
+												body
+												logo {
+													${imageData}
+												}
+											}
+										}
+									}
 									authors (
 				            publicationState: ${ fetchStatus },
 									) {
@@ -346,6 +359,23 @@ async function getAllStories() {
 		});
 	}
 
+	const processSponsorships = (sponsorshipsData) => {
+		return sponsorshipsData.map((sponsorship) => {
+			const sponsorshipAtts = sponsorship.attributes;
+			console.log('*', sponsorshipAtts.title);
+
+			const logo = sponsorshipAtts.logo.data.attributes.formats.thumbnail;
+			const logoSrc = logo.hash + logo.ext;
+
+			return {
+				title: sponsorshipAtts.title,
+				body: sponsorshipAtts.body,
+				logoSrc,
+				altText: sponsorshipAtts.logo.data.attributes.alternativeText
+			};
+		});
+	}
+
 	const promotableStories = stories.filter(({ attributes: { type } }) => ['Esej', 'Storja', 'Djarju', 'Terminu'].includes(type));
 	const promotablePoems = stories.filter(({ attributes: { type } }) => ['Poezija'].includes(type));
 
@@ -383,6 +413,7 @@ async function getAllStories() {
 		const cleanedBody = atts.body.replace(/ data-.*?=".*?"/gmi, "").replace(/fx-(\d)/gmi, "fx$1");
 		const anchoredBody = cleanedBody.replace(/(<h[56])>(.*?)(<\/h[56]>)/gmi, (full, openingTag, headline, closingTag) => `<hr>${ openingTag } id="${ slugifyStringMaltese(headline) }">${ headline }${ closingTag }`)
 		const booksMentioned = !!atts.booksMentioned.data.length && processBooksMentioned(atts.booksMentioned.data, atts.prominentMentions);
+		const sponsorships = !!atts.sponsorhips.data.length && processSponsorships(atts.sponsorhips.data);
 		const authorsType = atts.authorsType && atts.authorsType.replace(/\_.*/, '') || 'solo';
 		let {authors, authorForename, authorsString, authorPronoun} = parseAuthors(atts.authors.data, authorsType);
 
@@ -553,7 +584,7 @@ async function getAllStories() {
 			bookNationalBookPrizeCategory: isBook && atts.isBook?.nationalBookPrizeCategory?.replace("_", " "),
 			bookNationalBookPrizePosition: isBook && atts.isBook?.nationalBookPrizePosition?.replace("Rebbieh", "Rebbieħ"),
 			bookNationalBookPrizeYear: isBook && atts.isBook?.nationalBookPrizeYear,
-			bookOwnShopUrl: isBook && atts.isBook?.ownShopUrl,
+			bookOwnShopUrl: isBook && (atts.isBook?.ownShopUrl || "https://kotba.aphroconfuso.mt"),
 			bookNationalBookPrizeSticker: isBook && atts.isBook?.nationalBookPrizePosition && "/img/premju-" + atts.isBook?.nationalBookPrizePosition.toLowerCase() + ".png",
 			coda: atts.coda,
 			cssClass: atts.type === 'Poezija' ? 'body-text poetry' : 'body-text',
@@ -616,6 +647,7 @@ async function getAllStories() {
 			socialImageAlt: promoImageFormats.social && atts.promoImage.data.attributes.alternativeText,
 			socialImageFormats: promoImageFormats,
 			sortTitle: makeSortableTitle(title + atts.sequenceEpisodeNumber),
+			sponsorships,
 			storycollections,
 			subjectDate: atts.diaryDate,
 			subtitle,
@@ -769,9 +801,9 @@ async function getAllStories() {
 				audioPlayers.push({
 					authorName: promo.translatorForename || promo.authorForename,
 					highlight: promo.audioHighlight,
-					podcastLengthMinutes: promo.audioLengthMinutes || promo.podcastLengthMinutes,
-					podcastNote: promo.note || promo.podcastNote,
 					issueMonth: promo.issueMonth,
+					podcastLengthMinutes: promo.audioLengthMinutes || promo.podcastLengthMinutes,
+					podcastNote: promo.note || promo.audioNote || promo.podcastNote,
 					putAfterThisText: promo.putAfterThisText,
 					reads: getReads(promo.authorPronoun),
 					reportingTitle: promo.reportingTitle,

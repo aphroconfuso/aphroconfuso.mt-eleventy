@@ -55,7 +55,7 @@ permalink: /index.html
 				{% else %}{% set isEpisode = '' %}
 				{% endif %}
 				<div class="ga-{{ loop.index }}">
-					<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+					<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}{% if promo.podcastUrl %} audio-promo{% endif %}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% set omitEpisodeNumber = true %}
 						{# {% if loop.first %}{% set showEpisodeTitle = true %}{% else %}{% set showEpisodeTitle = false %}{% endif %} #}
 						{% include "_promo_header.njk" %}
@@ -82,7 +82,7 @@ permalink: /index.html
 
 				<div class="term-promos">
 					{% for promo in homepage.promos | selectattr("isTypeTerm") %}
-						<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+						<a class="{{ promo.issueMonth | slugify }} promo promo-plain promo-{{ promo.type | slugify }} story-{{ promo.id }}{{ isEpisode }}{% if promo.podcastUrl %} audio-promo{% endif %}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 							{% set omitEpisodeNumber = true %}
 							{% include "_promo_header.njk" %}
 							<div class="{{ promo.cssClass }}">
@@ -99,7 +99,7 @@ permalink: /index.html
 				{% else %}{% set isEpisode = '' %}
 				{% endif %}
 				<div class="ga-image-{{ loop.index }}">
-					<a class="{{ promo.issueMonth | slugify }} promo promo-picture-1 story-{{ promo.id }}{{ isEpisode }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+					<a class="{{ promo.issueMonth | slugify }} promo promo-picture-1 story-{{ promo.id }}{{ isEpisode }}{% if promo.podcastUrl %} audio-promo{% endif %}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% set showEpisodeTitle = true %}
 						{% set omitEpisodeNumber = true %}
 						{% include "_promo_header.njk" %}
@@ -120,7 +120,7 @@ permalink: /index.html
 
 			{% for promo in homepage.poetryPromos %}
 				<div class="ga-poem-{{ loop.index }}">
-					<a class="{{ promo.issueMonth | slugify }} promo promo-poetry story-{{ promo.id }}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
+					<a class="{{ promo.issueMonth | slugify }} promo promo-poetry story-{{ promo.id }}{% if promo.podcastUrl %} audio-promo{% endif %}" href="/{{ promo.slug | slugifyMaltese }}/" onclick="analytics(['trackEvent', 'Promo', 'minn: Homepage', 'għal: {{ promo.reportingTitle | escapeQuote }}', {{ loop.index }}]);">
 						{% include "_promo_header.njk" %}
 						<div class="{{ promo.cssClass }}">
 							<p{% if promo.blurbLines %} class="clamp-{{ promo.blurbLines }}"{% endif %}>
@@ -170,6 +170,7 @@ permalink: /index.html
 			{% set bookPromoId = promos[0].id %}
 		</div>
 		<aside class="ga-books books-list">
+			{% set showBookPrize = false %}
 			{% include '_our_books_list.njk' %}
 		</aside>
 	</div>

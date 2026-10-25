@@ -1,0 +1,16 @@
+{% for sponsorship in story.sponsorships %}
+  {% if loop.first %}
+    <section id="sponsors">
+    {% endif %}
+    <div class="logo">
+      <img src="{{ metadata.settings.imagesUrl }}{{ sponsorship.logoSrc }}" alt="{{ sponsorship.altText }}"></div>
+      <div
+        class="text">
+        {# Deliberately not prettified, to allow hyphenation in a tight space. #}
+        {{ sponsorship.body | safe }}
+      </div>
+    </figure>
+    {% if loop.last %}
+    </section>
+  {% endif %}
+{% endfor %}

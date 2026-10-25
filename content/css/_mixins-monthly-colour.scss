@@ -27,13 +27,8 @@
     }
   }
   .end-dot {
-    color: $colour;
     background-color: $colour;
   }
-	// .sponsors-ant {
-  //   color: var(--paper);
-  //   background-color: $colour;
-	// }
 	.body-text mark {
 		background: lighten(complement($colour), $faint);
 		border: 1px solid lighten(complement($colour), $lightest);

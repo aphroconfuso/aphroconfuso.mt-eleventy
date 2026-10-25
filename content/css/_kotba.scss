@@ -107,9 +107,9 @@ article.ktieb-stampat {
 // Article styles
 article.ktieb-stampat {
   &.content {
-    border-bottom-color: $podcast-beige;
+    border-bottom-color: $lighter-brown !important;
     h1 {
-      color: $light-brown;
+      color: $lighter-brown;
     }
     h5,
     h6,
@@ -117,7 +117,7 @@ article.ktieb-stampat {
       margin-top: $body-margin * 1.5;
     }
 		.end-dot {
-	    border-bottom-color: $podcast-beige;
+	    background-color: $lighter-brown !important;
 		}
   }
 
@@ -228,11 +228,12 @@ article.ktieb-stampat {
     border-radius: 0.25rem;
     color: var(--paper);
     display: inline-block;
-    font-family: $sans;
-    font-size: 1.4rem;
-    margin-top: $body-margin-half;
+    font-family: "Alegreya Sans SC";
+    font-size: $font-size-smallcaps;
+    font-variant: small-caps;
+    // margin-top: $body-margin-half;
     padding: $body-margin-quarter $body-margin-half;
-    text-transform: uppercase;
+    text-transform: lowercase;
 
     &:hover {
       background-color: $light-brown;
@@ -420,11 +421,11 @@ article.story {
 }
 
 .book-wrapper img.prize {
-	bottom: 17%;
+	bottom: 10%;
 	box-shadow: none !important;
-	filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.5));
+	filter: drop-shadow(2.5px 2.5px 5px rgba(0, 0, 0, 0.5));
 	position: absolute;
-	left: 65%;
+	right: -5%;
 	transform: rotate(5deg);
 	width: 150px;
 	z-index: 1;
