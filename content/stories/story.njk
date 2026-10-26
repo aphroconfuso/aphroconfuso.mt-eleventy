@@ -169,6 +169,7 @@ permalink: /{{ story.slug }}/index.html
 							{% set slide = story.promoImageMobile.attributes.formats %}
 							{% set slideMobile = slide %}
 							{% set imageCrop = 'uncropped' %}
+							{% set showBookPrize = true %}
 							<div class="book-wrapper">
 								{% include "_book_prize.njk" %}
 								{% include "_image.njk" %}
