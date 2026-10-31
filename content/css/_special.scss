@@ -513,11 +513,9 @@ article {
 }
 
 .story-288 {
-	#body-text {
-		p {
-			padding-left: $body-margin;
-		}
-	}
+  p.fx1 {
+    padding-left: $body-margin;
+  }
 }
 
 // .sponsors {
