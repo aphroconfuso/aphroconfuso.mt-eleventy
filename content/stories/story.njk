@@ -176,6 +176,9 @@ permalink: /{{ story.slug }}/index.html
 							</div>
 						{% endif %}
 						{% if story.bookIsbn and story.bookPages %}
+							<div class="hide-laptop">
+								{% include "_print_book_panel.njk" %}
+							</div>
 							<p>Aphroconfuso {{ story.bookSequence }}<br>
 							<span class="sc">isbn</span> {{ story.bookIsbn }}<br>
 							{{ story.bookPages | numberify(['paġna', 'paġni']) }}</p>
@@ -225,9 +228,6 @@ permalink: /{{ story.slug }}/index.html
 						<section class="generic-body-text{% if story.useSeparators %} separated{% endif %}">
 							{{ story.body | dropCapsifyAndSectionise(story.imagesPositionText, 0, story.dontUseDropCaps) | prettifyMaltese | safe }}
 						</section>
-						<div class="hide-laptop">
-							{% include "_print_book_panel.njk" %}
-						</div>
 						{% set imageMode = 'regular' %}
 						{% if story.slideshow or story.singleImage %}
 							{% set useSquare = true %}
