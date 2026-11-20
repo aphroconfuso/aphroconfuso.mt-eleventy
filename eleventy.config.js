@@ -57,7 +57,7 @@ module.exports = function (eleventyConfig) {
 	// Watch content images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{jpg,svg,webp,png,jpeg}");
 	eleventyConfig.watchIgnores.add("public/img/qr/*");
-	eleventyConfig.watchIgnores.add("public/splide-4.1.3/**");
+	eleventyConfig.watchIgnores.add("public/splide-4.1.3");
 
 	var slackError = slack.extend({
 		channel: '#events',

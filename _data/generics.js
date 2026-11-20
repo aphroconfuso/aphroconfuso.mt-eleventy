@@ -17,6 +17,7 @@ async function getGenerics() {
 								key
 								title
 								body
+								ownPage
 							}
 						}
 					}
