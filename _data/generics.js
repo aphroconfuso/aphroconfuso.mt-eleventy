@@ -9,7 +9,7 @@ async function getGenerics() {
 			body: JSON.stringify({
 				query: `{
 					generics(
-			            publicationState: ${fetchStatus},
+			      publicationState: ${fetchStatus},
 						pagination: { page: 1, pageSize: 250 },
 					) {
 						data {

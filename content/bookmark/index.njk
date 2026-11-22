@@ -3,7 +3,7 @@ eleventyExcludeFromCollections: true
 permalink: /bookmarks/index.html
 ---
 {% extends 'layouts/base.njk' %}
-{% set generic = bookmark %}
+{% set bookmark = generics['bookmark'] %}
 
 {% block head %}
 	<title>{{ bookmark.title }} · Aphroconfuso</title>
